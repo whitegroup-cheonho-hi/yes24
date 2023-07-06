@@ -1,0 +1,464 @@
+@charset "utf-8"; body {
+    text-align: center;
+    background-color: #f8f8f8;
+}
+
+#yesWrap {
+    text-align: center;
+}
+
+#yesWrap * {
+    font-family: '맑은 고딕','Malgun Gothic','Apple SD Gothic Neo',AppleGothic,'돋움',Dotum,'굴림',Gulim,Helvetica,sans-serif;
+}
+
+#yesWrap img {
+    vertical-align: top;
+}
+
+#ySHeader {
+    height: 100px;
+    text-align: center;
+}
+
+#ySHeader:after {
+    content: '';
+    clear: both;
+    display: block;
+}
+
+#ySHeader .ySHeaderAera {
+    position: relative;
+    margin: 0 auto;
+    width: 960px;
+    height: 100px;
+    text-align: left;
+}
+
+#ySHeader .ySHeaderAera h1 {
+    height: 100px;
+}
+
+#ySHeader .ySHeaderAera h1 .lnk_logo {
+    float: left;
+}
+
+#ySHeader .ySHeaderAera h1 .servName {
+    display: -moz-inline-stack;
+    display: inline-block;
+    zoom:1;*display: inline;
+    overflow: hidden;
+    text-align: left;
+    vertical-align: middle;
+}
+
+#ySHeader .ySHeaderAera h1 .servName {
+    height: 100px;
+    line-height: 100px;
+    font-family: 'Noto Sans KR';
+    font-size: 24px;
+    color: #333;
+    font-weight: 700;
+}
+
+#ySHeader .ySHeaderAera h1 .servName a {
+    display: block;
+    height: 100px;
+    line-height: 100px;
+    font-family: 'Noto Sans KR';
+    font-size: 24px;
+    color: #333;
+    font-weight: 700;
+}
+
+#ySHeader .ySHeaderAera h1 .servName a:hover {
+    text-decoration: none;
+}
+
+#ySHeader .ySHeaderAera h1 .servName.off a {
+    color: #ccc;
+    font-weight: 700;
+}
+
+#ySHeader .ySHeaderAera h1 .servDivi {
+    display: -moz-inline-stack;
+    display: inline-block;
+    zoom:1;*display: inline;
+    overflow: hidden;
+    text-align: left;
+    vertical-align: middle;
+}
+
+#ySHeader .ySHeaderAera h1 .servDivi {
+    position: relative;
+    width: 28px;
+    height: 100px;
+    text-indent: -999em;
+}
+
+#ySHeader .ySHeaderAera h1 .servDivi:before {
+    content: '';
+    position: absolute;
+    right: 13px;
+    top: 40px;
+    text-align: right;
+    height: 20px;
+    border-right: solid 1px #ccc;
+}
+
+#ySHeader .ySHeaderAera .headerLnk {
+    position: absolute;
+    right: 0;
+    top: 30px;
+    text-align: right;
+}
+
+#ySHeader .ySHeaderAera .headerLnk .hLnk_txt {
+    display: -moz-inline-stack;
+    display: inline-block;
+    zoom:1;*display: inline;
+    overflow: hidden;
+    text-align: left;
+    vertical-align: middle;
+}
+
+#ySHeader .ySHeaderAera .headerLnk .hLnk_txt {
+    line-height: 40px;
+    font-size: 13px;
+    color: #666;
+}
+
+#ySHeader .ySHeaderAera .headerLnk .btn_c {
+    margin: 0 0 0 6px;
+}
+
+#ySNavi {
+    position: relative;
+    margin: 0 auto;
+    width: 958px;
+    _width: 960px;
+    border: solid 1px #d8d8d8;
+    border-bottom: none;
+    text-align: center;
+    background-color: #fff;
+}
+
+#ySNavi:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    border-bottom: solid 1px #ebebeb;
+}
+
+#ySNavi+#ySContent {
+    border-top: none;
+}
+
+#ySNavi .mnu {
+    position: relative;
+    z-index: 2;
+    font-size: 0;
+}
+
+#ySNavi .mnu li {
+    position: relative;
+    display: -moz-inline-stack;
+    display: inline-block;
+    zoom:1;*display: inline;
+    overflow: hidden;
+    text-align: left;
+    vertical-align: top;
+}
+
+#ySNavi .mnu li a {
+    display: block;
+    height: 50px;
+    line-height: 50px;
+    font-size: 16px;
+    color: #333;
+    font-weight: bold;
+}
+
+#ySNavi .mnu li a:hover {
+    color: #196ab3;
+    text-decoration: none;
+}
+
+#ySNavi .mnu li a {
+    display: block;
+    padding: 0 20px;
+    height: 50px;
+    line-height: 50px;
+    font-size: 16px;
+    color: #333;
+    font-weight: bold;
+}
+
+#ySNavi .mnu li.mnuOn a {
+    color: #196ab3;
+}
+
+#ySNavi .mnu li.mnuOn a:before {
+    content: '';
+    position: absolute;
+    left: 20px;
+    right: 20px;
+    bottom: -1px;
+    z-index: 1;
+    border-bottom: solid 4px #196ab3;
+}
+
+#ySContent {
+    margin: 0 auto;
+    padding: 60px 0;
+    width: 958px;
+    _width: 960px;
+    border: solid 1px #d8d8d8;
+    text-align: center;
+    background-color: #fff;
+}
+
+#ySContent .ySContRow {
+    margin: 0 auto;
+    position: relative;
+    width: 760px;
+    text-align: left;
+}
+
+#ySContent .ySContRow.w_600 {
+    width: 600px;
+}
+
+#ySContent .ySContRow+.ySContRow {
+    margin-top: 50px;
+    padding: 50px 0 0 0;
+    border-top: solid 1px #ebebeb;
+}
+
+#ySContent .ySContTop {
+    padding: 15px 0;
+    line-height: 27px;
+    border-bottom: solid 1px #ebebeb;
+    color: #333;
+    font-size: 16px;
+    background-color: #f8f8f8;
+}
+
+#ySContent .ySCont_tit {
+    display: table;
+    margin: 0 auto;
+    width: 760px;
+}
+
+#ySContent .ySCont_tit .ySCont_titCell {
+    display: table-cell;
+    text-align: left;
+    vertical-align: middle;
+}
+
+#ySContent .ySCont_tit .ySCont_titCell.cell_img {
+    width: 234px;
+}
+
+#ySContent .ySCont_tit .ySCont_titCell.cell_img .bgYUI_ico {
+    width: 184px;
+    height: 226px;
+}
+
+#ySContent .ySCont_tit .ySCont_titCell.cell_img .bgYUI_ico.ico_adult {
+    height: 184px;
+    background-position: 0 0;
+}
+
+#ySContent .ySCont_tit .ySCont_titCell.cell_txt {
+    padding-bottom: 20px;
+}
+
+#ySContent .ySCont_tit .ySCont_titCell.cell_txt .txt_tit {
+    font-size: 36px;
+    color: #333;
+    font-weight: 700;
+    line-height: 1.2em;
+    font-family: 'Noto Sans KR','맑은 고딕';
+    letter-spacing: -1px;
+}
+
+#ySContent .ySCont_tit .ySCont_titCell.cell_txt .txt_tit * {
+    font-family: 'Noto Sans KR','맑은 고딕';
+}
+
+#ySContent .ySCont_tit .ySCont_titCell.cell_txt .txt_des {
+    margin-top: 20px;
+    line-height: 26px;
+    font-size: 16px;
+    color: #333;
+    letter-spacing: -1px;
+}
+
+#ySContent .ySCont_tit .ySCont_titCell.cell_txt .yesAlertLi {
+}
+
+#ySContent .ySCont_tit .ySCont_titCell.cell_txt .yesAlertLi li {
+    display: -moz-inline-stack;
+    display: inline-block;
+    zoom:1;*display: inline;
+    text-align: left;
+    vertical-align: top;
+}
+
+#ySContent .ySCont_tit .ySCont_titCell.cell_txt .yesAlertLi li {
+    margin-right: 10px;
+    color: #333 !important;
+}
+
+#ySContent .ySContRow .rowBtnTopTxt {
+    margin-top: 25px;
+    height: 22px;
+    line-height: 22px;
+    font-size: 16px;
+    color: #666;
+    text-align: center;
+}
+
+#ySContent .ySContRow .rowBtn {
+    margin-top: 40px;
+    text-align: center;
+}
+
+#ySContent .ySContRow .rowBtnTopTxt+.rowBtn {
+    margin-top: 30px;
+}
+
+#ySContent .ySContRow .rowBtn.btnRgtMid {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    margin-top: -30px;
+    text-align: right;
+}
+
+#ySContent .ySContRow .rowBtn.btnRgtMid .btnC {
+    margin: 0;
+}
+
+#ySContent .ySContRow .rowBtn.cols {
+    margin-left: -5px;
+    margin-right: -5px;
+}
+
+#ySContent .ySContRow .rowBtn.cols .colGrp {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+
+#ySContent .ySContRow .rowBtn.cols .colGrp .colCell {
+    display: table-cell;
+    vertical-align: top;
+}
+
+#ySContent .ySContRow .rowBtn.cols .colGrp .colCell.w_50p {
+    width: 50%;
+}
+
+#ySContent .ySContRow .rowBtn.cols .colGrp .colCell .btnC {
+    display: block;
+    margin: 0 5px;
+}
+
+#ySContent .ySContRow .rowBtn.cols .colGrp .colCell .btnC .bWrap {
+    display: block;
+}
+
+#ySContent .ySContBot {
+    padding: 15px 0;
+    text-align: center;
+    border-top: solid 1px #ebebeb;
+    line-height: 18px;
+    font-size: 12px;
+    color: #666;
+}
+
+#ySContent .ySContBot .btnC.s_size {
+    margin-top: -1px;
+}
+
+#ySContent .ySCmt {
+}
+
+#ySContent .ySCmt.b_size {
+    line-height: 24px;
+    font-size: 16px;
+    color: #333;
+    word-break: keep-all;
+}
+
+#ySFooter {
+    height: 50px;
+    text-align: center;
+}
+
+#ySFooter .ySFooterAera {
+    margin: 0 auto;
+    width: 960px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    color: #666;
+}
+
+#yesWrap #ySkyWrap {
+    display: none;
+}
+
+/* flag 캠페인 */
+.flag_campaign {
+    position: relative;
+    margin: 0 auto;
+    width: 760px;
+}
+
+.flag_campaign .flag {
+    position: absolute;
+    left: 0;
+    top: -71px;
+    padding: 10px 0 15px;
+    width: 85px;
+    text-align: center;
+    background-color: #39b54a;
+}
+
+.flag_campaign .flag .ico_flag {
+    display: block;
+    margin: 0 auto;
+    width: 60px;
+    height: 60px;
+}
+
+.flag_campaign .flag .flag_txt {
+    margin-top: 7px;
+    line-height: 18px;
+    font-size: 12px;
+    color: #fff;
+    font-weight: bold;
+}
+
+.flag_campaign .flag .bit_top {
+    position: absolute;
+    right: -5px;
+    top: 0;
+    width: 5px;
+    height: 10px;
+    background-position: 0 -600px;
+}
+
+.flag_campaign .flag .bit_bot {
+    position: absolute;
+    left: 0;
+    bottom: -20px;
+    width: 85px;
+    height: 20px;
+    background-position: 0 -620px;
+}

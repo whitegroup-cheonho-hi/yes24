@@ -1,0 +1,489 @@
+
+@charset "utf-8";
+
+
+#gnbwrap{margin-top:0 !important;}
+#warp {font-size:12px;font-family: '����',dotum,Helvetica,sans-serif;line-height:16px;padding-top:45px; color:#555;}
+#warp a {font-size:12px;font-family: '����',dotum,Helvetica,sans-serif;}
+#warp table{border-collapse: separate;}
+#warp th{font-weight:bold;vertical-align:middle;}
+#warp h2{font-weight:bold;}
+#warp h3{font-weight:bold;}
+#warp h4{font-weight:bold;}
+#warp h5{font-weight:bold;}
+#warp img{vertical-align: middle;}
+#warp strong{font-weight:bold;}
+#warp .information2 .info .event a:link, .information2 .info .event a:hover{font-size: 11px;}
+#warp .cont_t2 ul.rank li span a{font-size:11px;}
+#warp .cont_t2 ul.rank li.r01 span.tit{line-height: 14px;}
+#warp .recomm ul li span a{font-size:11px;}
+#warp .table_sm th{font-weight: normal;}
+#yesFooter{font-family: '����',dotum,Helvetica,sans-serif;}
+#yesFooter .yesUSafe strong{font-weight:bold; font-size:12px;color:#333; vertical-align:top;}
+.imgAlt{display:inline-block;vertical-align: top;text-align: left;}
+#yesFooter .yesUSafe dd a{font-size:11px;}
+#yesFooter .yFootCon .yFootAddr dd a#corpNumLnk{font-size:11px;}
+#container{padding-bottom:20px; margin:0 auto !important}
+.cont_section{margin-bottom:0;}
+#warp .alignment p.txt a{font-size:11px;}
+#warp .contain div.step ul.list a{font-size:11px;}
+#warp .main_list div.step ul.list li a{font-size:11px;}
+.coupon_list .srch_line input{letter-spacing:-1px;}
+#warp .loc_tab li a{font-size:11px;}
+#warp .sub_calrender table thead th{font-weight: normal;}
+.searchArea div.cont_det h4 a{font-size:15px !important;}
+#eventwrap{position:relative; margin:0;}
+.conwrap .listwrap .list dl dd table.tb_p td{vertical-align:middle;}
+#eventwrap2{padding-top:45px;overflow:hidden;}
+#warp .tmypage th{font-weight:normal;}
+.coupon input{letter-spacing:-1px;}
+#warp .sms_alram ul li a{font-size:11px;}
+#warp .guide_contain p.exception strong{font-weight:normal;}
+.ui-dialog .ui-dialog-title{font-size:12px;}
+#dialogDetailAlert strong span{font-size:12px; font-weight:bold;}
+#warp:after{content:"";display:block;width:100%;clear:both;}
+#warp .list_theater li a{font-size:11px;}
+.ui-datepicker td span, .ui-datepicker td a{font-size:12px;}
+.ui-datepicker .ui-datepicker-title select{vertical-align:top;}
+.ui-datepicker .ui-datepicker-prev{top:11px;left:7px;}
+.ui-widget-overlay{z-index:4000 !important;}
+.ui-dialog{z-index:5000 !important;}
+#warp .mag_wrap2 h3 a{font-size:20px; font-weight:bold; font-family:'Malgun Gothic','���� ����';}
+.list_theater li a{font-size:11px;}
+#warp .lnb .lmenu .m_sub li a{font-size:11px;font-family:'Malgun Gothic','���� ����';}
+#warp .mag_wrap3 .story ul li strong{font-weight: normal;}
+.mag_detail .otherNewsArea dd ul{overflow:hidden;}
+.history div.cont{width:100%; padding:20px 0;}
+.cont_section .tb_basic td.detail{width: 710px;}
+.information2 .info dt{display:block;}
+.information2 .info dd{display:block;clear:right;}
+
+@charset "utf-8";
+
+.mypage{ height:auto; margin-bottom:15px;}
+.mypage div.infor{ /*padding:10px;*/ border:1px solid #d3d3d3; background:#fbfbfb; word-break: break-all;}
+.mypage div.btn{ margin-bottom:0;}
+.mypage span.grade{ color:#3c3c3c; margin-top:1px; margin-left:7px; display:block; letter-spacing:-0.1em;padding: 10px 10px 0 10px;}
+.mypage span.grade em{ font-weight:bold;}
+
+.type01{ margin-top:5px; margin-left:6px;padding: 0 10px 5px 10px;}
+.type01 li{ background:url(//tkfile.yes24.com/img/mypage/icon_dot.gif) no-repeat 0 7px; padding-left:5px; font-size:11px;}
+.type02{width:194px; background:url(//tkfile.yes24.com/img/mypage/bg_mypage.gif) no-repeat -8px -69px; padding:10px;margin:0 0 2px 7px;}
+.type02 li{  font-size:11px;}
+.mypage div.infor .btn {height:25px;}
+
+.my_lmenu{border:4px solid #7a98b4; background-image:none !important; height:auto !important}
+.my_lmenu ul li.sub{ margin-top:-3px;}
+.my_lmenu ul{padding: 10px 0px 16px 0 !important;}
+.my_lmenu ul li.lbtn{ text-align:center; padding-top:10px;}
+.my_lmenu ul li.end{ }
+
+.mypage_contain{ width:730px; float:right; position:relative; margin-bottom:40px;  }
+.mypage_contain h1{ margin-bottom:16px; margin-top:2px;}
+.mypage_contain h1.stit{ margin-top:13px; margin-bottom:16px;}
+
+.mypage_contain div.step{ position:absolute; right:0; top:5px;}
+.mypage_contain div.step ul{ float:left; margin-left:10px; }
+.mypage_contain div.step ul li{ display:inline;}
+.mypage_contain div.step ul.list{ float:left; margin-left:7px; padding-top:3px; font-size:11px; }
+.mypage_contain div.step ul.list li{ display:inline; padding:0 3px;}
+.mypage_contain div.step ul.list li span.blu{ font-weight:bold;}
+.mypage_contain div.step select{ font-size:11px; height:15px; letter-spacing:-1px; margin:3px 5px 0px 15px;}
+
+.blue_box{ width:360px; float:left; margin-bottom:25px; }
+.blue_box h2{ border:1px solid #6d88a3; background:url(//tkfile.yes24.com/img/mypage/bg_tit01.gif) repeat-x; padding:8px 10px 6px 13px; height:14px; }
+.blue_box h2 a{ float:right; margin-right:-2px; *margin-top:-16px;}
+.blue_box h2 span{ font-size:11px; color:#FFFFFF; font-weight:normal;}
+.blue_box h2 em{ text-decoration:underline; font-weight:bold}
+.blue_box ul{ border:1px solid #d3d3d3; border-top:none; padding:11px 10px 7px 12px; height:40px;}
+.blue_box ul li{ background:url(//tkfile.yes24.com/img/mypage/icon_dot.gif) no-repeat 2px 6px; padding-left:8px; margin-bottom:4px; }
+.blue_box ul li span em{ color:#ea4955; text-decoration:underline; font-weight:bold;}
+.blue_box ul li a.fr{ *margin-top:-15px;}
+
+
+.mycont{ clear:both; margin-bottom:30px; position:relative; display:inline-block; width:100%;}
+.mycont div.more{ right:6px; top:5px;}
+.mycont div.more em{ float:left; font-size:11px; font-family:Verdana;}
+.mycont div.more ul{float:left; margin-left:5px;}
+.mycont div.more ul li{ float:left;}
+.mycont div.stxt {font-size:11px; color:#888; margin:5px 0 5px;}
+.mycont h2{ margin-bottom:7px;}
+.mycont h2 span{ margin-left:10px; font-size:11px; font-weight:normal;}
+.mycont h2 span.stit{ margin-top:2px; margin-left:5px;}
+.mycont h2 span span.ul{ text-decoration:underline;}
+.mycont h2 em{ font-weight:bold; text-decoration:underline; color:#ea4955;}
+.mycont h2 a{ margin-left:10px;}
+.mycont h2 a.tbtn{ float:right; margin-top:-2px; margin-right:5px; *margin-top:-18px; *margin-bottom:4px;}
+.mycont div.sbtn{ height:20px; margin-bottom:23px;}
+.mycont table{ margin-bottom:25px;}
+.mycont h2.stit{ background:url(//tkfile.yes24.com/img/common/btn_next.gif) no-repeat; padding-left:10px;}
+.mycont div.paging{ margin:15px 0 0 0;}
+.mycont .btn {margin-bottom:0 !important}
+
+.mycont a.alink {text-decoration:underline;margin-left: 0px;}
+.mycont .point ul {padding-top:5px;padding-bottom:3px;}
+.mycont .point li {display:inline-block; color:#666;background:url('//tkfile.yes24.com/img/mypage/ic_hdot.gif') no-repeat 0px 2px; padding:0px 3px 3px 10px; *display:inline;}
+.mycont .point li:first-child {background:none}
+.mycont .point li.ov {font-weight:bold;}
+.mycont .point li img {margin:-3px 2px 0 2px; }
+.mycont a:hover {text-decoration:underline;}
+
+.mycont .point li.bgn {/*background:none;*/}
+.mycont .point_txt {margin-top:-17px;font-size:11px; solid #888; text-align:right; padding-right:10px;}
+.mycont .table_gbox td em {font-size:11px;}
+
+
+.c_list{ display:inline-block;}
+.c_list div.btn{ border-top:1px solid #666; display:inline-block; margin-top:-30px; padding-top:20px; margin-bottom:40px; width:100%;}
+.mycont.pay{ width:271px; float:left; margin-right:7px; clear:none !important;}
+.mycont.pay div.gray_box{ background:url(//tkfile.yes24.com/img/mypage/bg_mypage04.gif) no-repeat  0 -2px;; height:432px; }
+.tmypage td.live {position:relative;padding:8px 30px 8px 15px !important; overflow:hidden; word-break:break-all; word-wrap:break-word} 
+.ic_live {position:absolute; right:5px; top:5px; display:inline-block; width:28px; height:24px; background: url('//tkfile.yes24.com/img/common/ic_live.png') no-repeat 0 0 }
+.ic_live span {visibility:hidden}
+.chklive {padding:5px 0 0 2px ; vertical-align:text-top}
+.chklive input {vertical-align:text-bottom; margin-right:2px}
+.tmypage td.live {position:relative;padding:8px 30px 8px 15px !important; overflow:hidden; word-break:break-all; word-wrap:break-word} 
+.mycont.cash{ width:451px; float:left; clear:none !important;margin-top:-1px;}
+.mycont.cash div.gray_box{ background:url(//tkfile.yes24.com/img/mypage/bg_mypage05.gif) no-repeat 0 -2px; height:432px; }
+.mycont.cash div.gray_box ul{ width:405px;}
+.mycont.cash div.gray_box div.account{width:405px;}
+.mycont.cash div.gray_box div.account ul{width:388px;}
+.mycont.cash div.gray_box table.table02{ margin:20px; border:4px solid #999; width:400px;}
+.mycont.cash div.gray_box table.table02 th{ background-color:#f8f2f3; color:#3c3c3c; border-right:1px solid #d3d3d3;  font-weight:bold;}
+.mycont.cash div.gray_box table.table02 td{ text-align:right; padding-right:10px; font-weight:bold; color:#ea4955;}
+
+.mycont td.tit {line-height:22px}
+.ic_play {display:inline-block;margin: 0 4px 0 -4px;width:22px;height:20px;overflow: hidden;background: url('//tkfile.yes24.com/img/common/ic_play.png') no-repeat 0 0;text-indent:-999em;vertical-align: top;}
+.fwb12 {font-size:12px !important; font-weight:bold}
+
+.ic_live {position:absolute; right:5px; top:5px; display:inline-block; width:28px; height:24px; background: url('//tkfile.yes24.com/img/common/ic_live.png') no-repeat 0 0 }
+.ic_live span {visibility:hidden}
+.my_list01{ border:1px solid #d2d2d2; border-top:2px solid #4e7ad1; display:inline-block;}
+.my_list01 li{ float:left;  background-color:#f9f9fb; _display:inline-block; _overflow:hidden; _height:100px; padding-bottom:5px}
+.my_list01 li div{ background:url(//tkfile.yes24.com/img/mypage/bg_line01.gif) no-repeat right; padding-right:20px; width:202px; height:68px; padding:18px 21px 18px 18px; }
+.my_list01 li div.end{ background:none; border:none; width:206px;}
+.my_list01 li img{ float:left;}
+.my_list01 li strong{ margin-left:65px; font-weight:bold; color:#3c3c3c; display:block; margin-bottom:6px; height:26px; margin-top:2px; margin-left:61px; line-height:13px; word-wrap: break-word; word-break: break-all;overflow: hidden;}
+.my_list01 li span{margin-left:62px; font-size:11px; display:block;line-height:15px;}
+.my_list01 li.nocont{ text-align:center; width:728px; padding-bottom:35px; _height:70px; }
+.my_list01 li.nocont em{ display:block; font-size:12px; margin-bottom:3px; padding-top:32px; border-top:1px solid #d2d2d2;}
+.my_list01 li.nocont a{ display:inline-block;}
+
+
+.table_blue{width:100%;margin-bottom:30px;table-layout:fixed;  border:2px solid #4e7bce;  border-collapse:collapse;}
+.table_blue caption{display:none}
+.table_blue th{ color:#666;letter-spacing:-1px; background-color:#f4f9ff; font-size:11px;  }
+.table_blue th{padding:8px 5px; border-bottom:1px solid #b6c1dd; border-left:1px solid #b6c1dd; border-right:1px solid #b6c1dd; }
+.table_blue td{padding:8px 5px; border-bottom:1px solid #b6c1dd; text-align:left; padding-left:20px;}
+.table_blue td{ border-left:1px solid #b6c1dd; border-right:1px solid #b6c1dd; font-size:12px; color:#666666; }
+.table_blue th em{ text-decoration:underline;}
+
+
+.location{ background:url(//tkfile.yes24.com/img/mypage/bg_loca.gif) no-repeat; height:33px; padding:18px 0 0 93px;}
+.location span{ font-weight:bold; color:#4c7cce;}
+.location span em{ text-decoration:underline;}
+
+
+.blu_box{border:3px solid #4e7bce; position:relative;}
+.blu_box p.tit{ background:url(//tkfile.yes24.com/img/mypage/bg_tit02.gif) repeat-x; padding:11px 20px; font-weight:bold; color:#3c3c3c; font-size:14px;}
+.blu_box p.tit span{ margin:0 2px; position:relative; top:-2px;}
+.blu_box p.poster { margin:15px 20px 20px 20px; display:block; width:180px; height:225px;}
+.blu_box {display:inline-block; padding-bottom:20px}
+.poster {float:left}
+.reserved_tb {float:right; width:470px; padding: 15px 20px 15px 0px;}
+.blu_box .table_sm {position:initial; width:100%}
+.blu_box .btn{ margin:0px 28px 10px 0; *position:relative; *top:0px; *height:38px;}
+.blu_box .btn div a{ height:20px;}
+
+.table_sm{width:100%; table-layout:fixed; border-collapse:collapse; border-top:2px solid #4e7bce;}
+.table_sm caption{display:none}
+.table_sm th{ color:#666;letter-spacing:-1px; background-color:#f4f9ff; font-size:11px; font-weight:normal; }
+.table_sm th{padding:7px 6px 7px 15px; border-bottom:1px solid #b6c1dd; border-left:1px solid #b6c1dd; border-right:1px solid #b6c1dd; text-align:left; }
+.table_sm th.le,.table_sm td.le{ border-left:none;}
+.table_sm th.ri,.table_sm td.ri{ border-right:none;}
+.table_sm td{padding:6px 5px; border-bottom:1px solid #d3d3d3; text-align:left; padding-left:14px;}
+.table_sm td{ border-left:1px solid #b6c1dd; border-right:1px solid #b6c1dd; font-size:12px; color:#666666; }
+.table_sm td span{ font-size:11px; display:block;}
+.table_sm td span.blu{ border-bottom:1px solid #4e7bce; color:#4e7bce; display:inline-block;}
+.table_sm td em{  border-bottom:none; font-size:11px; margin-left:5px;}
+.table_sm td div.scroll{ overflow-x:hidden; overflow:auto; height:34px;}
+.table_sm th.ri,.table_sm td.ri div{ width:350px; height:51px; overflow-y:auto; overflow-x:hidden;}
+.table_sm th.ri,.table_sm td.ri div span{ }
+.table_sm img.cen {vertical-align:-webkit-baseline-middle}
+.table_sm input { vertical-align: baseline;}
+
+
+.table_gbox{width:100%; table-layout:fixed; border-collapse:collapse; border-top:2px solid #888888;}
+.table_gbox caption{display:none}
+.table_gbox th{ color:#666;letter-spacing:-1px; background-color:#fafafb; font-size:11px; font-weight:normal; }
+.table_gbox th{padding:7px 6px 7px 15px; border-bottom:1px solid #d3d3d3; border-left:1px solid #d3d3d3; border-right:1px solid #d3d3d3; text-align:left; }
+.table_gbox th.le,.table_gbox td.le{ border-left:none;}
+.table_gbox th.ri,.table_gbox td.ri{ border-right:none;}
+.table_gbox td{padding:6px 5px; border-bottom:1px solid #d3d3d3; text-align:left; padding-left:10px;}
+.table_gbox td{ border-left:1px solid #b6c1dd; border-right:1px solid #b6c1dd; font-size:12px; color:#666666; }
+.table_gbox td div.sub_list{ margin-bottom:5px; padding:10px; background-color:#fafafb;}
+.table_gbox td div span{ font-size:11px; display:block;  }
+.table_gbox td span{  }
+.table_gbox td span.tit{ font-family:Tahoma;  }
+.table_gbox td span.blu{ text-decoration:underline; color:#4e7bce;}
+.table_gbox td div.scroll{ overflow-x:hidden; overflow:auto; height:34px;}
+
+
+.gray_box{ border-top:2px solid #666; padding-bottom:10px; background:url(//tkfile.yes24.com/img/mypage/bg_mypage02.gif) no-repeat 0 11px; height:330px; position:relative; margin-bottom:10px;}
+.gray_box.big{ border-top:2px solid #666; padding-bottom:10px; background:url(//tkfile.yes24.com/img/mypage/bg_mypage06.gif) no-repeat 0 11px; height:380px; position:relative; margin-bottom:10px;}
+.gray_box ul{ width:235px; margin:24px 20px 00px 20px;}
+.gray_box ul li{ margin-bottom:7px;_margin-bottom:5px; margin-left:6px; display:block; height:15px; color:#666666; }
+.gray_box ul li em{ float:left;}
+.gray_box ul li span{ float:right;}
+.gray_box ul li.gry{ background-color:#ebebeb; padding:6px 5px; font-weight:bold; color:#3c3c3c; margin-left:0px; margin-bottom:12px;}
+.gray_box ul li.total{ background:url(//tkfile.yes24.com/img/mypage/bg_total.gif) no-repeat; padding:13px 10px; font-size:14px; color:#FFFFFF; font-weight:bold; letter-spacing:-1px; margin-left:-3px;}
+.gray_box ul li.gtotal{ background:url(//tkfile.yes24.com/img/mypage/bg_gtotal.gif) no-repeat; padding:10px 10px; font-size:14px; color:#FFFFFF; font-weight:bold; letter-spacing:-1px; margin-left:-3px;}
+.gray_box ul li.wtotal{ background:url(//tkfile.yes24.com/img/mypage/bg_wtotal.gif) no-repeat; padding:13px 10px; font-size:14px; color:#FFFFFF; font-weight:bold; letter-spacing:-1px; margin-left:-3px;}
+.gray_box ul li.wtotal em{ color:#3c3c3c;}
+.gray_box ul li.wtotal span{ color:#ea4955;}
+
+.gray_box .table_sm{ position:absolute; top:31px; width:57%; left:295px; border-top:1px solid #3c3c3c; border-bottom:1px solid #3c3c3c; }
+.gray_box .table_sm th{ background-color:#fafafb;}
+.gray_box .table_sm th{ padding:8px 5px; padding-left:15px; text-align:left;}
+.gray_box .table_sm td{padding:8px 5px; padding-left:15px;}
+
+
+.gray_box02{ padding-bottom:10px; border:1px solid #d3d3d3; border-top:2px solid #666;  position:relative; margin-bottom:13px; _margin-bottom:25px;}
+.gray_box02 h2{ background:url(//tkfile.yes24.com/img/mypage/bg_tit03.gif) repeat-x; padding:13px 15px 15px 15px; color:#3c3c3c;}
+.gray_box02 h2 span{ font-size:12px; font-weight:bold;}
+.gray_box02 h3{ font-size:11px; color:#ea4955; text-decoration:underline; font-weight:normal; margin:3px 0 7px 20px}
+.gray_box02 ul{ margin:3px 0 6px 20px}
+.gray_box02 ul li{ font-size:11px; font-weight:bold; margin-bottom:3px;}
+.gray_box02 ul li span{ display:block; padding-left:15px; font-weight:normal;} 
+.gray_box02 ul li.f_n {font-weight:normal; }
+.gray_box02 ul li.f_n em {text-decoration:underline; font-weight:bold; color:#888}
+.gray_box02 .table_sm{ width:95%; margin:0 auto;  border-top:1px solid #3c3c3c; border-bottom:1px solid #d3d3d3; }
+.gray_box02 .table_sm th { font-weight:bold; background-color:#f8f2f3; border-left:none; border-right:none; border-bottom:1px solid #d3d3d3; padding:3px 5px 4px 5px; text-align:center;}
+.gray_box02 .table_sm td {border-left:none; border-right:none; text-align:center; font-size:11px; padding:4px 5px; border-bottom:1px solid #d3d3d3;}
+.ec{ margin-top:-32px; margin-bottom:0; margin-right:10px;}
+ul.gbox_notice{ border-bottom:1px solid #888888;  border-top:1px solid #fff; padding-bottom:5px; margin-bottom:10px;}
+ul.gbox_notice li{ font-size:11px; margin-bottom:6px; margin-left:15px;}
+ul.gbox_notice li em{ text-decoration:underline;}
+
+
+.gray_box03{ border:1px solid #d3d3d3; border-right:none; border-left:none; border-top:2px solid #666;  position:relative; margin-bottom:20px; padding:20px 10px;}
+.gray_box03 ul{}
+.gray_box03 ul li{ font-size:11px; letter-spacing:-1px; margin-bottom:9px;}
+.gray_box03 ul li.red{ font-weight:bold;}
+
+
+.img_tab{ height:32px; border-bottom:2px solid #4c7cce; margin-bottom:20px; margin-top:3px; display:block;}
+.img_tab li{ float:left; _position:relative; _top:2px;}
+
+.dot_tit{ background:url(//tkfile.yes24.com/img/mypage/icon_bullet.gif) no-repeat 0 2px; padding-left:18px; font-size:11px; margin:10px 10px 7px 8px;}
+.dot_tit em{ text-decoration:underline; font-weight:bold;}
+.dot_tit span{text-decoration:underline;}
+
+.coupon{ background:url(//tkfile.yes24.com/img/mypage/bg_coupon.gif) no-repeat; text-align:center; padding:26px 0; margin-bottom:27px; margin-top:15px;}
+.coupon input{ border:3px solid #888888; padding:4px;  text-align:center; _height:22px; _vertical-align:top;}
+.coup_notice{ background-color:#f9f9fb; border:1px solid #d3d3d3; padding:15px; margin-top:10px;}
+.coup_notice p{ margin-bottom:10px;}
+.coup_notice ul li{ letter-spacing:-1px; margin-bottom:6px;}
+
+.favor_list{ margin-top:5px; margin-bottom:50px;}
+.favor_list div.btn{ margin-right:5px;}
+.favor_list table{ margin-bottom:8px;}
+.favor_list table th{ font-weight:normal;}
+.favor_list table td span{ display:block; text-align:left; color:#888888;}
+.favor_list table td span.sm{ margin-top:-3px;}
+.favor_list table td span em{ color:#4c7cce; text-decoration:underline;}
+.favor_list table td a{ margin-bottom:3px; display:inline;}
+
+.favor_list table td div.list{ padding:10px; margin-left:-25px; margin-top:-2px; height:87px;}
+.favor_list table td div.list p{ float:left; margin-right:10px; width:75px;}
+.favor_list table td div.list strong{ margin:1px 0 5px; height:35px; display:block;}
+.favor_list table td div.list span{ display:block; font-size:11px; margin-top:-3px; margin-left:85px;}
+.favor_list table td div.list ul{ margin-top:3px;  margin-left:85px;}
+.favor_list table td div.list ul li{ float:left; margin-right:3px;}
+.favor_list table td span.no_cont{ padding:43px 40px 44px 40px; text-align:center;}
+.btnAlarm{ margin-bottom:3px!important; display:block!important; height:40px;}
+
+
+.date_list{ background:url(//tkfile.yes24.com/img/mypage/bg_date.gif) no-repeat; height:100px; margin-bottom:25px; padding:18px 22px;}
+.date_list.bg{ background:url(//tkfile.yes24.com/img/mypage/bg_date02.gif) no-repeat; height:56px; margin-bottom:25px; padding:18px 22px;}
+.date_list p.tit{ margin-bottom:25px; padding-left:3px;}
+.date_list p.tit strong{ }
+.date_list p.tit em{ text-decoration:underline; font-weight:bold;}
+.date_list ul li {float:left; margin-bottom:7px;}
+.date_list ul li input.date{ border:1px solid #CCC; height:16px; margin-right:3px; vertical-align:middle;}
+.date_list ul li.sec{ margin-left:30px; position:relative; top:-3px;}
+
+.memo{ background:url(//tkfile.yes24.com/img/mypage/bg_mypage03.gif) no-repeat; height:265px; margin-bottom:10px; position:relative;}
+.memo h3{ padding:7px 8px 8px 25px;}
+.memo h3 span{ font:bold 24px Tahoma; color:#3c3c3c; position:relative; display:block; height:25px; float:left;}
+.memo h3 em{ position:absolute; bottom:0; right:0;}
+.memo h3 strong{ color:#3c3c3c; font-size:15px; display:inline-block; /*padding:8px 0 0 12px;*/ *margin-left:35px; *margin-top:-30px; position:relative; top:-5px;}
+.memo p.poster{ float:left; width:141px; padding:18px 20px 20px 26px; *padding-top:6px; margin-right:20px;}
+.memo ul{ padding:21px; height:67px; *padding-left:0px; *padding-top:5px;}
+.memo ul li{ font-size:11px; float:left; margin-bottom:2px; margin-left:-3px; }
+.memo ul li em{ display:inline-block; width:50px; vertical-align:top; color:#666666;}
+.memo ul li em span{width:auto; font-weight:bold; text-decoration:underline; margin:0 2px;}
+.memo ul li span{display:inline-block; width:135px; letter-spacing:-1px;}
+.memo ul li span.cont{ width:350px;}
+.memo div.btn{ position:absolute; left:620px; top:70px;}
+.memo div.btn a{ display:block; margin-bottom:4px; *margin-bottom:-5px;}
+.memo div.number{ position:relative; display:inline-block; }
+.memo div.number span{ display:inline-block;}
+.memo div.number em{ position:absolute; right:0; *bottom:-5px;  }
+.memo.nocont{ background:none; border-top:1px solid #CCC; border-bottom:1px solid #ccc;}
+.memo.nocont strong{ font-size:18px; font-weight:bold; text-align:center; display:block; margin:0 auto; padding-top:125px;}
+
+
+
+.memo div.write_list{ position:absolute; top:140px; left:203px; font-size:11px}
+.memo div.write_list div{ position:relative; padding-left:72px; padding-top:12px; line-height:14px; width:420px; height:115px;}
+.memo div.write_list div textarea{ width:415px; height:57px; _height:45px; border:none; background-color:transparent; overflow:hidden; font-size:12px; }
+.memo div.write_list div span.zbtn{ position:absolute; bottom:2px; right:4px; bottom:43px; } 
+
+
+.memo div.corr_list{ position:absolute; top:139px; left:203px; font-size:11px; background:url(//tkfile.yes24.com/img/mypage/bg_memo.gif) no-repeat; width:502px;}
+.memo div.corr_list div{ position:relative; padding-top:37px; width:485px; height:90px; text-align:center; margin-left:7px;}
+.memo div.corr_list div textarea{ width:415px; height:57px; }
+.memo div.corr_list div span.zbtn{ position:absolute; bottom:0; right:5px; bottom:43px;} 
+
+.memo.end{ margin-bottom:50px;}
+
+.sms_alram{ background:url(//tkfile.yes24.com/img/mypage/bg_address02.gif) no-repeat; height:136px; margin-bottom:30px; padding:7px 10px 10px 10px;}
+.sms_alram h3 span{ font-size:11px; margin-left:3px; font-weight:normal; position:relative; top:3px; color:#666666; }
+.sms_alram em{ background:url(//tkfile.yes24.com/img/mypage/bg_address.gif) no-repeat; padding:15px; text-align:center; display:block; width:309px; height:17px; margin:4px auto; font-size:14px; font-weight:bold; color:#676767; }
+.sms_alram ul{ margin-top:10px; display:inline-block; margin-left:106px;}
+.sms_alram ul li{ font-size:11px; color:#bfbfc0;}
+
+
+.al_list{ border-top:2px solid #666; border-bottom:1px solid #d3d3d3; padding:15px 0 0 0; margin-bottom:8px;}
+.al_list ul{ display:inline-block; width:100%;}
+.al_list ul li{ height:107px; width:364px; float:left; margin-bottom:10px; *margin-bottom:0px; *height:120px; }
+.al_list ul li p{float:left; padding:0px 13px 0px 0px;} 
+.al_list ul li input{ display:inline-block; margin-top:3px; margin-bottom:5px;}
+.al_list ul li strong{display:block; color:#424248; margin:2px 0 8px; margin-left:93px; height:15px; overflow:hidden;}
+.al_list ul li strong a {color:#424248;}
+.al_list ul li strong a:hover{text-decoration:underline;}
+.al_list ul li span{ font-size:11px; display:block; margin-top:-3px; }
+.al_list ul li em{ font-size:11px; margin-top:3px; display:inline-block;}
+.al_list ul li em em{ text-decoration:underline;}
+.al_list ul li.no_person{ text-align:center; width:100%; background:none; height:57px}
+.al_list ul li.no_person span{ padding-top:25px;}
+
+
+.al_list02{ border-top:2px solid #666; border-bottom:1px solid #d3d3d3; padding:15px 0 0 0; margin-bottom:10px;}
+.al_list02 ul{ display:inline-block;}
+.al_list02 ul li{ height:92px; *height:112px;  width:243px; margin-bottom:15px; float:left; background:url(//tkfile.yes24.com/img/mypage/bg_line02.gif) no-repeat right; *background-position:0px right}
+.al_list02 ul li.end{ background:none;}
+.al_list02 ul li p{float:left; padding:0px 13px 0px 10px ;} 
+.al_list02 ul li input{ display:inline-block; margin-top:3px; margin-bottom:3px; }
+.al_list02 ul li strong{display:block; color:#424248; margin:2px 0 7px; *margin:2px 0 2px;}
+.al_list02 ul li span{ font-size:11px; display:block; margin-top:-3px; color:#bbbbbb; }
+.al_list02 ul li em{ color:#888888; font-size:11px; display:inline-block; background:url(//tkfile.yes24.com/img/mypage/icon_dot02.gif) no-repeat right 3px; padding-right:6px; margin-bottom:3px;}
+.al_list02 ul li.no_person{ text-align:center; width:725px; background:none;  height:57px}
+.al_list02 ul li.no_person span{ padding-top:31px; color:#888888;}
+
+.loca_notice{ margin-top:-20px;}
+.loca_select{ background:url(//tkfile.yes24.com/img/mypage/bg_location.gif) no-repeat; height:105px; margin:29px 0; position:relative;}
+.loca_select h2{ padding:14px 15px 10px 11px;}
+.loca_select a.more{ top:17px; right:19px;}
+.loca_select ul{ background:url(//tkfile.yes24.com/img/mypage/bg_sel_loca.gif) no-repeat; padding-left:85px;   height:29px; margin:12px 0px 15px 7px;}
+.loca_select ul li{ color:#3c3c3c; font-weight:bold; float:left; margin-right:14px; *margin-right:8px; *margin-top:7px; margin-top:9px;   *letter-spacing:-2px;}
+.loca_select ul li label{ padding-left:3px; position:relative; top:-2px; *top:2px;}
+
+
+
+/*추가용*/
+.account{ background:url(//tkfile.yes24.com/img/mypage/bg_dot.gif) repeat-x; margin-left:20px; width:235px; }
+.account h2{ padding:15px 0 0 0 ;}
+.account ul{ border:1px solid #eaeaea; background-color:#fff; padding:10px 8px; margin:0; width:205px;}
+.account ul li{ margin-bottom:5px;}
+.account ul li em{ font-size:11px; width:50px; display:inline-block;}
+.account ul li span{ display:inline-block; float:left; margin-left:10px;}
+.account ul li span input{ border:1px solid #CCC; height:16px; width:130px;}
+account ul.scroll{ overflow-y:auto; height:110px; overflow-x:hidden}
+.account ul.scroll li{ font-size:11px; display:block; height:auto; background:url(//tkfile.yes24.com/img/common/ic_sel03.gif) no-repeat 3px 3px; padding-left:10px; margin-left:0;}
+
+.alert{ font-size:11px; border:1px solid #eaeaea; background-color:#fff; padding:10px; margin:0; width:395px; height:75px; position:absolute; bottom:30px; right:20px;}
+.alert strong{ background:url(//tkfile.yes24.com/img/common/ic_selon.gif) no-repeat 0 5px; padding-left:10px; font-weight:bold; display:block;}
+.alert div{ height:69px; width:405px;  overflow:auto; overflow-x:hidden;}
+
+.reser{ position:absolute; right:10px; top:25px}
+.pack li{ font-size:11px; letter-spacing:0; margin:3px 0;}
+.pack li em{ margin-right:8px;} 
+.pack li span{ margin-right:8px;}
+
+.history{ border-bottom:1px solid #CCC; border-top:2px solid #888888; margin-bottom:20px;}
+.history p.tit{ margin-top:-2px; background:url(//tkfile.yes24.com/img/mypage/bg_tit04.gif) repeat-x; padding:15px; font-size:14px; font-weight:bold; color:#3c3c3c;}
+.history div.cont{ padding:20px;}
+.history div.cont table.table_sm{ border-top:1px solid #d3d3d3;}
+.history div.cont table.table_sm th{border-bottom:1px solid #d3d3d3; border-right:1px solid #d3d3d3; background-color:#fafafb; text-align:left; padding-left:15px;  font-size:12px;}
+.history div.cont table.table_sm td{border-bottom:1px solid #d3d3d3;  font-size:12px;}
+.history div.cont table.table_sm td span{ font-size:12px;}
+.history div.cont div.notice{ margin-bottom:20px;} 
+
+.pack_cont{ padding:0 !important; }
+.table_th{ width:100%;}
+.table_th li{ border-right:1px solid #d3d3d3; padding:9px 5px; float:left;}
+.table_th li.fst{ width:170px;}
+.table_th li.sec{ width:130px;}
+.table_th li.thd{ width:60px; border:none;}
+.table_td { display:inline-block;  width:100%;}
+
+.table_td li{float:left; padding:9px 5px; display:inline-block;vertical-align:middle;}
+.table_td li.fst{width:170px;}
+.table_td li.sec{width:130px;}
+.table_td li.thd{ width:60px; border:none;}
+ 
+.pack{display:inline-block; border-bottom:1px solid #d3d3d3; border-top:1px solid #d3d3d3; width:100%; }
+.gray_box02 ul.bd_n li {font-weight:normal !important}
+.gray_box02 ul.bd_n em {display:block; padding-left:10px;}
+
+.fanclub {margin-bottom: 30px;position: relative;display: inline-block; padding:10px 15px; width: 700px;height: 65px;background:url('//tkfile.yes24.com/img/mypage/bx_pink.gif');}
+.fanclub h2 {font:bold 16px 맑은 고딕; color:#eb4956;padding-bottom:5px;}
+.fanclub .reser {right:30px !important;top:27px !important}
+.tmypage td.ri.fanimg img {margin-top:5px;}
+.tmypage td.ri.fanimg {text-align:left !important}
+.tmypage td.ri.fanimg span {display:block!important;}
+
+
+ /* 해피패밀리석 */
+.imgAlt { display:-moz-inline-stack;display:inline-block;zoom:1;*display:inline;overflow:hidden;text-align:left;text-indent:-999em;vertical-align:top;} /* 기본 이미지 태체 태그 */
+* html .imgAlt {text-indent:0 !important; line-height:0 !important; font-size:0 !important; overflow:hidden !important;}/*ie6 hack */  
+*:first-child+html .imgAlt { text-indent:0 !important; line-height:0 !important; font-size:0 !important; overflow:hidden !important;}/*ie7 hack */
+.imgBg { display:-moz-inline-stack;display:inline-block;zoom:1;*display:inline;overflow:hidden;text-align:left;vertical-align:top;} /* 기본 이미지 태체 태그 */
+.btn_rbox {background:url(//tkfile.yes24.com/img/mypage/btn_rbox.gif) no-repeat 0 0; width:140px; height:17px; padding-top: 3px ; text-align:center; }
+.mycont a:hover.btn_rbox {text-decoration: none;}
+.btn_rbox em {color:#ea4955; font-size:11px;}
+.user_info {padding:0 20px}
+.user_info h3 {padding-bottom:3px;}
+.table_info {width:100%;border:0; margin:0; padding:0; line-height:26px;table-layout: fixed;border-collapse: collapse; }
+.table_info th {background:#f4f8fe; border-bottom:1px solid #b6c3db; border-top:1px solid #656668; }
+.table_info th, .table_info td {border-left:1px solid #d3d3d3; font-size:11px;text-align:center; }
+.table_info th:first-child , .table_info td:first-child  {border-left:none}
+.table_info tr.end td, .table_info td.end { border-bottom:1px solid #d3d3d3;}
+.table_info td {border-bottom:1px solid #eeeeee;line-height:16px; padding:6px 0}
+.table_info td input, .table_info td select {height:16px; margin:0 2px; vertical-align:middle}
+.table_info td input.w5 {width:50px;}
+.table_info td input.w7 {width:70px;}
+.user_info .btn_submit {text-align:center; margin:-10px 0 20px 0}
+
+/* 해외 배송 관련 */
+.btn_rbox2 {display:inline-block; overflow: hidden;  border:1px solid #c4c4c4;  border-radius:2px; background:linear-gradient(#fff, #f6f7fa); min-width:30px; text-align:center}
+.btn_rbox2 em.bnTxt {font:normal 11px ;color:#676767; line-height:15px; letter-spacing:-0.04em; padding:0 !important; margin:3px 5px}
+
+/*관람공연*/
+.mycont .rv_bor {border-top:2px solid #9172d1;}
+.mycont .rv_bor li strong {height:auto;margin-bottom:5px;}
+.mycont .rv_bor li span {font-size:11px; color:#666;}
+.mycont .rv_bor li span em {font-weight:bold;}
+.mycont .rv_bor li span img {margin:5px 3px 5px 0;}
+
+.mypage_contain.fan h3.tit {position:absolute; left: 232px;top:57px; color:#555}
+.fan  em.bl_rnd { display:inline-block;margin:5px 4px 3px 0;width:1px;height:1px;overflow:hidden;border:1px solid #666;border-radius:2px;margin-left:-7px;background-color:#666;;text-decoration:none; }
+.mypage_contain.fan .gray_box03 ul li {font-size:11px; letter-spacing:-0.03em}
+
+.poster {text-align:center}
+.btn_c { display:inline-block;margin:10px 1px;padding:0 15px;min-width:27px;height:27px;line-height:27px;text-indent:0 !important;text-align:center;vertical-align:top;font-size:15px;font-weight:bold;color:#666;border:solid 1px #ccc;border-radius:3px;background-color:#fff;box-shadow:0 1px 0 0 rgba(0, 0, 0, 0.1); }
+.btn_red {border: solid 1px #b52430; background-color: #eb4956; }
+.btn_c em.txt { font-size:12px;color: #fff;height:28px;line-height:28px; }
+a.btn_c:link {text-decoration:none;}
