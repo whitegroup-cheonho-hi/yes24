@@ -3,6 +3,8 @@
 
 <configuration>
     <typeAliases>
+    <typeAlias alias="UserVO" type="com.yes24.vo.UserVO" />
+            
     </typeAliases>
 
     <mappers>

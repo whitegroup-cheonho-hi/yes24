@@ -37,7 +37,10 @@
 	height: 300px;
 	margin: 200px auto;
 }
-;
+#memLoginForm input input {
+	font-weight: initial;
+}
+#fail{color:red; font-size:12px;}
 </style>
 </head>
 <body>
@@ -65,6 +68,9 @@
 					method="post" name="LoginSub" autocomplete="off">
 					<fieldset class="loginForm">
 						<legend class="blind">회원 로그인</legend>
+						<c:if test="${!empty message}">
+							<span id="fail">${message}</span>
+						</c:if>
 						<span id="spanMemID" class="yesIpt b_size ipt_wSizeF focus_blue">
 							<input name="userId" type="text" required="required"
 							placeholder="아이디" />

@@ -9,6 +9,7 @@ section > h2{text-transform: uppercase; text-align: center; font-weight: 700; fo
 /* header */
 header.pc{width: 100%; height: 110px; border-bottom: 1px solid #858585; position: fixed; top: 0; left: 0; background: #fff; z-index: 99;}
 header.pc #lnb{width: 100%; height: 35px; border-bottom: 1px solid #e5e7eb; box-sizing: border-box;  background-color: #000;}
+header.pc #lnb #lnba{color: #999;}
 header.pc #lnb #lnba a{color: #999;}
 header.pc #lnb .lnb{width: 90%; height: 100%; margin: 0 auto; display: flex; justify-content:flex-end; align-items: center;}
 header.pc #lnb .lnb li{margin-left: 29px; position: relative;}

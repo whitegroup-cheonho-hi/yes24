@@ -3,6 +3,65 @@
 
 <mapper namespace="user">
 	
+	<!-- 회원가입 -->
+	<insert id="insertUser" parameterType="UserVO">
+	
+		<![CDATA[
+			
+			INSERT INTO users (
+						       user_sq,
+						       user_id,
+						       user_password,
+						       user_name,
+						       user_birthday,
+						       gender,
+						       user_phone,
+						       user_email,
+						       user_post,
+						       user_basic_addr,
+						       user_detail_addr,
+						       user_role,
+						       user_stat
+						      ) 
+					   VALUES ( 
+					           seq_users_sq.NEXTVAL,
+			                   #{userId},
+			                   #{userPassword},
+			                   #{userName},
+			                   #{userBirthday},
+			                   #{gender},
+			                   #{userPhone},
+			                   #{userEmail},
+			                   #{userPost},
+			                   #{userBasicAddr},
+			                   #{userDetailAddr},
+						       1,
+						       1 
+						      )
+				
+		]]>
+			
+	</insert>
+	
+	<!-- 로그인 -->
+	<select id="loginUser" parameterType="UserVO" resultType="UserVO">
+	
+		<![CDATA[
+		
+			SELECT
+			      user_id AS userId,
+			      user_password AS userPassword,
+			      user_role AS userRole
+			  FROM
+			      users
+			 WHERE
+			      user_id = #{userId}
+			  AND 
+			      user_password = #{userPassword}
+		
+		]]>
+		
+	</select>
 	
 
 </mapper>
