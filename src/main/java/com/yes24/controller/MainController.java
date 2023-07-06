@@ -1,6 +1,7 @@
 package com.yes24.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -15,8 +16,8 @@ public class MainController {
 		
 	}
 	
-	@RequestMapping(value = "/category",method =RequestMethod.GET)
-	public String category() {
+	@RequestMapping(value = "/category/{no}",method =RequestMethod.GET)
+	public String category(@PathVariable("no")int no) {
 		System.out.println("category()");
 		
 		return "main/category";

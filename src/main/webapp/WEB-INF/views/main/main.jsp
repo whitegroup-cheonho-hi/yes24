@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>main</title>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath }/assets/css/reset.css"
 	type="text/css">
@@ -96,7 +96,7 @@
 			},
 		});
 	});
-
+ 
 	$("#nav li").on("click", function() {
 		// 다른 li 요소들에서 on 클래스 제거
 		$("#nav li").removeClass("on");
