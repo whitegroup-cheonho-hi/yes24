@@ -36,7 +36,7 @@
 }
 
 .section {
-	width: 360px;
+	width: 450px;
 	height: 300px;
 	margin: 200px auto;
 }
@@ -49,24 +49,24 @@
 	color: red;
 	font-size: 12px;
 }
+
+#join a span{background-color: #f8f8f8;;}
+.section2 {	padding-top: 0px;}
 </style>
 </head>
 <body>
 	<!-- 헤더 -->
 	<c:import url="/WEB-INF/views/includes/header.jsp"></c:import>
 	<!-- //헤더 -->
-	<section class="section">
+	<section class="section section2">
 		<div class="sectiondiv">
-			<div>
-				<a href="${pageContext.request.contextPath }/user/joinForm">회원가입</a>
-			</div>
 			<div class="loginCont">
 				<!-- ############### 탭 영역 시작 ############### -->
 				<div id="divTabMemberArea" class="yesTab_nor yesTab_blue tab_2col">
 					<ul id="ulTabMember">
 						<li id="liTabMember" class="on firstCol"><a
-							href="javascript:void(0);" id="aTabMember"
-							onClick="chgTabLogin(this,'mem');"><span class="txt">회원</span></a></li>
+							href="#none"
+							><span class="txt">회원</span></a></li>
 					</ul>
 				</div>
 				<!-- ############### 탭 영역 끝 ############### -->
@@ -91,6 +91,12 @@
 								class="btn_login btnC xb_size btn_blue">
 								<span class="bWrap"><em class="txt">로그인</em></span>
 							</button>
+							<div id="join">
+								<a href="${pageContext.request.contextPath }/user/joinForm"
+									class="btn_login btnC xb_size"> <span class="bWrap"><em
+										class="txt">회원가입</em></span>
+								</a>
+							</div>
 						</fieldset>
 					</form>
 

@@ -26,6 +26,9 @@
 	rel="stylesheet">
 <!-- 제이쿼리 최신버전 -->
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<!-- 우편번호 라이브러리 -->
+<script
+	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <style>
 #joinForm {
 	margin-top: 60px;
@@ -38,7 +41,8 @@
 .yesIpt.ipt_readonly {
 	background-color: #fff;
 }
-
+.btnC.w_90 .bWrap {width:305px;}
+.btnC.w_90 .bWrap em{width:65px;}
 </style>
 </head>
 <body>
@@ -47,9 +51,10 @@
 	<!-- //헤더 -->
 	<section id="joinForm">
 		<div id="ySContent">
-			<form  name="MemberRegister" method="post" action="${pageContext.request.contextPath }/user/join"
+			<form name="MemberRegister" method="post"
+				action="${pageContext.request.contextPath }/user/join"
 				id="MemberRegister">
-				<div class="ySContRow w_600">				
+				<div class="ySContRow w_600">
 					<div class="tm_grp">
 						<h2 class="tmM_txt">
 							<em class="tit_txt"><strong>회원가입</strong></em>
@@ -65,7 +70,7 @@
 							<div class="inpRow">
 								<span id="spanCertifyIpt_txtMemId"
 									class="yesIpt b_size ipt_wSizeF chkVal"> <input
-									id="txtMemId" name="userId" type="text" required="required"
+									id="userId" name="userId" type="text" required="required"
 									placeholder="4~15자리 영소문자, 숫자">
 								</span>
 							</div>
@@ -78,7 +83,8 @@
 							<div class="inpRow">
 								<span id="spanCertifyIpt_txtMemPw"
 									class="yesIpt b_size ipt_wSizeF chkVal"><input
-									id="txtMemPw" name="userPassword" type="password" maxlength="20" required="required"
+									id="txtMemPw" name="userPassword" type="password"
+									maxlength="20" required="required"
 									placeholder="8~20자리 영문 대/소문자, 숫자, 특수문자 조합"> </span>
 							</div>
 
@@ -90,8 +96,9 @@
 							<div class="inpRow">
 								<span id="spanCertifyIpt_txtMemRePw"
 									class="yesIpt b_size ipt_wSizeF chkVal"> <input
-									id="txtMemRePw" name="txtMemRePw" type="password" required="required"
-									maxlength="20" placeholder="확인을 위한 비밀번호 재입력">
+									id="txtMemRePw" name="txtMemRePw" type="password"
+									required="required" maxlength="20"
+									placeholder="확인을 위한 비밀번호 재입력">
 								</span>
 							</div>
 
@@ -144,7 +151,8 @@
 							<div class="inpRow">
 								<span id="spanCertifyIpt_txtTelNo"
 									class="yesIpt b_size ipt_wSizeF labelHide ipt_readonly">
-									<input name="userPhone" type="text" placeholder="'-' 없이 숫자만 입력" required="required" maxlength="11">
+									<input name="userPhone" type="text" placeholder="'-' 없이 숫자만 입력"
+									required="required" maxlength="11">
 								</span>
 							</div>
 						</dd>
@@ -170,9 +178,9 @@
 								<div class="colGrp">
 									<div class="colCell w_280">
 										<span id="spanCertifyIpt_AddrNo"
-											class="yesIpt b_size ipt_wSizeF"> <input id="Zip5"
+											class="yesIpt b_size ipt_wSizeF"> <input id="addr1"
 											name="Zip5" size="5" type="text" autocomplete="off"
-											readonly="readonly" placeholder="우편번호" >
+											readonly="readonly" placeholder="우편번호">
 										</span>
 									</div>
 									<div class="colCell pal10">
@@ -184,15 +192,14 @@
 							</div>
 							<div class="inpRow">
 								<span id="spanCertifyIpt_Addr1" class="yesIpt b_size ipt_wSizeF">
-									<input name="ST_ADDR_TEXT" type="text" placeholder="도로명 주소"
+									<input id="addr2" name="ST_ADDR_TEXT" type="text" placeholder="주소"
 									readonly="readonly">
 								</span>
 							</div>
 							<div class="inpRow">
 								<span id="spanCertifyIpt_Addr2" class="yesIpt b_size ipt_wSizeF">
-									 <input
-									name="OLD_ADDR_TEXT" type="text" placeholder="지번 주소"
-									readonly="readonly">
+									<input id="addr3" name="OLD_ADDR_TEXT" type="text" placeholder="세부 주소"
+									>
 								</span>
 							</div>
 						</dd>
@@ -201,9 +208,11 @@
 
 					<div class="yesFormBtn">
 						<div class="formBtn_btn">
-							<button type="submit" id="aBtnRegMember" href="javascript:void(0);"
-								class="btnC xb_size btn_blue btn_wSizeF"><span class="bWrap"><em
-									class="txt">회원 가입</em></span></button>
+							<button type="submit" id="aBtnRegMember"
+								href="javascript:void(0);"
+								class="btnC xb_size btn_blue btn_wSizeF">
+								<span class="bWrap"><em class="txt">회원 가입</em></span>
+							</button>
 						</div>
 					</div>
 				</div>
@@ -218,6 +227,46 @@
 </body>
 
 <script>
+	//아이디 체크
+	$("#userId").on("keyup",function(){
+		
+		var id = $("#userId").val();
+		console.log(id);
+		
+		$.ajax({
+			
+			url : "${pageContext.request.contextPath}/user/idCheck",		
+			type : "post",			
+			data : {id: id},
+	
+			dataType : "json",
+			success : function(result){
+				
+				if(result.data){
+					
+				console.log("가능");
+				
+				}
+			
+			},
+			error : function(XHR, status, error) {
+				console.error(status + " : " + error);
+			}
+		}); 
+		
+	});
 
+
+
+	//우편번호
+	$("#aSelectPostalCode").on("click", function() {
+		new daum.Postcode({
+			oncomplete : function(data) {
+			console.log(data);
+	 		$("#addr1").val(data.zonecode);
+	 		$("#addr2").val(data.address);				
+			}
+		}).open();
+	});
 </script>
 </html>

@@ -128,5 +128,20 @@
 		]]>
 	
 	</update>
+	
+	<!-- 아이디체크 -->
+	<select id="idCheck" parameterType="String" resultType="UserVO">
+	
+		<![CDATA[
+			
+			SELECT
+			 	  user_id AS userid
+			  FROM
+			      users
+		   	 WHERE
+			      user_id = #{id}	
+		]]>
+	
+	</select>
 
 </mapper>

@@ -10,8 +10,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yes24.service.UserService;
+import com.yes24.vo.JsonResult;
 import com.yes24.vo.UserVO;
 
 @Controller
@@ -88,13 +91,13 @@ public class UserController {
 
 	// ------------------- 회원수정폼
 	@RequestMapping(value = "/modifyForm", method = RequestMethod.GET)
-	public String modifyForm(Model model,HttpSession session) {
+	public String modifyForm(Model model, HttpSession session) {
 		System.out.println("modifyForm()");
-		
+
 		UserVO vo = (UserVO) session.getAttribute("authUser");
-		
+
 		userVO.setUserSq(vo.getUserSq());
-		
+
 		UserVO user = userService.getUser(userVO);
 		System.out.println(user);
 		model.addAttribute("user", user);
@@ -102,7 +105,7 @@ public class UserController {
 		return "user/modifyForm";
 
 	}
-	
+
 	// ------------------- 회원정보 수정
 	@RequestMapping(value = "/modify", method = RequestMethod.POST)
 	public String modify(@ModelAttribute UserVO vo) {
@@ -113,12 +116,12 @@ public class UserController {
 		return "redirect:/user/modifyForm";
 
 	}
-	
+
 	// ------------------- 회원정보 탈퇴
 	@RequestMapping(value = "/delete/{no}", method = RequestMethod.GET)
-	public String delete(@PathVariable("no")int no) {
+	public String delete(@PathVariable("no") int no) {
 		System.out.println("delete()");
-		
+
 		int result = userService.deleteUser(no);
 
 		return "redirect:/user/logout";
@@ -127,16 +130,37 @@ public class UserController {
 
 	// ------------------- 마이페이지
 	@RequestMapping(value = "/myPage/{no}", method = RequestMethod.GET)
-	public String myPageForm(Model model, HttpSession session,@PathVariable("no")int no) {
+	public String myPageForm(Model model, HttpSession session, @PathVariable("no") int no) {
 		System.out.println("myPage()");
-		
+
 		UserVO vo = (UserVO) session.getAttribute("authUser");
 		UserVO user = userService.getUser(vo);
-		
+
 		model.addAttribute("user", user);
-	
-		return "user/myPage"+no;
+
+		return "user/myPage" + no;
 
 	}
 
+	// ------------------- 아이디중복 체크
+	@ResponseBody
+	@RequestMapping(value = "/idCheck",method = RequestMethod.POST)
+	public JsonResult idCheck(@RequestParam("id")String id){
+		System.out.println("idCheck()");
+		
+		JsonResult jsonResult = new JsonResult();
+		
+		boolean result = userService.idCheck(id);
+				
+		jsonResult.success(result);
+
+		return jsonResult;
+	}
+
 }
+
+
+
+
+
+

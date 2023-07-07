@@ -26,6 +26,9 @@
 	rel="stylesheet">
 <!-- 제이쿼리 최신버전 -->
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<!-- 우편번호 라이브러리 -->
+<script
+	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <style>
 #joinForm {margin-top: 60px;}
 .inpRow .yesIpt input {font-weight: initial;}
@@ -169,9 +172,9 @@
 								<div class="colGrp">
 									<div class="colCell w_280">
 										<span id="spanCertifyIpt_AddrNo"
-											class="yesIpt b_size ipt_wSizeF"> <input id="Zip5"
+											class="yesIpt b_size ipt_wSizeF"> <input id="addr1"
 											name="Zip5" size="5" type="text" autocomplete="off"
-											readonly="readonly" value="${user.userPost}">
+											readonly="readonly" placeholder="우편번호">
 										</span>
 									</div>
 									<div class="colCell pal10">
@@ -183,14 +186,14 @@
 							</div>
 							<div class="inpRow">
 								<span id="spanCertifyIpt_Addr1" class="yesIpt b_size ipt_wSizeF">
-									<input name="ST_ADDR_TEXT" type="text" value="${user.userBasicAddr}"
+									<input id="addr2" name="ST_ADDR_TEXT" type="text" placeholder="주소"
 									readonly="readonly">
 								</span>
 							</div>
 							<div class="inpRow">
 								<span id="spanCertifyIpt_Addr2" class="yesIpt b_size ipt_wSizeF">
-									<input name="OLD_ADDR_TEXT" type="text"value="${user.userDetailAddr}"
-									readonly="readonly">
+									<input id="addr3" name="OLD_ADDR_TEXT" type="text" placeholder="세부 주소"
+									>
 								</span>
 							</div>
 						</dd>
@@ -244,6 +247,18 @@
 	            //no
 	        }
 		});
+		
+		//우편번호
+		$("#aSelectPostalCode").on("click", function() {
+			new daum.Postcode({
+				oncomplete : function(data) {
+				console.log(data);
+		 		$("#addr1").val(data.zonecode);
+		 		$("#addr2").val(data.address);				
+				}
+			}).open();
+		});
+
 	});
 </script>
 </html>

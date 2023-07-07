@@ -25,26 +25,33 @@ public class UserDAO {
 
 		return sqlSession.selectOne("user.loginUser", vo);
 	}
-	
+
 	// -------------------- 회원정보가져오기
 	public UserVO getUser(UserVO vo) {
 		System.out.println("getUser DAO()");
 
 		return sqlSession.selectOne("user.getUser", vo);
 	}
-	
+
 	// -------------------- 회원정보수정
 	public int updateUser(UserVO vo) {
 		System.out.println("updateUser DAO()");
 
 		return sqlSession.update("user.updateUser", vo);
 	}
-	
-	// -------------------- 회원탈퇴(회원 상태만 변경한다.)
-		public int deleteUser(int no) {
-			System.out.println("deleteUser DAO()");
 
-			return sqlSession.update("user.deleteUser", no);
-		}
-	
+	// -------------------- 회원탈퇴(회원 상태만 변경한다.)
+	public int deleteUser(int no) {
+		System.out.println("deleteUser DAO()");
+
+		return sqlSession.update("user.deleteUser", no);
+	}
+
+	// -------------------- 아이디 체크
+	public UserVO idCheck(String id) {
+		System.out.println("idCheck DAO()");
+		
+		return sqlSession.selectOne("user.idCheck", id);
+	}
+
 }
