@@ -25,4 +25,20 @@ public class UserDAO {
 
 		return sqlSession.selectOne("user.loginUser", vo);
 	}
+	
+	// -------------------- 회원정보가져오기
+	public UserVO getUser(UserVO vo) {
+		System.out.println("getUser DAO()");
+
+		return sqlSession.selectOne("user.getUser", vo);
+	}
+	
+	// -------------------- 회원정보수정
+	public int updateUser(UserVO vo) {
+		System.out.println("updateUser DAO()");
+
+		return sqlSession.update("user.updateUser", vo);
+	}
+	
+	
 }

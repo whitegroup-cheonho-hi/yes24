@@ -1,0 +1,31 @@
+@charset "UTF-8";
+#warp{margin-top: 40px;}
+#warp .tc img{margin-left: 115px;}
+#warp .customerCenter .title{height: 25px; padding: 3px;}
+#warp .infor{width: 216px; height: 70px;}
+#warp .mycont .tit{margin-bottom: 10px;}
+#warp .my_lmenu{width: 210px;}
+#warp .title{border: 1px solid #d3d3d3; background: #fbfbfb; word-break: break-all; width: 210px;}
+#warp .telNum{border: 1px solid #d3d3d3; background: #fbfbfb; word-break: break-all; width: 196px; height: 130px; padding:10px}
+#warp .telNum img{margin-bottom: 10px;}
+#warp .mypage h2 a img{width: 218px;}
+
+#warp .date_list{width: 730px;float: right;background: url(//tkfile.yes24.com/img/mypage/bg_date02.gif) no-repeat; height: 56px; margin-bottom: 25px; padding: 0;}
+#warp .date_list ul{margin-left: 286px;}
+#warp .tmypage{text-align: left !important;font-weight: 400;line-height: 16px;color: #888888;margin: 0; padding: 0;
+				border: 0; font-size: inherit;font-style: normal;vertical-align: baseline; 
+				font-family: 'NanumBarunGothic', '���� ����', 'Malgun Gothic', sans-serif;
+				border-spacing: 0;width: 100%;table-layout: fixed; border-top: 2px solid #4e7ad1;
+				margin-bottom: 25px; border-collapse: separate;}
+#warp .tmypage th{background-color:#f9f9fb ; text-align: center; color: #666; padding: 8px 5px; border-bottom: 1px solid #d3d3d3; border-left: 1px solid #eeeeee; border-right: 1px solid #eeeeee;}
+#warp .tmypage td{font-size: 12px; text-align: center; color: #666666; padding: 8px 5px; border-bottom: 1px solid #eeeeee;}
+#warp .lnb{float: left;}
+
+#warp .mypage_gray_box03{width: 730px; margin-left: 270px;}
+#warp .mycont .gray_box03{border-top: solid black 1px; padding: 10px 10px;}
+#warp .mycont .gray_box03 .red{padding-top: 10px; color:#ea4955;}
+#warp .date_list .subtitle{font-size: 16px; margin:10px;}
+#warp .date_list .tit{margin:10px;}
+.mypage_contain .mycont .tit .subtitle{font-size: 14px;}
+.date_list ul li.sec{margin-left: 27px;}
+

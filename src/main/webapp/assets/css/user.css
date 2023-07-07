@@ -1,6 +1,4 @@
-
 @charset "utf-8";
-
 
 #gnbwrap{margin-top:0 !important;}
 #warp {font-size:12px;font-family: '����',dotum,Helvetica,sans-serif;line-height:16px;padding-top:45px; color:#555;}
@@ -58,7 +56,6 @@
 .information2 .info dt{display:block;}
 .information2 .info dd{display:block;clear:right;}
 
-@charset "utf-8";
 
 .mypage{ height:auto; margin-bottom:15px;}
 .mypage div.infor{ /*padding:10px;*/ border:1px solid #d3d3d3; background:#fbfbfb; word-break: break-all;}
@@ -76,7 +73,7 @@
 .my_lmenu ul li.sub{ margin-top:-3px;}
 .my_lmenu ul{padding: 10px 0px 16px 0 !important;}
 .my_lmenu ul li.lbtn{ text-align:center; padding-top:10px;}
-.my_lmenu ul li.end{ }
+
 
 .mypage_contain{ width:730px; float:right; position:relative; margin-bottom:40px;  }
 .mypage_contain h1{ margin-bottom:16px; margin-top:2px;}
@@ -128,8 +125,7 @@
 .mycont .point li img {margin:-3px 2px 0 2px; }
 .mycont a:hover {text-decoration:underline;}
 
-.mycont .point li.bgn {/*background:none;*/}
-.mycont .point_txt {margin-top:-17px;font-size:11px; solid #888; text-align:right; padding-right:10px;}
+.mycont .point_txt {margin-top:-17px;font-size:11px; color:#888; text-align:right; padding-right:10px;}
 .mycont .table_gbox td em {font-size:11px;}
 
 
@@ -208,7 +204,7 @@
 .table_sm td em{  border-bottom:none; font-size:11px; margin-left:5px;}
 .table_sm td div.scroll{ overflow-x:hidden; overflow:auto; height:34px;}
 .table_sm th.ri,.table_sm td.ri div{ width:350px; height:51px; overflow-y:auto; overflow-x:hidden;}
-.table_sm th.ri,.table_sm td.ri div span{ }
+
 .table_sm img.cen {vertical-align:-webkit-baseline-middle}
 .table_sm input { vertical-align: baseline;}
 
@@ -223,7 +219,7 @@
 .table_gbox td{ border-left:1px solid #b6c1dd; border-right:1px solid #b6c1dd; font-size:12px; color:#666666; }
 .table_gbox td div.sub_list{ margin-bottom:5px; padding:10px; background-color:#fafafb;}
 .table_gbox td div span{ font-size:11px; display:block;  }
-.table_gbox td span{  }
+
 .table_gbox td span.tit{ font-family:Tahoma;  }
 .table_gbox td span.blu{ text-decoration:underline; color:#4e7bce;}
 .table_gbox td div.scroll{ overflow-x:hidden; overflow:auto; height:34px;}
@@ -307,7 +303,7 @@ ul.gbox_notice li em{ text-decoration:underline;}
 .date_list{ background:url(//tkfile.yes24.com/img/mypage/bg_date.gif) no-repeat; height:100px; margin-bottom:25px; padding:18px 22px;}
 .date_list.bg{ background:url(//tkfile.yes24.com/img/mypage/bg_date02.gif) no-repeat; height:56px; margin-bottom:25px; padding:18px 22px;}
 .date_list p.tit{ margin-bottom:25px; padding-left:3px;}
-.date_list p.tit strong{ }
+
 .date_list p.tit em{ text-decoration:underline; font-weight:bold;}
 .date_list ul li {float:left; margin-bottom:7px;}
 .date_list ul li input.date{ border:1px solid #CCC; height:16px; margin-right:3px; vertical-align:middle;}
@@ -487,3 +483,4 @@ account ul.scroll{ overflow-y:auto; height:110px; overflow-x:hidden}
 .btn_red {border: solid 1px #b52430; background-color: #eb4956; }
 .btn_c em.txt { font-size:12px;color: #fff;height:28px;line-height:28px; }
 a.btn_c:link {text-decoration:none;}
+

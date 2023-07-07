@@ -15,6 +15,9 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath }/assets/css/login.css"
 	type="text/css">
+	<link rel="stylesheet" type="text/css"
+	href="https://image.yes24.com/sysimage/yesUI/yesUI.css?v=20230403"
+	media="all">
 <!-- 구글폰트 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -44,7 +47,6 @@
 </style>
 </head>
 <body>
-
 	<!-- 헤더 -->
 	<c:import url="/WEB-INF/views/includes/header.jsp"></c:import>
 	<!-- //헤더 -->

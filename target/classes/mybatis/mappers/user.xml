@@ -49,6 +49,7 @@
 		<![CDATA[
 		
 			SELECT
+				  user_sq as userSq,
 			      user_id AS userId,
 			      user_password AS userPassword,
 			      user_role AS userRole
@@ -61,6 +62,35 @@
 		
 		]]>
 		
+	</select>
+	
+	<!-- 회원정보 가져오기 -->
+	<select id="getUser" parameterType="UserVO" resultType="UserVO">
+	
+		<![CDATA[
+		
+			  SELECT
+				    user_id                AS userid,
+				    user_password          AS userpassword,
+				    user_name              AS username,
+				    user_birthday          AS userbirthday,
+				    gender,
+				    user_phone             AS userphone,
+				    user_email             AS useremail,
+				    user_post              AS userpost,
+				    user_basic_addr        AS userbasicaddr,
+				    user_detail_addr       AS userdetailaddr,
+				    user_join_date         AS userjoindate,
+				    user_withdrawal_date   AS userwithdrawaldate,
+				    user_role              AS userrole,
+				    user_stat              AS userstat
+			    FROM
+				    users
+			   WHERE
+				    user_sq = #{userSq}
+		
+		]]>
+			
 	</select>
 	
 

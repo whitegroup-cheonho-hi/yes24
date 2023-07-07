@@ -1,11 +1,13 @@
 package com.yes24.controller;
 
 import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -18,6 +20,8 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private UserVO userVO;
 
 	// ------------------- 로그인폼
 	@RequestMapping(value = "/loginForm", method = RequestMethod.GET)
@@ -35,7 +39,7 @@ public class UserController {
 		String message = "아이디 또는 비밀번호를 잘못입력했습니다. \n<br> 입력하신 내용을 다시 확인해주세요.";
 		String Uri = "";
 
-		UserVO userVO = userService.loginUser(vo);
+		userVO = userService.loginUser(vo);
 
 		if (userVO == null) {
 			model.addAttribute("message", message);
@@ -51,7 +55,7 @@ public class UserController {
 	}
 
 	// ------------------- 로그아웃
-	@RequestMapping(value = "/logout", method = RequestMethod.POST)
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logout(HttpSession session) {
 		System.out.println("logout()");
 
@@ -81,6 +85,37 @@ public class UserController {
 		System.out.println(result);
 
 		return "redirect:/user/loginForm";
+
+	}
+
+	// ------------------- 회원수정폼
+	@RequestMapping(value = "/modifyForm", method = RequestMethod.GET)
+	public String modifyForm(Model model,HttpSession session) {
+		System.out.println("modifyForm()");
+		
+		UserVO vo = (UserVO) session.getAttribute("authUser");
+		
+		userVO.setUserSq(vo.getUserSq());
+		
+		UserVO user = userService.getUser(userVO);
+		
+		model.addAttribute("user", user);
+
+		return "user/modifyForm";
+
+	}
+
+	// ------------------- 마이페이지
+	@RequestMapping(value = "/myPage/{no}", method = RequestMethod.GET)
+	public String myPageForm(Model model, HttpSession session,@PathVariable("no")int no) {
+		System.out.println("myPage()");
+		
+		UserVO vo = (UserVO) session.getAttribute("authUser");
+		UserVO user = userService.getUser(vo);
+		
+		model.addAttribute("user", user);
+	
+		return "user/myPage"+no;
 
 	}
 

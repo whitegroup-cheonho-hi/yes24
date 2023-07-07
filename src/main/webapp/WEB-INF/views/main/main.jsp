@@ -37,12 +37,9 @@
 </style>
 </head>
 <body>
-	
 	<!-- 헤더 -->
 	<c:import url="/WEB-INF/views/includes/header.jsp"></c:import>
 	<!-- //헤더 -->
-	
-
 	<!-- 메인 롤링배너 (KV) -->
 	<div class="swiper swiper1">
 		<div class="swiper-wrapper">

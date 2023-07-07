@@ -21,9 +21,23 @@ public class UserService {
 
 	// -------------------- 로그인
 	public UserVO loginUser(UserVO vo) {
-		System.out.println("loginUser DAO()");
+		System.out.println("loginUser Service()");
 
 		return userDAO.loginUser( vo);
 	}
+	
+	// -------------------- 회원정보가져오기
+	public UserVO getUser(UserVO vo) {
+		System.out.println("getUser Service()");
+
+		return userDAO.getUser( vo);
+	}
+	
+	// -------------------- 회원정보수정
+		public int updateUser(UserVO vo) {
+			System.out.println("updateUser Service()");
+
+			return userDAO.updateUser(vo);
+		}
 
 }

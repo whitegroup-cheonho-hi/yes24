@@ -15,6 +15,8 @@
 					<li class="logout">${authUser.userId}님&nbsp;환영합니다</li>
 					<li class="logout"><a
 						href="${pageContext.request.contextPath}/user/logout">로그아웃</a></li>
+					<li class="myPage"><a
+						href="${pageContext.request.contextPath}/user/myPage/1">마이페이지</a></li>
 				</c:otherwise>
 			</c:choose>
 			<li class="search"><a href="#none">검색</a></li>
