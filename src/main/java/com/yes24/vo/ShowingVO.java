@@ -2,9 +2,9 @@ package com.yes24.vo;
 
 import java.sql.Date;
 
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Component;
 
-@Repository
+@Component
 public class ShowingVO {
 	
 	private int showingSq;
@@ -19,6 +19,10 @@ public class ShowingVO {
 	private int[] showingSeatSq;
 	private String[] showingSeatNO;
 	private int[] showingSeatStat;
+	//좌석구분
+	private int[] seatClassSq;
+	private String[] seatClass;
+	private int[] seatPrice;
 	
 	
 

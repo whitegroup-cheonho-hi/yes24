@@ -1,8 +1,8 @@
 package com.yes24.vo;
 
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Component;
 
-@Repository
+@Component
 public class ConcertHallVO {
 
 	private int concertHallSq;

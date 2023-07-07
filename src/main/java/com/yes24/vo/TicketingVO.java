@@ -2,9 +2,9 @@ package com.yes24.vo;
 
 import java.sql.Date;
 
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Component;
 
-@Repository
+@Component
 public class TicketingVO {
 
 	private int ticketingSq;
