@@ -9,15 +9,15 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath }/assets/css/reset.css"
 	type="text/css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath }/assets/css/sub.css"
-	type="text/css">
+<link rel="stylesheet" type="text/css"
+	href="https://image.yes24.com/sysimage/yesUI/yesUI.css?v=20230403"
+	media="all">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath }/assets/css/login.css"
 	type="text/css">
-	<link rel="stylesheet" type="text/css"
-	href="https://image.yes24.com/sysimage/yesUI/yesUI.css?v=20230403"
-	media="all">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath }/assets/css/sub.css"
+	type="text/css">
 <!-- 구글폰트 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -40,10 +40,15 @@
 	height: 300px;
 	margin: 200px auto;
 }
+
 #memLoginForm input input {
 	font-weight: initial;
 }
-#fail{color:red; font-size:12px;}
+
+#fail {
+	color: red;
+	font-size: 12px;
+}
 </style>
 </head>
 <body>
@@ -51,47 +56,49 @@
 	<c:import url="/WEB-INF/views/includes/header.jsp"></c:import>
 	<!-- //헤더 -->
 	<section class="section">
-		<div>
-			<a href="${pageContext.request.contextPath }/user/joinForm">회원가입</a>
-		</div>
-		<div class="loginCont">
-			<!-- ############### 탭 영역 시작 ############### -->
-			<div id="divTabMemberArea" class="yesTab_nor yesTab_blue tab_2col">
-				<ul id="ulTabMember">
-					<li id="liTabMember" class="on firstCol"><a
-						href="javascript:void(0);" id="aTabMember"
-						onClick="chgTabLogin(this,'mem');"><span class="txt">회원</span></a></li>
-				</ul>
+		<div class="sectiondiv">
+			<div>
+				<a href="${pageContext.request.contextPath }/user/joinForm">회원가입</a>
 			</div>
-			<!-- ############### 탭 영역 끝 ############### -->
-			<!-- ############### 로그인 폼 : 회원 영역 시작 ############### -->
-			<div id="memLoginForm" class="loginFormGrp">
-				<form action="${pageContext.request.contextPath }/user/login"
-					method="post" name="LoginSub" autocomplete="off">
-					<fieldset class="loginForm">
-						<legend class="blind">회원 로그인</legend>
-						<c:if test="${!empty message}">
-							<span id="fail">${message}</span>
-						</c:if>
-						<span id="spanMemID" class="yesIpt b_size ipt_wSizeF focus_blue">
-							<input name="userId" type="text" required="required"
-							placeholder="아이디" />
-						</span> <span id="spanMemPW"
-							class="yesIpt b_size ipt_wSizeF focus_blue mgt10"> <input
-							name="userPassword" type="password" required="required"
-							placeholder="비밀번호" />
-						</span>
-						<button type="submit" id="btnLogin" title="로그인"
-							class="btn_login btnC xb_size btn_blue">
-							<span class="bWrap"><em class="txt">로그인</em></span>
-						</button>
-					</fieldset>
-				</form>
+			<div class="loginCont">
+				<!-- ############### 탭 영역 시작 ############### -->
+				<div id="divTabMemberArea" class="yesTab_nor yesTab_blue tab_2col">
+					<ul id="ulTabMember">
+						<li id="liTabMember" class="on firstCol"><a
+							href="javascript:void(0);" id="aTabMember"
+							onClick="chgTabLogin(this,'mem');"><span class="txt">회원</span></a></li>
+					</ul>
+				</div>
+				<!-- ############### 탭 영역 끝 ############### -->
+				<!-- ############### 로그인 폼 : 회원 영역 시작 ############### -->
+				<div id="memLoginForm" class="loginFormGrp">
+					<form action="${pageContext.request.contextPath }/user/login"
+						method="post" name="LoginSub" autocomplete="off">
+						<fieldset class="loginForm">
+							<legend class="blind">회원 로그인</legend>
+							<c:if test="${!empty message}">
+								<span id="fail">${message}</span>
+							</c:if>
+							<span id="spanMemID" class="yesIpt b_size ipt_wSizeF focus_blue">
+								<input name="userId" type="text" required="required"
+								placeholder="아이디" />
+							</span> <span id="spanMemPW"
+								class="yesIpt b_size ipt_wSizeF focus_blue mgt10"> <input
+								name="userPassword" type="password" required="required"
+								placeholder="비밀번호" />
+							</span>
+							<button type="submit" id="btnLogin" title="로그인"
+								class="btn_login btnC xb_size btn_blue">
+								<span class="bWrap"><em class="txt">로그인</em></span>
+							</button>
+						</fieldset>
+					</form>
 
-				<!-- ##### 로그아웃 관련 안내 끝 ##### -->
+					<!-- ##### 로그아웃 관련 안내 끝 ##### -->
+				</div>
 			</div>
+			<!-- ############################## 로그인 관련 영역 끝 ############################## -->
 		</div>
-		<!-- ############################## 로그인 관련 영역 끝 ############################## -->
 	</section>
 	<!-- Footer -->
 	<c:import url="/WEB-INF/views/includes/footer.jsp"></c:import>

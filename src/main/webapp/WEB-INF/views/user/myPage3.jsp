@@ -89,7 +89,7 @@
 					<div class="mypage_contain">
 						<div class="mycont">
 							<h2 class="tit">
-								<b class="subtitle">티켓 오픈 알람</b>
+								&nbsp;<b class="subtitle">티켓 오픈 알람</b>
 							</h2>
 							<div id="divOrderList" style="">
 								<table class="tmypage" summary="티켓 오픈 알람">
@@ -123,7 +123,7 @@
 					<div class="mypage_contain">
 						<div class="mycont">
 							<h2 class="tit">
-								<b class="subtitle">양도 티켓 알람</b>
+								&nbsp;<b class="subtitle">양도 티켓 알람</b>
 							</h2>
 							<div id="divOrderList" style="">
 								<table class="tmypage" summary="최근 예매내역 리스트">
