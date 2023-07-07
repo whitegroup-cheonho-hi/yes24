@@ -82,8 +82,6 @@ public class UserController {
 
 		int result = userService.insertUser(vo);
 
-		System.out.println(result);
-
 		return "redirect:/user/loginForm";
 
 	}
@@ -98,10 +96,32 @@ public class UserController {
 		userVO.setUserSq(vo.getUserSq());
 		
 		UserVO user = userService.getUser(userVO);
-		
+		System.out.println(user);
 		model.addAttribute("user", user);
 
 		return "user/modifyForm";
+
+	}
+	
+	// ------------------- 회원정보 수정
+	@RequestMapping(value = "/modify", method = RequestMethod.POST)
+	public String modify(@ModelAttribute UserVO vo) {
+		System.out.println("modify()");
+
+		int result = userService.modifyUser(vo);
+
+		return "redirect:/user/modifyForm";
+
+	}
+	
+	// ------------------- 회원정보 탈퇴
+	@RequestMapping(value = "/delete/{no}", method = RequestMethod.GET)
+	public String delete(@PathVariable("no")int no) {
+		System.out.println("delete()");
+		
+		int result = userService.deleteUser(no);
+
+		return "redirect:/user/logout";
 
 	}
 

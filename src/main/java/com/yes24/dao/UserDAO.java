@@ -40,5 +40,11 @@ public class UserDAO {
 		return sqlSession.update("user.updateUser", vo);
 	}
 	
+	// -------------------- 회원탈퇴(회원 상태만 변경한다.)
+		public int deleteUser(int no) {
+			System.out.println("deleteUser DAO()");
+
+			return sqlSession.update("user.deleteUser", no);
+		}
 	
 }

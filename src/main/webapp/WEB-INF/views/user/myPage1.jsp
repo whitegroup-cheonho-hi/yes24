@@ -26,6 +26,9 @@
 	rel="stylesheet">
 <!-- 제이쿼리 최신버전 -->
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<style>
+
+</style>
 </head>
 <body>
 	<!-- 헤더 -->

@@ -119,7 +119,7 @@
 										<span id="spanCertifyIpt_txtBirthDay"
 											class="yesIpt b_size ipt_wSizeF labelHide ipt_readonly">
 											<input name="userBirthday" type="text"
-											placeholder="ex)20230101" required="required">
+											placeholder="ex)20230101" required="required" maxlength="8">
 										</span>
 									</div>
 									<div class="colCell w_130">
@@ -144,7 +144,7 @@
 							<div class="inpRow">
 								<span id="spanCertifyIpt_txtTelNo"
 									class="yesIpt b_size ipt_wSizeF labelHide ipt_readonly">
-									<input name="userPhone" type="text" placeholder="'-' 없이 숫자만 입력" required="required">
+									<input name="userPhone" type="text" placeholder="'-' 없이 숫자만 입력" required="required" maxlength="11">
 								</span>
 							</div>
 						</dd>
@@ -190,7 +190,7 @@
 							</div>
 							<div class="inpRow">
 								<span id="spanCertifyIpt_Addr2" class="yesIpt b_size ipt_wSizeF">
-									<label for="OLD_ADDR_TEXT">지번 주소</label> <input
+									 <input
 									name="OLD_ADDR_TEXT" type="text" placeholder="지번 주소"
 									readonly="readonly">
 								</span>

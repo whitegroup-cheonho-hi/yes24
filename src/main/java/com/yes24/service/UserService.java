@@ -34,10 +34,15 @@ public class UserService {
 	}
 	
 	// -------------------- 회원정보수정
-		public int updateUser(UserVO vo) {
-			System.out.println("updateUser Service()");
+		public int modifyUser(UserVO vo) {
+			System.out.println("modifyUser Service()");
 
 			return userDAO.updateUser(vo);
 		}
+		// -------------------- 회원탈퇴(회원 상태만 변경한다.)
+		public int deleteUser(int no) {
+			System.out.println("deleteUser Service()");
 
+			return userDAO.deleteUser(no);
+		}
 }

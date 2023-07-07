@@ -49,16 +49,18 @@
 		<![CDATA[
 		
 			SELECT
-				  user_sq as userSq,
-			      user_id AS userId,
-			      user_password AS userPassword,
-			      user_role AS userRole
+				  user_sq AS usersq,
+			      user_id AS userid,
+			      user_password AS userpassword,
+			      user_role AS userrole
 			  FROM
 			      users
 			 WHERE
 			      user_id = #{userId}
 			  AND 
 			      user_password = #{userPassword}
+			  AND
+			  	  user_stat < 4
 		
 		]]>
 		
@@ -70,6 +72,7 @@
 		<![CDATA[
 		
 			  SELECT
+			  		user_sq                AS usersq,
 				    user_id                AS userid,
 				    user_password          AS userpassword,
 				    user_name              AS username,
@@ -93,5 +96,37 @@
 			
 	</select>
 	
+	<!-- 회원정보수정 -->
+	<update id="updateUser" parameterType="UserVO">
+	
+		<![CDATA[
+			
+			UPDATE users SET  
+							user_password = #{userPassword},       					  
+			                user_phone = #{userPhone},
+			                user_email = #{userEmail},
+			                user_post = #{userPost},
+			                user_basic_addr = #{userBasicAddr},
+			                user_detail_addr =#{userDetailAddr}			                 
+			           WHERE 
+			                user_sq = #{userSq}
+					
+		]]>
+	
+	</update>
+	
+	<!-- 회원탈퇴(상태만 변경) -->
+	<update id="deleteUser" parameterType="int">
+	
+		<![CDATA[
+			
+			UPDATE users SET  
+			                user_stat = 4
+			 		   WHERE 
+			                user_sq =#{usersq}
+								
+		]]>
+	
+	</update>
 
 </mapper>

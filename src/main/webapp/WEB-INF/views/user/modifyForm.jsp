@@ -27,17 +27,11 @@
 <!-- 제이쿼리 최신버전 -->
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <style>
-#joinForm {
-	margin-top: 60px;
-}
-
-.inpRow .yesIpt input {
-	font-weight: initial;
-}
-
-.yesIpt.ipt_readonly {
-	background-color: #fff;
-}
+#joinForm {margin-top: 60px;}
+.inpRow .yesIpt input {font-weight: initial;}
+.yesIpt.ipt_readonly {background-color: #fff;}
+.yesFormBtn .formBtn_btn {text-align: center;}
+.yesFormBtn .formBtn_btn .bWrap .txt{width:180px;} 
 </style>
 </head>
 <body>
@@ -47,7 +41,7 @@
 	<section id="joinForm">
 		<div id="ySContent">
 			<form name="MemberRegister" method="post"
-				action="${pageContext.request.contextPath }/user/join"
+				action="${pageContext.request.contextPath }/user/modify"
 				id="MemberRegister">
 				<div class="ySContRow w_600">
 					<div class="tm_grp">
@@ -65,27 +59,27 @@
 							<div class="inpRow">
 								<span id="spanCertifyIpt_txtMemId"
 									class="yesIpt b_size ipt_wSizeF chkVal"> <input
+									name="userSq" type="hidden" value="${user.userSq}"> <input
 									name="userId" type="text" readonly value="${user.userId}">
-									<input name="userSq" type="hidden" value="${user.userSq}">
 								</span>
 							</div>
 
 						</dd>
 						<dt>
-							<strong class="item_tit">비밀번호</strong>
+							<strong class="item_tit">새비밀번호</strong>
 						</dt>
 						<dd>
 							<div class="inpRow">
 								<span id="spanCertifyIpt_txtMemPw"
 									class="yesIpt b_size ipt_wSizeF chkVal"><input
 									id="txtMemPw" name="userPassword" type="password"
-									maxlength="20" required="required"
-									placeholder="8~20자리 영문 대/소문자, 숫자, 특수문자 조합"> </span>
+									maxlength="20" required="required" value="${user.userPassword}">
+								</span>
 							</div>
 
 						</dd>
 						<dt>
-							<strong class="item_tit">비밀번호 재입력</strong>
+							<strong class="item_tit">새비밀번호 재입력</strong>
 						</dt>
 						<dd>
 							<div class="inpRow">
@@ -107,7 +101,8 @@
 							<div class="inpRow">
 								<span id="spanCertifyIpt_txtMemNm"
 									class="yesIpt b_size ipt_wSizeF ipt_readonly"> <input
-									name="userName" type="text" required="required">
+									name="userName" type="text" required="required"
+									value="${user.userName}">
 								</span>
 							</div>
 						</dd>
@@ -121,18 +116,21 @@
 										<span id="spanCertifyIpt_txtBirthDay"
 											class="yesIpt b_size ipt_wSizeF labelHide ipt_readonly">
 											<input name="userBirthday" type="text"
-											placeholder="ex)20230101" required="required">
+											placeholder="ex)20230101" required="required"
+											value="${user.userBirthday}" maxlength="8">
 										</span>
 									</div>
 									<div class="colCell w_130">
 										<div class="yesRadioTab col_2 b_size mgl10">
+											<input id="gender" type="hidden" value="${user.gender}">
 											<ul>
-												<li><input value="M" name="gender" type="radio"
-													id="rdoMemSexM" class="yesRadio" checked="checked"><label
-													for="rdoMemSexM" class="lnk_lab"><em class="txt">남</em></label></li>
-												<li><input value="F" name="gender" type="radio"
-													id="rdoMemSexF" class="yesRadio"><label
-													for="rdoMemSexF" class="lnk_lab"><em class="txt">여</em></label></li>
+												<li><input value="M" name="gender" type="radio" id="M"
+													class="yesRadio"><label for="rdoMemSexM"
+													class="lnk_lab"><em class="txt">남</em></label></li>
+
+												<li><input value="F" name="gender" type="radio" id="F"
+													class="yesRadio"><label for="rdoMemSexF"
+													class="lnk_lab"><em class="txt">여</em></label></li>
 											</ul>
 										</div>
 									</div>
@@ -146,8 +144,7 @@
 							<div class="inpRow">
 								<span id="spanCertifyIpt_txtTelNo"
 									class="yesIpt b_size ipt_wSizeF labelHide ipt_readonly">
-									<input name="userPhone" type="text" placeholder="'-' 없이 숫자만 입력"
-									required="required">
+									<input name="userPhone" type="text" required="required" value="${user.userPhone}" maxlength="11">
 								</span>
 							</div>
 						</dd>
@@ -158,8 +155,7 @@
 							<div class="inpRow">
 								<span id="spanCertifyIpt_txtMemMail"
 									class="yesIpt b_size ipt_wSizeF "> <input
-									name="userEmail" type="text" maxlength="50"
-									placeholder="이메일 주소 입력" required="required">
+									name="userEmail" type="text" maxlength="50" required="required" value="${user.userEmail}">
 								</span>
 							</div>
 						</dd>
@@ -175,7 +171,7 @@
 										<span id="spanCertifyIpt_AddrNo"
 											class="yesIpt b_size ipt_wSizeF"> <input id="Zip5"
 											name="Zip5" size="5" type="text" autocomplete="off"
-											readonly="readonly" placeholder="우편번호">
+											readonly="readonly" value="${user.userPost}">
 										</span>
 									</div>
 									<div class="colCell pal10">
@@ -187,14 +183,13 @@
 							</div>
 							<div class="inpRow">
 								<span id="spanCertifyIpt_Addr1" class="yesIpt b_size ipt_wSizeF">
-									<input name="ST_ADDR_TEXT" type="text" placeholder="도로명 주소"
+									<input name="ST_ADDR_TEXT" type="text" value="${user.userBasicAddr}"
 									readonly="readonly">
 								</span>
 							</div>
 							<div class="inpRow">
 								<span id="spanCertifyIpt_Addr2" class="yesIpt b_size ipt_wSizeF">
-									<label for="OLD_ADDR_TEXT">지번 주소</label> <input
-									name="OLD_ADDR_TEXT" type="text" placeholder="지번 주소"
+									<input name="OLD_ADDR_TEXT" type="text"value="${user.userDetailAddr}"
 									readonly="readonly">
 								</span>
 							</div>
@@ -204,11 +199,12 @@
 
 					<div class="yesFormBtn">
 						<div class="formBtn_btn">
-							<button type="submit" id="aBtnRegMember"
-								href="javascript:void(0);"
-								class="btnC xb_size btn_blue btn_wSizeF">
-								<span class="bWrap"><em class="txt">회원 가입</em></span>
+							<button type="submit" class="btnC xb_size btn_blue">
+								<span class="bWrap"><em class="txt">회원정보 수정</em></span>
 							</button>
+							<a href="#none" id="deleteUser" class="btnC xb_size btn_blue">
+								<span class="bWrap"><em class="txt">탈퇴</em></span>
+							</a>
 						</div>
 					</div>
 				</div>
@@ -223,6 +219,31 @@
 </body>
 
 <script>
-	
+	$(document).ready(function() {
+		
+		//성별 체크
+		let gender = $("#gender").val();
+		let M = $("#M");
+		let F = $("#F");
+		
+		if (gender === "M") {
+			M.attr("checked", true);
+		} else if (gender === "F") {
+			F.attr("checked", true);
+		}
+		
+		//회원탈퇴
+		$("#deleteUser").on("click",function(e){
+		
+			var result = confirm('정말 탈퇴 하시겠습니까?');
+
+	        if(result) {
+	           //yes
+	            location.replace("${pageContext.request.contextPath }/user/delete/${user.userSq}");
+	        } else {
+	            //no
+	        }
+		});
+	});
 </script>
 </html>

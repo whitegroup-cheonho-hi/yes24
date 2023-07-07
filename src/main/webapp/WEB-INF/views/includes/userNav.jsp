@@ -9,6 +9,7 @@
 		<div class="infor">
 			<span class="grade"><em>${user.userName}</em>님은 <em>일반회원</em>입니다.
 			</span>
+			<br>
 			<div class="btn">
 				<div class="tc">
 					<a href="${pageContext.request.contextPath}/user/modifyForm"
