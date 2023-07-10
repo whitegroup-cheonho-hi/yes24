@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -43,10 +44,10 @@
 				<!--rn-01-->
 				<div class="rn-02">
 					<!--제목-->
-					<p class="rn-big-title">[부산] 뮤지컬 〈시카고〉 25주년 기념 오리지널 내한</p>
+					<p class="rn-big-title">${show.showName}</p>
 					<div class="rn-product-short-data">
 						<p>
-							<span class="ps-date">2023.08.11 ~ 2023.08.20</span><a
+							<span class="ps-date">${show.startDate} ~ ${show.endDate}</span><a
 								href="#none" id="ps-location"><span class="ps-location">지도로가는링크</span></a>
 						</p>
 					</div>
@@ -61,7 +62,7 @@
 					<!--포스터, 지역, 동영상-->
 					<div class="rn-product-imgbox">
 						<img
-							src="http://tkfile.yes24.com/upload2/PerfBlog/202305/20230528/20230528-46102.jpg">
+							src="${pageContext.request.contextPath}/upload/${show.subImage}">
 						<a href="#" class="rn-product-movie" style="display: none;"><img
 							src="http://tkfile.yes24.com/imgNew/common/kv-movie.png" alt=""></a>
 					</div>
@@ -85,13 +86,18 @@
 						<!--등급, 관람시간, 출연, 가격, 혜택-->
 						<dl>
 							<dt>등급</dt>
-							<dd>&nbsp;14세 이상</dd>
+							<dd>&nbsp;${show.viewingAge}세 이상</dd>
 							<dt>관람시간</dt>
-							<dd>&nbsp;총 150분 (인터미션 20분)</dd>
+							<dd>&nbsp;총 ${show.showTime}분 (인터미션 20분)</dd>
 							<dt>출연</dt>
 							<dd>
-								&nbsp;<a href="https://www.google.com/search?q=-"
-									target="_blank" class="rn-product-peole">-</a>
+								&nbsp;<a href="https://www.google.com/search?q=${show.cast}"
+									target="_blank" class="rn-product-peole">${show.cast}</a>
+							</dd>
+							<dt>연출자</dt>
+							<dd>
+								&nbsp;<a href="https://www.google.com/search?q=${show.director}"
+									target="_blank" class="rn-product-peole">${show.director}</a>
 							</dd>
 							<dt id="dtPrice">가격</dt>
 							<dd id="divPrice" class="rn-product-price">
@@ -103,47 +109,18 @@
 										style="position: relative; top: 0; left: 0;" dir="ltr">
 										<ul
 											class="rn-product-price1 scroll-color mCustomScrollbar _mCS_3 mCS_no_scrollbar">
-											<li>VIP석 <span class="rn-red">170,000</span>원
-											</li>
-											<li>R석 <span class="rn-red">140,000</span>원
-											</li>
-											<li>S석 <span class="rn-red">110,000</span>원
-											</li>
-											<li>A석 <span class="rn-red">80,000</span>원
-											</li>
+											<c:forEach items="${show.seatClass}" var="seatClass"
+												varStatus="status">
+												<li>${seatClass}석&nbsp;:&nbsp;<span class="rn-red">
+												<fmt:formatNumber type="number" maxFractionDigits="3" value="${show.seatPrice[status.index]}"/>
+												</span>원
+												</li>
+											</c:forEach>
+
 										</ul>
-									</div>
-									<div id="mCSB_3_scrollbar_vertical"
-										class="mCSB_scrollTools mCSB_3_scrollbar mCS-light mCSB_scrollTools_vertical"
-										style="display: none;">
-										<div class="mCSB_draggerContainer">
-											<div id="mCSB_3_dragger_vertical" class="mCSB_dragger"
-												style="position: absolute; min-height: 30px; height: 0px; top: 0px;">
-												<div class="mCSB_dragger_bar" style="line-height: 30px;"></div>
-											</div>
-											<div class="mCSB_draggerRail"></div>
-										</div>
-									</div>
-								</div>
-								<p class="rn-product-price2">
-									할인 적용 시 최저가 <span class="rn-red">56,000</span>원 ~ 최고가 <span
-										class="rn-red">136,000</span>원<span class="rn-label rlb-12"><a
-										href="javascript:;" class="rn-pop-btn" data-popbtn="1">자세히</a></span>
-								</p>
-							</dd>
-							<dt>혜택</dt>
-							<dd class="rn-product-dc">
-								<p class="rn-product-dc1" style="display: none;">
-									<a href="#" class="ico-pop rn-pop-btn" id="infoBenefit"
-										style="background-image: none;"></a>
-								</p>
-								<p class="rn-product-dc2">
-									<a href="#" class="ico-pop rn-pop-btn" data-popbtn="5">
-										사용가능쿠폰(<span class="rn-red">2</span>)
-									</a> <a href="#" class="ico-pop rn-pop-btn" data-popbtn="3">무이자할부</a>
-									<a href="#" class="ico-pop rn-pop-btn" data-popbtn="2">제휴카드할인</a>
-								</p>
-							</dd>
+									</div>									
+								</div>								
+							</dd>							
 						</dl>
 					</div>
 					<!--포인트-->
@@ -156,9 +133,7 @@
 								2023년 8월 11일(금) ~ 2023년 8월 20일(일) <br>수,목,금 오후 7시 30분 / 토
 								오후 2시, 6시 30분 / 일 오후 2시 <br>* 8월 15일(화) 오후 2시, 6시 30분 <br>*
 								8월 18일(금) 오후 3시, 7시 30분
-							</dd>
-							<dt>배송정보</dt>
-							<dd>현장 수령 또는 배송(등기우편)</dd>
+							</dd>							
 						</dl>
 					</div>
 

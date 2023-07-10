@@ -15,9 +15,9 @@ public class UserVO {
 	private String gender;
 	private String userPhone;
 	private String userEmail;
-	private String userPost = "1524";
-	private String userBasicAddr = "미사강변한강로";
-	private String userDetailAddr = "100호";
+	private String userPost;
+	private String userBasicAddr;
+	private String userDetailAddr;
 	private Date userJoinDate;
 	private Date userWithdrawalDate;
 	private int userRole;

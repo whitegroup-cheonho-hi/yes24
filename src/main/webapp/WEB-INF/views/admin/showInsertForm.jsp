@@ -39,7 +39,7 @@
 
 		<section>
 			<div id="ySContent">
-				<form name="" method="post" action="" id="" >
+				<form name="" method="post" action="${pageContext.request.contextPath}/show/insertShow" id="insertShow" enctype="multipart/form-data">
 					<div class="ySContRow w_900">
 						<!-- ==================== 정보 입력 영역 시작 ==================== -->
 						<div class="tm_grp">
@@ -64,12 +64,12 @@
 										<div class="colGrp">
 											<div class="colCell w_280">
 												<span id="hallWidth" class="yesIpt b_size ipt_wSizeF">
-													<input id="mainImage" name="mainImage" type="file">
+													<input id="mainImage" name="file1" type="file">
 												</span>
 											</div>
 											<div class="colCell w_280">
 												<span id="hallHeight" class="yesIpt b_size ipt_wSizeF">
-													<input id="subImage" name="subImage" type="file">
+													<input id="subImage" name="file2" type="file">
 												</span>
 											</div>
 										</div>
@@ -78,10 +78,7 @@
 										<dl class="concertHall">
 											<dt class="imgCol">
 												<strong>공연정보</strong>
-											</dt>
-											<div id="editor" name="showContent">
-												<!-- <textarea id="showContent" name="showContent"></textarea> -->
-											</div>
+											</dt>										
 										</dl>
 									</div>
 								</div>
@@ -238,13 +235,13 @@
 											<div class="colGrp">
 												<div class="colCell w_280">
 													<span id="hallWidth" class="yesIpt b_size ipt_wSizeF">
-														<input id="seetClass1" name="seetClass1" type="text"
+														<input id="seetClass1" name="seatClass" type="text"
 														class="inpwid" placeholder="좌석등급 입력">석
 													</span>
 												</div>
 												<div class="colCell w_280">
 													<span id="hallHeight" class="yesIpt b_size ipt_wSizeF">
-														<input id="seetPrice1" name="seetPrice1" type="text"
+														<input id="seetPrice1" name="seatPrice" type="number"
 														class="inpwid" placeholder="좌석금액 입력">원
 													</span>
 												</div>
@@ -260,13 +257,13 @@
 											<div class="colGrp">
 												<div class="colCell w_280">
 													<span id="hallWidth" class="yesIpt b_size ipt_wSizeF">
-														<input id="seetClass2" name="seetClass2" type="text"
+														<input id="seetClass2" name="seatClass" type="text"
 														class="inpwid" placeholder="좌석등급 입력">석
 													</span>
 												</div>
 												<div class="colCell w_280">
 													<span id="hallHeight" class="yesIpt b_size ipt_wSizeF">
-														<input id="seetPrice2" name="seetPrice2" type="text"
+														<input id="seetPrice2" name="seatPrice" type="number"
 														class="inpwid" placeholder="좌석금액 입력">원
 													</span>
 												</div>
@@ -282,13 +279,13 @@
 											<div class="colGrp">
 												<div class="colCell w_280">
 													<span id="hallWidth" class="yesIpt b_size ipt_wSizeF">
-														<input id="seetClass3" name="seetClass3" type="text"
+														<input id="seetClass3" name="seatClass" type="text"
 														class="inpwid" placeholder="좌석등급 입력">석
 													</span>
 												</div>
 												<div class="colCell w_280">
 													<span id="hallHeight" class="yesIpt b_size ipt_wSizeF">
-														<input id="seetPrice3" name="seetPrice3" type="text"
+														<input id="seetPrice3" name="seatPrice" type="number"
 														class="inpwid" placeholder="좌석금액 입력">원
 													</span>
 												</div>
@@ -304,13 +301,13 @@
 											<div class="colGrp">
 												<div class="colCell w_280">
 													<span id="hallWidth" class="yesIpt b_size ipt_wSizeF">
-														<input id="seetClass4" name="seetClass4" type="text"
+														<input id="seetClass4" name="seatClass" type="text"
 														class="inpwid" placeholder="좌석등급 입력">석
 													</span>
 												</div>
 												<div class="colCell w_280">
 													<span id="hallHeight" class="yesIpt b_size ipt_wSizeF">
-														<input id="seetPrice4" name="seetPrice4" type="text"
+														<input id="seetPrice4" name="seatPrice" type="number"
 														class="inpwid" placeholder="좌석금액 입력">원
 													</span>
 												</div>
@@ -330,22 +327,22 @@
 								<div class="inpRow cols">
 									<span id="category">
 										<div class="cateGrp">
-											<input type="radio" name="category" value="뮤지컬">뮤지컬
+											<input type="radio" name="category" value="1">뮤지컬
 										</div>
 										<div class="cateGrp">
-											<input type="radio" name="category" value="콘서트">콘서트
+											<input type="radio" name="category" value="2">콘서트
 										</div>
 										<div class="cateGrp">
-											<input type="radio" name="category" value="연극">연극
+											<input type="radio" name="category" value="3">연극
 										</div>
 										<div class="cateGrp">
-											<input type="radio" name="category" value="전시">전시
+											<input type="radio" name="category" value="4">전시
 										</div>
 										<div class="cateGrp">
-											<input type="radio" name="category" value="클래식">클래식
+											<input type="radio" name="category" value="5">클래식
 										</div>
 										<div class="cateGrp">
-											<input type="radio" name="category" value="아동">아동
+											<input type="radio" name="category" value="6">아동
 										</div>
 									</span>
 								</div>
@@ -354,10 +351,10 @@
 
 						<div class="yesFormBtn">
 							<div class="formBtn_btn">
-								<a id="insertConcertHall" href="" onclick=""
+								<a id="insertButton" href="#none"
 									class="btnC xb_size btn_blue btn_wSizeH "> <span
 									class="bWrap"><em id="emtxt" class="txt">등록</em></span>
-								</a> <a id="cencleConcertHall" href="" onclick=""
+								</a> <a id="cencleConcertHall" href=""
 									class="btnC xb_size btn_blue btn_wSizeH "> <span
 									class="bWrap"><em id="emtxt" class="txt">취소</em></span>
 								</a>
@@ -376,6 +373,13 @@
 
 <script>
 	$(document).ready(function() {
+		
+		$("#insertButton").on("click", function() {
+			console.log("등록");
+		    $("#insertShow").submit();
+		});
+		
+		
 		$('#editor').summernote({
 			height : 300, // 에디터 높이
 			minHeight : null, // 최소 높이

@@ -3,4 +3,160 @@
 
 <mapper namespace="show">
 
+	<!-- 공연등록 -->
+	<insert id="insertShow" parameterType="ShowVO">
+
+		<selectKey keyProperty="showSq" resultType="int"
+			order="BEFORE">
+			SELECT seq_show_sq.NEXTVAL AS showSq FROM dual
+		</selectKey>
+		
+		<![CDATA[
+				
+		  INSERT INTO show (
+					        show_sq,
+					        main_image,
+					        sub_image,
+					        start_date,
+					        end_date,
+					        reservation_date,
+					        show_name,
+					        cast,
+					        director,
+					        show_time,
+					        viewing_age,
+					        show_content,
+					        category,
+					        show_stat,
+					        concert_hall_sq
+					       )
+			        VALUES ( 
+			                #{showSq},
+			                #{mainImage},
+			                #{subImage},
+			                #{startDate},
+			                #{endDate},
+			                #{reservationDate},
+			                #{showName},
+			                #{cast},
+			                #{director},
+			                #{showTime},
+			                #{viewingAge},
+			                #{cast},
+			                #{category},
+			                1,
+			                1                
+			               )
+		
+		]]>
+
+	</insert>
+
+	<!-- 좌석클래스 등록 -->
+	<insert id="insertSeatClass" parameterType="map">
+	
+		<![CDATA[
+		
+			INSERT INTO seat_class
+                     			  (
+			                       SEAT_CLASS_SQ,
+			                       SEAT_CLASS,
+			                       SEAT_PRICE,
+			                       SHOW_SQ
+			                      )
+			                VALUES
+			                      (
+			                       seq_seat_class_sq.nextval,
+			                       #{seatClass},
+			                       #{seatPrice},
+			                       #{showSq}
+			                      )
+			
+		]]>
+
+	</insert>
+
+	<!-- 공연정보가져오기 -->
+	<select id="getShow" parameterType="int" resultType="ShowVO">
+		
+		<![CDATA[
+
+		      SELECT
+				    show_sq AS showsq,
+				    main_image AS mainimage,
+				    sub_image AS subimage,
+				    TO_CHAR(start_date, 'YYYY.MM.DD') AS startdate,
+				    TO_CHAR(end_date, 'YYYY.MM.DD') AS enddate,
+				    TO_CHAR(reservation_date, 'YYYY.MM.DD') AS reservationdate,
+				    show_name AS showname,
+				    cast,
+				    director,
+				    show_time AS showtime,
+				    viewing_age AS viewingage,
+				    show_content AS showcontent,
+				    category,
+				    show_stat AS showstat,
+				    concert_hall_sq AS concerthallsq
+				FROM
+				    show
+			   WHERE
+				    show_sq = #{showSq}			
+		
+		]]>
+
+	</select>
+
+	<!-- 공연리스트가져오기 -->
+	<select id="getShowList" parameterType="int" resultType="ShowVO">
+
+		<![CDATA[
+			
+			  SELECT
+				    show_sq            AS showsq,
+				    main_image         AS mainimage,
+				    sub_image          AS subimage,
+				    start_date         AS startdate,
+				    end_date           AS enddate,
+				    reservation_date   AS reservationdate,
+				    show_name          AS showname,
+				    cast,
+				    director,
+				    show_time          AS showtime,
+				    viewing_age        AS viewingage,
+				    show_content       AS showcontent,
+				    category,
+				    show_stat          AS showstat,
+				    concert_hall_sq    AS concerthallsq
+				FROM
+				    show
+			  WHERE category = #{category}	    
+			ORDER BY
+				    show_sq DESC
+		]]>
+
+	</select>
+	
+	<!-- 좌석클래스리스트 -->
+	<select id="getSeatClassList" parameterType="int" resultType="SeatClassVO">
+			
+			  SELECT
+				    seat_class_sq   AS SEATCLASSSQ,
+				    seat_class      AS SEATCLASS,
+				    seat_price      AS SEATPRICE,
+				    show_sq         AS SEATSQ
+				FROM
+				    seat_class
+				WHERE
+				    show_sq = #{showSq}
+		    ORDER BY 
+				    seat_price DESC    
+	
+	</select>
+	
+
 </mapper>
+
+
+
+
+

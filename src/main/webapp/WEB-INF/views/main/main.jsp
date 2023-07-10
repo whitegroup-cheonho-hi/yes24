@@ -28,12 +28,10 @@
 
 
 <style>
-
 .swiper-wrapper{margin-top: 110px;}
 .swiper1 .swiper-slide img{width: 100%; margin: auto; display: block; }
 .swiper1 .swiper-button-prev{color: #8f9090; left:50px;}
 .swiper1 .swiper-button-next{color: #8f9090; right:50px;}
-
 </style>
 </head>
 <body>
@@ -43,18 +41,16 @@
 	<!-- 메인 롤링배너 (KV) -->
 	<div class="swiper swiper1">
 		<div class="swiper-wrapper">
-			<div class="swiper-slide banner01">
-				<a href="#none"><img src="${pageContext.request.contextPath }/assets/images/오페라의유령메인.jpg"></a>
-			</div>
-			<div class="swiper-slide banner02">
-				<a href="#none"><img src="${pageContext.request.contextPath }/assets/images/라스트세션메인.jpg"></a>
-			</div>
-			<div class="swiper-slide banner03">
-				<a href="#none"><img src="${pageContext.request.contextPath }/assets/images/그날들메인.jpg"></a>
-			</div>
-			<div class="swiper-slide banner04">
-				<a href="#none"><img src="${pageContext.request.contextPath }/assets/images/쿠로이저택엔누가살고있을까메인.jpg"></a>
-			</div>
+			<c:forEach items="${showList}" var="show">
+				<div class="swiper-slide banner01">
+					<a
+						href="${pageContext.request.contextPath}/show/detail/${show.showSq}">
+						<img
+						src="${pageContext.request.contextPath}/upload/${show.mainImage}">
+					</a>
+				</div>
+			</c:forEach>
+
 		</div>
 
 		<div class="swiper-pagination"></div>
@@ -93,7 +89,7 @@
 			},
 		});
 	});
- 
+
 	$("#nav li").on("click", function() {
 		// 다른 li 요소들에서 on 클래스 제거
 		$("#nav li").removeClass("on");

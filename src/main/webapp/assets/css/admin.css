@@ -87,8 +87,8 @@ nav #navigation li a{font-size: 16px; font-weight: 500;}
 button.btnC.btn_wSizeH { width:100%; }
 .btnC.btn_wSizeF .bWrap { display:block; }
 .formBtn_btn{text-align: center; }
+#admWidth{margin-right: 10px;}
 #emtxt {width: 150px;}
-#hallWidth{margin-right: 10px;}
 .imgGrp{display: flex;}
 .imgCol{flex-basis: 50%;}
 div.inpRow .inpwid { width: 90%; }
@@ -102,3 +102,9 @@ strong {font-size: 15px; color: #333;}
 #category { text-align: center; box-sizing: border-box; border: solid 1px #ebebeb; background-color: #fff; 
 	padding: 9px 14px 11px; line-height: 28px; display: flex; align-items: center; }
 #ySContent{margin-top: 120px;}
+.container{ border-top: solid 1px rgb(0, 0, 0); border-left: solid 1px rgb(0, 0, 0);align-items: center; display: none; }
+.item{ width: 30px; height: 30px; background-color: #d8d8d8; border-right: solid 1px rgb(0, 0, 0); 
+border-bottom: solid 1px rgb(0, 0, 0); text-align: center; font-size: 17px; box-sizing: border-box; }
+.admRow{margin-top: 10px;}
+.admSpan{display: flex; justify-content: center; box-sizing: border-box; border: solid 1px #ebebeb; 
+background-color: #fff;padding: 9px 14px 11px; line-height: 28px; display: flex; text-align: center;}
