@@ -75,7 +75,7 @@
 							<div class="inpRow">
 								<span id="spanCertifyIpt_txtMemPw"
 									class="yesIpt b_size ipt_wSizeF chkVal"><input
-									id="txtMemPw" name="userPassword" type="password"
+									id="userPassword" name="userPassword" type="password"
 									maxlength="20" required="required" value="${user.userPassword}">
 								</span>
 							</div>
@@ -88,7 +88,7 @@
 							<div class="inpRow">
 								<span id="spanCertifyIpt_txtMemRePw"
 									class="yesIpt b_size ipt_wSizeF chkVal"> <input
-									id="txtMemRePw" name="txtMemRePw" type="password"
+									id="userRePassword" name="userRePassword" type="password"
 									required="required" maxlength="20"
 									placeholder="확인을 위한 비밀번호 재입력">
 								</span>
@@ -246,6 +246,18 @@
 	        } else {
 	            //no
 	        }
+		});
+		
+		//비밀번호 재확인
+		$("#userRePassword").on("change",function(){
+			
+			let pwd =$("#userPassword").val();
+			let repwd=$("#userRePassword").val();
+			
+			if(pwd!=repwd){
+				alert("처음 입력하신 비밀번호와 다릅니다. 다시입력해주세요");
+			}
+			
 		});
 		
 		//우편번호

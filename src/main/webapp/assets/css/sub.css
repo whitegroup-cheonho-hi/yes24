@@ -3,7 +3,7 @@
 *{font-family: 'Noto Sans KR', 'NanumBarunGothic', '맑은 고딕', 'Malgun Gothic', sans-serif;}
 .en{font-family: 'Comfortaa', cursive;}
 .clear::after{content: ''; clear: both; display: block;}
-section{width: 1000px; margin: 0 auto; padding-top: 70px;}
+section{ margin: 0 auto; padding-top: 70px;}
 section > h2{text-transform: uppercase; text-align: center; font-weight: 700; font-size: 35px; margin-bottom: 30px;}
 
 /* header */
