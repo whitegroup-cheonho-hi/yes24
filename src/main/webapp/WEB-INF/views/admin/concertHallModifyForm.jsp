@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Update title here</title>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath }/assets/css/reset.css"
 	type="text/css">
@@ -40,12 +40,12 @@
 		<!-- //헤더 -->
 		<section>
 			<div id="ySContent">
-				<form id="insertForm" method="post" action="${pageContext.request.contextPath}/concertHall/insertConcertHall" >
+				<form id="updateForm" method="post" action="${pageContext.request.contextPath}/concertHall/concertHallModify" >
 					<div class="ySContRow w_900">
 						<!-- ==================== 정보 입력 영역 시작 ==================== -->
 						<div class="tm_grp">
 							<h3 class="tmM_txt">
-								<em class="tit_txt"><strong id="adminTit">공연장 등록</strong></em>
+								<em class="tit_txt"><strong id="adminTit">공연장 정보 수정</strong></em>
 							</h3>
 						</div>
 
@@ -57,8 +57,11 @@
 							<dd>
 								<div class="inpRow">
 									<span id="txtConHall" class="yesIpt b_size ipt_wSizeF chkVal">
+										<input name="concertHallSq" type="hidden"
+										value="${concertHall.concertHallSq}">
 										<input id="txtConHall" name="concertHallName" type="text"
-										placeholder="공연장명을 입력해주세요.">
+										value="${concertHall.concertHallName}">
+									
 									</span>
 								</div>
 							</dd>
@@ -76,13 +79,13 @@
 											<div class="colCell w_280">
 												<span id="admWidth" class="yesIpt b_size ipt_wSizeF">
 													<input id="hallWidth" name="concertHallWidth" size="3"
-													type="number" placeholder="가로좌석수 입력">
+													type="number" value="${concertHall.concertHallWidth}">
 												</span>
 											</div>
 											<div class="colCell w_280">
 												<span class="yesIpt b_size ipt_wSizeF"> <input
 													id="hallHeight" name="concertHallHeight" size="3" type="number"
-													placeholder="새로좌석수 입력">
+													 value="${concertHall.concertHallHeight}">
 												</span>
 											</div>
 										</div>
@@ -117,7 +120,7 @@
 											<span id=""
 												class="yesIpt b_size ipt_wSizeF"> <input id="addr1"
 												name="concertHallPost" size="5" type="text" readonly="readonly"
-												placeholder="우편번호">
+												value="${concertHall.concertHallPost}">
 											</span>
 										</div>
 										<div class="colCell pal10">
@@ -131,12 +134,12 @@
 									<span id="spanCertifyIpt_Addr1"
 										class="yesIpt b_size ipt_wSizeF"> <input
 										id="addr2" name="concertHallRoadAddr" type="text"
-										readonly="readonly" placeholder="도로명 주소">
+										readonly="readonly" value="${concertHall.concertHallRoadAddr}">
 									</span>
 								</div>
 								<div class="inpRow">
 								<span id="spanCertifyIpt_Addr2" class="yesIpt b_size ipt_wSizeF">
-									<input id="addr3" name="concertHallJibunAddr" type="text" readonly="readonly" placeholder="지번 주소">
+									<input id="addr3" name="concertHallJibunAddr" type="text" readonly="readonly" value="${concertHall.concertHallJibunAddr}">
 								</span>
 								</div>								
 							</dd>
@@ -144,9 +147,9 @@
 
 						<div class="yesFormBtn">
 							<div class="formBtn_btn">
-								<a id="insertConcertHall" href="#none" 
+								<a id="updateConcertHall" href="#none" 
 									class="btnC xb_size btn_blue btn_wSizeH"> <span
-									class="bWrap"><em id="emtxt" class="txt">등록</em></span>
+									class="bWrap"><em id="emtxt" class="txt">수정</em></span>
 								</a> <a id="cencleConcertHall" href="" 
 									class="btnC xb_size btn_blue btn_wSizeH"> <span
 									class="bWrap"><em id="emtxt" class="txt">취소</em></span>
@@ -163,6 +166,11 @@
 
 </body>
 <script>
+	// 로드되면서 좌석배치 보여주기
+	$(document).ready(function() {
+		$('#seetbtn').trigger('click');
+	});
+	
 	//우편번호찾기
 	$("#aSelectPostalCode").on("click", function() {
 		console.log("우편번호");
@@ -191,10 +199,10 @@
 			}
 			container.show();
 		}); 
-	//극장등록
-	$("#insertConcertHall").on("click",function(){
-		console.log("등록");
-		$("#insertForm").submit();
+	//극장수정
+	$("#updateConcertHall").on("click",function(){
+		console.log("수정");
+		$("#updateForm").submit();
 	});
 </script>
 

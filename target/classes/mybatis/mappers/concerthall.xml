@@ -138,5 +138,37 @@
 		]]>
 
 	</select>
+	
+	<!-- 극장정보업데이트 -->
+	<update id="updateConcertHall" parameterType="ConcertHallVO">
+	
+		<![CDATA[
+		
+			UPDATE concert_hall
+			                SET
+			                    concert_hall_name = #{concertHallName},
+			                    concert_hall_post = #{concertHallPost},
+			                    concert_hall_basic_addr = #{concertHallRoadAddr},
+			                    concert_hall_detail_addr = #{concertHallJibunAddr},
+			                    concert_hall_width = #{concertHallWidth},
+			                    concert_hall_height = #{concertHallHeight}
+			                WHERE
+			                    concert_hall_sq = #{concertHallSq}
+						
+		]]>
+	
+	</update>
+	
+	<!-- 좌석삭제 -->
+	<delete id="deleteConcertHallSeat" parameterType="int">
+	
+		<![CDATA[
+		
+			DELETE seat WHERE concert_hall_sq = #{concertHallSq}
+				    
+		]]>
+		
+	</delete>
+	
 
 </mapper>
