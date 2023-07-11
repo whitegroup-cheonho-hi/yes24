@@ -23,14 +23,15 @@ public class ShowService {
 	private ShowDAO showDAO;
 	@Autowired
 	private ShowVO showVO;
-
+	Map<String, Object> seatClass = new HashMap<>();
 	String saveDir = "C:/yes24/img/upload/";
 
 	// ------------------ 공연등록
 	public int insertShow(ShowVO vo, MultipartFile file1, MultipartFile file2) {
 		System.out.println("insertShow Service()");
+		
 		int resulet = 0;
-		Map<String, Object> seatClass = new HashMap<>();
+	
 		fileCheck(vo, file1, file2);
 		if (!file1.isEmpty() && !file2.isEmpty()) {
 
@@ -51,27 +52,27 @@ public class ShowService {
 		return resulet;
 	}
 
-	// ------------------ 공연등록
+	// ------------------ 공연수정
 	public int updateShow(ShowVO vo, MultipartFile file1, MultipartFile file2) {
 		System.out.println("updateShow Service()");
-	
+
 		int resulet = 0;
-		Map<String, Object> seatClass = new HashMap<>();
+
 		fileCheck(vo, file1, file2);
 		if (!file1.isEmpty() && !file2.isEmpty()) {
 
 			resulet = showDAO.updateShow(vo);
 
-				// 좌석클래스 저장
-				for (int i = 0; i < vo.getSeatClass().size(); i++) {
+			// 좌석클래스 수정
+			for (int i = 0; i < vo.getSeatClass().size(); i++) {
 
-					seatClass.put("seatClass", vo.getSeatClass().get(i));
-					seatClass.put("seatPrice", vo.getSeatPrice().get(i));
-					seatClass.put("seatClassSq", vo.getSeatClassSq().get(i));
+				seatClass.put("seatClass", vo.getSeatClass().get(i));
+				seatClass.put("seatPrice", vo.getSeatPrice().get(i));
+				seatClass.put("seatClassSq", vo.getSeatClassSq().get(i));
 
-					showDAO.updateSeatClass(seatClass);
+				showDAO.updateSeatClass(seatClass);
 
-				}
+			}
 		}
 
 		return resulet;
@@ -102,7 +103,7 @@ public class ShowService {
 
 	}
 
-	// ------------------ 공연리스트가져오기
+	// ------------------ 공연리스트가져오기 상태값때문에 no가 필요
 	public List<ShowVO> getShowList(int no) {
 		System.out.println("getShowList Service()");
 

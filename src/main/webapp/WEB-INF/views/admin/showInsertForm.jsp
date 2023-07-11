@@ -27,14 +27,29 @@
 <!-- 제이쿼리 최신버전 -->
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <!-- 에디터 -->
-<script type="text/javascript" src="${pageContext.request.contextPath }/assets/js/summernote-ko-KR.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath }/assets/js/summernote-lite.js"></script>
-<link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/summernote-lite.css">
+<script type="text/javascript"
+	src="${pageContext.request.contextPath }/assets/js/summernote-ko-KR.js"></script>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath }/assets/js/summernote-lite.js"></script>
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath }/assets/css/summernote-lite.css">
 <style>
-#ySContent{width: 1200px;}
-#ySContent .ySContRow {width: 900px;}
-#ySContent .yesIpt{margin-right: 10px;  margin-top: 10px;}
-#category {width: 890px;}
+#ySContent {
+	width: 1200px;
+}
+
+#ySContent .ySContRow {
+	width: 900px;
+}
+
+#ySContent .yesIpt {
+	margin-right: 10px;
+	margin-top: 10px;
+}
+
+#category {
+	width: 890px;
+}
 </style>
 </head>
 <body>
@@ -45,7 +60,9 @@
 
 		<section>
 			<div id="ySContent">
-				<form name="" method="post" action="${pageContext.request.contextPath}/show/insertShow" id="insertShow" enctype="multipart/form-data">
+				<form name="" method="post"
+					action="${pageContext.request.contextPath}/show/insertShow"
+					id="insertShow" enctype="multipart/form-data">
 					<div class="ySContRow w_900">
 						<!-- ==================== 정보 입력 영역 시작 ==================== -->
 						<div class="tm_grp">
@@ -69,23 +86,26 @@
 									<div class="inpRow">
 										<div class="colGrp">
 											<div class="colCell w_280">
-												<span class="yesIpt b_size ipt_wSizeF hallWidth">
-													<input id="mainImage" name="file1" type="file">
+												<span class="yesIpt b_size ipt_wSizeF hallWidth"> <input
+													id="mainImage" name="file1" type="file">
 												</span>
 											</div>
 											<div class="colCell w_280">
-												<span class="yesIpt b_size ipt_wSizeF hallWidth">
-													<input id="subImage" name="file2" type="file">
+												<span class="yesIpt b_size ipt_wSizeF hallWidth"> <input
+													id="subImage" name="file2" type="file">
 												</span>
 											</div>
 										</div>
 									</div>
 									<div class="inpRow">
-										<dl class="concertHall">
-											<dt class="imgCol">
+										<div class="concertHall">
+											<div class="imgCol">
 												<strong>공연정보</strong>
-											</dt>										
-										</dl>
+												<!-- <div id="editor" class="showContent"> -->
+													<!-- <textarea id="showContent" name="showContent"></textarea> -->
+												</div>
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -106,14 +126,13 @@
 										<div class="inpRow">
 											<div class="colGrp">
 												<div class="colCell w_280">
-													<span class="yesIpt b_size ipt_wSizeF hallWidth">
-														<input id="reservationDate" name="reservationDate"
-														type="date">
+													<span class="yesIpt b_size ipt_wSizeF hallWidth"> <input
+														id="reservationDate" name="reservationDate" type="date">
 													</span>
 												</div>
 												<div class="colCell w_280">
-													<span  class="yesIpt b_size ipt_wSizeF hallWidth">
-														<input id="showTime" name="showTime" type="text"
+													<span class="yesIpt b_size ipt_wSizeF hallWidth"> <input
+														id="showTime" name="showTime" type="text"
 														placeholder="공연시간 입력" class="inpwid">분
 													</span>
 												</div>
@@ -137,13 +156,13 @@
 										<div class="inpRow">
 											<div class="colGrp">
 												<div class="colCell w_280">
-													<span class="yesIpt b_size ipt_wSizeF hallWidth">
-														<input id="startDate" name="startDate" type="date">
+													<span class="yesIpt b_size ipt_wSizeF hallWidth"> <input
+														id="startDate" name="startDate" type="date">
 													</span>
 												</div>
 												<div class="colCell w_280">
-													<span  class="yesIpt b_size ipt_wSizeF hallWidth">
-														<input id="endDate" name="endDate" type="date">
+													<span class="yesIpt b_size ipt_wSizeF hallWidth"> <input
+														id="endDate" name="endDate" type="date">
 													</span>
 												</div>
 											</div>
@@ -171,22 +190,22 @@
 										<div class="inpRow">
 											<div class="colGrp">
 												<div class="colCell w_280">
-													<span class="yesIpt b_size ipt_wSizeF hallWidth">
-														<input id="showName" name="showName" type="text"
+													<span class="yesIpt b_size ipt_wSizeF hallWidth"> <input
+														id="showName" name="showName" type="text"
 														placeholder="제목 입력">
 													</span>
 												</div>
 												<div class="colCell w_280">
-													<span  class="yesIpt b_size ipt_wSizeF hallWidth">
-														<input id="viewingAge" name="viewingAge" type="text"
+													<span class="yesIpt b_size ipt_wSizeF hallWidth"> <input
+														id="viewingAge" name="viewingAge" type="text"
 														placeholder="관람연령 입력" class="inpwid">세
 													</span>
 												</div>
 												<div class="colCell w_280">
-													<span  class="yesIpt b_size ipt_wSizeF hallWidth">
-														<select id="concertHallName" name="concertHallName"
+													<span class="yesIpt b_size ipt_wSizeF hallWidth"> <select
+														id="concertHallName" name="concertHallName"
 														aria-selected="undefined">
-															<option value="" selected disabled ></option>
+															<option value="" selected disabled></option>
 															<option value="천호홀">천호홀</option>
 															<option value="잠실홀">잠실홀</option>
 															<option value="강남홀">강남홀</option>
@@ -212,15 +231,14 @@
 										<div class="inpRow">
 											<div class="colGrp">
 												<div class="colCell w_280">
-													<span  class="yesIpt b_size ipt_wSizeF hallWidth">
-														<input id="director" name="director" type="text"
+													<span class="yesIpt b_size ipt_wSizeF hallWidth"> <input
+														id="director" name="director" type="text"
 														placeholder="연출자 입력">
 													</span>
 												</div>
 												<div class="colCell w_280">
-													<span  class="yesIpt b_size ipt_wSizeF hallWidth">
-														<input id="cast" name="cast" type="text"
-														placeholder="출연진 입력">
+													<span class="yesIpt b_size ipt_wSizeF hallWidth"> <input
+														id="cast" name="cast" type="text" placeholder="출연진 입력">
 													</span>
 												</div>
 											</div>
@@ -240,14 +258,14 @@
 										<div class="inpRow">
 											<div class="colGrp">
 												<div class="colCell w_280">
-													<span  class="yesIpt b_size ipt_wSizeF hallWidth">
-														<input id="seetClass1" name="seatClass" type="text"
+													<span class="yesIpt b_size ipt_wSizeF hallWidth"> <input
+														id="seetClass1" name="seatClass" type="text"
 														class="inpwid" placeholder="좌석등급 입력">석
 													</span>
 												</div>
 												<div class="colCell w_280">
-													<span  class="yesIpt b_size ipt_wSizeF hallWidth">
-														<input id="seetPrice1" name="seatPrice" type="number"
+													<span class="yesIpt b_size ipt_wSizeF hallWidth"> <input
+														id="seetPrice1" name="seatPrice" type="number"
 														class="inpwid" placeholder="좌석금액 입력">원
 													</span>
 												</div>
@@ -262,14 +280,14 @@
 										<div class="inpRow">
 											<div class="colGrp">
 												<div class="colCell w_280">
-													<span  class="yesIpt b_size ipt_wSizeF hallWidth">
-														<input id="seetClass2" name="seatClass" type="text"
+													<span class="yesIpt b_size ipt_wSizeF hallWidth"> <input
+														id="seetClass2" name="seatClass" type="text"
 														class="inpwid" placeholder="좌석등급 입력">석
 													</span>
 												</div>
 												<div class="colCell w_280">
-													<span  class="yesIpt b_size ipt_wSizeF hallWidth">
-														<input id="seetPrice2" name="seatPrice" type="number"
+													<span class="yesIpt b_size ipt_wSizeF hallWidth"> <input
+														id="seetPrice2" name="seatPrice" type="number"
 														class="inpwid" placeholder="좌석금액 입력">원
 													</span>
 												</div>
@@ -284,14 +302,14 @@
 										<div class="inpRow">
 											<div class="colGrp">
 												<div class="colCell w_280">
-													<span  class="yesIpt b_size ipt_wSizeF hallWidth">
-														<input id="seetClass3" name="seatClass" type="text"
+													<span class="yesIpt b_size ipt_wSizeF hallWidth"> <input
+														id="seetClass3" name="seatClass" type="text"
 														class="inpwid" placeholder="좌석등급 입력">석
 													</span>
 												</div>
 												<div class="colCell w_280">
-													<span  class="yesIpt b_size ipt_wSizeF hallWidth">
-														<input id="seetPrice3" name="seatPrice" type="number"
+													<span class="yesIpt b_size ipt_wSizeF hallWidth"> <input
+														id="seetPrice3" name="seatPrice" type="number"
 														class="inpwid" placeholder="좌석금액 입력">원
 													</span>
 												</div>
@@ -306,14 +324,14 @@
 										<div class="inpRow">
 											<div class="colGrp">
 												<div class="colCell w_280">
-													<span  class="yesIpt b_size ipt_wSizeF hallWidth">
-														<input id="seetClass4" name="seatClass" type="text"
+													<span class="yesIpt b_size ipt_wSizeF hallWidth"> <input
+														id="seetClass4" name="seatClass" type="text"
 														class="inpwid" placeholder="좌석등급 입력">석
 													</span>
 												</div>
 												<div class="colCell w_280">
-													<span  class="yesIpt b_size ipt_wSizeF hallWidth">
-														<input id="seetPrice4" name="seatPrice" type="number"
+													<span class="yesIpt b_size ipt_wSizeF hallWidth"> <input
+														id="seetPrice4" name="seatPrice" type="number"
 														class="inpwid" placeholder="좌석금액 입력">원
 													</span>
 												</div>
@@ -379,13 +397,12 @@
 
 <script>
 	$(document).ready(function() {
-		
+
 		$("#insertButton").on("click", function() {
 			console.log("등록");
-		    $("#insertShow").submit();
+			$("#insertShow").submit();
 		});
-		
-		
+
 		$('#editor').summernote({
 			height : 300, // 에디터 높이
 			minHeight : null, // 최소 높이

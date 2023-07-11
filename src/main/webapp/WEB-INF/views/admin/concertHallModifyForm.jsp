@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Update title here</title>
+<title>concertHallModifyForm</title>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath }/assets/css/reset.css"
 	type="text/css">

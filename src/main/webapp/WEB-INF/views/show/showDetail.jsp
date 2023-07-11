@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,6 +24,9 @@
 	rel="stylesheet">
 <!-- 제이쿼리 최신버전 -->
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<!-- 다음지도API -->
+<script type="text/javascript"
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1d8e22ec81bcdc862373ee6f17fdef961d8e22ec81bcdc862373ee6f17fdef96"></script>
 </head>
 <body>
 	<!-- 헤더 -->
@@ -112,15 +115,16 @@
 											<c:forEach items="${show.seatClass}" var="seatClass"
 												varStatus="status">
 												<li>${seatClass}석&nbsp;:&nbsp;<span class="rn-red">
-												<fmt:formatNumber type="number" maxFractionDigits="3" value="${show.seatPrice[status.index]}"/>
+														<fmt:formatNumber type="number" maxFractionDigits="3"
+															value="${show.seatPrice[status.index]}" />
 												</span>원
 												</li>
 											</c:forEach>
 
 										</ul>
-									</div>									
-								</div>								
-							</dd>							
+									</div>
+								</div>
+							</dd>
 						</dl>
 					</div>
 					<!--포인트-->
@@ -133,7 +137,7 @@
 								2023년 8월 11일(금) ~ 2023년 8월 20일(일) <br>수,목,금 오후 7시 30분 / 토
 								오후 2시, 6시 30분 / 일 오후 2시 <br>* 8월 15일(화) 오후 2시, 6시 30분 <br>*
 								8월 18일(금) 오후 3시, 7시 30분
-							</dd>							
+							</dd>
 						</dl>
 					</div>
 
@@ -152,8 +156,20 @@
 		</div>
 	</section>
 
+	<div id="map" style="width: 500px; height: 400px;"></div>
+
 	<!-- Footer -->
 	<c:import url="/WEB-INF/views/includes/footer.jsp"></c:import>
 	<!-- //Footer -->
 </body>
+
+<script>
+	var container = document.getElementById('map');
+	var options = {
+		center : new kakao.maps.LatLng(33.450701, 126.570667),
+		level : 3
+	};
+
+	var map = new kakao.maps.Map(container, options);
+</script>
 </html>

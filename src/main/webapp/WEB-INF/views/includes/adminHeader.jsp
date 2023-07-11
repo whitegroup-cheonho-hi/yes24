@@ -22,8 +22,8 @@
 		<ul id="navigation">
 			<li class="submenu"><a>공연관리</a>
 				<ul class="menus">
-					<li><a href="">공연장등록</a></li>
-					<li><a href="">공연등록</a></li>
+					<li><a href="${pageContext.request.contextPath}/concertHall/concertHallInsertForm">공연장등록</a></li>
+					<li><a href="${pageContext.request.contextPath}/show/showInsertForm">공연등록</a></li>
 					<li><a href="">예정공연</a></li>
 					<li><a href="">진행공연</a></li>
 					<li><a href="">종료공연</a></li>
