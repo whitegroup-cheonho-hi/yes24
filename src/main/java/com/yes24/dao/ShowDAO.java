@@ -24,6 +24,13 @@ public class ShowDAO {
 
 		return sqlSession.insert("show.insertShow", vo);
 	}
+	
+	// ------------------ 공연수정
+		public int updateShow(ShowVO vo) {
+			System.out.println("updateShow DAO()");
+
+			return sqlSession.update("show.updateShow", vo);
+		}
 
 	// ------------------ 공연좌석등급 등록
 	public int insertSeatClass(Map<String, Object> seatClass) {

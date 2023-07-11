@@ -50,6 +50,31 @@ public class ShowService {
 
 		return 0;
 	}
+	
+	// ------------------ 공연등록 
+		public int updateShow(ShowVO vo, MultipartFile file1, MultipartFile file2) {
+			System.out.println("updateShow Service()");
+
+			Map<String, Object> seatClass = new HashMap<>();
+			fileCheck(vo, file1, file2);
+			showDAO.updateShow(vo);
+			if (!file1.isEmpty() && !file2.isEmpty()) {
+				
+		
+				// 좌석클래스 저장
+				for (int i = 0; i < vo.getSeatClass().size(); i++) {
+
+					seatClass.put("seatClass", vo.getSeatClass().get(i));
+					seatClass.put("seatPrice", vo.getSeatPrice().get(i));
+					seatClass.put("showSq", vo.getshowSq());
+
+					showDAO.insertSeatClass(seatClass);
+
+				}
+			}
+
+			return 0;
+		}
 
 	// ------------------ 공연정보가져오기
 	public ShowVO getShow(int no) {
@@ -75,7 +100,7 @@ public class ShowService {
 		return showVO;
 
 	}
-
+	
 	// ------------------ 공연리스트가져오기
 	public List<ShowVO> getShowList(int no) {
 		System.out.println("getShowList Service()");

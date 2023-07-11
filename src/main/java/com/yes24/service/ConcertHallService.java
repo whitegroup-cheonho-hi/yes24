@@ -54,7 +54,7 @@ public class ConcertHallService {
 		return concertHallDAO.getConcertHallList();
 	}
 
-	// -------------------- 극장정보 업데이트
+	// -------------------- 공연장정보 업데이트
 	public int updateConcertHall(ConcertHallVO vo) {
 		System.out.println("updateConcertHall Service()");
 
@@ -67,9 +67,9 @@ public class ConcertHallService {
 		int result = concertHallDAO.updateConcertHall(vo);
 		// 저장되어있는 공연장정보 가져오기
 				
-		// width & height 값이 바뀌지 않았을때
+		// width or height 값이 바뀌지 않았을때
 		if (concertHallVO.getConcertHallHeight() != height || concertHallVO.getConcertHallWidth() != width) {
-			
+			//기존 좌석을 삭제
 			concertHallDAO.deleteConcertHallSeat(vo.getConcertHallSq());
 
 			List<String> seatList = seat(vo, height, width);

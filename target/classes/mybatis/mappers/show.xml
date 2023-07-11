@@ -51,6 +51,29 @@
 		]]>
 
 	</insert>
+	
+	<!-- 공연수정 -->
+	<update id="updateShow" parameterType="ShowVO">
+	
+		<![CDATA[
+			
+			UPDATE show SET						 
+						   start_date = #{startDate},
+						   end_date = #{endDate},
+						   reservation_date = #{reservationDate},
+						   show_name = #{showName},
+						   cast = #{cast},
+						   director = #{director},
+						   show_time = #{showTime},
+						   viewing_age = #{viewingAge},
+						   category = #{category}, 						   
+						   concert_hall_sq = #{concertHallSq}
+					  WHERE
+						   show_sq = #{showSq}
+			
+		]]>
+	
+	</update>
 
 	<!-- 좌석클래스 등록 -->
 	<insert id="insertSeatClass" parameterType="map">
