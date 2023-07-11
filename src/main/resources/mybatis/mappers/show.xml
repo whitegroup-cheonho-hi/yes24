@@ -57,7 +57,9 @@
 	
 		<![CDATA[
 			
-			UPDATE show SET						 
+			UPDATE show SET	
+				           main_image = #{mainImage},
+						   sub_image = #{subImage},	 
 						   start_date = #{startDate},
 						   end_date = #{endDate},
 						   reservation_date = #{reservationDate},
@@ -98,6 +100,21 @@
 		]]>
 
 	</insert>
+	
+	<!-- 공연수정 -->
+	<update id="updateSeatClass" parameterType="map">
+	
+		<![CDATA[
+		
+			UPDATE seat_class
+						  SET
+						     seat_class =  #{seatClass},
+						     seat_price = #{seatPrice}
+				        WHERE
+						     seat_class_sq = #{seatClassSq}
+		]]>
+	
+	</update>
 
 	<!-- 공연정보가져오기 -->
 	<select id="getShow" parameterType="int" resultType="ShowVO">

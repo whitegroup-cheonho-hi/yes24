@@ -26,16 +26,16 @@ public class ShowService {
 
 	String saveDir = "C:/yes24/img/upload/";
 
-	// ------------------ 공연등록 
+	// ------------------ 공연등록
 	public int insertShow(ShowVO vo, MultipartFile file1, MultipartFile file2) {
 		System.out.println("insertShow Service()");
-
+		int resulet = 0;
 		Map<String, Object> seatClass = new HashMap<>();
 		fileCheck(vo, file1, file2);
 		if (!file1.isEmpty() && !file2.isEmpty()) {
-			
-			showDAO.insertShow(vo);
-	
+
+			resulet = showDAO.insertShow(vo);
+
 			// 좌석클래스 저장
 			for (int i = 0; i < vo.getSeatClass().size(); i++) {
 
@@ -48,33 +48,34 @@ public class ShowService {
 			}
 		}
 
-		return 0;
+		return resulet;
 	}
-	
-	// ------------------ 공연등록 
-		public int updateShow(ShowVO vo, MultipartFile file1, MultipartFile file2) {
-			System.out.println("updateShow Service()");
 
-			Map<String, Object> seatClass = new HashMap<>();
-			fileCheck(vo, file1, file2);
-			showDAO.updateShow(vo);
-			if (!file1.isEmpty() && !file2.isEmpty()) {
-				
-		
+	// ------------------ 공연등록
+	public int updateShow(ShowVO vo, MultipartFile file1, MultipartFile file2) {
+		System.out.println("updateShow Service()");
+	
+		int resulet = 0;
+		Map<String, Object> seatClass = new HashMap<>();
+		fileCheck(vo, file1, file2);
+		if (!file1.isEmpty() && !file2.isEmpty()) {
+
+			resulet = showDAO.updateShow(vo);
+
 				// 좌석클래스 저장
 				for (int i = 0; i < vo.getSeatClass().size(); i++) {
 
 					seatClass.put("seatClass", vo.getSeatClass().get(i));
 					seatClass.put("seatPrice", vo.getSeatPrice().get(i));
-					seatClass.put("showSq", vo.getshowSq());
+					seatClass.put("seatClassSq", vo.getSeatClassSq().get(i));
 
-					showDAO.insertSeatClass(seatClass);
+					showDAO.updateSeatClass(seatClass);
 
 				}
-			}
-
-			return 0;
 		}
+
+		return resulet;
+	}
 
 	// ------------------ 공연정보가져오기
 	public ShowVO getShow(int no) {
@@ -83,24 +84,24 @@ public class ShowService {
 		List<String> seatClassList = new ArrayList<>();
 		List<Integer> seatPriceSqList = new ArrayList<>();
 
-		//공연정보
+		// 공연정보
 		showVO = showDAO.getShow(no);
-		
-		//좌석클레스
+
+		// 좌석클레스
 		List<SeatClassVO> SeatClassList = showDAO.getSeatClassList(no);
 		for (SeatClassVO seatClassSq : SeatClassList) {
 			seatClassSqList.add(seatClassSq.getSeatClassSq());
 			seatClassList.add(seatClassSq.getSeatClass());
 			seatPriceSqList.add(seatClassSq.getSeatPrice());
-		}			
+		}
 		showVO.setSeatClassSq(seatClassSqList);
 		showVO.setSeatClass(seatClassList);
 		showVO.setSeatPrice(seatPriceSqList);
-			
+
 		return showVO;
 
 	}
-	
+
 	// ------------------ 공연리스트가져오기
 	public List<ShowVO> getShowList(int no) {
 		System.out.println("getShowList Service()");
@@ -115,20 +116,20 @@ public class ShowService {
 		if (!file1.isEmpty() && !file2.isEmpty()) {
 			// 오리지널파일
 			String orgName = file1.getOriginalFilename();
-			String orgName2 = file2.getOriginalFilename();			
+			String orgName2 = file2.getOriginalFilename();
 
 			// 확장자
 			String exName = orgName.substring(orgName.indexOf("."));
 			String exName2 = orgName2.substring(orgName2.indexOf("."));
-			
+
 			// 저장파일 이름
 			String saveName = System.currentTimeMillis() + UUID.randomUUID().toString() + exName;
 			String saveName2 = System.currentTimeMillis() + UUID.randomUUID().toString() + exName2;
-		
+
 			// 파일패스
 			String filePath = saveDir + saveName;
 			String filePath2 = saveDir + saveName2;
-	
+
 			try {
 				file1.transferTo(new File(filePath));
 				file2.transferTo(new File(filePath2));
