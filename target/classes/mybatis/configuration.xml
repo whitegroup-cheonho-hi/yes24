@@ -7,6 +7,7 @@
 	    <typeAlias alias="ConcertHallVO" type="com.yes24.vo.ConcertHallVO" />
 	    <typeAlias alias="NotificationVO" type="com.yes24.vo.NotificationVO" />
 	    <typeAlias alias="QnAVO" type="com.yes24.vo.QnAVO" />
+	    <typeAlias alias="SeatVO" type="com.yes24.vo.SeatVO" />
 	    <typeAlias alias="ReviewVO" type="com.yes24.vo.ReviewVO" />
 	    <typeAlias alias="SeatClassVO" type="com.yes24.vo.SeatClassVO" />
 	    <typeAlias alias="ShowingVO" type="com.yes24.vo.ShowingVO" />

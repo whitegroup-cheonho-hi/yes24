@@ -59,6 +59,84 @@
 
 	</insert>
 
+	<!-- 공연장정보가져오기 -->
+	<select id="getConcertHall" parameterType="int"	resultType="ConcertHallVO">
+		
+		<![CDATA[
+		
+			SELECT
+			      concert_hall_sq            AS concerthallsq,
+			      concert_hall_name          AS concerthallname,
+			      concert_hall_post          AS concerthallpost,
+			      concert_hall_basic_addr    AS concerthallroadaddr,
+			      concert_hall_detail_addr   AS concerthalljibunaddr,
+			      concert_hall_width         AS concerthallwidth,
+			      concert_hall_height        AS concerthallheight
+			  FROM
+			      concert_hall
+			 WHERE
+			      concert_hall_sq = #{concerthallsq}
+		
+		]]>
 
+	</select>
+	
+	<!-- 공연장리스트가져오기 -->
+	<select id="getConcertHallList" resultType="ConcertHallVO">
+		
+		<![CDATA[
+		
+			SELECT
+			      concert_hall_sq            AS concerthallsq,
+			      concert_hall_name          AS concerthallname,
+			      concert_hall_post          AS concerthallpost,
+			      concert_hall_basic_addr    AS concerthallroadaddr,
+			      concert_hall_detail_addr   AS concerthalljibunaddr,
+			      concert_hall_width         AS concerthallwidth,
+			      concert_hall_height        AS concerthallheight
+			  FROM
+			      concert_hall	
+		
+		]]>
+
+	</select>
+	
+	<!-- 공연장 좌석정보가져오기 -->
+	<select id="getConcertHallSeat" parameterType="SeatVO"	resultType="SeatVO">
+		
+		<![CDATA[
+		
+				SELECT
+				      seat_sq AS seatsq,
+				      seat_no AS seatNo,
+				      concert_hall_sq AS concerthallsq
+				  FROM
+				      seat
+				 WHERE
+				      concert_hall_sq = #{concerthallsq}
+				   AND
+				      seat_sq = #{seatSq}
+			
+		]]>
+
+	</select>
+	
+	<!-- 공연좌석리스트가져오기 -->	
+	<select id="getConcertHallSeatList" parameterType="int"	resultType="SeatVO">
+		
+		<![CDATA[
+		
+			SELECT
+			      seat_sq AS seatsq,
+				  seat_no AS seatNo,
+				  concert_hall_sq AS concerthallsq
+			  FROM
+			      seat
+			 WHERE
+			      concert_hall_sq = #{concerthallsq}
+			
+		]]>
+
+	</select>
 
 </mapper>

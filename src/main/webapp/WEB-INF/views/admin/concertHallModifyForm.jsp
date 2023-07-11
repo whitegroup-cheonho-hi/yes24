@@ -40,7 +40,7 @@
 		<!-- //헤더 -->
 		<section>
 			<div id="ySContent">
-				<form id="insertForm" method="post" action="${pageContext.request.contextPath}/concertHall/concertHallInsert" >
+				<form id="insertForm" method="post" action="${pageContext.request.contextPath}/concertHall/insertConcertHall" >
 					<div class="ySContRow w_900">
 						<!-- ==================== 정보 입력 영역 시작 ==================== -->
 						<div class="tm_grp">
