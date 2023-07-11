@@ -10,8 +10,8 @@ public class ConcertHallVO {
 	private int concertHallSq;
 	private String concertHallName;
 	private String concertHallPost;
-	private String concertHallBasicAddr;
-	private String concertHallDetailAddr;
+	private String concertHallRoadAddr;
+	private String concertHallJibunAddr;
 	private int concertHallWidth;
 	private int concertHallHeight;
 	// 좌석
@@ -22,15 +22,15 @@ public class ConcertHallVO {
 		super();
 	}
 
-	public ConcertHallVO(int concertHallSq, String concertHallName, String concertHallPost, String concertHallBasicAddr,
-			String concertHallDetailAddr, int concertHallWidth, int concertHallHeight, List<Integer> seatSq,
+	public ConcertHallVO(int concertHallSq, String concertHallName, String concertHallPost, String concertHallRoadAddr,
+			String concertHallJibunAddr, int concertHallWidth, int concertHallHeight, List<Integer> seatSq,
 			List<String> seatNo) {
 		super();
 		this.concertHallSq = concertHallSq;
 		this.concertHallName = concertHallName;
 		this.concertHallPost = concertHallPost;
-		this.concertHallBasicAddr = concertHallBasicAddr;
-		this.concertHallDetailAddr = concertHallDetailAddr;
+		this.concertHallRoadAddr = concertHallRoadAddr;
+		this.concertHallJibunAddr = concertHallJibunAddr;
 		this.concertHallWidth = concertHallWidth;
 		this.concertHallHeight = concertHallHeight;
 		this.seatSq = seatSq;
@@ -61,20 +61,20 @@ public class ConcertHallVO {
 		this.concertHallPost = concertHallPost;
 	}
 
-	public String getConcertHallBasicAddr() {
-		return concertHallBasicAddr;
+	public String getConcertHallRoadAddr() {
+		return concertHallRoadAddr;
 	}
 
-	public void setConcertHallBasicAddr(String concertHallBasicAddr) {
-		this.concertHallBasicAddr = concertHallBasicAddr;
+	public void setConcertHallRoadAddr(String concertHallRoadAddr) {
+		this.concertHallRoadAddr = concertHallRoadAddr;
 	}
 
-	public String getConcertHallDetailAddr() {
-		return concertHallDetailAddr;
+	public String getConcertHallJibunAddr() {
+		return concertHallJibunAddr;
 	}
 
-	public void setConcertHallDetailAddr(String concertHallDetailAddr) {
-		this.concertHallDetailAddr = concertHallDetailAddr;
+	public void setConcertHallJibunAddr(String concertHallJibunAddr) {
+		this.concertHallJibunAddr = concertHallJibunAddr;
 	}
 
 	public int getConcertHallWidth() {
@@ -112,9 +112,10 @@ public class ConcertHallVO {
 	@Override
 	public String toString() {
 		return "ConcertHallVO [concertHallSq=" + concertHallSq + ", concertHallName=" + concertHallName
-				+ ", concertHallPost=" + concertHallPost + ", concertHallBasicAddr=" + concertHallBasicAddr
-				+ ", concertHallDetailAddr=" + concertHallDetailAddr + ", concertHallWidth=" + concertHallWidth
+				+ ", concertHallPost=" + concertHallPost + ", concertHallRoadAddr=" + concertHallRoadAddr
+				+ ", concertHallJibunAddr=" + concertHallJibunAddr + ", concertHallWidth=" + concertHallWidth
 				+ ", concertHallHeight=" + concertHallHeight + ", seatSq=" + seatSq + ", seatNo=" + seatNo + "]";
 	}
 
+	
 }

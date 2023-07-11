@@ -130,13 +130,13 @@
 								<div class="inpRow">
 									<span id="spanCertifyIpt_Addr1"
 										class="yesIpt b_size ipt_wSizeF"> <input
-										id="addr2" name="concertHallBasicAddr" type="text"
+										id="addr2" name="concertHallRoadAddr" type="text"
 										readonly="readonly" placeholder="도로명 주소">
 									</span>
 								</div>
 								<div class="inpRow">
 								<span id="spanCertifyIpt_Addr2" class="yesIpt b_size ipt_wSizeF">
-									<input id="addr3" name="concertHallDetailAddr" type="text" readonly="readonly" placeholder="지번 주소">
+									<input id="addr3" name="concertHallJibunAddr" type="text" readonly="readonly" placeholder="지번 주소">
 								</span>
 								</div>								
 							</dd>
@@ -171,26 +171,26 @@
 			console.log(data);		
 	 		$("#addr1").val(data.zonecode);
 	 		$("#addr2").val(data.address);				
-	 		$("#addr3").val(data.autoJibunAddress);				
+	 		$("#addr3").val(data.jibunAddress+data.autoJibunAddress);				
 			}
 		}).open();
 	});
-	/* //좌석배치 미리보기
+	//좌석배치 미리보기
 	$("#seetbtn").on("click", function(){
 			console.log('click');
-			var num1 = parseInt($("input[name='hallWidth']").val()) + 65;
-			var num2 = parseInt($("input[name='hallHeight']").val());
+			var num1 = parseInt($("input[name='concertHallWidth']").val()) + 65;
+			var num2 = parseInt($("input[name='concertHallHeight']").val());
 			var container = $('.container'); // .container 요소를 변수에 저장
 			container.empty(); // .container 내부를 비움
 			container.css({ 'grid-template-columns': 'repeat(' + num2 + ', 30px)', 'display' : 'grid', 'width' : + num2 * 30 + 'px' });// display 속성을 grid로 설정
 			for(var i=65; i<num1; i++){
 				for(var j=1; j<=num2; j++){
-					var item = $('<div>').addClass('item').text(String.fromCharCode(i)+j);
+					var item = $('<span>').addClass('item').text(String.fromCharCode(i)+j);
 					container.append(item);
 				}
 			}
 			container.show();
-		}); */
+		}); 
 	//극장등록
 	$("#insertConcertHall").on("click",function(){
 		console.log("등록");

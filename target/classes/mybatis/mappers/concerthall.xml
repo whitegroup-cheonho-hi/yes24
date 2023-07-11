@@ -3,4 +3,62 @@
 
 <mapper namespace="concerthall">
 
+	<!-- 공연장등록 -->
+	<insert id="insertConcertHall" parameterType="ConcertHallVO">
+
+		<selectKey keyProperty="concertHallSq" resultType="int"
+			order="BEFORE">
+			SELECT seq_concert_hall_sq.NEXTVAL AS concertHallSq FROM dual
+		</selectKey>
+		
+		
+		<![CDATA[
+					
+		   INSERT INTO concert_hall (
+							         concert_hall_sq,
+							         concert_hall_name,
+							         concert_hall_post,
+							         concert_hall_basic_addr,
+							         concert_hall_detail_addr,
+							         concert_hall_width,
+							         concert_hall_height
+							        )
+			                  VALUES 
+			                        ( 
+			                         #{concertHallSq},
+			                         #{concertHallName},
+			                         #{concertHallPost},
+			                         #{concertHallRoadAddr},
+			                         #{concertHallJibunAddr},
+			                         #{concertHallWidth},
+			                         #{concertHallHeight}
+			                        )
+		
+		]]>
+
+	</insert>
+
+	<!-- 공연장좌석등록 -->
+	<insert id="insertConcertHallSeat" parameterType="map">
+	
+		<![CDATA[
+		
+			INSERT INTO seat (
+			                  seat_sq,
+			                  seat_no,
+			                  concert_hall_sq
+			                 )
+			           VALUES 
+			                 ( 
+			                  seq_seat_sq.NEXTVAL,
+			                  #{seatNo},
+			                  #{concerthallsq}
+			                 )
+		
+		]]>
+
+	</insert>
+
+
+
 </mapper>

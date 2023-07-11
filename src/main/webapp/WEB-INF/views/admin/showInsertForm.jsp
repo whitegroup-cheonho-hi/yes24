@@ -30,6 +30,12 @@
 <script type="text/javascript" src="${pageContext.request.contextPath }/assets/js/summernote-ko-KR.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath }/assets/js/summernote-lite.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/summernote-lite.css">
+<style>
+#ySContent{width: 1200px;}
+#ySContent .ySContRow {width: 900px;}
+#ySContent .yesIpt{margin-right: 10px;  margin-top: 10px;}
+#category {width: 890px;}
+</style>
 </head>
 <body>
 	<section>
@@ -49,26 +55,26 @@
 						</div>
 
 						<!-- ==================== 이미지 입력 영역 시작 ==================== -->
-						<dl class="concertHall">
+						<div class="concertHall">
 							<div class="imgGrp">
-								<dt class="imgCol">
+								<div class="imgCol">
 									<strong>메인 이미지 등록</strong>
-								</dt>
-								<dt class="imgCol">
+								</div>
+								<div class="imgCol">
 									<strong>서브 이미지 등록</strong>
-								</dt>
+								</div>
 							</div>
-							<dd>
+							<div>
 								<div class="inpRow cols">
 									<div class="inpRow">
 										<div class="colGrp">
 											<div class="colCell w_280">
-												<span id="hallWidth" class="yesIpt b_size ipt_wSizeF">
+												<span class="yesIpt b_size ipt_wSizeF hallWidth">
 													<input id="mainImage" name="file1" type="file">
 												</span>
 											</div>
 											<div class="colCell w_280">
-												<span id="hallHeight" class="yesIpt b_size ipt_wSizeF">
+												<span class="yesIpt b_size ipt_wSizeF hallWidth">
 													<input id="subImage" name="file2" type="file">
 												</span>
 											</div>
@@ -82,31 +88,31 @@
 										</dl>
 									</div>
 								</div>
-							</dd>
-						</dl>
+							</div>
+						</div>
 						<!-- ==================== 공연일정 입력 영역 시작 ==================== -->
-						<dl class="concertHall">
+						<div class="concertHall">
 							<div class="inpRow">
 								<div class="imgGrp">
-									<dt class="imgCol">
+									<div class="imgCol">
 										<strong>예매 시작일</strong>
-									</dt>
-									<dt class="imgCol">
+									</div>
+									<div class="imgCol">
 										<strong>공연 시간</strong>
-									</dt>
+									</div>
 								</div>
-								<dd>
+								<div>
 									<div class="inpRow cols">
 										<div class="inpRow">
 											<div class="colGrp">
 												<div class="colCell w_280">
-													<span id="hallWidth" class="yesIpt b_size ipt_wSizeF">
+													<span class="yesIpt b_size ipt_wSizeF hallWidth">
 														<input id="reservationDate" name="reservationDate"
 														type="date">
 													</span>
 												</div>
 												<div class="colCell w_280">
-													<span id="hallHeight" class="yesIpt b_size ipt_wSizeF">
+													<span  class="yesIpt b_size ipt_wSizeF hallWidth">
 														<input id="showTime" name="showTime" type="text"
 														placeholder="공연시간 입력" class="inpwid">분
 													</span>
@@ -115,72 +121,72 @@
 											</div>
 										</div>
 									</div>
-								</dd>
+								</div>
 							</div>
 							<div class="inpRow">
 								<div class="imgGrp">
-									<dt class="imgCol">
+									<div class="imgCol">
 										<strong>공연 시작일</strong>
-									</dt>
-									<dt class="imgCol">
+									</div>
+									<div class="imgCol">
 										<strong>공연 종료일</strong>
-									</dt>
+									</div>
 								</div>
-								<dd>
+								<div>
 									<div class="inpRow cols">
 										<div class="inpRow">
 											<div class="colGrp">
 												<div class="colCell w_280">
-													<span id="hallWidth" class="yesIpt b_size ipt_wSizeF">
+													<span class="yesIpt b_size ipt_wSizeF hallWidth">
 														<input id="startDate" name="startDate" type="date">
 													</span>
 												</div>
 												<div class="colCell w_280">
-													<span id="hallHeight" class="yesIpt b_size ipt_wSizeF">
+													<span  class="yesIpt b_size ipt_wSizeF hallWidth">
 														<input id="endDate" name="endDate" type="date">
 													</span>
 												</div>
 											</div>
 										</div>
 									</div>
-								</dd>
+								</div>
 							</div>
-						</dl>
+						</div>
 						<!-- ==================== 공연 정보 입력 영역 시작 ==================== -->
-						<dl class="concertHall">
+						<div class="concertHall">
 							<div class="inpRow">
 								<div class="imgGrp">
-									<dt class="imgCol">
+									<div class="imgCol">
 										<strong>공연명</strong>
-									</dt>
-									<dt class="imgCol">
+									</div>
+									<div class="imgCol">
 										<strong>관람가</strong>
-									</dt>
-									<dt class="imgCol">
+									</div>
+									<div class="imgCol">
 										<strong>공연장</strong>
-									</dt>
+									</div>
 								</div>
-								<dd>
+								<div>
 									<div class="inpRow cols">
 										<div class="inpRow">
 											<div class="colGrp">
 												<div class="colCell w_280">
-													<span id="hallWidth" class="yesIpt b_size ipt_wSizeF">
+													<span class="yesIpt b_size ipt_wSizeF hallWidth">
 														<input id="showName" name="showName" type="text"
 														placeholder="제목 입력">
 													</span>
 												</div>
 												<div class="colCell w_280">
-													<span id="hallWidth" class="yesIpt b_size ipt_wSizeF">
+													<span  class="yesIpt b_size ipt_wSizeF hallWidth">
 														<input id="viewingAge" name="viewingAge" type="text"
 														placeholder="관람연령 입력" class="inpwid">세
 													</span>
 												</div>
 												<div class="colCell w_280">
-													<span id="hallHeight" class="yesIpt b_size ipt_wSizeF">
+													<span  class="yesIpt b_size ipt_wSizeF hallWidth">
 														<select id="concertHallName" name="concertHallName"
 														aria-selected="undefined">
-															<option value="" selected disabled hidden></option>
+															<option value="" selected disabled ></option>
 															<option value="천호홀">천호홀</option>
 															<option value="잠실홀">잠실홀</option>
 															<option value="강남홀">강남홀</option>
@@ -190,29 +196,29 @@
 											</div>
 										</div>
 									</div>
-								</dd>
+								</div>
 							</div>
 							<div class="inpRow">
 								<div class="imgGrp">
-									<dt class="imgCol">
+									<div class="imgCol">
 										<strong>연출</strong>
-									</dt>
-									<dt class="imgCol">
+									</div>
+									<div class="imgCol">
 										<strong>출연진</strong>
-									</dt>
+									</div>
 								</div>
-								<dd>
+								<div>
 									<div class="inpRow cols">
 										<div class="inpRow">
 											<div class="colGrp">
 												<div class="colCell w_280">
-													<span id="hallWidth" class="yesIpt b_size ipt_wSizeF">
+													<span  class="yesIpt b_size ipt_wSizeF hallWidth">
 														<input id="director" name="director" type="text"
 														placeholder="연출자 입력">
 													</span>
 												</div>
 												<div class="colCell w_280">
-													<span id="hallHeight" class="yesIpt b_size ipt_wSizeF">
+													<span  class="yesIpt b_size ipt_wSizeF hallWidth">
 														<input id="cast" name="cast" type="text"
 														placeholder="출연진 입력">
 													</span>
@@ -220,27 +226,27 @@
 											</div>
 										</div>
 									</div>
-								</dd>
+								</div>
 							</div>
-						</dl>
+						</div>
 						<!-- ==================== 공연금액 입력 영역 시작 ==================== -->
-						<dl class="concertHall">
-							<dt class="imgCol">
+						<div class="concertHall">
+							<div class="imgCol">
 								<strong>좌석설정</strong>
-							</dt>
+							</div>
 							<div class="inpRow">
-								<dd>
+								<div>
 									<div class="inpRow cols">
 										<div class="inpRow">
 											<div class="colGrp">
 												<div class="colCell w_280">
-													<span id="hallWidth" class="yesIpt b_size ipt_wSizeF">
+													<span  class="yesIpt b_size ipt_wSizeF hallWidth">
 														<input id="seetClass1" name="seatClass" type="text"
 														class="inpwid" placeholder="좌석등급 입력">석
 													</span>
 												</div>
 												<div class="colCell w_280">
-													<span id="hallHeight" class="yesIpt b_size ipt_wSizeF">
+													<span  class="yesIpt b_size ipt_wSizeF hallWidth">
 														<input id="seetPrice1" name="seatPrice" type="number"
 														class="inpwid" placeholder="좌석금액 입력">원
 													</span>
@@ -248,21 +254,21 @@
 											</div>
 										</div>
 									</div>
-								</dd>
+								</div>
 							</div>
 							<div class="inpRow">
-								<dd>
+								<div>
 									<div class="inpRow cols">
 										<div class="inpRow">
 											<div class="colGrp">
 												<div class="colCell w_280">
-													<span id="hallWidth" class="yesIpt b_size ipt_wSizeF">
+													<span  class="yesIpt b_size ipt_wSizeF hallWidth">
 														<input id="seetClass2" name="seatClass" type="text"
 														class="inpwid" placeholder="좌석등급 입력">석
 													</span>
 												</div>
 												<div class="colCell w_280">
-													<span id="hallHeight" class="yesIpt b_size ipt_wSizeF">
+													<span  class="yesIpt b_size ipt_wSizeF hallWidth">
 														<input id="seetPrice2" name="seatPrice" type="number"
 														class="inpwid" placeholder="좌석금액 입력">원
 													</span>
@@ -270,21 +276,21 @@
 											</div>
 										</div>
 									</div>
-								</dd>
+								</div>
 							</div>
 							<div class="inpRow">
-								<dd>
+								<div>
 									<div class="inpRow cols">
 										<div class="inpRow">
 											<div class="colGrp">
 												<div class="colCell w_280">
-													<span id="hallWidth" class="yesIpt b_size ipt_wSizeF">
+													<span  class="yesIpt b_size ipt_wSizeF hallWidth">
 														<input id="seetClass3" name="seatClass" type="text"
 														class="inpwid" placeholder="좌석등급 입력">석
 													</span>
 												</div>
 												<div class="colCell w_280">
-													<span id="hallHeight" class="yesIpt b_size ipt_wSizeF">
+													<span  class="yesIpt b_size ipt_wSizeF hallWidth">
 														<input id="seetPrice3" name="seatPrice" type="number"
 														class="inpwid" placeholder="좌석금액 입력">원
 													</span>
@@ -292,21 +298,21 @@
 											</div>
 										</div>
 									</div>
-								</dd>
+								</div>
 							</div>
 							<div class="inpRow">
-								<dd>
+								<div>
 									<div class="inpRow cols">
 										<div class="inpRow">
 											<div class="colGrp">
 												<div class="colCell w_280">
-													<span id="hallWidth" class="yesIpt b_size ipt_wSizeF">
+													<span  class="yesIpt b_size ipt_wSizeF hallWidth">
 														<input id="seetClass4" name="seatClass" type="text"
 														class="inpwid" placeholder="좌석등급 입력">석
 													</span>
 												</div>
 												<div class="colCell w_280">
-													<span id="hallHeight" class="yesIpt b_size ipt_wSizeF">
+													<span  class="yesIpt b_size ipt_wSizeF hallWidth">
 														<input id="seetPrice4" name="seatPrice" type="number"
 														class="inpwid" placeholder="좌석금액 입력">원
 													</span>
@@ -314,9 +320,9 @@
 											</div>
 										</div>
 									</div>
-								</dd>
+								</div>
 							</div>
-						</dl>
+						</div>
 
 						<!-- ==================== 카테고리 정보 영역 시작 ==================== -->
 						<dl class="concertHall">
@@ -325,7 +331,7 @@
 							</dt>
 							<dd>
 								<div class="inpRow cols">
-									<span id="category">
+									<div id="category">
 										<div class="cateGrp">
 											<input type="radio" name="category" value="1">뮤지컬
 										</div>
@@ -344,7 +350,7 @@
 										<div class="cateGrp">
 											<input type="radio" name="category" value="6">아동
 										</div>
-									</span>
+									</div>
 								</div>
 							</dd>
 						</dl>

@@ -26,17 +26,16 @@ public class ShowService {
 
 	String saveDir = "C:/yes24/img/upload/";
 
+	// ------------------ 공연등록 
 	public int insertShow(ShowVO vo, MultipartFile file1, MultipartFile file2) {
 		System.out.println("insertShow Service()");
 
 		Map<String, Object> seatClass = new HashMap<>();
 		fileCheck(vo, file1, file2);
 		if (!file1.isEmpty() && !file2.isEmpty()) {
-
-			System.out.println(vo);
+			
 			showDAO.insertShow(vo);
-			System.out.println(vo);
-
+	
 			// 좌석클래스 저장
 			for (int i = 0; i < vo.getSeatClass().size(); i++) {
 
@@ -91,28 +90,20 @@ public class ShowService {
 		if (!file1.isEmpty() && !file2.isEmpty()) {
 			// 오리지널파일
 			String orgName = file1.getOriginalFilename();
-			String orgName2 = file2.getOriginalFilename();
-			System.out.println("orgName: " + orgName);
-			System.out.println("orgName2: " + orgName2);
+			String orgName2 = file2.getOriginalFilename();			
 
 			// 확장자
 			String exName = orgName.substring(orgName.indexOf("."));
 			String exName2 = orgName2.substring(orgName2.indexOf("."));
-			System.out.println("exName: " + exName);
-			System.out.println("exName2: " + exName2);
-
+			
 			// 저장파일 이름
 			String saveName = System.currentTimeMillis() + UUID.randomUUID().toString() + exName;
 			String saveName2 = System.currentTimeMillis() + UUID.randomUUID().toString() + exName2;
-			System.out.println(saveName);
-			System.out.println(saveName2);
-
+		
 			// 파일패스
 			String filePath = saveDir + saveName;
 			String filePath2 = saveDir + saveName2;
-			System.out.println(filePath);
-			System.out.println(filePath2);
-
+	
 			try {
 				file1.transferTo(new File(filePath));
 				file2.transferTo(new File(filePath2));
