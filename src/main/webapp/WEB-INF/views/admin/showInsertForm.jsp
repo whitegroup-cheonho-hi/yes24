@@ -98,14 +98,11 @@
 										</div>
 									</div>
 									<div class="inpRow">
-										<div class="concertHall">
-											<div class="imgCol">
+										<dl class="concertHall">
+											<dt class="imgCol">
 												<strong>공연정보</strong>
-												<!-- <div id="editor" class="showContent"> -->
-													<!-- <textarea id="showContent" name="showContent"></textarea> -->
-												</div>
-											</div>
-										</div>
+											</dt>
+										</dl>
 									</div>
 								</div>
 							</div>
@@ -136,7 +133,6 @@
 														placeholder="공연시간 입력" class="inpwid">분
 													</span>
 												</div>
-
 											</div>
 										</div>
 									</div>
@@ -203,12 +199,12 @@
 												</div>
 												<div class="colCell w_280">
 													<span class="yesIpt b_size ipt_wSizeF hallWidth"> <select
-														id="concertHallName" name="concertHallName"
+														id="concertHallName" name="concertHallSq"
 														aria-selected="undefined">
-															<option value="" selected disabled></option>
-															<option value="천호홀">천호홀</option>
-															<option value="잠실홀">잠실홀</option>
-															<option value="강남홀">강남홀</option>
+															<c:forEach items="${concertHallList}" var="concertHall">
+																<option id="concertHall${concertHall.concertHallSq}"
+																	value="${concertHall.concertHallSq}">${concertHall.concertHallName}</option>
+															</c:forEach>
 													</select>
 													</span>
 												</div>
@@ -384,11 +380,7 @@
 								</a>
 							</div>
 						</div>
-
-						<!-- ==================== 정보 입력 영역 끝 ==================== -->
-					</div>
 				</form>
-
 				<div id="wrapperContent"></div>
 			</div>
 		</section>

@@ -12,7 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.yes24.dao.ConcertHallDAO;
 import com.yes24.dao.ShowDAO;
+import com.yes24.vo.ConcertHallVO;
 import com.yes24.vo.SeatClassVO;
 import com.yes24.vo.ShowVO;
 
@@ -23,7 +25,10 @@ public class ShowService {
 	private ShowDAO showDAO;
 	@Autowired
 	private ShowVO showVO;
+	@Autowired
+	private ConcertHallDAO concertHallDAO;
 	Map<String, Object> seatClass = new HashMap<>();
+	List<ConcertHallVO> concertHallList = new ArrayList<>();
 	String saveDir = "C:/yes24/img/upload/";
 
 	// ------------------ 공연등록
@@ -79,14 +84,21 @@ public class ShowService {
 	}
 
 	// ------------------ 공연정보가져오기
-	public ShowVO getShow(int no) {
+	public Map<String,Object> getShow(int no) {
 		System.out.println("getShow Service()");
+		Map<String,Object> map = new HashMap<>();
 		List<Integer> seatClassSqList = new ArrayList<>();
 		List<String> seatClassList = new ArrayList<>();
 		List<Integer> seatPriceSqList = new ArrayList<>();
-
+		
+		// 공연장 리스트
+		concertHallList = concertHallDAO.getConcertHallList();
+		
 		// 공연정보
 		showVO = showDAO.getShow(no);
+		
+		// 공연장정보
+		ConcertHallVO concertHallVO = concertHallDAO.getConcertHall(showVO.getConcertHallSq());
 
 		// 좌석클레스
 		List<SeatClassVO> SeatClassList = showDAO.getSeatClassList(no);
@@ -98,8 +110,12 @@ public class ShowService {
 		showVO.setSeatClassSq(seatClassSqList);
 		showVO.setSeatClass(seatClassList);
 		showVO.setSeatPrice(seatPriceSqList);
-
-		return showVO;
+		
+		map.put("showVO", showVO);
+		map.put("concertHallVO", concertHallVO);
+		map.put("concertHallList", concertHallList);
+		
+		return map;
 
 	}
 

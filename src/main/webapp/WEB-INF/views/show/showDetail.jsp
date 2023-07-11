@@ -26,7 +26,20 @@
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <!-- 다음지도API -->
 <script type="text/javascript"
-	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1d8e22ec81bcdc862373ee6f17fdef961d8e22ec81bcdc862373ee6f17fdef96"></script>
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1d8e22ec81bcdc862373ee6f17fdef96&libraries=services"></script>
+
+<style>
+#map {margin: 0 auto;}
+
+#cName{
+    width: 150px;
+    text-align: center;
+    padding: 4px 0;
+    font-size: 19px;
+    background-color: rgb(190 192 223);
+}
+#cName img{width:20px;}
+</style>
 </head>
 <body>
 	<!-- 헤더 -->
@@ -50,8 +63,8 @@
 					<p class="rn-big-title">${show.showName}</p>
 					<div class="rn-product-short-data">
 						<p>
-							<span class="ps-date">${show.startDate} ~ ${show.endDate}</span><a
-								href="#none" id="ps-location"><span class="ps-location">지도로가는링크</span></a>
+							<span class="ps-date">${show.startDate} ~ ${show.endDate}</span><a 
+								href="#map" id="ps-location"><span class="ps-location">공연장 위치보기</span></a>
 						</p>
 					</div>
 				</div>
@@ -140,23 +153,14 @@
 							</dd>
 						</dl>
 					</div>
-
-					<!--자동주문방지적용-->
-
-
-				</div>
-				<!--rn-03-right-->
-			</div>
-			<!--rn-03-->
-
-			<div class="rnplus-tk-bar" id="divPerfNoTimeInfo"
-				style="display: none;">
-				<span class="">※ 본 상품은 상시 관람 상품으로 관람일을 별도로 지정하지 않습니다.</span>
-			</div>
-		</div>
+				</div>				
+			</div>					
+		</div>		
+		<h2>공연장 위치 정보</h2>
+		<!-- 지도를 표시할 div 입니다 -->
+		<div id="map" style="width: 1200px; height: 350px;"></div>
 	</section>
-
-	<div id="map" style="width: 500px; height: 400px;"></div>
+	
 
 	<!-- Footer -->
 	<c:import url="/WEB-INF/views/includes/footer.jsp"></c:import>
@@ -164,12 +168,42 @@
 </body>
 
 <script>
-	var container = document.getElementById('map');
-	var options = {
-		center : new kakao.maps.LatLng(33.450701, 126.570667),
-		level : 3
+	var mapContainer = $("#map"); // 지도를 표시할 div 
+	var mapOption = {
+	    center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+	    level: 3 // 지도의 확대 레벨
 	};
-
-	var map = new kakao.maps.Map(container, options);
+	
+	// 지도를 표시할 div와 지도 옵션으로 지도를 생성합니다
+	var map = new kakao.maps.Map(mapContainer.get(0), mapOption);
+	
+	// 주소-좌표 변환 객체를 생성합니다
+	var geocoder = new kakao.maps.services.Geocoder();
+	
+  	
+	
+	// 주소로 좌표를 검색합니다
+	geocoder.addressSearch('${concertHall.concertHallJibunAddr}', function(result, status) {
+	    // 정상적으로 검색이 완료됐으면
+	    if (status === kakao.maps.services.Status.OK) {
+	        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+	
+	        // 결과값으로 받은 위치를 마커로 표시합니다
+	        var marker = new kakao.maps.Marker({
+	            map: map,
+	            position: coords
+	        });
+	
+	        // 인포윈도우로 장소에 대한 설명을 표시합니다
+	        var infowindow = new kakao.maps.InfoWindow({
+	            content: '<div id="cName">&nbsp;&nbsp;<img src="${pageContext.request.contextPath}/assets/images/극장.png"/> ${concertHall.concertHallName}</div>'
+	        });
+	        infowindow.open(map, marker);
+	
+	        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+	        map.setCenter(coords);
+	    }
+	});
+		
 </script>
 </html>
