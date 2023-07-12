@@ -50,6 +50,9 @@
 #category {
 	width: 890px;
 }
+.admRow .admSpan .container{ border-top: solid 1px rgb(0, 0, 0); 
+border-left: solid 1px rgb(0, 0, 0);
+align-items: center; display: none; }
 </style>
 </head>
 <body>
@@ -201,8 +204,11 @@
 													<span class="yesIpt b_size ipt_wSizeF hallWidth"> <select
 														id="concertHallName" name="concertHallSq"
 														aria-selected="undefined">
+															<option id="concertHall0" value="0" data-width="0">극장선택</option>
 															<c:forEach items="${concertHallList}" var="concertHall">
 																<option id="concertHall${concertHall.concertHallSq}"
+																	data-width="${concertHall.concertHallWidth}"
+																	data-height="${concertHall.concertHallHeight}"
 																	value="${concertHall.concertHallSq}">${concertHall.concertHallName}</option>
 															</c:forEach>
 													</select>
@@ -243,11 +249,12 @@
 								</div>
 							</div>
 						</div>
+						
 						<!-- ==================== 공연금액 입력 영역 시작 ==================== -->
 						<div class="concertHall">
 							<div class="imgCol">
 								<strong>좌석설정</strong>
-							</div>
+							</div>							
 							<div class="inpRow">
 								<div>
 									<div class="inpRow cols">
@@ -388,8 +395,9 @@
 </body>
 
 <script>
-	$(document).ready(function() {
+	$(document).ready(function() 
 
+		//공연등록
 		$("#insertButton").on("click", function() {
 			console.log("등록");
 			$("#insertShow").submit();

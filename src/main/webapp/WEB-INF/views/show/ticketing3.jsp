@@ -13,11 +13,18 @@
 	type="text/css">
 <!-- 제이쿼리 최신 버전 -->
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+<!-- iamport.payment.js -->
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 <style>
 #guideview {
 	margin-left: 25px;
 }
+#StepCtrlBtnPanel a{cursor: pointer; }
 </style>
+
+
+
+
 </head>
 <body>
 	<div id="header" class="header">
@@ -82,7 +89,7 @@
 					<div id="StepCtrlBtn05" style="display: block;">
 						<a id="prevButton" class="dcursor"><img
 							src="http://tkfile.yes24.com/img/perfsale/btn_prev.gif"
-							alt="이전단계"></a> <a class="dcursor"><img id="imgPayEnd"
+							alt="이전단계"></a> <a id="payment" class="dcursor"><img id="imgPayEnd"
 							src="http://tkfile.yes24.com/img/perfsale/btn_succ.gif"
 							alt="결제하기"></a>
 					</div>
@@ -93,24 +100,55 @@
 </body>
 
 <script>
+	   var IMP = window.IMP;
+	   IMP.init("imp61438883");
+	   
+	//결제 API
+	$("#payment").on("click", function() {
+	    console.log("결제");  
+	    requestPay();
+	});
+
+	function requestPay() {
+	    // IMP.request_pay(param, callback) 결제창 호출
+	    
+	    IMP.request_pay({
+			    pg : 'kakaopay',
+			    pay_method : 'card', //생략 가능
+			    merchant_uid: "order_no_0004", // 상점에서 관리하는 주문 번호
+			    name : '주문명:결제테스트',
+			    amount : 100,
+			    buyer_email : 'iamport@siot.do',
+			    buyer_name : '구매자이름',
+			    buyer_tel : '010-1234-5678',
+			    buyer_addr : '서울특별시 강남구 삼성동',
+			    buyer_postcode : '123-456'
+			}, function(rsp) { // callback
+				        if (rsp.success) {
+	            // 결제 성공 시 로직
+	            console.log("결제 성공");
+	        } else {
+	            // 결제 실패 시 로직
+	            console.log("결제 실패");
+	        }
+	    });
+	}
+	
 	//이전단계
-	$("#prevButton")
-			.on(
-					"click",
-					function(e) {
-						e.preventDefault();
-						console.log("이전");
+	$("#prevButton").on("click",function(e) {
+		e.preventDefault();
+		console.log("이전");
 
-						// showSq 값을 가져와서 URL 생성
-						var showSq = "${show.showSq}"; // 이 부분은 JavaScript 변수로 대체해야 합니다.
-						var url = "${pageContext.request.contextPath}/order/orderForm2/"
-								+ showSq;
+		// showSq 값을 가져와서 URL 생성
+		var showSq = "${show.showSq}"; // 이 부분은 JavaScript 변수로 대체해야 합니다.
+		var url = "${pageContext.request.contextPath}/order/orderForm2/"
+				+ showSq;
 
-						// 페이지 이동
-						location.href = url;
+		// 페이지 이동
+		location.href = url;
 
-						// 추가 로직 작성
-					});
+		// 추가 로직 작성
+	});
 </script>
 
 </html>

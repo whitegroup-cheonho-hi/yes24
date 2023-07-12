@@ -37,7 +37,8 @@ public class ShowController {
 		concertHallList = concertHallService.getConcertHallList();
 
 		model.addAttribute("concertHallList", concertHallList);
-
+		
+		System.out.println(concertHallList);
 		return "admin/showInsertForm";
 	}
 
