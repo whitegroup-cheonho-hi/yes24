@@ -84,8 +84,7 @@ public class ShowController {
 
 		model.addAttribute("show", map.get("showVO"));
 		model.addAttribute("concertHall", map.get("concertHallVO"));
-		System.out.println(map.get("concertHallVO"));
-
+	
 		return "show/showDetail";
 	}
 

@@ -22,23 +22,45 @@
 <link
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300&display=swap"
 	rel="stylesheet">
-<!-- 제이쿼리 최신버전 -->
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<!-- 제이쿼리 최신 버전 -->
+<script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <!-- 다음지도API -->
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1d8e22ec81bcdc862373ee6f17fdef96&libraries=services"></script>
 
 <style>
-#map {margin: 0 auto;}
-
-#cName{
-    width: 150px;
-    text-align: center;
-    padding: 4px 0;
-    font-size: 19px;
-    background-color: rgb(190 192 223);
+#map {
+	margin: 0 auto;
 }
-#cName img{width:20px;}
+
+#cName {
+	width: 150px;
+	text-align: center;
+	padding: 4px 0;
+	font-size: 19px;
+}
+
+#cName img {
+	width: 20px;
+}
+
+#ticketingdiv {
+	text-align: center;
+}
+
+#ticketingdiv div {
+	padding: 5px;
+	width: 250px;
+	background: #f43142;
+	margin: 0 auto;
+	border: 2px solid #f43142;
+}
+
+.ticketing {
+	font-size: 20px;
+	color: #fff;
+	display: block; height:100%;
+}
 </style>
 </head>
 <body>
@@ -47,24 +69,15 @@
 	<!-- //헤더 -->
 	<section>
 		<div class="renew-wrap">
-			<div class="renew-content">
-				<div class="rn-01">
-					<!--로케이션, 라벨-->
-					<p class="rn-location">
-						<a
-							href="/New/Genre/GenreMain.aspx?genre=15457&amp;Gcode=009_202_001">뮤지컬</a><a
-							href="/New/Genre/GenreList.aspx?genretype=2&amp;genre=15466">오리지널</a>
-					</p>
-					<p class="rn-labels"></p>
-				</div>
-				<!--rn-01-->
+			<div class="renew-content">				
 				<div class="rn-02">
 					<!--제목-->
 					<p class="rn-big-title">${show.showName}</p>
 					<div class="rn-product-short-data">
 						<p>
-							<span class="ps-date">${show.startDate} ~ ${show.endDate}</span><a 
-								href="#map" id="ps-location"><span class="ps-location">공연장 위치보기</span></a>
+							<span class="ps-date">${show.startDate} ~ ${show.endDate}</span><a
+								href="#map" id="ps-location"><span class="ps-location">공연장
+									위치보기</span></a>
 						</p>
 					</div>
 				</div>
@@ -153,14 +166,20 @@
 							</dd>
 						</dl>
 					</div>
-				</div>				
-			</div>					
-		</div>		
+				</div>
+			</div>
+			<div id="ticketingdiv">
+				<div>
+					<a id="ticketing" href="#none" class="ticketing">예매하기</a>
+				</div>
+			</div>
+		</div>
+		<br>
 		<h2>공연장 위치 정보</h2>
 		<!-- 지도를 표시할 div 입니다 -->
 		<div id="map" style="width: 1200px; height: 350px;"></div>
 	</section>
-	
+
 
 	<!-- Footer -->
 	<c:import url="/WEB-INF/views/includes/footer.jsp"></c:import>
@@ -168,42 +187,61 @@
 </body>
 
 <script>
+
+	//예매버튼 클릭시
+	$("#ticketing").on("click", function(e){
+		e.preventDefault()
+		console.log("예매");
+		popup();
+		
+	});
+	//팝업창
+	function popup() {
+		var url = '${pageContext.request.contextPath}/order/orderForm/${show.showSq}';
+		var name = "ticketing";
+		var option = "width=990, height=640, top=100, left=200, location=no";
+		window.open(url, name, option);
+	}
+
 	var mapContainer = $("#map"); // 지도를 표시할 div 
 	var mapOption = {
-	    center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-	    level: 3 // 지도의 확대 레벨
+		center : new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+		level : 3
+	// 지도의 확대 레벨
 	};
-	
+
 	// 지도를 표시할 div와 지도 옵션으로 지도를 생성합니다
 	var map = new kakao.maps.Map(mapContainer.get(0), mapOption);
-	
+
 	// 주소-좌표 변환 객체를 생성합니다
 	var geocoder = new kakao.maps.services.Geocoder();
-	
-  	
-	
+
 	// 주소로 좌표를 검색합니다
-	geocoder.addressSearch('${concertHall.concertHallJibunAddr}', function(result, status) {
-	    // 정상적으로 검색이 완료됐으면
-	    if (status === kakao.maps.services.Status.OK) {
-	        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-	
-	        // 결과값으로 받은 위치를 마커로 표시합니다
-	        var marker = new kakao.maps.Marker({
-	            map: map,
-	            position: coords
-	        });
-	
-	        // 인포윈도우로 장소에 대한 설명을 표시합니다
-	        var infowindow = new kakao.maps.InfoWindow({
-	            content: '<div id="cName">&nbsp;&nbsp;<img src="${pageContext.request.contextPath}/assets/images/극장.png"/> ${concertHall.concertHallName}</div>'
-	        });
-	        infowindow.open(map, marker);
-	
-	        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-	        map.setCenter(coords);
-	    }
-	});
-		
+	geocoder
+			.addressSearch(
+					'${concertHall.concertHallJibunAddr}',
+					function(result, status) {
+						// 정상적으로 검색이 완료됐으면
+						if (status === kakao.maps.services.Status.OK) {
+							var coords = new kakao.maps.LatLng(result[0].y,
+									result[0].x);
+
+							// 결과값으로 받은 위치를 마커로 표시합니다
+							var marker = new kakao.maps.Marker({
+								map : map,
+								position : coords
+							});
+
+							// 인포윈도우로 장소에 대한 설명을 표시합니다
+							var infowindow = new kakao.maps.InfoWindow(
+									{
+										content : '<div id="cName">&nbsp;&nbsp;<img src="${pageContext.request.contextPath}/assets/images/극장.png"/> ${concertHall.concertHallName}</div>'
+									});
+							infowindow.open(map, marker);
+
+							// 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+							map.setCenter(coords);
+						}
+					});
 </script>
 </html>
