@@ -49,8 +49,10 @@ public class ShowController {
 		System.out.println("insertShow()");
 
 		showService.insertShow(vo, file1, file2);
+		
+		int showSq = vo.getshowSq();
 
-		return "";
+		return "redirect:/show/showSeatClassInsertForm/"+showSq;
 	}
 
 	// ------------------- 공연 수정폼
@@ -75,6 +77,19 @@ public class ShowController {
 
 		return "";
 	}
+	
+	// ------------------- 공연 좌석 클래스등록폼
+		@RequestMapping(value = "/showSeatClassInsertForm/{no}", method = RequestMethod.GET)
+		public String showSeatClassInsertForm(Model model,@PathVariable("no")int no) {
+			System.out.println("showSeatClassInsertForm()");
+
+			Map<String, Object> map = showService.getShow(no);
+
+			model.addAttribute("show", map.get("showVO"));
+			model.addAttribute("concertHall", map.get("concertHallVO"));
+		
+			return "admin/showSeatClassInsertForm";
+		}
 
 	// ------------------- 공연 상세
 	@RequestMapping(value = "/detail/{no}", method = RequestMethod.GET)

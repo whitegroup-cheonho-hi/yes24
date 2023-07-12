@@ -50,13 +50,9 @@
 #category {
 	width: 890px;
 }
-
-.admRow .admSpan .container {
-	border-top: solid 1px rgb(0, 0, 0);
-	border-left: solid 1px rgb(0, 0, 0);
-	align-items: center;
-	display: none;
-}
+.admRow .admSpan .container{ border-top: solid 1px rgb(0, 0, 0); 
+border-left: solid 1px rgb(0, 0, 0);
+align-items: center; display: none; }
 </style>
 </head>
 <body>
@@ -253,6 +249,102 @@
 								</div>
 							</div>
 						</div>
+						
+						<!-- ==================== 공연금액 입력 영역 시작 ==================== -->
+						<div class="concertHall">
+							<div class="imgCol">
+								<strong>좌석설정</strong>
+							</div>							
+							<div class="inpRow">
+								<div>
+									<div class="inpRow cols">
+										<div class="inpRow">
+											<div class="colGrp">
+												<div class="colCell w_280">
+													<span class="yesIpt b_size ipt_wSizeF hallWidth"> <input
+														id="seetClass1" name="seatClass" type="text"
+														class="inpwid" placeholder="좌석등급 입력">석
+													</span>
+												</div>
+												<div class="colCell w_280">
+													<span class="yesIpt b_size ipt_wSizeF hallWidth"> <input
+														id="seetPrice1" name="seatPrice" type="number"
+														class="inpwid" placeholder="좌석금액 입력">원
+													</span>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="inpRow">
+								<div>
+									<div class="inpRow cols">
+										<div class="inpRow">
+											<div class="colGrp">
+												<div class="colCell w_280">
+													<span class="yesIpt b_size ipt_wSizeF hallWidth"> <input
+														id="seetClass2" name="seatClass" type="text"
+														class="inpwid" placeholder="좌석등급 입력">석
+													</span>
+												</div>
+												<div class="colCell w_280">
+													<span class="yesIpt b_size ipt_wSizeF hallWidth"> <input
+														id="seetPrice2" name="seatPrice" type="number"
+														class="inpwid" placeholder="좌석금액 입력">원
+													</span>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="inpRow">
+								<div>
+									<div class="inpRow cols">
+										<div class="inpRow">
+											<div class="colGrp">
+												<div class="colCell w_280">
+													<span class="yesIpt b_size ipt_wSizeF hallWidth"> <input
+														id="seetClass3" name="seatClass" type="text"
+														class="inpwid" placeholder="좌석등급 입력">석
+													</span>
+												</div>
+												<div class="colCell w_280">
+													<span class="yesIpt b_size ipt_wSizeF hallWidth"> <input
+														id="seetPrice3" name="seatPrice" type="number"
+														class="inpwid" placeholder="좌석금액 입력">원
+													</span>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="inpRow">
+								<div>
+									<div class="inpRow cols">
+										<div class="inpRow">
+											<div class="colGrp">
+												<div class="colCell w_280">
+													<span class="yesIpt b_size ipt_wSizeF hallWidth"> <input
+														id="seetClass4" name="seatClass" type="text"
+														class="inpwid" placeholder="좌석등급 입력">석
+													</span>
+												</div>
+												<div class="colCell w_280">
+													<span class="yesIpt b_size ipt_wSizeF hallWidth"> <input
+														id="seetPrice4" name="seatPrice" type="number"
+														class="inpwid" placeholder="좌석금액 입력">원
+													</span>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
 						<!-- ==================== 카테고리 정보 영역 시작 ==================== -->
 						<dl class="concertHall">
 							<dt>
@@ -295,7 +387,6 @@
 								</a>
 							</div>
 						</div>
-					</div>
 				</form>
 				<div id="wrapperContent"></div>
 			</div>
