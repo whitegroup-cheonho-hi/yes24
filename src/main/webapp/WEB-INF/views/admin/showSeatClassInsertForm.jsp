@@ -237,16 +237,63 @@
 
 <script>
 	$(document).ready(function() {
+		
+		 var values = []; // 값을 저장할 배열
 			
 		//좌석정보등록
-		$(".seatClass").on("change",function(){
-			var seatClass = $(this).val();
-			var item = '&nbsp;<button type="button" class="classButton" id='+seatClass+'>'+seatClass+'</button>';
+		$("#seatClass4").on("change",function(){
+			var seatClass1 = $("#seatClass1").val();
+			var seatClass2 = $("#seatClass2").val();
+			var seatClass3 = $("#seatClass3").val();
+			var seatClass4 = $("#seatClass4").val();
 			
-			$("#seatClass").append(item);
-			
+			var seatClass = [seatClass1,seatClass2,seatClass3,seatClass4]; 
+		
+			var isAllDifferent = seatClass.every(function(value, index, array) {
+				  return array.indexOf(value) === index; // 배열의 모든 요소가 중복되지 않는지 확인하는 함수
+				});
+
+				if (isAllDifferent) { // 모든 값이 중복되지 않는 경우
+					
+					//입력받은 좌석 클래스 반복문으로 버튼만들기
+					for(var i = 0; i<seatClass.length; i++){
+					
+					var item = '&nbsp;<button type="button" class="classButton" id='+seatClass[i]+'>'+seatClass[i]+'</button>';
+					$("#seatClass").append(item);
+				
+					}
+				
+					$("#"+seatClass1).on("click",function() {
+						console.log("VIP");
+						console.log(values);
+						
+								 
+					});
+					$("#"+seatClass2).on("click",function() {
+						console.log("R");
+								 
+					});
+					$("#"+seatClass3).on("click",function() {
+						console.log("S");
+								 
+					});
+					$("#"+seatClass4).on("click",function() {
+						console.log("A");
+								 
+					});
+										
+					
+				
+				} else { // 중복된 값이 존재하는 경우
+					
+				  alert("중복된 값이 존재합니다.");
+				
+				}
+				
 		});
 		
+		
+	
 		//좌석배치 미리보기
 
 		var num1 = 65 + Number('${concertHall.concertHallWidth}');		
@@ -273,12 +320,13 @@
 		});
 		
 		
-		//드래그
+		// 드래그 시작 시에 처리할 내용
 		$(document).on('dragstart', function(ev, dd) {
-		  $('<div class="selection" />') // 드래그 시작 시 드래그 영역을 생성하여 body에 추가
+		  return $('<div class="selection" />')
 		    .css('opacity', 0.65)
 		    .appendTo(document.body);
 		})
+		// 드래그 중에 처리할 내용
 		.on('drag', function(ev, dd) {
 		  $(dd.proxy).css({
 		    top: Math.min(ev.pageY, dd.startY), // 드래그 영역의 top 위치 설정
@@ -287,23 +335,24 @@
 		    width: Math.abs(ev.pageX - dd.startX) // 드래그 영역의 너비 설정
 		  });
 		})
+		// 드래그 종료 시에 처리할 내용
 		.on('dragend', function(ev, dd) {
-		  $(dd.proxy).remove(); // 드래그 종료 시 드래그 영역 제거
-		  console.log('드래그 종료');
+		  $(dd.proxy).remove(); // 드래그 영역 삭제
+		  console.log('drag'); // "drag" 출력
+
 		
-		  var values = []; // 값을 저장할 배열
-		  $('.dropped').each(function(index) {
-		    var text = $(this).text(); // 현재 드롭된 요소의 텍스트 값을 가져옴
-		
+		  $(".dropped").each(function(index) {
+		    var text = $(this).text(); // 현재 드래그된 요소의 텍스트 값 가져오기
+
 		    // 값이 배열에 없는 경우에만 추가
 		    if (!values.includes(text)) {
-		      values.push(text);
+		      values.push(text); // 배열에 값 추가
 		    }
 		  });
-		
+
 		  console.log(values); // 값 배열 출력
 		});
-		
+			
 		$('.drop')
 		  .on('dropstart', function() {
 		    $(this).addClass('active'); // 드롭 시작 시 활성화 클래스 추가
