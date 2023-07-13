@@ -35,6 +35,8 @@
 .yesIpt.ipt_readonly {background-color: #fff;}
 .yesFormBtn .formBtn_btn {text-align: center;}
 .yesFormBtn .formBtn_btn .bWrap .txt{width:180px;} 
+.btnC.w_90 .bWrap {width:305px;}
+.btnC.w_90 .bWrap em{width:65px;}
 </style>
 </head>
 <body>
@@ -174,7 +176,7 @@
 										<span id="spanCertifyIpt_AddrNo"
 											class="yesIpt b_size ipt_wSizeF"> <input id="addr1"
 											name="Zip5" size="5" type="text" autocomplete="off"
-											readonly="readonly" placeholder="우편번호">
+											readonly="readonly" value="${user.userPost}">
 										</span>
 									</div>
 									<div class="colCell pal10">
@@ -186,14 +188,13 @@
 							</div>
 							<div class="inpRow">
 								<span id="spanCertifyIpt_Addr1" class="yesIpt b_size ipt_wSizeF">
-									<input id="addr2" name="ST_ADDR_TEXT" type="text" placeholder="주소"
+									<input id="addr2" name="ST_ADDR_TEXT" type="text" value="${user.userBasicAddr}"
 									readonly="readonly">
 								</span>
 							</div>
 							<div class="inpRow">
 								<span id="spanCertifyIpt_Addr2" class="yesIpt b_size ipt_wSizeF">
-									<input id="addr3" name="OLD_ADDR_TEXT" type="text" placeholder="세부 주소"
-									>
+									<input id="addr3" name="OLD_ADDR_TEXT" type="text" value="${user.userDetailAddr}">
 								</span>
 							</div>
 						</dd>
