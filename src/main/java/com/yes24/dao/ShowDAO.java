@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.yes24.vo.SeatClassListVO;
 import com.yes24.vo.SeatClassVO;
+import com.yes24.vo.ShowSeatVO;
 import com.yes24.vo.ShowVO;
 
 @Repository
@@ -39,6 +40,13 @@ public class ShowDAO {
 
 		return sqlSession.insert("show.insertSeatClass", vo);
 	}
+	
+	// ------------------ 공연좌석 등록
+		public int insertShowSeat(ShowSeatVO vo) {
+			System.out.println("insertShowSeat DAO()");
+
+			return sqlSession.insert("show.insertShowSeat", vo);
+		}
 	// ------------------ 공연좌석등급 수정
 	public int updateSeatClass(Map<String, Object> seatClass) {
 		System.out.println("updateSeatClass DAO()");

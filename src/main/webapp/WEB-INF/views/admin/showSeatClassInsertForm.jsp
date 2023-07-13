@@ -427,6 +427,9 @@
 			
 				dataType : "json",
 				success : function(result){
+					
+			    window.location.href = '${pageContext.request.contextPath}/';
+			
 				
 				},
 				error : function(XHR, status, error) {

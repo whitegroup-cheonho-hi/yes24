@@ -53,32 +53,58 @@ public class ShowService {
 	// ------------------ 공연좌석클래스 등록
 	public int insertSeatClass(List<SeatClassListVO> list) {
 		System.out.println("insertSeatClass Service()");
-					
-		List<SeatVO> seatVOList = new ArrayList<>();
-		List<ShowSeatVO> showSeatVOList = new ArrayList<>();		
-		Map<String,Object> showSeat = new HashMap<>(); 
 		
+		List<SeatVO> seatVOList = new ArrayList<>();
+		
+		//공연장 시퀀스 번호로 등록된 좌석을 리스트로 받아온다
 		seatVOList = concertHallDAO.getConcertHallSeatList(list.get(0).getConcertHallSq());
 		
-		//좌석클래스 등록
-		for (SeatClassListVO s : list) {			
-			
-			//showDAO.insertSeatClass(s);
-			
-		}	
+		// 포이치문 사용 인덱스
+		int index = 0;
+	
+		// 좌석 클래스 시퀀스값 저장 배열
+		int[] seatClassSq = new int[list.size()];
+		//좌석의 총 개수를 담을 변수
+		int total = 0;
+
+		//파라미터 list에서 반복문
+		for (SeatClassListVO s : list) {
+			// 좌석 클래스 등록
+			showDAO.insertSeatClass(s); 
+			// selectKey 값을 배열에 저장
+			seatClassSq[index++] = s.getSeatClassSq(); 
+			// 좌석리스트의 갯수를 구하는 식
+			total += s.getSeatClassList().size();
 		
-		int seatClassSize = list.get(0).getSeatClassList().size();
-				
-			
-		for(int i = 0 ; i < seatVOList.size(); i++ ) {
-			ShowSeatVO showSeatVO = new ShowSeatVO();
-			
-			showSeatVO.setSeatSq(seatVOList.get(i).getSeatSq());		
-			
-			showSeatVOList.add(showSeatVO );	
+		}		
+	
+		// 좌석의 총 개수 만큼 좌석클래스 시퀀스 번호를 담기위한 배열
+		int[] seatClassSqList = new int[total];
+		
+		// i & j 값을 사용하지 못하기에 index  변수선언
+		int index2 = 0;
+		// seatClassSq 배열의 길이만큼 반복
+		for (int i = 0; i < seatClassSq.length; i++) {
+			// 좌석클래스의 사이즈를 구한다
+			int seatClassSize = list.get(i).getSeatClassList().size();
+			// 좌석클래스의 사이즈만큼 반복
+			for (int j = 0; j < seatClassSize; j++) {
+				// 각 좌석 클래스의 사이즈에 해당하는 시퀀스 번호를 좌석의 총 개수만큼 배치합니다.
+				seatClassSqList[index2++] = seatClassSq[i];
+			}
 		}
-		
-		System.out.println(showSeatVOList);
+		// 좌석의 총 개수만큼 공연좌석으로 등록
+		for (int i = 0; i < seatVOList.size(); i++) {
+			// 반복으로 생성한 이유는 힙메모리에 값이 덮어씌워지기 때문!!
+			ShowSeatVO showSeatVO = new ShowSeatVO();
+			// 공연좌석 객체에 좌석 시퀀스 저장
+			showSeatVO.setSeatSq(seatVOList.get(i).getSeatSq());
+			// 공연좌석 객체에 좌석클래스 시퀀스 저장
+			showSeatVO.setSeatClassSq(seatClassSqList[i]);
+			// 공연좌석 등록
+			showDAO.insertShowSeat(showSeatVO);
+		}
+
 		return 0;
 	}
 
@@ -93,16 +119,16 @@ public class ShowService {
 
 			resulet = showDAO.updateShow(vo);
 
-			// 좌석클래스 수정
-			for (int i = 0; i < vo.getSeatClass().size(); i++) {
-
-				seatClass.put("seatClass", vo.getSeatClass().get(i));
-				seatClass.put("seatPrice", vo.getSeatPrice().get(i));
-				seatClass.put("seatClassSq", vo.getSeatClassSq().get(i));
-
-				showDAO.updateSeatClass(seatClass);
-
-			}
+//			// 좌석클래스 수정
+//			for (int i = 0; i < vo.getSeatClass().size(); i++) {
+//
+//				seatClass.put("seatClass", vo.getSeatClass().get(i));
+//				seatClass.put("seatPrice", vo.getSeatPrice().get(i));
+//				seatClass.put("seatClassSq", vo.getSeatClassSq().get(i));
+//
+//				showDAO.updateSeatClass(seatClass);
+//
+//			}
 		}
 
 		return resulet;

@@ -23,6 +23,8 @@ import com.yes24.vo.JsonResult;
 import com.yes24.vo.SeatClassListVO;
 import com.yes24.vo.ShowVO;
 
+import oracle.net.aso.l;
+
 @Controller
 @RequestMapping("/show")
 public class ShowController {
@@ -113,11 +115,13 @@ public class ShowController {
 	@RequestMapping(value = "/insertSeatClass", method = RequestMethod.POST)
 	public JsonResult insertSeatClass(@RequestBody List<SeatClassListVO> list) {
 		System.out.println("insertSeatClass()");
-
+		
 		int result = showService.insertSeatClass(list);
 
 		JsonResult jsonResult = new JsonResult();
-
+		
+		jsonResult.success(result);
+		
 		return jsonResult;
 
 	}

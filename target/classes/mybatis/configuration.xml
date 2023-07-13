@@ -4,34 +4,35 @@
 <configuration>
     <typeAliases>
 	    <typeAlias alias="AlarmVO" type="com.yes24.vo.AlarmVO" />
-	    <typeAlias alias="ConcertHallVO" type="com.yes24.vo.ConcertHallVO" />
-	    <typeAlias alias="NotificationVO" type="com.yes24.vo.NotificationVO" />
-	    <typeAlias alias="QnAVO" type="com.yes24.vo.QnAVO" />
-	    <typeAlias alias="SeatVO" type="com.yes24.vo.SeatVO" />
-	    <typeAlias alias="ReviewVO" type="com.yes24.vo.ReviewVO" />
-	    <typeAlias alias="SeatClassVO" type="com.yes24.vo.SeatClassVO" />
-	    <typeAlias alias="SeatClassListVO" type="com.yes24.vo.SeatClassListVO" />
-	    <typeAlias alias="ShowingVO" type="com.yes24.vo.ShowingVO" />
-	    <typeAlias alias="ShowVO" type="com.yes24.vo.ShowVO" />
-	    <typeAlias alias="TicketingVO" type="com.yes24.vo.TicketingVO" />
-	    <typeAlias alias="TicketVO" type="com.yes24.vo.TicketVO" />
+		<typeAlias alias="ConcertHallVO" type="com.yes24.vo.ConcertHallVO" />
+		<typeAlias alias="NotificationVO" type="com.yes24.vo.NotificationVO" />
+		<typeAlias alias="QnAVO" type="com.yes24.vo.QnAVO" />
+		<typeAlias alias="ReviewVO" type="com.yes24.vo.ReviewVO" />
+		<typeAlias alias="SeatClassListVO" type="com.yes24.vo.SeatClassListVO" />
+		<typeAlias alias="SeatClassVO" type="com.yes24.vo.SeatClassVO" />
+		<typeAlias alias="SeatVO" type="com.yes24.vo.SeatVO" />
+		<typeAlias alias="ShowSeatVO" type="com.yes24.vo.ShowSeatVO" />
+		<typeAlias alias="ShowVO" type="com.yes24.vo.ShowVO" />
+		<typeAlias alias="ShowingVO" type="com.yes24.vo.ShowingVO" />
+		<typeAlias alias="TicketVO" type="com.yes24.vo.TicketVO" />
+		<typeAlias alias="TicketingVO" type="com.yes24.vo.TicketingVO" />
 		<typeAlias alias="TransferAlarmVO" type="com.yes24.vo.TransferAlarmVO" />
-	    <typeAlias alias="TransferBoardVO" type="com.yes24.vo.TransferBoardVO" />
-	    <typeAlias alias="UserVO" type="com.yes24.vo.UserVO" />          
+		<typeAlias alias="TransferBoardVO" type="com.yes24.vo.TransferBoardVO" />
+		<typeAlias alias="UserVO" type="com.yes24.vo.UserVO" />
     </typeAliases>
 
     <mappers>
         <mapper resource="mybatis/mappers/alarm.xml" />
-        <mapper resource="mybatis/mappers/concerthall.xml" />
-        <mapper resource="mybatis/mappers/notification.xml" />
-        <mapper resource="mybatis/mappers/qna.xml" />
-        <mapper resource="mybatis/mappers/review.xml" />
-        <mapper resource="mybatis/mappers/show.xml" />
-        <mapper resource="mybatis/mappers/showing.xml" />
-        <mapper resource="mybatis/mappers/ticket.xml" />
-        <mapper resource="mybatis/mappers/ticketing.xml" />
-        <mapper resource="mybatis/mappers/transferalarm.xml" />
-        <mapper resource="mybatis/mappers/transferboard.xml" />
-        <mapper resource="mybatis/mappers/user.xml" />       
+		<mapper resource="mybatis/mappers/concerthall.xml" />
+		<mapper resource="mybatis/mappers/notification.xml" />
+		<mapper resource="mybatis/mappers/qna.xml" />
+		<mapper resource="mybatis/mappers/review.xml" />
+		<mapper resource="mybatis/mappers/show.xml" />
+		<mapper resource="mybatis/mappers/showing.xml" />
+		<mapper resource="mybatis/mappers/ticket.xml" />
+		<mapper resource="mybatis/mappers/ticketing.xml" />
+		<mapper resource="mybatis/mappers/transferalarm.xml" />
+		<mapper resource="mybatis/mappers/transferboard.xml" />
+		<mapper resource="mybatis/mappers/user.xml" />  
     </mappers>
 </configuration>

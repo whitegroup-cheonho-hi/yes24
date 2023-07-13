@@ -106,6 +106,27 @@
 
 	</insert>
 	
+	<!-- 공연좌석 등록 -->
+	<insert id="insertShowSeat" parameterType="ShowSeatVO">
+	
+		<![CDATA[
+		
+			INSERT INTO show_seat 
+								 (
+								  seat_sq,
+								  seat_class_sq
+								 )
+						   VALUES
+								 (
+								 #{seatSq},
+								 #{seatClassSq}
+								 )			
+		]]>
+
+	</insert>
+	
+	
+	
 	<!-- 공연수정 -->
 	<update id="updateSeatClass" parameterType="map">
 	
