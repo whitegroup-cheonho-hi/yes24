@@ -26,6 +26,14 @@
 	rel="stylesheet">
 <!-- 제이쿼리 최신버전 -->
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<!-- 드레그 -->
+<script type="text/javascript" async="" src="http://www.google-analytics.com/ga.js"></script><script src="http://threedubmedia.com/inc/js/jquery-1.7.2.js"></script>
+<script src="http://threedubmedia.com/inc/js/jquery.event.drag-2.2.js"></script>
+<script src="http://threedubmedia.com/inc/js/jquery.event.drag.live-2.2.js"></script>
+<script src="http://threedubmedia.com/inc/js/jquery.event.drop-2.2.js"></script>
+<script src="http://threedubmedia.com/inc/js/jquery.event.drop.live-2.2.js"></script>
+<script src="http://threedubmedia.com/inc/js/excanvas.min.js"></script>
+
 <style>
 #ySContent {
 	width: 1200px;
@@ -53,6 +61,36 @@
 #seatClass{height:50px;}
 #imgCol2{margin-bottom: 10px;}
 #seatClass .classButton{background:#196ab3;}
+/* 드레그 */
+.selection {
+        position: absolute;
+        border: 1px solid #89B;
+        background: #BCE;
+        background-color: #BEC;
+        border-color: #8B9;
+        }
+    .size2 {
+        height: 118px;
+        line-height: 118px;
+        }
+    .size3 {
+        height: 178px;
+        line-height: 178px;
+        }
+    .drop {
+        float: left;   
+        background: #EEE;
+        text-align: center;    
+   
+        }
+    .dropped {
+        background-color: #EBC;
+        border-color: #B89;
+        }	
+    .active {  
+        background-color: #CEB;
+        border-color: #9B8;
+        }
 </style>
 </head>
 <body>
@@ -221,7 +259,7 @@
 		for (var i = 65; i < num1; i++) {
 			  for (var j = 1; j <= num2; j++) {
 			    var seatNo = String.fromCharCode(i) + j;
-			    var item = $('<span>').addClass('item').text(seatNo).attr("id",seatNo);
+			    var item = $('<span>').addClass('item drop').text(seatNo).attr("id",seatNo);
 			    container.append(item);		
 			  }
 			}
@@ -234,6 +272,52 @@
 			$("#insertShowSeatClass").submit();
 		});
 		
+		
+		//드래그
+		$(document).on('dragstart', function(ev, dd) {
+		  $('<div class="selection" />') // 드래그 시작 시 드래그 영역을 생성하여 body에 추가
+		    .css('opacity', 0.65)
+		    .appendTo(document.body);
+		})
+		.on('drag', function(ev, dd) {
+		  $(dd.proxy).css({
+		    top: Math.min(ev.pageY, dd.startY), // 드래그 영역의 top 위치 설정
+		    left: Math.min(ev.pageX, dd.startX), // 드래그 영역의 left 위치 설정
+		    height: Math.abs(ev.pageY - dd.startY), // 드래그 영역의 높이 설정
+		    width: Math.abs(ev.pageX - dd.startX) // 드래그 영역의 너비 설정
+		  });
+		})
+		.on('dragend', function(ev, dd) {
+		  $(dd.proxy).remove(); // 드래그 종료 시 드래그 영역 제거
+		  console.log('드래그 종료');
+		
+		  var values = []; // 값을 저장할 배열
+		  $('.dropped').each(function(index) {
+		    var text = $(this).text(); // 현재 드롭된 요소의 텍스트 값을 가져옴
+		
+		    // 값이 배열에 없는 경우에만 추가
+		    if (!values.includes(text)) {
+		      values.push(text);
+		    }
+		  });
+		
+		  console.log(values); // 값 배열 출력
+		});
+		
+		$('.drop')
+		  .on('dropstart', function() {
+		    $(this).addClass('active'); // 드롭 시작 시 활성화 클래스 추가
+		  })
+		  .on('drop', function(ev, dd) {
+		    $(this).toggleClass('dropped'); // 드롭 시 드롭된 요소에 드롭 클래스 토글
+		  })
+		  .on('dropend', function() {
+		    $(this).removeClass('active'); // 드롭 종료 시 활성화 클래스 제거
+		    console.log('드롭 완료');
+		  });
+		
+		$.drop({ multi: true }); // 다중 드롭 설정
+	
 		
 	});
 </script>
