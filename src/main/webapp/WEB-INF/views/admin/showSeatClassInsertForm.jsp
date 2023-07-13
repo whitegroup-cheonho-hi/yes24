@@ -27,7 +27,7 @@
 <!-- 제이쿼리 최신버전 -->
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <!-- 드레그 -->
-<script type="text/javascript" async="" src="http://www.google-analytics.com/ga.js"></script><script src="http://threedubmedia.com/inc/js/jquery-1.7.2.js"></script>
+<script type="text/javascript" src="http://www.google-analytics.com/ga.js"></script><script src="http://threedubmedia.com/inc/js/jquery-1.7.2.js"></script>
 <script src="http://threedubmedia.com/inc/js/jquery.event.drag-2.2.js"></script>
 <script src="http://threedubmedia.com/inc/js/jquery.event.drag.live-2.2.js"></script>
 <script src="http://threedubmedia.com/inc/js/jquery.event.drop-2.2.js"></script>
@@ -60,37 +60,41 @@
 }
 #seatClass{height:50px;}
 #imgCol2{margin-bottom: 10px;}
-#seatClass .classButton{background:#196ab3;}
 /* 드레그 */
 .selection {
-        position: absolute;
-        border: 1px solid #89B;
-        background: #BCE;
-        background-color: #BEC;
-        border-color: #8B9;
-        }
-    .size2 {
-        height: 118px;
-        line-height: 118px;
-        }
-    .size3 {
-        height: 178px;
-        line-height: 178px;
-        }
-    .drop {
-        float: left;   
-        background: #EEE;
-        text-align: center;    
-   
-        }
-    .dropped {
-        background-color: #EBC;
-        border-color: #B89;
-        }	
-    .active {  
-        background-color: #CEB;
-        border-color: #9B8;
-        }
+    position: absolute;
+    border: 1px solid #89B;
+    background: #BCE;
+    background-color: #BEC;
+    border-color: #8B9;
+    }
+.size2 {
+    height: 118px;
+    line-height: 118px;
+    }
+.size3 {
+    height: 178px;
+    line-height: 178px;
+    }
+.drop {
+    float: left;   
+    background: #EEE;
+    text-align: center;    
+
+    }
+.dropped {
+    background-color: #EBC;
+    border-color: #B89;
+    }	
+.active {  
+    background-color: #CEB;
+    border-color: #9B8;
+    }
+.red {background-color: red;}
+.blue {background-color: blue;}
+.orange {background-color: orange;}
+.green {background-color: green;}
+        
 </style>
 </head>
 <body>
@@ -238,7 +242,11 @@
 <script>
 	$(document).ready(function() {
 		
-		 var values = []; // 값을 저장할 배열
+		var values = []; // 값을 저장할 배열
+		var seatClassArry1 = []; // 좌석1번배열
+		var seatClassArry2 = []; // 좌석2번배열
+		var seatClassArry3 = []; // 좌석3번배열
+		var seatClassArry4 = []; // 좌석4번배열
 			
 		//좌석정보등록
 		$("#seatClass4").on("change",function(){
@@ -254,35 +262,66 @@
 				});
 
 				if (isAllDifferent) { // 모든 값이 중복되지 않는 경우
-					
+					var color = ['red','blue','orange','green'];
 					//입력받은 좌석 클래스 반복문으로 버튼만들기
 					for(var i = 0; i<seatClass.length; i++){
 					
-					var item = '&nbsp;<button type="button" class="classButton" id='+seatClass[i]+'>'+seatClass[i]+'</button>';
+					var item = '&nbsp;<button type="button" class="'+color[i]+'" id='+seatClass[i]+'>'+seatClass[i]+'</button>';
 					$("#seatClass").append(item);
 				
 					}
 				
+					// 첫번째 좌석클래스버튼								
 					$("#"+seatClass1).on("click",function() {
-						console.log("VIP");
-						console.log(values);
+						console.log(seatClass1);
+						seatClassArry1 = values;
 						
-								 
+						for (let i = 0; i < seatClassArry1.length; i++) {
+							  var id = seatClassArry1[i];
+							  console.log(id);						  
+							  $("#"+id).addClass("red");
+							  $("#"+id).removeClass("dropped");
+							}
+						
 					});
+					// 두번째 좌석클래스버튼
 					$("#"+seatClass2).on("click",function() {
-						console.log("R");
-								 
+						console.log(seatClass2);
+						seatClassArry2 = values;
+						
+						for (let i = 0; i < seatClassArry2.length; i++) {
+							  var id = seatClassArry2[i];
+							  console.log(id);
+							  $("#"+id).removeClass("dropped");
+							  $("#"+id).addClass("blue");
+							}
+						
 					});
+					// 세번째 좌석클래스버튼
 					$("#"+seatClass3).on("click",function() {
-						console.log("S");
-								 
+						console.log(seatClass3);
+						seatClassArry3 = values;	
+						
+						for (let i = 0; i < seatClassArry3.length; i++) {
+							  var id = seatClassArry3[i];
+							  console.log(id);
+							  $("#"+id).removeClass("dropped");
+							  $("#"+id).addClass("orange");
+							}
 					});
+					// 네번째 좌석클래스버튼
 					$("#"+seatClass4).on("click",function() {
-						console.log("A");
-								 
-					});
+						console.log(seatClass4);
+						seatClassArry4 = values;
+						
+						for (let i = 0; i < seatClassArry4.length; i++) {
+							  var id = seatClassArry4[i];
+							  console.log(id);
+							  $("#"+id).removeClass("dropped");
+							  $("#"+id).addClass("green");
+							}
+					});		
 										
-					
 				
 				} else { // 중복된 값이 존재하는 경우
 					
@@ -321,47 +360,55 @@
 		
 		
 		// 드래그 시작 시에 처리할 내용
-		$(document).on('dragstart', function(ev, dd) {
-		  return $('<div class="selection" />')
-		    .css('opacity', 0.65)
-		    .appendTo(document.body);
-		})
-		// 드래그 중에 처리할 내용
-		.on('drag', function(ev, dd) {
-		  $(dd.proxy).css({
-		    top: Math.min(ev.pageY, dd.startY), // 드래그 영역의 top 위치 설정
-		    left: Math.min(ev.pageX, dd.startX), // 드래그 영역의 left 위치 설정
-		    height: Math.abs(ev.pageY - dd.startY), // 드래그 영역의 높이 설정
-		    width: Math.abs(ev.pageX - dd.startX) // 드래그 영역의 너비 설정
-		  });
-		})
-		// 드래그 종료 시에 처리할 내용
-		.on('dragend', function(ev, dd) {
-		  $(dd.proxy).remove(); // 드래그 영역 삭제
-		  console.log('drag'); // "drag" 출력
-
+		$(document)
+		  .on('dragstart', function(ev, dd) {
+		    return $('<div class="selection" />')
+		      .css('opacity', 0.65)
+		      .appendTo(document.body);
+		  })
+		  .on('drag', function(ev, dd) {
+		    $(dd.proxy).css({
+		      top: Math.min(ev.pageY, dd.startY),
+		      left: Math.min(ev.pageX, dd.startX),
+		      height: Math.abs(ev.pageY - dd.startY),
+		      width: Math.abs(ev.pageX - dd.startX)
+		    });
+		  })
+		  .on('dragend', function(ev, dd) {
+		    $(dd.proxy).remove();
+		    console.log('drag');
+		    values = [];
 		
-		  $(".dropped").each(function(index) {
-		    var text = $(this).text(); // 현재 드래그된 요소의 텍스트 값 가져오기
-
-		    // 값이 배열에 없는 경우에만 추가
-		    if (!values.includes(text)) {
-		      values.push(text); // 배열에 값 추가
-		    }
+		    $(".dropped").each(function(index) {
+		      var text = $(this).text();
+		      var hasClass = $(this).hasClass("dropped");
+		
+		      // "dropped" 클래스가 있는 경우에만 추가
+		      if (hasClass && !values.includes(text)) {
+		        values.push(text);
+		        console.log("data", values);
+		      } else if (!hasClass && values.includes(text)) {
+		    	console.log("data", "중복체크");
+		        values.splice(values.indexOf(text), 1);
+		      }
+		    });
+		
+		    console.log(values.length);
+		    console.log("type", typeof(values));
 		  });
-
-		  console.log(values); // 값 배열 출력
-		});
-			
 		$('.drop')
 		  .on('dropstart', function() {
 		    $(this).addClass('active'); // 드롭 시작 시 활성화 클래스 추가
 		  })
-		  .on('drop', function(ev, dd) {
+		  .on('drop', function(ev, dd) {	
 		    $(this).toggleClass('dropped'); // 드롭 시 드롭된 요소에 드롭 클래스 토글
 		  })
 		  .on('dropend', function() {
 		    $(this).removeClass('active'); // 드롭 종료 시 활성화 클래스 제거
+		    $(this).removeClass('red');
+		    $(this).removeClass('blue');
+		    $(this).removeClass('orange');
+		    $(this).removeClass('green');
 		    console.log('드롭 완료');
 		  });
 		
