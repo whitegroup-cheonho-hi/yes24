@@ -273,34 +273,97 @@
 					}
 					//첫번째 버튼 클릭시
 					$("#" + seatClass1).on("click", function() {
-					  seatClassArry1 = values;
-					  updateSeatClass(seatClassArry1, "color1");
+					  // values를 사용하여 seatClass1의 업데이트된 class를 적용	
+					  updateSeatClass(values, "color1 seat1");
+					  console.log(seatClass1);
+					  console.log(values);
+					
+					  // seatClassArry2,3,4에서 values에 해당하는 텍스트를 포함하지 않는 요소들로 필터링
+					  seatClassArry2 = seatClassArry2.filter(element => !values.includes($("#" + element).text()));
+					  seatClassArry3 = seatClassArry3.filter(element => !values.includes($("#" + element).text()));
+					  seatClassArry4 = seatClassArry4.filter(element => !values.includes($("#" + element).text()));
+					
+					  seatClassArry1 = $(".container span.seat1").map(function() {
+					    return $(this).text();
+					  }).get();
+					  
+					  console.log(seatClass1);
+					  console.log(seatClassArry1);
+					  console.log(seatClassArry2);
+					  console.log(seatClassArry3);
+					  console.log(seatClassArry4);
 					});
 					
-					//두번째 버튼 클릭시
-					$("#" + seatClass2).on("click", function() {					
-					  seatClassArry2 = values;
-					  updateSeatClass(seatClassArry2, "color2");
-					});
+						//두번째 버튼 클릭시
+					$("#" + seatClass2).on("click", function() {
+					  updateSeatClass(values, "color2 seat2");
+					  console.log(seatClass2);
+					  console.log(values);
 					
+					  seatClassArry1 = seatClassArry1.filter(element => !values.includes($("#" + element).text()));
+					  seatClassArry3 = seatClassArry3.filter(element => !values.includes($("#" + element).text()));
+					  seatClassArry4 = seatClassArry4.filter(element => !values.includes($("#" + element).text()));
+					
+					  seatClassArry2 = $(".container span.seat2").map(function() {
+					    return $(this).text();
+					  }).get();
+					
+					  console.log(seatClass2);
+					  console.log(seatClassArry1);
+					  console.log(seatClassArry2);
+					  console.log(seatClassArry3);
+					  console.log(seatClassArry4);
+					});
+														
 					//세번째 버튼 클릭시
-					$("#" + seatClass3).on("click", function() {			
-					  seatClassArry3 = values;
-					  updateSeatClass(seatClassArry3, "color3");
+					$("#" + seatClass3).on("click", function() {
+					  updateSeatClass(values, "color3 seat3");
+					  console.log(seatClass3);
+					  console.log(values);
+					
+					  seatClassArry1 = seatClassArry1.filter(element => !values.includes($("#" + element).text()));
+					  seatClassArry2 = seatClassArry2.filter(element => !values.includes($("#" + element).text()));
+					  seatClassArry4 = seatClassArry4.filter(element => !values.includes($("#" + element).text()));
+					
+					  seatClassArry3 = $(".container span.seat3").map(function() {
+					    return $(this).text();
+					  }).get();
+					
+					  console.log(seatClass3);
+					  console.log(seatClassArry1);
+					  console.log(seatClassArry2);
+					  console.log(seatClassArry3);
+					  console.log(seatClassArry4);
 					});
 					
 					//네번째 버튼 클릭시
-					$("#" + seatClass4).on("click", function() {			
-					  seatClassArry4 = values;
-					  updateSeatClass(seatClassArry4, "color4");
+					$("#" + seatClass4).on("click", function() {
+					  updateSeatClass(values, "color4 seat4");
+					  console.log(seatClass4);
+					  console.log(values);
+					
+					  
+					  seatClassArry1 = seatClassArry1.filter(element => !values.includes($("#" + element).text()));
+					  seatClassArry2 = seatClassArry2.filter(element => !values.includes($("#" + element).text()));
+					  seatClassArry3 = seatClassArry3.filter(element => !values.includes($("#" + element).text()));
+					
+					  seatClassArry4 = $(".container span.seat4").map(function() {
+					    return $(this).text();
+					  }).get();
+					
+					  console.log(seatClass4);
+					  console.log(seatClassArry1);
+					  console.log(seatClassArry2);
+					  console.log(seatClassArry3);
+					  console.log(seatClassArry4);
 					});
 
 					// 좌석 클래스 업데이트 함수
-					function updateSeatClass(seatClassArry, color) {
+					function updateSeatClass(seatClassArry, classs) {
 					  for (let i = 0; i < seatClassArry.length; i++) {
 					    var id = seatClassArry[i];
 				
-					    $("#" + id).removeClass("dropped").addClass(color);
+					    $("#" + id).removeClass("dropped").addClass(classs);
 					  }
 					}						
 				
@@ -373,6 +436,7 @@
 		        values.splice(values.indexOf(text), 1);
 		      }
 		    });		
+		    
 		  });
 		$('.drop')
 		  .on('dropstart', function() {
@@ -382,7 +446,7 @@
 		    $(this).toggleClass('dropped'); // 드롭 시 드롭된 요소에 드롭 클래스 토글
 		  })
 		  .on('dropend', function() {		 
-		    $(this).removeClass('active color1 color2 color3 color4'); // 드롭 종료 시 활성화 클래스 제거
+		    $(this).removeClass('active color1 color2 color3 color4 seat1 seat2 seat3 seat4'); // 드롭 종료 시 활성화 클래스 제거
 
 		  });
 		
