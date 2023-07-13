@@ -55,7 +55,7 @@ public class ConcertHallDAO {
 	// -------------------- 공연좌석 리스트가지고오기
 	public List<SeatVO> getConcertHallSeatList(int no) {
 		System.out.println("getConcertHallList DAO()");
-
+		
 		return sqlSession.selectList("concerthall.getConcertHallSeatList", no);
 	}
 

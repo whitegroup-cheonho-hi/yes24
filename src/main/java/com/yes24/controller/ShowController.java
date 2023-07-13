@@ -9,14 +9,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.yes24.service.ConcertHallService;
 import com.yes24.service.ShowService;
 import com.yes24.vo.ConcertHallVO;
+import com.yes24.vo.JsonResult;
+import com.yes24.vo.SeatClassListVO;
 import com.yes24.vo.ShowVO;
 
 @Controller
@@ -37,7 +41,7 @@ public class ShowController {
 		concertHallList = concertHallService.getConcertHallList();
 
 		model.addAttribute("concertHallList", concertHallList);
-		
+
 		System.out.println(concertHallList);
 		return "admin/showInsertForm";
 	}
@@ -49,10 +53,10 @@ public class ShowController {
 		System.out.println("insertShow()");
 
 		showService.insertShow(vo, file1, file2);
-		
+
 		int showSq = vo.getshowSq();
 
-		return "redirect:/show/showSeatClassInsertForm/"+showSq;
+		return "redirect:/show/showSeatClassInsertForm/" + showSq;
 	}
 
 	// ------------------- 공연 수정폼
@@ -77,19 +81,19 @@ public class ShowController {
 
 		return "";
 	}
-	
+
 	// ------------------- 공연 좌석 클래스등록폼
-		@RequestMapping(value = "/showSeatClassInsertForm/{no}", method = RequestMethod.GET)
-		public String showSeatClassInsertForm(Model model,@PathVariable("no")int no) {
-			System.out.println("showSeatClassInsertForm()");
+	@RequestMapping(value = "/showSeatClassInsertForm/{no}", method = RequestMethod.GET)
+	public String showSeatClassInsertForm(Model model, @PathVariable("no") int no) {
+		System.out.println("showSeatClassInsertForm()");
 
-			Map<String, Object> map = showService.getShow(no);
+		Map<String, Object> map = showService.getShow(no);
 
-			model.addAttribute("show", map.get("showVO"));
-			model.addAttribute("concertHall", map.get("concertHallVO"));
-		
-			return "admin/showSeatClassInsertForm";
-		}
+		model.addAttribute("show", map.get("showVO"));
+		model.addAttribute("concertHall", map.get("concertHallVO"));
+
+		return "admin/showSeatClassInsertForm";
+	}
 
 	// ------------------- 공연 상세
 	@RequestMapping(value = "/detail/{no}", method = RequestMethod.GET)
@@ -100,8 +104,22 @@ public class ShowController {
 
 		model.addAttribute("show", map.get("showVO"));
 		model.addAttribute("concertHall", map.get("concertHallVO"));
-	
+
 		return "show/showDetail";
+	}
+
+	// ------------------- 공연 좌석클래스 등록
+	@ResponseBody
+	@RequestMapping(value = "/insertSeatClass", method = RequestMethod.POST)
+	public JsonResult insertSeatClass(@RequestBody List<SeatClassListVO> list) {
+		System.out.println("insertSeatClass()");
+
+		int result = showService.insertSeatClass(list);
+
+		JsonResult jsonResult = new JsonResult();
+
+		return jsonResult;
+
 	}
 
 }

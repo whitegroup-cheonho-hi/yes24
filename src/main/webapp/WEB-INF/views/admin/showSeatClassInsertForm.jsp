@@ -242,6 +242,8 @@
 <script>
 	$(document).ready(function() {
 		
+		var showSq = "${show.showSq}";
+		var concertHallSq = "${concertHall.concertHallSq}";
 		var values = []; // 값을 저장할 배열
 		var seatClassArry1 = []; // 좌석1번배열
 		var seatClassArry2 = []; // 좌석2번배열
@@ -278,7 +280,7 @@
 					  console.log(seatClass1);
 					  console.log(values);
 					
-					  // seatClassArry2,3,4에서 values에 해당하는 텍스트를 포함하지 않는 요소들로 필터링
+					  // seatClassArry2에서 values에 해당하는 텍스트를 포함하지 않는 요소들로 필터링
 					  seatClassArry2 = seatClassArry2.filter(element => !values.includes($("#" + element).text()));
 					  seatClassArry3 = seatClassArry3.filter(element => !values.includes($("#" + element).text()));
 					  seatClassArry4 = seatClassArry4.filter(element => !values.includes($("#" + element).text()));
@@ -396,9 +398,44 @@
 			
 			
 		//좌석 등급 등록
-		$("#insertButton").on("click", function() {
+		$("#insertButton").on("click", function() {			
 			console.log("등록");
-			$("#insertShowSeatClass").submit();
+			
+			var seatClass1 = $("#seatClass1").val();
+			var seatClass2 = $("#seatClass2").val();
+			var seatClass3 = $("#seatClass3").val();
+			var seatClass4 = $("#seatClass4").val();
+			
+			var seatPrice1 = $("#seatPrice1").val();
+			var seatPrice2 = $("#seatPrice2").val();
+			var seatPrice3 = $("#seatPrice3").val();
+			var seatPrice4 = $("#seatPrice4").val();
+	
+			var seatClassList = [
+				{ "seatPrice":seatPrice1,  "seatClass" : seatClass1, "seatClassList" : seatClassArry1, "showSq" : showSq, "concertHallSq" : concertHallSq },
+			  	{ "seatPrice":seatPrice2,  "seatClass" : seatClass2, "seatClassList" : seatClassArry2, "showSq" : showSq, "concertHallSq" : concertHallSq },
+			 	{ "seatPrice":seatPrice3,  "seatClass" : seatClass3, "seatClassList" : seatClassArry3, "showSq" : showSq, "concertHallSq" : concertHallSq },
+			 	{ "seatPrice":seatPrice4,  "seatClass" : seatClass4, "seatClassList" : seatClassArry4, "showSq" : showSq, "concertHallSq" : concertHallSq }
+			 ]
+						
+			$.ajax({
+				
+				url : "${pageContext.request.contextPath}/show/insertSeatClass",		
+				type : "post",
+				contentType : "application/json",
+				data : JSON.stringify(seatClassList),
+			
+				dataType : "json",
+				success : function(result){
+				
+				},
+				error : function(XHR, status, error) {
+					console.error(status + " : " + error);
+				}
+			});  
+
+		
+			
 		});
 		
 		

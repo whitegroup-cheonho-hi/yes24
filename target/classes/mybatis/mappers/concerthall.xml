@@ -121,19 +121,21 @@
 
 	</select>
 	
+	
+	
 	<!-- 공연좌석리스트가져오기 -->	
 	<select id="getConcertHallSeatList" parameterType="int"	resultType="SeatVO">
 		
 		<![CDATA[
 		
 			SELECT
-			      seat_sq AS seatsq,
-				  seat_no AS seatNo,
-				  concert_hall_sq AS concerthallsq
-			  FROM
+			      seat_sq AS seatSq
+		      FROM
 			      seat
-			 WHERE
-			      concert_hall_sq = #{concerthallsq}
+		  	 WHERE
+			      concert_hall_sq = #{concert_hall_sq}
+		  ORDER BY
+			      seat_sq
 			
 		]]>
 

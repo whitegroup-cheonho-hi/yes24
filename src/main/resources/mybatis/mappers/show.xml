@@ -78,7 +78,12 @@
 	</update>
 
 	<!-- 좌석클래스 등록 -->
-	<insert id="insertSeatClass" parameterType="map">
+	<insert id="insertSeatClass" parameterType="SeatClassListVO">
+	
+		<selectKey keyProperty="seatClassSq" resultType="int"
+			order="BEFORE">
+			SELECT seq_seat_class_sq.NEXTVAL AS seatClassSq FROM dual
+		</selectKey>	
 	
 		<![CDATA[
 		
@@ -90,8 +95,8 @@
 			                       SHOW_SQ
 			                      )
 			                VALUES
-			                      (
-			                       seq_seat_class_sq.nextval,
+			                      (			                       
+			                       #{seatClassSq},
 			                       #{seatClass},
 			                       #{seatPrice},
 			                       #{showSq}

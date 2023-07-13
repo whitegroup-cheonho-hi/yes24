@@ -15,7 +15,10 @@ import org.springframework.web.multipart.MultipartFile;
 import com.yes24.dao.ConcertHallDAO;
 import com.yes24.dao.ShowDAO;
 import com.yes24.vo.ConcertHallVO;
+import com.yes24.vo.SeatClassListVO;
 import com.yes24.vo.SeatClassVO;
+import com.yes24.vo.SeatVO;
+import com.yes24.vo.ShowSeatVO;
 import com.yes24.vo.ShowVO;
 
 @Service
@@ -34,27 +37,49 @@ public class ShowService {
 	// ------------------ 공연등록
 	public int insertShow(ShowVO vo, MultipartFile file1, MultipartFile file2) {
 		System.out.println("insertShow Service()");
-		
+
 		int resulet = 0;
-	
+
 		fileCheck(vo, file1, file2);
 		if (!file1.isEmpty() && !file2.isEmpty()) {
 
 			resulet = showDAO.insertShow(vo);
 
-			// 좌석클래스 저장
-			for (int i = 0; i < vo.getSeatClass().size(); i++) {
-
-				seatClass.put("seatClass", vo.getSeatClass().get(i));
-				seatClass.put("seatPrice", vo.getSeatPrice().get(i));
-				seatClass.put("showSq", vo.getshowSq());
-
-				showDAO.insertSeatClass(seatClass);
-
-			}
 		}
 
 		return resulet;
+	}
+
+	// ------------------ 공연좌석클래스 등록
+	public int insertSeatClass(List<SeatClassListVO> list) {
+		System.out.println("insertSeatClass Service()");
+					
+		List<SeatVO> seatVOList = new ArrayList<>();
+		List<ShowSeatVO> showSeatVOList = new ArrayList<>();		
+		Map<String,Object> showSeat = new HashMap<>(); 
+		
+		seatVOList = concertHallDAO.getConcertHallSeatList(list.get(0).getConcertHallSq());
+		
+		//좌석클래스 등록
+		for (SeatClassListVO s : list) {			
+			
+			//showDAO.insertSeatClass(s);
+			
+		}	
+		
+		int seatClassSize = list.get(0).getSeatClassList().size();
+				
+			
+		for(int i = 0 ; i < seatVOList.size(); i++ ) {
+			ShowSeatVO showSeatVO = new ShowSeatVO();
+			
+			showSeatVO.setSeatSq(seatVOList.get(i).getSeatSq());		
+			
+			showSeatVOList.add(showSeatVO );	
+		}
+		
+		System.out.println(showSeatVOList);
+		return 0;
 	}
 
 	// ------------------ 공연수정
@@ -84,19 +109,19 @@ public class ShowService {
 	}
 
 	// ------------------ 공연정보가져오기
-	public Map<String,Object> getShow(int no) {
+	public Map<String, Object> getShow(int no) {
 		System.out.println("getShow Service()");
-		Map<String,Object> map = new HashMap<>();
+		Map<String, Object> map = new HashMap<>();
 		List<Integer> seatClassSqList = new ArrayList<>();
 		List<String> seatClassList = new ArrayList<>();
 		List<Integer> seatPriceSqList = new ArrayList<>();
-		
+
 		// 공연장 리스트
 		concertHallList = concertHallDAO.getConcertHallList();
-		
+
 		// 공연정보
 		showVO = showDAO.getShow(no);
-		
+
 		// 공연장정보
 		ConcertHallVO concertHallVO = concertHallDAO.getConcertHall(showVO.getConcertHallSq());
 
@@ -110,11 +135,11 @@ public class ShowService {
 		showVO.setSeatClassSq(seatClassSqList);
 		showVO.setSeatClass(seatClassList);
 		showVO.setSeatPrice(seatPriceSqList);
-		
+
 		map.put("showVO", showVO);
 		map.put("concertHallVO", concertHallVO);
 		map.put("concertHallList", concertHallList);
-		
+
 		return map;
 
 	}

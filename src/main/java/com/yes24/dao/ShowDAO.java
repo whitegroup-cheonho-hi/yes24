@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.yes24.vo.SeatClassListVO;
 import com.yes24.vo.SeatClassVO;
 import com.yes24.vo.ShowVO;
 
@@ -33,10 +34,10 @@ public class ShowDAO {
 	}
 
 	// ------------------ 공연좌석등급 등록
-	public int insertSeatClass(Map<String, Object> seatClass) {
+	public int insertSeatClass(SeatClassListVO vo) {
 		System.out.println("insertSeatClass DAO()");
 
-		return sqlSession.insert("show.insertSeatClass", seatClass);
+		return sqlSession.insert("show.insertSeatClass", vo);
 	}
 	// ------------------ 공연좌석등급 수정
 	public int updateSeatClass(Map<String, Object> seatClass) {
