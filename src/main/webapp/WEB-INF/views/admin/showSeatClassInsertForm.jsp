@@ -90,10 +90,10 @@
     background-color: #CEB;
     border-color: #9B8;
     }
-.red {background-color: red;}
-.blue {background-color: blue;}
-.orange {background-color: orange;}
-.green {background-color: green;}
+.color1 {background-color: #e24647;}
+.color2 {background-color: #dfa5ff;}
+.color3 {background-color: #8fbfee;}
+.color4 {background-color: #a5ea7b;}
         
 </style>
 </head>
@@ -247,7 +247,8 @@
 		var seatClassArry2 = []; // 좌석2번배열
 		var seatClassArry3 = []; // 좌석3번배열
 		var seatClassArry4 = []; // 좌석4번배열
-			
+		var color = ['color1','color2','color3','color4']; // 색 클래스 부여	
+		
 		//좌석정보등록
 		$("#seatClass4").on("change",function(){
 			var seatClass1 = $("#seatClass1").val();
@@ -262,7 +263,7 @@
 				});
 
 				if (isAllDifferent) { // 모든 값이 중복되지 않는 경우
-					var color = ['red','blue','orange','green'];
+				
 					//입력받은 좌석 클래스 반복문으로 버튼만들기
 					for(var i = 0; i<seatClass.length; i++){
 					
@@ -270,65 +271,44 @@
 					$("#seatClass").append(item);
 				
 					}
+					//첫번째 버튼 클릭시
+					$("#" + seatClass1).on("click", function() {
+					  seatClassArry1 = values;
+					  updateSeatClass(seatClassArry1, "color1");
+					});
+					
+					//두번째 버튼 클릭시
+					$("#" + seatClass2).on("click", function() {					
+					  seatClassArry2 = values;
+					  updateSeatClass(seatClassArry2, "color2");
+					});
+					
+					//세번째 버튼 클릭시
+					$("#" + seatClass3).on("click", function() {			
+					  seatClassArry3 = values;
+					  updateSeatClass(seatClassArry3, "color3");
+					});
+					
+					//네번째 버튼 클릭시
+					$("#" + seatClass4).on("click", function() {			
+					  seatClassArry4 = values;
+					  updateSeatClass(seatClassArry4, "color4");
+					});
+
+					// 좌석 클래스 업데이트 함수
+					function updateSeatClass(seatClassArry, color) {
+					  for (let i = 0; i < seatClassArry.length; i++) {
+					    var id = seatClassArry[i];
 				
-					// 첫번째 좌석클래스버튼								
-					$("#"+seatClass1).on("click",function() {
-						console.log(seatClass1);
-						seatClassArry1 = values;
-						
-						for (let i = 0; i < seatClassArry1.length; i++) {
-							  var id = seatClassArry1[i];
-							  console.log(id);						  
-							  $("#"+id).addClass("red");
-							  $("#"+id).removeClass("dropped");
-							}
-						
-					});
-					// 두번째 좌석클래스버튼
-					$("#"+seatClass2).on("click",function() {
-						console.log(seatClass2);
-						seatClassArry2 = values;
-						
-						for (let i = 0; i < seatClassArry2.length; i++) {
-							  var id = seatClassArry2[i];
-							  console.log(id);
-							  $("#"+id).removeClass("dropped");
-							  $("#"+id).addClass("blue");
-							}
-						
-					});
-					// 세번째 좌석클래스버튼
-					$("#"+seatClass3).on("click",function() {
-						console.log(seatClass3);
-						seatClassArry3 = values;	
-						
-						for (let i = 0; i < seatClassArry3.length; i++) {
-							  var id = seatClassArry3[i];
-							  console.log(id);
-							  $("#"+id).removeClass("dropped");
-							  $("#"+id).addClass("orange");
-							}
-					});
-					// 네번째 좌석클래스버튼
-					$("#"+seatClass4).on("click",function() {
-						console.log(seatClass4);
-						seatClassArry4 = values;
-						
-						for (let i = 0; i < seatClassArry4.length; i++) {
-							  var id = seatClassArry4[i];
-							  console.log(id);
-							  $("#"+id).removeClass("dropped");
-							  $("#"+id).addClass("green");
-							}
-					});		
-										
+					    $("#" + id).removeClass("dropped").addClass(color);
+					  }
+					}						
 				
 				} else { // 중복된 값이 존재하는 경우
 					
 				  alert("중복된 값이 존재합니다.");
 				
-				}
-				
+				}				
 		});
 		
 		
@@ -352,7 +332,7 @@
 		container.show();
 			
 			
-		//공연등록
+		//좌석 등급 등록
 		$("#insertButton").on("click", function() {
 			console.log("등록");
 			$("#insertShowSeatClass").submit();
@@ -377,7 +357,8 @@
 		  .on('dragend', function(ev, dd) {
 		    $(dd.proxy).remove();
 		    console.log('drag');
-		    values = [];
+		    
+		    values = []; // 배열초기화
 		
 		    $(".dropped").each(function(index) {
 		      var text = $(this).text();
@@ -386,15 +367,12 @@
 		      // "dropped" 클래스가 있는 경우에만 추가
 		      if (hasClass && !values.includes(text)) {
 		        values.push(text);
-		        console.log("data", values);
+		       
 		      } else if (!hasClass && values.includes(text)) {
-		    	console.log("data", "중복체크");
+		    	
 		        values.splice(values.indexOf(text), 1);
 		      }
-		    });
-		
-		    console.log(values.length);
-		    console.log("type", typeof(values));
+		    });		
 		  });
 		$('.drop')
 		  .on('dropstart', function() {
@@ -403,13 +381,9 @@
 		  .on('drop', function(ev, dd) {	
 		    $(this).toggleClass('dropped'); // 드롭 시 드롭된 요소에 드롭 클래스 토글
 		  })
-		  .on('dropend', function() {
-		    $(this).removeClass('active'); // 드롭 종료 시 활성화 클래스 제거
-		    $(this).removeClass('red');
-		    $(this).removeClass('blue');
-		    $(this).removeClass('orange');
-		    $(this).removeClass('green');
-		    console.log('드롭 완료');
+		  .on('dropend', function() {		 
+		    $(this).removeClass('active color1 color2 color3 color4'); // 드롭 종료 시 활성화 클래스 제거
+
 		  });
 		
 		$.drop({ multi: true }); // 다중 드롭 설정
