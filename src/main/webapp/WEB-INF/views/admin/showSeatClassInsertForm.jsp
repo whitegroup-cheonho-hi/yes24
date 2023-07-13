@@ -277,30 +277,20 @@
 					$("#" + seatClass1).on("click", function() {
 					  // values를 사용하여 seatClass1의 업데이트된 class를 적용	
 					  updateSeatClass(values, "color1 seat1");
-					  console.log(seatClass1);
-					  console.log(values);
-					
-					  // seatClassArry2에서 values에 해당하는 텍스트를 포함하지 않는 요소들로 필터링
+									
+					  // seatClassArry2,3,4에서 values에 해당하는 텍스트를 포함하지 않는 요소들로 필터링
 					  seatClassArry2 = seatClassArry2.filter(element => !values.includes($("#" + element).text()));
 					  seatClassArry3 = seatClassArry3.filter(element => !values.includes($("#" + element).text()));
 					  seatClassArry4 = seatClassArry4.filter(element => !values.includes($("#" + element).text()));
 					
 					  seatClassArry1 = $(".container span.seat1").map(function() {
 					    return $(this).text();
-					  }).get();
-					  
-					  console.log(seatClass1);
-					  console.log(seatClassArry1);
-					  console.log(seatClassArry2);
-					  console.log(seatClassArry3);
-					  console.log(seatClassArry4);
+					  }).get();					
 					});
 					
 						//두번째 버튼 클릭시
 					$("#" + seatClass2).on("click", function() {
 					  updateSeatClass(values, "color2 seat2");
-					  console.log(seatClass2);
-					  console.log(values);
 					
 					  seatClassArry1 = seatClassArry1.filter(element => !values.includes($("#" + element).text()));
 					  seatClassArry3 = seatClassArry3.filter(element => !values.includes($("#" + element).text()));
@@ -308,21 +298,13 @@
 					
 					  seatClassArry2 = $(".container span.seat2").map(function() {
 					    return $(this).text();
-					  }).get();
-					
-					  console.log(seatClass2);
-					  console.log(seatClassArry1);
-					  console.log(seatClassArry2);
-					  console.log(seatClassArry3);
-					  console.log(seatClassArry4);
+					  }).get();					
 					});
 														
 					//세번째 버튼 클릭시
 					$("#" + seatClass3).on("click", function() {
 					  updateSeatClass(values, "color3 seat3");
-					  console.log(seatClass3);
-					  console.log(values);
-					
+										
 					  seatClassArry1 = seatClassArry1.filter(element => !values.includes($("#" + element).text()));
 					  seatClassArry2 = seatClassArry2.filter(element => !values.includes($("#" + element).text()));
 					  seatClassArry4 = seatClassArry4.filter(element => !values.includes($("#" + element).text()));
@@ -330,41 +312,25 @@
 					  seatClassArry3 = $(".container span.seat3").map(function() {
 					    return $(this).text();
 					  }).get();
-					
-					  console.log(seatClass3);
-					  console.log(seatClassArry1);
-					  console.log(seatClassArry2);
-					  console.log(seatClassArry3);
-					  console.log(seatClassArry4);
 					});
 					
 					//네번째 버튼 클릭시
 					$("#" + seatClass4).on("click", function() {
 					  updateSeatClass(values, "color4 seat4");
-					  console.log(seatClass4);
-					  console.log(values);
-					
-					  
+										  
 					  seatClassArry1 = seatClassArry1.filter(element => !values.includes($("#" + element).text()));
 					  seatClassArry2 = seatClassArry2.filter(element => !values.includes($("#" + element).text()));
 					  seatClassArry3 = seatClassArry3.filter(element => !values.includes($("#" + element).text()));
 					
 					  seatClassArry4 = $(".container span.seat4").map(function() {
 					    return $(this).text();
-					  }).get();
-					
-					  console.log(seatClass4);
-					  console.log(seatClassArry1);
-					  console.log(seatClassArry2);
-					  console.log(seatClassArry3);
-					  console.log(seatClassArry4);
+					  }).get();					
 					});
 
 					// 좌석 클래스 업데이트 함수
 					function updateSeatClass(seatClassArry, classs) {
 					  for (let i = 0; i < seatClassArry.length; i++) {
 					    var id = seatClassArry[i];
-				
 					    $("#" + id).removeClass("dropped").addClass(classs);
 					  }
 					}						
@@ -379,7 +345,6 @@
 		
 	
 		//좌석배치 미리보기
-
 		var num1 = 65 + Number('${concertHall.concertHallWidth}');		
 		var num2 = '${concertHall.concertHallHeight}';
 		
@@ -401,24 +366,24 @@
 		$("#insertButton").on("click", function() {			
 			console.log("등록");
 			
-			var seatClass1 = $("#seatClass1").val();
-			var seatClass2 = $("#seatClass2").val();
-			var seatClass3 = $("#seatClass3").val();
-			var seatClass4 = $("#seatClass4").val();
-			
-			var seatPrice1 = $("#seatPrice1").val();
-			var seatPrice2 = $("#seatPrice2").val();
-			var seatPrice3 = $("#seatPrice3").val();
-			var seatPrice4 = $("#seatPrice4").val();
-	
 			var seatClassList = [
-				{ "seatPrice":seatPrice1,  "seatClass" : seatClass1, "seatClassList" : seatClassArry1, "showSq" : showSq, "concertHallSq" : concertHallSq },
-			  	{ "seatPrice":seatPrice2,  "seatClass" : seatClass2, "seatClassList" : seatClassArry2, "showSq" : showSq, "concertHallSq" : concertHallSq },
-			 	{ "seatPrice":seatPrice3,  "seatClass" : seatClass3, "seatClassList" : seatClassArry3, "showSq" : showSq, "concertHallSq" : concertHallSq },
-			 	{ "seatPrice":seatPrice4,  "seatClass" : seatClass4, "seatClassList" : seatClassArry4, "showSq" : showSq, "concertHallSq" : concertHallSq }
-			 ]
-						
-			$.ajax({
+				//1번째 클래스정보
+			    { seatPrice: $("#seatPrice1").val(), seatClass: $("#seatClass1").val(),
+			      seatClassList: seatClassArry1, showSq: showSq, concertHallSq: concertHallSq },
+				//2번째 클래스정보
+			    { seatPrice: $("#seatPrice2").val(), seatClass: $("#seatClass2").val(),
+			      seatClassList: seatClassArry2, showSq: showSq, concertHallSq: concertHallSq },
+				//3번째 클래스정보
+			    { seatPrice: $("#seatPrice3").val(), seatClass: $("#seatClass3").val(),
+			      seatClassList: seatClassArry3, showSq: showSq, concertHallSq: concertHallSq },
+				//4번째 클래스정보
+			    { seatPrice: $("#seatPrice4").val(), seatClass: $("#seatClass4").val(),
+			      seatClassList: seatClassArry4, showSq: showSq, concertHallSq: concertHallSq }   
+			  ];
+			
+				console.log(seatClassList);
+			 // 공연클래스 좌석 등록 ajax						
+			/*  $.ajax({
 				
 				url : "${pageContext.request.contextPath}/show/insertSeatClass",		
 				type : "post",
@@ -430,15 +395,12 @@
 					
 			    window.location.href = '${pageContext.request.contextPath}/';
 			
-				
 				},
 				error : function(XHR, status, error) {
 					console.error(status + " : " + error);
 				}
-			});  
-
-		
-			
+			});   */
+ 
 		});
 		
 		
