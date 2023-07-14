@@ -173,7 +173,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="admRow">
+						<div class="admRow" id="dragForm">
 							<div class="imgCol" id="imgCol2">
 								<strong id="seatClass">등급선택</strong>
 							</div>
@@ -344,7 +344,7 @@
 			
 				console.log(seatClassList);
 			 // 공연클래스 좌석 등록 ajax						
-			/*  $.ajax({
+			  $.ajax({
 				
 				url : "${pageContext.request.contextPath}/show/insertSeatClass",		
 				type : "post",
@@ -360,13 +360,13 @@
 				error : function(XHR, status, error) {
 					console.error(status + " : " + error);
 				}
-			});   */
+			});   
  
 		});
 		
 		
 		// 드래그 시작 시에 처리할 내용
-		$(document)
+		$("#dragForm")
 		  .on('dragstart', function(ev, dd) {
 		    return $('<div class="selection" />')
 		      .css('opacity', 0.65)
