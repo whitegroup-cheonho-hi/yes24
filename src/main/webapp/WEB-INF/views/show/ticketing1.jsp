@@ -28,7 +28,7 @@
 		<ul class="gnb">
 			<li class="m01 on"><span>관람일/회차</span></li>
 			<li class="m02"><span>좌석선택</span></li>
-			<li class="m03"><span>결제방법</span></li>
+			<li class="m05"><span>결제방법</span></li>
 		</ul>
 	</div>
 	<section>

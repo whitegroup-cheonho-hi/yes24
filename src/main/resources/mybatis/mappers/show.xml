@@ -171,6 +171,25 @@
 		]]>
 
 	</select>
+	
+	<!-- 공연장 시퀀스로 공연 시퀀스 가지고오기 -->
+	<select id="getShowSq" parameterType="int" resultType="ShowVO">
+		
+		<![CDATA[
+
+		     SELECT
+			       show_sq AS showSq
+			   FROM
+				   show a,
+				   concert_hall b
+			 WHERE
+			       a.concert_hall_sq = b.concert_hall_sq
+				   AND a.concert_hall_sq = #{concerthallsq}
+		
+		]]>
+
+	</select>	
+
 
 	<!-- 공연리스트가져오기 -->
 	<select id="getShowList" parameterType="int" resultType="ShowVO">

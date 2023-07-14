@@ -1,0 +1,101 @@
+@charset "UTF-8";
+/* header */
+header.pc{width: 100%; height: 120px; border-bottom: 1px solid #858585; position: fixed; top: 0; left: 0; background: #fff; z-index: 99;}
+header.pc #lnb{width: 100%; height: 35px; border-bottom: 1px solid #e5e7eb; box-sizing: border-box;  background-color: #000;}
+header.pc #lnb #lnba a{color: #999;}
+header.pc #lnb .lnb{width: 90%; height: 100%; margin: 0 auto; display: flex; justify-content:flex-end; align-items: center;}
+header.pc #lnb .lnb li{margin-left: 29px; position: relative;}
+header.pc #lnb .lnb li a{font-size: 12px;}
+header.pc #lnb p{font-size: 18; display: block; color: #fff;}
+
+header.pc #header{height: 75px; width: 90%; margin: 0 auto; display: flex; align-items: center; justify-content:space-between;}
+header.pc #header h1{width: 145px; height: 54px; background: url('../images/logo.png') 0 0/contain no-repeat;}
+header.pc #header h1 a{font-size: 0; display: block; height: 100%;}
+header.pc #header #navigation{display: flex; align-items: center;}
+header.pc #header #navigation li{margin-left: 80px;}
+header.pc #header #navigation li:first-of-type{margin-left: 0px;}
+header.pc #header #navigation li a{font-weight: 600; font-size: 18px;}
+/* nav */
+nav #navigation{width: 1250px; height: 100%; margin: 0 auto; display: flex; justify-content:flex-start; align-items: center; flex-wrap: nowrap;}
+nav #navigation li {margin-right: 25px;}
+nav #navigation li a{font-size: 16px; font-weight: 500;}
+
+#navigation { margin: auto; width: 1000px; display: flex; justify-content: space-between; }
+#navigation .submenu:hover>a { background-color: #f7f7f7; color: #db2931; text-decoration: none; }
+#navigation .submenu:hover .menus a { background-color: #fff; color: #6c6c6c; text-decoration: none; }
+#navigation .submenu:hover .menus2 a { background-color: #fff; color: #6c6c6c; text-decoration: none; }
+#navigation .submenu { position: relative; width: 130px; text-align: center; }
+#navigation .submenu .menus { display: none; position: absolute; top:0;  z-index: 1; white-space: nowrap; padding-top:30px;}
+#navigation .submenu .menus2 { display: none; position: absolute; top: 0; right: 10px; z-index: 1; white-space: nowrap; padding-top:30px;}
+#navigation .submenu:hover .menus { display: flex; }
+#navigation .submenu:hover .menus2 { display: flex; }
+/* 입력 폼 */
+.tm_grp+.concertHall { margin-top:15px; }
+.concertHall+.concertHall { margin-top:55px; }
+.yesPopUp .popYUI_cont .concertHall+.concertHall { margin-top:20px; }
+.concertHall dt { line-height:20px;font-size:13px;font-weight:bold;color:#333; }
+.concertHall dt.none { display:none; }
+.concertHall dt .item_tit { line-height:20px;font-size:13px;font-weight:bold;color:#333; }
+.concertHall dt .item_des { line-height:20px;font-size:13px;font-weight:normal;color:#999; }
+.concertHall dd { margin-top:8px;line-height:20px; }
+.concertHall dd+dt { margin-top:18px; }
+.concertHall .inpRow+.inpRow { margin-top:10px; }
+.concertHall .yesFormTxt+.inpRow { margin-top:10px; }
+/* .concertHall .inpRow.cols {  } */
+.concertHall .inpRow.cols .colGrp { display:table;margin:0;padding:0;width:100%;table-layout:fixed; }
+.concertHall .inpRow.cols .colGrp .colCell { display:table-cell;vertical-align:top; }
+.concertHall .inpRow.cols .colGrp .colCell.w_30p { width:30%; }
+.concertHall .inpRow.cols .colGrp .colCell.w_40p { width:40%; }
+.concertHall .inpRow.cols .colGrp .colCell.w_50p { width:50%; }
+.concertHall .inpRow.cols .colGrp .colCell.w_80  { width:80px; }
+.concertHall .inpRow.cols .colGrp .colCell.w_10  { width:10px; }
+.concertHall .inpRow.cols .colGrp .colCell.w_20  { width:20px; }
+.concertHall .inpRow.cols .colGrp .colCell.w_30  { width:30px; }
+.concertHall .inpRow.cols .colGrp .colCell.w_100 { width:100px; }
+.concertHall .inpRow.cols .colGrp .colCell.w_120 { width:120px; }
+.concertHall .inpRow.cols .colGrp .colCell.w_130 { width:130px; }
+.concertHall .inpRow.cols .colGrp .colCell.w_140 { width:140px; }
+.concertHall .inpRow.cols .colGrp .colCell.w_150 { width:150px; }
+.concertHall .inpRow.cols .colGrp .colCell.w_160 { width:160px; }
+.concertHall .inpRow.cols .colGrp .colCell.w_165 { width:165px; }
+.concertHall .inpRow.cols .colGrp .colCell.w_180 { width:180px; }
+.concertHall .inpRow.cols .colGrp .colCell.w_190 { width:190px; }
+.concertHall .inpRow.cols .colGrp .colCell.w_200 { width:200px; }
+.concertHall .inpRow.cols .colGrp .colCell.w_210 { width:210px; }
+.concertHall .inpRow.cols .colGrp .colCell.w_250 { width:250px; }
+.concertHall .inpRow.cols .colGrp .colCell.w_260 { width:260px; }
+.concertHall .inpRow.cols .colGrp .colCell.w_270 { width:270px; }
+.concertHall .inpRow.cols .colGrp .colCell.w_280 { width:280px; }
+.concertHall .inpRow.cols .colGrp .colCell.w_290 { width:290px; }
+.concertHall .yesFormCmt { line-height:20px;font-size:13px;color:#666; }
+
+.concertHall .yesFormSubGrp { padding:20px;background-color:#f8f8f8; }
+.concertHall .yesFormChkLi+.yesFormSubGrp { margin-top:15px; }
+.concertHall .yesFormSubGrp .yesFormChkLi { margin-top:0; }
+
+.yesFormBtn { margin-top:60px; }
+.yesFormBtn .formBtn_txt { margin-top:20px;line-height:20px;font-size:13px;color:#333; }
+.yesFormBtn.cols { margin-left:-5px;margin-right:-5px; }
+.yesFormBtn.cols .colGrp { display:table;width:100%;table-layout:fixed; }
+.yesFormBtn.cols .colGrp .colCell { display:table-cell;vertical-align:top; }
+.yesFormBtn.cols .colGrp .colCell.w_50p { width:50%; }
+.yesFormBtn.cols .colGrp .colCell .btnC { display:block;margin:0 5px; }
+.yesFormBtn.cols .colGrp .colCell .btnC .bWrap { display:block; }
+.yesPopUp .popYUI_cont .yesFormBtn { margin-top:20px; }
+
+button.btnC.btn_wSizeH { width: 100%; }
+.btnC.btn_wSizeF .bWrap { display: block; }
+.formBtn_btn { text-align: center; }
+#emtxt { width: 150px; }
+.imgCol { flex-basis: 50%; }
+div.inpRow .inpwid { width: 90%; }
+#concertHallName { font-family: 'Noto Sans KR', 'NanumBarunGothic', '맑은 고딕', 'Malgun Gothic', sans-serif;
+  width: 100%; border: none; color: #333; font-size: 16px; font-weight: bold; }
+
+strong { font-size: 15px; color: #333; }
+#adminTit { font-size: 25px; }
+
+#category .cateGrp { flex: 1; }
+#category { text-align: center; box-sizing: border-box; border: solid 1px #ebebeb; background-color: #fff;
+  padding: 9px 14px 11px; line-height: 28px; display: flex; align-items: center; }
+

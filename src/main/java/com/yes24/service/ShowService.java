@@ -161,11 +161,12 @@ public class ShowService {
 		showVO.setSeatClassSq(seatClassSqList);
 		showVO.setSeatClass(seatClassList);
 		showVO.setSeatPrice(seatPriceSqList);
-
+				
 		map.put("showVO", showVO);
 		map.put("concertHallVO", concertHallVO);
 		map.put("concertHallList", concertHallList);
-
+		map.put("seatClassList",SeatClassList);
+		
 		return map;
 
 	}

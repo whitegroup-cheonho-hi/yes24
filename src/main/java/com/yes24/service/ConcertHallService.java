@@ -9,13 +9,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.yes24.dao.ConcertHallDAO;
+import com.yes24.dao.ShowDAO;
 import com.yes24.vo.ConcertHallVO;
+import com.yes24.vo.SeatVO;
+import com.yes24.vo.ShowVO;
 
 @Service
 public class ConcertHallService {
 
 	@Autowired
 	private ConcertHallDAO concertHallDAO;
+	@Autowired
+	private ShowDAO showDAO;
 
 	// -------------------- 공연장 등록 & 좌석등록
 	public int insertConcertHall(ConcertHallVO vo) {
@@ -26,7 +31,7 @@ public class ConcertHallService {
 		int width = vo.getConcertHallWidth();
 
 		int result = concertHallDAO.insertConcertHall(vo);
-		
+
 		List<String> seatList = seat(vo, height, width);
 
 		for (int i = 0; i < (height * width); i++) {
@@ -61,15 +66,35 @@ public class ConcertHallService {
 		Map<String, Object> seat = new HashMap<>();
 		int height = vo.getConcertHallHeight();
 		int width = vo.getConcertHallWidth();
-		
+		int result = 0;
 		ConcertHallVO concertHallVO = concertHallDAO.getConcertHall(vo.getConcertHallSq());
 
-		int result = concertHallDAO.updateConcertHall(vo);
+		concertHallDAO.updateConcertHall(vo);
 		// 저장되어있는 공연장정보 가져오기
-				
+
 		// width or height 값이 바뀌지 않았을때
 		if (concertHallVO.getConcertHallHeight() != height || concertHallVO.getConcertHallWidth() != width) {
-			//기존 좌석을 삭제
+
+			List<SeatVO> deleteSeatList = new ArrayList<>();
+
+			// 공연장 시퀀스로 공연장 좌석 시퀀스가져오기
+			deleteSeatList = concertHallDAO.getConcertHallSeatList(vo.getConcertHallSq());
+			// 삭제된 공연좌석 카운트
+			int cnt = 0;
+			// 공연좌석 삭제
+			for (SeatVO seatVO : deleteSeatList) {
+
+				cnt += concertHallDAO.deleteShowSeat(seatVO.getSeatSq());
+			}
+			// 공연좌석이 삭제가 되면
+			if (cnt > 0) {
+				//공연시퀀스 가지고와서
+				ShowVO showVO = showDAO.getShowSq(vo.getConcertHallSq());
+				// 리턴값으로 넣어준다
+				result = showVO.getshowSq();
+			}
+
+			// 기존 좌석을 삭제
 			concertHallDAO.deleteConcertHallSeat(vo.getConcertHallSq());
 
 			List<String> seatList = seat(vo, height, width);

@@ -172,5 +172,16 @@
 		
 	</delete>
 	
+	<!-- 공연좌석삭제 -->
+	<delete id="deleteShowSeat" parameterType="int">
+	
+		<![CDATA[
+		
+			DELETE show_seat WHERE seat_sq =  #{seatSq}
+				    
+		]]>
+		
+	</delete>
+	
 
 </mapper>

@@ -137,7 +137,8 @@
 						<!-- ==================== 정보 입력 영역 시작 ==================== -->
 						<div class="tm_grp">
 							<h3 class="tmM_txt">
-								<em class="tit_txt"><strong id="adminTit">공연 등록&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp; 공연 좌석클래스 등록</strong></em>
+								<em class="tit_txt"><strong id="adminTit">공연
+										등록&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp; 공연 좌석클래스 등록</strong></em>
 							</h3>
 						</div>
 
@@ -146,94 +147,31 @@
 							<div class="imgCol">
 								<strong>좌석설정</strong>
 							</div>
-							<div class="inpRow">
-								<div>
-									<div class="inpRow cols">
-										<div class="inpRow">
-											<div class="colGrp">
-												<div class="colCell w_280">
-													<span class="yesIpt b_size ipt_wSizeF hallWidth"> <input
-														id="seatClass1" name="seatClass" type="text"
-														class="seatClass inpwid" placeholder="좌석등급 입력">석
-													</span>
-												</div>
-												<div class="colCell w_280">
-													<span class="yesIpt b_size ipt_wSizeF hallWidth"> <input
-														id="seatPrice1" name="seatPrice" type="number"
-														class="inpwid" placeholder="좌석금액 입력">원
-													</span>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="inpRow">
-								<div>
-									<div class="inpRow cols">
-										<div class="inpRow">
-											<div class="colGrp">
-												<div class="colCell w_280">
-													<span class="yesIpt b_size ipt_wSizeF hallWidth"> <input
-														id="seatClass2" name="seatClass" type="text"
-														class="seatClass inpwid" placeholder="좌석등급 입력">석
-													</span>
-												</div>
-												<div class="colCell w_280">
-													<span class="yesIpt b_size ipt_wSizeF hallWidth"> <input
-														id="seatPrice2" name="seatPrice" type="number"
-														class="inpwid" placeholder="좌석금액 입력">원
-													</span>
+							<c:forEach items="${SeatClassVO}" var="seatClass">
+								<div class="inpRow">
+									<div>
+										<div class="inpRow cols">
+											<div class="inpRow">
+												<div class="colGrp">
+													<div class="colCell w_280">
+														<span class="yesIpt b_size ipt_wSizeF hallWidth"> <input
+															id="seatClass4" name="seatClass" type="text"
+															class="seatClass inpwid" value="${seatClass.seatClass}">석
+															
+														</span>
+													</div>
+													<div class="colCell w_280">
+														<span class="yesIpt b_size ipt_wSizeF hallWidth"> <input
+															id="seatPrice4" name="seatPrice" type="number"
+															class="seatClass inpwid" value="${seatClass.seatPrice}">원
+														</span>
+													</div>
 												</div>
 											</div>
 										</div>
 									</div>
 								</div>
-							</div>
-							<div class="inpRow">
-								<div>
-									<div class="inpRow cols">
-										<div class="inpRow">
-											<div class="colGrp">
-												<div class="colCell w_280">
-													<span class="yesIpt b_size ipt_wSizeF hallWidth"> <input
-														id="seatClass3" name="seatClass" type="text"
-														class="seatClass inpwid" placeholder="좌석등급 입력">석
-													</span>
-												</div>
-												<div class="colCell w_280">
-													<span class="yesIpt b_size ipt_wSizeF hallWidth"> <input
-														id="seatPrice3" name="seatPrice" type="number"
-														class="inpwid" placeholder="좌석금액 입력">원
-													</span>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="inpRow">
-								<div>
-									<div class="inpRow cols">
-										<div class="inpRow">
-											<div class="colGrp">
-												<div class="colCell w_280">
-													<span class="yesIpt b_size ipt_wSizeF hallWidth"> <input
-														id="seatClass4" name="seatClass" type="text"
-														class="seatClass inpwid" placeholder="좌석등급 입력">석
-													</span>
-												</div>
-												<div class="colCell w_280">
-													<span class="yesIpt b_size ipt_wSizeF hallWidth"> <input
-														id="seatPrice4" name="seatPrice" type="number"
-														class="seatClass inpwid" placeholder="좌석금액 입력">원
-													</span>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
+							</c:forEach>
 						</div>
 						<div class="admRow" id="dragForm">
 							<div class="imgCol" id="imgCol2">

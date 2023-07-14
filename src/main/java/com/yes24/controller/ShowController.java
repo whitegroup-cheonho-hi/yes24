@@ -96,6 +96,26 @@ public class ShowController {
 
 		return "admin/showSeatClassInsertForm";
 	}
+	
+	// ------------------- 공연 좌석 클래스수정폼
+		@RequestMapping(value = "/showSeatClassModifyForm/{no}", method = RequestMethod.GET)
+		public String showSeatClassModifyForm(Model model, @PathVariable("no") int no) {
+			System.out.println("showSeatClassModifyForm()");
+
+			Map<String, Object> map = showService.getShow(no);
+			
+			System.out.println(map.get("showVO"));
+			System.out.println(map.get("concertHallVO"));
+			System.out.println(map.get("concertHallList"));
+			System.out.println(map.get("seatClassList"));
+			
+			model.addAttribute("show", map.get("showVO"));
+			model.addAttribute("concertHall", map.get("concertHallVO"));			
+			model.addAttribute("seatClassList", map.get("seatClassList"));
+				
+			
+			return "admin/showSeatClassModifyForm";
+		}
 
 	// ------------------- 공연 상세
 	@RequestMapping(value = "/detail/{no}", method = RequestMethod.GET)

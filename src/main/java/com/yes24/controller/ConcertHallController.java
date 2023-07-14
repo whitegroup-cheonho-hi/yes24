@@ -54,9 +54,14 @@ public class ConcertHallController {
 	@RequestMapping(value = "/concertHallModify", method = RequestMethod.POST)
 	public String concertHallModify(@ModelAttribute ConcertHallVO vo) {
 		System.out.println("concertHallModify()");
-			
+		
+		String Uri = "redirect:/";
 		int result = concertHallService.updateConcertHall(vo);
 		
-		return "";
+		if(result > 0) {
+			Uri = "redirect:/show/showSeatClassModifyForm/"+result;
+		}
+			System.out.println(result);			
+		return Uri;
 	}
 }

@@ -14,7 +14,7 @@
 	type="text/css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath }/assets/css/admin.css"
-	type="text/css">
+	type="text/css">	
 <link rel="stylesheet" type="text/css"
 	href="https://image.yes24.com/sysimage/yesUI/yesUI.css?v=20230403"
 	media="all">
@@ -57,6 +57,9 @@
 	align-items: center;
 	display: none;
 }
+.tm_grp {height: 72px; margin-bottom: 25px;}
+.tm_grp .tmM_txt{ display: inline-block;}
+
 </style>
 </head>
 <body>
@@ -75,7 +78,7 @@
 						<div class="tm_grp">
 							<h3 class="tmM_txt">
 								<em class="tit_txt"><strong id="adminTit">공연 등록</strong></em>
-							</h3>
+							</h3>												
 						</div>
 
 						<!-- ==================== 이미지 입력 영역 시작 ==================== -->

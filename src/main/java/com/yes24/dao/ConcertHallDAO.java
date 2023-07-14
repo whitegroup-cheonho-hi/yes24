@@ -19,7 +19,7 @@ public class ConcertHallDAO {
 	// -------------------- 공연장 등록
 	public int insertConcertHall(ConcertHallVO vo) {
 		System.out.println("insertConcertHall DAO");
-		
+
 		return sqlSession.insert("concerthall.insertConcertHall", vo);
 
 	}
@@ -27,7 +27,7 @@ public class ConcertHallDAO {
 	// -------------------- 공연장 좌석 등록
 	public int insertConcertHallSeat(Map<String, Object> seat) {
 		System.out.println("insertConcertHallSeat DAO");
-		
+
 		return sqlSession.insert("concerthall.insertConcertHallSeat", seat);
 	}
 
@@ -55,7 +55,7 @@ public class ConcertHallDAO {
 	// -------------------- 공연좌석 리스트가지고오기
 	public List<SeatVO> getConcertHallSeatList(int no) {
 		System.out.println("getConcertHallList DAO()");
-		
+
 		return sqlSession.selectList("concerthall.getConcertHallSeatList", no);
 	}
 
@@ -71,6 +71,13 @@ public class ConcertHallDAO {
 		System.out.println("deleteConcertHallSeat DAO()");
 
 		return sqlSession.delete("concerthall.deleteConcertHallSeat", no);
+	}
+
+	// -------------------- 공연좌석삭제
+	public int deleteShowSeat(int no) {
+		System.out.println("deleteShowSeat DAO()");
+
+		return sqlSession.delete("concerthall.deleteShowSeat", no);
 	}
 
 }

@@ -50,9 +50,13 @@
 #category {
 	width: 890px;
 }
-.admRow .admSpan .container{ border-top: solid 1px rgb(0, 0, 0); 
-border-left: solid 1px rgb(0, 0, 0);
-align-items: center; display: none; }
+
+.admRow .admSpan .container {
+	border-top: solid 1px rgb(0, 0, 0);
+	border-left: solid 1px rgb(0, 0, 0);
+	align-items: center;
+	display: none;
+}
 </style>
 </head>
 <body>
@@ -249,12 +253,12 @@ align-items: center; display: none; }
 								</div>
 							</div>
 						</div>
-						
+
 						<!-- ==================== 공연금액 입력 영역 시작 ==================== -->
 						<div class="concertHall">
 							<div class="imgCol">
 								<strong>좌석설정</strong>
-							</div>							
+							</div>
 							<div class="inpRow">
 								<div>
 									<div class="inpRow cols">
@@ -387,6 +391,7 @@ align-items: center; display: none; }
 								</a>
 							</div>
 						</div>
+					</div>
 				</form>
 				<div id="wrapperContent"></div>
 			</div>

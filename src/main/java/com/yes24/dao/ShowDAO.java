@@ -54,13 +54,22 @@ public class ShowDAO {
 		return sqlSession.insert("show.updateSeatClass", seatClass);
 	}
 
-	// ------------------ 공연정보가져오기
+	// ------------------ 공연정보 가져오기
 	public ShowVO getShow(int no) {
 		System.out.println("getShow DAO()");
 
 		return sqlSession.selectOne("show.getShow", no);
 
 	}
+	
+	// ------------------ 공연장 시퀀스로 공연 시퀀스 가지고오기
+	public ShowVO getShowSq(int no) {
+		System.out.println("getShowSq DAO()");
+
+		return sqlSession.selectOne("show.getShowSq", no);
+
+	}	
+	
 
 	// ------------------ 공연리스트가져오기
 	public List<ShowVO> getShowList(int no) {
