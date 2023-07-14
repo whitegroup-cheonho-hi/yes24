@@ -9,7 +9,7 @@ header.pc #lnb .lnb li a{font-size: 12px;}
 header.pc #lnb p{font-size: 18; display: block; color: #fff;}
 
 header.pc #header{height: 75px; width: 90%; margin: 0 auto; display: flex; align-items: center; justify-content:space-between;}
-header.pc #header h1{width: 145px; height: 54px; background: url('../images/logo.png') 0 0/contain no-repeat;}
+/* header.pc #header h1{width: 145px; height: 54px; background: url('../images/logo.png') 0 0/contain no-repeat;} */
 header.pc #header h1 a{font-size: 0; display: block; height: 100%;}
 header.pc #header #navigation{display: flex; align-items: center;}
 header.pc #header #navigation li{margin-left: 80px;}
@@ -105,7 +105,8 @@ strong {font-size: 15px; color: #333;}
 h2 { direction: ltr; text-align: left; font-size: 1.75em; margin: 0px; }
 .fc-cell-shaded a, .fc-scrollgrid-section-body a { text-decoration: none; color: inherit; }
 #navigation a { text-decoration: none; color: inherit; }
-.position a { text-decoration: none; color: inherit; }
+
+
 .fc-list-table{width: 550px;}
 .showingInput{border-color: lightgray; border-radius: 4px; height: 40px;}
 .calendar { width: 550px; }
@@ -114,6 +115,10 @@ h2 { direction: ltr; text-align: left; font-size: 1.75em; margin: 0px; }
 div, table { border-radius: 5px; }
 .modal-body{font-size: 14px;}
 .tbshowing .showingInput{text-align: left; margin-top: 10px}
+.concertHall .position {
+  font-size: 14px;
+  font-family: 'Noto Sans KR', 'NanumBarunGothic', '맑은 고딕', 'Malgun Gothic', sans-serif;
+}
 /* 일요일 날짜 빨간색 */
 .fc-day-sun a { color: red; text-decoration: none; }
 /* 토요일 날짜 파란색 */

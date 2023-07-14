@@ -41,7 +41,7 @@
                </h3>
             </div>
 
-            <!-- ==================== 이미지 입력 영역 시작 ==================== -->
+            <!-- ==================== 캘린더 영역 시작 ==================== -->
             <dl class="concertHall">
                <div class="inpRow">
                   <dl class="concertHall">
@@ -77,7 +77,7 @@
                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                </button>
-               <h4 class="modal-title" id="myModalLabel">회차추가 모달</h4>
+               <h4 class="modal-title" id="myModalLabel" style="font-weight: bold;">회차추가 모달</h4>
             </div>
             <div class="modal-body">
                <table class="fc-list-table">

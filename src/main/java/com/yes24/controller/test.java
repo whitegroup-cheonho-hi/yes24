@@ -103,5 +103,11 @@ public class test {
 	
 		return "show/showDetail";
 	}
+	
+	// 회차등록 폼
+		@RequestMapping(value = "/showingInsertForm/{no}", method = RequestMethod.GET)
+		public String showingInsertForm(@PathVariable("no") int no, Model model) {
+			return "admin/showingInsertForm";
+		}
 
 }
