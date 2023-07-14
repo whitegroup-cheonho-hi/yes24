@@ -15,6 +15,8 @@ import com.yes24.vo.ShowVO;
 @Controller
 public class MainController {
 	
+	/* 테스트 */
+	
 	@Autowired
 	private ShowService showService;
 	@Autowired
