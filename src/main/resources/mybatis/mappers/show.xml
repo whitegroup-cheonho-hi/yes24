@@ -107,7 +107,7 @@
 	</insert>
 	
 	<!-- 공연좌석 등록 -->
-	<insert id="insertShowSeat" parameterType="ShowSeatVO">
+	<insert id="insertShowSeat" parameterType="SeatClassListVO">
 	
 		<![CDATA[
 		
@@ -128,7 +128,7 @@
 	
 	
 	<!-- 공연수정 -->
-	<update id="updateSeatClass" parameterType="map">
+	<update id="updateSeatClass" parameterType="SeatClassVO">
 	
 		<![CDATA[
 		
@@ -228,7 +228,7 @@
 				    seat_class_sq   AS SEATCLASSSQ,
 				    seat_class      AS SEATCLASS,
 				    seat_price      AS SEATPRICE,
-				    show_sq         AS SEATSQ
+				    show_sq         AS SHOWSQ
 				FROM
 				    seat_class
 				WHERE
@@ -239,6 +239,17 @@
 	</select>
 	
 
+	<!-- 공연좌석삭제 -->
+	<delete id="deleteShowSeat" parameterType="int">
+	
+		<![CDATA[
+		
+			DELETE show_seat WHERE SEAT_CLASS_SQ =  #{seatClassSq}
+				    
+		]]>
+		
+	</delete>
+	
 </mapper>
 
 

@@ -30,7 +30,7 @@ public class ShowDAO {
 	// ------------------ 공연수정
 	public int updateShow(ShowVO vo) {
 		System.out.println("updateShow DAO()");
-		
+
 		return sqlSession.update("show.updateShow", vo);
 	}
 
@@ -40,18 +40,19 @@ public class ShowDAO {
 
 		return sqlSession.insert("show.insertSeatClass", vo);
 	}
-	
-	// ------------------ 공연좌석 등록
-		public int insertShowSeat(ShowSeatVO vo) {
-			System.out.println("insertShowSeat DAO()");
 
-			return sqlSession.insert("show.insertShowSeat", vo);
-		}
+	// ------------------ 공연좌석 등록
+	public int insertShowSeat(ShowSeatVO vo) {
+		System.out.println("insertShowSeat DAO()");
+
+		return sqlSession.insert("show.insertShowSeat", vo);
+	}
+
 	// ------------------ 공연좌석등급 수정
-	public int updateSeatClass(Map<String, Object> seatClass) {
+	public int updateSeatClass(SeatClassListVO vo) {
 		System.out.println("updateSeatClass DAO()");
 
-		return sqlSession.insert("show.updateSeatClass", seatClass);
+		return sqlSession.update("show.updateSeatClass", vo);
 	}
 
 	// ------------------ 공연정보 가져오기
@@ -61,15 +62,14 @@ public class ShowDAO {
 		return sqlSession.selectOne("show.getShow", no);
 
 	}
-	
+
 	// ------------------ 공연장 시퀀스로 공연 시퀀스 가지고오기
 	public ShowVO getShowSq(int no) {
 		System.out.println("getShowSq DAO()");
 
 		return sqlSession.selectOne("show.getShowSq", no);
 
-	}	
-	
+	}
 
 	// ------------------ 공연리스트가져오기
 	public List<ShowVO> getShowList(int no) {
@@ -85,5 +85,12 @@ public class ShowDAO {
 
 		return sqlSession.selectList("show.getSeatClassList", no);
 
+	}
+
+	// -------------------- 공연좌석삭제
+	public int deleteShowSeat(int no) {
+		System.out.println("deleteShowSeat DAO()");
+
+		return sqlSession.delete("show.deleteShowSeat", no);
 	}
 }

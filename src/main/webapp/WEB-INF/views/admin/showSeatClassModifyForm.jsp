@@ -138,7 +138,7 @@
 						<div class="tm_grp">
 							<h3 class="tmM_txt">
 								<em class="tit_txt"><strong id="adminTit">공연
-										등록&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp; 공연 좌석클래스 등록</strong></em>
+										수정&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp; 공연 좌석클래스 수정</strong></em>
 							</h3>
 						</div>
 
@@ -147,22 +147,23 @@
 							<div class="imgCol">
 								<strong>좌석설정</strong>
 							</div>
-							<c:forEach items="${SeatClassVO}" var="seatClass">
+							<c:forEach items="${seatClassList}" var="seatClass" varStatus="status" begin="0">
 								<div class="inpRow">
 									<div>
 										<div class="inpRow cols">
 											<div class="inpRow">
 												<div class="colGrp">
 													<div class="colCell w_280">
-														<span class="yesIpt b_size ipt_wSizeF hallWidth"> <input
-															id="seatClass4" name="seatClass" type="text"
-															class="seatClass inpwid" value="${seatClass.seatClass}">석
-															
+														<span class="yesIpt b_size ipt_wSizeF hallWidth">
+														    <input id="seatClass${status.index + 1}" name="seatClass" type="text"
+														        class="seatClass inpwid" value="${seatClass.seatClass}">석
+													         <input id="seatClassSq${status.index + 1}" name="seatClassSq" 
+													         type="hidden" value="${seatClass.seatClassSq}">
 														</span>
 													</div>
 													<div class="colCell w_280">
 														<span class="yesIpt b_size ipt_wSizeF hallWidth"> <input
-															id="seatPrice4" name="seatPrice" type="number"
+															id="seatPrice${status.index + 1}"  name="seatPrice" type="number"
 															class="seatClass inpwid" value="${seatClass.seatPrice}">원
 														</span>
 													</div>
@@ -186,7 +187,7 @@
 							<div class="formBtn_btn">
 								<a id="insertButton" href="#none"
 									class="btnC xb_size btn_blue btn_wSizeH "> <span
-									class="bWrap"><em id="emtxt" class="txt">등록</em></span>
+									class="bWrap"><em id="emtxt" class="txt">삭제</em></span>
 								</a> <a id="cencleConcertHall" href=""
 									class="btnC xb_size btn_blue btn_wSizeH "> <span
 									class="bWrap"><em id="emtxt" class="txt">취소</em></span>
@@ -202,10 +203,9 @@
 </body>
 
 <script>
-	$(document).ready(function() {
-
+	$(document).ready(function() {		
+		
 		var showSq = "${show.showSq}";
-		console.log(showSq);
 		var concertHallSq = "${concertHall.concertHallSq}";
 		var values = []; // 값을 저장할 배열
 		var seatClassArry1 = []; // 좌석1번배열
@@ -214,21 +214,21 @@
 		var seatClassArry4 = []; // 좌석4번배열
 		var color = ['color1','color2','color3','color4']; // 색 클래스 부여	
 		
-		//좌석정보등록
-		$("#seatClass4").on("change",function(){
-			var seatClass1 = $("#seatClass1").val();
-			var seatClass2 = $("#seatClass2").val();
-			var seatClass3 = $("#seatClass3").val();
-			var seatClass4 = $("#seatClass4").val();
-			
-			var seatClass = [seatClass1,seatClass2,seatClass3,seatClass4]; 
+					
+	// 좌석정보수정	
+		var seatClass1 = $("#seatClass1").val();
+		var seatClass2 = $("#seatClass2").val();
+		var seatClass3 = $("#seatClass3").val();
+		var seatClass4 = $("#seatClass4").val();
 		
-			var isAllDifferent = seatClass.every(function(value, index, array) {
-				  return array.indexOf(value) === index; // 배열의 모든 요소가 중복되지 않는지 확인하는 함수
-				});
+		var seatClass = [seatClass1,seatClass2,seatClass3,seatClass4]; 
+	
+		var isAllDifferent = seatClass.every(function(value, index, array) {
+			  return array.indexOf(value) === index; // 배열의 모든 요소가 중복되지 않는지 확인하는 함수
+			});
 
-				if (isAllDifferent) { // 모든 값이 중복되지 않는 경우
-				
+			if (isAllDifferent) { // 모든 값이 중복되지 않는 경우
+							
 					//입력받은 좌석 클래스 반복문으로 버튼만들기
 					for(var i = 0; i<seatClass.length; i++){
 					
@@ -236,75 +236,91 @@
 					$("#seatClass").append(item);
 				
 					}
-					//첫번째 버튼 클릭시
-					$("#" + seatClass1).on("click", function() {
-					  // values를 사용하여 seatClass1의 업데이트된 class를 적용	
-					  updateSeatClass(values, "color1 seat1");
+					
+			
+				//첫번째 버튼 클릭시
+				$("#" + seatClass1).on("click", function() {
+				  // values를 사용하여 seatClass1의 업데이트된 class를 적용	
+				  updateSeatClass(values, "color1 seat1");
+								
+				  // seatClassArry2,3,4에서 values에 해당하는 텍스트를 포함하지 않는 요소들로 필터링
+				  seatClassArry2 = seatClassArry2.filter(element => !values.includes($("#" + element).text()));
+				  seatClassArry3 = seatClassArry3.filter(element => !values.includes($("#" + element).text()));
+				  seatClassArry4 = seatClassArry4.filter(element => !values.includes($("#" + element).text()));
+				
+				  seatClassArry1 = $(".container span.seat1").map(function() {
+				    return $(this).text();
+				  }).get();					
+				});
+				
+					//두번째 버튼 클릭시
+				$("#" + seatClass2).on("click", function() {
+				  updateSeatClass(values, "color2 seat2");
+				
+				  seatClassArry1 = seatClassArry1.filter(element => !values.includes($("#" + element).text()));
+				  seatClassArry3 = seatClassArry3.filter(element => !values.includes($("#" + element).text()));
+				  seatClassArry4 = seatClassArry4.filter(element => !values.includes($("#" + element).text()));
+				
+				  seatClassArry2 = $(".container span.seat2").map(function() {
+				    return $(this).text();
+				  }).get();					
+				});
+													
+				//세번째 버튼 클릭시
+				$("#" + seatClass3).on("click", function() {
+				  updateSeatClass(values, "color3 seat3");
 									
-					  // seatClassArry2,3,4에서 values에 해당하는 텍스트를 포함하지 않는 요소들로 필터링
-					  seatClassArry2 = seatClassArry2.filter(element => !values.includes($("#" + element).text()));
-					  seatClassArry3 = seatClassArry3.filter(element => !values.includes($("#" + element).text()));
-					  seatClassArry4 = seatClassArry4.filter(element => !values.includes($("#" + element).text()));
-					
-					  seatClassArry1 = $(".container span.seat1").map(function() {
-					    return $(this).text();
-					  }).get();					
-					});
-					
-						//두번째 버튼 클릭시
-					$("#" + seatClass2).on("click", function() {
-					  updateSeatClass(values, "color2 seat2");
-					
-					  seatClassArry1 = seatClassArry1.filter(element => !values.includes($("#" + element).text()));
-					  seatClassArry3 = seatClassArry3.filter(element => !values.includes($("#" + element).text()));
-					  seatClassArry4 = seatClassArry4.filter(element => !values.includes($("#" + element).text()));
-					
-					  seatClassArry2 = $(".container span.seat2").map(function() {
-					    return $(this).text();
-					  }).get();					
-					});
-														
-					//세번째 버튼 클릭시
-					$("#" + seatClass3).on("click", function() {
-					  updateSeatClass(values, "color3 seat3");
-										
-					  seatClassArry1 = seatClassArry1.filter(element => !values.includes($("#" + element).text()));
-					  seatClassArry2 = seatClassArry2.filter(element => !values.includes($("#" + element).text()));
-					  seatClassArry4 = seatClassArry4.filter(element => !values.includes($("#" + element).text()));
-					
-					  seatClassArry3 = $(".container span.seat3").map(function() {
-					    return $(this).text();
-					  }).get();
-					});
-					
-					//네번째 버튼 클릭시
-					$("#" + seatClass4).on("click", function() {
-					  updateSeatClass(values, "color4 seat4");
-										  
-					  seatClassArry1 = seatClassArry1.filter(element => !values.includes($("#" + element).text()));
-					  seatClassArry2 = seatClassArry2.filter(element => !values.includes($("#" + element).text()));
-					  seatClassArry3 = seatClassArry3.filter(element => !values.includes($("#" + element).text()));
-					
-					  seatClassArry4 = $(".container span.seat4").map(function() {
-					    return $(this).text();
-					  }).get();					
-					});
+				  seatClassArry1 = seatClassArry1.filter(element => !values.includes($("#" + element).text()));
+				  seatClassArry2 = seatClassArry2.filter(element => !values.includes($("#" + element).text()));
+				  seatClassArry4 = seatClassArry4.filter(element => !values.includes($("#" + element).text()));
+				
+				  seatClassArry3 = $(".container span.seat3").map(function() {
+				    return $(this).text();
+				  }).get();
+				});
+				
+				//네번째 버튼 클릭시
+				$("#" + seatClass4).on("click", function() {
+				  updateSeatClass(values, "color4 seat4");
+									  
+				  seatClassArry1 = seatClassArry1.filter(element => !values.includes($("#" + element).text()));
+				  seatClassArry2 = seatClassArry2.filter(element => !values.includes($("#" + element).text()));
+				  seatClassArry3 = seatClassArry3.filter(element => !values.includes($("#" + element).text()));
+				
+				  seatClassArry4 = $(".container span.seat4").map(function() {
+				    return $(this).text();
+				  }).get();					
+				});
 
-					// 좌석 클래스 업데이트 함수
-					function updateSeatClass(seatClassArry, classs) {
-					  for (let i = 0; i < seatClassArry.length; i++) {
-					    var id = seatClassArry[i];
-					    $("#" + id).removeClass("dropped").addClass(classs);
-					  }
-					}						
+				// 좌석 클래스 업데이트 함수
+				function updateSeatClass(seatClassArry, classs) {
+				  for (let i = 0; i < seatClassArry.length; i++) {
+				    var id = seatClassArry[i];
+				    $("#" + id).removeClass("dropped").addClass(classs);
+				  }
+				}						
+			
+			} else { // 중복된 값이 존재하는 경우
 				
-				} else { // 중복된 값이 존재하는 경우
-					
-				  alert("중복된 값이 존재합니다.");
-				
-				}				
-		});	
+			  alert("중복된 값이 존재합니다.");
+			
+			}				
 		
+		// 버튼 아이디
+		const class1 = $("#seatClass > :nth-child(1)").text();
+		const class2 = $("#seatClass > :nth-child(2)").text();
+		const class3 = $("#seatClass > :nth-child(3)").text();
+		const class4 = $("#seatClass > :nth-child(4)").text();
+		const seatClasses = [class1, class2, class3, class4];
+					
+		// 좌석정보 수정됐을 때
+		for (let i = 0; i < seatClasses.length; i++) {
+		    $("#seatClass"+[i+1]).on("change", function() {
+		        let seatClass = $(this).val();
+		        $("#"+seatClasses[i]).text(seatClass);
+		    });
+		}
+					
 	
 		//좌석배치 미리보기
 		var num1 = 65 + Number('${concertHall.concertHallWidth}');		
@@ -331,23 +347,27 @@
 			var seatClassList = [
 				//1번째 클래스정보
 			    { seatPrice: $("#seatPrice1").val(), seatClass: $("#seatClass1").val(),
-			      seatClassList: seatClassArry1, showSq: showSq, concertHallSq: concertHallSq },
+			      seatClassList: seatClassArry1, showSq: showSq, concertHallSq: concertHallSq,
+			      seatClassSq : $("#seatClassSq1").val() },
 				//2번째 클래스정보
 			    { seatPrice: $("#seatPrice2").val(), seatClass: $("#seatClass2").val(),
-			      seatClassList: seatClassArry2, showSq: showSq, concertHallSq: concertHallSq },
+			      seatClassList: seatClassArry2, showSq: showSq, concertHallSq: concertHallSq,
+			      seatClassSq : $("#seatClassSq2").val() },
 				//3번째 클래스정보
 			    { seatPrice: $("#seatPrice3").val(), seatClass: $("#seatClass3").val(),
-			      seatClassList: seatClassArry3, showSq: showSq, concertHallSq: concertHallSq },
+			      seatClassList: seatClassArry3, showSq: showSq, concertHallSq: concertHallSq,
+			      seatClassSq : $("#seatClassSq3").val() },
 				//4번째 클래스정보
 			    { seatPrice: $("#seatPrice4").val(), seatClass: $("#seatClass4").val(),
-			      seatClassList: seatClassArry4, showSq: showSq, concertHallSq: concertHallSq }   
+			      seatClassList: seatClassArry4, showSq: showSq, concertHallSq: concertHallSq,
+			      seatClassSq : $("#seatClassSq4").val() }   
 			  ];
 			
 				console.log(seatClassList);
 			 // 공연클래스 좌석 등록 ajax						
 			  $.ajax({
 				
-				url : "${pageContext.request.contextPath}/show/insertSeatClass",		
+				url : "${pageContext.request.contextPath}/show/updateSeatClass",		
 				type : "post",
 				contentType : "application/json",
 				data : JSON.stringify(seatClassList),

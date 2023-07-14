@@ -21,9 +21,8 @@ import com.yes24.service.ShowService;
 import com.yes24.vo.ConcertHallVO;
 import com.yes24.vo.JsonResult;
 import com.yes24.vo.SeatClassListVO;
+import com.yes24.vo.SeatClassVO;
 import com.yes24.vo.ShowVO;
-
-import oracle.net.aso.l;
 
 @Controller
 @RequestMapping("/show")
@@ -103,17 +102,12 @@ public class ShowController {
 			System.out.println("showSeatClassModifyForm()");
 
 			Map<String, Object> map = showService.getShow(no);
-			
-			System.out.println(map.get("showVO"));
-			System.out.println(map.get("concertHallVO"));
-			System.out.println(map.get("concertHallList"));
-			System.out.println(map.get("seatClassList"));
-			
+						
 			model.addAttribute("show", map.get("showVO"));
 			model.addAttribute("concertHall", map.get("concertHallVO"));			
 			model.addAttribute("seatClassList", map.get("seatClassList"));
-				
-			
+		
+			System.out.println(map.get("seatClassList"));
 			return "admin/showSeatClassModifyForm";
 		}
 
@@ -141,6 +135,22 @@ public class ShowController {
 		JsonResult jsonResult = new JsonResult();
 		
 		jsonResult.success(result);
+		
+		return jsonResult;
+
+	}
+	
+	// ------------------- 공연 좌석클래스 수정
+	@ResponseBody
+	@RequestMapping(value = "/updateSeatClass", method = RequestMethod.POST)
+	public JsonResult updateSeatClass(@RequestBody List<SeatClassListVO> list) {
+		System.out.println("updateSeatClass()");		
+
+		int result = showService.updateSeatClass(list);
+
+		JsonResult jsonResult = new JsonResult();
+		
+		
 		
 		return jsonResult;
 
