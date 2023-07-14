@@ -26,7 +26,7 @@ public class MainController {
 	public String main(Model model) {
 		System.out.println("main()");
 		
-		//나중에 개봉예정작으로 수정해야함
+		//나중에 개봉예정작으로 수정해야함5
 		showList = showService.getShowList(1);
 		
 		model.addAttribute("showList", showList);
