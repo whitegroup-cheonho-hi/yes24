@@ -88,11 +88,13 @@
 											<div class="colCell w_280">
 												<span class="yesIpt b_size ipt_wSizeF hallWidth"> <input
 													id="mainImage" name="file1" type="file">
+													<input id="mainImage" name="mainImage" type="hidden" value="${show.mainImage}">
 												</span>
 											</div>
 											<div class="colCell w_280">
 												<span class="yesIpt b_size ipt_wSizeF hallWidth"> <input
 													id="subImage" name="file2" type="file">
+													<input id="subImage" name="subImage" type="hidden" value="${show.subImage}">
 												</span>
 											</div>
 										</div>
@@ -251,39 +253,6 @@
 							</div>
 						</div>
 						<!-- ==================== 공연금액 입력 영역 시작 ==================== -->
-						<div class="concertHall">
-							<div class="imgCol">
-								<strong>좌석설정</strong>
-							</div>
-							<c:forEach items="${show.seatClass}" var="seatClass" varStatus="status">
-								<div class="inpRow">
-									<div>
-										<div class="inpRow cols">
-											<div class="inpRow">
-												<div class="colGrp">
-													<div class="colCell w_280">
-														<span class="yesIpt b_size ipt_wSizeF hallWidth"> <input
-															id="seatClass" name="seatClass" type="text"
-															class="inpwid" value="${seatClass}">석
-															<input
-															id="seatClassSq" name="seatClassSq" type="hidden"
-															class="inpwid" value="${show.seatClassSq[status.index]}">															
-														</span>
-													</div>
-													<div class="colCell w_280">
-														<span class="yesIpt b_size ipt_wSizeF hallWidth"> <input
-															id="seatPrice1" name="seatPrice" type="number"
-															class="inpwid" value="${show.seatPrice[status.index]}">원
-														</span>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</c:forEach>
-						</div>
-
 						<!-- ==================== 카테고리 정보 영역 시작 ==================== -->
 						<dl class="concertHall">
 							<dt>
@@ -369,28 +338,7 @@
 			console.log("수정");
 			$("#updateShow").submit();
 		});
-
-		$('#editor').summernote({
-			height : 300, // 에디터 높이
-			minHeight : null, // 최소 높이
-			maxHeight : null, // 최대 높이
-			focus : true, // 에디터 로딩후 포커스를 맞출지 여부
-			lang : "ko-KR", // 한글 설정
-			placeholder : "입력해라"
-		});
-
-		// 서머노트에 text 쓰기
-		$('#summernote').summernote('insertText', '써머노트에 쓸 텍스트');
-		// 서머노트 쓰기 비활성화
-		$('#summernote').summernote('disable');
-		// 서머노트 쓰기 활성화
-		$('#summernote').summernote('enable');
-		// 서머노트 리셋
-		$('#summernote').summernote('reset');
-		// 마지막으로 한 행동 취소 ( 뒤로가기 )
-		$('#summernote').summernote('undo');
-		// 앞으로가기
-		$('#summernote').summernote('redo');
+	
 	});
 </script>
 </html>

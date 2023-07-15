@@ -45,7 +45,7 @@
 			                #{cast},
 			                #{category},
 			                1,
-			                #{concert_hall_sq}                
+			                #{concertHallSq}                
 			               )
 		
 		]]>

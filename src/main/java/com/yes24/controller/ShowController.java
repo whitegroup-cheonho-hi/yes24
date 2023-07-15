@@ -43,7 +43,6 @@ public class ShowController {
 
 		model.addAttribute("concertHallList", concertHallList);
 
-		System.out.println(concertHallList);
 		return "admin/showInsertForm";
 	}
 
@@ -52,7 +51,7 @@ public class ShowController {
 	public String insertShow(@ModelAttribute ShowVO vo, @RequestParam("file1") MultipartFile file1,
 			@RequestParam("file2") MultipartFile file2) {
 		System.out.println("insertShow()");
-
+		System.out.println(vo);
 		showService.insertShow(vo, file1, file2);
 
 		int showSq = vo.getshowSq();
@@ -78,6 +77,7 @@ public class ShowController {
 	public String updateShow(@ModelAttribute ShowVO vo, @RequestParam("file1") MultipartFile file1,
 			@RequestParam("file2") MultipartFile file2) {
 		System.out.println("updateShow()");
+	
 		int result = showService.updateShow(vo, file1, file2);
 
 		return "";

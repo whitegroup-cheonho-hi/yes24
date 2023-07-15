@@ -41,16 +41,17 @@ public class ShowService {
 	public int insertShow(ShowVO vo, MultipartFile file1, MultipartFile file2) {
 		System.out.println("insertShow Service()");
 
-		int resulet = 0;
+		int result = 0;
 
-		fileCheck(vo, file1, file2);
 		if (!file1.isEmpty() && !file2.isEmpty()) {
 
-			resulet = showDAO.insertShow(vo);
+			fileCheck(vo, file1, file2);
+
+			result = showDAO.insertShow(vo);
 
 		}
 
-		return resulet;
+		return result;
 	}
 
 	// ------------------ 공연좌석클래스 등록
@@ -95,7 +96,7 @@ public class ShowService {
 				seatClassSqList[index++] = seatClassSq[i];
 			}
 		}
-	
+
 		// 좌석의 총 개수만큼 공연좌석으로 등록
 		for (SeatVO seatVO : seatVOList) {
 			// 반복으로 생성한 이유는 힙메모리에 값이 덮어씌워지기 때문!!
@@ -108,23 +109,30 @@ public class ShowService {
 			showDAO.insertShowSeat(showSeatVO);
 		}
 
-		return 0;
+		return index;
 	}
 
-	// ------------------ 공연수정 기존파일을 사용하고 싶을때 예외처리 아니면수정할때 파일을 디폴트로 넣어보자
+	// ------------------ 공연수정
 	public int updateShow(ShowVO vo, MultipartFile file1, MultipartFile file2) {
 		System.out.println("updateShow Service()");
 
-		int resulet = 0;
-
-		fileCheck(vo, file1, file2);
+		// 파일두개가 수정될때
 		if (!file1.isEmpty() && !file2.isEmpty()) {
 
-			resulet = showDAO.updateShow(vo);
+			fileCheck(vo, file1, file2);
 
+			// 메인이미지만 수정될때
+		} else if (!file1.isEmpty()) {
+
+			fileCheck(vo, file1, 1);
+
+			// 서브이미지만 수정될떄
+		} else if (!file2.isEmpty()) {
+
+			fileCheck(vo, file2, 2);
 		}
 
-		return resulet;
+		return showDAO.updateShow(vo);
 	}
 
 	// ------------------ 공연좌석클래스 수정
@@ -172,7 +180,7 @@ public class ShowService {
 			}
 		}
 
-		// 좌석의 총 개수만큼 공연좌석으로 등록		
+		// 좌석의 총 개수만큼 공연좌석으로 등록
 		for (SeatVO seatVO : seatVOList) {
 			// 반복으로 생성한 이유는 힙메모리에 값이 덮어씌워지기 때문!!
 			ShowSeatVO showSeatVO = new ShowSeatVO();
@@ -184,7 +192,7 @@ public class ShowService {
 			showDAO.insertShowSeat(showSeatVO);
 		}
 
-		return 0;
+		return index;
 	}
 
 	// ------------------ 공연정보가져오기 필요없는 값 보내지 않기 위해 파라미터를 추가 수정예정
@@ -255,11 +263,46 @@ public class ShowService {
 			try {
 				file1.transferTo(new File(filePath));
 				file2.transferTo(new File(filePath2));
-				// 파일이름 상품번호 map으로 만들어 보내기
 
 				vo.setMainImage(saveName);
 				vo.setSubImage(saveName2);
 
+			} catch (IOException e) {
+				// 파일 처리 중 예외가 발생한 경우 예외 처리 로직을 추가합니다.
+				System.out.println("Error occurred while uploading file.");
+				e.printStackTrace();
+			}
+		} else {
+			// 업로드된 파일이 없는 경우에 대한 처리를 수행합니다.
+			System.out.println("No file uploaded.");
+		}
+	}
+
+	// 파일이 한개일경우 체크 오버로드!! 오버로드를 사용한 이유는 조건문이 늘어서 가독성이 떨어질거같았다.
+	public void fileCheck(ShowVO vo, MultipartFile file, int no) {
+		if (!file.isEmpty()) {
+			// 오리지널 파일
+			String orgName = file.getOriginalFilename();
+
+			// 확장자
+			String exName = orgName.substring(orgName.indexOf("."));
+
+			// 저장 파일 이름
+			String saveName = System.currentTimeMillis() + UUID.randomUUID().toString() + exName;
+
+			// 파일 패스
+			String filePath = saveDir + saveName;
+
+			try {
+				file.transferTo(new File(filePath));
+
+				if (no == 1) {
+					vo.setMainImage(saveName);
+					System.out.println(saveName);
+				} else {
+					vo.setSubImage(saveName);
+					System.out.println(saveName);
+				}
 			} catch (IOException e) {
 				// 파일 처리 중 예외가 발생한 경우 예외 처리 로직을 추가합니다.
 				System.out.println("Error occurred while uploading file.");
