@@ -95,7 +95,9 @@
 			      concert_hall_width         AS concerthallwidth,
 			      concert_hall_height        AS concerthallheight
 			  FROM
-			      concert_hall	
+			      concert_hall
+		  ORDER BY 
+		          concert_hall_sq     	
 		
 		]]>
 

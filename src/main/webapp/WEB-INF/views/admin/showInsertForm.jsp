@@ -26,13 +26,7 @@
 	rel="stylesheet">
 <!-- 제이쿼리 최신버전 -->
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<!-- 에디터 -->
-<script type="text/javascript"
-	src="${pageContext.request.contextPath }/assets/js/summernote-ko-KR.js"></script>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath }/assets/js/summernote-lite.js"></script>
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath }/assets/css/summernote-lite.css">
+
 <style>
 #ySContent {
 	width: 1200px;
@@ -307,35 +301,13 @@
 </body>
 
 <script>
-	$(document).ready(function() 
-
+	$(document).ready(function() {
 		//공연등록
 		$("#insertButton").on("click", function() {
 			console.log("등록");
 			$("#insertShow").submit();
 		});
-
-		$('#editor').summernote({
-			height : 300, // 에디터 높이
-			minHeight : null, // 최소 높이
-			maxHeight : null, // 최대 높이
-			focus : true, // 에디터 로딩후 포커스를 맞출지 여부
-			lang : "ko-KR", // 한글 설정
-			placeholder : "입력해라"
-		});
-
-		// 서머노트에 text 쓰기
-		$('#summernote').summernote('insertText', '써머노트에 쓸 텍스트');
-		// 서머노트 쓰기 비활성화
-		$('#summernote').summernote('disable');
-		// 서머노트 쓰기 활성화
-		$('#summernote').summernote('enable');
-		// 서머노트 리셋
-		$('#summernote').summernote('reset');
-		// 마지막으로 한 행동 취소 ( 뒤로가기 )
-		$('#summernote').summernote('undo');
-		// 앞으로가기
-		$('#summernote').summernote('redo');
+		
 	});
 </script>
 </html>

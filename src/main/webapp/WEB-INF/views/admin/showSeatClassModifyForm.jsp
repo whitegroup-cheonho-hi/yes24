@@ -187,7 +187,7 @@
 							<div class="formBtn_btn">
 								<a id="insertButton" href="#none"
 									class="btnC xb_size btn_blue btn_wSizeH "> <span
-									class="bWrap"><em id="emtxt" class="txt">삭제</em></span>
+									class="bWrap"><em id="emtxt" class="txt">수정</em></span>
 								</a> <a id="cencleConcertHall" href=""
 									class="btnC xb_size btn_blue btn_wSizeH "> <span
 									class="bWrap"><em id="emtxt" class="txt">취소</em></span>

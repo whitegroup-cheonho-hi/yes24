@@ -1,7 +1,6 @@
 package com.yes24.service;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -21,18 +20,22 @@ public class ConcertHallService {
 	private ConcertHallDAO concertHallDAO;
 	@Autowired
 	private ShowDAO showDAO;
+	@Autowired
+	private Map<String, Object> seat;
+	//오토와이어드 달면 스프링 에러남;; 뭐지;;
+	private List<String> seatList = new ArrayList<>();
 
 	// -------------------- 공연장 등록 & 좌석등록
 	public int insertConcertHall(ConcertHallVO vo) {
 		System.out.println("insertConcertHall Service");
 
-		Map<String, Object> seat = new HashMap<>();
+		
 		int height = vo.getConcertHallHeight();
 		int width = vo.getConcertHallWidth();
 
 		int result = concertHallDAO.insertConcertHall(vo);
 
-		List<String> seatList = seat(vo, height, width);
+		seatList = seat(vo, height, width);
 
 		for (int i = 0; i < (height * width); i++) {
 
@@ -62,8 +65,7 @@ public class ConcertHallService {
 	// -------------------- 공연장정보 업데이트
 	public int updateConcertHall(ConcertHallVO vo) {
 		System.out.println("updateConcertHall Service()");
-
-		Map<String, Object> seat = new HashMap<>();
+		
 		int height = vo.getConcertHallHeight();
 		int width = vo.getConcertHallWidth();
 		int result = 0;
@@ -97,7 +99,7 @@ public class ConcertHallService {
 			// 기존 좌석을 삭제
 			concertHallDAO.deleteConcertHallSeat(vo.getConcertHallSq());
 
-			List<String> seatList = seat(vo, height, width);
+			 seatList = seat(vo, height, width);
 
 			for (int i = 0; i < (height * width); i++) {
 
@@ -113,7 +115,7 @@ public class ConcertHallService {
 
 	// 좌석생성 함수
 	public List<String> seat(ConcertHallVO vo, int height, int width) {
-		List<String> seatList = new ArrayList<>();
+		
 		// 아스키코드
 		int A = 65;
 		// 입력받은 열과행값으로 좌석번호 만들기
