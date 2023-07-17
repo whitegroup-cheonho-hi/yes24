@@ -1,6 +1,7 @@
 package com.yes24.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -20,15 +21,12 @@ public class ConcertHallService {
 	private ConcertHallDAO concertHallDAO;
 	@Autowired
 	private ShowDAO showDAO;
-	@Autowired
-	private Map<String, Object> seat;
-	//오토와이어드 달면 스프링 에러남;; 뭐지;;
-	private List<String> seatList = new ArrayList<>();
 
 	// -------------------- 공연장 등록 & 좌석등록
 	public int insertConcertHall(ConcertHallVO vo) {
 		System.out.println("insertConcertHall Service");
-
+		List<String> seatList = new ArrayList<>();
+		Map<String, Object> seat = new HashMap<>();
 		
 		int height = vo.getConcertHallHeight();
 		int width = vo.getConcertHallWidth();
@@ -41,7 +39,7 @@ public class ConcertHallService {
 
 			seat.put("seatNo", seatList.get(i));
 			seat.put("concerthallsq", vo.getConcertHallSq());
-
+						
 			concertHallDAO.insertConcertHallSeat(seat);
 		}
 
@@ -66,6 +64,7 @@ public class ConcertHallService {
 	public int updateConcertHall(ConcertHallVO vo) {
 		System.out.println("updateConcertHall Service()");
 		
+		List<String> seatList = new ArrayList<>();
 		int height = vo.getConcertHallHeight();
 		int width = vo.getConcertHallWidth();
 		int result = 0;
@@ -78,7 +77,7 @@ public class ConcertHallService {
 		if (concertHallVO.getConcertHallHeight() != height || concertHallVO.getConcertHallWidth() != width) {
 
 			List<SeatVO> deleteSeatList = new ArrayList<>();
-
+			Map<String, Object> seat = new HashMap<>();
 			// 공연장 시퀀스로 공연장 좌석 시퀀스가져오기
 			deleteSeatList = concertHallDAO.getConcertHallSeatList(vo.getConcertHallSq());
 			// 삭제된 공연좌석 카운트
@@ -100,7 +99,7 @@ public class ConcertHallService {
 			concertHallDAO.deleteConcertHallSeat(vo.getConcertHallSq());
 
 			 seatList = seat(vo, height, width);
-
+		
 			for (int i = 0; i < (height * width); i++) {
 
 				seat.put("seatNo", seatList.get(i));
@@ -115,16 +114,18 @@ public class ConcertHallService {
 
 	// 좌석생성 함수
 	public List<String> seat(ConcertHallVO vo, int height, int width) {
-		
+		List<String> seatList = new ArrayList<>();
 		// 아스키코드
 		int A = 65;
 		// 입력받은 열과행값으로 좌석번호 만들기
-		for (int i = A; i < (height + A); i++) {
+		for (int i = A; i <= (height + A); i++) {
 			for (int j = 1; j <= width; j++) {
 				String seatNo = (char) i + String.valueOf(j);
 				seatList.add(seatNo);
+			
 			}
 		}
+		
 		return seatList;
 	}
 

@@ -229,12 +229,13 @@ $(document).ready(function() {
 		      for(var i = 0; i < result.data.length; i++){
 		    	  var startTime =result.data[i].showingDate+'T'+result.data[i].startTime;
 		    	  var endTime =result.data[i].showingDate+'T'+result.data[i].endTime;
+		    	  var showingSq =  result.data[i].showingSq;		  
 		    	  dayList.addEvent({
 						// DB연결해서 데이터 불러오는 영역
 						title : [i+1]+'회차',
 						start : startTime,						
 						end : endTime,
-						hiddenValue: result.data[i].showingSq
+						hiddenValue: showingSq
 					});
               }   	  
 		    },
@@ -264,17 +265,32 @@ $(document).ready(function() {
 	
 	// 리스트 초기화
 	dayListEl = $('#dayList')[0];
+	// 리스트 클릭이벤트 
 	dayList = new FullCalendar.Calendar(dayListEl, {
 		initialView : 'listDay',
 		locale : 'ko',
 		timeZone : 'local',
 		initialDate : moment().toDate(),
 		eventClick : function(arg) {
-			
-			console.log(arg.event.title); // 클릭한 이벤트의 타이틀
-			console.log(arg.event.start); // 클릭한 이벤트의 시작 시간
-			console.log(arg.event.end); // 클릭한 이벤트의 종료 시간
-			
+		var showingSq = arg.event.extendedProps.hiddenValue; 
+					
+		var ShowingVO = {showingSq : showingSq};
+		// 회차 정보 가져오기
+		  $.ajax({
+		    url: "${pageContext.request.contextPath}/showing/remainingSeats",
+		    type: "post",
+		    //contentType: "application/json",
+		    data: ShowingVO,
+		    
+		    dataType: "json",
+		    success: function(result) {		          	     
+		               	  
+		    },
+		    error: function(XHR, status, error) {
+		      console.error(status + " : " + error);
+		    }
+		  });
+		
 			
 		}
 	});

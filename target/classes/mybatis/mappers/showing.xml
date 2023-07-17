@@ -205,9 +205,10 @@
 			   FROM
 				   show a,
 				   concert_hall b
-			 WHERE
+			  WHERE
 			       a.concert_hall_sq = b.concert_hall_sq
-				   AND a.concert_hall_sq = #{concerthallsq}
+		        AND 
+		           a.concert_hall_sq = #{concerthallsq}
 		
 		]]>
 

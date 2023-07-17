@@ -1,6 +1,5 @@
 package com.yes24.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -21,7 +20,6 @@ import com.yes24.service.ShowService;
 import com.yes24.vo.ConcertHallVO;
 import com.yes24.vo.JsonResult;
 import com.yes24.vo.SeatClassListVO;
-import com.yes24.vo.SeatClassVO;
 import com.yes24.vo.ShowVO;
 
 @Controller
@@ -32,15 +30,15 @@ public class ShowController {
 	private ShowService showService;
 	@Autowired
 	private ConcertHallService concertHallService;
-	List<ConcertHallVO> concertHallList = new ArrayList<>();
+	
 
 	// ------------------- 공연 등록폼
 	@RequestMapping(value = "/showInsertForm", method = RequestMethod.GET)
 	public String showInsertForm(Model model) {
 		System.out.println("showInsertForm()");
-
-		concertHallList = concertHallService.getConcertHallList();
-
+		
+		List<ConcertHallVO> concertHallList = concertHallService.getConcertHallList();
+	
 		model.addAttribute("concertHallList", concertHallList);
 
 		return "admin/showInsertForm";
@@ -130,6 +128,7 @@ public class ShowController {
 	public JsonResult insertSeatClass(@RequestBody List<SeatClassListVO> list) {
 		System.out.println("insertSeatClass()");
 		
+		System.out.println(list);
 		int result = showService.insertSeatClass(list);
 
 		JsonResult jsonResult = new JsonResult();

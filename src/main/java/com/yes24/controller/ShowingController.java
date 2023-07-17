@@ -36,5 +36,20 @@ public class ShowingController {
 		return jsonResult;
 
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/remainingSeats", method = RequestMethod.POST)
+	public JsonResult getRemainingSeats(@ModelAttribute ShowingVO vo) {
+		System.out.println("getRemainingSeats()");
+		
+		System.out.println(vo);
+
+		JsonResult jsonResult = new JsonResult();
+
+		//jsonResult.success(showingList);
+
+		return jsonResult;
+
+	}
 
 }

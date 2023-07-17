@@ -30,10 +30,6 @@ public class ShowService {
 	private ShowVO showVO;
 	@Autowired
 	private ConcertHallDAO concertHallDAO;
-	@Autowired
-	private List<SeatVO> seatVOList;
-	@Autowired
-	private List<ConcertHallVO> concertHallList;
 
 	String saveDir = "C:/yes24/img/upload/";
 
@@ -58,6 +54,7 @@ public class ShowService {
 	public int insertSeatClass(List<SeatClassListVO> list) {
 		System.out.println("insertSeatClass Service()");
 
+		List<SeatVO> seatVOList = new ArrayList<>();
 		// 공연장 시퀀스 번호로 등록된 좌석을 리스트로 받아온다
 		seatVOList = concertHallDAO.getConcertHallSeatList(list.get(0).getConcertHallSq());
 
@@ -73,7 +70,8 @@ public class ShowService {
 		// 파라미터 list에서 반복문
 		for (SeatClassListVO s : list) {
 			// 좌석 클래스 등록
-			showDAO.insertSeatClass(s);
+			int d = showDAO.insertSeatClass(s);
+			System.out.println(d);
 			// selectKey 값을 배열에 저장
 			seatClassSq[index++] = s.getSeatClassSq();
 			// 좌석리스트의 갯수를 구하는 식
@@ -139,6 +137,7 @@ public class ShowService {
 	public int updateSeatClass(List<SeatClassListVO> list) {
 		System.out.println("updateSeatClass Service()");
 
+		List<SeatVO> seatVOList = new ArrayList<>();
 		// 공연장 시퀀스 번호로 등록된 좌석을 리스트로 받아온다
 		seatVOList = concertHallDAO.getConcertHallSeatList(list.get(0).getConcertHallSq());
 
@@ -202,6 +201,7 @@ public class ShowService {
 		List<Integer> seatClassSqList = new ArrayList<>();
 		List<String> seatClassList = new ArrayList<>();
 		List<Integer> seatPriceSqList = new ArrayList<>();
+		List<ConcertHallVO> concertHallList = new ArrayList<>();
 
 		// 공연장 리스트
 		concertHallList = concertHallDAO.getConcertHallList();

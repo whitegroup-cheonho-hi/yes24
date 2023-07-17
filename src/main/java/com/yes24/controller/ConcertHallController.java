@@ -42,7 +42,8 @@ public class ConcertHallController {
 	@RequestMapping(value = "/concertHallModifyForm/{no}", method = RequestMethod.GET)
 	public String concertHallModifyForm(@PathVariable("no") int no, Model model) {
 		System.out.println("concertHallModifyForm()");
-
+		
+	
 		concertHallVO = concertHallService.getConcertHall(no);
 
 		model.addAttribute("concertHall", concertHallVO);
@@ -53,7 +54,7 @@ public class ConcertHallController {
 	// -------------------- 공연장 수정
 	@RequestMapping(value = "/concertHallModify", method = RequestMethod.POST)
 	public String concertHallModify(@ModelAttribute ConcertHallVO vo) {
-		System.out.println("concertHallModify()");
+		System.out.println("concertHallModify()");	
 		
 		String Uri = "redirect:/";
 		int result = concertHallService.updateConcertHall(vo);
