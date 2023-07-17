@@ -8,13 +8,13 @@
 		
 		<![CDATA[
 		      SELECT 
-			      	showing_sq as showingSq,
-			       	showing_date as showingDate,
-			       	TO_CHAR(w.start_time, 'HH24:MI') AS "startTime",
-			       	TO_CHAR(w.end_time, 'HH24:MI') AS "endTime",
-					show_sq as showSq,
-					show_information as showInformation,
-					showing_stat
+			      	showing_sq         AS showingsq,
+				    TO_CHAR(showing_date, 'YYYY-MM-DD') AS showingdate,
+				    TO_CHAR(start_time, 'HH24:MI') AS starttime,
+				    TO_CHAR(end_time, 'HH24:MI') AS endtime,
+				    show_sq            AS showsq,
+				    show_information   AS showinformation,
+				    showing_stat       AS showingstat
 				FROM 
 					showing
 				where 
