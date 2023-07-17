@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 public class ShowingVO {
 
 	private int showingSq;
+	private String showName;
 	private String showingDate;
 	private String startTime;
 	private String endTime;
@@ -28,11 +29,13 @@ public class ShowingVO {
 		super();
 	}
 
-	public ShowingVO(int showingSq, String showingDate, String startTime, String endTime, String showInformation,
-			String showingStat, int showSq, List<Integer> showingSeatSq, List<String> showingSeatNO,
-			List<Integer> showingSeatStat, List<Integer> seatClassSq, List<String> seatClass, List<Integer> seatPrice) {
+	public ShowingVO(int showingSq, String showName, String showingDate, String startTime, String endTime,
+			String showInformation, String showingStat, int showSq, List<Integer> showingSeatSq,
+			List<String> showingSeatNO, List<Integer> showingSeatStat, List<Integer> seatClassSq,
+			List<String> seatClass, List<Integer> seatPrice) {
 		super();
 		this.showingSq = showingSq;
+		this.showName = showName;
 		this.showingDate = showingDate;
 		this.startTime = startTime;
 		this.endTime = endTime;
@@ -53,6 +56,14 @@ public class ShowingVO {
 
 	public void setShowingSq(int showingSq) {
 		this.showingSq = showingSq;
+	}
+
+	public String getShowName() {
+		return showName;
+	}
+
+	public void setShowName(String showName) {
+		this.showName = showName;
 	}
 
 	public String getShowingDate() {
@@ -153,11 +164,13 @@ public class ShowingVO {
 
 	@Override
 	public String toString() {
-		return "ShowingVO [showingSq=" + showingSq + ", showingDate=" + showingDate + ", startTime=" + startTime
-				+ ", endTime=" + endTime + ", showInformation=" + showInformation + ", showingStat=" + showingStat
-				+ ", showSq=" + showSq + ", showingSeatSq=" + showingSeatSq + ", showingSeatNO=" + showingSeatNO
-				+ ", showingSeatStat=" + showingSeatStat + ", seatClassSq=" + seatClassSq + ", seatClass=" + seatClass
-				+ ", seatPrice=" + seatPrice + "]";
+		return "ShowingVO [showingSq=" + showingSq + ", showName=" + showName + ", showingDate=" + showingDate
+				+ ", startTime=" + startTime + ", endTime=" + endTime + ", showInformation=" + showInformation
+				+ ", showingStat=" + showingStat + ", showSq=" + showSq + ", showingSeatSq=" + showingSeatSq
+				+ ", showingSeatNO=" + showingSeatNO + ", showingSeatStat=" + showingSeatStat + ", seatClassSq="
+				+ seatClassSq + ", seatClass=" + seatClass + ", seatPrice=" + seatPrice + "]";
 	}
+
+	
 
 }

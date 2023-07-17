@@ -209,50 +209,42 @@ $(document).ready(function() {
 	let dayListEl;
 	let dayList;
 	let date;
+	
+	function dayEvent(date) { // 날짜를 클릭하면 데이터 가져오기
+		  console.log(date);
+		  dayList.removeAllEvents();
 
-	function dayEvent(date) { // 날짜누르면 데이터 가지고오기
-		console.log(date);
-		dayList.removeAllEvents();
-		
-		ShowingVO ={showingDate : date, showSq : '${show.showSq}'}
-		console.log(ShowingVO);
-		  // 회차 정보 가지고 오기
-		   $.ajax({
-				
-				url : "${pageContext.request.contextPath}/showing/getShowing",		
-				type : "post",
-				//contentType : "application/json",
-				data : ShowingVO,
-			
-				dataType : "json",
-				success : function(result){		
-										
-					console.log(result);
-					
-				for (let index of result.data) {
-					  const event = {
-					    title: '오페라의 유령 1회',
-					    start: new Date(index.startTime),  // 데이터에서 적절한 값을 가져와야 함
-					    end: new Date(index.endTime)  // 데이터에서 적절한 값을 가져와야 함
-					  };
-					  dayList.addEvent(event);
-				}
-				dayList.addEvent({
-					// DB연결해서 데이터 불러오는 영역
-					title : '오페라의 유령 1회',
-					start : '2023-07-12T11:30:00',
-					end : '2023-07-12T14:00:00'
-				});
-					
-				},
-				error : function(XHR, status, error) {
-					console.error(status + " : " + error);
-				}
-			});  
-						
+		  const ShowingVO = { showingDate: date, showSq: '${show.showSq}' }; // ShowingVO 객체를 생성하고 데이터 할당
+		  console.log(ShowingVO);
 
-		
-	}
+		  // 회차 정보 가져오기
+		  $.ajax({
+		    url: "${pageContext.request.contextPath}/showing/getShowing",
+		    type: "post",
+		    //contentType: "application/json",
+		    data: ShowingVO,
+		    dataType: "json",
+		    success: function(result) {
+		      console.log(result.data);
+		     
+		      for(var i = 0; i < result.data.length; i++){
+              		    	  
+		    	calendar.addEvent({
+ 
+              	
+		    		
+		    	});//addEvent end
+
+              }
+		    	  
+		    	  
+		      
+		    },
+		    error: function(XHR, status, error) {
+		      console.error(status + " : " + error);
+		    }
+		  });
+		}
 
 	// 달력 초기화
 	var calendarEl = $('#calendar')[0];
