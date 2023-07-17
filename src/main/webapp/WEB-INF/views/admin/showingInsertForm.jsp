@@ -41,8 +41,8 @@
 <style>
 #bWrap1{height: 50px;}
 #bWrap2{height: 50px;}
-#bWrap1 .txt{height: 20px;}
-#bWrap2 .txt{height: 20px;}
+#bWrap1 .txt{height: 20px;width: 150px; display: flex; align-items: center; justify-content: center; }
+#bWrap2 .txt{height: 20px;width: 150px; display: flex; align-items: center; justify-content: center;}
 </style>
 </head>
 <body>
