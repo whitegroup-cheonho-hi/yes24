@@ -16,7 +16,7 @@ public class ShowingDAO {
 
 	// 공연번호 날짜로 회차정보 가지고오기
 	public List<ShowingVO> getShowing(ShowingVO vo) {
-		System.out.println("getShowing DAO");
+		System.out.println("getShowing DAO()");
 
 		return sqlSession.selectList("showing.getShowing", vo);
 	}

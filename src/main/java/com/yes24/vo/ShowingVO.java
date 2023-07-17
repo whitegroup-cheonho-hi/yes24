@@ -1,6 +1,5 @@
 package com.yes24.vo;
 
-import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.stereotype.Component;

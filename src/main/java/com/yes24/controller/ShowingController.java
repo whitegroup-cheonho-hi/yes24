@@ -2,6 +2,7 @@ package com.yes24.controller;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,22 +16,25 @@ import com.yes24.vo.ShowingVO;
 @Controller
 @RequestMapping("/showing")
 public class ShowingController {
-	
+
+	@Autowired
 	private ShowingService showingService;
-	
+
 	@ResponseBody
-	@RequestMapping(value = "/getShowing",method = RequestMethod.POST)
+	@RequestMapping(value = "/getShowing", method = RequestMethod.POST)
 	public JsonResult getShowing(@ModelAttribute ShowingVO vo) {
-		System.out.println("getShowing");
+		System.out.println("getShowing()");
 		
+		System.out.println(vo);
+
 		List<ShowingVO> showingList = showingService.getShowing(vo);
-		
-		System.out.println(showingList);
-		
+
 		JsonResult jsonResult = new JsonResult();
-		
-		return jsonResult;		
-		
+
+		jsonResult.success(showingList);
+
+		return jsonResult;
+
 	}
 
 }

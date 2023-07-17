@@ -225,23 +225,32 @@ $(document).ready(function() {
 				data : ShowingVO,
 			
 				dataType : "json",
-				success : function(result){					
-			
+				success : function(result){		
+										
+					console.log(result);
+					
+				for (let index of result.data) {
+					  const event = {
+					    title: '오페라의 유령 1회',
+					    start: new Date(index.startTime),  // 데이터에서 적절한 값을 가져와야 함
+					    end: new Date(index.endTime)  // 데이터에서 적절한 값을 가져와야 함
+					  };
+					  dayList.addEvent(event);
+				}
+				dayList.addEvent({
+					// DB연결해서 데이터 불러오는 영역
+					title : '오페라의 유령 1회',
+					start : '2023-07-12T11:30:00',
+					end : '2023-07-12T14:00:00'
+				});
+					
 				},
 				error : function(XHR, status, error) {
 					console.error(status + " : " + error);
 				}
 			});  
 						
-		dayList.addEvent({		
-					
-			// DB연결해서 데이터 불러오는 영역
-			title : '오페라의 유령 1회',
-			start : '2023-07-12T11:30:00',
-			end : '2023-07-12T14:00:00'
-												
-			
-		});
+
 		
 	}
 
