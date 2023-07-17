@@ -16,13 +16,17 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.yes24.service.ConcertHallService;
 import com.yes24.service.ShowService;
+import com.yes24.service.TestService;
 import com.yes24.vo.ConcertHallVO;
 import com.yes24.vo.ShowVO;
 
 @Controller
 @RequestMapping("/show1")
-public class test {
+public class testController {
 
+	@Autowired
+	private TestService testservice;
+	
 	@Autowired
 	private ShowService showService;
 	@Autowired
@@ -107,6 +111,10 @@ public class test {
 	// 회차등록 폼
 		@RequestMapping(value = "/showingInsertForm/{no}", method = RequestMethod.GET)
 		public String showingInsertForm(@PathVariable("no") int no, Model model) {
+			System.out.println("showingInsertForm");
+			Map<String, Object> map = testservice.getShow(no);
+			
+			
 			return "admin/showingInsertForm";
 		}
 
