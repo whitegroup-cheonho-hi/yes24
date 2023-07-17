@@ -4,7 +4,7 @@
 <mapper namespace="showing">
 
 <!-- 회차정보가져오기 -->
-	<select id="getShowing" parameterType="int" resultType="ShowingVO">
+	<select id="getShowing" parameterType="ShowingVO" resultType="ShowingVO">
 		
 		<![CDATA[
 		      SELECT 
@@ -18,7 +18,9 @@
 				FROM 
 					showing
 				where 
-					show_sq = #{showSq};
+					show_sq = #{showSq}
+			     AND 
+			        to_char(showing_date, 'YYYY-MM-DD') = #{showingDate}		
 		]]>
 	</select>
 
