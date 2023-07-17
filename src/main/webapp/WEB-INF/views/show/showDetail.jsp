@@ -223,22 +223,20 @@ $(document).ready(function() {
 		    type: "post",
 		    //contentType: "application/json",
 		    data: ShowingVO,
+		    
 		    dataType: "json",
-		    success: function(result) {
-		      console.log(result.data);
-		     
+		    success: function(result) {		          	     
 		      for(var i = 0; i < result.data.length; i++){
-              		    	  
-		    	calendar.addEvent({
- 
-              	
-		    		
-		    	});//addEvent end
-
-              }
-		    	  
-		    	  
-		      
+		    	  var startTime =result.data[i].showingDate+'T'+result.data[i].startTime;
+		    	  var endTime =result.data[i].showingDate+'T'+result.data[i].endTime;
+		    	  dayList.addEvent({
+						// DB연결해서 데이터 불러오는 영역
+						title : [i+1]+'회차',
+						start : startTime,						
+						end : endTime,
+						hiddenValue: result.data[i].showingSq
+					});
+              }   	  
 		    },
 		    error: function(XHR, status, error) {
 		      console.error(status + " : " + error);
@@ -272,15 +270,12 @@ $(document).ready(function() {
 		timeZone : 'local',
 		initialDate : moment().toDate(),
 		eventClick : function(arg) {
+			
 			console.log(arg.event.title); // 클릭한 이벤트의 타이틀
 			console.log(arg.event.start); // 클릭한 이벤트의 시작 시간
 			console.log(arg.event.end); // 클릭한 이벤트의 종료 시간
-			$('#myModal').modal('show');
-			$('#title').val(arg.event.title);
-			$('#startTime').val(
-					moment(arg.event.start).format('HH:mm'));
-			$('#endTime')
-					.val(moment(arg.event.end).format('HH:mm'));
+			
+			
 		}
 	});
 	dayList.render();

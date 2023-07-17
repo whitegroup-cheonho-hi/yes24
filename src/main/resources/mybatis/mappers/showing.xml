@@ -20,7 +20,9 @@
 				where 
 					show_sq = #{showSq}
 			     AND 
-			        to_char(showing_date, 'YYYY-MM-DD') = #{showingDate}		
+			        to_char(showing_date, 'YYYY-MM-DD') = #{showingDate}
+			ORDER BY 
+			   		showing_date     		
 		]]>
 	</select>
 
