@@ -9,9 +9,9 @@ import org.springframework.stereotype.Component;
 public class ShowingVO {
 	
 	private int showingSq;
-	private Date showingDate;
-	private Date startTime;
-	private Date endTime;
+	private String showingDate;
+	private String startTime;
+	private String endTime;
 	private String showInformation;
 	private String showingStat;
 	//공연
@@ -29,7 +29,7 @@ public class ShowingVO {
 		super();
 	}
 
-	public ShowingVO(int showingSq, Date showingDate, Date startTime, Date endTime, String showInformation,
+	public ShowingVO(int showingSq, String showingDate, String startTime, String endTime, String showInformation,
 			String showingStat, int showSq, int[] showingSeatSq, String[] showingSeatNO, int[] showingSeatStat,
 			int[] seatClassSq, String[] seatClass, int[] seatPrice) {
 		super();
@@ -48,6 +48,7 @@ public class ShowingVO {
 		this.seatPrice = seatPrice;
 	}
 
+
 	public int getShowingSq() {
 		return showingSq;
 	}
@@ -56,27 +57,28 @@ public class ShowingVO {
 		this.showingSq = showingSq;
 	}
 
-	public Date getShowingDate() {
+
+	public String getShowingDate() {
 		return showingDate;
 	}
 
-	public void setShowingDate(Date showingDate) {
+	public void setShowingDate(String showingDate) {
 		this.showingDate = showingDate;
 	}
 
-	public Date getStartTime() {
+	public String getStartTime() {
 		return startTime;
 	}
 
-	public void setStartTime(Date startTime) {
+	public void setStartTime(String startTime) {
 		this.startTime = startTime;
 	}
 
-	public Date getEndTime() {
+	public String getEndTime() {
 		return endTime;
 	}
 
-	public void setEndTime(Date endTime) {
+	public void setEndTime(String endTime) {
 		this.endTime = endTime;
 	}
 
@@ -161,5 +163,6 @@ public class ShowingVO {
 				+ ", seatClassSq=" + Arrays.toString(seatClassSq) + ", seatClass=" + Arrays.toString(seatClass)
 				+ ", seatPrice=" + Arrays.toString(seatPrice) + "]";
 	}
+
 	
 }
