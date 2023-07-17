@@ -1,37 +1,37 @@
 package com.yes24.vo;
 
-import java.sql.Date;
 import java.util.Arrays;
+import java.util.List;
 
 import org.springframework.stereotype.Component;
 
 @Component
 public class ShowingVO {
-	
+
 	private int showingSq;
 	private String showingDate;
 	private String startTime;
 	private String endTime;
 	private String showInformation;
 	private String showingStat;
-	//공연
+	// 공연
 	private int showSq;
-	//회차좌석 배열
-	private int[] showingSeatSq;
-	private String[] showingSeatNO;
-	private int[] showingSeatStat;
-	//좌석구분
-	private int[] seatClassSq;
-	private String[] seatClass;
-	private int[] seatPrice;
-	
+	// 회차좌석 배열
+	private List<Integer> showingSeatSq;
+	private List<String> showingSeatNO;
+	private List<Integer> showingSeatStat;
+	// 좌석구분
+	private List<Integer> seatClassSq;
+	private List<String> seatClass;
+	private List<Integer> seatPrice;
+
 	public ShowingVO() {
 		super();
 	}
 
 	public ShowingVO(int showingSq, String showingDate, String startTime, String endTime, String showInformation,
-			String showingStat, int showSq, int[] showingSeatSq, String[] showingSeatNO, int[] showingSeatStat,
-			int[] seatClassSq, String[] seatClass, int[] seatPrice) {
+			String showingStat, int showSq, List<Integer> showingSeatSq, List<String> showingSeatNO,
+			List<Integer> showingSeatStat, List<Integer> seatClassSq, List<String> seatClass, List<Integer> seatPrice) {
 		super();
 		this.showingSq = showingSq;
 		this.showingDate = showingDate;
@@ -48,7 +48,6 @@ public class ShowingVO {
 		this.seatPrice = seatPrice;
 	}
 
-
 	public int getShowingSq() {
 		return showingSq;
 	}
@@ -56,7 +55,6 @@ public class ShowingVO {
 	public void setShowingSq(int showingSq) {
 		this.showingSq = showingSq;
 	}
-
 
 	public String getShowingDate() {
 		return showingDate;
@@ -106,51 +104,51 @@ public class ShowingVO {
 		this.showSq = showSq;
 	}
 
-	public int[] getShowingSeatSq() {
+	public List<Integer> getShowingSeatSq() {
 		return showingSeatSq;
 	}
 
-	public void setShowingSeatSq(int[] showingSeatSq) {
+	public void setShowingSeatSq(List<Integer> showingSeatSq) {
 		this.showingSeatSq = showingSeatSq;
 	}
 
-	public String[] getShowingSeatNO() {
+	public List<String> getShowingSeatNO() {
 		return showingSeatNO;
 	}
 
-	public void setShowingSeatNO(String[] showingSeatNO) {
+	public void setShowingSeatNO(List<String> showingSeatNO) {
 		this.showingSeatNO = showingSeatNO;
 	}
 
-	public int[] getShowingSeatStat() {
+	public List<Integer> getShowingSeatStat() {
 		return showingSeatStat;
 	}
 
-	public void setShowingSeatStat(int[] showingSeatStat) {
+	public void setShowingSeatStat(List<Integer> showingSeatStat) {
 		this.showingSeatStat = showingSeatStat;
 	}
 
-	public int[] getSeatClassSq() {
+	public List<Integer> getSeatClassSq() {
 		return seatClassSq;
 	}
 
-	public void setSeatClassSq(int[] seatClassSq) {
+	public void setSeatClassSq(List<Integer> seatClassSq) {
 		this.seatClassSq = seatClassSq;
 	}
 
-	public String[] getSeatClass() {
+	public List<String> getSeatClass() {
 		return seatClass;
 	}
 
-	public void setSeatClass(String[] seatClass) {
+	public void setSeatClass(List<String> seatClass) {
 		this.seatClass = seatClass;
 	}
 
-	public int[] getSeatPrice() {
+	public List<Integer> getSeatPrice() {
 		return seatPrice;
 	}
 
-	public void setSeatPrice(int[] seatPrice) {
+	public void setSeatPrice(List<Integer> seatPrice) {
 		this.seatPrice = seatPrice;
 	}
 
@@ -158,11 +156,9 @@ public class ShowingVO {
 	public String toString() {
 		return "ShowingVO [showingSq=" + showingSq + ", showingDate=" + showingDate + ", startTime=" + startTime
 				+ ", endTime=" + endTime + ", showInformation=" + showInformation + ", showingStat=" + showingStat
-				+ ", showSq=" + showSq + ", showingSeatSq=" + Arrays.toString(showingSeatSq) + ", showingSeatNO="
-				+ Arrays.toString(showingSeatNO) + ", showingSeatStat=" + Arrays.toString(showingSeatStat)
-				+ ", seatClassSq=" + Arrays.toString(seatClassSq) + ", seatClass=" + Arrays.toString(seatClass)
-				+ ", seatPrice=" + Arrays.toString(seatPrice) + "]";
+				+ ", showSq=" + showSq + ", showingSeatSq=" + showingSeatSq + ", showingSeatNO=" + showingSeatNO
+				+ ", showingSeatStat=" + showingSeatStat + ", seatClassSq=" + seatClassSq + ", seatClass=" + seatClass
+				+ ", seatPrice=" + seatPrice + "]";
 	}
 
-	
 }

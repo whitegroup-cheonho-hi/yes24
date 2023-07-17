@@ -27,11 +27,7 @@
 <!-- 다음지도API -->
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1d8e22ec81bcdc862373ee6f17fdef96&libraries=services"></script>
-<!-- 풀켈린더js -->
-<script type="text/javascript"
-	src='${pageContext.request.contextPath }/assets/js/index.global.min.js'></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+
 <style>
 #map {margin: 0 auto;}
 #cName {width: 150px;text-align: center;padding: 4px 0;font-size: 19px;}
@@ -39,18 +35,6 @@
 #ticketingdiv {text-align: center;}
 #ticketingdiv div {padding: 5px;width: 250px;background: #f43142;margin: 0 auto;border: 2px solid #f43142;}
 .ticketing {font-size: 20px;color: #fff;display: block; height:100%;}
-.concertHall .position{margin-bottom: 50px;}
-.concertHall .position{width: 1178px;display: flex;border: solid 1px #ec7d2c; padding: 10px;}
-.concertHall .position #calendar,#dayList{margin-right: 20px; width: 390px;}
-.concertHall .position #remainingSeats{ width: 355px;}
-.concertHall .position h2{font-size: 20px;}
-.concertHall .position .fc-scrollgrid-sync-table a{font-size: 12px; cursor: pointer;}
-.concertHall .position .fc .fc-button{font-size: 12px;}
-.position #calendar .fc-view-harness .fc-col-header .fc-col-header-cell{width:55px;}
-.position #calendar .fc-scrollgrid-section .fc-scrollgrid-sync-table tbody .fc-day{width:55px;}
-.fc .fc-daygrid-body-unbalanced .fc-daygrid-day-events {min-height: 0em;}
-#remainingSeats h2{height: 55px;}
-#remainingSeats .fc-view-harness{border: solid 1px;}
 </style>
 </head>
 <body>
@@ -158,34 +142,6 @@
 					</div>
 				</div>
 			</div>
-			
-				<!-- ==================== 캘린더 영역 시작 ==================== -->
-				<div class="concertHall">
-					<div class="inpRow">
-						<div class="concertHall">							
-							<div class="position">
-								<div id='calendar' class="calendar"></div>
-								<div id='dayList' class="calendar"></div>
-								
-								<div id="remainingSeats"> 		
-									<div class="fc-header-toolbar fc-toolbar ">
-										<div class="fc-toolbar-chunk">
-											<h2 class="fc-toolbar-title" id="fc-dom-86">예매가능 좌석</h2>
-										</div>										
-									</div>
-									<div aria-labelledby="fc-dom-86"
-										class="fc-view-harness fc-view-harness-active"
-										style="height: 288.889px;">
-										<div class="fc-listDay-view fc-view fc-list fc-list-sticky">
-											
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>			
-				<!-- ==================== 캘린더 영역 끝 ==================== -->				
 			<div id="ticketingdiv">
 				<div>
 					<a id="ticketing" href="#none" class="ticketing">예매하기</a>
@@ -205,85 +161,6 @@
 </body>
 
 <script>
-$(document).ready(function() {
-	let dayListEl;
-	let dayList;
-	let date;
-
-	function dayEvent(date) { // 날짜누르면 데이터 가지고오기
-		console.log(date);
-		dayList.removeAllEvents();
-		
-		ShowingVO ={showingDate : date, showSq : '${show.showSq}'}
-		console.log(ShowingVO);
-		  // 회차 정보 가지고 오기
-		   $.ajax({
-				
-				url : "${pageContext.request.contextPath}/showing/getShowing",		
-				type : "post",
-				//contentType : "application/json",
-				data : ShowingVO,
-			
-				dataType : "json",
-				success : function(result){					
-			
-				},
-				error : function(XHR, status, error) {
-					console.error(status + " : " + error);
-				}
-			});  
-						
-		dayList.addEvent({		
-					
-			// DB연결해서 데이터 불러오는 영역
-			title : '오페라의 유령 1회',
-			start : '2023-07-12T11:30:00',
-			end : '2023-07-12T14:00:00'
-												
-			
-		});
-		
-	}
-
-	// 달력 초기화
-	var calendarEl = $('#calendar')[0];
-	var calendar = new FullCalendar.Calendar(calendarEl, {
-		initialView : 'dayGridMonth',
-		selectable : true,
-		// dateClick: true,
-		locale : 'ko',
-		timeZone : 'ko',
-		dateClick : function(arg) {
-			console.log(arg);
-			date = moment(arg.date).format("YYYY-MM-DD");
-			// date = arg.dateStr;
-			dayEvent(date);
-			dayList.gotoDate(date);
-		}
-	});
-	calendar.render();
-	
-	// 리스트 초기화
-	dayListEl = $('#dayList')[0];
-	dayList = new FullCalendar.Calendar(dayListEl, {
-		initialView : 'listDay',
-		locale : 'ko',
-		timeZone : 'local',
-		initialDate : moment().toDate(),
-		eventClick : function(arg) {
-			console.log(arg.event.title); // 클릭한 이벤트의 타이틀
-			console.log(arg.event.start); // 클릭한 이벤트의 시작 시간
-			console.log(arg.event.end); // 클릭한 이벤트의 종료 시간
-			$('#myModal').modal('show');
-			$('#title').val(arg.event.title);
-			$('#startTime').val(
-					moment(arg.event.start).format('HH:mm'));
-			$('#endTime')
-					.val(moment(arg.event.end).format('HH:mm'));
-		}
-	});
-	dayList.render();
-
 
 	//예매버튼 클릭시
 	$("#ticketing").on("click", function(e){
@@ -337,6 +214,5 @@ $(document).ready(function() {
 			map.setCenter(coords);
 		}
 	});
-});
 </script>
 </html>
