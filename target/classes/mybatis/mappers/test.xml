@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="test">
+<!-- 공연정보가져오기 -->
+	<select id="getShow" parameterType="int" resultType="ShowVO">
+		
+		<![CDATA[
+
+		      SELECT
+				    show_sq AS showsq,
+				    main_image AS mainimage,
+				    sub_image AS subimage,
+				    TO_CHAR(start_date, 'YYYY.MM.DD') AS startdate,
+				    TO_CHAR(end_date, 'YYYY.MM.DD') AS enddate,
+				    TO_CHAR(reservation_date, 'YYYY.MM.DD') AS reservationdate,
+				    show_name AS showname,
+				    cast,
+				    director,
+				    show_time AS showtime,
+				    viewing_age AS viewingage,
+				    show_content AS showcontent,
+				    category,
+				    show_stat AS showstat,
+				    concert_hall_sq AS concerthallsq
+				FROM
+				    show
+			   WHERE
+				    show_sq = #{showSq}			
+		
+		]]>
+
+	</select>
+<!-- 회차정보가져오기 -->
+	<select id="getShowing" parameterType="ShowingVO" resultType="ShowingVO">
+		
+		<![CDATA[
+		      SELECT 
+			      	w.showing_sq         AS showingsq,
+				    TO_CHAR(w.showing_date, 'YYYY-MM-DD') AS showingdate,
+				    TO_CHAR(w.start_time, 'HH24:MI') AS starttime,
+				    TO_CHAR(w.end_time, 'HH24:MI') AS endtime,
+				    w.show_sq            AS showsq,
+                    s.show_name            AS showname,
+				    w.show_information   AS showinformation,
+				    w.showing_stat       AS showingstat
+				FROM 
+					showing w, show s
+				where 
+					s.show_sq = #{showSq}
+			     AND 
+			        to_char(w.showing_date, 'YYYY-MM-DD') = #{showingDate}
+			ORDER BY 
+			   		w.showing_date
+		]]>
+	</select>
+
+<!-- 회차등록 -->
+	<insert id="insertShowing" parameterType="ShowingVO">
+
+		<selectKey keyProperty="showingSq" resultType="int"
+			order="BEFORE">
+			SELECT seq_showing_sq.NEXTVAL AS showingSq FROM dual
+		</selectKey>
+		
+		<![CDATA[
+		
+		INSERT INTO showing (
+                    showing_sq,
+                    showing_date,
+                    start_time,
+                    end_time,
+                    showing_stat,
+                    show_sq,
+                    show_information)
+            values (
+            		#{showingSq},
+                    TO_DATE(#{showingDate}, 'YYYY-MM-DD'),
+                    TO_DATE(#{startTime}, 'YYYY-MM-DD-HH24:MI'),
+                    TO_DATE(#{endTime}, 'YYYY-MM-DD-HH24:MI'),
+                    'Y',
+                    #{showSq},
+                    '이거 누가하자했냐..2'
+            		)  		
+		]]>
+
+	</insert>
+	
+	<!-- 공연수정 -->
+	<update id="updateShow" parameterType="ShowVO">
+	
+		<![CDATA[
+			
+			UPDATE show SET	
+				           main_image = #{mainImage},
+						   sub_image = #{subImage},	 
+						   start_date = #{startDate},
+						   end_date = #{endDate},
+						   reservation_date = #{reservationDate},
+						   show_name = #{showName},
+						   cast = #{cast},
+						   director = #{director},
+						   show_time = #{showTime},
+						   viewing_age = #{viewingAge},
+						   category = #{category}, 						   
+						   concert_hall_sq = #{concertHallSq}
+					  WHERE
+						   show_sq = #{showSq}
+			
+		]]>
+	
+	</update>
+
+	<!-- 좌석클래스 등록 -->
+	<insert id="insertSeatClass" parameterType="SeatClassListVO">
+	
+		<selectKey keyProperty="seatClassSq" resultType="int"
+			order="BEFORE">
+			SELECT seq_seat_class_sq.NEXTVAL AS seatClassSq FROM dual
+		</selectKey>	
+	
+		<![CDATA[
+		
+			INSERT INTO seat_class
+                     			  (
+			                       SEAT_CLASS_SQ,
+			                       SEAT_CLASS,
+			                       SEAT_PRICE,
+			                       SHOW_SQ
+			                      )
+			                VALUES
+			                      (			                       
+			                       #{seatClassSq},
+			                       #{seatClass},
+			                       #{seatPrice},
+			                       #{showSq}
+			                      )
+			
+		]]>
+
+	</insert>
+	
+	<!-- 공연좌석 등록 -->
+	<insert id="insertShowSeat" parameterType="SeatClassListVO">
+	
+		<![CDATA[
+		
+			INSERT INTO show_seat 
+								 (
+								  seat_sq,
+								  seat_class_sq
+								 )
+						   VALUES
+								 (
+								 #{seatSq},
+								 #{seatClassSq}
+								 )			
+		]]>
+
+	</insert>
+	
+	
+	
+	<!-- 공연수정 -->
+	<update id="updateSeatClass" parameterType="SeatClassVO">
+	
+		<![CDATA[
+		
+			UPDATE seat_class
+						  SET
+						     seat_class =  #{seatClass},
+						     seat_price = #{seatPrice}
+				        WHERE
+						     seat_class_sq = #{seatClassSq}
+		]]>
+	
+	</update>
+
+	
+	
+	<!-- 공연장 시퀀스로 공연 시퀀스 가지고오기 -->
+	<select id="getShowSq" parameterType="int" resultType="ShowVO">
+		
+		<![CDATA[
+
+		     SELECT
+			       show_sq AS showSq
+			   FROM
+				   show a,
+				   concert_hall b
+			 WHERE
+			       a.concert_hall_sq = b.concert_hall_sq
+				   AND a.concert_hall_sq = #{concerthallsq}
+		
+		]]>
+
+	</select>	
+
+
+	<!-- 공연리스트가져오기 -->
+	<select id="getShowList" parameterType="int" resultType="ShowVO">
+
+		<![CDATA[
+			
+			  SELECT
+				    show_sq            AS showsq,
+				    main_image         AS mainimage,
+				    sub_image          AS subimage,
+				    start_date         AS startdate,
+				    end_date           AS enddate,
+				    reservation_date   AS reservationdate,
+				    show_name          AS showname,
+				    cast,
+				    director,
+				    show_time          AS showtime,
+				    viewing_age        AS viewingage,
+				    show_content       AS showcontent,
+				    category,
+				    show_stat          AS showstat,
+				    concert_hall_sq    AS concerthallsq
+				FROM
+				    show
+			  WHERE category = #{category}	    
+			ORDER BY
+				    show_sq DESC
+		]]>
+
+	</select>
+	
+	<!-- 좌석클래스리스트 -->
+	<select id="getSeatClassList" parameterType="int" resultType="SeatClassVO">
+			
+			  SELECT
+				    seat_class_sq   AS SEATCLASSSQ,
+				    seat_class      AS SEATCLASS,
+				    seat_price      AS SEATPRICE,
+				    show_sq         AS SHOWSQ
+				FROM
+				    seat_class
+				WHERE
+				    show_sq = #{showSq}
+		    ORDER BY 
+				    seat_price DESC    
+	
+	</select>
+	
+
+	<!-- 공연좌석삭제 -->
+	<delete id="deleteShowSeat" parameterType="int">
+	
+		<![CDATA[
+		
+			DELETE show_seat WHERE SEAT_CLASS_SQ =  #{seatClassSq}
+				    
+		]]>
+		
+	</delete>
+
+</mapper>

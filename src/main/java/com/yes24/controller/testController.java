@@ -12,13 +12,17 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.yes24.service.ConcertHallService;
 import com.yes24.service.ShowService;
+import com.yes24.service.ShowingService;
 import com.yes24.service.TestService;
 import com.yes24.vo.ConcertHallVO;
+import com.yes24.vo.JsonResult;
 import com.yes24.vo.ShowVO;
+import com.yes24.vo.ShowingVO;
 
 @Controller
 @RequestMapping("/show1")
@@ -29,6 +33,8 @@ public class testController {
 	
 	@Autowired
 	private ShowService showService;
+	@Autowired
+	private ShowingService showingService;
 	@Autowired
 	private ConcertHallService concertHallService;
 	List<ConcertHallVO> concertHallList = new ArrayList<>();
@@ -111,11 +117,37 @@ public class testController {
 	// 회차등록 폼
 		@RequestMapping(value = "/showingInsertForm/{no}", method = RequestMethod.GET)
 		public String showingInsertForm(@PathVariable("no") int no, Model model) {
-			System.out.println("showingInsertForm");
-			Map<String, Object> map = testservice.getShow(no);
-			
-			
+			//System.out.println("showingInsertForm");
+			ShowVO vo = testservice.getShow(no);
+			model.addAttribute("show", vo);
+			System.out.println(vo);
 			return "admin/showingInsertForm";
+		}
+		
+		
+		@ResponseBody
+		@RequestMapping(value = "/getShowing", method = RequestMethod.POST)
+		public JsonResult getShowing(@ModelAttribute ShowingVO vo) {
+		    //System.out.println("getShowing()");
+		    //System.out.println(vo);
+		    List<ShowingVO> showingList = testservice.getShowing(vo);
+		    JsonResult jsonResult = new JsonResult();
+		    jsonResult.success(showingList);
+		    System.out.println(showingList);
+		    return jsonResult;
+	   }
+		
+		@ResponseBody
+		@RequestMapping(value = "/InsertShowing", method = RequestMethod.POST)
+		public JsonResult InsertShowing(@ModelAttribute ShowingVO vo) {
+			System.out.println("InsertShowing()");
+			//System.out.println(vo);
+			//List<ShowingVO> showingList = testservice.getShowing(vo);
+			int no = testservice.InsertShowing(vo);
+			JsonResult jsonResult = new JsonResult();
+			System.out.println(no);
+			jsonResult.success(no);
+			return jsonResult;
 		}
 
 }

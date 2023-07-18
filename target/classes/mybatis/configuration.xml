@@ -35,5 +35,6 @@
 		<mapper resource="mybatis/mappers/transferalarm.xml" />
 		<mapper resource="mybatis/mappers/transferboard.xml" />
 		<mapper resource="mybatis/mappers/user.xml" />  
+		<mapper resource="mybatis/mappers/test.xml" />  
     </mappers>
 </configuration>
