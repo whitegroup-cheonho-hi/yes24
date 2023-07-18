@@ -39,6 +39,7 @@
 #ticketingdiv {text-align: center;}
 #ticketingdiv div {padding: 5px;width: 250px;background: #f43142;margin: 0 auto;border: 2px solid #f43142;}
 .ticketing {font-size: 20px;color: #fff;display: block; height:100%;}
+
 .concertHall .position{margin-bottom: 50px;}
 .concertHall .position{width: 1178px;display: flex;border: solid 1px #ec7d2c; padding: 10px;}
 .concertHall .position #calendar,#dayList{margin-right: 20px; width: 390px;}
@@ -309,7 +310,7 @@ $(document).ready(function() {
 	function popup() {
 		var url = '${pageContext.request.contextPath}/order/orderForm/${show.showSq}';
 		var name = "ticketing";
-		var option = "width=990, height=640, top=100, left=200, location=no";
+		var option = "width=990, height=680, top=100, left=200, location=no";
 		window.open(url, name, option);
 	}
 

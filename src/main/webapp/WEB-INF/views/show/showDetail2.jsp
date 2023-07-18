@@ -27,7 +27,11 @@
 <!-- 다음지도API -->
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1d8e22ec81bcdc862373ee6f17fdef96&libraries=services"></script>
-
+<!-- 풀켈린더js -->
+<script type="text/javascript"
+	src='${pageContext.request.contextPath }/assets/js/index.global.min.js'></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 <style>
 #map {margin: 0 auto;}
 #cName {width: 150px;text-align: center;padding: 4px 0;font-size: 19px;}
@@ -35,6 +39,21 @@
 #ticketingdiv {text-align: center;}
 #ticketingdiv div {padding: 5px;width: 250px;background: #f43142;margin: 0 auto;border: 2px solid #f43142;}
 .ticketing {font-size: 20px;color: #fff;display: block; height:100%;}
+
+.concertHall .position{margin-bottom: 50px;}
+.concertHall .position{width: 1178px;display: flex;border: solid 1px #ec7d2c; padding: 10px;}
+.concertHall .position #calendar,#dayList{margin-right: 20px; width: 390px;}
+.concertHall .position #remainingSeats{ width: 355px;}
+.concertHall .position h2{font-size: 20px;}
+.concertHall .position .fc-scrollgrid-sync-table a{font-size: 12px; cursor: pointer;}
+.concertHall .position .fc .fc-button{font-size: 12px;}
+.position #calendar .fc-view-harness .fc-col-header .fc-col-header-cell{width:55px;}
+.position #calendar .fc-scrollgrid-section .fc-scrollgrid-sync-table tbody .fc-day{width:55px;}
+.fc .fc-daygrid-body-unbalanced .fc-daygrid-day-events {min-height: 0em;}
+#fc-dom-87{border-bottom: solid 2px;}
+#remaining{border: 1px solid #ddd;height: 200px;margin-top: 15px;padding: 10px; }
+#remainingSeats h2{height: 55px;}
+#remainingSeats .fc-view-harness{padding: 10px;}
 </style>
 </head>
 <body>
@@ -142,6 +161,36 @@
 					</div>
 				</div>
 			</div>
+			
+				<!-- ==================== 캘린더 영역 시작 ==================== -->
+				<div class="concertHall">
+					<div class="inpRow">
+						<div class="concertHall">							
+							<div class="position">
+								<div id='calendar' class="calendar"></div>
+								<div id='dayList' class="calendar"></div>
+								
+								<div id="remainingSeats"> 		
+									<div class="fc-header-toolbar fc-toolbar ">
+										<div class="fc-toolbar-chunk">
+											<h2 class="fc-toolbar-title" id="fc-dom-87">예매가능 좌석</h2>
+										</div>										
+									</div>
+									<div aria-labelledby="fc-dom-86"
+										class="fc-view-harness fc-view-harness-active"
+										style="height: 288.889px;">
+										<div>										
+										</div>
+										<div id ="remaining">
+											<div id="remainingSeat" class="fc-listDay-view fc-view fc-list fc-list-sticky"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>			
+				<!-- ==================== 캘린더 영역 끝 ==================== -->				
 			<div id="ticketingdiv">
 				<div>
 					<a id="ticketing" href="#none" class="ticketing">예매하기</a>
@@ -161,6 +210,94 @@
 </body>
 
 <script>
+$(document).ready(function() {
+	let dayListEl;
+	let dayList;
+	let date;
+	// 오늘날짜
+	var currentDate = new Date();
+	var formattedDate = currentDate.toISOString().split('T')[0];
+	// 페리이 로드되면 오늘날짜로 회차정보 가지고오기
+	getShowingInfo(formattedDate);
+	
+	// 날짜를 클릭하면 데이터 가져오기
+	function dayEvent(date) { 
+		  console.log(date);
+		  dayList.removeAllEvents();
+		  var Seat = $("#remainingSeat");
+	      // 회차클릭시 잔여좌석 비우기
+	      Seat.empty();	
+		  getShowingInfo(date);
+		 
+		}
+
+	// 달력 초기화
+	var calendarEl = $('#calendar')[0];
+	var calendar = new FullCalendar.Calendar(calendarEl, {
+		initialView : 'dayGridMonth',
+		selectable : true,
+		// dateClick: true,
+		locale : 'ko',
+		timeZone : 'ko',
+		dateClick : function(arg) {
+			console.log(arg);
+			date = moment(arg.date).format("YYYY-MM-DD");
+			// date = arg.dateStr;
+			dayEvent(date);
+			dayList.gotoDate(date);
+		}
+	});
+	calendar.render();
+	
+	// 리스트 초기화
+	dayListEl = $('#dayList')[0];
+	// 리스트 클릭이벤트 
+	dayList = new FullCalendar.Calendar(dayListEl, {
+		initialView : 'listDay',
+		locale : 'ko',
+		timeZone : 'local',
+		initialDate : moment().toDate(),
+		eventClick : function(arg) {
+    	var Seat = $("#remainingSeat");
+    	// 회차클릭시 잔여좌석 비우기
+    	Seat.empty();
+		var showingSq = arg.event.extendedProps.hiddenValue; 
+					
+		var ShowingVO = {showingSq : showingSq};
+		// 회차 정보 가져오기
+		  $.ajax({
+		    url: "${pageContext.request.contextPath}/showing/remainingSeats",
+		    type: "post",
+		    //contentType: "application/json",
+		    data: ShowingVO,
+		    
+		    dataType: "json",
+		    success: function(result) {		          	     
+		               	  console.log(result);
+			   
+			    for (let index in result.data) {
+			        if (result.data.hasOwnProperty(index)) {
+			            //금액 포맷
+			        	var seatPriceFormatted = new Intl.NumberFormat('ko-KR').format(result.data[index].seatPrice);
+
+			            var item = '<div style="margin-bottom: 5px;">' + result.data[index].seatClass +'석'			            
+			            	item += '&nbsp;&nbsp;';
+			            	item += seatPriceFormatted  +'원';
+			            	item += '&nbsp;&nbsp;';
+			            	item += '<span style="color: orange"> 잔여 : ('+result.data[index].seatEa +'석)</span>';
+			            	item +='</div>';
+			            Seat.append(item);
+			        }
+			    }
+		    },
+		    error: function(XHR, status, error) {
+		      console.error(status + " : " + error);
+		    }
+		  });
+		}
+	});
+	dayList.render();
+
 
 	//예매버튼 클릭시
 	$("#ticketing").on("click", function(e){
@@ -214,5 +351,38 @@
 			map.setCenter(coords);
 		}
 	});
+	
+	// 날짜로 회차 데이터 가져오기
+	function getShowingInfo(date) {
+			console.log("호출");
+		  var ShowingVO = { showingDate: date, showSq: '${show.showSq}'};
+		  console.log(ShowingVO);
+		  $.ajax({
+		    url: "${pageContext.request.contextPath}/showing/getShowing",
+		    type: "post",
+		    //contentType: "application/json",
+		    data: ShowingVO,
+		    dataType: "json",
+		    success: function(result) {
+		    	console.log(result);
+		      for (var i = 0; i < result.data.length; i++) {
+		        var startTime = result.data[i].showingDate + 'T' + result.data[i].startTime;
+		        var endTime = result.data[i].showingDate + 'T' + result.data[i].endTime;
+		        var showingSq = result.data[i].showingSq;
+		        dayList.addEvent({
+		          title: [i + 1] + '회차',
+		          start: startTime,
+		          end: endTime,
+		          hiddenValue: showingSq
+		        });
+		      }
+		    },
+		    error: function(XHR, status, error) {
+		      console.error(status + " : " + error);
+		    }
+		  });
+		}
+	
+});
 </script>
 </html>

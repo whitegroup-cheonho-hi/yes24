@@ -9,14 +9,41 @@
 	href="${pageContext.request.contextPath }/assets/css/reset.css"
 	type="text/css">
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath }/assets/css/ticketing.css"
+	href="${pageContext.request.contextPath }/assets/css/ticketing2.css"
 	type="text/css">
 <!-- 제이쿼리 최신 버전 -->
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+<!-- 풀켈린더js -->
+<script type="text/javascript"
+	src='${pageContext.request.contextPath }/assets/js/index.global.min.js'></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 <style>
-#guideview {
-	margin-left: 25px;
-}
+.position .calendar{padding:0px;}
+#guideview {margin-left: 25px;}
+.step01_date {height: 417px;}
+.step01_time {height: 417px;}
+#ContentsArea .position{width: 665px; height: 374px;display: flex;padding: 10px;}
+#ContentsArea .position h2{font-size: 15px; background:none; border:none;}
+#ContentsArea .position #calendar{margin-right: 20px; width: 238px;}
+#ContentsArea .position #dayList{margin-right: 8px; width: 241px;}
+#ContentsArea .position #remainingSeats{ width: 165px;}
+#ContentsArea .position .fc-daygrid-day-frame{height: 10px}
+#ContentsArea .position .fc-today-button{display: none;}
+#ContentsArea .position .fc .fc-button { font-size: 10px;}
+#ContentsArea .position .fc .fc-scrollgrid-sync-inner {font-size: 14px;}
+#ContentsArea .position .fc-scrollgrid-sync-table a{font-size: 11px; cursor: pointer;}
+#ContentsArea .position .fc .fc-daygrid-body-unbalanced .fc-daygrid-day-events {min-height: 0em;}
+#ContentsArea .position .fc-daygrid-body .fc-scrollgrid-sync-table .fc-day {height: 36px;}
+#ContentsArea .position .fc-daygrid-body .fc-scrollgrid-sync-table .fc-day .fc-daygrid-day-events{display: none;}
+#ContentsArea .concertHall .position .fc .fc-scrollgrid-sync-inner{font-size: 12px;}
+.gnb li{float:left;  background: url("${pageContext.request.contextPath}/assets/images/예매순서.png"); height:52px; width:120px;}
+#dayList .fc-view-harness{font-size: 12px;}
+#fc-dom-87{border-bottom: solid 2px;}
+#remaining{border: 1px solid #ddd;height: 308px;margin-top: 15px;padding: 10px;}
+#remainingSeats .fc-header-toolbar{height: 15px; margin-top: 4px;}
+#remainingSeats h2{height: 51px;padding-top: 3px;}
+#remainingSeats .fc-view-harness{padding: 10px; font-size: 12px;}
 </style>
 </head>
 <body>
@@ -28,7 +55,7 @@
 		<ul class="gnb">
 			<li class="m01 on"><span>관람일/회차</span></li>
 			<li class="m02"><span>좌석선택</span></li>
-			<li class="m05"><span>결제방법</span></li>
+			<li class="m03"><span>결제방법</span></li>
 		</ul>
 	</div>
 	<section>
@@ -36,219 +63,43 @@
 			<!-- 제 1 단계 : 관람일/회차 -->
 			<div id="step01">
 				<!-- 관람일선택 -->
-				<div id="step01_date" class="step01_date" style="display: block;">
+				<div id="step01_date" class="step01_date concertHall" style="display: block;">
 					<h2>
 						<img src="http://tkfile.yes24.com/img/perfsale/h2_tit01.gif"
 							alt="관람일선택"><span><img
 							src="http://tkfile.yes24.com/img/perfsale/icon_nt.gif" alt=""></span>
 					</h2>
-					<div id="calendar" class="calendar">
-						<div class="cal_selectDay">
-							<a class="pre dcursor" onclick="fdc_CtrlStep(jcSTEP1_1);"
-								title="이전달"><img
-								src="http://tkfile.yes24.com/img/perfsale/btn_pre.gif" alt="이전달"></a><a
-								class="next dcursor" onclick="fdc_CtrlStep(jcSTEP1_2);"
-								title="다음달"><img
-								src="http://tkfile.yes24.com/img/perfsale/btn_next.gif"
-								alt="다음달"></a><span>2023. 08</span>
+					<div class="position">					
+						<div id='calendar' class="calendar"></div>
+							<div id='dayList' class="calendar"></div>
+							
+							<div id="remainingSeats"> 		
+								<div class="fc-header-toolbar fc-toolbar ">
+									<div class="fc-toolbar-chunk">
+										<h2 class="fc-toolbar-title" id="fc-dom-87">예매가능 좌석</h2>
+									</div>										
+								</div>
+								<div aria-labelledby="fc-dom-86"
+									class="fc-view-harness fc-view-harness-active">
+									<div>										
+									</div>
+									<div id ="remaining">
+										<div id="remainingSeat" class="fc-listDay-view fc-view fc-list fc-list-sticky"></div>
+									</div>
+								</div>
+							</div>						
 						</div>
-						<table summary="공연일정을 선택할 수 있는 달력 형태의 표">
-							<caption>공연일정 달력</caption>
-							<tbody>
-								<tr>
-									<td style="border: none;"><img
-										src="http://tkfile.yes24.com/img/perfsale/day_sun.gif"
-										alt="sun"></td>
-									<td style="border: none;"><img
-										src="http://tkfile.yes24.com/img/perfsale/day_mon.gif"
-										alt="mon"></td>
-									<td style="border: none;"><img
-										src="http://tkfile.yes24.com/img/perfsale/day_tue.gif"
-										alt="tue"></td>
-									<td style="border: none;"><img
-										src="http://tkfile.yes24.com/img/perfsale/day_wed.gif"
-										alt="wed"></td>
-									<td style="border: none;"><img
-										src="http://tkfile.yes24.com/img/perfsale/day_thu.gif"
-										alt="thu"></td>
-									<td style="border: none;"><img
-										src="http://tkfile.yes24.com/img/perfsale/day_fri.gif"
-										alt="fri"></td>
-									<td style="border: none;"><img
-										src="http://tkfile.yes24.com/img/perfsale/day_sat.gif"
-										alt="sat"></td>
-								</tr>
-								<tr>
-									<td></td>
-									<td></td>
-									<td><a caldays="1"
-										onclick="fdc_CalDateClick(&quot;2023-08-01&quot;);"
-										class="dcursor" id="2023-08-01" title="해당일은 공연이 없습니다.">1</a></td>
-									<td><a caldays="1"
-										onclick="fdc_CalDateClick(&quot;2023-08-02&quot;);"
-										class="dcursor" id="2023-08-02" title="해당일은 공연이 없습니다.">2</a></td>
-									<td><a caldays="1"
-										onclick="fdc_CalDateClick(&quot;2023-08-03&quot;);"
-										class="dcursor" id="2023-08-03" title="해당일은 공연이 없습니다.">3</a></td>
-									<td><a caldays="1"
-										onclick="fdc_CalDateClick(&quot;2023-08-04&quot;);"
-										class="dcursor" id="2023-08-04" title="해당일은 공연이 없습니다.">4</a></td>
-									<td><a caldays="1"
-										onclick="fdc_CalDateClick(&quot;2023-08-05&quot;);"
-										class="dcursor" id="2023-08-05" title="해당일은 공연이 없습니다.">5</a></td>
-								</tr>
-								<tr>
-									<td><a caldays="1"
-										onclick="fdc_CalDateClick(&quot;2023-08-06&quot;);"
-										class="dcursor" id="2023-08-06" title="해당일은 공연이 없습니다.">6</a></td>
-									<td><a caldays="1"
-										onclick="fdc_CalDateClick(&quot;2023-08-07&quot;);"
-										class="dcursor" id="2023-08-07" title="해당일은 공연이 없습니다.">7</a></td>
-									<td><a caldays="1"
-										onclick="fdc_CalDateClick(&quot;2023-08-08&quot;);"
-										class="dcursor" id="2023-08-08" title="해당일은 공연이 없습니다.">8</a></td>
-									<td><a caldays="1"
-										onclick="fdc_CalDateClick(&quot;2023-08-09&quot;);"
-										class="dcursor" id="2023-08-09" title="해당일은 공연이 없습니다.">9</a></td>
-									<td><a caldays="1"
-										onclick="fdc_CalDateClick(&quot;2023-08-10&quot;);"
-										class="dcursor" id="2023-08-10" title="해당일은 공연이 없습니다.">10</a></td>
-									<td class="select"><a caldays="1"
-										onclick="fdc_CalDateClick(&quot;2023-08-11&quot;);"
-										class="dcursor" id="2023-08-11" title="2023-08-11">11</a></td>
-									<td class="select"><a caldays="1"
-										onclick="fdc_CalDateClick(&quot;2023-08-12&quot;);"
-										class="dcursor" id="2023-08-12" title="2023-08-12">12</a></td>
-								</tr>
-								<tr>
-									<td class="select"><a caldays="1"
-										onclick="fdc_CalDateClick(&quot;2023-08-13&quot;);"
-										class="dcursor" id="2023-08-13" title="2023-08-13">13</a></td>
-									<td><a caldays="1"
-										onclick="fdc_CalDateClick(&quot;2023-08-14&quot;);"
-										class="dcursor" id="2023-08-14" title="해당일은 공연이 없습니다.">14</a></td>
-									<td class="select"><a caldays="1"
-										onclick="fdc_CalDateClick(&quot;2023-08-15&quot;);"
-										class="dcursor" id="2023-08-15" title="2023-08-15">15</a></td>
-									<td class="select"><a caldays="1"
-										onclick="fdc_CalDateClick(&quot;2023-08-16&quot;);"
-										class="dcursor" id="2023-08-16" title="2023-08-16">16</a></td>
-									<td class="select"><a caldays="1"
-										onclick="fdc_CalDateClick(&quot;2023-08-17&quot;);"
-										class="dcursor" id="2023-08-17" title="2023-08-17">17</a></td>
-									<td class="select"><a caldays="1"
-										onclick="fdc_CalDateClick(&quot;2023-08-18&quot;);"
-										class="dcursor" id="2023-08-18" title="2023-08-18">18</a></td>
-									<td class="term"><a caldays="1"
-										onclick="fdc_CalDateClick(&quot;2023-08-19&quot;);"
-										class="dcursor" id="2023-08-19" title="2023-08-19">19</a></td>
-								</tr>
-								<tr>
-									<td class="select"><a caldays="1"
-										onclick="fdc_CalDateClick(&quot;2023-08-20&quot;);"
-										class="dcursor" id="2023-08-20" title="2023-08-20">20</a></td>
-									<td><a caldays="1"
-										onclick="fdc_CalDateClick(&quot;2023-08-21&quot;);"
-										class="dcursor" id="2023-08-21" title="해당일은 공연이 없습니다.">21</a></td>
-									<td><a caldays="1"
-										onclick="fdc_CalDateClick(&quot;2023-08-22&quot;);"
-										class="dcursor" id="2023-08-22" title="해당일은 공연이 없습니다.">22</a></td>
-									<td><a caldays="1"
-										onclick="fdc_CalDateClick(&quot;2023-08-23&quot;);"
-										class="dcursor" id="2023-08-23" title="해당일은 공연이 없습니다.">23</a></td>
-									<td><a caldays="1"
-										onclick="fdc_CalDateClick(&quot;2023-08-24&quot;);"
-										class="dcursor" id="2023-08-24" title="해당일은 공연이 없습니다.">24</a></td>
-									<td><a caldays="1"
-										onclick="fdc_CalDateClick(&quot;2023-08-25&quot;);"
-										class="dcursor" id="2023-08-25" title="해당일은 공연이 없습니다.">25</a></td>
-									<td><a caldays="1"
-										onclick="fdc_CalDateClick(&quot;2023-08-26&quot;);"
-										class="dcursor" id="2023-08-26" title="해당일은 공연이 없습니다.">26</a></td>
-								</tr>
-								<tr>
-									<td><a caldays="1"
-										onclick="fdc_CalDateClick(&quot;2023-08-27&quot;);"
-										class="dcursor" id="2023-08-27" title="해당일은 공연이 없습니다.">27</a></td>
-									<td><a caldays="1"
-										onclick="fdc_CalDateClick(&quot;2023-08-28&quot;);"
-										class="dcursor" id="2023-08-28" title="해당일은 공연이 없습니다.">28</a></td>
-									<td><a caldays="1"
-										onclick="fdc_CalDateClick(&quot;2023-08-29&quot;);"
-										class="dcursor" id="2023-08-29" title="해당일은 공연이 없습니다.">29</a></td>
-									<td><a caldays="1"
-										onclick="fdc_CalDateClick(&quot;2023-08-30&quot;);"
-										class="dcursor" id="2023-08-30" title="해당일은 공연이 없습니다.">30</a></td>
-									<td><a caldays="1"
-										onclick="fdc_CalDateClick(&quot;2023-08-31&quot;);"
-										class="dcursor" id="2023-08-31" title="해당일은 공연이 없습니다.">31</a></td>
-									<td></td>
-									<td></td>
-								</tr>
-							</tbody>
-						</table>
-						<p class="tc">
-							<img src="http://tkfile.yes24.com/img/perfsale/img_selday.gif"
-								alt="선택하신날짜 / 예매가능날짜">
-						</p>
 					</div>
-				</div>
 				<!-- //관람일선택 -->
 				<!--회차선택 -->
 				<div id="step01_time" class="step01_time" style="display: block;">
-					<div style="display: none;">
-						<p>
-							<img src="http://tkfile.yes24.com/img/perfsale/img_select.gif"
-								alt="관람일을 선택해주세요">
-						</p>
-					</div>
 					<div style="display: block;">
 						<h2>
 							<img src="http://tkfile.yes24.com/img/perfsale/h2_tit02.gif"
 								alt="회차선택"><span><img
 								src="http://tkfile.yes24.com/img/perfsale/icon_nt.gif" alt=""></span>
 						</h2>
-						<div class="choie_select">
-							<div class="select_day">
-								<em class="tit">선택날짜</em><span>2023. 8. 19.</span>
-							</div>
-							<div class="number">
-								<em class="tit">회차선택</em>
-								<ul id="ulTime">
-									<li value="1229994" timeoption="2" idhall="10182"
-										seatviewmode="1" saleclose="2023.08.18"
-										cancelclose="2023.08.18 17:00:00" limitcussalecnt="10"
-										limittimesalecnt="10" timeinfo="14시 00분" yespointoption="N"
-										perfdate="2023-08-19" class="on">[1회] 14시 00분</li>
-									<li value="1230003" timeoption="2" idhall="10182"
-										seatviewmode="1" saleclose="2023.08.18"
-										cancelclose="2023.08.18 17:00:00" limitcussalecnt="10"
-										limittimesalecnt="10" timeinfo="18시 30분" yespointoption="N"
-										perfdate="2023-08-19">[2회] 18시 30분</li>
-								</ul>
-								<div style="display: none;" class="point">
-									<img src="http://tkfile.yes24.com/img/common/btn_p02.gif"
-										alt="YES포인트"><span><em>적립 제외 회차</em></span>
-								</div>
-							</div>
-							<div class="seat">
-								<em class="tit">좌석등급/잔여석</em>
-								<ul id="ulSeatSpace" class="hi">
-									<li><strong>VIP석</strong>170,000원 (잔여:<span class="red">49석</span>)</li>
-									<li><strong>R석</strong>140,000원 (잔여:<span class="red">87석</span>)</li>
-									<li><strong>S석</strong>110,000원 (잔여:<span class="red">44석</span>)</li>
-									<li><strong>A석</strong>80,000원 (잔여:<span class="red">116석</span>)</li>
-								</ul>
-							</div>
-							<div class="btn">
-								<div class="fr">
-									<img id="btnSeatSelect"
-										src="http://tkfile.yes24.com/img/perfsale/btn_seat.gif"
-										alt="좌석선택" class="dcursor" onclick="fdc_ChoiceSeat();"
-										style="display: block;">
-								</div>
-							</div>
-						</div>
+						
 					</div>
 				</div>
 				<!-- //회차선택 -->
@@ -343,20 +194,142 @@
 
 <script>
 
-//다음단계
-$("#nextButton").on("click", function(e) {
-    e.preventDefault();
-    console.log("다음");
+$(document).ready(function() {
+	let dayListEl;
+	let dayList;
+	let date;
+	var showingSq;
+	// 오늘날짜
+	var currentDate = new Date();
+	var formattedDate = currentDate.toISOString().split('T')[0];
+	// 페리이 로드되면 오늘날짜로 회차정보 가지고오기
+	getShowingInfo(formattedDate);
+	
+	// 날짜를 클릭하면 데이터 가져오기
+	function dayEvent(date) { 
+		  console.log(date);
+		  dayList.removeAllEvents();
+		  var Seat = $("#remainingSeat");
+	      // 회차클릭시 잔여좌석 비우기
+	      Seat.empty();	
+		  getShowingInfo(date);
+		 
+		}
 
-    // showSq 값을 가져와서 URL 생성
-    var showSq = "${show.showSq}"; // 이 부분은 JavaScript 변수로 대체해야 합니다.
-    var url = "${pageContext.request.contextPath}/order/orderForm2/" + showSq;
+	// 달력 초기화
+	var calendarEl = $('#calendar')[0];
+	var calendar = new FullCalendar.Calendar(calendarEl, {
+		initialView : 'dayGridMonth',
+		selectable : true,
+		// dateClick: true,
+		locale : 'ko',
+		timeZone : 'ko',
+		dateClick : function(arg) {
+			console.log(arg);
+			date = moment(arg.date).format("YYYY-MM-DD");
+			// date = arg.dateStr;
+			dayEvent(date);
+			dayList.gotoDate(date);
+		}
+	});
+	calendar.render();
+	
+	// 리스트 초기화
+	dayListEl = $('#dayList')[0];
+	// 리스트 클릭이벤트 
+	dayList = new FullCalendar.Calendar(dayListEl, {
+		initialView : 'listDay',
+		locale : 'ko',
+		timeZone : 'local',
+		initialDate : moment().toDate(),
+		eventClick : function(arg) {
+    	var Seat = $("#remainingSeat");
+    	// 회차클릭시 잔여좌석 비우기
+    	Seat.empty();
+		showingSq = arg.event.extendedProps.hiddenValue; 
+					
+		var ShowingVO = {showingSq : showingSq};
+		// 회차 정보 가져오기
+		  $.ajax({
+		    url: "${pageContext.request.contextPath}/showing/remainingSeats",
+		    type: "post",
+		    //contentType: "application/json",
+		    data: ShowingVO,
+		    
+		    dataType: "json",
+		    success: function(result) {		          	     
+		               	  console.log(result);
+			   
+			    for (let index in result.data) {
+			        if (result.data.hasOwnProperty(index)) {
+			            //금액 포맷
+			        	var seatPriceFormatted = new Intl.NumberFormat('ko-KR').format(result.data[index].seatPrice);
 
-    // 페이지 이동
-    location.href = url;
+			            var item = '<div style="margin-bottom: 5px;">' + result.data[index].seatClass +'석'			            
+			            	item += '&nbsp;&nbsp;';
+			            	item += seatPriceFormatted  +'원';
+			            	item += '<br>';    	
+			            	item += '<span style="color: orange"> 잔여 : ('+result.data[index].seatEa +'석)</span>';
+			            	item +='</div>';
+			            Seat.append(item);
+			        }
+			    }
+		    },
+		    error: function(XHR, status, error) {
+		      console.error(status + " : " + error);
+		    }
+		  });
+		}
+	});
+	dayList.render();
+	
+	//다음단계
+	$("#nextButton").on("click", function(e) {
+	    e.preventDefault();
+	    console.log("다음");	   
+	    	  
+	    var url = "${pageContext.request.contextPath}/order/orderForm2/" + showingSq;
+	    // 페이지 이동
+	    location.href = url; 
 
-    // 추가 로직 작성
+	    // 추가 로직 작성
+	});
+	
+	// 날짜로 회차 데이터 가져오기
+	function getShowingInfo(date) {
+			console.log("호출");
+		  var ShowingVO = { showingDate: date, showSq: '${show.showSq}'};
+		  console.log(ShowingVO);
+		  $.ajax({
+		    url: "${pageContext.request.contextPath}/showing/getShowing",
+		    type: "post",
+		    //contentType: "application/json",
+		    data: ShowingVO,
+		    dataType: "json",
+		    success: function(result) {
+		    	console.log(result);
+		      for (var i = 0; i < result.data.length; i++) {
+		        var startTime = result.data[i].showingDate + 'T' + result.data[i].startTime;
+		        //var endTime = result.data[i].showingDate + 'T' + result.data[i].endTime;
+		        var showingSq = result.data[i].showingSq;
+		        dayList.addEvent({
+		          title: [i + 1] + '회차',
+		          start: startTime,		         
+		          hiddenValue: showingSq
+		        });
+		      }
+		    },
+		    error: function(XHR, status, error) {
+		      console.error(status + " : " + error);
+		    }
+		  });
+		}
+	
 });
+
+
+
+
 
 
 </script>

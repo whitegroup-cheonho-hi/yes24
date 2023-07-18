@@ -80,7 +80,7 @@ a:hover{color:#888888;text-decoration:none}
 .header h1 img { width: 100%;} 
 
 .gnb{padding-top:8px; float:right;}
-.gnb li{float:left; background:url(https://stkfile.yes24.com/img/perfsale/img_gnb.gif) no-repeat; height:52px; width:120px; }
+
 .gnb li span{display: block;font-size: 11px; height: 11px; overflow-x: hidden;overflow-y: hidden;position: relative; z-index: -1;}
 
 .m01{background-position:0 0 !important;}
@@ -108,20 +108,10 @@ a:hover{color:#888888;text-decoration:none}
 
 
 /*달력*/
-.calendar{ width:248px; padding:10px;}
 .cal_selectDay{ position:relative;   height:15px; margin:25px 0 25px;}
 .cal_selectDay a.pre{ position:absolute; left:50px; top:7px;}
 .cal_selectDay a.next{ position:absolute; right:50px; top:7px;}
 .cal_selectDay span{ font:normal  20px Verdana; text-align:center; display:block; color:#333333; }
-.calendar table{text-align:center; border-collapse:collapse; margin:0 auto; margin-bottom:15px; width:238px; }
-.calendar table thead th{ height:25px; }
-.calendar table tbody{ padding-left:5px;}
-.calendar table tbody td{ border:1px solid #dcdcdc; padding:5px 0; height:20px; font:normal bold 12px 맑은 고딕; display:inline-block; width:32px; margin-top:-1px; margin-left:-1px; text-align:right; *text-align:center; }
-.calendar table tbody td a{ display:block; width:23px; height:20px;}
-.calendar table tbody td.select{ background-color:#7b8c93; }
-.calendar table tbody td.select a{color:#FFF}
-.calendar table tbody td.term{ background-color:#eb4956;}
-.calendar table tbody td.term a{color:#FFF}
 
 
 /*회차선택*/
