@@ -16,7 +16,7 @@
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <style>
 #guideview {margin-left: 25px;}
-.f_header {margin-top: 70px;margin-left: 10px;}
+.f_header {margin-top: 70px;margin-left: 10px; height: 34px;}
 #br {margin-bottom: 5px;}
 .minimap_m>* {padding: 5px;}
 .ulLegend{height: 150px;border: solid 1px #ddd; width: 239px;}
@@ -24,11 +24,18 @@
 .admRow{margin-top: 10px; height: 530px; }
 .admSpan{display: flex; justify-content: center; box-sizing: border-box; border: solid 1px #ebebeb; 
 background-color: #fff;padding: 9px 14px 11px; line-height: 28px; display: flex; text-align: center;}
-#container{ border-top: solid 1px rgb(0, 0, 0); border-left: solid 1px rgb(0, 0, 0);align-items: center; display: none; }
+#container{border-top: solid 1px rgb(0, 0, 0); border-left: solid 1px rgb(0, 0, 0);align-items: center; display: none; }
+#container .item{color: black;}
 .item{ width: 30px; height: 30px; background-color:#efdfdf; border-right: solid 1px rgb(0, 0, 0); 
 border-bottom: solid 1px rgb(0, 0, 0); text-align: center; font-size: 17px; box-sizing: border-box; }
 #cover{margin-top: 46px;}
-.check{background-color:red;}
+.red{background-color: #e24647;}
+.pink{background-color: #dfa5ff;}
+.blue{background-color: #8fbfee;}
+.green{background-color: #a5ea7b;}
+.check{background-color:#fff;}
+#selFlashDateAll,#selFlashTime{font-size: 15px;}
+#ulLegend,#ulLegend2{font-size: 14px; color:black;}
 </style>
 </head>
 <body>
@@ -48,8 +55,8 @@ border-bottom: solid 1px rgb(0, 0, 0); text-align: center; font-size: 17px; box-
 			<ul>
 				<li><em><img class="img"
 						src="http://tkfile.yes24.com/img/perfsale/h3_tit_seat01.gif"
-						alt="관람일변경"></em> <span> 
-						<select id="selFlashDateAll" style="width: 200px;">
+						alt="관람일변경"></em> <span> <select id="selFlashDateAll"
+						style="width: 200px;">
 							<option selected="">날짜선택</option>
 							<c:forEach items="${showingList}" var="showing">
 								<option value="${showing.showingDate}">${showing.showingDate}</option>
@@ -58,9 +65,10 @@ border-bottom: solid 1px rgb(0, 0, 0); text-align: center; font-size: 17px; box-
 				</span></li>
 				<li><em><img class="img"
 						src="http://tkfile.yes24.com/img/perfsale/h3_tit_seat02.gif"
-						alt="회차변경"></em> <span> <select id="selFlashTime"	style="width: 200px;">
-						<option selected="" value="0">회차 선택</option>						
-						</select>
+						alt="회차변경"></em> <span> <select id="selFlashTime"
+						style="width: 200px;">
+							<option selected="" value="0">회차 선택</option>
+					</select>
 				</span></li>
 			</ul>
 		</div>
@@ -69,8 +77,7 @@ border-bottom: solid 1px rgb(0, 0, 0); text-align: center; font-size: 17px; box-
 			<div id="step01"></div>
 			<div id=cover>
 				<div class="admRow">
-					<span class="admSpan">
-						<span id="container"></span>
+					<span class="admSpan"> <span id="container"></span>
 					</span>
 				</div>
 			</div>
@@ -94,13 +101,13 @@ border-bottom: solid 1px rgb(0, 0, 0); text-align: center; font-size: 17px; box-
 				<div class="minimap_m">
 					<br>
 					<h4>좌석등급/가격</h4>
-					<ul id="ulLegend" class="ulLegend">						
+					<ul id="ulLegend" class="ulLegend">
 					</ul>
 					<!--  //좌석 등급/가격 -->
 					<!--  선택좌석 -->
 					<br>
 					<h4>선택좌석</h4>
-					<ul id="ulLegend2" class="ulLegend">						
+					<ul id="ulLegend2" class="ulLegend">
 					</ul>
 					<!--  //선택좌석 -->
 					<div class="btn"></div>
@@ -148,7 +155,7 @@ $(document).ready(function() {
 			    
 			    dataType: "json",
 			    success: function(result) {		          	     
-			         console.log(result);
+			         
 			         var item0 = '<option selected="" value="0">회차 선택</option>';
 			         selFlashTime.append(item0);
 			    	 for (let index in result.data) {
@@ -186,7 +193,7 @@ $(document).ready(function() {
 		    
 		    dataType: "json",
 		    success: function(result) {		          	     
-		               	  console.log(result);
+		               
 			   
 			    for (let index in result.data) {
 			        if (result.data.hasOwnProperty(index)) {
@@ -202,61 +209,8 @@ $(document).ready(function() {
 			            	ulLegend.append(item);
 			        }
 			    }
-			    
-			    $.ajax({
-				    url: "${pageContext.request.contextPath}/showing/getShowSeatList",
-				    type: "post",
-				    //contentType: "application/json",
-				    data: {showSq : showSq},
-				    
-				    dataType: "json",
-				    success: function(result) {		          	     
-				               	  console.log(result);
-					  
-				
-				    },
-				    error: function(XHR, status, error) {
-				      console.error(status + " : " + error);
-				    }
-			 	});		
-			    
-			    
-			    
-			    
-			    
-			    
-			    
-			    
-			    
-			    
-			    
-			    
-			    
-			    
-			    
-			    
-			    
-			    
-			    
-			  /*   var width = parseInt('${concertHall.concertHallWidth}');
-			    var height = parseInt('${concertHall.concertHallHeight}');
-				var container = $('#container');			
-				container.empty();
-				container.css({
-				  'grid-template-columns': 'repeat(' + width + ', 30px)',
-				  'display': 'grid',
-				  'width': width * 30 + 'px'
-				});
-
-				for (let i = 65; i < 65 + width; i++) {
-				  for (let j = 1; j <= height; j++) {
-					var seat = String.fromCharCode(i) + j;
-				    var item = $('<button type="button">').attr('id',seat).addClass('item').val(seat).text(seat);
-				    container.append(item);
-				  
-				  }
-				} */
-				
+			     // 좌석그리기 ajax 호출
+			   	 getShowSeatList();			  
 		    },
 		    error: function(XHR, status, error) {
 		      console.error(status + " : " + error);
@@ -269,9 +223,16 @@ $(document).ready(function() {
 	  var seat = $(this).val();
 	  
 	  $("#"+seat).addClass('check');
-	  	  
 	  
-	  console.log(seat);
+	  var seatClass = $("#"+seat).data("seatclass");
+	  var seatNo = $("#"+seat).data("seatno");
+	  var addSeat = '';
+	  addSeat += '<div>좌석번호 : '+ seatClass +'석  '+ seatNo +'</div>';	  
+	  console.log(seatClass);
+	  console.log(seatNo);
+	  
+	  $("#ulLegend2").append(addSeat);
+	  
 	});
 		
 	
@@ -306,6 +267,66 @@ $(document).ready(function() {
 
 		// 추가 로직 작성
 	});
+	
+	
+	
+	function getShowSeatList() {
+		  $.ajax({
+		    url: "${pageContext.request.contextPath}/showing/getShowSeatList",
+		    type: "post",
+		    //contentType: "application/json",
+		    data: {showSq: showSq},
+		    dataType: "json",
+		    success: function(result) {
+		      console.log(result);
+		      var width = parseInt('${concertHall.concertHallWidth}');
+		      var height = parseInt('${concertHall.concertHallHeight}');
+		      var container = $('#container');
+		      container.empty();
+		      container.css({
+		        'grid-template-columns': 'repeat(' + width + ', 30px)',
+		        'display': 'grid',
+		        'width': width * 30 + 'px'
+		      });
+		      var index = 0;
+		      var seatClassSq; // 좌석클래스 시퀀스
+		      var seatClass; // 좌석클래스 명
+		      var seatNo; // 좌석 번호
+		      const set = new Set(); // 중복제거를 위한 셋 선언
+		      for (var i = 0; i < width; i++) {
+		        for (var j = 0; j < height; j++) {
+		          seatClassSq = result.data[index].seatClassSq;
+		          seatClass = result.data[index].seatClass;
+		          seatNo = result.data[index].seatNo;
+		          index++; // 좌석 갯수 만큼 인덱스 증가
+		          set.add(seatClass);
+
+		          var item = $('<button type="button" data-seatclasssq="' + seatClassSq + '" data-seatno="' + seatNo + '" data-seatclass="'+seatClass+'">')
+		            .attr('id', seatNo)
+		            .addClass('item')
+		            .addClass(seatClass)
+		            .val(seatNo)
+		            .text(seatNo);
+
+		          container.append(item);
+		        }
+		      }
+		      // 클래스 명 배열에 저장
+		      var cssarr = ['red', 'pink', 'blue', 'green'];
+		      var index2 = 0; // 클래스배열에서 사용할 인덱스
+		      for (let index of set) {
+		        $("." + index).addClass(cssarr[index2]);
+		        index2++;
+		      }
+		    },
+		    error: function(XHR, status, error) {
+		      console.error(status + " : " + error);
+		    }
+		  });
+		}
+	
+	
+	
 });	
 </script>
 

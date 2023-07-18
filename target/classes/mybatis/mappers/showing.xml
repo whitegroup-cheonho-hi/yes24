@@ -344,8 +344,38 @@
 		
 	</select>
 
+
+	<!-- 공연 좌석 가져오기 -->
+	<select id="getShowSeats" parameterType="int" resultType="SeatClassVO">
+		
+		<![CDATA[
+		
+			  SELECT
+				    a.seat_class_sq   AS seatclasssq,
+				    b.seat_no         AS seatno,
+				    c.seat_class      AS seatclass
+				FROM
+				    show_seat a
+				    INNER JOIN seat b ON a.seat_sq = b.seat_sq
+				    INNER JOIN seat_class c ON a.seat_class_sq = c.seat_class_sq
+			   WHERE
+				    a.seat_class_sq IN (
+				        SELECT
+				            seat_class_sq
+				        FROM
+				            seat_class
+				        WHERE
+				            show_sq = #{showSq}
+				    )
+				ORDER BY
+				    b.seat_no
+		
+		]]>
 	
-	<!-- 잔여좌석 가져오기 -->
+	
+	</select>
+	
+	<!-- 잔여좌석 갯수 가져오기 -->
 	<select id="getRemainingSeats" parameterType="ShowingVO" resultType="RemainingSeatsVO">
 		
 		<![CDATA[

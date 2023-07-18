@@ -44,7 +44,7 @@ public class OrderController {
 		model.addAttribute("showingList", map.get("showingList"));
 		model.addAttribute("show", map.get("show"));
 		model.addAttribute("concertHall", map.get("concertHall"));
-		System.out.println(map.get("concertHall"));
+		
 		return "show/ticketing2";
 	}
 

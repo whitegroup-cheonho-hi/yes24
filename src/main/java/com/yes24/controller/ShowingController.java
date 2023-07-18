@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.yes24.service.ShowingService;
 import com.yes24.vo.JsonResult;
 import com.yes24.vo.RemainingSeatsVO;
+import com.yes24.vo.SeatClassVO;
 import com.yes24.vo.ShowingVO;
 
 @Controller
@@ -23,6 +24,7 @@ public class ShowingController {
 	@Autowired
 	private ShowingService showingService;
 
+	// ---------------------- 공연회차 가져오기
 	@ResponseBody
 	@RequestMapping(value = "/getShowing", method = RequestMethod.POST)
 	public JsonResult getShowing(@ModelAttribute ShowingVO vo) {
@@ -40,6 +42,7 @@ public class ShowingController {
 
 	}
 	
+	// ---------------------- 잔여좌석 가져오기
 	@ResponseBody
 	@RequestMapping(value = "/remainingSeats", method = RequestMethod.POST)
 	public JsonResult getRemainingSeats(@ModelAttribute ShowingVO vo) {
@@ -55,6 +58,7 @@ public class ShowingController {
 
 	}
 	
+	// ---------------------- 공연회차리시트 가져오기
 	@ResponseBody
 	@RequestMapping(value = "/getShowingList", method = RequestMethod.POST)
 	public JsonResult getShowingList(@ModelAttribute ShowingVO vo) {
@@ -70,16 +74,18 @@ public class ShowingController {
 
 	}
 	
+	// ---------------------- 공연좌석리시트 가져오기
 	@ResponseBody
 	@RequestMapping(value = "/getShowSeatList", method = RequestMethod.POST)
 	public JsonResult getShowSeatList(@RequestParam("showSq")int no) {
 		System.out.println("getShowSeatList()");
-		System.out.println(no);
-	
+
 		
+		List<SeatClassVO> seatClassList = showingService.getShowSeats(no);
+							
 		JsonResult jsonResult = new JsonResult();
 		
-
+		jsonResult.success(seatClassList);
 		
 		return jsonResult;
 

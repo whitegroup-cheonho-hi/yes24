@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.yes24.vo.RemainingSeatsVO;
+import com.yes24.vo.SeatClassVO;
 import com.yes24.vo.ShowingVO;
 
 @Repository
@@ -49,4 +50,12 @@ public class ShowingDAO {
 
 		return sqlSession.selectList("showing.getShowingList", no);
 	}
+
+	// 공연 좌석 가져오기
+	public List<SeatClassVO> getShowSeats(int no) {
+		System.out.println("getShowSeats DAO()");
+
+		return sqlSession.selectList("showing.getShowSeats", no);
+	}
+
 }
