@@ -70,5 +70,20 @@ public class ShowingController {
 
 	}
 	
+	@ResponseBody
+	@RequestMapping(value = "/getShowSeatList", method = RequestMethod.POST)
+	public JsonResult getShowSeatList(@RequestParam("showSq")int no) {
+		System.out.println("getShowSeatList()");
+		System.out.println(no);
+	
+		
+		JsonResult jsonResult = new JsonResult();
+		
+
+		
+		return jsonResult;
+
+	}
+	
 
 }

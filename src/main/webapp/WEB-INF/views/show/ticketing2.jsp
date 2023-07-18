@@ -21,8 +21,14 @@
 .minimap_m>* {padding: 5px;}
 .ulLegend{height: 150px;border: solid 1px #ddd; width: 239px;}
 .gnb li{float:left;  background: url("${pageContext.request.contextPath}/assets/images/예매순서.png"); height:52px; width:120px;}
-
+.admRow{margin-top: 10px; height: 530px; }
+.admSpan{display: flex; justify-content: center; box-sizing: border-box; border: solid 1px #ebebeb; 
+background-color: #fff;padding: 9px 14px 11px; line-height: 28px; display: flex; text-align: center;}
+#container{ border-top: solid 1px rgb(0, 0, 0); border-left: solid 1px rgb(0, 0, 0);align-items: center; display: none; }
+.item{ width: 30px; height: 30px; background-color:#efdfdf; border-right: solid 1px rgb(0, 0, 0); 
+border-bottom: solid 1px rgb(0, 0, 0); text-align: center; font-size: 17px; box-sizing: border-box; }
 #cover{margin-top: 46px;}
+.check{background-color:red;}
 </style>
 </head>
 <body>
@@ -62,11 +68,10 @@
 			<!-- 제 1 단계 : 관람일/회차 -->
 			<div id="step01"></div>
 			<div id=cover>
-				<div id=render>
-					<h1>dd</h1>
-					<h1>dd</h1>
-					<h1>dd</h1>
-					<h1>dd</h1>			
+				<div class="admRow">
+					<span class="admSpan">
+						<span id="container"></span>
+					</span>
 				</div>
 			</div>
 			<!-- //제 1 단계 : 관람일/회차 -->
@@ -122,7 +127,7 @@
 
 <script>
 $(document).ready(function() {
-	var showSq = '${showingList[0].showSq}';
+	var showSq = '${showingList[0].showSq}';	
 	// 날짜 선택
 	$("#selFlashDateAll").on("change",function(){
 		var selFlashTime = $("#selFlashTime");
@@ -197,12 +202,80 @@ $(document).ready(function() {
 			            	ulLegend.append(item);
 			        }
 			    }
+			    
+			    $.ajax({
+				    url: "${pageContext.request.contextPath}/showing/getShowSeatList",
+				    type: "post",
+				    //contentType: "application/json",
+				    data: {showSq : showSq},
+				    
+				    dataType: "json",
+				    success: function(result) {		          	     
+				               	  console.log(result);
+					  
+				
+				    },
+				    error: function(XHR, status, error) {
+				      console.error(status + " : " + error);
+				    }
+			 	});		
+			    
+			    
+			    
+			    
+			    
+			    
+			    
+			    
+			    
+			    
+			    
+			    
+			    
+			    
+			    
+			    
+			    
+			    
+			    
+			  /*   var width = parseInt('${concertHall.concertHallWidth}');
+			    var height = parseInt('${concertHall.concertHallHeight}');
+				var container = $('#container');			
+				container.empty();
+				container.css({
+				  'grid-template-columns': 'repeat(' + width + ', 30px)',
+				  'display': 'grid',
+				  'width': width * 30 + 'px'
+				});
+
+				for (let i = 65; i < 65 + width; i++) {
+				  for (let j = 1; j <= height; j++) {
+					var seat = String.fromCharCode(i) + j;
+				    var item = $('<button type="button">').attr('id',seat).addClass('item').val(seat).text(seat);
+				    container.append(item);
+				  
+				  }
+				} */
+				
 		    },
 		    error: function(XHR, status, error) {
 		      console.error(status + " : " + error);
 		    }
 	 	});		
 	});
+	
+	// 좌석 선택
+	$("#container").on("click", "button", function() {
+	  var seat = $(this).val();
+	  
+	  $("#"+seat).addClass('check');
+	  	  
+	  
+	  console.log(seat);
+	});
+		
+	
+	
 	
 	
 	//이전단계

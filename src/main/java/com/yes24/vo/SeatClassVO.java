@@ -7,15 +7,17 @@ public class SeatClassVO {
 
 	private int seatClassSq;
 	private String seatClass;
+	private String seatNo;
 	private int seatPrice;
 	private int showSq;
 	public SeatClassVO() {
 		super();
 	}
-	public SeatClassVO(int seatClassSq, String seatClass, int seatPrice, int showSq) {
+	public SeatClassVO(int seatClassSq, String seatClass, String seatNo, int seatPrice, int showSq) {
 		super();
 		this.seatClassSq = seatClassSq;
 		this.seatClass = seatClass;
+		this.seatNo = seatNo;
 		this.seatPrice = seatPrice;
 		this.showSq = showSq;
 	}
@@ -31,6 +33,12 @@ public class SeatClassVO {
 	public void setSeatClass(String seatClass) {
 		this.seatClass = seatClass;
 	}
+	public String getSeatNo() {
+		return seatNo;
+	}
+	public void setSeatNo(String seatNo) {
+		this.seatNo = seatNo;
+	}
 	public int getSeatPrice() {
 		return seatPrice;
 	}
@@ -45,8 +53,8 @@ public class SeatClassVO {
 	}
 	@Override
 	public String toString() {
-		return "SeatClassVO [seatClassSq=" + seatClassSq + ", seatClass=" + seatClass + ", seatPrice=" + seatPrice
-				+ ", showSq=" + showSq + "]";
+		return "SeatClassVO [seatClassSq=" + seatClassSq + ", seatClass=" + seatClass + ", seatNo=" + seatNo
+				+ ", seatPrice=" + seatPrice + ", showSq=" + showSq + "]";
 	}
 	
 	

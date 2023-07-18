@@ -7,8 +7,10 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.yes24.dao.ConcertHallDAO;
 import com.yes24.dao.ShowDAO;
 import com.yes24.dao.ShowingDAO;
+import com.yes24.vo.ConcertHallVO;
 import com.yes24.vo.RemainingSeatsVO;
 import com.yes24.vo.ShowVO;
 import com.yes24.vo.ShowingVO;
@@ -20,6 +22,8 @@ public class ShowingService {
 	private ShowingDAO showingDAO;
 	@Autowired
 	private ShowDAO showDAO;
+	@Autowired
+	private ConcertHallDAO concertHallDAO;
 
 	// 공연번호 날짜로 회차정보 가지고오기
 	public List<ShowingVO> getShowing(ShowingVO vo) {
@@ -40,11 +44,14 @@ public class ShowingService {
 		System.out.println("getShowingDateList Service()");
 		
 		Map<String, Object> map = new HashMap<>();
-		
+		// 회차정보가져오기
 		List<ShowingVO>	showingList = showingDAO.getShowingDateList(no);
-		
+		// 공연정보 가져오기
 		ShowVO showVO = showDAO.getShow(no);
-				
+		// 공연장 정보 가져오기	
+		ConcertHallVO concertHallVO = concertHallDAO.getConcertHall(showVO.getConcertHallSq());
+		
+		map.put("concertHall", concertHallVO);
 		map.put("showingList", showingList);
 		map.put("show", showVO);
 				
