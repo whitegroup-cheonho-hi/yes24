@@ -149,8 +149,6 @@ public class ShowController {
 
 		JsonResult jsonResult = new JsonResult();
 		
-		
-		
 		return jsonResult;
 
 	}

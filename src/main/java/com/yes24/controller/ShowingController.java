@@ -5,8 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yes24.service.ShowingService;
@@ -52,5 +54,21 @@ public class ShowingController {
 		return jsonResult;
 
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/getShowingList", method = RequestMethod.POST)
+	public JsonResult getShowingList(@ModelAttribute ShowingVO vo) {
+		System.out.println("getShowingList()");
+		
+		List<ShowingVO> showingList = showingService.getShowingList(vo);
+		
+		JsonResult jsonResult = new JsonResult();
+		
+		jsonResult.success(showingList);
+		
+		return jsonResult;
+
+	}
+	
 
 }

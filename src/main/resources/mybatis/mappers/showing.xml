@@ -274,6 +274,77 @@
 		
 	</delete>
 	
+	<!-- 공연번호로 회차날짜 가져오기 -->
+	<select id="getShowingDateList" parameterType="int" resultType="ShowingVO">
+	
+		<![CDATA[
+		
+			SELECT   
+			      DISTINCT 
+			      TO_CHAR(showing_date, 'YYYY-MM-DD') AS showingDate,
+			      show_sq            AS showSq
+			  FROM
+			      showing
+		     WHERE
+			      show_sq = #{showSq}
+				    
+		]]>
+	
+	</select>
+	
+	<!-- 날짜로 회차 리스트 가져오기 -->
+	<select id="getShowingListDate" parameterType="ShowingVO" resultType="ShowingVO">
+	
+		<![CDATA[
+		
+			  SELECT
+				    showing_sq         AS showingsq,
+				    TO_CHAR(showing_date, 'YYYY-MM-DD') AS showingdate,
+				    TO_CHAR(start_time, '""HH24"시 "MI"분')  AS starttime,
+   					TO_CHAR(end_time, '""HH24"시 "MI"분')  AS endtime,
+				    show_sq            AS showsq,
+				    show_information   AS showinformation,
+				    showing_stat       AS showingstat
+				FROM
+				    showing
+				WHERE
+				    show_sq = #{showSq}
+				    AND TO_CHAR(showing_date, 'YYYY-MM-DD') = #{showingDate}
+			
+		]]>
+	
+	</select>
+	
+	<!-- 티켓팅 -->
+	<select id="getShowingList" parameterType="int" resultType="ShowingVO">
+			
+		<![CDATA[
+		
+			  SELECT
+				    showing_sq         AS showingsq,
+				    TO_CHAR(showing_date, 'YYYY-MM-DD') AS showingdate,
+				    TO_CHAR(start_time, 'HH24:MI') AS starttime,
+				    TO_CHAR(end_time, 'HH24:MI') AS endtime,
+				    show_sq            AS showsq,
+				    show_information   AS showinformation,
+				    showing_stat       AS showingstat
+				FROM
+				    showing
+				WHERE
+				    show_sq = (
+				        SELECT
+				            show_sq
+				        FROM
+				            showing
+				        WHERE
+				            showing_sq = #{showingSq}
+				    )
+				    
+		]]>
+		
+	</select>
+
+	
 	<!-- 잔여좌석 가져오기 -->
 	<select id="getRemainingSeats" parameterType="ShowingVO" resultType="RemainingSeatsVO">
 		

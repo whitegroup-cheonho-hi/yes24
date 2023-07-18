@@ -28,4 +28,25 @@ public class ShowingDAO {
 
 		return sqlSession.selectList("showing.getRemainingSeats", vo);
 	}
+
+	// 화차 날짜 리스트 가지고오기
+	public List<ShowingVO> getShowingDateList(int no) {
+		System.out.println("getShowingDateList DAO()");
+
+		return sqlSession.selectList("showing.getShowingDateList", no);
+	}
+
+	// 날짜로 화차 리스트 가지고오기
+	public List<ShowingVO> getShowingList(ShowingVO vo) {
+		System.out.println("getShowingList DAO()");
+
+		return sqlSession.selectList("showing.getShowingListDate", vo);
+	}
+
+	// 화차 리스트 가지고오기
+	public List<ShowingVO> getShowingList(int no) {
+		System.out.println("getShowingList DAO()");
+
+		return sqlSession.selectList("showing.getShowingList", no);
+	}
 }

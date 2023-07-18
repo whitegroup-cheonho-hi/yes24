@@ -198,7 +198,10 @@ $(document).ready(function() {
 	let dayListEl;
 	let dayList;
 	let date;
+	var showSq='${show.showSq}';
+	console.log(showSq);
 	var showingSq;
+	
 	// 오늘날짜
 	var currentDate = new Date();
 	var formattedDate = currentDate.toISOString().split('T')[0];
@@ -286,19 +289,24 @@ $(document).ready(function() {
 	//다음단계
 	$("#nextButton").on("click", function(e) {
 	    e.preventDefault();
-	    console.log("다음");	   
-	    	  
-	    var url = "${pageContext.request.contextPath}/order/orderForm2/" + showingSq;
+	    console.log("다음");
+	   
+	    if (showingSq == null) {
+	        alert("회차를 선택해주세요");
+	    } else {
+	    
+	    var url = "${pageContext.request.contextPath}/order/orderForm2/" + showSq;
 	    // 페이지 이동
 	    location.href = url; 
-
-	    // 추가 로직 작성
+	    	
+	    }
+	
 	});
 	
 	// 날짜로 회차 데이터 가져오기
 	function getShowingInfo(date) {
 			console.log("호출");
-		  var ShowingVO = { showingDate: date, showSq: '${show.showSq}'};
+		  var ShowingVO = { showingDate: date, showSq: showSq};
 		  console.log(ShowingVO);
 		  $.ajax({
 		    url: "${pageContext.request.contextPath}/showing/getShowing",

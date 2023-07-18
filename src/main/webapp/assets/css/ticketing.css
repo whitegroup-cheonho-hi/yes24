@@ -80,7 +80,6 @@ a:hover{color:#888888;text-decoration:none}
 .header h1 img { width: 100%;} 
 
 .gnb{padding-top:8px; float:right;}
-.gnb li{float:left; background:url(https://stkfile.yes24.com/img/perfsale/img_gnb.gif) no-repeat; height:52px; width:120px; }
 .gnb li span{display: block;font-size: 11px; height: 11px; overflow-x: hidden;overflow-y: hidden;position: relative; z-index: -1;}
 
 .m01{background-position:0 0 !important;}

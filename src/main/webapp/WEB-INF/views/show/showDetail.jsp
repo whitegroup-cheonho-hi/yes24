@@ -45,7 +45,7 @@
 .concertHall .position #calendar,#dayList{margin-right: 20px; width: 390px;}
 .concertHall .position #remainingSeats{ width: 355px;}
 .concertHall .position h2{font-size: 20px;}
-.concertHall .position .fc-scrollgrid-sync-table a{font-size: 12px; cursor: pointer;}
+.concertHall .position .fc-scrollgrid-sync-table a{font-size: 15px; cursor: pointer;}
 .concertHall .position .fc .fc-button{font-size: 12px;}
 .position #calendar .fc-view-harness .fc-col-header .fc-col-header-cell{width:55px;}
 .position #calendar .fc-scrollgrid-section .fc-scrollgrid-sync-table tbody .fc-day{width:55px;}
@@ -264,7 +264,7 @@ $(document).ready(function() {
 		var showingSq = arg.event.extendedProps.hiddenValue; 
 					
 		var ShowingVO = {showingSq : showingSq};
-		// 회차 정보 가져오기
+		  // 회차 정보 가져오기
 		  $.ajax({
 		    url: "${pageContext.request.contextPath}/showing/remainingSeats",
 		    type: "post",
