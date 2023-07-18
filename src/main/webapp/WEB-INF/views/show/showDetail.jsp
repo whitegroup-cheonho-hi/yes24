@@ -176,7 +176,7 @@
 									<div aria-labelledby="fc-dom-86"
 										class="fc-view-harness fc-view-harness-active"
 										style="height: 288.889px;">
-										<div class="fc-listDay-view fc-view fc-list fc-list-sticky">
+										<div id="remainingSeat" class="fc-listDay-view fc-view fc-list fc-list-sticky">
 											
 										</div>
 									</div>
@@ -284,7 +284,22 @@ $(document).ready(function() {
 		    
 		    dataType: "json",
 		    success: function(result) {		          	     
-		               	  
+		               	  console.log(result);
+			    var Seat = $("#remainingSeat");          	  
+			    for (let index in result.data) {
+			        if (result.data.hasOwnProperty(index)) {
+			            //금액 포맷
+			        	var seatPriceFormatted = new Intl.NumberFormat('ko-KR').format(result.data[index].seatPrice);
+
+			            var item = '<div>' + result.data[index].seatClass +'석'			            
+			            	item += '&nbsp;&nbsp;';
+			            	item += seatPriceFormatted  +'원';
+			            	item += '&nbsp;&nbsp;';
+			            	item += '잔여 : ('+result.data[index].seatEa +'석)';
+			            	item +='</div>';
+			            Seat.append(item);
+			        }
+			    }
 		    },
 		    error: function(XHR, status, error) {
 		      console.error(status + " : " + error);

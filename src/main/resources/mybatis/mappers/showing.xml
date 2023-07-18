@@ -273,5 +273,83 @@
 		]]>
 		
 	</delete>
+	
+	<!-- 잔여좌석 가져오기 -->
+	<select id="getRemainingSeats" parameterType="ShowingVO" resultType="RemainingSeatsVO">
+		
+		<![CDATA[
+		
+			  SELECT
+				    seat_class      AS seatclass,
+				    seat_class_sq   AS seatclasssq,
+				    seat_price      AS seatprice,
+				    COUNT(*) AS seatea
+				FROM
+				    (
+				        SELECT
+				            c.seat_class,
+				            a.seat_no,
+				            c.seat_class_sq,
+				            c.seat_price
+				        FROM
+				            seat a
+				            INNER JOIN show_seat b ON a.seat_sq = b.seat_sq
+				            INNER JOIN seat_class c ON b.seat_class_sq = c.seat_class_sq
+				        WHERE
+				            concert_hall_sq = (
+				                SELECT
+				                    concert_hall_sq
+				                FROM
+				                    show
+				                WHERE
+				                    show_sq = (
+				                        SELECT
+				                            show_sq
+				                        FROM
+				                            showing
+				                        WHERE
+				                            showing_sq = #{showingSq}
+				                    )
+				            )
+				        MINUS
+				        SELECT DISTINCT
+				            i.seat_class,
+				            j.showing_seat_no,
+				            j.seat_class_sq,
+				            i.seat_price
+				        FROM
+				            seat_class i
+				            INNER JOIN (
+				                SELECT
+				                    a.show_sq,
+				                    b.showing_seat_no,
+				                    b.seat_class_sq
+				                FROM
+				                    show a
+				                    INNER JOIN (
+				                        SELECT
+				                            show_sq,
+				                            showing_seat_no,
+				                            seat_class_sq
+				                        FROM
+				                            showing a
+				                            INNER JOIN showing_seat b ON a.showing_sq = b.showing_sq
+				                        WHERE
+				                            b.showing_sq = #{showingSq}
+				                    ) b ON a.show_sq = b.show_sq
+				            ) j ON i.seat_class_sq = j.seat_class_sq
+				    ) 
+				GROUP BY
+				    seat_class,
+				    seat_class_sq,
+				    seat_price
+				ORDER BY
+				    seat_class_sq
+				    
+		]]>
+	
+	
+	</select>
+	
 
 </mapper>

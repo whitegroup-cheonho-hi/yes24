@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yes24.service.ShowingService;
 import com.yes24.vo.JsonResult;
+import com.yes24.vo.RemainingSeatsVO;
 import com.yes24.vo.ShowingVO;
 
 @Controller
@@ -42,11 +43,11 @@ public class ShowingController {
 	public JsonResult getRemainingSeats(@ModelAttribute ShowingVO vo) {
 		System.out.println("getRemainingSeats()");
 		
-		System.out.println(vo);
-
+		List<RemainingSeatsVO> remainingSeatsList = showingService.getRemainingSeats(vo);
+			
 		JsonResult jsonResult = new JsonResult();
 
-		//jsonResult.success(showingList);
+		jsonResult.success(remainingSeatsList);
 
 		return jsonResult;
 

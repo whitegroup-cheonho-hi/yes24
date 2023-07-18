@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.yes24.vo.RemainingSeatsVO;
 import com.yes24.vo.ShowingVO;
 
 @Repository
@@ -19,5 +20,12 @@ public class ShowingDAO {
 		System.out.println("getShowing DAO()");
 
 		return sqlSession.selectList("showing.getShowing", vo);
+	}
+
+	// 잔여좌석 가지고오기
+	public List<RemainingSeatsVO> getRemainingSeats(ShowingVO vo) {
+		System.out.println("getRemainingSeats DAO()");
+
+		return sqlSession.selectList("showing.getRemainingSeats", vo);
 	}
 }
