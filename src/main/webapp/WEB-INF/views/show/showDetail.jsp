@@ -49,8 +49,10 @@
 .position #calendar .fc-view-harness .fc-col-header .fc-col-header-cell{width:55px;}
 .position #calendar .fc-scrollgrid-section .fc-scrollgrid-sync-table tbody .fc-day{width:55px;}
 .fc .fc-daygrid-body-unbalanced .fc-daygrid-day-events {min-height: 0em;}
+#fc-dom-87{border-bottom: solid 2px;}
+#remaining{border: 1px solid #ddd;height: 200px;margin-top: 15px;padding: 10px; }
 #remainingSeats h2{height: 55px;}
-#remainingSeats .fc-view-harness{border: solid 1px;}
+#remainingSeats .fc-view-harness{padding: 10px;}
 </style>
 </head>
 <body>
@@ -170,14 +172,16 @@
 								<div id="remainingSeats"> 		
 									<div class="fc-header-toolbar fc-toolbar ">
 										<div class="fc-toolbar-chunk">
-											<h2 class="fc-toolbar-title" id="fc-dom-86">예매가능 좌석</h2>
+											<h2 class="fc-toolbar-title" id="fc-dom-87">예매가능 좌석</h2>
 										</div>										
 									</div>
 									<div aria-labelledby="fc-dom-86"
 										class="fc-view-harness fc-view-harness-active"
 										style="height: 288.889px;">
-										<div id="remainingSeat" class="fc-listDay-view fc-view fc-list fc-list-sticky">
-											
+										<div>										
+										</div>
+										<div id ="remaining">
+											<div id="remainingSeat" class="fc-listDay-view fc-view fc-list fc-list-sticky"></div>
 										</div>
 									</div>
 								</div>
@@ -209,40 +213,21 @@ $(document).ready(function() {
 	let dayListEl;
 	let dayList;
 	let date;
+	// 오늘날짜
+	var currentDate = new Date();
+	var formattedDate = currentDate.toISOString().split('T')[0];
+	// 페리이 로드되면 오늘날짜로 회차정보 가지고오기
+	getShowingInfo(formattedDate);
 	
-	function dayEvent(date) { // 날짜를 클릭하면 데이터 가져오기
+	// 날짜를 클릭하면 데이터 가져오기
+	function dayEvent(date) { 
 		  console.log(date);
 		  dayList.removeAllEvents();
-
-		  const ShowingVO = { showingDate: date, showSq: '${show.showSq}' }; // ShowingVO 객체를 생성하고 데이터 할당
-		  console.log(ShowingVO);
-
-		  // 회차 정보 가져오기
-		  $.ajax({
-		    url: "${pageContext.request.contextPath}/showing/getShowing",
-		    type: "post",
-		    //contentType: "application/json",
-		    data: ShowingVO,
-		    
-		    dataType: "json",
-		    success: function(result) {		          	     
-		      for(var i = 0; i < result.data.length; i++){
-		    	  var startTime =result.data[i].showingDate+'T'+result.data[i].startTime;
-		    	  var endTime =result.data[i].showingDate+'T'+result.data[i].endTime;
-		    	  var showingSq =  result.data[i].showingSq;		  
-		    	  dayList.addEvent({
-						// DB연결해서 데이터 불러오는 영역
-						title : [i+1]+'회차',
-						start : startTime,						
-						end : endTime,
-						hiddenValue: showingSq
-					});
-              }   	  
-		    },
-		    error: function(XHR, status, error) {
-		      console.error(status + " : " + error);
-		    }
-		  });
+		  var Seat = $("#remainingSeat");
+	      // 회차클릭시 잔여좌석 비우기
+	      Seat.empty();	
+		  getShowingInfo(date);
+		 
 		}
 
 	// 달력 초기화
@@ -272,6 +257,9 @@ $(document).ready(function() {
 		timeZone : 'local',
 		initialDate : moment().toDate(),
 		eventClick : function(arg) {
+    	var Seat = $("#remainingSeat");
+    	// 회차클릭시 잔여좌석 비우기
+    	Seat.empty();
 		var showingSq = arg.event.extendedProps.hiddenValue; 
 					
 		var ShowingVO = {showingSq : showingSq};
@@ -285,17 +273,17 @@ $(document).ready(function() {
 		    dataType: "json",
 		    success: function(result) {		          	     
 		               	  console.log(result);
-			    var Seat = $("#remainingSeat");          	  
+			   
 			    for (let index in result.data) {
 			        if (result.data.hasOwnProperty(index)) {
 			            //금액 포맷
 			        	var seatPriceFormatted = new Intl.NumberFormat('ko-KR').format(result.data[index].seatPrice);
 
-			            var item = '<div>' + result.data[index].seatClass +'석'			            
+			            var item = '<div style="margin-bottom: 5px;">' + result.data[index].seatClass +'석'			            
 			            	item += '&nbsp;&nbsp;';
 			            	item += seatPriceFormatted  +'원';
 			            	item += '&nbsp;&nbsp;';
-			            	item += '잔여 : ('+result.data[index].seatEa +'석)';
+			            	item += '<span style="color: orange"> 잔여 : ('+result.data[index].seatEa +'석)</span>';
 			            	item +='</div>';
 			            Seat.append(item);
 			        }
@@ -305,8 +293,6 @@ $(document).ready(function() {
 		      console.error(status + " : " + error);
 		    }
 		  });
-		
-			
 		}
 	});
 	dayList.render();
@@ -364,6 +350,38 @@ $(document).ready(function() {
 			map.setCenter(coords);
 		}
 	});
+	
+	// 날짜로 회차 데이터 가져오기
+	function getShowingInfo(date) {
+			console.log("호출");
+		  var ShowingVO = { showingDate: date, showSq: '${show.showSq}'};
+		  console.log(ShowingVO);
+		  $.ajax({
+		    url: "${pageContext.request.contextPath}/showing/getShowing",
+		    type: "post",
+		    //contentType: "application/json",
+		    data: ShowingVO,
+		    dataType: "json",
+		    success: function(result) {
+		    	console.log(result);
+		      for (var i = 0; i < result.data.length; i++) {
+		        var startTime = result.data[i].showingDate + 'T' + result.data[i].startTime;
+		        var endTime = result.data[i].showingDate + 'T' + result.data[i].endTime;
+		        var showingSq = result.data[i].showingSq;
+		        dayList.addEvent({
+		          title: [i + 1] + '회차',
+		          start: startTime,
+		          end: endTime,
+		          hiddenValue: showingSq
+		        });
+		      }
+		    },
+		    error: function(XHR, status, error) {
+		      console.error(status + " : " + error);
+		    }
+		  });
+		}
+	
 });
 </script>
 </html>
