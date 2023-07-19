@@ -30,4 +30,15 @@ public class TestService {
 		System.out.println("InsertShowing Service()");
 		return testdao.InsertShowing(vo);
 	}
+	//회차 삭제
+	public int DeleteShowing(String showingSq) {
+		System.out.println("DeleteShowing Service()");
+		return testdao.DeleteShowing(showingSq);
+	}
+	// 월별 공연일정
+		public List<String> getShowingDay(int showSq){
+			System.out.println("getShowingDay Service()");
+			List<String> list = testdao.getShowingDay(showSq);
+			return list;
+		}
 }

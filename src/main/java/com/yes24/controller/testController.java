@@ -128,11 +128,11 @@ public class testController {
 		@ResponseBody
 		@RequestMapping(value = "/getShowing", method = RequestMethod.POST)
 		public JsonResult getShowing(@ModelAttribute ShowingVO vo) {
-		    //System.out.println("getShowing()");
 		    //System.out.println(vo);
 		    List<ShowingVO> showingList = testservice.getShowing(vo);
 		    JsonResult jsonResult = new JsonResult();
 		    jsonResult.success(showingList);
+		    System.out.println("getShowing()");
 		    System.out.println(showingList);
 		    return jsonResult;
 	   }
@@ -143,11 +143,45 @@ public class testController {
 			System.out.println("InsertShowing()");
 			//System.out.println(vo);
 			//List<ShowingVO> showingList = testservice.getShowing(vo);
-			int no = testservice.InsertShowing(vo);
+			int cnt = testservice.InsertShowing(vo);
 			JsonResult jsonResult = new JsonResult();
-			System.out.println(no);
-			jsonResult.success(no);
+			System.out.println(cnt);
+			jsonResult.success(cnt);
 			return jsonResult;
 		}
+		
+		@ResponseBody
+		@RequestMapping(value = "/DeleteShowing", method = RequestMethod.POST)
+		public JsonResult DeleteShowing(@RequestParam("showingSq") String showingSq) {
+			System.out.println("DeleteShowing()");
+			int cnt = testservice.DeleteShowing(showingSq);
+			JsonResult jsonResult = new JsonResult();
+			System.out.println(cnt);
+			jsonResult.success(cnt);
+			return jsonResult;
+		}
+		
+		@ResponseBody
+		@RequestMapping(value = "getShowingDay", method = RequestMethod.POST)
+		public JsonResult getShowingDay(@RequestParam("showSq") int showSq) {
+			System.out.println("getShowingDay()");
+			List<String> dayList = testservice.getShowingDay(showSq);
+			JsonResult jsonResult = new JsonResult();
+			System.out.println(dayList);
+			jsonResult.success(dayList);
+			return jsonResult;
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 
 }

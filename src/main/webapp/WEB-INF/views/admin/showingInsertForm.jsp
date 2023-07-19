@@ -142,178 +142,215 @@
 	
 </body>
 <script>
-	$(document).ready(function() {
-		let dayListEl;
-		let dayList;
-		let date;
-		//let showName = '${show.showName}';
+$(document).ready(function() {
+	let calendar;
+	let dayListEl;
+	let dayList;
+	let date;
+	let showingSq;
+	let showSq = '${show.showSq}';
+	
+	function getShowingDay() {
+        console.log('getShowingDay');
+        calendar.removeAllEvents();
+      	//ajax 한달 공연 스케쥴 불러오기
+		console.log(showSq);
+		$.ajax({
+	        url: "${pageContext.request.contextPath}/show1/getShowingDay",
+	        type: "post",
+	        //contentType: "application/json",
+	        data: {showSq : showSq},
+	        dataType: "json",
+	        //성공시
+	        success: function(result) {
+		        console.log("ajax");
+		        console.log(result);
+		        console.log(result.data[0]);
+		        console.log(result.data[1]);
+		        console.log(result.data[2]);
+		        for(var i = 0; i < result.data.length; i++){
+		        	calendar.addEvent({
+		    			//title: '백그라운드 색상',
+		                start: result.data[i],
+		                //start: '2023-07-28',
+		                display: 'background', // 백그라운드 색상을 표시하는 옵션
+		                color: '#FF0000' // 원하는 색상 값으로 변경
+		            });
+		        }
+	        },
+	        error: function(XHR, status, error) {
+	        	console.error(status + " : " + error);
+	        }
+	    });
+	}
+	
+	function dayEvent(date) { // 날짜를 클릭하면 데이터 가져오기
+        console.log(date);
+        dayList.removeAllEvents();
 
-		/* function dayEvent(date) { // 날짜누르면 데이터 가지고오기
-			// console.log(date);
-			dayList.removeAllEvents();
-			dayList.addEvent({
-				// DB연결해서 데이터 불러오는 영역
-				title : '오페라의 유령 1회',
-				start : '2023-07-12T11:30:00',
-				end : '2023-07-12T14:00:00'
-			});
-			dayList.render();
-		}
-		 */
-		
-		function dayEvent(date) { // 날짜를 클릭하면 데이터 가져오기
-	        console.log(date);
-	        dayList.removeAllEvents();
+        const ShowingVO = { showingDate: date, showSq: '${show.showSq}' }; // ShowingVO 객체를 생성하고 데이터 할당
+        /* console.log(ShowingVO); */
 
-	        const ShowingVO = { showingDate: date, showSq: '${show.showSq}' }; // ShowingVO 객체를 생성하고 데이터 할당
-	        /* console.log(ShowingVO); */
-
-	        // 회차 정보 가져오기
-	        $.ajax({
-	          url: "${pageContext.request.contextPath}/show1/getShowing",
-	          type: "post",
-	          //contentType: "application/json",
-	          data: ShowingVO,
-	          
-	          dataType: "json",
-	          success: function(result) {    
-	        	console.log(result);
-	            for(var i = 0; i < result.data.length; i++){
-	            	var showname = result.data[i].showName;
-	               	var startTime =result.data[i].showingDate+'T'+result.data[i].startTime;
-	               	var endTime =result.data[i].showingDate+'T'+result.data[i].endTime;
-	               	var showingSq =  result.data[i].showingSq;
-	               	dayList.addEvent({
-	                  // DB연결해서 데이터 불러오는 영역
-	                  title : showname + ' ' + [i+1] + '회차',
-	                  start : startTime,                  
-	                  end : endTime,
-	                  hiddenValue: showingSq
-	               });
-	              }        
-	          },
-	          error: function(XHR, status, error) {
-	            console.error(status + " : " + error);
-	          }
-	        });
-			dayList.render();
-	      }
-		 
-		//모달창 오픈 버튼 클릭		 
-		function insertEvent(arg) { 
-			// ShowingVO 객체를 생성하고 데이터 할당
-			/* const VO = { 
-				showName: '${show.showName}' 
-			};  */
-		
-			//모달창 열기&초기화
-			$('#myModal').modal('show');
-			$('#title').val('${show.showName}');
-			$('#startTime').val('');
-			$('#endTime').val('');
-		}
-		
-		//회차 삭제이벤트
-		function deleteEvent(arg) {
-			$('#btnDelete').on("click", function() {
-				console.log(arg.event.extendedProps.hiddenValue);
-			});
-		}
-		
-		//ajax 회차등록 클릭 이벤트
-		$('#btnInsert').on("click",	function() {
-			const VO = { 
-					showingDate: date, showSq: '${show.showSq}', showName: '${show.showName}' 
-				}; 
-			/* console.log($('#startTime').val());
-			console.log($('#endTime').val()); */
-			//데이터 모으기
-			var startTime = date + '-' + $('#startTime').val();
-			var endTime = date + '-' + $('#endTime').val();
-			var ShowingVO = {
-					showSq: VO.showSq,
-					showingDate: VO.showingDate,
-					startTime: startTime,
-					endTime: endTime,
-					showName: VO.showName
-			}
-			console.log(ShowingVO);
-			// VO 넘기기
-	        $.ajax({
-	          url: "${pageContext.request.contextPath}/show1/InsertShowing",
-	          type: "post",
-	          //contentType: "application/json",
-	          data: ShowingVO,
-	          
-	          dataType: "json",
-	          success: function(result) {
-	        	  console.log("ajax");
-	        	  dayEvent(date);
-	          },
-	          error: function(XHR, status, error) {
-	            console.error(status + " : " + error);
-	          }
-	        });
+        // 회차 정보 가져오기
+        $.ajax({
+          url: "${pageContext.request.contextPath}/show1/getShowing",
+          type: "post",
+          //contentType: "application/json",
+          data: ShowingVO,
+          
+          dataType: "json",
+          success: function(result) {    
+        	console.log(result);
+            for(var i = 0; i < result.data.length; i++){
+            	var showname = result.data[i].showName;
+               	var startTime =result.data[i].showingDate+'T'+result.data[i].startTime;
+               	var endTime =result.data[i].showingDate+'T'+result.data[i].endTime;
+               	var showingSq =  result.data[i].showingSq;
+               	dayList.addEvent({
+                  // DB연결해서 데이터 불러오는 영역
+                  title : showname + ' ' + [i+1] + '회차',
+                  start : startTime,                  
+                  end : endTime,
+                  hiddenValue: showingSq
+               });
+              }        
+          },
+          error: function(XHR, status, error) {
+            console.error(status + " : " + error);
+          }
+        });
+		dayList.render();
+      }
+	 
+	//회차입력 모달창 오픈		 
+	function insertEvent(arg) { 
+		//모달창 열기&초기화
+		$('#myModal').modal('show');
+		$('#title').val('${show.showName}');
+		$('#startTime').val('');
+		$('#endTime').val('');
+		$('#btnInsert').show();
+        $('#btnDelete').hide();
+	}
+	
+	//회차삭제 모달창 오픈		 
+	function deleteEvent(arg) {
+		$('#myModal').modal('show');
+		$('#title').val(arg.event.title);
+		$('#startTime').val(moment(arg.event.start).format('HH:mm'));
+		$('#endTime').val(moment(arg.event.end).format('HH:mm'));
+		$('#btnInsert').hide();
+        $('#btnDelete').show();
+	}
+		//ajax 회차삭제 클릭 이벤트
+		$('#btnDelete').on("click", function() {
+			console.log(showingSq);
+			$.ajax({
+		        url: "${pageContext.request.contextPath}/show1/DeleteShowing",
+		        type: "post",
+		        //contentType: "application/json",
+		        data: {showingSq : showingSq},
+		        dataType: "json",
+		        success: function(result) {
+		        console.log("ajax");
+		        dayEvent(date);
+		        },
+		        error: function(XHR, status, error) {
+		        	console.error(status + " : " + error);
+		        }
+		    });
 			//dayList.render();
 			$("#myModal").modal("hide");
+			getShowingDay();
 		});
+	
+	//ajax 회차등록 클릭 이벤트
+	$('#btnInsert').on("click",	function() {
+		const VO = { 
+				showingDate: date, showSq: '${show.showSq}', showName: '${show.showName}' 
+			}; 
+		/* console.log($('#startTime').val());
+		console.log($('#endTime').val()); */
+		//데이터 모으기
+		var startTime = date + '-' + $('#startTime').val();
+		var endTime = date + '-' + $('#endTime').val();
+		var ShowingVO = {
+				showSq: VO.showSq,
+				showingDate: VO.showingDate,
+				startTime: startTime,
+				endTime: endTime,
+				showName: VO.showName
+		}
+		console.log(ShowingVO);
+		// VO 넘기기
+        $.ajax({
+          url: "${pageContext.request.contextPath}/show1/InsertShowing",
+          type: "post",
+          //contentType: "application/json",
+          data: ShowingVO,
+          
+          dataType: "json",
+          success: function(result) {
+        	  console.log("ajax");
+        	  dayEvent(date);
+          },
+          error: function(XHR, status, error) {
+            console.error(status + " : " + error);
+          }
+        });
+		//dayList.render();
+		$("#myModal").modal("hide");
+		getShowingDay();
+	});
 
-		// 달력 초기화
-		var calendarEl = $('#calendar')[0];
-		var calendar = new FullCalendar.Calendar(calendarEl, {
-			initialView : 'dayGridMonth',
-			selectable : true,
-			// dateClick: true,
-			locale : 'ko',
-			timeZone : 'ko',
-			dateClick : function(arg) {
-				//console.log(arg);
-				date = moment(arg.date).format("YYYY-MM-DD");
-				// date = arg.dateStr;
-				dayEvent(date);
-				dayList.gotoDate(date);
-			}
-		});
-		calendar.render();
+	// 달력 초기화
+	var calendarEl = $('#calendar')[0];
+	calendar = new FullCalendar.Calendar(calendarEl, {
+		initialView : 'dayGridMonth',
+		selectable : true,
+		// dateClick: true,
+		locale : 'ko',
+		timeZone : 'ko',
+		dateClick : function(arg) {
+			date = moment(arg.date).format("YYYY-MM-DD");
+			// date = arg.dateStr;
+			dayEvent(date);
+			dayList.gotoDate(date);
+			console.log(date);
+		},
+	});
+	calendar.render();
+	getShowingDay();
 
-		// 리스트 초기화
-		dayListEl = $('#dayList')[0];
-		dayList = new FullCalendar.Calendar(dayListEl, {
-			initialView : 'listDay',
-			locale : 'ko',
-			timeZone : 'local',
-			initialDate : moment().toDate(),
-			eventClick : function(arg) {
-				/* console.log(arg.event.title); // 클릭한 이벤트의 타이틀
-				console.log(arg.event.start); // 클릭한 이벤트의 시작 시간
-				console.log(arg.event.end); // 클릭한 이벤트의 종료 시간 */
-				console.log('hiddenValue');
-				var showingSq = arg.event.extendedProps.hiddenValue; 
-				console.log(showingSq);
-				$('#myModal').modal('show');
-				$('#title').val(arg.event.title);
-				$('#startTime').val(moment(arg.event.start).format('HH:mm'));
-				$('#endTime').val(moment(arg.event.end).format('HH:mm'));
-				$('#btnInsert').hide();
-		        $('#btnDelete').show();
-			},
-			headerToolbar : {
-				center : 'addEventButton'
-			},
-			customButtons : {
-				addEventButton : {
-					text : "회차추가",
-					click : function(arg) {
-						console.log("회차추가");
-						console.log(date);
-						/* console.log(arg); */
-						insertEvent(arg);
-						$('#btnInsert').show();
-		                $('#btnDelete').hide();
-					}
+	// 리스트 초기화
+	dayListEl = $('#dayList')[0];
+	dayList = new FullCalendar.Calendar(dayListEl, {
+		initialView : 'listDay',
+		locale : 'ko',
+		timeZone : 'local',
+		initialDate : moment().toDate(),
+		eventClick : function(arg) {
+			showingSq = arg.event.extendedProps.hiddenValue;
+			/* console.log(arg.event.title); // 클릭한 이벤트의 타이틀
+			console.log(arg.event.start); // 클릭한 이벤트의 시작 시간
+			console.log(arg.event.end); // 클릭한 이벤트의 종료 시간 */
+			//console.log(date);
+	        deleteEvent(arg);
+		},
+		headerToolbar : {
+			center : 'addEventButton'
+		},
+		customButtons : {
+			addEventButton : {
+				text : "회차추가",
+				click : function(arg) {
+					console.log("회차추가");
+					/* console.log(arg); */
+					insertEvent(arg);
 				}
 			}
-		});
+		}
 	});
+});
 </script>
 </html>

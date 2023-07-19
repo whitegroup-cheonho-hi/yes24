@@ -47,11 +47,11 @@
 				FROM 
 					showing w, show s
 				where 
-					s.show_sq = #{showSq}
+					w.show_sq = s.show_sq and s.show_sq = #{showSq}
 			     AND 
 			        to_char(w.showing_date, 'YYYY-MM-DD') = #{showingDate}
 			ORDER BY 
-			   		w.showing_date
+			   		w.start_time
 		]]>
 	</select>
 
@@ -85,6 +85,35 @@
 		]]>
 
 	</insert>
+	
+	<!-- 공연좌석삭제 -->
+	<delete id="deleteShowing" parameterType="int">
+	
+		<![CDATA[
+		
+			DELETE FROM showing WHERE showing_sq = #{showingSq}
+				    
+		]]>
+		
+	</delete>
+
+	<!-- 월별 공연일정 가져오기 -->
+	<select id="getShowingDay" parameterType="int" resultType="String">
+	
+		<![CDATA[
+		
+			SELECT 
+				TO_CHAR(showing_date, 'YYYY-MM-DD') AS showing_date     
+			FROM
+				showing
+			WHERE
+				show_sq = #{showSq}
+			GROUP BY 
+				showing_date
+				    
+		]]>
+		
+	</select>
 	
 	<!-- 공연수정 -->
 	<update id="updateShow" parameterType="ShowVO">
