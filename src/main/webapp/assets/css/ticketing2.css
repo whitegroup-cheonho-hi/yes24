@@ -50,7 +50,7 @@ a.hover:hover{ text-decoration:underline;}
 .scroll_pop2{height:178px; overflow:auto; overflow-x:hidden;}  
 a:link{color:#888888;text-decoration:none}
 a:visited{color:#888888;text-decoration:none}
-a:hover{color:#888888;text-decoration:none}
+a:hover{color:#fff; text-decoration:none}
 
 .btn{ margin:15px 0; height:28px; }
 .btn span{ font-weight:bold;}
@@ -185,7 +185,7 @@ table.sale_table tbody td.select a{color:#FFF}
 
 
 /* 결과창 */
-.result{ float:right; width:260px; _width:250px; height:600px; margin-top:-55px;}
+.result{ float:right; width:260px; _width:250px; height:656px; margin-top:-60px;}
 .result div.btn{ margin:5px 0;}
 
 .srch_box{ border:1px solid #CCC; padding:8px; margin:5px 10px; display:inline-block; position:relative;}

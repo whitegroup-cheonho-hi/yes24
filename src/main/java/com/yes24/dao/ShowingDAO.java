@@ -21,7 +21,14 @@ public class ShowingDAO {
 	public List<ShowingVO> getShowing(ShowingVO vo) {
 		System.out.println("getShowing DAO()");
 
-		return sqlSession.selectList("showing.getShowing", vo);
+		return sqlSession.selectList("showing.getShowings", vo);
+	}
+
+	// 회차 정보 가져오기
+	public ShowingVO getShowing(int no) {
+		System.out.println("getShowing DAO()");
+
+		return sqlSession.selectOne("showing.getShowing", no);
 	}
 
 	// 회차좌석에 예매된 자석 가져오기 -- 예매된 좌석 비활성화 시키기위해

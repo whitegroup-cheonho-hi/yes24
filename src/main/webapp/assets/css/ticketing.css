@@ -5,7 +5,6 @@ h1,h2,h3,h4,h5,h6{font-size:1em}
 html{overflow-y:scroll;height:100%; }
 body{width:970PX;height:590px;font-size:75%;  line-height:16px;}
 body,input,textarea,select,button,table{font-family:'돋움',dotum,AppleGothic,Vendara;color:#888888}
-
 ol,ul{list-style:none outside none}
 img,fieldset{border:0 none;vertical-align:middle/* cursor:pointer; */}
 em,address{font-style:normal}
@@ -95,7 +94,6 @@ a:hover{color:#888888;text-decoration:none}
 .m05.on{background-position:-480px -52px !important;}
 
 .container{ float:left; width:690px; height:555px; background-color:#FFFFFF; padding:10px;}
-.container h2{ padding:4px 4px 4px 12px; background:url(https://stkfile.yes24.com/img/perfsale/bg_tit.gif) repeat-x; border-bottom:1px solid #bebebe; display:block; height:17px; }
 .container h2 span{ float:right; margin-top:3px; *margin-top:-13px;}
 
 .step01_date{ width:265px; height:365px;  border:1px solid #bebebe; float:left; margin-bottom:20px;}
@@ -194,7 +192,7 @@ table.sale_table tbody td.select a{color:#FFF}
 
 
 /* 결과창 */
-.result{ float:right; width:260px; _width:250px; height:600px; margin-top:-55px;}
+.result{ float:right; width:260px; _width:250px; height:656px; margin-top:-60px;}
 .result div.btn{ margin:5px 0;}
 
 .srch_box{ border:1px solid #CCC; padding:8px; margin:5px 10px; display:inline-block; position:relative;}
@@ -280,7 +278,7 @@ table.sale_table tbody td.select a{color:#FFF}
 
 
 /* 주의사항 */
-.caution{ border:1px solid #dddddd; padding:5px 7px 0px 7px; background-color:#f7f7f8; margin-bottom:3px;}
+.caution{ border:1px solid #dddddd; background-color:#f7f7f8; margin-bottom:3px;}
 .caution h5{ font:bold 11px 돋움; margin-bottom:8px;}
 .caution ul{ margin:0;}
 .caution ul li {line-height:1.3em;padding:0 !important;}

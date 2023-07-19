@@ -23,6 +23,13 @@
 #guideview {margin-left: 25px;}
 .step01_date {height: 417px;}
 .step01_time {height: 417px;}
+#header{background-color: #363636;}
+.result{background-color: #363636; color : #fff}
+#ptitle a{color: #FFFFFF; font-size: 15px;}
+.select_infor{height: 422px;}
+.select_infor h2{font-size: 15px;}
+#StepCtrlBtn01 img{width: 240px;}
+#day,#tk_day{font-size: 15px;}
 #ContentsArea .position{width: 665px; height: 374px;display: flex;padding: 10px;}
 #ContentsArea .position h2{font-size: 15px; background:none; border:none;}
 #ContentsArea .position #calendar{margin-right: 20px; width: 238px;}
@@ -49,7 +56,7 @@
 <body>
 	<div id="header" class="header">
 		<h1>
-			<img src="${pageContext.request.contextPath}/assets/images/로고.png"
+			<img src="${pageContext.request.contextPath}/assets/images/로고2.PNG"
 				alt="YES24.com">
 		</h1>
 		<ul class="gnb">
@@ -145,31 +152,15 @@
 					id="hiddenDisplayRemainSeat" type="hidden" value="0">
 			</div>
 			<div class="select_infor">
-				<h3>
-					<img src="http://tkfile.yes24.com/img/perfsale/h3_tit_result01.gif"
-						alt="선택내역">
-				</h3>
+				<h2>
+					선택내역
+				</h2>
+				<br>
 				<ul>
-					<li><em><img
-							src="http://tkfile.yes24.com/img/perfsale/r_tit01.gif" alt="날짜"></em><span
+					<li><em id="day">날짜</em><span
 						id="tk_day">2023.08.19 (토)</span></li>
 				</ul>
-			</div>
-			<div class="pay_infor">
-				<h3>
-					<img src="http://tkfile.yes24.com/img/perfsale/h3_tit_result02.gif"
-						alt="결제내역">
-				</h3>
-				<div class="link01">
-					<ul>
-						<li class="tk_price"><em><img
-								src="http://tkfile.yes24.com/img/perfsale/r_tit05.gif"
-								alt="티켓금액"></em><span>0</span></li>
-
-					</ul>
-				</div>
-			</div>
-			<span class="t_result">0<span>원</span></span>
+			</div>		
 			<div class="btn">
 				<div id="StepCtrlBtnPanel" class="tc">
 					<div id="StepCtrlBtn01" style="display: block;">

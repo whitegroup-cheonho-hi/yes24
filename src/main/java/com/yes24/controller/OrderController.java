@@ -54,11 +54,11 @@ public class OrderController {
 		
 		System.out.println(vo);
 		
-		Map<String, Object> map = showService.getShow(vo.getShowSq());
+		Map<String, Object> map = showService.getShow(vo);
 		model.addAttribute("SaveTicket", vo);
 		model.addAttribute("show", map.get("showVO"));
-		//model.addAttribute("concertHall", map.get("concertHallVO"));
-
+		model.addAttribute("showing", map.get("showing"));
+		
 		return "show/ticketing3";
 	}
 

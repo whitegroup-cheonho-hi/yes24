@@ -17,16 +17,22 @@
 <style>
 #guideview {margin-left: 25px;}
 .f_header {margin-top: 70px;margin-left: 10px;height: 34px;}
-#br {margin-bottom: 5px;}
+#br {margin-bottom: 5px;margin-left: 25px;}
+#header{background-color: #363636;}
+.result{background-color: #363636; color : #fff;}
+#ptitle a{color: #FFFFFF; font-size: 15px;}
+#brup{padding: 0;}
+.minimap_m h2{font-size: 15px;}
 .minimap_m>* {padding: 5px;}
-.ulLegend {height: 150px;border: solid 1px #ddd;width: 239px;}
+.ulLegend {height: 150px;width: 239px;}
 .gnb li {float: left;background:url("${pageContext.request.contextPath}/assets/images/예매순서.png");height: 52px;width: 120px;}
 .admRow {margin-top: 10px;height: 530px;}
-.admSpan {display: flex;justify-content: center;box-sizing: border-box;border: solid 1px #ebebeb;background-color: #fff;padding: 9px 14px 11px;line-height: 28px;display: flex;text-align: center;}
+.admSpan {display: flex;justify-content: center;box-sizing: border-box;background-color: #fff;padding: 9px 14px 11px;line-height: 28px;display: flex;text-align: center;}
 #container {border-top: solid 1px #fff;border-left: solid 1px #fff;align-items: center;display: none;}
 #container .item {color: black;}
 .item {width: 23px;height: 23px;background-color: #efdfdf;border-radius: 8px 8px 0 0;border: solid 1px #fff;text-align: center;font-size: 17px;box-sizing: border-box;}
-#cover {margin-top: 46px;}
+#cover {margin-top: 46px;background-color: lightgray;}
+#cover .admRow .admSpan{background-color: lightgray; margin-top: 40px;}
 .red {background-color: #e24647;}
 .pink {background-color: #dfa5ff;}
 .blue {background-color: #8fbfee;}
@@ -34,14 +40,16 @@
 .gray {background-color: gray;  pointer-events: none;}
 .check {background:url("${pageContext.request.contextPath}/assets/images/체크버튼.png");}
 #selFlashDateAll, #selFlashTime {font-size: 15px;}
-#ulLegend, #ulLegend2 {font-size: 14px;	color: black;}
-#screen{width: 690px;height: 60px;}
+#ulLegend, #ulLegend2 {font-size: 14px;	color: #fff;margin: auto; border: solid 1px #ec7d2c;}
+#screen{width: 690px;height: 50px;}
+#clearButton img{width: 240px; height: 37px; margin-left: 10px;}
+.btn{height:29px;}
 </style>
 </head>
 <body>
 	<div id="header" class="header">
 		<h1>
-			<img src="${pageContext.request.contextPath}/assets/images/로고.png"
+			<img src="${pageContext.request.contextPath}/assets/images/로고2.PNG"
 				alt="YES24.com">
 		</h1>
 		<ul class="gnb">
@@ -88,6 +96,9 @@
 			<form id="insertform" action="${pageContext.request.contextPath}/order/orderForm3" method="POST">
 			<input type="hidden" id="inputShowingSq" name="showingSq" value="">
 			<input type="hidden" id="showingSq" name="showSq" value="${show.showSq}">
+			<div id="insertformDiv">
+			
+			</div>
 			</form>
 		</div>
 
@@ -109,22 +120,22 @@
 				</div>
 				<div class="minimap_m">
 					<br>
-					<h4>좌석등급/가격</h4>
+					<h2>&nbsp;좌석등급/가격</h2>
 					<ul id="ulLegend" class="ulLegend">
 					</ul>
 					<!--  //좌석 등급/가격 -->
 					<!--  선택좌석 -->
 					<br>
-					<h4>선택좌석</h4>
+					<h2>&nbsp;선택좌석</h2>
 					<ul id="ulLegend2" class="ulLegend">
 					</ul>
 					<!--  //선택좌석 -->
 					<div class="btn"></div>
-					<div>
+					<div id="brup">
 						<p id="br">
 							<a id="prevButton" href="#none"><img
 								src="http://tkfile.yes24.com/images/ticket_new/btn_pre.gif"
-								alt="이전화면"></a> <a href="javascript:ChoiceReset();"><img
+								alt="이전화면"></a> <a id="reset" href="#none"><img
 								src="http://tkfile.yes24.com/images/ticket_new/btn_refresh.gif"
 								alt="좌석선택다시"></a>
 						</p>
@@ -236,7 +247,7 @@ $(document).ready(function() {
 	// 좌석 선택
 	$("#container").on("click", "button", function() {
 	  var seat = $(this).val();
-	  var insertform = $("#insertform");
+	  var insertform = $("#insertformDiv");
 	  var $seat = $("#" + seat);
 	  
 	  if ($seat.hasClass('check')) {
@@ -283,6 +294,15 @@ $(document).ready(function() {
 
 		// 추가 로직 작성
 	});
+	
+	// 좌석 리셋
+	$("#reset").on("click", function() {
+	  console.log("리셋");
+	  $("#container button").removeClass("check");
+	  $("#ulLegend2").empty();
+	  $("#insertformDiv").empty();
+	});
+	
 
 	//좌석선택완료 결제로
 	$("#clearButton").on("click", function(e) {

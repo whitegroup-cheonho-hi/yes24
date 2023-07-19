@@ -4,7 +4,7 @@
 <mapper namespace="showing">
 
 <!-- 회차정보가져오기 -->
-	<select id="getShowing" parameterType="ShowingVO" resultType="ShowingVO">
+	<select id="getShowings" parameterType="ShowingVO" resultType="ShowingVO">
 		
 		<![CDATA[
 		      SELECT 
@@ -374,6 +374,30 @@
 	
 	
 	</select>
+	
+	<!-- 회차 1개가져오기 -->
+	<select id="getShowing" parameterType="int" resultType="ShowingVO">
+		
+		<![CDATA[
+					  
+			  SELECT
+				    showing_sq         AS showingsq,
+				    TO_CHAR(showing_date, 'YYYY-MM-DD') AS showingdate,
+				    TO_CHAR(start_time, '""HH24"시 "MI"분') AS starttime,
+				    TO_CHAR(end_time, '""HH24"시 "MI"분') AS endtime,
+				    show_sq            AS showsq,
+				    show_information   AS showinformation,
+				    showing_stat       AS showingstat
+				FROM
+				    showing
+				WHERE
+				    showing_sq = #{showingSq}
+					
+		]]>
+	
+	
+	</select>
+	
 	
 	
 	<!-- 예매된 좌석정보 가져오기 showing_seat -->

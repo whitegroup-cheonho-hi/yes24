@@ -14,12 +14,15 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.yes24.dao.ConcertHallDAO;
 import com.yes24.dao.ShowDAO;
+import com.yes24.dao.ShowingDAO;
 import com.yes24.vo.ConcertHallVO;
+import com.yes24.vo.SaveTicketVO;
 import com.yes24.vo.SeatClassListVO;
 import com.yes24.vo.SeatClassVO;
 import com.yes24.vo.SeatVO;
 import com.yes24.vo.ShowSeatVO;
 import com.yes24.vo.ShowVO;
+import com.yes24.vo.ShowingVO;
 
 @Service
 public class ShowService {
@@ -30,6 +33,8 @@ public class ShowService {
 	private ShowVO showVO;
 	@Autowired
 	private ConcertHallDAO concertHallDAO;
+	@Autowired
+	private ShowingDAO showingDAO;
 
 	String saveDir = "C:/yes24/img/upload/";
 
@@ -227,6 +232,24 @@ public class ShowService {
 		map.put("concertHallVO", concertHallVO);
 		map.put("concertHallList", concertHallList);
 		map.put("seatClassList", SeatClassList);
+
+		return map;
+
+	}
+
+	// ------------------ 공연정보가져오기 필요없는 값 보내지 않기 위해 파라미터를 추가 수정예정
+	public Map<String, Object> getShow(SaveTicketVO vo) {
+		System.out.println("getShow Service()");
+		Map<String, Object> map = new HashMap<>();
+	
+		// 공연정보
+		showVO = showDAO.getShow(vo.getShowSq());
+
+		ShowingVO showing = showingDAO.getShowing(vo.getShowingSq());
+		
+		map.put("showVO", showVO);		
+		map.put("showing", showing);
+		
 
 		return map;
 
