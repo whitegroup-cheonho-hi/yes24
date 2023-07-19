@@ -11,7 +11,8 @@
 		<typeAlias alias="ReviewVO" type="com.yes24.vo.ReviewVO" />
 		<typeAlias alias="SeatClassListVO" type="com.yes24.vo.SeatClassListVO" />
 		<typeAlias alias="SeatClassVO" type="com.yes24.vo.SeatClassVO" />
-		<typeAlias alias="SeatVO" type="com.yes24.vo.SeatVO" />
+		<typeAlias alias="SeatVO" type="com.yes24.vo.SeatVO" />		
+		<typeAlias alias="ShowingSeatVO" type="com.yes24.vo.ShowingSeatVO" />
 		<typeAlias alias="ShowSeatVO" type="com.yes24.vo.ShowSeatVO" />
 		<typeAlias alias="ShowVO" type="com.yes24.vo.ShowVO" />
 		<typeAlias alias="ShowingVO" type="com.yes24.vo.ShowingVO" />

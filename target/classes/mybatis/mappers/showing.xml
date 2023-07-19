@@ -315,7 +315,7 @@
 	
 	</select>
 	
-	<!-- 티켓팅 -->
+	<!-- 회차리스트 -->
 	<select id="getShowingList" parameterType="int" resultType="ShowingVO">
 			
 		<![CDATA[
@@ -374,6 +374,31 @@
 	
 	
 	</select>
+	
+	
+	<!-- 예매된 좌석정보 가져오기 showing_seat -->
+	<select id="getShowingSeats" parameterType="int" resultType="ShowingSeatVO">
+		
+		<![CDATA[
+		
+			  SELECT
+				    showing_seat_sq AS showingSeatSq,
+				    showing_seat_no AS showingSeatNo,
+				    showing_seat_stat AS showingSeatStat,
+				    showing_sq AS showingSq,
+				    seat_class_sq AS seatClassSq
+				FROM
+				    showing_seat
+				WHERE
+				    showing_sq = #{showingSq}
+				ORDER BY
+				    showing_seat_sq
+		
+		]]>
+	
+	
+	</select>
+	
 	
 	<!-- 잔여좌석 갯수 가져오기 -->
 	<select id="getRemainingSeats" parameterType="ShowingVO" resultType="RemainingSeatsVO">

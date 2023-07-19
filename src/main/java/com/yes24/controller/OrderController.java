@@ -1,18 +1,18 @@
 package com.yes24.controller;
 
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.yes24.service.ShowService;
 import com.yes24.service.ShowingService;
-import com.yes24.vo.ShowingVO;
+import com.yes24.vo.SaveTicketVO;
 
 @Controller
 @RequestMapping("/order")
@@ -48,14 +48,16 @@ public class OrderController {
 		return "show/ticketing2";
 	}
 
-	@RequestMapping(value = "/orderForm3/{no}", method = RequestMethod.GET)
-	public String orderForm3(@PathVariable("no") int no, Model model) {
+	@RequestMapping(value = "/orderForm3", method = RequestMethod.POST)
+	public String orderForm3(@ModelAttribute SaveTicketVO vo,Model model) {
 		System.out.println("orderForm3()");
-
-		Map<String, Object> map = showService.getShow(no);
-
+		
+		System.out.println(vo);
+		
+		Map<String, Object> map = showService.getShow(vo.getShowSq());
+		model.addAttribute("SaveTicket", vo);
 		model.addAttribute("show", map.get("showVO"));
-		model.addAttribute("concertHall", map.get("concertHallVO"));
+		//model.addAttribute("concertHall", map.get("concertHallVO"));
 
 		return "show/ticketing3";
 	}

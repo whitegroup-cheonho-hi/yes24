@@ -1,6 +1,7 @@
 package com.yes24.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,7 +30,7 @@ public class ShowingController {
 	@RequestMapping(value = "/getShowing", method = RequestMethod.POST)
 	public JsonResult getShowing(@ModelAttribute ShowingVO vo) {
 		System.out.println("getShowing()");
-		
+
 		System.out.println(vo);
 
 		List<ShowingVO> showingList = showingService.getShowing(vo);
@@ -41,15 +42,15 @@ public class ShowingController {
 		return jsonResult;
 
 	}
-	
+
 	// ---------------------- 잔여좌석 가져오기
 	@ResponseBody
 	@RequestMapping(value = "/remainingSeats", method = RequestMethod.POST)
 	public JsonResult getRemainingSeats(@ModelAttribute ShowingVO vo) {
 		System.out.println("getRemainingSeats()");
-		
+
 		List<RemainingSeatsVO> remainingSeatsList = showingService.getRemainingSeats(vo);
-			
+
 		JsonResult jsonResult = new JsonResult();
 
 		jsonResult.success(remainingSeatsList);
@@ -57,39 +58,37 @@ public class ShowingController {
 		return jsonResult;
 
 	}
-	
+
 	// ---------------------- 공연회차리시트 가져오기
 	@ResponseBody
 	@RequestMapping(value = "/getShowingList", method = RequestMethod.POST)
 	public JsonResult getShowingList(@ModelAttribute ShowingVO vo) {
 		System.out.println("getShowingList()");
-		
+
 		List<ShowingVO> showingList = showingService.getShowingList(vo);
-		
+
 		JsonResult jsonResult = new JsonResult();
-		
+
 		jsonResult.success(showingList);
-		
+
 		return jsonResult;
 
 	}
-	
+
 	// ---------------------- 공연좌석리시트 가져오기
 	@ResponseBody
 	@RequestMapping(value = "/getShowSeatList", method = RequestMethod.POST)
-	public JsonResult getShowSeatList(@RequestParam("showSq")int no) {
+	public JsonResult getShowSeatList(@ModelAttribute ShowingVO vo) {
 		System.out.println("getShowSeatList()");
-
 		
-		List<SeatClassVO> seatClassList = showingService.getShowSeats(no);
-							
+		Map<String, Object> map = showingService.getShowSeats(vo);
+		
 		JsonResult jsonResult = new JsonResult();
 		
-		jsonResult.success(seatClassList);
+		jsonResult.success(map);
 		
 		return jsonResult;
 
 	}
-	
 
 }

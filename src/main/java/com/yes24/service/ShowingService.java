@@ -14,6 +14,7 @@ import com.yes24.vo.ConcertHallVO;
 import com.yes24.vo.RemainingSeatsVO;
 import com.yes24.vo.SeatClassVO;
 import com.yes24.vo.ShowVO;
+import com.yes24.vo.ShowingSeatVO;
 import com.yes24.vo.ShowingVO;
 
 @Service
@@ -74,10 +75,18 @@ public class ShowingService {
 	}
 
 	// 공연 좌석 가져오기
-	public List<SeatClassVO> getShowSeats(int no) {
+	public Map<String, Object> getShowSeats(ShowingVO vo) {
 		System.out.println("getShowSeats Service()");
+		Map<String, Object> map = new HashMap<>();
+		
+		List<SeatClassVO> seatClassList = showingDAO.getShowSeats(vo.getShowSq());
+		List<ShowingSeatVO> showingSeatList = showingDAO.getShowingSeats(vo.getShowingSq());
+		// 잔여좌석
+		map.put("seatClassList", seatClassList);
+		// 예매된 좌석
+		map.put("showingSeatList", showingSeatList);
 
-		return showingDAO.getShowSeats(no);
+		return map;
 	}
 
 }

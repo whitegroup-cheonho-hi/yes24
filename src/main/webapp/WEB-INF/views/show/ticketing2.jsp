@@ -16,26 +16,26 @@
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <style>
 #guideview {margin-left: 25px;}
-.f_header {margin-top: 70px;margin-left: 10px; height: 34px;}
+.f_header {margin-top: 70px;margin-left: 10px;height: 34px;}
 #br {margin-bottom: 5px;}
 .minimap_m>* {padding: 5px;}
-.ulLegend{height: 150px;border: solid 1px #ddd; width: 239px;}
-.gnb li{float:left;  background: url("${pageContext.request.contextPath}/assets/images/예매순서.png"); height:52px; width:120px;}
-.admRow{margin-top: 10px; height: 530px; }
-.admSpan{display: flex; justify-content: center; box-sizing: border-box; border: solid 1px #ebebeb; 
-background-color: #fff;padding: 9px 14px 11px; line-height: 28px; display: flex; text-align: center;}
-#container{border-top: solid 1px rgb(0, 0, 0); border-left: solid 1px rgb(0, 0, 0);align-items: center; display: none; }
-#container .item{color: black;}
-.item{ width: 30px; height: 30px; background-color:#efdfdf; border-right: solid 1px rgb(0, 0, 0); 
-border-bottom: solid 1px rgb(0, 0, 0); text-align: center; font-size: 17px; box-sizing: border-box; }
-#cover{margin-top: 46px;}
-.red{background-color: #e24647;}
-.pink{background-color: #dfa5ff;}
-.blue{background-color: #8fbfee;}
-.green{background-color: #a5ea7b;}
-.check{background-color:#fff;}
-#selFlashDateAll,#selFlashTime{font-size: 15px;}
-#ulLegend,#ulLegend2{font-size: 14px; color:black;}
+.ulLegend {height: 150px;border: solid 1px #ddd;width: 239px;}
+.gnb li {float: left;background:url("${pageContext.request.contextPath}/assets/images/예매순서.png");height: 52px;width: 120px;}
+.admRow {margin-top: 10px;height: 530px;}
+.admSpan {display: flex;justify-content: center;box-sizing: border-box;border: solid 1px #ebebeb;background-color: #fff;padding: 9px 14px 11px;line-height: 28px;display: flex;text-align: center;}
+#container {border-top: solid 1px #fff;border-left: solid 1px #fff;align-items: center;display: none;}
+#container .item {color: black;}
+.item {width: 23px;height: 23px;background-color: #efdfdf;border-radius: 8px 8px 0 0;border: solid 1px #fff;text-align: center;font-size: 17px;box-sizing: border-box;}
+#cover {margin-top: 46px;}
+.red {background-color: #e24647;}
+.pink {background-color: #dfa5ff;}
+.blue {background-color: #8fbfee;}
+.green {background-color: #a5ea7b;}
+.gray {background-color: gray;  pointer-events: none;}
+.check {background:url("${pageContext.request.contextPath}/assets/images/체크버튼.png");}
+#selFlashDateAll, #selFlashTime {font-size: 15px;}
+#ulLegend, #ulLegend2 {font-size: 14px;	color: black;}
+#screen{width: 690px;height: 60px;}
 </style>
 </head>
 <body>
@@ -77,12 +77,21 @@ border-bottom: solid 1px rgb(0, 0, 0); text-align: center; font-size: 17px; box-
 			<div id="step01"></div>
 			<div id=cover>
 				<div class="admRow">
+					<img id="screen" src="${pageContext.request.contextPath}/assets/images/screen.png">
 					<span class="admSpan"> <span id="container"></span>
 					</span>
 				</div>
 			</div>
 			<!-- //제 1 단계 : 관람일/회차 -->
 		</div>
+		<div id="formdiv" style="display: none;">
+			<form id="insertform" action="${pageContext.request.contextPath}/order/orderForm3" method="POST">
+			<input type="hidden" id="inputShowingSq" name="showingSq" value="">
+			<input type="hidden" id="showingSq" name="showSq" value="${show.showSq}">
+			</form>
+		</div>
+
+
 		<div class="result">
 			<div class="seatinfo">
 				<div id="perfboard" class="title">
@@ -134,7 +143,8 @@ border-bottom: solid 1px rgb(0, 0, 0); text-align: center; font-size: 17px; box-
 
 <script>
 $(document).ready(function() {
-	var showSq = '${showingList[0].showSq}';	
+	var showSq = '${showingList[0].showSq}';
+	
 	// 날짜 선택
 	$("#selFlashDateAll").on("change",function(){
 		var selFlashTime = $("#selFlashTime");
@@ -182,8 +192,12 @@ $(document).ready(function() {
 		var showingSq = $(this).val();
 		console.log(showingSq);
 		var ulLegend = $("#ulLegend");
-		
+		// 좌석등급/가격지우기
+		ulLegend.empty();
 		var ShowingVO = {showingSq : showingSq};
+		// form input태그
+		var inputShowingSq = $("#inputShowingSq");
+		inputShowingSq.val(showingSq);
 		// 잔여좌석 가지고오기
 		$.ajax({
 		    url: "${pageContext.request.contextPath}/showing/remainingSeats",
@@ -200,7 +214,9 @@ $(document).ready(function() {
 			            //금액 포맷
 			        	var seatPriceFormatted = new Intl.NumberFormat('ko-KR').format(result.data[index].seatPrice);
 
-			            var item = '<li style="margin-bottom: 5px;">' + result.data[index].seatClass +'석'			            
+			            var item = '<li id="'+result.data[index].seatClass;
+		           			item +='2" data-price="'+result.data[index].seatPrice;
+		           			item +='"style="margin-bottom: 5px;">' + result.data[index].seatClass +'석'			            
 			            	item += '&nbsp;&nbsp;';
 			            	item += seatPriceFormatted  +'원';
 			            	item += '&nbsp;&nbsp;';
@@ -210,34 +226,50 @@ $(document).ready(function() {
 			        }
 			    }
 			     // 좌석그리기 ajax 호출
-			   	 getShowSeatList();			  
+			   	 getShowSeatList(showingSq);			  
 		    },
 		    error: function(XHR, status, error) {
 		      console.error(status + " : " + error);
 		    }
 	 	});		
 	});
-	
 	// 좌석 선택
 	$("#container").on("click", "button", function() {
 	  var seat = $(this).val();
+	  var insertform = $("#insertform");
+	  var $seat = $("#" + seat);
 	  
-	  $("#"+seat).addClass('check');
-	  
-	  var seatClass = $("#"+seat).data("seatclass");
-	  var seatNo = $("#"+seat).data("seatno");
-	  var addSeat = '';
-	  addSeat += '<div>좌석번호 : '+ seatClass +'석  '+ seatNo +'</div>';	  
-	  console.log(seatClass);
-	  console.log(seatNo);
-	  
-	  $("#ulLegend2").append(addSeat);
-	  
+	  if ($seat.hasClass('check')) {
+	    $seat.removeClass('check');
+
+	    var seatClass = $seat.data("seatclass");
+	    var seatNo = $seat.data("seatno");
+	    var seatText = '좌석번호 : ' + seatClass + '석  ' + seatNo;
+
+	    $("#ulLegend2").find('div:contains("' + seatText + '")').remove();
+	    
+	    // 해당 좌석 데이터를 가진 input 요소 삭제
+	    insertform.find('input[data-seat="' + seat + '"]').remove();
+	  } else {
+	    $seat.addClass('check');
+
+	    var seatClass = $seat.data("seatclass");
+	    var seatNo = $seat.data("seatno");
+	    var addSeat = '<div>좌석번호 : ' + seatClass + '석  ' + seatNo + '</div>';
+
+	    $("#ulLegend2").append(addSeat);
+
+	    // form에 hidden으로 추가
+	    var inputseatClass = '<input type="hidden" name="seatClass" value="' + seatClass + '" data-seat="' + seat + '">';
+	    var inputseatNo = '<input type="hidden" name="seatNo" value="' + seatNo + '" data-seat="' + seat + '">';
+	    var price = $("#" + seatClass + "2").data("price");
+	    var inputseatPrice = '<input type="hidden" name="seatPrice" value="' + price + '" data-seat="' + seat + '">';
+
+	    insertform.append(inputseatClass);
+	    insertform.append(inputseatNo);
+	    insertform.append(inputseatPrice);
+	  }
 	});
-		
-	
-	
-	
 	
 	//이전단계
 	$("#prevButton").on("click",function(e) {
@@ -253,40 +285,47 @@ $(document).ready(function() {
 	});
 
 	//좌석선택완료 결제로
-	$("#clearButton").on("click",function(e) {
-		e.preventDefault();
-		console.log("결제");
-
-		// showSq 값을 가져와서 URL 생성
-		var showSq = "${show.showSq}"; // 이 부분은 JavaScript 변수로 대체해야 합니다.
-		var url = "${pageContext.request.contextPath}/order/orderForm3/"
-				+ showSq;
-
-		// 페이지 이동
-		location.href = url;
-
-		// 추가 로직 작성
+	$("#clearButton").on("click", function(e) {
+	  e.preventDefault();
+	  console.log("결제");
+	
+	  // 좌석 선택 여부 확인
+	  if ($("#ulLegend2").children().length > 0) {
+	    // 좌석 선택이 있을 경우 폼 제출
+	    insertform.submit();
+	  } else {
+	    // 좌석 선택이 없을 경우 알림 출력
+	    alert("좌석을 선택해주세요.");
+	  }
 	});
 	
 	
 	
-	function getShowSeatList() {
+	function getShowSeatList(showingSq) {
+		
+			ShowingVO={ showSq : showSq, showingSq : showingSq}
 		  $.ajax({
 		    url: "${pageContext.request.contextPath}/showing/getShowSeatList",
 		    type: "post",
 		    //contentType: "application/json",
-		    data: {showSq: showSq},
+		    data: ShowingVO,
 		    dataType: "json",
 		    success: function(result) {
 		      console.log(result);
+		      // 공연의 좌석 리스트
+		      var seatClassList = result.data.seatClassList;
+		      // 예매된 좌석 리스트
+		      var showingSeatList = result.data.showingSeatList;
+		      // 공연장 가로좌석크기		      
 		      var width = parseInt('${concertHall.concertHallWidth}');
+		      // 공연장 세로 좌석 크기
 		      var height = parseInt('${concertHall.concertHallHeight}');
 		      var container = $('#container');
 		      container.empty();
 		      container.css({
-		        'grid-template-columns': 'repeat(' + width + ', 30px)',
+		        'grid-template-columns': 'repeat(' + width + ', 23px)',
 		        'display': 'grid',
-		        'width': width * 30 + 'px'
+		        'width': width * 23 + 'px'
 		      });
 		      var index = 0;
 		      var seatClassSq; // 좌석클래스 시퀀스
@@ -295,9 +334,9 @@ $(document).ready(function() {
 		      const set = new Set(); // 중복제거를 위한 셋 선언
 		      for (var i = 0; i < width; i++) {
 		        for (var j = 0; j < height; j++) {
-		          seatClassSq = result.data[index].seatClassSq;
-		          seatClass = result.data[index].seatClass;
-		          seatNo = result.data[index].seatNo;
+		          seatClassSq = seatClassList[index].seatClassSq;
+		          seatClass = seatClassList[index].seatClass;
+		          seatNo = seatClassList[index].seatNo;		      
 		          index++; // 좌석 갯수 만큼 인덱스 증가
 		          set.add(seatClass);
 
@@ -305,8 +344,8 @@ $(document).ready(function() {
 		            .attr('id', seatNo)
 		            .addClass('item')
 		            .addClass(seatClass)
-		            .val(seatNo)
-		            .text(seatNo);
+		            .val(seatNo);
+		            //.text(seatNo);
 
 		          container.append(item);
 		        }
@@ -318,6 +357,13 @@ $(document).ready(function() {
 		        $("." + index).addClass(cssarr[index2]);
 		        index2++;
 		      }
+		      
+		      for (let seat of showingSeatList) {
+		    	  var showingSeatNo = seat.showingSeatNo;
+		    	  $("#"+showingSeatNo).addClass('gray');
+		    	}
+		      
+		      
 		    },
 		    error: function(XHR, status, error) {
 		      console.error(status + " : " + error);

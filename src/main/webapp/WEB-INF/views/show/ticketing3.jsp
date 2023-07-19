@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,10 +17,9 @@
 <!-- iamport.payment.js -->
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 <style>
-#guideview {
-	margin-left: 25px;
-}
+#guideview {margin-left: 25px;}
 #StepCtrlBtnPanel a{cursor: pointer; }
+.gnb li {float: left;background:url("${pageContext.request.contextPath}/assets/images/예매순서.png");height: 52px;width: 120px;}
 </style>
 
 
@@ -33,15 +33,32 @@
 				alt="YES24.com">
 		</h1>
 		<ul class="gnb">
-			<li class="m01 on"><span>관람일/회차</span></li>
+			<li class="m01"><span>관람일/회차</span></li>
 			<li class="m02"><span>좌석선택</span></li>
-			<li class="m03"><span>결제방법</span></li>
+			<li class="m03 on"><span>결제방법</span></li>
 		</ul>
 	</div>
 	<section>
 		<div id="ContentsArea" class="container" style="display: block;">
 			<!-- 결제API -->
 			<div id="step01"></div>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<div>
+			${SaveTicket.showingSq}
+			${SaveTicket.showSq}
+			${SaveTicket.seatClass[0]}
+			${SaveTicket.seatNo[0]}
+			${SaveTicket.seatPrice[0]}<br>
+			${SaveTicket.seatClass[1]}
+			${SaveTicket.seatNo[1]}
+			${SaveTicket.seatPrice[1]}	
+			</div>
 			<!-- end 결제API -->
 		</div>
 		<div class="result">
@@ -54,9 +71,7 @@
 				<span id="ptitle" class="tit"><a title="${show.showName}">${show.showName}</a></span><span
 					class="date">${show.startDate} ~ ${show.endDate}</span><span
 					id="ptheatername" class="date"><a
-					title="${show.concertHallName}">${show.concertHallName}</a></span><input
-					id="hiddenGenreId" type="hidden" value="15457"><input
-					id="hiddenDisplayRemainSeat" type="hidden" value="0">
+					title="${show.concertHallName}">${show.concertHallName}</a></span>
 			</div>
 			<div class="select_infor">
 				<h3>
