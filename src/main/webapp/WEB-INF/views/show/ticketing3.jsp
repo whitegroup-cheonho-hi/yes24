@@ -155,7 +155,8 @@ background:	url("${pageContext.request.contextPath}/assets/images/페이결제.p
 				</ul>
 				<div id="setaView">
 				<br>
-				<form id="insertForm" action="${pageContext.request.contextPath}/ticketing/insertTicketing" method="POST" >											
+				<form id="insertForm" action="" method="POST" >
+				     <!-- <input type="hidden" name="userSq" value="1"> -->       
 				     <input type="hidden" name="showingSq" value="${SaveTicket.showingSq}">       
 				     <input type="hidden" name="showSq" value="${SaveTicket.showSq}">       
 				<c:forEach items="${SaveTicket.seatClass}" var="seatClass" varStatus="status">
@@ -202,8 +203,7 @@ $(document).ready(function() {
 	    var price = $("#" + id).children("span").data("price");
 	    totalPrice += price;
 	}
-	
-	    console.log(totalPrice);
+		    
 	var seatPriceFormatted = new Intl.NumberFormat('ko-KR').format(totalPrice);   
 	$("#totalPrice").text(seatPriceFormatted+" 원");
 	
@@ -211,24 +211,31 @@ $(document).ready(function() {
 	
 	//결제 API
 	$("#payment").on("click", function() {
-		console.log("결제");
-		
-		$("#insertForm").submit();
-		
-		
-		
-		
-		
-		
-		
-		//requestPay();
-		
-		
-		
-		
-		
-		
-		
+	  console.log("결제");
+	
+	  // 폼 이벤트 헨들러
+	  $("#insertForm").submit(function(event) {
+	    event.preventDefault(); 
+	
+	    var formData = $(this).serialize(); // 폼 데이터 직렬화
+	   
+	    
+	    $.ajax({
+	      url: "${pageContext.request.contextPath}/ticketing/insertTicketing",
+	      type: "post",
+	      data: formData,
+	      dataType: "json",
+	      success: function(result) {
+	        console.log(result);
+	      },
+	      error: function(XHR, status, error) {
+	        console.error(status + " : " + error);
+	      }
+	    });
+	  });
+	
+	  // 폼 제출 이벤트 트리거
+	  $("#insertForm").submit();
 	});
 
 	function requestPay() {
