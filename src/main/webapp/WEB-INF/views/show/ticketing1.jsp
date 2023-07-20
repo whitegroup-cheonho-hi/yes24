@@ -227,7 +227,7 @@ $(document).ready(function() {
 		}
 	});
 	calendar.render();
-	
+	getShowingDay();
 	// 리스트 초기화
 	dayListEl = $('#dayList')[0];
 	// 리스트 클릭이벤트 
@@ -237,6 +237,9 @@ $(document).ready(function() {
 		timeZone : 'local',
 		initialDate : moment().toDate(),
 		eventClick : function(arg) {
+		//백그라운드 초기화
+		$('#dayList tr').not(arg.el).css('background-color', '');
+		$(arg.el).css('background-color', 'rgb(255 124 124)');		
     	var Seat = $("#remainingSeat");
     	// 회차클릭시 잔여좌석 비우기
   
@@ -325,6 +328,36 @@ $(document).ready(function() {
 		    }
 		  });
 		}
+	
+	// 등록된 회차 보여주기
+	function getShowingDay() {
+        console.log('getShowingDay');
+        calendar.removeAllEvents();
+      	//ajax 한달 공연 스케쥴 불러오기		
+		$.ajax({
+	        url: "${pageContext.request.contextPath}/show1/getShowingDay",
+	        type: "post",
+	        //contentType: "application/json",
+	        data: {showSq : showSq},
+	        dataType: "json",
+	        //성공시
+	        success: function(result) {
+		       
+		        for(var i = 0; i < result.data.length; i++){
+		        	calendar.addEvent({
+		    			//title: '백그라운드 색상',
+		                start: result.data[i],
+		                //start: '2023-07-28',
+		                display: 'background', // 백그라운드 색상을 표시하는 옵션
+		                color: '#FF0000' // 원하는 색상 값으로 변경
+		            });
+		        }
+	        },
+	        error: function(XHR, status, error) {
+	        	console.error(status + " : " + error);
+	        }
+	    });
+	}
 	
 	
 });

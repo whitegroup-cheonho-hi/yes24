@@ -214,6 +214,8 @@ $(document).ready(function() {
 	let dayListEl;
 	let dayList;
 	let date;
+	var showSq = '${show.showSq}';
+		
 	// 오늘날짜
 	var currentDate = new Date();
 	var formattedDate = currentDate.toISOString().split('T')[0];
@@ -249,6 +251,8 @@ $(document).ready(function() {
 	});
 	calendar.render();
 	
+	getShowingDay();
+
 	// 리스트 초기화
 	dayListEl = $('#dayList')[0];
 	// 리스트 클릭이벤트 
@@ -258,6 +262,10 @@ $(document).ready(function() {
 		timeZone : 'local',
 		initialDate : moment().toDate(),
 		eventClick : function(arg) {
+			
+		//백그라운드 초기화
+		$('#dayList tr').not(arg.el).css('background-color', '');
+		$(arg.el).css('background-color', 'rgb(255 124 124)');	
     	var Seat = $("#remainingSeat");
     	// 회차클릭시 잔여좌석 비우기
     	Seat.empty();
@@ -308,7 +316,7 @@ $(document).ready(function() {
 	});
 	//팝업창
 	function popup() {
-		var url = '${pageContext.request.contextPath}/order/orderForm/${show.showSq}';
+		var url = '${pageContext.request.contextPath}/order/orderForm/'+showSq;
 		var name = "ticketing";
 		var option = "width=990, height=680, top=100, left=200, location=no";
 		window.open(url, name, option);
@@ -355,7 +363,7 @@ $(document).ready(function() {
 	// 날짜로 회차 데이터 가져오기
 	function getShowingInfo(date) {
 			console.log("호출");
-		  var ShowingVO = { showingDate: date, showSq: '${show.showSq}'};
+		  var ShowingVO = { showingDate: date, showSq: showSq};
 		  console.log(ShowingVO);
 		  $.ajax({
 		    url: "${pageContext.request.contextPath}/showing/getShowing",
@@ -382,6 +390,36 @@ $(document).ready(function() {
 		    }
 		  });
 		}
+	
+	// 등록된 회차 보여주기
+	function getShowingDay() {
+        console.log('getShowingDay');
+        calendar.removeAllEvents();
+      	//ajax 한달 공연 스케쥴 불러오기		
+		$.ajax({
+	        url: "${pageContext.request.contextPath}/show1/getShowingDay",
+	        type: "post",
+	        //contentType: "application/json",
+	        data: {showSq : showSq},
+	        dataType: "json",
+	        //성공시
+	        success: function(result) {
+		       
+		        for(var i = 0; i < result.data.length; i++){
+		        	calendar.addEvent({
+		    			//title: '백그라운드 색상',
+		                start: result.data[i],
+		                //start: '2023-07-28',
+		                display: 'background', // 백그라운드 색상을 표시하는 옵션
+		                color: '#FF0000' // 원하는 색상 값으로 변경
+		            });
+		        }
+	        },
+	        error: function(XHR, status, error) {
+	        	console.error(status + " : " + error);
+	        }
+	    });
+	}
 	
 });
 </script>
