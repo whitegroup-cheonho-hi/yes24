@@ -334,7 +334,10 @@ $(document).ready(function() {
 			/* console.log(arg.event.title); // 클릭한 이벤트의 타이틀
 			console.log(arg.event.start); // 클릭한 이벤트의 시작 시간
 			console.log(arg.event.end); // 클릭한 이벤트의 종료 시간 */
-			//console.log(date);
+			console.log(showingSq);
+			//백그라운드 초기화
+			$('#dayList tr').not(arg.el).css('background-color', '');
+			$(arg.el).css('background-color', '#817f7f');
 	        deleteEvent(arg);
 		},
 		headerToolbar : {
