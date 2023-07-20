@@ -209,42 +209,36 @@ $(document).ready(function() {
 	
 	
 	
-	//결제 API
+	//결제 버튼시작
 	$("#payment").on("click", function() {
 	  console.log("결제");
-	
-	  // 폼 이벤트 헨들러
-	  $("#insertForm").submit(function(event) {
-	    event.preventDefault(); 
-	
-	    var formData = $(this).serialize(); // 폼 데이터 직렬화
-	   
-	    
+	  	    
 	    $.ajax({
 	      url: "${pageContext.request.contextPath}/ticketing/insertTicketing",
-	      type: "post",
-	      data: formData,
+	      type: "get",
+	      
 	      dataType: "json",
 	      success: function(result) {
-	        console.log(result);
+	        console.log(result.data);
+	        // 예매번호로 결제 API호출
+	        requestPay(result.data);
+	       	            
 	      },
 	      error: function(XHR, status, error) {
 	        console.error(status + " : " + error);
 	      }
 	    });
-	  });
-	
-	  // 폼 제출 이벤트 트리거
-	  $("#insertForm").submit();
+  	
 	});
-
-	function requestPay() {
-		// IMP.request_pay(param, callback) 결제창 호출
+	
+	// 결제 API
+	function requestPay(ticketingSq) {
+		//IMP.request_pay(param, callback) 결제창 호출
 
 		IMP.request_pay({
 			pg : 'kakaopay',
 			pay_method : 'card', //생략 가능
-			merchant_uid : "order_no_0004", // 상점에서 관리하는 주문 번호
+			merchant_uid : "T"+ticketingSq, // 상점에서 관리하는 주문 번호
 			name : '주문명:결제테스트',
 			amount : 100,
 			buyer_email : 'iamport@siot.do',
@@ -253,12 +247,21 @@ $(document).ready(function() {
 			buyer_addr : '서울특별시 강남구 삼성동',
 			buyer_postcode : '123-456'
 		}, function(rsp) { // callback
-			if (rsp.success) {
+			if (rsp.success) {				
 				// 결제 성공 시 로직
 				console.log("결제 성공");
+				// 폼데이터 보내기
+				insertFormSubmit(ticketingSq)
+				// 팝업창 닫기					
+				closeParentWindow();
+		
 			} else {
 				// 결제 실패 시 로직
 				console.log("결제 실패");
+				// 결제 실패시 예매삭제
+				deleteTicketing();
+				
+				
 			}
 		});
 	}
@@ -278,6 +281,61 @@ $(document).ready(function() {
 
 		// 추가 로직 작성
 	});
+	
+	// 부모창을 닫는 함수
+	function closeParentWindow() {
+		
+	  // 현재 창이 팝업 창인지 확인하고, 팝업 창이면 부모 창을 닫기
+	  if (window.opener && !window.opener.closed) {
+	    window.opener.location.reload(); // 부모 창을 새로고침
+	    window.close(); // 현재 창을 닫기
+	  }
+	}
+	
+	// 결제 완료시 폼데이터 보내기
+	function insertFormSubmit(ticketingSq){
+		var sq = ticketingSq;
+		  // 폼 이벤트 헨들러
+		  $("#insertForm").submit(function(event) {
+		    event.preventDefault(); 
+		
+		    var formData = $(this).serialize() + "&ticketingSq="+sq; // 폼 데이터 직렬화
+		   				    
+		    $.ajax({
+		      url: "${pageContext.request.contextPath}/ticketing/insertTicket",
+		      type: "post",
+		      data: formData,
+		      dataType: "json",
+		      success: function(result) {
+		        console.log(result);
+		      },
+		      error: function(XHR, status, error) {
+		        console.error(status + " : " + error);
+		      }
+		    });
+		  });
+		
+		  // 폼 제출 이벤트 트리거
+		  $("#insertForm").submit(); 
+	};
+	
+	// 결제 실패시 예매삭제
+	function deleteTicketing(){
+		$.ajax({
+		      url: "${pageContext.request.contextPath}/ticketing/deleteTicketing",
+		      type: "get",
+		      
+		      dataType: "json",
+		      success: function(result) {
+		        console.log(result.data);
+		        window.close;
+		      },
+		      error: function(XHR, status, error) {
+		        console.error(status + " : " + error);
+		      }
+		});
+		};
+	  
 });
 </script>
 

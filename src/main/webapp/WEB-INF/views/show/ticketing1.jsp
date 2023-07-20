@@ -51,6 +51,7 @@
 #remainingSeats .fc-header-toolbar{height: 15px; margin-top: 4px;}
 #remainingSeats h2{height: 51px;padding-top: 3px;}
 #remainingSeats .fc-view-harness{padding: 10px; font-size: 12px;}
+.focus{background-color : red;}
 </style>
 </head>
 <body>
@@ -196,7 +197,7 @@ $(document).ready(function() {
 	// 오늘날짜
 	var currentDate = new Date();
 	var formattedDate = currentDate.toISOString().split('T')[0];
-	// 페리이 로드되면 오늘날짜로 회차정보 가지고오기
+	// 페이지 로드되면 오늘날짜로 회차정보 가지고오기
 	getShowingInfo(formattedDate);
 	
 	// 날짜를 클릭하면 데이터 가져오기
@@ -205,11 +206,10 @@ $(document).ready(function() {
 		  dayList.removeAllEvents();
 		  var Seat = $("#remainingSeat");
 	      // 회차클릭시 잔여좌석 비우기
-	      Seat.empty();	
+	      Seat.empty();			
 		  getShowingInfo(date);
 		 
 		}
-
 	// 달력 초기화
 	var calendarEl = $('#calendar')[0];
 	var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -239,6 +239,7 @@ $(document).ready(function() {
 		eventClick : function(arg) {
     	var Seat = $("#remainingSeat");
     	// 회차클릭시 잔여좌석 비우기
+  
     	Seat.empty();
 		showingSq = arg.event.extendedProps.hiddenValue; 
 					
@@ -297,6 +298,7 @@ $(document).ready(function() {
 	// 날짜로 회차 데이터 가져오기
 	function getShowingInfo(date) {
 			console.log("호출");
+	
 		  var ShowingVO = { showingDate: date, showSq: showSq};
 		  console.log(ShowingVO);
 		  $.ajax({
@@ -324,11 +326,8 @@ $(document).ready(function() {
 		  });
 		}
 	
+	
 });
-
-
-
-
 
 
 </script>

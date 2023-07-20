@@ -52,8 +52,6 @@ public class OrderController {
 	public String orderForm3(@ModelAttribute SaveTicketVO vo,Model model) {
 		System.out.println("orderForm3()");
 		
-		System.out.println(vo);
-		
 		Map<String, Object> map = showService.getShow(vo);
 		model.addAttribute("SaveTicket", vo);
 		model.addAttribute("show", map.get("showVO"));
