@@ -16,7 +16,7 @@
 					<li class="logout"><a
 						href="${pageContext.request.contextPath}/user/logout">로그아웃</a></li>
 					<li class="myPage"><a
-						href="${pageContext.request.contextPath}/user/myPage/1">마이페이지</a></li>
+						href="${pageContext.request.contextPath}/myPage/myTicketingList">마이페이지</a></li>
 				</c:otherwise>
 			</c:choose>
 			<li class="search"><a href="#none">검색</a></li>
@@ -35,7 +35,7 @@
 			<li><a href="${pageContext.request.contextPath}/category/2">콘서트</a></li>
 			<li><a href="${pageContext.request.contextPath}/category/3">연극</a></li>
 			<li><a href="${pageContext.request.contextPath}/category/4">클래식</a></li>
-			<li><a href="">양도티켓</a></li>
+			<li><a href="${pageContext.request.contextPath}/transferTicket/transferBoardForm">양도티켓</a></li>
 			<li><a href="">리뷰</a></li>
 		</ul>
 		<input type="text" id="searchWord" autocomplete="off"> <a

@@ -13,7 +13,7 @@ header.pc #lnb #lnba{color: #999;}
 header.pc #lnb #lnba a{color: #999;}
 header.pc #lnb .lnb{width: 90%; height: 100%; margin: 0 auto; display: flex; justify-content:flex-end; align-items: center;}
 header.pc #lnb .lnb li{margin-left: 29px; position: relative;}
-header.pc #lnb .lnb li a{font-size: 12px;}
+header.pc #lnb .lnb li a{font-size: 15px;}
 
 header.pc #header{height: 75px; width: 90%; margin: 0 auto; display: flex; align-items: center; justify-content:space-between;}
 header.pc #header h1{width: 145px; height: 54px; background: url('../images/logo.png') 0 0/contain no-repeat;}

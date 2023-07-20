@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mypage">
+	
+	<!-- 예매리스트 가지고오기 -->
+	<select id="myTicketingList" parameterType="int" resultType="MyTicketingVO">
+	
+		<![CDATA[
+		
+			  SELECT
+				    a.ticketing_sq        AS ticketingsq,
+				    a.ticket_sq           AS ticketsq,
+				    TO_CHAR(b.ticketing_date, 'YYYY.MM.DD') AS ticketingdate,
+				    d.show_name           AS showname,
+				    a.ticket_no           AS ticketno,
+				    a.ticket_seat         AS ticketseat,
+				    TO_CHAR(c.start_time, 'YYYY.MM.DD" "HH24"시 "MI"분') AS starttime,
+				    a.ticket_seat_price   AS ticketseatprice,
+				    a.ticket_stat         AS ticketstat,
+				    a.ticket_active       AS ticketactive,
+				    c.show_sq             AS showsq
+				FROM
+				    ticket a
+				    FULL OUTER JOIN ticketing b ON a.ticketing_sq = b.ticketing_sq
+				    LEFT JOIN showing c ON a.showing_sq = c.showing_sq
+				    LEFT JOIN show d ON c.show_sq = d.show_sq
+			   WHERE
+				    a.ticketing_sq IN (
+				        SELECT
+				            ticketing_sq
+				        FROM
+				            ticketing
+				        WHERE
+				            user_sq = #{userSq}
+				    )
+				    OR c.showing_sq IN (
+				        SELECT DISTINCT
+				            showing_sq
+				        FROM
+				            ticket
+				        WHERE
+				            ticketing_sq IN (
+				                SELECT
+				                    ticketing_sq
+				                FROM
+				                    ticketing
+				                WHERE
+				                    user_sq = #{userSq}
+				            )
+				    )
+			ORDER BY
+				    a.ticket_sq
+		
+		]]>
+	
+	</select>
+
+</mapper>

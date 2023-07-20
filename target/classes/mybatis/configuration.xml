@@ -6,6 +6,7 @@
 	    <typeAlias alias="AlarmVO" type="com.yes24.vo.AlarmVO" />
 		<typeAlias alias="ConcertHallVO" type="com.yes24.vo.ConcertHallVO" />
 		<typeAlias alias="NotificationVO" type="com.yes24.vo.NotificationVO" />
+		<typeAlias alias="MyTicketingVO" type="com.yes24.vo.MyTicketingVO" />		
 		<typeAlias alias="QnAVO" type="com.yes24.vo.QnAVO" />
 		<typeAlias alias="RemainingSeatsVO" type="com.yes24.vo.RemainingSeatsVO" />
 		<typeAlias alias="ReviewVO" type="com.yes24.vo.ReviewVO" />
@@ -27,6 +28,7 @@
         <mapper resource="mybatis/mappers/alarm.xml" />
 		<mapper resource="mybatis/mappers/concerthall.xml" />
 		<mapper resource="mybatis/mappers/notification.xml" />
+		<mapper resource="mybatis/mappers/mypage.xml" />
 		<mapper resource="mybatis/mappers/qna.xml" />
 		<mapper resource="mybatis/mappers/review.xml" />
 		<mapper resource="mybatis/mappers/show.xml" />
