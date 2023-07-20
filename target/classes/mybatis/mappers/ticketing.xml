@@ -40,5 +40,69 @@
 	
 	</delete>
 	
+	<!-- 결제 완료시 티켓등록 -->
+	<insert id="insertTicket" parameterType="TicketVO">
+	
+		<![CDATA[
+		
+			INSERT INTO ticket (
+							    ticket_sq,
+							    ticket_no,
+							    ticket_seat,
+							    ticket_seat_price,
+							    ticket_stat,
+							    ticket_active,
+							    showing_sq,
+							    ticketing_sq
+							) VALUES (
+							    seq_ticket_sq.NEXTVAL,
+							    #{ticketNo} ,
+							    #{ticketSeatNo} ,
+							    #{ticketSeatPrice} ,
+							    1 ,
+							    'Y',
+							    #{showingSq} ,
+							    #{ticketingSq}
+							)
+		
+		]]>
+	
+	
+	</insert>
+	
+	<!-- 결제완료시 회차좌석 등록 -->
+	<insert id="insertShowingSeat" parameterType="ShowingSeatVO">
+	
+		<![CDATA[
+		
+			  INSERT INTO showing_seat (
+									    showing_seat_sq,
+									    showing_seat_no,
+									    showing_seat_stat,
+									    showing_sq,
+									    seat_class_sq
+									   )
+								 VALUES 
+								       (
+									    seq_showing_seat_sq.NEXTVAL,
+									    #{showingSeatNo},
+									    1,
+									    #{showingSq},
+									    (SELECT
+									           seat_class_sq
+									       FROM
+									           seat_class
+									      WHERE
+									           show_sq = #{seatClassSq}
+									        AND 
+									           seat_class = #{seatClass}
+									    )
+									   )
+		
+		]]>
+	
+	</insert>
+	
+	
 	
 </mapper>

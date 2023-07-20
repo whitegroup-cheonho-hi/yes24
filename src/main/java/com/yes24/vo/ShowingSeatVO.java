@@ -10,18 +10,21 @@ public class ShowingSeatVO {
 	private int showingSeatStat;
 	private int showingSq;
 	private int seatClassSq;
+	private String seatClass;
 
 	public ShowingSeatVO() {
 		super();
 	}
 
-	public ShowingSeatVO(int showingSeatSq, String showingSeatNo, int showingSeatStat, int showingSq, int seatClassSq) {
+	public ShowingSeatVO(int showingSeatSq, String showingSeatNo, int showingSeatStat, int showingSq, int seatClassSq,
+			String seatClass) {
 		super();
 		this.showingSeatSq = showingSeatSq;
 		this.showingSeatNo = showingSeatNo;
 		this.showingSeatStat = showingSeatStat;
 		this.showingSq = showingSq;
 		this.seatClassSq = seatClassSq;
+		this.seatClass = seatClass;
 	}
 
 	public int getShowingSeatSq() {
@@ -64,11 +67,19 @@ public class ShowingSeatVO {
 		this.seatClassSq = seatClassSq;
 	}
 
+	public String getSeatClass() {
+		return seatClass;
+	}
+
+	public void setSeatClass(String seatClass) {
+		this.seatClass = seatClass;
+	}
+
 	@Override
 	public String toString() {
 		return "ShowingSeatVO [showingSeatSq=" + showingSeatSq + ", showingSeatNo=" + showingSeatNo
 				+ ", showingSeatStat=" + showingSeatStat + ", showingSq=" + showingSq + ", seatClassSq=" + seatClassSq
-				+ "]";
+				+ ", seatClass=" + seatClass + "]";
 	}
 
 }

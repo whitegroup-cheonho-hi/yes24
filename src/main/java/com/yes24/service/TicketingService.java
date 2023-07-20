@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.yes24.dao.TicketingDAO;
 import com.yes24.vo.SaveTicketVO;
+import com.yes24.vo.ShowingSeatVO;
 import com.yes24.vo.TicketVO;
 import com.yes24.vo.TicketingVO;
 import com.yes24.vo.UserVO;
@@ -49,12 +50,28 @@ public class TicketingService {
 		System.out.println("insertTicket Service");
 
 		for (int i = 0; i < vo.getSeatNo().size(); i++) {
-
+			// 티켓 객체 생성
 			TicketVO ticket = new TicketVO();
 			String s = generateTicketNumber(vo.getSeatNo().get(i));
-			//ticket.set
-			System.out.println(s);
+			ticket.setTicketNo(s);
+			ticket.setTicketSeatNo(vo.getSeatNo().get(i));
+			ticket.setTicketSeatPrice(vo.getSeatPrice().get(i));
+			ticket.setShowingSq(vo.getShowingSq());
+			ticket.setTicketingSq(vo.getTicketingSq());
+			// 반복으로 티켓 생성
+			ticketingDAO.insertTicket(ticket);
 			
+			//회차좌석 객체 생성
+			ShowingSeatVO showingSeatVO = new ShowingSeatVO();
+			showingSeatVO.setShowingSq(vo.getShowingSq());
+			showingSeatVO.setSeatClass(vo.getSeatClass().get(i));
+			showingSeatVO.setShowingSeatNo(vo.getSeatNo().get(i));
+			// 좌석 등급명으로 좌석등급 시퀀스 넣기위한 코드
+			showingSeatVO.setSeatClassSq(vo.getShowSq());
+			
+			// 반복으로 회차좌석 등록
+			ticketingDAO.insertShowingSeat(showingSeatVO);
+					
 		}
 
 		return 0;

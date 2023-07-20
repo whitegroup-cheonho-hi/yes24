@@ -1,7 +1,6 @@
 package com.yes24.controller;
 
 import javax.servlet.http.HttpSession;
-import javax.websocket.Session;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,9 +27,9 @@ public class TicketingController {
 	public JsonResult insertTicketing(HttpSession session) {
 		System.out.println("insertTicketing()");
 
-		UserVO vo = (UserVO) session.getAttribute("authUser");
+		UserVO userVO = (UserVO) session.getAttribute("authUser");
 
-		int ticketingSq = ticketingService.insertTicketing(vo.getUserSq());
+		int ticketingSq = ticketingService.insertTicketing(userVO.getUserSq());
 
 		JsonResult jsonResult = new JsonResult();
 
@@ -45,9 +44,9 @@ public class TicketingController {
 	public JsonResult deleteTicketing(HttpSession session) {
 		System.out.println("deleteTicketing()");
 
-		UserVO vo = (UserVO) session.getAttribute("authUser");
+		UserVO userVO = (UserVO) session.getAttribute("authUser");
 
-		int result = ticketingService.deleteTicketing(vo);
+		int result = ticketingService.deleteTicketing(userVO);
 
 		JsonResult jsonResult = new JsonResult();
 
@@ -62,6 +61,9 @@ public class TicketingController {
 	public JsonResult insertTicket(HttpSession session,@ModelAttribute SaveTicketVO vo) {
 		System.out.println("insertTicket()");
 		System.out.println(vo);
+		
+		
+		
 		int result = ticketingService.insertTicket(vo);
 		
 		JsonResult jsonResult = new JsonResult();

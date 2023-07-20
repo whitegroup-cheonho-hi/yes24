@@ -7,7 +7,7 @@ public class TicketVO {
 
 	private int ticketSq;
 	private String ticketNo;
-	private String ticketSeat;
+	private String ticketSeatNo;
 	private int ticketSeatPrice;
 	private int ticketStat;
 	private String ticketActive;
@@ -20,12 +20,12 @@ public class TicketVO {
 		super();
 	}
 
-	public TicketVO(int ticketSq, String ticketNo, String ticketSeat, int ticketSeatPrice, int ticketStat,
+	public TicketVO(int ticketSq, String ticketNo, String ticketSeatNo, int ticketSeatPrice, int ticketStat,
 			String ticketActive, int showingSq, int ticketingSq) {
 		super();
 		this.ticketSq = ticketSq;
 		this.ticketNo = ticketNo;
-		this.ticketSeat = ticketSeat;
+		this.ticketSeatNo = ticketSeatNo;
 		this.ticketSeatPrice = ticketSeatPrice;
 		this.ticketStat = ticketStat;
 		this.ticketActive = ticketActive;
@@ -49,12 +49,12 @@ public class TicketVO {
 		this.ticketNo = ticketNo;
 	}
 
-	public String getTicketSeat() {
-		return ticketSeat;
+	public String getTicketSeatNo() {
+		return ticketSeatNo;
 	}
 
-	public void setTicketSeat(String ticketSeat) {
-		this.ticketSeat = ticketSeat;
+	public void setTicketSeatNo(String ticketSeatNo) {
+		this.ticketSeatNo = ticketSeatNo;
 	}
 
 	public int getTicketSeatPrice() {
@@ -99,9 +99,10 @@ public class TicketVO {
 
 	@Override
 	public String toString() {
-		return "TicketVO [ticketSq=" + ticketSq + ", ticketNo=" + ticketNo + ", ticketSeat=" + ticketSeat
+		return "TicketVO [ticketSq=" + ticketSq + ", ticketNo=" + ticketNo + ", ticketSeatNo=" + ticketSeatNo
 				+ ", ticketSeatPrice=" + ticketSeatPrice + ", ticketStat=" + ticketStat + ", ticketActive="
 				+ ticketActive + ", showingSq=" + showingSq + ", ticketingSq=" + ticketingSq + "]";
 	}
-
+	
+	
 }
