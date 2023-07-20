@@ -156,7 +156,7 @@ $(document).ready(function() {
       	//ajax 한달 공연 스케쥴 불러오기
 		console.log(showSq);
 		$.ajax({
-	        url: "${pageContext.request.contextPath}/show1/",
+	        url: "${pageContext.request.contextPath}/show1/getShowingDay",
 	        type: "post",
 	        //contentType: "application/json",
 	        data: {showSq : showSq},

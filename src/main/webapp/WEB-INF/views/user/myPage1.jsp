@@ -95,7 +95,7 @@ section {
 					<div class="mypage_contain">
 						<div class="mycont">
 							<h2 class="tit">
-								&nbsp;<b class="subtitle">예매내역</b> <span>양준우님께서 최근 3개월간
+								&nbsp;<b class="subtitle">예매내역</b> <span>${user.userName}님께서 최근 3개월간
 									예매하신 내역입니다.</span>
 							</h2>
 							<div id="divOrderList" style="">

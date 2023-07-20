@@ -4,7 +4,7 @@
 <mapper namespace="mypage">
 	
 	<!-- 예매리스트 가지고오기 -->
-	<select id="myTicketingList" parameterType="int" resultType="MyTicketingVO">
+	<select id="myTicketingList" parameterType="map" resultType="MyTicketingVO">
 	
 		<![CDATA[
 		
@@ -26,7 +26,7 @@
 				    LEFT JOIN showing c ON a.showing_sq = c.showing_sq
 				    LEFT JOIN show d ON c.show_sq = d.show_sq
 			   WHERE
-				    a.ticketing_sq IN (
+				    ( a.ticketing_sq IN (
 				        SELECT
 				            ticketing_sq
 				        FROM
@@ -34,7 +34,7 @@
 				        WHERE
 				            user_sq = #{userSq}
 				    )
-				    OR c.showing_sq IN (
+				      OR c.showing_sq IN (
 				        SELECT DISTINCT
 				            showing_sq
 				        FROM
@@ -48,8 +48,9 @@
 				                WHERE
 				                    user_sq = #{userSq}
 				            )
-				    )
-			ORDER BY
+				    ) )
+				    AND a.ticket_stat = #{stat}
+				ORDER BY
 				    a.ticket_sq
 		
 		]]>

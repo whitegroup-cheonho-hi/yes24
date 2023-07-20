@@ -1,6 +1,7 @@
 package com.yes24.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +16,10 @@ public class MyPageDAO {
 	private SqlSession sqlSession;
 	
 	// 나의 예매 내역 가져오기
-	public List<MyTicketingVO> myTicketingList(int no) {
+	public List<MyTicketingVO> myTicketingList(Map<String, Object> map) {
 		System.out.println("myTicketingList DAO()");
 
-		return sqlSession.selectList("mypage.myTicketingList", no);
+		return sqlSession.selectList("mypage.myTicketingList", map);
 
 	}
 }

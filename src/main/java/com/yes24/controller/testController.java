@@ -162,7 +162,7 @@ public class testController {
 		}
 		
 		@ResponseBody
-		@RequestMapping(value = "getShowingDay", method = RequestMethod.POST)
+		@RequestMapping(value = "/getShowingDay", method = RequestMethod.POST)
 		public JsonResult getShowingDay(@RequestParam("showSq") int showSq) {
 			System.out.println("getShowingDay()");
 			List<String> dayList = testservice.getShowingDay(showSq);

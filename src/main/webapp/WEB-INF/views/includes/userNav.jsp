@@ -23,7 +23,7 @@
 	</div>
 	<div class="my_lmenu">
 		<ul>
-			<li><a href="${pageContext.request.contextPath}/user/myPage/1"> <img
+			<li><a href="${pageContext.request.contextPath}/myPage/myTicketingList"> <img
 					src="http://tkfile.yes24.com/img/mypage/lmenu_01.gif" alt="예매확인/취소">
 			</a></li>
 			<li><a href="${pageContext.request.contextPath}/user/myPage/2"> <img
