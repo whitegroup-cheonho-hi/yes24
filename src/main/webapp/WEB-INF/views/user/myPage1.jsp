@@ -35,6 +35,7 @@ section {
 }
 
 #showHref{text-decoration: none;}
+#mypage_contain2{height: 200px;}
 </style>
 </head>
 <body>
@@ -55,7 +56,7 @@ section {
 						<br> <b class="subtitle">나의 예매리스트</b>
 						<div>
 							<ul>
-								<li class="sec"><span>일자별 조회</span> <input id="txtStart"
+								<li class="sec"><span>예매일자별 조회</span> <input id="txtStart"
 									type="text" class="date imedisable w70 hasDatepicker"
 									style="width: 90px; z-index: 999;" autocomplete="off"><img
 									class="ui-datepicker-trigger"
@@ -152,7 +153,7 @@ section {
 						</div>
 					</div>
 
-					<div class="mypage_contain">
+					<div id ="mypage_contain2" class="mypage_contain">
 						<div class="mycont">
 							<h2 class="tit">
 								&nbsp;<b class="subtitle">양도 거래내역</b> <span>양준우님께서 최근
@@ -161,8 +162,8 @@ section {
 							<div id="divOrderList" style="">
 								<table class="tmypage" summary="최근 양도내역 리스트">
 									<colgroup>
+										<col width="12%">
 										<col width="8%">
-										<col width="10%">
 										<col width="*">
 										<col width="10%">
 										<col width="10%">

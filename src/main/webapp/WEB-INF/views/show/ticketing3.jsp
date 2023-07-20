@@ -150,7 +150,7 @@ background:	url("${pageContext.request.contextPath}/assets/images/페이결제.p
 				<br>
 				<ul>
 					<li><em>날짜</em><span
-						id="tk_day">${showing.showingDate}</span>
+						id="tk_day">${showing.showingDate}일</span>
 					</li>
 				</ul>
 				<div id="setaView">
@@ -273,8 +273,9 @@ $(document).ready(function() {
 
 		// showSq 값을 가져와서 URL 생성
 		var showSq = "${show.showSq}"; // 이 부분은 JavaScript 변수로 대체해야 합니다.
+		var showingDate	= "${showing.showingDate}";
 		var url = "${pageContext.request.contextPath}/order/orderForm2/"
-				+ showSq;
+				+ showSq + "/" + showingDate;
 
 		// 페이지 이동
 		location.href = url;

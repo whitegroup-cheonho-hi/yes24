@@ -46,6 +46,7 @@ public class OrderController {
 		model.addAttribute("show", map.get("show"));
 		model.addAttribute("concertHall", map.get("concertHall"));
 		model.addAttribute("date", date);
+	
 
 		return "show/ticketing2";
 	}

@@ -96,10 +96,10 @@
 							<div id="divOrderList" style="">
 								<table class="tmypage" summary="나의 관람 공연">
 									<colgroup>
+										<col width="12%">
 										<col width="8%">
-										<col width="10%">
 										<col width="*">
-										<col width="10%">
+										<col width="30%">
 										<col width="10%">
 									</colgroup>
 									<thead>
@@ -112,9 +112,21 @@
 										</tr>
 									</thead>
 									<tbody>
-										<tr>
-											<td colspan="5" class="le ri">최근 관람내역이 없습니다.</td>
-										</tr>
+										<c:forEach items="${myTicketingList}" var="myTicketing">
+											<tr>
+												<td scope="row" class="fst"><input type="hidden"
+													name="showSq" value="${myTicketing.showSq}"> <input
+													type="hidden" name="ticketSq"
+													value="${myTicketing.ticketSq}">
+													${myTicketing.ticketingDate}</td>
+												<td scope="row">${myTicketing.ticketingSq}</td>
+												<td scope="row"><a id="showHref" href="${pageContext.request.contextPath}/show/detail/${myTicketing.showSq}">${myTicketing.showName}</a></td>
+												<td scope="row">${myTicketing.startTime}</td>												
+												<c:if test="${myTicketing.ticketStat == '2'}">
+													<td scope="row">관람완료</td>
+												</c:if>												
+											</tr>
+										</c:forEach>
 									</tbody>
 								</table>
 							</div>

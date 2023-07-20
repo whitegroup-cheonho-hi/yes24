@@ -38,7 +38,11 @@
 .blue {background-color: #8fbfee;}
 .green {background-color: #a5ea7b;}
 .gray {background-color: gray;  pointer-events: none;}
-.check {background:url("${pageContext.request.contextPath}/assets/images/체크버튼.png");}
+.check {
+  background-image: url("${pageContext.request.contextPath}/assets/images/체크버튼.PNG"); 
+  background-size: cover; 
+  background-position: center center; 
+}
 #selFlashDateAll, #selFlashTime {font-size: 15px;}
 #ulLegend, #ulLegend2 {font-size: 14px;	color: #fff;margin: auto; border: solid 1px #ec7d2c;}
 #screen{width: 690px;height: 50px;}
@@ -186,8 +190,8 @@ $(document).ready(function() {
 	  var $seat = $("#" + seat);
 	  
 	  if ($seat.hasClass('check')) {
-	    $seat.removeClass('check');
-
+	    $seat.removeClass('check');		
+	    
 	    var seatClass = $seat.data("seatclass");
 	    var seatNo = $seat.data("seatno");
 	    var seatText = '좌석번호 : ' + seatClass + '석  ' + seatNo;
@@ -197,8 +201,8 @@ $(document).ready(function() {
 	    // 해당 좌석 데이터를 가진 input 요소 삭제
 	    insertform.find('input[data-seat="' + seat + '"]').remove();
 	  } else {
-	    $seat.addClass('check');
-
+	    $seat.addClass('check');   
+	    
 	    var seatClass = $seat.data("seatclass");
 	    var seatNo = $seat.data("seatno");
 	    var addSeat = '<div>좌석번호 : ' + seatClass + '석  ' + seatNo + '</div>';

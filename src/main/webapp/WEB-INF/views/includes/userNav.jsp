@@ -26,7 +26,7 @@
 			<li><a href="${pageContext.request.contextPath}/myPage/myTicketingList"> <img
 					src="http://tkfile.yes24.com/img/mypage/lmenu_01.gif" alt="예매확인/취소">
 			</a></li>
-			<li><a href="${pageContext.request.contextPath}/user/myPage/2"> <img
+			<li><a href="${pageContext.request.contextPath}/myPage/myViewingShowList"> <img
 					src="http://tkfile.yes24.com/img/mypage/lmenu_04.gif" alt="나의관람공연"></a></li>
 			<li><a href="${pageContext.request.contextPath}/user/myPage/3"> <img
 					src="http://tkfile.yes24.com/img/mypage/lmenu_05.gif" alt="나의맞춤설정"></a></li>

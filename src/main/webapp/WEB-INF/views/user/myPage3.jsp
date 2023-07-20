@@ -30,6 +30,7 @@
 #warp {
 	height: 530px;
 }
+.mypage_contain{ margin-bottom: 112px;} 
 </style>
 </head>
 <body>
@@ -94,8 +95,8 @@
 							<div id="divOrderList" style="">
 								<table class="tmypage" summary="티켓 오픈 알람">
 									<colgroup>
+										<col width="12%">
 										<col width="8%">
-										<col width="10%">
 										<col width="*">
 										<col width="10%">
 										<col width="10%">
@@ -128,8 +129,8 @@
 							<div id="divOrderList" style="">
 								<table class="tmypage" summary="최근 예매내역 리스트">
 									<colgroup>
+										<col width="12%">
 										<col width="8%">
-										<col width="10%">
 										<col width="*">
 										<col width="10%">
 										<col width="10%">

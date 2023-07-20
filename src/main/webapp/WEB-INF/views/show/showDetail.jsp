@@ -54,6 +54,8 @@
 #remaining{border: 1px solid #ddd;height: 200px;margin-top: 15px;padding: 10px; }
 #remainingSeats h2{height: 55px;}
 #remainingSeats .fc-view-harness{padding: 10px;}
+.rn-product-area3 #precautions{color:red;}
+
 </style>
 </head>
 <body>
@@ -151,11 +153,13 @@
 					<div class="rn-product-area3">
 						<!--공연시간안내, 배송정보-->
 						<dl>
-							<dt>공연시간 안내</dt>
+							<dt><strong id="precautions">예매 유의사항</strong></dt>
 							<dd>
-								2023년 8월 11일(금) ~ 2023년 8월 20일(일) <br>수,목,금 오후 7시 30분 / 토
-								오후 2시, 6시 30분 / 일 오후 2시 <br>* 8월 15일(화) 오후 2시, 6시 30분 <br>*
-								8월 18일(금) 오후 3시, 7시 30분
+								예매는 PC, 모바일, 고객센터 를 통해 신용카드, 가상계좌(무통장 입금) 등으로 예매하실 수 있습니다. <br>								
+								무통장입금 결제 선택 시 입금 마감시간은 예매일 익일 밤 11시 29분까지입니다.<br> 
+								입금 마감시간 내 미입금 된 경우 예매가 자동 취소됩니다. <br>
+								(단, 상품에 따라 예매 당일 밤 11시 29분에 마감되는 경우가 있으니 예매 전후 반드시 확인해주시기 바랍니다.)<br>
+								
 							</dd>
 						</dl>
 					</div>
@@ -316,10 +320,25 @@ $(document).ready(function() {
 	});
 	//팝업창
 	function popup() {
-		var url = '${pageContext.request.contextPath}/order/orderForm/'+showSq;
-		var name = "ticketing";
-		var option = "width=990, height=680, top=100, left=200, location=no";
-		window.open(url, name, option);
+    var url = '${pageContext.request.contextPath}/order/orderForm/'+showSq;
+    var name = "ticketing";
+
+    
+    var width = 990;
+    var height = 680;
+
+    // 모니터의 가로 길이와 세로 길이를 구한다
+    var screenWidth = window.screen.width;
+    var screenHeight = window.screen.height;
+
+    // 창을 모니터 가운데에 위치시키기 위한 좌표 값을 계산
+    var left = (screenWidth - width) / 2;
+    var top = (screenHeight - height) / 2;
+
+    // 수정된 부분: 위치 및 창 속성을 설정
+    var option = "width=" + width + ", height=" + height + ", top=" + top + ", left=" + left + ", location=no";
+
+    window.open(url, name, option);
 	}
 
 	var mapContainer = $("#map"); // 지도를 표시할 div 
