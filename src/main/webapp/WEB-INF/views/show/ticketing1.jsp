@@ -159,7 +159,7 @@
 				<br>
 				<ul>
 					<li><em id="day">날짜</em><span
-						id="tk_day">2023.08.19 (토)</span></li>
+						id="tk_day"></span></li>
 				</ul>
 			</div>		
 			<div class="btn">
@@ -189,7 +189,7 @@
 $(document).ready(function() {
 	let dayListEl;
 	let dayList;
-	let date;
+	var date;
 	var showSq='${show.showSq}';
 	console.log(showSq);
 	var showingSq;
@@ -205,6 +205,8 @@ $(document).ready(function() {
 		  console.log(date);
 		  dayList.removeAllEvents();
 		  var Seat = $("#remainingSeat");
+		  $("#tk_day").text(date + "일");
+		  
 	      // 회차클릭시 잔여좌석 비우기
 	      Seat.empty();			
 		  getShowingInfo(date);
@@ -247,36 +249,8 @@ $(document).ready(function() {
 		showingSq = arg.event.extendedProps.hiddenValue; 
 					
 		var ShowingVO = {showingSq : showingSq};
-		// 회차 정보 가져오기
-		  $.ajax({
-		    url: "${pageContext.request.contextPath}/showing/remainingSeats",
-		    type: "post",
-		    //contentType: "application/json",
-		    data: ShowingVO,
-		    
-		    dataType: "json",
-		    success: function(result) {		          	     
-		               	  console.log(result);
-			   
-			    for (let index in result.data) {
-			        if (result.data.hasOwnProperty(index)) {
-			            //금액 포맷
-			        	var seatPriceFormatted = new Intl.NumberFormat('ko-KR').format(result.data[index].seatPrice);
-
-			            var item = '<div style="margin-bottom: 5px;">' + result.data[index].seatClass +'석'			            
-			            	item += '&nbsp;&nbsp;';
-			            	item += seatPriceFormatted  +'원';
-			            	item += '<br>';    	
-			            	item += '<span style="color: orange"> 잔여 : ('+result.data[index].seatEa +'석)</span>';
-			            	item +='</div>';
-			            Seat.append(item);
-			        }
-			    }
-		    },
-		    error: function(XHR, status, error) {
-		      console.error(status + " : " + error);
-		    }
-		  });
+		getshowing(ShowingVO);	
+		
 		}
 	});
 	dayList.render();
@@ -289,8 +263,8 @@ $(document).ready(function() {
 	    if (showingSq == null) {
 	        alert("회차를 선택해주세요");
 	    } else {
-	    
-	    var url = "${pageContext.request.contextPath}/order/orderForm2/" + showSq;
+	
+	    var url = "${pageContext.request.contextPath}/order/orderForm2/" + showSq+"/"+date;
 	    // 페이지 이동
 	    location.href = url; 
 	    	
@@ -359,6 +333,39 @@ $(document).ready(function() {
 	    });
 	}
 	
+	// 잔여좌석 정보 가져오기
+	function getshowing(ShowingVO){
+		var Seat = $("#remainingSeat");
+		  $.ajax({
+		    url: "${pageContext.request.contextPath}/showing/remainingSeats",
+		    type: "post",
+		    //contentType: "application/json",
+		    data: ShowingVO,
+		    
+		    dataType: "json",
+		    success: function(result) {		          	     
+		               	  console.log(result);
+			   
+			    for (let index in result.data) {
+			        if (result.data.hasOwnProperty(index)) {
+			            //금액 포맷
+			        	var seatPriceFormatted = new Intl.NumberFormat('ko-KR').format(result.data[index].seatPrice);
+
+			            var item = '<div style="margin-bottom: 5px;">' + result.data[index].seatClass +'석'			            
+			            	item += '&nbsp;&nbsp;';
+			            	item += seatPriceFormatted  +'원';
+			            	item += '<br>';    	
+			            	item += '<span style="color: orange"> 잔여 : ('+result.data[index].seatEa +'석)</span>';
+			            	item +='</div>';
+			            Seat.append(item);
+			        }
+			    }
+		    },
+		    error: function(XHR, status, error) {
+		      console.error(status + " : " + error);
+		    }
+		});
+	};
 	
 });
 

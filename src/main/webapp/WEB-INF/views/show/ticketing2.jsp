@@ -28,7 +28,7 @@
 .gnb li {float: left;background:url("${pageContext.request.contextPath}/assets/images/예매순서.png");height: 52px;width: 120px;}
 .admRow {margin-top: 10px;height: 530px;}
 .admSpan {display: flex;justify-content: center;box-sizing: border-box;background-color: #fff;padding: 9px 14px 11px;line-height: 28px;display: flex;text-align: center;}
-#container {border-top: solid 1px #fff;border-left: solid 1px #fff;align-items: center;display: none;}
+#container {align-items: center;display: none;}
 #container .item {color: black;}
 .item {width: 23px;height: 23px;background-color: #efdfdf;border-radius: 8px 8px 0 0;border: solid 1px #fff;text-align: center;font-size: 17px;box-sizing: border-box;}
 #cover {margin-top: 46px;background-color: lightgray;}
@@ -63,19 +63,18 @@
 			<ul>
 				<li><em><img class="img"
 						src="http://tkfile.yes24.com/img/perfsale/h3_tit_seat01.gif"
-						alt="관람일변경"></em> <span> <select id="selFlashDateAll"
-						style="width: 200px;">
-							<option selected="">날짜선택</option>
-							<c:forEach items="${showingList}" var="showing">
-								<option value="${showing.showingDate}">${showing.showingDate}</option>
+						alt="관람일변경"></em> <span> 
+						<select id="selFlashDateAll" style="width: 200px;">
+							<option>날짜선택</option>
+							<c:forEach items="${showingList}" var="showing">			
+							<option <c:out value="${showing.showingDate eq date ? 'selected':'' }"/>>${showing.showingDate}</option>
 							</c:forEach>
 					</select>
 				</span></li>
 				<li><em><img class="img"
 						src="http://tkfile.yes24.com/img/perfsale/h3_tit_seat02.gif"
 						alt="회차변경"></em> <span> <select id="selFlashTime"
-						style="width: 200px;">
-							<option selected="" value="0">회차 선택</option>
+						style="width: 200px;">							
 					</select>
 				</span></li>
 			</ul>
@@ -101,8 +100,6 @@
 			</div>
 			</form>
 		</div>
-
-
 		<div class="result">
 			<div class="seatinfo">
 				<div id="perfboard" class="title">
@@ -154,47 +151,24 @@
 
 <script>
 $(document).ready(function() {
-	var showSq = '${showingList[0].showSq}';
+	var showSq = '${showingList[0].showSq}';	
+	var selFlashTime = $("#selFlashTime");		
+	var selectionDate = $("#selFlashDateAll").val();
+	
+	//넘어온 날짜로 회차가져오기
+	dateajax(selectionDate);
+	
 	
 	// 날짜 선택
 	$("#selFlashDateAll").on("change",function(){
-		var selFlashTime = $("#selFlashTime");
-		selFlashTime.empty();
 		var date = $(this).val();
-				
-		ShowingVO = {
-			showingDate:date,
-			showSq: showSq
-		}
-		console.log(ShowingVO);
-		
-		 $.ajax({
-			    url: "${pageContext.request.contextPath}/showing/getShowingList",
-			    type: "post",
-			    //contentType: "application/json",
-			    data: ShowingVO,
-			    
-			    dataType: "json",
-			    success: function(result) {		          	     
-			         
-			         var item0 = '<option selected="" value="0">회차 선택</option>';
-			         selFlashTime.append(item0);
-			    	 for (let index in result.data) {
-					        if (result.data.hasOwnProperty(index)) {
-					           	var i = parseInt(index) + 1;
-					            var item = '<option value='+result.data[index].showingSq+'>';
-					            item += i+' 회차 : '+result.data[index].startTime;
-					            item += '</option>';			            
-					            	
-					            selFlashTime.append(item);
-					        }
-					    }			    	
-			    				    	
-			  },
-			    error: function(XHR, status, error) {
-			      console.error(status + " : " + error);
-			    }
-		  });	
+		selFlashTime.empty();
+		// 좌석 지우기
+		$("#container").empty();
+		// 태그 비우기		
+		empty();
+	
+		dateajax(date);
 		
 	});
 	
@@ -202,47 +176,8 @@ $(document).ready(function() {
 	$("#selFlashTime").on("change",function(){
 		var showingSq = $(this).val();
 		console.log(showingSq);
-		var ulLegend = $("#ulLegend");
-		// 좌석등급/가격지우기
-		ulLegend.empty();
-		var ShowingVO = {showingSq : showingSq};
-		// form input태그
-		var inputShowingSq = $("#inputShowingSq");
-		inputShowingSq.val(showingSq);
-		// 잔여좌석 가지고오기
-		$.ajax({
-		    url: "${pageContext.request.contextPath}/showing/remainingSeats",
-		    type: "post",
-		    //contentType: "application/json",
-		    data: ShowingVO,
-		    
-		    dataType: "json",
-		    success: function(result) {		          	     
-		               
-			   
-			    for (let index in result.data) {
-			        if (result.data.hasOwnProperty(index)) {
-			            //금액 포맷
-			        	var seatPriceFormatted = new Intl.NumberFormat('ko-KR').format(result.data[index].seatPrice);
-
-			            var item = '<li id="'+result.data[index].seatClass;
-		           			item +='2" data-price="'+result.data[index].seatPrice;
-		           			item +='"style="margin-bottom: 5px;">' + result.data[index].seatClass +'석'			            
-			            	item += '&nbsp;&nbsp;';
-			            	item += seatPriceFormatted  +'원';
-			            	item += '&nbsp;&nbsp;';
-			            	item += '<span style="color: orange"> 잔여 : ('+result.data[index].seatEa +'석)</span>';
-			            	item +='</li>';
-			            	ulLegend.append(item);
-			        }
-			    }
-			     // 좌석그리기 ajax 호출
-			   	 getShowSeatList(showingSq);			  
-		    },
-		    error: function(XHR, status, error) {
-		      console.error(status + " : " + error);
-		    }
-	 	});		
+		showingajax(showingSq);	
+		
 	});
 	// 좌석 선택
 	$("#container").on("click", "button", function() {
@@ -318,12 +253,96 @@ $(document).ready(function() {
 	    alert("좌석을 선택해주세요.");
 	  }
 	});
+		
 	
+	// 날짜 선택시 ajax
+	function dateajax(date){
+		selFlashTime.empty();
+		// 태그들 비우기
+		empty();
+		
+		
+		ShowingVO = { showingDate:date,	showSq: showSq }
 	
+		 $.ajax({
+			    url: "${pageContext.request.contextPath}/showing/getShowingList",
+			    type: "post",
+			    //contentType: "application/json",
+			    data: ShowingVO,
+			    
+			    dataType: "json",
+			    success: function(result) {		          	     
+			         
+			         var item0 = '<option selected="" value="0">회차 선택</option>';
+			         selFlashTime.append(item0);
+			    	 for (let index in result.data) {
+					        if (result.data.hasOwnProperty(index)) {
+					           	var i = parseInt(index) + 1;
+					            var item = '<option value='+result.data[index].showingSq+'>';
+					            item += i+' 회차 : '+result.data[index].startTime;
+					            item += '</option>';			            
+					            	
+					            selFlashTime.append(item);
+					        }
+					    }			    	
+			    				    	
+			  },
+			    error: function(XHR, status, error) {
+			      console.error(status + " : " + error);
+			  }
+		  });	
+	};
 	
+	// 회차 선택시 ajax
+	function showingajax(showingSq){
+		var ulLegend = $("#ulLegend");
+		// 태그들 비우기
+		empty();
+		
+		var ShowingVO = {showingSq : showingSq};
+		// form input태그
+		var inputShowingSq = $("#inputShowingSq");
+		inputShowingSq.val(showingSq);
+		// 잔여좌석 가지고오기
+		$.ajax({
+		    url: "${pageContext.request.contextPath}/showing/remainingSeats",
+		    type: "post",
+		    //contentType: "application/json",
+		    data: ShowingVO,
+		    
+		    dataType: "json",
+		    success: function(result) {		          	     
+		               
+			   
+			    for (let index in result.data) {
+			        if (result.data.hasOwnProperty(index)) {
+			            //금액 포맷
+			        	var seatPriceFormatted = new Intl.NumberFormat('ko-KR').format(result.data[index].seatPrice);
+	
+			            var item = '<li id="'+result.data[index].seatClass;
+		           			item +='2" data-price="'+result.data[index].seatPrice;
+		           			item +='"style="margin-bottom: 5px;">' + result.data[index].seatClass +'석'			            
+			            	item += '&nbsp;&nbsp;';
+			            	item += seatPriceFormatted  +'원';
+			            	item += '&nbsp;&nbsp;';
+			            	item += '<span style="color: orange"> 잔여 : ('+result.data[index].seatEa +'석)</span>';
+			            	item +='</li>';
+			            	ulLegend.append(item);
+			        }
+			    }
+			     // 좌석그리기 ajax 호출
+			   	 getShowSeatList(showingSq);			  
+		    },
+		    error: function(XHR, status, error) {
+		      console.error(status + " : " + error);
+		    }
+	 	});
+	};
+	
+	// 좌석그리기 ajax
 	function getShowSeatList(showingSq) {
 		
-			ShowingVO={ showSq : showSq, showingSq : showingSq}
+		ShowingVO={ showSq : showSq, showingSq : showingSq}
 		  $.ajax({
 		    url: "${pageContext.request.contextPath}/showing/getShowSeatList",
 		    type: "post",
@@ -359,14 +378,14 @@ $(document).ready(function() {
 		          seatNo = seatClassList[index].seatNo;		      
 		          index++; // 좌석 갯수 만큼 인덱스 증가
 		          set.add(seatClass);
-
+	
 		          var item = $('<button type="button" data-seatclasssq="' + seatClassSq + '" data-seatno="' + seatNo + '" data-seatclass="'+seatClass+'">')
 		            .attr('id', seatNo)
 		            .addClass('item')
 		            .addClass(seatClass)
 		            .val(seatNo);
 		            //.text(seatNo);
-
+	
 		          container.append(item);
 		        }
 		      }
@@ -388,10 +407,17 @@ $(document).ready(function() {
 		    error: function(XHR, status, error) {
 		      console.error(status + " : " + error);
 		    }
-		  });
-		}
+	  });
+	}
 	
-	
+	function empty(){
+		// 좌석등급/가격지우기		
+		$("#ulLegend").empty();
+		// 선택좌석 지우기
+		$("#ulLegend2").empty();
+		// 폼비우기
+		$("#insertformDiv").empty();
+	};
 	
 });	
 </script>

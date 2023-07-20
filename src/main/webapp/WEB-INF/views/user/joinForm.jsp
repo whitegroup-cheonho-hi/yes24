@@ -65,6 +65,7 @@
 					<dl class="yesFormDl">
 						<dt>
 							<strong class="item_tit">아이디</strong>
+							<span id="idCheck"></span>
 						</dt>
 						<dd>
 							<div class="inpRow">
@@ -227,33 +228,33 @@
 </body>
 
 <script>
+
 	//아이디 체크
-	$("#userId").on("keyup",function(){
-		
-		var id = $("#userId").val();
-		console.log(id);
-		
-		$.ajax({
-			
-			url : "${pageContext.request.contextPath}/user/idCheck",		
-			type : "post",			
-			data : {id: id},
+	$("#userId").on("keyup", function () {
+	  var id = $("#userId").val();
 	
-			dataType : "json",
-			success : function(result){
-				
-				if(result.data){
-					
-				console.log("가능");
-				
-				}
-			
-			},
-			error : function(XHR, status, error) {
-				console.error(status + " : " + error);
-			}
-		}); 
-		
+	  if (id === "") {
+	    $("#idCheck").text(""); // 입력 필드가 비어있을 때, #idCheck의 내용을 비웁니다.
+	    return; // 입력 필드가 비어있을 경우 서버 요청을 보내지 않도록 합니다.
+	  }
+	  console.log(id);
+	
+	  $.ajax({
+	    url: "${pageContext.request.contextPath}/user/idCheck",
+	    type: "post",
+	    data: { id: id },
+	    dataType: "json",
+	    success: function (result) {
+	      if (result.data) {
+	        $("#idCheck").css("color", "blue").text("아이디 사용 가능합니다");
+	      } else {
+	        $("#idCheck").css("color", "red").text("사용중인 아이디입니다.");
+	      }
+	    },
+	    error: function (XHR, status, error) {
+	      console.error(status + " : " + error);
+	    },
+	  });
 	});
 
 	//비밀번호 재확인
@@ -278,5 +279,6 @@
 			}
 		}).open();
 	});
+
 </script>
 </html>
