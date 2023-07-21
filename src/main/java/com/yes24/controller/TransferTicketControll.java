@@ -1,12 +1,13 @@
 package com.yes24.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yes24.vo.JsonResult;
+import com.yes24.vo.TransferBoardVO;
 
 @Controller
 @RequestMapping("/transferTicket")
@@ -21,10 +22,10 @@ public class TransferTicketControll {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value = "/insertTransferTicket",method = RequestMethod.GET)
-	public JsonResult insertTransferTicket(@RequestParam("ticketSq")int no) {
+	@RequestMapping(value = "/insertTransferTicket",method = RequestMethod.POST)
+	public JsonResult insertTransferTicket(@ModelAttribute TransferBoardVO vo) {
 		System.out.println("insertTransferTicket()");
-		System.out.println(no);
+		System.out.println(vo);
 		
 		JsonResult jsonResult = new JsonResult();
 		

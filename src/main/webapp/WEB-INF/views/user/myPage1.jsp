@@ -33,21 +33,23 @@ section {
 	margin: 0 auto;
 	padding-top: 70px;
 }
-
-
+/* 양도등록창 */
 .inquiry_popup{position: fixed; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 9999999; top: 0; left: 0;}
 .inquiry_popup .inquiry_close{display: none;}
-.inquiry_popup .inquiry_write{border-radius: 30px; box-sizing: border-box; padding: 60px; width: 700px; height: 700px; position: absolute; top: 10%; left: 50%; margin-left: -350px; background: #fff;}
-.inquiry_popup .inquiry_write2{border-radius: 30px; box-sizing: border-box; padding: 60px; width: 1000px; height: 700px; position: absolute; top: 10%; left: 50%; margin-left: -500px; background: #fff;}
-.inquiry_popup .inquiry_write h3{ font-weight: 700; font-size: 28px; margin-bottom: 60px; text-align: center;}
+.inquiry_popup .inquiry_write{border-radius: 5px; box-sizing: border-box; padding: 60px; width: 700px; height: 750px; position: absolute; top: 10%; left: 50%; margin-left: -350px; background: #fff;}
+.inquiry_popup .inquiry_write h3{ font-weight: 700; font-size: 28px; margin-bottom: 20px; text-align: center;}
 .inquiry_popup .inquiry_write table { width: 100%;border: 1px solid #ccc; border-collapse: collapse; }
 .inquiry_popup .inquiry_write th,
 .inquiry_popup .inquiry_write td {vertical-align: middle; border: 1px solid #ccc; padding: 10px; text-align: left;}
 .inquiry_popup .inquiry_write td input#secret_write_N{margin-left: 20px;}
 .inquiry_popup .inquiry_write td input#inquiry_tit{border-radius: 5px; border: 1px solid #ccc; padding: 10px; font-size: 16px; width: 100%; box-sizing: border-box;}
-.inquiry_popup .inquiry_write td textarea#inquiry_cont{border-radius: 5px;  resize: none;border: 1px solid #ccc; padding: 10px; font-size: 16px; width: 100%; height: 250px; box-sizing: border-box;}
-.inquiry_popup .inquiry_write td textarea#inquiry_cont2{border-radius: 5px;  resize: none;border: 1px solid #ccc; padding: 10px; font-size: 16px; width: 100%; height: 250px; box-sizing: border-box;}
-.inquiry_popup .inquiry_write td .textLengthWrap{text-align: right; color: #aaa;};
+.inquiry_popup .inquiry_write td textarea#content{border-radius: 5px;  resize: none;border: 1px solid #ccc; padding: 10px; font-size: 16px; width: 100%; height: 120px; box-sizing: border-box;}
+.inquiry_popup .inquiry_write td .textLengthWrap{text-align: right; color: #aaa;}
+/* 버튼 */
+.btn_wrap{margin-top: 40px; display: flex; justify-content: center;}
+.btn_wrap a{padding: 15px 50px; margin: 0 5px; font-weight: 600;}
+.btn_wrap a.order_btn{background: #f43142; border: 1px solid #f43142; color: #fff;}
+.btn_wrap a.shopping_btn{background: #fff; border: 1px solid #f43142; color: #5c5c5c;}
 </style>
 </head>
 <body>
@@ -108,8 +110,8 @@ section {
 					<div class="mypage_contain">
 						<div class="mycont">
 							<h2 class="tit">
-								&nbsp;<b class="subtitle">예매내역</b> <span>${user.userName}님께서 최근 3개월간
-									예매하신 내역입니다.</span>
+								&nbsp;<b class="subtitle">예매내역</b> <span>${user.userName}님께서
+									최근 3개월간 예매하신 내역입니다.</span>
 							</h2>
 							<div id="divOrderList" style="">
 								<table class="tmypage" summary="최근 예매내역 리스트">
@@ -147,7 +149,8 @@ section {
 													value="${myTicketing.ticketSq}">
 													${myTicketing.ticketingDate}</td>
 												<td scope="row">${myTicketing.ticketingSq}</td>
-												<td scope="row"><a id="showHref" href="${pageContext.request.contextPath}/show/detail/${myTicketing.showSq}">${myTicketing.showName}</a></td>
+												<td scope="row"><a id="showHref"
+													href="${pageContext.request.contextPath}/show/detail/${myTicketing.showSq}">${myTicketing.showName}</a></td>
 												<td scope="row">${myTicketing.ticketSeat}</td>
 												<td scope="row">${myTicketing.startTime}</td>
 												<td scope="row"><fmt:formatNumber type="number"
@@ -156,7 +159,15 @@ section {
 												<c:if test="${myTicketing.ticketStat == '1'}">
 													<td scope="row">예매</td>
 												</c:if>
-												<td scope="row"><button class="transferButton" type="button" data-ticketsq="${myTicketing.ticketSq}">양도</button></td>
+												<td scope="row"><button class="transferButton"
+														type="button" data-ticketsq="${myTicketing.ticketSq}"
+														data-showsq="${myTicketing.showSq}"
+														data-showname="${myTicketing.showName}"
+														data-ticketseat="${myTicketing.ticketSeat}"
+														data-ticketingsq="${myTicketing.ticketingSq}"
+														data-ticketingdate="${myTicketing.ticketingDate}"
+														data-starttime="${myTicketing.startTime}"
+														data-ticketseatprice="${myTicketing.ticketSeatPrice}">양도</button></td>
 											</tr>
 										</c:forEach>
 									</tbody>
@@ -165,7 +176,7 @@ section {
 						</div>
 					</div>
 
-					<div id ="mypage_contain2" class="mypage_contain">
+					<div id="mypage_contain2" class="mypage_contain">
 						<div class="mycont">
 							<h2 class="tit">
 								&nbsp;<b class="subtitle">양도 거래내역</b> <span>양준우님께서 최근
@@ -191,7 +202,7 @@ section {
 											<th scope="row">좌석</th>
 											<th scope="row">관람일시</th>
 											<th scope="row">양도금액</th>
-											<th scope="row" >양도상태</th>
+											<th scope="row">양도상태</th>
 											<th scope="row" class="end">버튼</th>
 										</tr>
 									</thead>
@@ -253,94 +264,111 @@ section {
 
 
 	<!-- 상품 등록 -->
-	<section id="inquiry_popup2" class="inquiry_popup inquiry_popup2"
+	<section id="inquiry_popup" class="inquiry_popup"
 		style="display: none;">
 		<a href="#none" class="inquiry_close"><img
 			src="images/ver02/close.png" alt=""></a>
-		<div class="inquiry_write inquiry_write2">
-			<h3>상품 등록</h3>
-			<form id="insertProductForm"
-				action="${pageContext.request.contextPath}/product/insertProduct"
-				method="POST" enctype="multipart/form-data">
+		<div class="inquiry_write">
+			<h3>양도등록</h3>
+			<form id="moveForm1" action="#none" >
 				<table>
+					<colgroup>
+						<col width="20%">
+						<col width="80%">
+					</colgroup>
 					<tr>
-						<td rowspan="8" width="30%" style="text-align: center;"><img
-							id="preview2"
-							src="${pageContext.request.contextPath}/assets/images/sns4.png"
-							width="100%"><br> <br> <br> <b>이미지
-								미리보기</b></td>
+						<th><label for="inquiry_tit">제목</label></th>
+						<td><input type="text" id="showName" name="showName"
+							required readonly>
+							<input type="hidden" id="ticketSq">
+							</td>
 					</tr>
 					<tr>
-						<td style="text-align: center;">제품명</td>
-						<td><input type="text" id="productName2"
-							name="productName" required></td>
+						<th><label for="inquiry_cont">좌석 번호</label></th>
+						<td><input type="text" id="seatNo" name="seatNo"
+							required readonly></td>
+					</tr>
+					<tr>
+						<th><label for="inquiry_cont">일시</label></th>
+						<td><input type="text" id="ticketingDate" name="ticketingDate" required readonly></td>
 					</tr>
 
 					<tr>
-						<td style="text-align: center;">수량</td>
-						<td><input type="number" id="productEa2" name="productEa"
-							min="1" required></td>
+						<th><label for="inquiry_cont">구입금액</label></th>
+						<td> 
+						<input type="text" id="byPrice" name="byPrice" required readonly />  						
+						</td>
 					</tr>
 					<tr>
-						<td style="text-align: center;">가격</td>
-						<td><input type="number" id="price2" name="price"
-							min="3000" step="100" required></td>
+						<th><label for="inquiry_cont">판매금액</label></th>
+						<td><input type="number" id="hopePrice" name="hopePrice" step="100"
+							placeholder="판매희망 금액" required>
+							</td>
 					</tr>
 					<tr>
-						<td style="text-align: center;">상품 정보</td>
-						<td><input type="text" id="productContent2"
-							name="productContent" required></td>
-					</tr>
-					<tr>
-						<td style="text-align: center;">카테고리</td>
-						<td><input type="text" id="category2" name="category"
-							required></td>
-					</tr>
-					<tr>
-						<td style="text-align: center;">서브 카테고리</td>
-						<td><input type="text" id="subCategory2"
-							name="subCategory" required></td>
-					</tr>
-					<tr>
-						<td style="text-align: center;">제품사진</td>
-						<td><input id="file2" type="file" name="file" required></td>
+						<th><label for="inquiry_cont">게시 내용</label></th>
+						<td><textarea name="content" id="content"
+								placeholder="100자 이하 입력가능" ></textarea>
+							<div class="textLengthWrap">
+								<span class="textCount">0자</span> <span class="textTotal">/
+									100자</span>
+							</div></td>
 					</tr>
 				</table>
 				<div class="btn_wrap">
-					<a id="insertProduct" href="#none" class="order_btn">등록</a> <a
+					<a id="insertTransfer" href="#none" class="order_btn">양도등록</a> <a
 						href="#none" class="shopping_btn">취소</a>
 				</div>
-
 			</form>
 		</div>
 	</section>
 </body>
 <script>
+	$(document).ready(function() {
 
-$(document).ready(function() {
-	
-	
-	//상품 등록창 열기
-	$("#Insert").on("click", function() {
-
-		$("#inquiry_popup2").show();
-
-	});
-	
-	//  양도버튼 클릭
-	$(".transferButton").on("click",function(){
-		console.log("양도");
-		var ticketSq = $(this).data("ticketsq");
-		console.log(ticketSq);
-	
-	/* 	
-		$.ajax({
+		//  양도버튼 클릭
+		$(".transferButton").on("click", function() {
+			$("#inquiry_popup").show();
+			console.log("양도");
+			// 양도등록창에 정보 보내기
+			var ticketSq = $(this).data("ticketsq");
+			var showSq = $(this).data("showsq");
+			var showName = $(this).data("showname");
+			var ticketSeat = $(this).data("ticketseat");
+			var ticketingSq = $(this).data("ticketingsq");
+			var ticketingDate = $(this).data("ticketingdate");
+			var startTime = $(this).data("starttime");
+			var price = $(this).data("ticketseatprice");
+			
+			// 금액포맷
+			var ticketSeatPrice = new Intl.NumberFormat('ko-KR').format(price);   
+		
+					
+			$("#ticketSq").val(ticketSq);
+			$("#showName").val(showName);
+			$("#seatNo").val(ticketSeat);
+			$("#ticketingDate").val(ticketingDate);
+			$("#byPrice").val(ticketSeatPrice+" 원");
+			$("#sellPrice").attr("max",ticketSeatPrice);
+			
+			
+			// 양도신청 버튼
+			$("#insertTransfer").on("click", function() {
+				console.log("양도등록");
+				
+				var transferBoardContent = $("#content").val();
+				var hopePrice = $("#hopePrice").val();
+				 
+				TransferBoardVO = {ticketSq : ticketSq, transferBoardContent : transferBoardContent, hopePrice : hopePrice}
+				
+							
+			 	$.ajax({
 				    url: "${pageContext.request.contextPath}/transferTicket/insertTransferTicket",
-				    type: "get",
-				    /* contentType: "application/json", */
+				    type: "post",
+				    //contentType: "application/json", 				    
+				    data: TransferBoardVO ,
 				    
-				    data: {ticketSq : ticketSq},
-				    dataType: "json",
+				    dataType: "json",				    
 				    success: function(result) {
 				    	console.log(result);
 				    
@@ -349,24 +377,22 @@ $(document).ready(function() {
 				    error: function(XHR, status, error) {
 				      console.error(status + " : " + error);
 				    }
-				  });
-			 */
-	
+			 	});
+
+			});
+
+		});
+
+
+		// 양도 취소버튼
+		$(".btn_wrap .shopping_btn").on("click", function() {
+			console.log("취소");
+			$('#inquiry_popup').hide();
+		});	
+		
+		
 	});
-	
-	
-	
-	
-	
-	
-	
-});
-
-
-
-
-
-
+		
 </script>
 
 </html>
