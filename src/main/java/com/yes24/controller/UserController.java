@@ -102,7 +102,7 @@ public class UserController {
 		System.out.println(user);
 		model.addAttribute("user", user);
 
-		return "user/myPage4";
+		return "user/myPage5";
 
 	}
 

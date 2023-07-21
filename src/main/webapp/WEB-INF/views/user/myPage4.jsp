@@ -42,77 +42,55 @@ section {
 	height: 200px;
 }
 /* input */
-.yesIpt { display:-moz-inline-stack;display:inline-block;zoom:1;*display:inline;text-align:left;vertical-align:middle;box-shadow:inset 0 1px 2px 0 #fafafa; }
-.yesIpt { box-sizing:border-box;position:relative;padding:3px 8px 5px;width:auto;height:30px;line-height:20px;border:solid 1px #ebebeb;border-top-color:#d8d8d8;border-left-color:#d8d8d8;border-radius:3px;background-color:#fff; }
-.yesIpt.yesIptCal { padding-left:0 !important;padding-right:25px !important; }
-.yesIpt.yesIptCal input { text-align:center; }
-.yesIpt.yesIptCal .lnk_cal { display:block;position:absolute;right:0;top:50%;margin-top:-9px;padding-right:5px; }
-.yesIpt.yesIptCal .lnk_cal .bgYUI { width:17px;height:18px;background-position:-130px -30px; }
-.yesIpt label { position:absolute;left:8px;top:4px;height:20px;line-height:20px;color:#999;font-size:12px; }
-.yesIpt .lnk_del { display:none;position:absolute;right:0;top:50%;margin-top:-14px;padding:10px 10px;height:9px; } 
-.yesIpt.nowFocus .lnk_del { display:block; } 
-.yesIpt .lnk_del .bgYUI { width:9px;height:9px;background-position:-260px -240px; } 
-.yesIpt .ipt_msg { position:absolute;right:8px;top:4px;height:20px;line-height:20px;color:#999;font-size:12px; } 
-.yesIpt .ipt_cVal { position:absolute;right:5px;top:50%;margin-top:-16px; } 
-.yesIpt.ipt_disabled { opacity:0.4;background:#f8f8f8; } /* 주석 */
-.yesIpt.ipt_disabled label { color:#000; }
-.yesIpt.ipt_readonly { background:rgba(248,248,248,0.4); }
-.yesIpt.ipt_readonly label { color:#333; }
-.yesIpt input { width:100%;height:20px;line-height:20px;overflow:hidden;border:none;border-color:transparent;font-size:12px;color:#333;-webkit-appearance:none;border-radius:0;outline-style:none;background-color:transparent;vertical-align:top; }
-.yesIpt input:focus { outline:none; }
-.yesIpt input:-ms-clear { display:none; }
-.yesIpt input:-ms-reveal { display:none; }
-.yesIpt input::-ms-clear { display:none; }
-.yesIpt input::-ms-reveal { display:none; }
-.yesIpt.ipt_clearNone input::-ms-clear { display:none; }
-.yesIpt input:-webkit-autofill { -webkit-box-shadow: 0 0 0px 1000px white inset !important; }
-.yesIpt.s_size { padding:0 5px;width:auto;height:20px;line-height:18px; }
-.yesIpt.s_size input { padding:0;height:17px;line-height:17px;font-size:12px; }
-.yesIpt.s_size label { position:absolute;left:5px;top:1px;height:17px;line-height:17px;font-size:12px; }
-.yesIpt.s_size .ipt_msg { right:5px;top:1px;height:17px;line-height:17px;font-size:12px; } 
-.yesIpt.m_size { padding:4px 11px 6px;width:auto;height:40px;line-height:28px; }
-.yesIpt.m_size input { padding:0;height:28px;line-height:27px;font-size:13px;font-weight:bold; }
-.yesIpt.m_size label { position:absolute;left:11px;top:1px;height:35px;line-height:35px;font-size:13px; }
-.yesIpt.m_size .ipt_msg { right:11px;top:1px;height:35px;line-height:35px;font-size:13px; }
-.yesIpt.b_size { padding:9px 14px 11px;width:320px;height:50px;line-height:28px; }
-.yesIpt.b_size.chkVal { padding-right:80px; }
-.yesIpt.b_size input { padding:0;height:28px;line-height:27px;font-size:16px;font-weight:bold; }
-.yesIpt.b_size label { position:absolute;left:14px;top:1px;height:45px;line-height:45px;font-size:16px; }
-.yesIpt.b_size .ipt_msg { right:19px;top:1px;height:45px;line-height:45px;font-size:13px; }
-.yesIpt.labelHide label { display:none; }
-.yesIpt input:focus+label { display:none; }
-.yesIpt.error { border:solid 1px #ff6666; }
-.yesIpt.focusOn.focus_blue { border:solid 1px #6699cc; }
-.yesIpt.w_40 { width:40px; }
-.yesIpt.w_45 { width:45px; }
-.yesIpt.w_50 { width:50px; }
-.yesIpt.w_60 { width:60px; }
-.yesIpt.w_70 { width:70px; }
-.yesIpt.w_77 { width:77px; }
-.yesIpt.w_80 { width:80px; }
-.yesIpt.w_87 { width:87px; }
-.yesIpt.w_90 { width:90px; }
-.yesIpt.w_100 { width:100px; }
-.yesIpt.w_110 { width:110px; }
-.yesIpt.w_120 { width:120px; }
-.yesIpt.w_130 { width:130px; }
-.yesIpt.w_140 { width:140px; }
-.yesIpt.w_150 { width:150px; }
-.yesIpt.w_160 { width:160px; }
-.yesIpt.w_170 { width:170px; }
-.yesIpt.w_180 { width:170px; }
-.yesIpt.w_190 { width:190px; }
-.yesIpt.w_200 { width:200px; }
-.yesIpt.w_210 { width:210px; }
-.yesIpt.w_220 { width:220px; }
-.yesIpt.ipt_wSizeF { display:block; }
-.yesIptTxt { display:-moz-inline-stack;display:inline-block;zoom:1;*display:inline;text-align:left;vertical-align:middle; }
-.yesIptTxt { vertical-align:-2px; }
+.mypage_contain .yesIpt { display:-moz-inline-stack;display:inline-block;zoom:1;*display:inline;text-align:left;vertical-align:middle;box-shadow:inset 0 1px 2px 0 #fafafa; }
+.mypage_contain .yesIpt { box-sizing:border-box;position:relative;padding:3px 8px 5px;width:auto;height:30px;line-height:20px;border:solid 1px #ebebeb;border-top-color:#d8d8d8;border-left-color:#d8d8d8;border-radius:3px;background-color:#fff; }
+.mypage_contain .yesIpt.yesIptCal { padding-left:0 !important;padding-right:25px !important; }
+.mypage_contain .yesIpt.yesIptCal input { text-align:center; }
+.mypage_contain .yesIpt label { position:absolute;left:8px;top:4px;height:20px;line-height:20px;color:#999;font-size:12px; }
+.mypage_contain .yesIpt .lnk_del .bgYUI { width:9px;height:9px;background-position:-260px -240px; } 
+.mypage_contain .yesIpt .ipt_msg { position:absolute;right:8px;top:4px;height:20px;line-height:20px;color:#999;font-size:12px; } 
+.mypage_contain .yesIpt .ipt_cVal { position:absolute;right:5px;top:50%;margin-top:-16px; } 
+.mypage_contain .yesIpt.ipt_disabled { opacity:0.4;background:#f8f8f8; } /* 주석 */
+.mypage_contain .yesIpt input { width:100%;height:20px;line-height:20px;overflow:hidden;border:none;border-color:transparent;font-size:12px;color:#333;-webkit-appearance:none;border-radius:0;outline-style:none;background-color:transparent;vertical-align:top; }
+.mypage_contain .yesIpt.s_size { padding:0 5px;width:auto;height:20px;line-height:18px; }
+.mypage_contain .yesIpt.s_size input { padding:0;height:17px;line-height:17px;font-size:12px; }
+.mypage_contain .yesIpt.s_size label { position:absolute;left:5px;top:1px;height:17px;line-height:17px;font-size:12px; }
+.mypage_contain .yesIpt.s_size .ipt_msg { right:5px;top:1px;height:17px;line-height:17px;font-size:12px; } 
+.mypage_contain .yesIpt.m_size { padding:4px 11px 6px;width:auto;height:40px;line-height:28px; }
+.mypage_contain .yesIpt.m_size input { padding:0;height:28px;line-height:27px;font-size:13px;font-weight:bold; }
+.mypage_contain .yesIpt.m_size label { position:absolute;left:11px;top:1px;height:35px;line-height:35px;font-size:13px; }
+.mypage_contain .yesIpt.m_size .ipt_msg { right:11px;top:1px;height:35px;line-height:35px;font-size:13px; }
+.mypage_contain .yesIpt.b_size { padding:9px 14px 11px;width:320px;height:50px;line-height:28px; }
+.mypage_contain .yesIpt.b_size.chkVal { padding-right:80px; }
+.mypage_contain .yesIpt.b_size input { padding:0;height:28px;line-height:27px;font-size:16px;font-weight:bold; }
+.mypage_contain .yesIpt.b_size label { position:absolute;left:14px;top:1px;height:45px;line-height:45px;font-size:16px; }
+.mypage_contain .yesIpt.b_size .ipt_msg { right:19px;top:1px;height:45px;line-height:45px;font-size:13px; }
 
-/* input discription */
-.yesFormTxt { margin-bottom:7px;padding:7px 0 0 0;line-height:17px;font-size:13px;color:#666; }
-.yesFormTxt.m_size { line-height:16px;font-size:12px; }
-.yesFormTxt.error { color:#ff6666; }
+.mypage_contain .yesIpt.w_40 { width:40px; }
+.mypage_contain .yesIpt.w_45 { width:45px; }
+.mypage_contain .yesIpt.w_50 { width:50px; }
+.mypage_contain .yesIpt.w_60 { width:60px; }
+.mypage_contain .yesIpt.w_70 { width:70px; }
+.mypage_contain .yesIpt.w_77 { width:77px; }
+.mypage_contain .yesIpt.w_80 { width:80px; }
+.mypage_contain .yesIpt.w_87 { width:87px; }
+.mypage_contain .yesIpt.w_90 { width:90px; }
+.mypage_contain .yesIpt.w_100 { width:100px; }
+.mypage_contain .yesIpt.w_110 { width:110px; }
+.mypage_contain .yesIpt.w_120 { width:120px; }
+.mypage_contain .yesIpt.w_130 { width:130px; }
+.mypage_contain .yesIpt.w_140 { width:140px; }
+.mypage_contain .yesIpt.w_150 { width:150px; }
+.mypage_contain .yesIpt.w_160 { width:160px; }
+.mypage_contain .yesIpt.w_170 { width:170px; }
+.mypage_contain .yesIpt.w_180 { width:170px; }
+.mypage_contain .yesIpt.w_190 { width:190px; }
+.mypage_contain .yesIpt.w_200 { width:200px; }
+.mypage_contain .yesIpt.w_210 { width:210px; }
+.mypage_contain .yesIpt.w_220 { width:220px; }
+
+
+
 </style>
 </head>
 <body>
@@ -134,6 +112,7 @@ section {
 					</div>
 
 					<div class="mypage_contain">
+					
 						<dl class="yesFormDl">
 							<dt>
 								<strong class="item_tit">아이디</strong>
