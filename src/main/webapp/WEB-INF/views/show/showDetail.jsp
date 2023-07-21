@@ -55,6 +55,7 @@
 #remainingSeats h2{height: 55px;}
 #remainingSeats .fc-view-harness{padding: 10px;}
 .rn-product-area3 #precautions{color:red;}
+.fc-event{cursor: pointer;}
 
 </style>
 </head>

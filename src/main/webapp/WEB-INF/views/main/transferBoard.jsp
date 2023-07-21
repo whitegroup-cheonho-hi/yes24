@@ -5,35 +5,22 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>category</title>
+<title>transferBoard</title>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath }/assets/css/reset.css"
 	type="text/css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath }/assets/css/sub.css"
 	type="text/css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath }/assets/css/slick.css"
-	type="text/css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath }/assets/css/slick-theme.css"
-	type="text/css">
-
 <!-- 구글폰트 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300&display=swap"
 	rel="stylesheet">
-<!-- 스와이퍼 js -->
-<script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
-<!-- 스와이퍼 CSS -->
-<link rel="stylesheet"
-	href="https://unpkg.com/swiper@8/swiper-bundle.min.css" type="text/css">
 <!-- 제이쿼리 최신버전 -->
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script src="${pageContext.request.contextPath }/assets/js/slick.js"
-	type="text/javascript" charset="utf-8"></script>
+
 <style>
 * {	box-sizing: border-box;}
 .wrapper {max-width: 1920px;margin: 0 auto;}
@@ -58,17 +45,22 @@
 	<c:import url="/WEB-INF/views/includes/header.jsp"></c:import>
 	<!-- //헤더 -->
 
-	<div class="wrapper">
-		<section class="center slider">
+	<div class="wrapper"></div>
+
+	<section class="center slider">
+		<div>
 			<c:forEach items="${showList}" var="show">
-			    <div>
-			        <a href="${pageContext.request.contextPath}/show/detail/${show.showSq}">
-			            <img src="${pageContext.request.contextPath}/upload/${show.subImage}">
-			        </a>
-			    </div>
+				<div>
+					<a
+						href="${pageContext.request.contextPath}/show/detail/${show.showSq}">
+						<img
+						src="${pageContext.request.contextPath}/upload/${show.subImage}">
+					</a>
+				</div>
 			</c:forEach>
-		</section>
-	</div>
+		</div>
+	</section>
+	
 
 	<!-- Footer -->
 	<c:import url="/WEB-INF/views/includes/footer.jsp"></c:import>

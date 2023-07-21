@@ -52,6 +52,7 @@
 #remainingSeats h2{height: 51px;padding-top: 3px;}
 #remainingSeats .fc-view-harness{padding: 10px; font-size: 12px;}
 .focus{background-color : red;}
+.fc-event{cursor: pointer;}
 </style>
 </head>
 <body>
