@@ -73,4 +73,31 @@ public class ShowingDAO {
 		return sqlSession.selectList("showing.getShowSeats", no);
 	}
 
+	// -----------------------------------------------------------------------------------
+	// 공연번호 날짜로 회차정보 가지고오기
+
+	// 회차 입력
+	public int insertShowing(ShowingVO vo) {
+		System.out.println("insertShowing DAO()");
+
+		return sqlSession.insert("showing.insertShowing", vo);
+	}
+
+	// 회차 삭제
+	public int deleteShowing(String showingSq) {
+		System.out.println("deleteShowing DAO()");
+
+		return sqlSession.delete("showing.deleteShowing", showingSq);
+	}
+
+	// 월별 공연일정
+	public List<String> getShowingDay(int showSq) {
+		System.out.println("getShowingDay DAO()");
+
+		List<String> list = sqlSession.selectList("showing.getShowingDay", showSq);
+
+		return list;
+	}
+	// ----------------------------------------------------------------------------------------
+
 }

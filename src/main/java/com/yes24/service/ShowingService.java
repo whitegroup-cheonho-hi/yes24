@@ -78,7 +78,7 @@ public class ShowingService {
 	public Map<String, Object> getShowSeats(ShowingVO vo) {
 		System.out.println("getShowSeats Service()");
 		Map<String, Object> map = new HashMap<>();
-		
+
 		List<SeatClassVO> seatClassList = showingDAO.getShowSeats(vo.getShowSq());
 		List<ShowingSeatVO> showingSeatList = showingDAO.getShowingSeats(vo.getShowingSq());
 		// 잔여좌석
@@ -88,5 +88,37 @@ public class ShowingService {
 
 		return map;
 	}
+
+	// ----------------------------------------------------------------------------------------
+
+	public ShowVO getShow2(int no) {
+		System.out.println("getShow Service");
+
+		return showDAO.getShow2(no);
+	}
+
+	// 회차 입력
+	public int insertShowing(ShowingVO vo) {
+		System.out.println("insertShowing Service()");
+
+		return showingDAO.insertShowing(vo);
+	}
+
+	// 회차 삭제
+	public int deleteShowing(String showingSq) {
+		System.out.println("deleteShowing Service()");
+
+		return showingDAO.deleteShowing(showingSq);
+	}
+
+	// 월별 공연일정
+	public List<String> getShowingDay(int showSq) {
+		System.out.println("getShowingDay Service()");
+
+		List<String> list = showingDAO.getShowingDay(showSq);
+		return list;
+	}
+
+	// ----------------------------------------------------------------------------------------
 
 }

@@ -11,6 +11,7 @@ import com.yes24.vo.SeatClassListVO;
 import com.yes24.vo.SeatClassVO;
 import com.yes24.vo.ShowSeatVO;
 import com.yes24.vo.ShowVO;
+import com.yes24.vo.ShowingVO;
 
 @Repository
 public class ShowDAO {
@@ -93,4 +94,13 @@ public class ShowDAO {
 
 		return sqlSession.delete("show.deleteShowSeat", no);
 	}
+
+	// -----------------------------------------------------------------------------------
+	public ShowVO getShow2(int no) {
+		System.out.println("getShow DAO()");
+
+		return sqlSession.selectOne("show.getShow2", no);
+
+	}
+	// ----------------------------------------------------------------------------------------
 }

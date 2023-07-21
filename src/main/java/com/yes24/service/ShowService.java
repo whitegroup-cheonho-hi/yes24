@@ -241,15 +241,14 @@ public class ShowService {
 	public Map<String, Object> getShow(SaveTicketVO vo) {
 		System.out.println("getShow Service()");
 		Map<String, Object> map = new HashMap<>();
-	
+
 		// 공연정보
 		showVO = showDAO.getShow(vo.getShowSq());
 
 		ShowingVO showing = showingDAO.getShowing(vo.getShowingSq());
-		
-		map.put("showVO", showVO);		
+
+		map.put("showVO", showVO);
 		map.put("showing", showing);
-		
 
 		return map;
 
@@ -263,6 +262,7 @@ public class ShowService {
 
 	}
 
+	
 	// ------------- 파일체크 & 저장
 	public void fileCheck(ShowVO vo, MultipartFile file1, MultipartFile file2) {
 

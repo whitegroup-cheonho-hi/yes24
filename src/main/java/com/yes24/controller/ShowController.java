@@ -21,6 +21,7 @@ import com.yes24.vo.ConcertHallVO;
 import com.yes24.vo.JsonResult;
 import com.yes24.vo.SeatClassListVO;
 import com.yes24.vo.ShowVO;
+import com.yes24.vo.ShowingVO;
 
 @Controller
 @RequestMapping("/show")
@@ -152,5 +153,7 @@ public class ShowController {
 		return jsonResult;
 
 	}
+	
+		
 
 }

@@ -156,7 +156,7 @@ $(document).ready(function() {
       	//ajax 한달 공연 스케쥴 불러오기
 		console.log(showSq);
 		$.ajax({
-	        url: "${pageContext.request.contextPath}/show1/getShowingDay",
+	        url: "${pageContext.request.contextPath}/showing/getShowingDay",
 	        type: "post",
 	        //contentType: "application/json",
 	        data: {showSq : showSq},
@@ -193,19 +193,22 @@ $(document).ready(function() {
 
         // 회차 정보 가져오기
         $.ajax({
-          url: "${pageContext.request.contextPath}/show1/getShowing",
+          url: "${pageContext.request.contextPath}/showing/getShowing",
           type: "post",
           //contentType: "application/json",
           data: ShowingVO,
           
           dataType: "json",
           success: function(result) {    
+        	console.log("이거확인");
         	console.log(result);
             for(var i = 0; i < result.data.length; i++){
             	var showname = result.data[i].showName;
                	var startTime =result.data[i].showingDate+'T'+result.data[i].startTime;
                	var endTime =result.data[i].showingDate+'T'+result.data[i].endTime;
                	var showingSq =  result.data[i].showingSq;
+               	console.log(startTime);
+               	console.log(endTime);
                	dayList.addEvent({
                   // DB연결해서 데이터 불러오는 영역
                   title : showname + ' ' + [i+1] + '회차',
@@ -235,6 +238,9 @@ $(document).ready(function() {
 	
 	//회차삭제 모달창 오픈		 
 	function deleteEvent(arg) {
+		console.log(arg);
+		console.log(arg.event);
+		console.log(arg.event.end);
 		$('#myModal').modal('show');
 		$('#title').val(arg.event.title);
 		$('#startTime').val(moment(arg.event.start).format('HH:mm'));
@@ -246,7 +252,7 @@ $(document).ready(function() {
 		$('#btnDelete').on("click", function() {
 			console.log(showingSq);
 			$.ajax({
-		        url: "${pageContext.request.contextPath}/show1/DeleteShowing",
+		        url: "${pageContext.request.contextPath}/showing/deleteShowing",
 		        type: "post",
 		        //contentType: "application/json",
 		        data: {showingSq : showingSq},
@@ -284,7 +290,7 @@ $(document).ready(function() {
 		console.log(ShowingVO);
 		// VO 넘기기
         $.ajax({
-          url: "${pageContext.request.contextPath}/show1/InsertShowing",
+          url: "${pageContext.request.contextPath}/showing/insertShowing",
           type: "post",
           //contentType: "application/json",
           data: ShowingVO,

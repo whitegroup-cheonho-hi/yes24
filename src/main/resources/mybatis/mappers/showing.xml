@@ -8,21 +8,22 @@
 		
 		<![CDATA[
 		      SELECT 
-			      	showing_sq         AS showingsq,
-				    TO_CHAR(showing_date, 'YYYY-MM-DD') AS showingdate,
-				    TO_CHAR(start_time, 'HH24:MI') AS starttime,
-				    TO_CHAR(end_time, 'HH24:MI') AS endtime,
-				    show_sq            AS showsq,
-				    show_information   AS showinformation,
-				    showing_stat       AS showingstat
+			      	w.showing_sq         AS showingsq,
+				    TO_CHAR(w.showing_date, 'YYYY-MM-DD') AS showingdate,
+				    TO_CHAR(w.start_time, 'HH24:MI') AS starttime,
+				    TO_CHAR(w.end_time, 'HH24:MI') AS endtime,
+				    w.show_sq            AS showsq,
+                    s.show_name            AS showname,
+				    w.show_information   AS showinformation,
+				    w.showing_stat       AS showingstat
 				FROM 
-					showing
+					showing w, show s
 				where 
-					show_sq = #{showSq}
+					w.show_sq = s.show_sq and s.show_sq = #{showSq}
 			     AND 
-			        to_char(showing_date, 'YYYY-MM-DD') = #{showingDate}
+			        to_char(w.showing_date, 'YYYY-MM-DD') = #{showingDate}
 			ORDER BY 
-			   		showing_date     		
+			   		w.start_time     		
 		]]>
 	</select>
 
@@ -499,6 +500,67 @@
 		]]>
 	
 	
+	</select>
+	
+	
+	<!-- 회차등록 -->
+	<insert id="insertShowing" parameterType="ShowingVO">
+
+		<selectKey keyProperty="showingSq" resultType="int"
+			order="BEFORE">
+			SELECT seq_showing_sq.NEXTVAL AS showingSq FROM dual
+		</selectKey>
+		
+		<![CDATA[
+		
+		INSERT INTO showing (
+                    showing_sq,
+                    showing_date,
+                    start_time,
+                    end_time,
+                    showing_stat,
+                    show_sq,
+                    show_information)
+            values (
+            		#{showingSq},
+                    TO_DATE(#{showingDate}, 'YYYY-MM-DD'),
+                    TO_DATE(#{startTime}, 'YYYY-MM-DD-HH24:MI'),
+                    TO_DATE(#{endTime}, 'YYYY-MM-DD-HH24:MI'),
+                    'Y',
+                    #{showSq},
+                    '이거 누가하자했냐..2'
+            		)  		
+		]]>
+
+	</insert>
+	
+	<!-- 회차삭제 -->
+	<delete id="deleteShowing" parameterType="int">
+	
+		<![CDATA[
+		
+			DELETE FROM showing WHERE showing_sq = #{showingSq}
+				    
+		]]>
+		
+	</delete>
+	
+	<!-- 월별 공연일정 가져오기 -->
+	<select id="getShowingDay" parameterType="int" resultType="String">
+	
+		<![CDATA[
+		
+			SELECT 
+				TO_CHAR(showing_date, 'YYYY-MM-DD') AS showing_date     
+			FROM
+				showing
+			WHERE
+				show_sq = #{showSq}
+			GROUP BY 
+				showing_date
+				    
+		]]>
+		
 	</select>
 	
 

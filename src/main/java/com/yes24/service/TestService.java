@@ -15,30 +15,32 @@ public class TestService {
 	@Autowired
 	private TestDAO testdao;
 
-
 	public ShowVO getShow(int no) {
 		return testdao.getShow(no);
 	}
 
 	// 공연번호 날짜로 회차정보 가지고오기
 	public List<ShowingVO> getShowing(ShowingVO vo) {
-		//System.out.println("getShowing Service()");
+		// System.out.println("getShowing Service()");
 		return testdao.getShowing(vo);
 	}
-	//회차 입력
+
+	// 회차 입력
 	public int InsertShowing(ShowingVO vo) {
 		System.out.println("InsertShowing Service()");
 		return testdao.InsertShowing(vo);
 	}
-	//회차 삭제
+
+	// 회차 삭제
 	public int DeleteShowing(String showingSq) {
 		System.out.println("DeleteShowing Service()");
 		return testdao.DeleteShowing(showingSq);
 	}
+
 	// 월별 공연일정
-		public List<String> getShowingDay(int showSq){
-			System.out.println("getShowingDay Service()");
-			List<String> list = testdao.getShowingDay(showSq);
-			return list;
-		}
+	public List<String> getShowingDay(int showSq) {
+		System.out.println("getShowingDay Service()");
+		List<String> list = testdao.getShowingDay(showSq);
+		return list;
+	}
 }
