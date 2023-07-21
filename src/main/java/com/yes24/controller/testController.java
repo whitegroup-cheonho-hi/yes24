@@ -105,72 +105,88 @@ public class testController {
 	@RequestMapping(value = "/detail/{no}", method = RequestMethod.GET)
 	public String detailForm(@PathVariable("no") int no, Model model) {
 		System.out.println("detailForm()");
-
 		Map<String, Object> map = showService.getShow(no);
-
 		model.addAttribute("show", map.get("showVO"));
 		model.addAttribute("concertHall", map.get("concertHallVO"));
-	
 		return "show/showDetail";
 	}
 	
+	//어드민 공연리스트
+	@RequestMapping(value = "/adminShowList/{showStat}", method = RequestMethod.GET)
+	public String adminShowList(@PathVariable("showStat") int showStat, Model modle) {
+		System.out.println("adminShowList");
+		System.out.println(showStat);
+		
+		List<ShowVO> list = testservice.getShowList(showStat);
+		modle.addAttribute("showList", list);
+		System.out.println(list);
+		return "admin/showList";
+	}
+	
 	// 회차등록 폼
-		@RequestMapping(value = "/showingInsertForm/{no}", method = RequestMethod.GET)
-		public String showingInsertForm(@PathVariable("no") int no, Model model) {
-			//System.out.println("showingInsertForm");
-			ShowVO vo = testservice.getShow(no);
-			model.addAttribute("show", vo);
-			System.out.println(vo);
-			return "admin/showingInsertForm";
-		}
-		
-		
-		@ResponseBody
-		@RequestMapping(value = "/getShowing", method = RequestMethod.POST)
-		public JsonResult getShowing(@ModelAttribute ShowingVO vo) {
-		    //System.out.println(vo);
-		    List<ShowingVO> showingList = testservice.getShowing(vo);
-		    JsonResult jsonResult = new JsonResult();
-		    jsonResult.success(showingList);
-		    System.out.println("getShowing()");
-		    System.out.println(showingList);
-		    return jsonResult;
-	   }
-		
-		@ResponseBody
-		@RequestMapping(value = "/InsertShowing", method = RequestMethod.POST)
-		public JsonResult InsertShowing(@ModelAttribute ShowingVO vo) {
-			System.out.println("InsertShowing()");
-			//System.out.println(vo);
-			//List<ShowingVO> showingList = testservice.getShowing(vo);
-			int cnt = testservice.InsertShowing(vo);
-			JsonResult jsonResult = new JsonResult();
-			System.out.println(cnt);
-			jsonResult.success(cnt);
-			return jsonResult;
-		}
-		
-		@ResponseBody
-		@RequestMapping(value = "/DeleteShowing", method = RequestMethod.POST)
-		public JsonResult DeleteShowing(@RequestParam("showingSq") String showingSq) {
-			System.out.println("DeleteShowing()");
-			int cnt = testservice.DeleteShowing(showingSq);
-			JsonResult jsonResult = new JsonResult();
-			System.out.println(cnt);
-			jsonResult.success(cnt);
-			return jsonResult;
-		}
-		
-		@ResponseBody
-		@RequestMapping(value = "/getShowingDay", method = RequestMethod.POST)
-		public JsonResult getShowingDay(@RequestParam("showSq") int showSq) {
-			System.out.println("getShowingDay()");
-			List<String> dayList = testservice.getShowingDay(showSq);
-			JsonResult jsonResult = new JsonResult();
-			System.out.println(dayList);
-			jsonResult.success(dayList);
-			return jsonResult;
-		}
+	@RequestMapping(value = "/showingInsertForm/{no}", method = RequestMethod.GET)
+	public String showingInsertForm(@PathVariable("no") int no, Model model) {
+		//System.out.println("showingInsertForm");
+		ShowVO vo = testservice.getShow(no);
+		model.addAttribute("show", vo);
+		System.out.println(vo);
+		return "admin/showingInsertForm";
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping(value = "/getShowing", method = RequestMethod.POST)
+	public JsonResult getShowing(@ModelAttribute ShowingVO vo) {
+	    //System.out.println(vo);
+	    List<ShowingVO> showingList = testservice.getShowing(vo);
+	    JsonResult jsonResult = new JsonResult();
+	    jsonResult.success(showingList);
+	    System.out.println("getShowing()");
+	    System.out.println(showingList);
+	    return jsonResult;
+   }
+	
+	@ResponseBody
+	@RequestMapping(value = "/InsertShowing", method = RequestMethod.POST)
+	public JsonResult InsertShowing(@ModelAttribute ShowingVO vo) {
+		System.out.println("InsertShowing()");
+		//System.out.println(vo);
+		//List<ShowingVO> showingList = testservice.getShowing(vo);
+		int cnt = testservice.InsertShowing(vo);
+		JsonResult jsonResult = new JsonResult();
+		System.out.println(cnt);
+		jsonResult.success(cnt);
+		return jsonResult;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/DeleteShowing", method = RequestMethod.POST)
+	public JsonResult DeleteShowing(@RequestParam("showingSq") String showingSq) {
+		System.out.println("DeleteShowing()");
+		int cnt = testservice.DeleteShowing(showingSq);
+		JsonResult jsonResult = new JsonResult();
+		System.out.println(cnt);
+		jsonResult.success(cnt);
+		return jsonResult;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/getShowingDay", method = RequestMethod.POST)
+	public JsonResult getShowingDay(@RequestParam("showSq") int showSq) {
+		System.out.println("getShowingDay()");
+		List<String> dayList = testservice.getShowingDay(showSq);
+		JsonResult jsonResult = new JsonResult();
+		System.out.println(dayList);
+		jsonResult.success(dayList);
+		return jsonResult;
+	}
+	//예매시작 상태변경
+	@RequestMapping(value = "/showUpdateStat/{showSq}", method = RequestMethod.GET)
+	public String showUpdateStat(@PathVariable("showSq") int showSq) {
+		System.out.println("showUpdateStat");
+		int cnt = testservice.showUpdateStat(showSq); 
+		return "redirect:/admin/showList";
+	}
 		
 		
 		

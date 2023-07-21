@@ -60,7 +60,7 @@
 				<div class="tm_grp">
 					<h3 class="tmM_txt">
 						<em class="tit_txt"><strong id="adminTit"
-							style="margin-left: 20px;">회차 등록</strong></em>
+							style="margin-left: 20px;">회차 등록&수정</strong></em>
 					</h3>
 				</div>
 

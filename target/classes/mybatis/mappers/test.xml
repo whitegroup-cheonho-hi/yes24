@@ -144,6 +144,34 @@
 		
 	</select>
 	
+	<!-- 예매시작 상태변경 -->
+	<update id="showUpdateStat" parameterType="int">
+	
+		<![CDATA[
+		
+			UPDATE show
+            SET
+                show_stat = 2
+			WHERE
+				show_sq = #{showSq}
+		
+			
+		]]>
+	
+	</update>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	<!-- 공연수정 -->
 	<update id="updateShow" parameterType="ShowVO">
 	

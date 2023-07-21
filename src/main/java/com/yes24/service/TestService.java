@@ -20,10 +20,10 @@ public class TestService {
 	}
 	
 	// 공연상태로 공연정보 가져오기
-		public List<ShowVO> getShowList(int showStat){
-			System.out.println("getShowList Service()");
-			return testdao.getShowList(showStat);
-		}
+	public List<ShowVO> getShowList(int showStat){
+		System.out.println("getShowList Service()");
+		return testdao.getShowList(showStat);
+	}
 
 	// 공연번호 날짜로 회차정보 가지고오기
 	public List<ShowingVO> getShowing(ShowingVO vo) {
@@ -49,4 +49,11 @@ public class TestService {
 		List<String> list = testdao.getShowingDay(showSq);
 		return list;
 	}
+	
+	//예매시작 상태변경
+		public int showUpdateStat(int showSq) {
+			System.out.println("showUpdateStat Service()");
+			return testdao.showUpdateStat(showSq);
+		}
+	
 }

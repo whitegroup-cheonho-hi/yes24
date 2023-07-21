@@ -52,5 +52,11 @@ public class TestDAO {
 		List<String> list = sqlSession.selectList("test.getShowingDay", showSq);
 		return list;
 	}
+	//예매시작 상태변경
+	public int showUpdateStat(int showSq) {
+		System.out.println("showUpdateStat DAO()");
+		return sqlSession.update("test.showUpdateStat", showSq);
+	}
+	
 	
 }

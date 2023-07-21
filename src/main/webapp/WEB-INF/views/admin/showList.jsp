@@ -18,12 +18,12 @@
 <style>
 	#ySContent{ margin: 120px auto; }
 	.listItem { width: 1200px; display: grid; grid-template-columns: repeat(5, 200px); justify-content: space-around; justify-items: center; }
-	.listItem a { display: inline-block; width: 200px; height: 400px; margin: 0 15px; vertical-align: top; }
+	.listItem .listItemdiv { display: inline-block; width: 200px; height: 300px; margin: 0 15px; vertical-align: top; }
 	.listItem img {width: 100%;}
 	.listItemTxt { display: flex; align-items: center; flex-wrap: wrap; justify-content: center;}
 	.listItemTxt button { margin: auto; width: 70px; height: 35px; font-size: 14px; font-weight: bold; 
 		background-color: #196ab3; color: white; border: none; border-radius: 5px;}
-	.listItemTxt p { height: 40px; margin-bottom: 10px; }
+	.listItemTxt p { width: 200px; height: 40px; margin-bottom: 10px; }
 	
 	/* 상품페이지 카테고리 */
 	#show .category{width: 1200px; display: flex; justify-content: center; margin-bottom: 20px;}
@@ -60,48 +60,19 @@
 			<!-- ==================== 정보 입력 영역 시작 ==================== -->
 			<div class="">
 				<div class="listItem">
-					<a href="${pageContext.request.contextPath}/show/showModifyForm/1" target="_self" title="<쿠로이 저택엔 누가 살고 있을까?>">
-						<div class="">
-							<img class="listItemImg" src="http://tkfile.yes24.com/upload2/perfblog/202305/20230530/20230530-45433.jpg/dims/quality/70/">
+					<c:forEach var = "showList" items="${showList}">
+					
+						<div class="listItemdiv">
+							<a href="${pageContext.request.contextPath}/show/showModifyForm/${showList}">
+									<img class="listItemImg" src="${pageContext.request.contextPath}/upload/${showList.subImage}">
+							</a>
 							<div class="listItemTxt">
-								<p class="listItemTit">&lt;쿠로이 저택엔 누가 살고 있을까?&gt;</p>
-								<button type="button" class="btnstat">상태변경</button><button type="button" class="btndelete">삭 제</button>
+								<p class="listItemTit">&lt;${showList.showName}&gt;</p>
+								<button type="button" class="btnstat" data-sq="${showList.showSq}">예매시작</button>
+								<button type="button" class="btndelete" data-sq="${showList.showSq}">삭 제</button>
 							</div>
 						</div>
-					</a>
-					<a href="" target="_self" title="<알로하, 나의 엄마들>">
-						<div class=""><img class="listItemImg" alt="<알로하, 나의 엄마들>"
-							src="http://tkfile.yes24.com/upload2/perfblog/202307/20230707/20230707-46037.jpg/dims/quality/70/">
-							<div class="listItemTxt">
-								<p class="listItemTit">&lt;알로하, 나의 엄마들&gt;</p>
-								<button type="button">상태변경</button><button type="button">삭 제</button>
-							</div>
-						</div>
-					</a>
-					<a href="" target="_self" title="뮤지컬 <신의 손가락>">
-						<div class=""><img class="listItemImg" alt="<신의 손가락>"
-								src="http://tkfile.yes24.com/upload2/perfblog/202307/20230717/20230717-45830.jpg/dims/quality/70/">
-							<div class="listItemTxt">
-								<p class="listItemTit">&lt;신의 손가락&gt;</p>
-							</div>
-						</div>
-					</a>
-					<a href="" target="_self" title="<투모로우 모닝>">
-						<div class=""><img class="listItemImg" alt="<투모로우 모닝>"
-								src="http://tkfile.yes24.com/upload2/perfblog/202307/20230711/20230711-46513.jpg/dims/quality/70/">
-							<div class="listItemTxt">
-								<p class="listItemTit">&lt;투모로우 모닝&gt;</p>
-							</div>
-						</div>
-					</a>
-					<a href="" target="_self" title="<보이A>">
-						<div class=""><img class="listItemImg" alt="<보이A>"
-								src="http://tkfile.yes24.com/upload2/perfblog/202306/20230626/20230626-45677.jpg/dims/quality/70/">
-							<div class="listItemTxt">
-								<p class="listItemTit">&lt;보이A&gt;</p>
-							</div>
-						</div>
-					</a>
+					</c:forEach>
 				</div>
 			</div>
 			
@@ -113,6 +84,63 @@
 </body>
 
 <script>
+	$(document).ready(function() {
+			
+	});
+	
+	function showUpdateStat() {
+		console.log(date);
+        dayList.removeAllEvents();
 
+        const ShowingVO = { showingDate: date, showSq: '${show.showSq}' }; // ShowingVO 객체를 생성하고 데이터 할당
+        /* console.log(ShowingVO); */
+
+        // 회차 정보 가져오기
+        $.ajax({
+          url: "${pageContext.request.contextPath}/showing/getShowing",
+          type: "post",
+          //contentType: "application/json",
+          data: ShowingVO,
+          
+          dataType: "json",
+          success: function(result) {    
+        	console.log("이거확인");
+        	console.log(result);
+            for(var i = 0; i < result.data.length; i++){
+            	var showname = result.data[i].showName;
+               	var startTime =result.data[i].showingDate+'T'+result.data[i].startTime;
+               	var endTime =result.data[i].showingDate+'T'+result.data[i].endTime;
+               	var showingSq =  result.data[i].showingSq;
+               	console.log(startTime);
+               	console.log(endTime);
+               	dayList.addEvent({
+                  // DB연결해서 데이터 불러오는 영역
+                  title : showname + ' ' + [i+1] + '회차',
+                  start : startTime,                  
+                  end : endTime,
+                  hiddenValue: showingSq
+               });
+              }        
+          },
+          error: function(XHR, status, error) {
+            console.error(status + " : " + error);
+          }
+        });
+	}
+	
+	$('.btnstat').on('click', function() {
+		var showSq = $(this).data("sq");
+		var url = "${pageContext.request.contextPath}/show1/showUpdateStat/" + showSq;
+		console.log(showSq);
+		
+		
+		
+		
+	});
+	
+	$('.btndelete').on('click', function() {
+		var showSq = $(this).data("sq");
+		console.log(showSq);
+	});
 </script>
 </html>
