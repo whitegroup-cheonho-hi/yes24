@@ -175,7 +175,7 @@
 									<div class="colCell w_280">
 										<span id="spanCertifyIpt_AddrNo"
 											class="yesIpt b_size ipt_wSizeF"> <input id="addr1"
-											name="Zip5" size="5" type="text" autocomplete="off"
+											name="userPost" size="5" type="text" autocomplete="off"
 											readonly="readonly" value="${user.userPost}">
 										</span>
 									</div>
@@ -188,13 +188,13 @@
 							</div>
 							<div class="inpRow">
 								<span id="spanCertifyIpt_Addr1" class="yesIpt b_size ipt_wSizeF">
-									<input id="addr2" name="ST_ADDR_TEXT" type="text" value="${user.userBasicAddr}"
+									<input id="addr2" name="userBasicAddr" type="text" value="${user.userBasicAddr}"
 									readonly="readonly">
 								</span>
 							</div>
 							<div class="inpRow">
 								<span id="spanCertifyIpt_Addr2" class="yesIpt b_size ipt_wSizeF">
-									<input id="addr3" name="OLD_ADDR_TEXT" type="text" value="${user.userDetailAddr}">
+									<input id="addr3" name="userDetailAddr" type="text" value="${user.userDetailAddr}">
 								</span>
 							</div>
 						</dd>

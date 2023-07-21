@@ -417,7 +417,7 @@
 				dataType : "json",
 				success : function(result){
 					
-			    window.location.href = '${pageContext.request.contextPath}/';
+			    window.location.href = '${pageContext.request.contextPath}/showing/showingInsertForm/'+showSq;
 			
 				},
 				error : function(XHR, status, error) {

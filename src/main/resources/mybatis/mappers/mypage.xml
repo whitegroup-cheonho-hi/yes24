@@ -51,7 +51,7 @@
 				    ) )
 				    AND a.ticket_stat = #{stat}
 				ORDER BY
-				    a.ticket_sq
+				    a.ticket_sq desc
 		
 		]]>
 	

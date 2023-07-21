@@ -234,6 +234,7 @@ $(document).ready(function() {
 	      // 회차클릭시 잔여좌석 비우기
 	      Seat.empty();	
 		  getShowingInfo(date);
+	
 		 
 		}
 
@@ -416,7 +417,7 @@ $(document).ready(function() {
         calendar.removeAllEvents();
       	//ajax 한달 공연 스케쥴 불러오기		
 		$.ajax({
-	        url: "${pageContext.request.contextPath}/show1/getShowingDay",
+	        url: "${pageContext.request.contextPath}/showing/getShowingDay",
 	        type: "post",
 	        //contentType: "application/json",
 	        data: {showSq : showSq},

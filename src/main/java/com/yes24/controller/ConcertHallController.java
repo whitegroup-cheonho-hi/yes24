@@ -34,8 +34,9 @@ public class ConcertHallController {
 		System.out.println("concertHallInsert()");
 
 		int result = concertHallService.insertConcertHall(vo);
+		
 
-		return "";
+		return "redirect:/concertHall/concertHallModifyForm/"+vo.getConcertHallSq();
 	}
 
 	// -------------------- 공연장 수정폼
@@ -56,7 +57,7 @@ public class ConcertHallController {
 	public String concertHallModify(@ModelAttribute ConcertHallVO vo) {
 		System.out.println("concertHallModify()");	
 		
-		String Uri = "redirect:/";
+		String Uri = "redirect:/concertHall/concertHallModifyForm/"+vo.getConcertHallSq();
 		int result = concertHallService.updateConcertHall(vo);
 		
 		if(result > 0) {

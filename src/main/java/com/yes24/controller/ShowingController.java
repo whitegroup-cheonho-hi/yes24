@@ -40,13 +40,13 @@ public class ShowingController {
 		JsonResult jsonResult = new JsonResult();
 
 		jsonResult.success(showingList);
-		
+
 		System.out.println(showingList);
 
 		return jsonResult;
 
 	}
-	
+
 	// ---------------------- 잔여좌석 가져오기
 	@ResponseBody
 	@RequestMapping(value = "/remainingSeats", method = RequestMethod.POST)
@@ -98,35 +98,26 @@ public class ShowingController {
 	// 회차등록 폼
 	@RequestMapping(value = "/showingInsertForm/{no}", method = RequestMethod.GET)
 	public String showingInsertForm(@PathVariable("no") int no, Model model) {
-		// System.out.println("showingInsertForm");
-		ShowVO vo = showingService.getShow2(no);
-		model.addAttribute("show", vo);
-		System.out.println(vo);
-		return "admin/showingInsertForm";
-	}
+		System.out.println("showingInsertForm()");
 
-	@ResponseBody
-	@RequestMapping(value = "/getShowing2", method = RequestMethod.POST)
-	public JsonResult getShowing2(@ModelAttribute ShowingVO vo) {
-		// System.out.println(vo);
-		List<ShowingVO> showingList = showingService.getShowing(vo);
-		JsonResult jsonResult = new JsonResult();
-		jsonResult.success(showingList);
-		System.out.println("getShowing()");
-		System.out.println(showingList);
-		return jsonResult;
+		ShowVO vo = showingService.getShow2(no);
+
+		model.addAttribute("show", vo);
+
+		return "admin/showingInsertForm";
 	}
 
 	@ResponseBody
 	@RequestMapping(value = "/insertShowing", method = RequestMethod.POST)
 	public JsonResult insertShowing(@ModelAttribute ShowingVO vo) {
 		System.out.println("insertShowing()");
-		// System.out.println(vo);
-		// List<ShowingVO> showingList = testservice.getShowing(vo);
+
 		int cnt = showingService.insertShowing(vo);
+
 		JsonResult jsonResult = new JsonResult();
-		System.out.println(cnt);
+
 		jsonResult.success(cnt);
+
 		return jsonResult;
 	}
 
@@ -134,10 +125,12 @@ public class ShowingController {
 	@RequestMapping(value = "/deleteShowing", method = RequestMethod.POST)
 	public JsonResult deleteShowing(@RequestParam("showingSq") String showingSq) {
 		System.out.println("insertShowing()");
+
 		int cnt = showingService.deleteShowing(showingSq);
 		JsonResult jsonResult = new JsonResult();
-		System.out.println(cnt);
+
 		jsonResult.success(cnt);
+
 		return jsonResult;
 	}
 
@@ -145,10 +138,13 @@ public class ShowingController {
 	@RequestMapping(value = "/getShowingDay", method = RequestMethod.POST)
 	public JsonResult getShowingDay(@RequestParam("showSq") int showSq) {
 		System.out.println("getShowingDay()");
+
 		List<String> dayList = showingService.getShowingDay(showSq);
+
 		JsonResult jsonResult = new JsonResult();
-		System.out.println(dayList);
+
 		jsonResult.success(dayList);
+
 		return jsonResult;
 	}
 

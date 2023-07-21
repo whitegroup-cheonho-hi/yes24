@@ -120,7 +120,7 @@ section {
 											<th scope="row">관람일시</th>
 											<th scope="row">금액</th>
 											<th scope="row">예매상태</th>
-											<th scope="row">비고</th>
+											<th scope="row">버튼</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -144,7 +144,7 @@ section {
 												<c:if test="${myTicketing.ticketStat == '1'}">
 													<td scope="row">예매</td>
 												</c:if>
-												<td scope="row">비고</td>
+												<td scope="row"><button id="transferButton" type="button">양도</button></td>
 											</tr>
 										</c:forEach>
 									</tbody>
@@ -179,8 +179,8 @@ section {
 											<th scope="row">좌석</th>
 											<th scope="row">관람일시</th>
 											<th scope="row">양도금액</th>
-											<th scope="row" class="end">양도상태</th>
-											<th scope="row">비고</th>
+											<th scope="row" >양도상태</th>
+											<th scope="row" class="end">버튼</th>
 										</tr>
 									</thead>
 									<tbody>
