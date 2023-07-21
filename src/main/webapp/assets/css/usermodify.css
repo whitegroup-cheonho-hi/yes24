@@ -1,0 +1,137 @@
+@charset "UTF-8";
+.yesIpt { display:-moz-inline-stack;display:inline-block;zoom:1;*display:inline;text-align:left;vertical-align:middle;box-shadow:inset 0 1px 2px 0 #fafafa; }
+.yesIpt { box-sizing:border-box;position:relative;padding:3px 8px 5px;width:auto;height:30px;line-height:20px;border:solid 1px #ebebeb;border-top-color:#d8d8d8;border-left-color:#d8d8d8;border-radius:3px;background-color:#fff; }
+.yesIpt.yesIptCal { padding-left:0 !important;padding-right:25px !important; }
+.yesIpt.yesIptCal input { text-align:center; }
+.yesIpt label { position:absolute;left:8px;top:4px;height:20px;line-height:20px;color:#999;font-size:12px; }
+.yesIpt .ipt_msg { position:absolute;right:8px;top:4px;height:20px;line-height:20px;color:#999;font-size:12px; } 
+.yesIpt .ipt_cVal { position:absolute;right:5px;top:50%;margin-top:-16px; } 
+.yesIpt.ipt_disabled { opacity:0.4;background:#f8f8f8; } /* 주석 */
+.yesIpt.ipt_disabled label { color:#000; }
+.yesIpt.ipt_readonly { background:rgba(248,248,248,0.4); }
+.yesIpt.ipt_readonly label { color:#333; }
+.yesIpt input { width:100%;height:20px;line-height:20px;overflow:hidden;border:none;border-color:transparent;font-size:12px;color:#333;-webkit-appearance:none;border-radius:0;outline-style:none;background-color:transparent;vertical-align:top; }
+.yesIpt.s_size { padding:0 5px;width:auto;height:20px;line-height:18px; }
+.yesIpt.s_size input { padding:0;height:17px;line-height:17px;font-size:12px; }
+.yesIpt.s_size label { position:absolute;left:5px;top:1px;height:17px;line-height:17px;font-size:12px; }
+.yesIpt.s_size .ipt_msg { right:5px;top:1px;height:17px;line-height:17px;font-size:12px; } 
+.yesIpt.m_size { padding:4px 11px 6px;width:auto;height:40px;line-height:28px; }
+.yesIpt.m_size input { padding:0;height:28px;line-height:27px;font-size:13px;font-weight:bold; }
+.yesIpt.m_size label { position:absolute;left:11px;top:1px;height:35px;line-height:35px;font-size:13px; }
+.yesIpt.m_size .ipt_msg { right:11px;top:1px;height:35px;line-height:35px;font-size:13px; }
+.yesIpt.b_size { padding:9px 14px 11px;width:auto;height:50px;line-height:28px; }
+.yesIpt.b_size.chkVal { padding-right:80px; }
+.yesIpt.b_size input { padding:0;height:28px;line-height:27px;font-size:16px;font-weight:bold; }
+.yesIpt.b_size label { position:absolute;left:14px;top:1px;height:45px;line-height:45px;font-size:16px; }
+.yesIpt.b_size .ipt_msg { right:19px;top:1px;height:45px;line-height:45px;font-size:13px; }
+.yesIpt.error { border:solid 1px #ff6666; }
+.yesIpt.focusOn.focus_blue { border:solid 1px #6699cc; }
+.yesIpt.w_40 { width:40px; }
+.yesIpt.w_45 { width:45px; }
+.yesIpt.w_50 { width:50px; }
+.yesIpt.w_60 { width:60px; }
+.yesIpt.w_70 { width:70px; }
+.yesIpt.w_77 { width:77px; }
+.yesIpt.w_80 { width:80px; }
+.yesIpt.w_87 { width:87px; }
+.yesIpt.w_90 { width:90px; }
+.yesIpt.w_100 { width:100px; }
+.yesIpt.w_110 { width:110px; }
+.yesIpt.w_120 { width:120px; }
+.yesIpt.w_130 { width:130px; }
+.yesIpt.w_140 { width:140px; }
+.yesIpt.w_150 { width:150px; }
+.yesIpt.w_160 { width:160px; }
+.yesIpt.w_170 { width:170px; }
+.yesIpt.w_180 { width:170px; }
+.yesIpt.w_190 { width:190px; }
+.yesIpt.w_200 { width:200px; }
+.yesIpt.w_210 { width:210px; }
+.yesIpt.w_220 { width:220px; }
+.yesIpt.ipt_wSizeF { display:block; }
+.yesIptTxt { display:-moz-inline-stack;display:inline-block;zoom:1;*display:inline;text-align:left;vertical-align:middle; }
+.yesIptTxt { vertical-align:-2px; }
+#top{margin-top: 45px;}
+.yesFormDl dt,dd{ margin-bottom: 6px;}
+
+
+/* btn */
+.btnC { display:-moz-inline-stack;display:inline-block;zoom:1;*display:inline;text-align:left;vertical-align:top; }
+.btnC {/* margin:0 2px; */text-align:left;/* white-space:nowrap; *//* text-indent:0; */}
+.btnC .bWrap { display:-moz-inline-stack;display:inline-block;zoom:1;*display:inline;text-align:center;vertical-align:top; }
+.btnC .bWrap { position:relative;padding:0 7px;height:28px;text-align:center;text-indent:0;border:solid 1px #ebebeb;border-bottom-color:#d8d8d8;border-right-color:#d8d8d8;border-radius:3px;background-color:#fff; }
+.btnC .bWrap em.txt { display:-moz-inline-stack;display:inline-block;zoom:1;*display:inline;text-align:center;vertical-align:top; }
+.btnC .bWrap em.txt { position:relative;padding:0;overflow:hidden;line-height:27px;font-size:12px;color:#333 !important;font-weight:bold;text-indent:0;cursor:pointer; }
+a.btnC:hover { text-decoration:none; }
+button.btnC {margin:0;padding:0;border:0;-webkit-appearance:none;-webkit-text-size-adjust:none;border-radius:0;background-color:transparent;}
+button.btnC:disabled { opacity:0.4; }
+.btnC.btn_disabled { opacity:0.4; }
+.btnC.btn_blue { }
+.btnC.btn_blue .bWrap {height: 40px; border-color:#196ab3;border-bottom-color:#165fa1;border-right-color:#165fa1;background-color:#196ab3;     width: 130px;}
+.btnC.btn_blue .bWrap em.txt {margin-top: 6px; font-size: 19px; color:#fff !important;     width: 130px;}
+.btnC.b_size .bWrap { padding:0 19px;height:48px;text-align:center;     width: 340px; }
+.btnC.b_size .bWrap em.txt {width: 226px; height:47px;line-height:47px;font-size:16px;font-weight:bold;letter-spacing:0; }
+.btnC.b_size.btn_2ln .bWrap { padding:14px 19px;height:40px;text-align:center; }
+.btnC.b_size.btn_2ln .bWrap em.txt { height:20px;line-height:20px;font-size:16px;font-weight:bold;letter-spacing:0; }
+.btnC.b_size.btn_2ln .bWrap em.des { height:20px;line-height:20px;color:#999;font-size:12px;font-weight:normal;letter-spacing:0; }
+button.btnC.b_size .bWrap { height:48px; }
+.yesFormBtn .formBtn_btn { text-align: center;margin-top: 20px;}
+
+
+/* radioBtn - 사각탭모양 라디오기능 */
+/* 모바일웹의 common.css btnRadio_wrap 동일 */
+.yesRadioTab { height: 27px; border:solid 1px #d8d8d8;border-radius:3px;background-color:#f8f8f8;   display: inline-block;   width: 124px; }
+.yesRadioTab ul { display:table;width:100%;table-layout:fixed; }
+.yesRadioTab li { display:table-cell;position:relative;z-index:1;height:28px;text-align:center; }
+.yesRadioTab li a { display:block;position:relative;z-index:2;height:28px; }
+.yesRadioTab li a em.txt { line-height:28px;color:#666;font-size:12px; }
+.yesRadioTab li .yesRadio { position:absolute;opacity:0; }
+.yesRadioTab li label { display:block;position:relative;z-index:2;height:28px; }
+.yesRadioTab li label .yBlind { left:-999em;top:0; } /* 체크시 맨위로 올라가는 버그로 재정의 */
+.yesRadioTab li label em.txt { line-height:28px;color:#666;font-size:12px; }
+.yesRadioTab li .yesRadio:checked+label { background-color:#fff; }
+.yesRadioTab li .yesRadio:checked+label:before { content:'';position:absolute;left:-1px;top:-1px;right:-1px;bottom:-1px;border:solid 1px #333; }
+.yesRadioTab li .yesRadio:checked+label em.txt { color:#333; }
+.yesRadioTab li:first-child .yesRadio:checked+label:before { border-top-left-radius:3px;border-bottom-left-radius:3px;   }
+.yesRadioTab li:last-child .yesRadio:checked+label:before  { border-top-right-radius:3px;border-bottom-right-radius:3px; }
+.yesRadioTab li a:hover { text-decoration:none; }
+.yesRadioTab li a:hover em.txt { color:#333; }
+.yesRadioTab li:after { content:'';position:absolute;right:0;top:0;bottom:0;z-index:1;border-right:solid 1px #d8d8d8; }
+.yesRadioTab li:last-child:after { display:none; }
+.yesRadioTab li.selected { z-index:2; }
+.yesRadioTab li.selected:before { content:'';position:absolute;left:-1px;top:-1px;right:-1px;bottom:-1px;z-index:5;border:solid 1px #333; }
+.yesRadioTab li:first-child.selected:before { border-top-left-radius:3px;border-bottom-left-radius:3px;   }
+.yesRadioTab li:last-child.selected:before  { border-top-right-radius:3px;border-bottom-right-radius:3px; }
+.yesRadioTab li.selected a { background-color:#fff; }
+.yesRadioTab li.selected a em.txt { color:#333; }
+.yesRadioTab li.selected a:hover em.txt { color:#333; }
+.yesRadioTab li.selected label { background-color:#fff; }
+.yesRadioTab li.selected label em.txt { color:#333; }
+.yesRadioTab.col_2 li { width:62px; }
+.yesRadioTab.col_3 li { width:33.3%; }
+.yesRadioTab.col_3 li:liast-child { width:auto; }
+.yesRadioTab.col_4 li { width:25%; }
+.yesRadioTab.col_5 li { width:20%; }
+.yesRadioTab.s_size li { height:18px; }
+.yesRadioTab.s_size li a { height:18px; }
+.yesRadioTab.s_size li a em.txt { line-height:18px;font-size:11px; }
+.yesRadioTab.s_size li label { height:18px; }
+.yesRadioTab.s_size li label em.txt { line-height:17px;font-size:11px; }
+.yesRadioTab.m_size li { height:38px; }
+.yesRadioTab.m_size li a { height:38px; }
+.yesRadioTab.m_size li a em.txt { line-height:38px;font-size:13px;font-weight:bold; }
+.yesRadioTab.m_size li label { height:38px; }
+.yesRadioTab.m_size li label em.txt { line-height:37px;font-size:13px;font-weight:bold; }
+.yesRadioTab.b_size li { height:48px; }
+.yesRadioTab.b_size li a { height:48px; }
+.yesRadioTab.b_size li a em.txt { line-height:48px;font-size:16px;font-weight:bold; }
+.yesRadioTab.b_size li label { height:48px; background-color: #fcfcfc; border-left: solid 1px;  border-right: solid 1px #d8d8d8;}
+.yesRadioTab.b_size li label em.txt { line-height:47px;font-size:16px;font-weight:bold; }
+.yesRadioTab.tabInline { display:-moz-inline-stack;display:inline-block;zoom:1;*display:inline;text-align:left;vertical-align:top; }
+
+.colCell{display: inline-block;}
+.colCell.pal10{text-align: right;}
+.colCell w_130{}
+#spanCertifyIpt_AddrNo{width: 347px; display: inline-block;}
+#spanCertifyIpt_txtBirthDay{width: 600px; display: inline-block;}
+#warp .date_list ul {    margin-left: 0px;};

@@ -34,8 +34,20 @@ section {
 	padding-top: 70px;
 }
 
-#showHref{text-decoration: none;}
-#mypage_contain2{height: 200px;}
+
+.inquiry_popup{position: fixed; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 9999999; top: 0; left: 0;}
+.inquiry_popup .inquiry_close{display: none;}
+.inquiry_popup .inquiry_write{border-radius: 30px; box-sizing: border-box; padding: 60px; width: 700px; height: 700px; position: absolute; top: 10%; left: 50%; margin-left: -350px; background: #fff;}
+.inquiry_popup .inquiry_write2{border-radius: 30px; box-sizing: border-box; padding: 60px; width: 1000px; height: 700px; position: absolute; top: 10%; left: 50%; margin-left: -500px; background: #fff;}
+.inquiry_popup .inquiry_write h3{ font-weight: 700; font-size: 28px; margin-bottom: 60px; text-align: center;}
+.inquiry_popup .inquiry_write table { width: 100%;border: 1px solid #ccc; border-collapse: collapse; }
+.inquiry_popup .inquiry_write th,
+.inquiry_popup .inquiry_write td {vertical-align: middle; border: 1px solid #ccc; padding: 10px; text-align: left;}
+.inquiry_popup .inquiry_write td input#secret_write_N{margin-left: 20px;}
+.inquiry_popup .inquiry_write td input#inquiry_tit{border-radius: 5px; border: 1px solid #ccc; padding: 10px; font-size: 16px; width: 100%; box-sizing: border-box;}
+.inquiry_popup .inquiry_write td textarea#inquiry_cont{border-radius: 5px;  resize: none;border: 1px solid #ccc; padding: 10px; font-size: 16px; width: 100%; height: 250px; box-sizing: border-box;}
+.inquiry_popup .inquiry_write td textarea#inquiry_cont2{border-radius: 5px;  resize: none;border: 1px solid #ccc; padding: 10px; font-size: 16px; width: 100%; height: 250px; box-sizing: border-box;}
+.inquiry_popup .inquiry_write td .textLengthWrap{text-align: right; color: #aaa;};
 </style>
 </head>
 <body>
@@ -144,7 +156,7 @@ section {
 												<c:if test="${myTicketing.ticketStat == '1'}">
 													<td scope="row">예매</td>
 												</c:if>
-												<td scope="row"><button id="transferButton" type="button">양도</button></td>
+												<td scope="row"><button class="transferButton" type="button" data-ticketsq="${myTicketing.ticketSq}">양도</button></td>
 											</tr>
 										</c:forEach>
 									</tbody>
@@ -239,5 +251,122 @@ section {
 	<c:import url="/WEB-INF/views/includes/footer.jsp"></c:import>
 	<!-- //Footer -->
 
+
+	<!-- 상품 등록 -->
+	<section id="inquiry_popup2" class="inquiry_popup inquiry_popup2"
+		style="display: none;">
+		<a href="#none" class="inquiry_close"><img
+			src="images/ver02/close.png" alt=""></a>
+		<div class="inquiry_write inquiry_write2">
+			<h3>상품 등록</h3>
+			<form id="insertProductForm"
+				action="${pageContext.request.contextPath}/product/insertProduct"
+				method="POST" enctype="multipart/form-data">
+				<table>
+					<tr>
+						<td rowspan="8" width="30%" style="text-align: center;"><img
+							id="preview2"
+							src="${pageContext.request.contextPath}/assets/images/sns4.png"
+							width="100%"><br> <br> <br> <b>이미지
+								미리보기</b></td>
+					</tr>
+					<tr>
+						<td style="text-align: center;">제품명</td>
+						<td><input type="text" id="productName2"
+							name="productName" required></td>
+					</tr>
+
+					<tr>
+						<td style="text-align: center;">수량</td>
+						<td><input type="number" id="productEa2" name="productEa"
+							min="1" required></td>
+					</tr>
+					<tr>
+						<td style="text-align: center;">가격</td>
+						<td><input type="number" id="price2" name="price"
+							min="3000" step="100" required></td>
+					</tr>
+					<tr>
+						<td style="text-align: center;">상품 정보</td>
+						<td><input type="text" id="productContent2"
+							name="productContent" required></td>
+					</tr>
+					<tr>
+						<td style="text-align: center;">카테고리</td>
+						<td><input type="text" id="category2" name="category"
+							required></td>
+					</tr>
+					<tr>
+						<td style="text-align: center;">서브 카테고리</td>
+						<td><input type="text" id="subCategory2"
+							name="subCategory" required></td>
+					</tr>
+					<tr>
+						<td style="text-align: center;">제품사진</td>
+						<td><input id="file2" type="file" name="file" required></td>
+					</tr>
+				</table>
+				<div class="btn_wrap">
+					<a id="insertProduct" href="#none" class="order_btn">등록</a> <a
+						href="#none" class="shopping_btn">취소</a>
+				</div>
+
+			</form>
+		</div>
+	</section>
 </body>
+<script>
+
+$(document).ready(function() {
+	
+	
+	//상품 등록창 열기
+	$("#Insert").on("click", function() {
+
+		$("#inquiry_popup2").show();
+
+	});
+	
+	//  양도버튼 클릭
+	$(".transferButton").on("click",function(){
+		console.log("양도");
+		var ticketSq = $(this).data("ticketsq");
+		console.log(ticketSq);
+	
+	/* 	
+		$.ajax({
+				    url: "${pageContext.request.contextPath}/transferTicket/insertTransferTicket",
+				    type: "get",
+				    /* contentType: "application/json", */
+				    
+				    data: {ticketSq : ticketSq},
+				    dataType: "json",
+				    success: function(result) {
+				    	console.log(result);
+				    
+				   
+				    },
+				    error: function(XHR, status, error) {
+				      console.error(status + " : " + error);
+				    }
+				  });
+			 */
+	
+	});
+	
+	
+	
+	
+	
+	
+	
+});
+
+
+
+
+
+
+</script>
+
 </html>

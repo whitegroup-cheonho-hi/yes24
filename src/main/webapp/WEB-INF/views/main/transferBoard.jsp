@@ -22,21 +22,14 @@
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 
 <style>
-* {	box-sizing: border-box;}
-.wrapper {max-width: 1920px;margin: 0 auto;}
-.center {width: 100%;}
-.slider {margin: 100px auto;}
-.slick-slide {margin: 0px 15px;}
-.slick-slide img {width: 100%;}
-.slick-prev, .slick-next {top: 48%;width: 50px;height: 60px;z-index: 99;}
-.slick-next:before {content: '';display: block;width: 50px;height: 60px;background:	url('http://tkfile.yes24.com/imgNew/common/slide-dir-next.png')	no-repeat;}
-.slick-prev:before {content: '';display: block;width: 50px;height: 60px;background:	url('http://tkfile.yes24.com/imgNew/common/slide-dir-prev.png')	no-repeat;}
-.slick-next {right: 100px;}
-.slick-prev {left: 100px;}
-.slick-track {padding: 30px 0;}
-.slick-slide {transition: all ease-in-out .3s;opacity: 0.7;}
-.slick-current {opacity: 1;transform: scaleY(1.1) scaleX(1.05);}
-.slick-active {	opacity: 1;}
+	#ySContent{ margin: 120px auto; }
+	.listItem { width: 1200px; display: grid; grid-template-columns: repeat(5, 200px); justify-content: space-around; justify-items: center; }
+	.listItem .listItemdiv { display: inline-block; width: 200px; height: 300px; margin: 0 15px; vertical-align: top; }
+	.listItem img {width: 100%;}
+	.listItemTxt { display: flex; align-items: center; flex-wrap: wrap; justify-content: center;}
+	.listItemTxt button { margin: auto; width: 70px; height: 35px; font-size: 14px; font-weight: bold; 
+		background-color: #196ab3; color: white; border: none; border-radius: 5px;}
+	.listItemTxt p { width: 200px; height: 40px; margin-bottom: 10px; }
 </style>
 </head>
 <body>
@@ -47,17 +40,24 @@
 
 	<div class="wrapper"></div>
 
-	<section class="center slider">
-		<div>
-			<c:forEach items="${showList}" var="show">
-				<div>
-					<a
-						href="${pageContext.request.contextPath}/show/detail/${show.showSq}">
-						<img
-						src="${pageContext.request.contextPath}/upload/${show.subImage}">
-					</a>
+	<section>
+		<div id="ySContent">
+			<div id="show">
+		        		           
+		      
+			</div>
+			<!-- ==================== 정보 입력 영역 시작 ==================== -->
+			<div class="">
+				<div class="listItem">
+				
+					
+				
+				
 				</div>
-			</c:forEach>
+			</div>
+			
+			<!-- ==================== 정보 입력 영역 끝 ==================== -->
+			
 		</div>
 	</section>
 	
