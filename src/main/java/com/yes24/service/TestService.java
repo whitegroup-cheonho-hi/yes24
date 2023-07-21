@@ -18,6 +18,12 @@ public class TestService {
 	public ShowVO getShow(int no) {
 		return testdao.getShow(no);
 	}
+	
+	// 공연상태로 공연정보 가져오기
+		public List<ShowVO> getShowList(int showStat){
+			System.out.println("getShowList Service()");
+			return testdao.getShowList(showStat);
+		}
 
 	// 공연번호 날짜로 회차정보 가지고오기
 	public List<ShowingVO> getShowing(ShowingVO vo) {

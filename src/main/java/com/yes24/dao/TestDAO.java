@@ -15,6 +15,14 @@ public class TestDAO {
 	@Autowired
 	private SqlSession sqlSession;
 	
+	//showStat로 공연정보 가져오기
+	public List<ShowVO> getShowList(int showStat) {
+		System.out.println("getShowList DAO()");
+		List<ShowVO> showList = sqlSession.selectList("test.adminShowList", showStat);
+		System.out.println(showList);
+		return showList;
+	}
+	//showSq로 공연정보 가져오기
 	public ShowVO getShow(int no) {
 		//System.out.println("getShow DAO()");
 		return sqlSession.selectOne("test.getShow", no);

@@ -2,6 +2,35 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="test">
+<!-- 공연리스트 정보가져오기 -->
+	<select id="adminShowList" parameterType="int" resultType="ShowVO">
+		
+		<![CDATA[
+
+		      SELECT
+				    show_sq AS showsq,
+				    main_image AS mainimage,
+				    sub_image AS subimage,
+				    TO_CHAR(start_date, 'YYYY.MM.DD') AS startdate,
+				    TO_CHAR(end_date, 'YYYY.MM.DD') AS enddate,
+				    TO_CHAR(reservation_date, 'YYYY.MM.DD') AS reservationdate,
+				    show_name AS showname,
+				    cast,
+				    director,
+				    show_time AS showtime,
+				    viewing_age AS viewingage,
+				    show_content AS showcontent,
+				    category,
+				    show_stat AS showstat,
+				    concert_hall_sq AS concerthallsq
+				FROM
+				    show
+			   WHERE
+				    show_stat = #{showStat}			
+		
+		]]>
+
+	</select>
 <!-- 공연정보가져오기 -->
 	<select id="getShow" parameterType="int" resultType="ShowVO">
 		
