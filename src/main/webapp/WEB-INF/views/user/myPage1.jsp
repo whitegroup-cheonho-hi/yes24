@@ -349,7 +349,7 @@ section {
 			$("#seatNo").val(ticketSeat);
 			$("#ticketingDate").val(ticketingDate);
 			$("#byPrice").val(ticketSeatPrice+" 원");
-			$("#sellPrice").attr("max",ticketSeatPrice);
+			$("#hopePrice").attr("max",price);
 			
 			
 			// 양도신청 버튼
@@ -372,7 +372,7 @@ section {
 				    success: function(result) {
 				    	console.log(result);
 				    
-				   
+				    	location.reload();
 				    },
 				    error: function(XHR, status, error) {
 				      console.error(status + " : " + error);
