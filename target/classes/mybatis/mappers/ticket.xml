@@ -3,4 +3,27 @@
 
 <mapper namespace="ticket">
 
+	<!-- 양도등록시 티켓 상태변경 -->
+	<update id="insertTransferTicket" parameterType="int">
+	
+		<![CDATA[
+		
+			UPDATE ticket SET TICKET_STAT = 4 WHERE TICKET_SQ = #{ticketSq}
+		
+		]]>
+
+	</update>
+
+	<!-- 양도완료후 티켓 상태죽이기 -->
+	<update id="buyTransferTicket" parameterType="int">
+	
+		<![CDATA[
+		
+			UPDATE ticket SET TICKET_ACTIVE = 'N' WHERE TICKET_SQ = #{ticketSq}
+		
+		]]>
+
+	</update>
+
+
 </mapper>

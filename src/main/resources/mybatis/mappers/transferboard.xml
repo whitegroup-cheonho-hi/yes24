@@ -3,4 +3,36 @@
 
 <mapper namespace="transferboard">
 
+
+	<!-- 양도표 등록 -->
+	<insert id="insertTransferboard" parameterType="TransferBoardVO">
+	
+		<![CDATA[
+		
+			INSERT INTO transfer_board (
+			                            transfer_board_sq ,
+			                            hope_price ,
+			                            transfer_stat ,
+			                            transfer_board_content ,
+			                            transfer_board_reg_date ,
+			                            ticket_sq ,
+			                            buy_user_sq
+			                           ) 
+			                     VALUES 
+			                           (
+			                            seq_transfer_board_sq.NEXTVAL ,
+			                            #{hopePrice} ,
+			                            'Y',
+			                            #{transferBoardContent} ,
+			                            SYSDATE ,
+			                            #{ticketSq} ,
+			                            #{buyUserSq}
+                           			   )
+				
+		]]>	
+	
+	</insert>
+	
+	
+
 </mapper>
