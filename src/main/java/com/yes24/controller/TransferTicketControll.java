@@ -1,6 +1,5 @@
 package com.yes24.controller;
 
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -12,13 +11,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.yes24.service.TicketingService;
 import com.yes24.service.TransferBoardService;
 import com.yes24.vo.JsonResult;
 import com.yes24.vo.MyTicketingVO;
-import com.yes24.vo.SeatClassVO;
 import com.yes24.vo.TransferBoardVO;
 import com.yes24.vo.UserVO;
 
@@ -28,6 +26,8 @@ public class TransferTicketControll {
 
 	@Autowired
 	private TransferBoardService transferBoardService;
+	@Autowired
+	private TicketingService ticketingService;
 
 	// ---------------- 티켓 양도 등록
 	@ResponseBody
@@ -75,26 +75,24 @@ public class TransferTicketControll {
 		model.addAttribute("transferBoard", map.get("transferBoardVO"));
 		model.addAttribute("show", map.get("showVO"));
 		model.addAttribute("concertHall", map.get("concertHallVO"));	
-		model.addAttribute("showSeatList", map.get("showSeatList"));
-		System.out.println(map.get("transferBoardVO"));
-		System.out.println(map.get("showSeatList"));
+		model.addAttribute("showSeatList", map.get("showSeatList"));		
 
 		return "/show/showDetail2";
 
 	}
-
-	// ------------------ 좌석그리기
-	@ResponseBody
-	@RequestMapping(value = "/drawingSeat", method = RequestMethod.POST)
-	public JsonResult drawingSeat(@RequestParam("showSq")int no) {
-		System.out.println("drawingSeat()");
-			
-		List<SeatClassVO> seatClassList = transferBoardService.drawingSeat(no);
+	
+	// ---------------------- 티켓 양도 완료
+	@RequestMapping(value="/buyTransferTicket", method = RequestMethod.POST)
+	public String buyTransferTicket(@ModelAttribute TransferBoardVO vo, HttpSession session) {
+		System.out.println("buyTransferTicket()");
 		
-		JsonResult jsonResult = new JsonResult();
+		UserVO userVO = (UserVO) session.getAttribute("authUser");
 		
-		jsonResult.success(seatClassList);
-
-		return jsonResult;
+		vo.setBuyUserSq(userVO.getUserSq());
+		
+		int result = ticketingService.buyTransferTicket(vo);
+		
+		return "";
 	}
+
 }

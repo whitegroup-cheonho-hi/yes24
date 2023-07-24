@@ -32,7 +32,23 @@
 		]]>
 
 	</insert>
-
+	<!-- 양도 완료시 양도게시글 업데이트 -->
+	<update id="updateTransferboard" parameterType="TransferBoardVO">
+		
+		<![CDATA[
+		
+			 UPDATE transfer_board
+				SET
+				    transfer_stat = 'N',
+				    transfer_date = SYSDATE,
+				    buy_user_sq = #{buyUserSq}
+			   WHERE
+				    transfer_board_sq = #{transferBoardSq}
+		
+		]]>
+		
+	</update>
+	
 	<!-- 양도게시글 삭제 -->
 	<delete id="deleteTransferboard" parameterType="int">
 	
@@ -50,25 +66,27 @@
 	    <![CDATA[
 	    
 	          SELECT
-				    z.transfer_board_sq        AS transferboardsq,
-				    z.hope_price               AS hopeprice,
-				    z.transfer_stat            AS transferstat,
-				    z.transfer_board_content   AS transferboardcontent,
-				    TO_CHAR(z.transfer_board_reg_date, 'YYYY.MM.DD') AS transferboardregdate,
-				    a.ticket_seat              AS ticketseat,
-				    z.ticket_sq                AS ticketsq,
-				    z.sell_user_sq             AS sellusersq,
-				    d.show_sq                  AS showsq,
-				    d.sub_image                AS subimage,
-				    d.show_name                AS showname
-				FROM
-				    transfer_board z
-				    LEFT JOIN ticket a ON z.ticket_sq = a.ticket_sq
-				    LEFT JOIN ticketing b ON a.ticketing_sq = b.ticketing_sq
-				    LEFT JOIN showing c ON a.showing_sq = c.showing_sq
-				    LEFT JOIN show d ON c.show_sq = d.show_sq
-				ORDER BY
-				    transfer_board_sq DESC
+		            a.transfer_board_sq        AS transferboardsq,
+		            a.hope_price               AS hopeprice,
+		            a.transfer_stat            AS transferstat,
+		            a.transfer_board_content   AS transferboardcontent,
+		            TO_CHAR(a.transfer_board_reg_date, 'YYYY.MM.DD') AS transferboardregdate,
+		            b.ticket_seat              AS ticketseat,
+		            a.ticket_sq                AS ticketsq,
+		            a.sell_user_sq             AS sellusersq,
+		            e.show_sq                  AS showsq,
+		            e.sub_image                AS subimage,
+		            e.show_name                AS showname
+		        FROM
+		            transfer_board a
+		            LEFT JOIN ticket b ON a.ticket_sq = b.ticket_sq
+		            LEFT JOIN ticketing c ON b.ticketing_sq = c.ticketing_sq
+		            LEFT JOIN showing d ON b.showing_sq = d.showing_sq
+		            LEFT JOIN show e ON d.show_sq = e.show_sq
+		       WHERE 
+		            a.transfer_stat = 'Y'
+		    ORDER BY
+		            transfer_board_sq DESC
 	    ]]>
 	    
 	</select>

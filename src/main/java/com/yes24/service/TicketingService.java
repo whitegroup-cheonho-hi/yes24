@@ -7,11 +7,14 @@ import java.util.Random;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.yes24.dao.TicketDAO;
 import com.yes24.dao.TicketingDAO;
+import com.yes24.dao.TransferBoardDAO;
 import com.yes24.vo.SaveTicketVO;
 import com.yes24.vo.ShowingSeatVO;
 import com.yes24.vo.TicketVO;
 import com.yes24.vo.TicketingVO;
+import com.yes24.vo.TransferBoardVO;
 import com.yes24.vo.UserVO;
 
 @Service
@@ -23,6 +26,10 @@ public class TicketingService {
 
 	@Autowired
 	private TicketingDAO ticketingDAO;
+	@Autowired
+	private TicketDAO ticketDAO;
+	@Autowired
+	private TransferBoardDAO transferBoardDAO;
 
 	// -------------- 예매등록
 	public int insertTicketing(int no) {
@@ -37,7 +44,7 @@ public class TicketingService {
 		return vo.getTicketingSq();
 	}
 
-	// -------------- 예매등록
+	// -------------- 예매취소
 	public int deleteTicketing(UserVO vo) {
 		System.out.println("deleteTicketing Service()");
 
@@ -60,21 +67,48 @@ public class TicketingService {
 			ticket.setTicketingSq(vo.getTicketingSq());
 			// 반복으로 티켓 생성
 			ticketingDAO.insertTicket(ticket);
-			
-			//회차좌석 객체 생성
+
+			// 회차좌석 객체 생성
 			ShowingSeatVO showingSeatVO = new ShowingSeatVO();
 			showingSeatVO.setShowingSq(vo.getShowingSq());
 			showingSeatVO.setSeatClass(vo.getSeatClass().get(i));
 			showingSeatVO.setShowingSeatNo(vo.getSeatNo().get(i));
 			// 좌석 등급명으로 좌석등급 시퀀스 넣기위한 코드
 			showingSeatVO.setSeatClassSq(vo.getShowSq());
-			
+
 			// 반복으로 회차좌석 등록
 			ticketingDAO.insertShowingSeat(showingSeatVO);
-					
+
 		}
 
 		return 0;
+	}
+
+	// --------------- 양도표 구매
+	public int buyTransferTicket(TransferBoardVO vo) {
+		System.out.println("buyTransferTicket Service()");
+		System.out.println(vo);
+				
+		// 기존 티켓 상태변경
+		ticketDAO.buyTransferTicket(vo.getTicketSq());
+		
+		TicketingVO ticketingVO = new TicketingVO();
+		// 예매 생성
+		ticketingVO.setUserSq(vo.getBuyUserSq());		
+		ticketingDAO.insertTicketing(ticketingVO);
+		
+		// 새티켓 등록
+		TicketVO ticket = new TicketVO();
+		String s = generateTicketNumber(vo.getTicketSeat());		
+		ticket.setTicketNo(s);
+		ticket.setTicketSeatNo(vo.getTicketSeat());
+		ticket.setTicketingSq(ticketingVO.getTicketingSq());
+		ticket.setShowingSq(vo.getTicketSq());		
+		
+		ticketingDAO.buyTransferTicket(ticket);
+		
+		// 양도 게시판 상태 변경
+		return transferBoardDAO.updateTransferboard(vo);
 	}
 
 	// --------------- 티켓번호 난수 생성

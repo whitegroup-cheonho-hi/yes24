@@ -20,7 +20,13 @@ public class TransferBoardDAO {
 
 		return sqlSession.insert("transferboard.insertTransferboard", vo);
 	}
+	
+	// ------------------- 양도완료후 게시판 업데이트
+	public int updateTransferboard(TransferBoardVO vo) {
+		System.out.println("updateTransferboard DAO()");
 
+		return sqlSession.update("transferboard.updateTransferboard", vo);
+	}
 	// -------------------- 양도 게시글 삭제
 	public int deleteTransferboard(int no) {
 		System.out.println("deleteTransferboard DAO()");

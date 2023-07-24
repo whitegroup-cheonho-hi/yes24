@@ -16,7 +16,12 @@ public class TicketDAO {
 
 		return sqlSession.update("ticket.insertTransferTicket", no);
 	}
+	// ------------ 티켓 양도상태로 변경
+		public int buyTransferTicket(int no) {
+			System.out.println("deleteTicket DAO()");
 
+			return sqlSession.update("ticket.buyTransferTicket", no);
+		}
 	// ----------- 티켓 양도취소
 	public int cancelTransferTicket(int no) {
 		System.out.println("cancelTransferTicket DAO()");

@@ -70,6 +70,36 @@
 	
 	</insert>
 	
+	<!-- 양도 완료시 티켓등록 -->
+	<insert id="buyTransferTicket" parameterType="TicketVO">
+	
+		<![CDATA[
+		
+			INSERT INTO ticket (
+							    ticket_sq,
+							    ticket_no,
+							    ticket_seat,
+							    ticket_seat_price,
+							    ticket_stat,
+							    ticket_active,
+							    showing_sq,
+							    ticketing_sq
+							) VALUES (
+							    seq_ticket_sq.NEXTVAL,
+							    #{ticketNo} ,
+							    #{ticketSeatNo} ,
+							    (select TICKET_SEAT_PRICE from ticket where TICKET_SQ = #{showingSq} ) ,
+							    1 ,
+							    'Y',
+							    (select SHOWING_SQ from ticket where TICKET_SQ = #{showingSq}) ,
+							    #{ticketingSq}
+							)
+		
+		]]>
+	
+	
+	</insert>
+	
 	<!-- 결제완료시 회차좌석 등록 -->
 	<insert id="insertShowingSeat" parameterType="ShowingSeatVO">
 	

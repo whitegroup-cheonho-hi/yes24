@@ -37,6 +37,14 @@ public class TicketingDAO {
 		return sqlSession.insert("ticketing.insertTicket", vo);
 	}
 
+	// -------------- 양도후 티켓등록
+	public int buyTransferTicket(TicketVO vo) {
+		System.out.println("buyTransferTicket DAO()");
+		
+		return sqlSession.insert("ticketing.buyTransferTicket", vo);
+	
+	}
+
 	// -------------- 회차 좌석 등록
 	public int insertShowingSeat(ShowingSeatVO vo) {
 		System.out.println("insertShowingSeat DAO()");

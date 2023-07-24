@@ -192,7 +192,13 @@
 						</dl>
 					</div>
 					<!--포인트-->
-					<div></div>
+					<div>
+					<form id="buyTicketButton" action="${pageContext.request.contextPath}/transferTicket/buyTransferTicket" method="post" style="display: none;">
+						<input type="hidden" name ="transferBoardSq" value="${transferBoard.transferBoardSq}">
+						<input type="hidden" name ="ticketSq" value="${transferBoard.ticketSq}">
+						<input type="hidden" name ="ticketSeat" value="${transferBoard.ticketSeat}">
+					</form>
+					</div>
 					<div class="rn-product-area3">
 						<!--공연시간안내, 배송정보-->
 						<dl>
@@ -242,8 +248,7 @@
 		//결제 API
 		var IMP = window.IMP;
 		IMP.init("imp61438883");
-		
-		
+	
 		// 양도표 좌석
 		var seatNo = '${transferBoard.ticketSeat}';
 		// 좌석 체크
@@ -286,9 +291,13 @@
 	    var today = new Date();
 	    var formattedDateTime = today.toISOString().slice(0, 19).replace('T', ' ');
 	    var PaymentNumber = ticketSeatClass + seatNo + formattedDateTime;
-	    console.log(PaymentNumber);
+	    
+	    $("#ticketing").on("click", function() {
+	    	$("#buyTicketButton").submit();
+	    });
+	    
 	      	      
-		//구매버튼 클릭시
+		/* //구매버튼 클릭시
 		$("#ticketing").on("click", function(e) {
 			e.preventDefault()
 			console.log("구매");
@@ -309,20 +318,17 @@
 					if (rsp.success) {		
 						console.log("결제 성공");
 						
-						
+						buyTicketButton.submit();
 					
 				
 					} else {
 						// 결제 실패 시 로직
-						console.log("결제 실패");
-						// 결제 실패시 예매삭제
-						deleteTicketing();
-						
+						console.log("결제 실패");												
 						
 					}
 				});
 			}else{}
-		});
+		}); */
 
 		var mapContainer = $("#map"); // 지도를 표시할 div 
 		var mapOption = {

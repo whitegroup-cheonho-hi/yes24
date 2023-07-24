@@ -33,7 +33,7 @@
 .listItemTxt p { width: 200px; height: 40px; margin-bottom: 10px; }
 section{width: 1200px; margin: 0 auto; padding-top: 120px;}
 section ul {  display: flex;  justify-content: flex-start; flex-direction: row; flex-wrap: wrap; margin: 0 -15px; }
-section ul li{ width: calc(25% - 30px); margin: 0 15px; margin-bottom: 70px;}
+section ul li{ width: calc(25% - 92px); margin: 0 15px; margin-bottom: 70px;}
 section ul li a img{width: 100%;}
 section ul li a span{display: block; text-align: center; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;}
 section ul li a span.tit{font-size: 14px; margin-top:15px;}
