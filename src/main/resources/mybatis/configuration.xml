@@ -2,9 +2,9 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
 
 <configuration>
-    <typeAliases>
-	    <typeAlias alias="AlarmVO" type="com.yes24.vo.AlarmVO" />
+    <typeAliases>	  
 		<typeAlias alias="ConcertHallVO" type="com.yes24.vo.ConcertHallVO" />
+		<typeAlias alias="Criteria" type="com.yes24.vo.Criteria" />		
 		<typeAlias alias="NotificationVO" type="com.yes24.vo.NotificationVO" />
 		<typeAlias alias="MyTicketingVO" type="com.yes24.vo.MyTicketingVO" />		
 		<typeAlias alias="QnAVO" type="com.yes24.vo.QnAVO" />
@@ -24,8 +24,7 @@
 		<typeAlias alias="UserVO" type="com.yes24.vo.UserVO" />
     </typeAliases>
 
-    <mappers>
-        <mapper resource="mybatis/mappers/alarm.xml" />
+    <mappers>     
 		<mapper resource="mybatis/mappers/concerthall.xml" />
 		<mapper resource="mybatis/mappers/notification.xml" />
 		<mapper resource="mybatis/mappers/mypage.xml" />
