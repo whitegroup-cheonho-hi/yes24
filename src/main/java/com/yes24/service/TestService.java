@@ -22,7 +22,7 @@ public class TestService {
 
 	public ShowVO getShow(int no) {
 		return testdao.getShow(no);
-	}
+	} 
 	
 	// 공연상태로 공연정보 가져오기
 	public Map<String, Object> getShowList(Criteria cri){
