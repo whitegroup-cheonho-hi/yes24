@@ -3,7 +3,7 @@
 
 <mapper namespace="test">
 <!-- 공연리스트 정보가져오기 -->
-	<select id="adminShowList" parameterType="Criteria" resultType="ShowVO">
+	<select id="adminShowList" parameterType="com.yes24.vo.Criteria" resultType="ShowVO">
 		
 		<![CDATA[
 
