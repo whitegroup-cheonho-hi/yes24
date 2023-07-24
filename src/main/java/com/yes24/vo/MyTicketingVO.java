@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 public class MyTicketingVO {
 
 	private int ticketingSq;
-	private int ticketSq;
+	private int ticketSq;	
 	private String ticketingDate;
 	private String showName;
 	private String ticketNo;
@@ -16,13 +16,18 @@ public class MyTicketingVO {
 	private int ticketStat;
 	private String ticketActive;
 	private int showSq;
+	
+	private int transferBoardSq;
+	private String transferBoardRegDate;
+	private int hopePrice;
 
 	public MyTicketingVO() {
 		super();
 	}
 
 	public MyTicketingVO(int ticketingSq, int ticketSq, String ticketingDate, String showName, String ticketNo,
-			String ticketSeat, String startTime, int ticketSeatPrice, int ticketStat, String ticketActive, int showSq) {
+			String ticketSeat, String startTime, int ticketSeatPrice, int ticketStat, String ticketActive, int showSq,
+			int transferBoardSq, String transferBoardRegDate, int hopePrice) {
 		super();
 		this.ticketingSq = ticketingSq;
 		this.ticketSq = ticketSq;
@@ -35,6 +40,9 @@ public class MyTicketingVO {
 		this.ticketStat = ticketStat;
 		this.ticketActive = ticketActive;
 		this.showSq = showSq;
+		this.transferBoardSq = transferBoardSq;
+		this.transferBoardRegDate = transferBoardRegDate;
+		this.hopePrice = hopePrice;
 	}
 
 	public int getTicketingSq() {
@@ -125,12 +133,39 @@ public class MyTicketingVO {
 		this.showSq = showSq;
 	}
 
+	public int getTransferBoardSq() {
+		return transferBoardSq;
+	}
+
+	public void setTransferBoardSq(int transferBoardSq) {
+		this.transferBoardSq = transferBoardSq;
+	}
+
+	public String getTransferBoardRegDate() {
+		return transferBoardRegDate;
+	}
+
+	public void setTransferBoardRegDate(String transferBoardRegDate) {
+		this.transferBoardRegDate = transferBoardRegDate;
+	}
+
+	public int getHopePrice() {
+		return hopePrice;
+	}
+
+	public void setHopePrice(int hopePrice) {
+		this.hopePrice = hopePrice;
+	}
+
 	@Override
 	public String toString() {
 		return "MyTicketingVO [ticketingSq=" + ticketingSq + ", ticketSq=" + ticketSq + ", ticketingDate="
 				+ ticketingDate + ", showName=" + showName + ", ticketNo=" + ticketNo + ", ticketSeat=" + ticketSeat
 				+ ", startTime=" + startTime + ", ticketSeatPrice=" + ticketSeatPrice + ", ticketStat=" + ticketStat
-				+ ", ticketActive=" + ticketActive + ", showSq=" + showSq + "]";
+				+ ", ticketActive=" + ticketActive + ", showSq=" + showSq + ", transferBoardSq=" + transferBoardSq
+				+ ", transferBoardRegDate=" + transferBoardRegDate + ", hopePrice=" + hopePrice + "]";
 	}
+
+	
 
 }

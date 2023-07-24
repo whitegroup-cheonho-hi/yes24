@@ -24,6 +24,17 @@
 		]]>
 
 	</update>
+	
+	<!-- 양도취소시 티켓 상태변경 -->
+	<update id="cancelTransferTicket" parameterType="int">
+	
+		<![CDATA[
+		
+			UPDATE ticket SET TICKET_STAT = 1 WHERE TICKET_SQ = #{ticketSq}
+		
+		]]>
 
+	</update>
+	
 
 </mapper>

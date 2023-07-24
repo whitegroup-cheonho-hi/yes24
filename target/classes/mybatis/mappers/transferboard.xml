@@ -16,7 +16,7 @@
 			                            transfer_board_content ,
 			                            transfer_board_reg_date ,
 			                            ticket_sq ,
-			                            buy_user_sq
+			                            sell_user_sq
 			                           ) 
 			                     VALUES 
 			                           (
@@ -26,12 +26,23 @@
 			                            #{transferBoardContent} ,
 			                            SYSDATE ,
 			                            #{ticketSq} ,
-			                            #{buyUserSq}
+			                            #{sellUserSq}
                            			   )
 				
 		]]>	
 	
 	</insert>
+	
+	<!-- 양도게시글 삭제 -->
+	<delete id="deleteTransferboard" parameterType="int">
+	
+		<![CDATA[
+		
+			DELETE transfer_board WHERE transfer_board_sq = #{transferBoardSq}
+		
+		]]>
+		
+	</delete>
 	
 	
 
