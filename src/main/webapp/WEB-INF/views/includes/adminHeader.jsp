@@ -24,9 +24,9 @@
 				<ul class="menus">
 					<li><a href="${pageContext.request.contextPath}/concertHall/concertHallInsertForm">공연장등록</a></li>
 					<li><a href="${pageContext.request.contextPath}/show/showInsertForm">공연등록</a></li>
-					<li><a href="">예정공연</a></li>
-					<li><a href="">진행공연</a></li>
-					<li><a href="">종료공연</a></li>
+					<li><a href="${pageContext.request.contextPath}/show1/adminShowList">예정공연</a></li>
+					<li><a href="${pageContext.request.contextPath}/show1/ticketingShowList">진행공연</a></li>
+					<li><a href="${pageContext.request.contextPath}/show1/showEndList">종료공연</a></li>
 				</ul></li>
 			<li class="submenu"><a href="">회원관리</a>
 				<ul class="menus">

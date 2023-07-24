@@ -25,6 +25,12 @@
 		background-color: #196ab3; color: white; border: none; border-radius: 5px;}
 	.listItemTxt p { width: 200px; height: 40px; margin-bottom: 10px; }
 	
+	#paging{ text-align: center; padding: 0; margin: 0px auto; width: 310px; }
+	.pageInfo{font: 14px "맑은 고딕", 돋움, 굴림; text-align: center; padding: 0; list-style-type: none; margin: 10px 5px 10px 5px; display: inline;}
+	#paging ul { display: inline-block; }
+	#paging ul>li { display: inline-block; margin: 0px 8px 0px 8px; }
+	#paging ul>li.active { font-size: 16px; font-weight: bold; }
+	
 	/* 상품페이지 카테고리 */
 	#show .category{width: 1200px; display: flex; justify-content: center; margin-bottom: 20px;}
 	#show .category li{ margin: 0 5px;}
@@ -57,7 +63,7 @@
 		            </ul>
 		         </c:if>
 			</div>
-			<!-- ==================== 정보 입력 영역 시작 ==================== -->
+			<!-- ==================== 리스트 영역 ==================== -->
 			<div class="">
 				<div class="listItem">
 					<c:forEach var = "showList" items="${showList}">
@@ -76,7 +82,35 @@
 				</div>
 			</div>
 			
-			<!-- ==================== 정보 입력 영역 끝 ==================== -->
+			<!-- ==================== 페이징 영역  ==================== -->
+			<div id="paging">
+				
+				<ul id="pageInfo" class="pageInfo">
+					<!-- 이전페이지 버튼 -->
+			        <c:if test="${pageMake.prev}">
+			    	    <li class="pageInfo_btn previous"><a href="${pageMake.startPage-1}">◀</a></li>
+			        </c:if>
+					<!-- 각 번호 페이지 버튼 -->
+					<c:forEach var="num" begin="${pageMake.startPage }" end="${pageMake.endPage }">
+						<li class="pageInfo_btn ${pageMake.cri.pageNum == num ? "active":"" }">
+							<a href="${num }">${num }</a>
+						</li>
+					</c:forEach>
+					<!-- 다음페이지 버튼 -->
+			        <c:if test="${pageMake.next}">
+			        	<li class="pageInfo_btn next">
+			        		<a href="${(pageMake.endPage + 1)}">▶</a>
+			        	</li>
+			        </c:if>
+				</ul>
+
+				<div class="clear"></div>
+			</div>
+			<form action="adminShowList" id="moveForm" method="get">
+				<input type="hidden" name="pageNum" value="${pageMake.cri.pageNum }">
+				<input type="hidden" name="amount" value="${pageMake.cri.amount }">
+				
+			</form>
 			
 		</div>
 	</section>
@@ -84,10 +118,19 @@
 </body>
 
 <script>
+
+	//페이징 버튼 클릭
 	$(document).ready(function() {
-			
+	  $("#paging .pageInfo a").on("click", function(e) {
+	     e.preventDefault();
+	     var pageNum = $(this).attr("href");
+	     $("#moveForm input[name='pageNum']").val(pageNum);
+	     $("#moveForm").submit();
+	  });
 	});
 	
+	
+	//공연상태변경
 	function showUpdateStat(showVO) {
 		console.log(showVO);
         
@@ -108,6 +151,7 @@
 	    });
 	}
 	
+	//상태변경버튼1
 	$('.btnstat').on('click', function() {
 		//넘길 데이터 모으기
 		var showSq = $(this).data("sq");
@@ -117,10 +161,13 @@
 		
 	});
 	
+	//상태변경버튼1
 	$('.btndelete').on('click', function() {
 		var showSq = $(this).data("sq");
 		var showVO = {showSq : showSq, showStat : 3};
 		showUpdateStat(showVO)
 	});
+	
+	
 </script>
 </html>

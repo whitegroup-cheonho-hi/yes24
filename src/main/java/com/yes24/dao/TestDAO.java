@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.yes24.vo.Criteria;
 import com.yes24.vo.ShowVO;
 import com.yes24.vo.ShowingVO;
 
@@ -16,9 +17,9 @@ public class TestDAO {
 	private SqlSession sqlSession;
 	
 	//showStat로 공연정보 가져오기
-	public List<ShowVO> getShowList(int showStat) {
+	public List<ShowVO> getShowList(Criteria cri) {
 		System.out.println("getShowList DAO()");
-		List<ShowVO> showList = sqlSession.selectList("test.adminShowList", showStat);
+		List<ShowVO> showList = sqlSession.selectList("test.adminShowList", cri);
 		System.out.println(showList);
 		return showList;
 	}
@@ -56,6 +57,14 @@ public class TestDAO {
 	public int showUpdateStat(ShowVO vo) {
 		System.out.println("showUpdateStat DAO()");
 		return sqlSession.update("test.showUpdateStat", vo);
+	}
+	//상태별 공연갯수 가져오기
+	public int getTotal(Criteria cri) {
+		System.out.println("getTotal DAO()");
+		System.out.println(cri);
+		int num = sqlSession.selectOne("test.getShowTotal", cri);
+		System.out.println(num);
+		return num;
 	}
 	
 	

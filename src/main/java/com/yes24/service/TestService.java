@@ -1,11 +1,15 @@
 package com.yes24.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.yes24.dao.TestDAO;
+import com.yes24.dto.PageMakerDTO;
+import com.yes24.vo.Criteria;
 import com.yes24.vo.ShowVO;
 import com.yes24.vo.ShowingVO;
 
@@ -14,15 +18,30 @@ public class TestService {
 
 	@Autowired
 	private TestDAO testdao;
+	
 
 	public ShowVO getShow(int no) {
 		return testdao.getShow(no);
 	}
 	
 	// 공연상태로 공연정보 가져오기
-	public List<ShowVO> getShowList(int showStat){
+	public Map<String, Object> getShowList(Criteria cri){
 		System.out.println("getShowList Service()");
-		return testdao.getShowList(showStat);
+		
+		Map<String, Object> map = new HashMap<>();
+		System.out.println(cri);
+		List<ShowVO> list = testdao.getShowList(cri);
+		int total = testdao.getTotal(cri);
+		
+		PageMakerDTO pageMake = new PageMakerDTO(total, cri);
+		System.out.println(pageMake);
+		System.out.println(list);
+		
+		map.put("pageMake", pageMake);
+		map.put("list", list);
+		
+		
+		return map;
 	}
 
 	// 공연번호 날짜로 회차정보 가지고오기
@@ -51,9 +70,14 @@ public class TestService {
 	}
 	
 	//예매시작 상태변경
-		public int showUpdateStat(ShowVO vo) {
-			System.out.println("showUpdateStat Service()");
-			return testdao.showUpdateStat(vo);
-		}
+	public int showUpdateStat(ShowVO vo) {
+		System.out.println("showUpdateStat Service()");
+		return testdao.showUpdateStat(vo);
+	}
+		
+	//상태별 공연갯수 가져오기
+	public int getTotal(Criteria cri) {
+		return testdao.getTotal(cri);
+	}
 	
 }

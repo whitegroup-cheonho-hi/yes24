@@ -15,11 +15,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.yes24.dto.PageMakerDTO;
 import com.yes24.service.ConcertHallService;
 import com.yes24.service.ShowService;
 import com.yes24.service.ShowingService;
 import com.yes24.service.TestService;
 import com.yes24.vo.ConcertHallVO;
+import com.yes24.vo.Criteria;
 import com.yes24.vo.JsonResult;
 import com.yes24.vo.ShowVO;
 import com.yes24.vo.ShowingVO;
@@ -111,17 +113,35 @@ public class testController {
 		return "show/showDetail";
 	}
 	
-	//어드민 공연리스트
-	@RequestMapping(value = "/adminShowList/{showStat}", method = RequestMethod.GET)
-	public String adminShowList(@PathVariable("showStat") int showStat, Model modle) {
-		System.out.println("adminShowList");
-		System.out.println(showStat);
+	//어드민 공연리스트(예매전)
+	@RequestMapping(value = "/adminShowList", method = RequestMethod.GET)
+	public String adminShowList(Model modle, Criteria cri) {
+		cri.setShowStat(1);
+		Map<String, Object> map = testservice.getShowList(cri);
 		
-		List<ShowVO> list = testservice.getShowList(showStat);
-		modle.addAttribute("showList", list);
-		System.out.println(list);
+		modle.addAttribute("showList", map.get("list"));
+		modle.addAttribute("pageMake", map.get("pageMake"));
+		
 		return "admin/showList";
 	}
+//	
+//	//어드민 공연리스트(예매중)
+//	@RequestMapping(value = "/ticketingShowList", method = RequestMethod.GET)
+//	public String showTicketingList(Model modle, Criteria cri) {
+//		cri.setShowStat(2);
+//		List<ShowVO> list = testservice.getShowList(cri);
+//		modle.addAttribute("showList", list);
+//		return "admin/showTicketingList";
+//	}
+	
+//	//어드민 공연리스트(공연완료)
+//	@RequestMapping(value = "/showEndList", method = RequestMethod.GET)
+//	public String showEndList(Model modle, Criteria cri) {
+//		cri.setShowStat(3);
+//		List<ShowVO> list = testservice.getShowList(cri);
+//		modle.addAttribute("showList", list);
+//		return "admin/showEndList";
+//	}
 	
 	// 회차등록 폼
 	@RequestMapping(value = "/showingInsertForm/{no}", method = RequestMethod.GET)
@@ -132,8 +152,7 @@ public class testController {
 		System.out.println(vo);
 		return "admin/showingInsertForm";
 	}
-	
-	
+	//회차리스트
 	@ResponseBody
 	@RequestMapping(value = "/getShowing", method = RequestMethod.POST)
 	public JsonResult getShowing(@ModelAttribute ShowingVO vo) {
@@ -144,8 +163,8 @@ public class testController {
 	    System.out.println("getShowing()");
 	    System.out.println(showingList);
 	    return jsonResult;
-   }
-	
+	}
+	//회차추가
 	@ResponseBody
 	@RequestMapping(value = "/InsertShowing", method = RequestMethod.POST)
 	public JsonResult InsertShowing(@ModelAttribute ShowingVO vo) {
@@ -158,7 +177,7 @@ public class testController {
 		jsonResult.success(cnt);
 		return jsonResult;
 	}
-	
+	//회차삭제
 	@ResponseBody
 	@RequestMapping(value = "/DeleteShowing", method = RequestMethod.POST)
 	public JsonResult DeleteShowing(@RequestParam("showingSq") String showingSq) {
@@ -169,7 +188,7 @@ public class testController {
 		jsonResult.success(cnt);
 		return jsonResult;
 	}
-	
+	//한달스케쥴(백그라운드)
 	@ResponseBody
 	@RequestMapping(value = "/getShowingDay", method = RequestMethod.POST)
 	public JsonResult getShowingDay(@RequestParam("showSq") int showSq) {
@@ -190,15 +209,7 @@ public class testController {
 		jsonResult.success(cnt);
 		return jsonResult;
 	}
-		
-		
-		
-		
-		
-		
-		
-		
-		
+	
 		
 		
 		
