@@ -144,14 +144,14 @@
 		
 	</select>
 	
-	<!-- 예매시작 상태변경 -->
-	<update id="showUpdateStat" parameterType="int">
+	<!-- 공연 상태변경 -->
+	<update id="showUpdateStat" parameterType="ShowVO">
 	
 		<![CDATA[
 		
 			UPDATE show
             SET
-                show_stat = 2
+                show_stat = #{showStat}
 			WHERE
 				show_sq = #{showSq}
 		

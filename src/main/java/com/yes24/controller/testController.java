@@ -181,11 +181,14 @@ public class testController {
 		return jsonResult;
 	}
 	//예매시작 상태변경
-	@RequestMapping(value = "/showUpdateStat/{showSq}", method = RequestMethod.GET)
-	public String showUpdateStat(@PathVariable("showSq") int showSq) {
+	@ResponseBody
+	@RequestMapping(value = "/showUpdateStat", method = RequestMethod.POST)
+	public JsonResult showUpdateStat(@ModelAttribute ShowVO vo) {
 		System.out.println("showUpdateStat");
-		int cnt = testservice.showUpdateStat(showSq); 
-		return "redirect:/admin/showList";
+		JsonResult jsonResult = new JsonResult();
+		int cnt = testservice.showUpdateStat(vo);
+		jsonResult.success(cnt);
+		return jsonResult;
 	}
 		
 		

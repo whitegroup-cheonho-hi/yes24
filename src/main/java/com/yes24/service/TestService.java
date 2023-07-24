@@ -51,9 +51,9 @@ public class TestService {
 	}
 	
 	//예매시작 상태변경
-		public int showUpdateStat(int showSq) {
+		public int showUpdateStat(ShowVO vo) {
 			System.out.println("showUpdateStat Service()");
-			return testdao.showUpdateStat(showSq);
+			return testdao.showUpdateStat(vo);
 		}
 	
 }

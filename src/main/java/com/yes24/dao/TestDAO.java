@@ -53,9 +53,9 @@ public class TestDAO {
 		return list;
 	}
 	//예매시작 상태변경
-	public int showUpdateStat(int showSq) {
+	public int showUpdateStat(ShowVO vo) {
 		System.out.println("showUpdateStat DAO()");
-		return sqlSession.update("test.showUpdateStat", showSq);
+		return sqlSession.update("test.showUpdateStat", vo);
 	}
 	
 	
