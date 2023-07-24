@@ -30,8 +30,9 @@ public class MyPageController {
 		Map<String, Object> map = myPageService.myTicketingList(userVO.getUserSq(), userVO, 1);
 
 		model.addAttribute("myTicketingList", map.get("myTicketingList"));
+		model.addAttribute("myTransferTicketList", map.get("myTransferTicketList"));
 		model.addAttribute("user", map.get("userVO"));
-
+		System.out.println(map.get("myTransferTicketList"));
 		return "user/myPage1";
 
 	}

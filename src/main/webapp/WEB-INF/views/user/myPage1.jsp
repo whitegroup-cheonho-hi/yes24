@@ -143,11 +143,7 @@ section {
 											</tr> -->
 										<c:forEach items="${myTicketingList}" var="myTicketing">
 											<tr>
-												<td scope="row" class="fst"><input type="hidden"
-													name="showSq" value="${myTicketing.showSq}"> <input
-													type="hidden" name="ticketSq"
-													value="${myTicketing.ticketSq}">
-													${myTicketing.ticketingDate}</td>
+												<td scope="row" class="fst">${myTicketing.ticketingDate}</td>
 												<td scope="row">${myTicketing.ticketingSq}</td>
 												<td scope="row"><a id="showHref"
 													href="${pageContext.request.contextPath}/show/detail/${myTicketing.showSq}">${myTicketing.showName}</a></td>
@@ -196,20 +192,41 @@ section {
 									</colgroup>
 									<thead>
 										<tr>
-											<th scope="row" class="fst">예매일</th>
-											<th scope="row">예매번호</th>
+											<th scope="row" class="fst">양도등록일</th>
+											<th scope="row">게시번호</th>
 											<th scope="row">공연명</th>
 											<th scope="row">좌석</th>
-											<th scope="row">관람일시</th>
-											<th scope="row">양도금액</th>
+											<th scope="row">티켓금액</th>
+											<th scope="row">희망금액</th>
 											<th scope="row">양도상태</th>
 											<th scope="row" class="end">버튼</th>
 										</tr>
 									</thead>
 									<tbody>
-										<tr>
-											<td colspan="8" class="le ri">최근 예매내역이 없습니다.</td>
-										</tr>
+										<c:forEach items="${myTransferTicketList}" var="transferTicket">
+											<tr>
+												<td scope="row" class="fst">${transferTicket.transferBoardRegDate}</td>
+												<td scope="row">${transferTicket.transferBoardSq}</td>
+												<td scope="row"><a id="showHref2"
+													href="${pageContext.request.contextPath}/show/detail/${transferTicket.showSq}">${transferTicket.showName}</a></td>
+												<td scope="row">${transferTicket.ticketSeat}</td>												
+												<td scope="row"><fmt:formatNumber type="number"
+														maxFractionDigits="3"
+														value="${transferTicket.ticketSeatPrice}" />원</td>
+												<td scope="row"><fmt:formatNumber type="number"
+														maxFractionDigits="3"
+														value="${transferTicket.hopePrice}" />원</td>
+												<c:if test="${transferTicket.ticketActive == 'Y'}">
+													<td scope="row">양도중</td>
+													<td scope="row"><button class="transferCancelButton"
+														type="button" data-ticketsq="${transferTicket.ticketSq}"														
+														data-transferboardsq="${transferTicket.transferBoardSq}">취소</button></td>
+												</c:if>
+												<c:if test="${transferTicket.ticketActive == 'N'}">
+													<td scope="row">양도완료</td>
+												</c:if>
+											</tr>
+										</c:forEach>
 									</tbody>
 								</table>
 							</div>
@@ -383,8 +400,43 @@ section {
 
 		});
 
-
-		// 양도 취소버튼
+		// 양도 취소
+		$(".transferCancelButton").on("click",function(){
+			
+			var result = confirm("정말 취소 하시겠습니까?");
+			if (result) {
+				
+				var ticketSq = $(this).data("ticketsq");
+				var transferboardsq = $(this).data("transferboardsq");
+							
+				MyTicketingVO = {ticketSq : ticketSq, transferBoardSq : transferboardsq};
+				
+				
+				$.ajax({
+				    url: "${pageContext.request.contextPath}/transferTicket/cancelTransferTicket",
+				    type: "post",
+				    //contentType: "application/json", 				    
+				    data: MyTicketingVO ,
+				    
+				    dataType: "json",				    
+				    success: function(result) {
+				    	console.log(result);
+				    
+				    	location.reload();
+				    },
+				    error: function(XHR, status, error) {
+				      console.error(status + " : " + error);
+				    }
+			 	});
+			}else{
+				
+				
+			}
+			
+		});
+		
+		
+		// 양도등록폼 취소버튼
 		$(".btn_wrap .shopping_btn").on("click", function() {
 			console.log("취소");
 			$('#inquiry_popup').hide();

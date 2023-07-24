@@ -22,4 +22,11 @@ public class MyPageDAO {
 		return sqlSession.selectList("mypage.myTicketingList", map);
 
 	}
+	// 나의 양도 등록 내역 가져오기
+	public List<MyTicketingVO> myTransferTicketList(int no) {
+		System.out.println("myTransferTicketList DAO()");
+
+		return sqlSession.selectList("mypage.myTransferTicketList", no);
+
+	}
 }
