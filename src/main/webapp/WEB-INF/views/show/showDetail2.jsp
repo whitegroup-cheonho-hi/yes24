@@ -45,7 +45,7 @@
 .concertHall .position #calendar,#dayList{margin-right: 20px; width: 390px;}
 .concertHall .position #remainingSeats{ width: 355px;}
 .concertHall .position h2{font-size: 20px;}
-.concertHall .position .fc-scrollgrid-sync-table a{font-size: 12px; cursor: pointer;}
+.concertHall .position .fc-scrollgrid-sync-table a{font-size: 15px; cursor: pointer;}
 .concertHall .position .fc .fc-button{font-size: 12px;}
 .position #calendar .fc-view-harness .fc-col-header .fc-col-header-cell{width:55px;}
 .position #calendar .fc-scrollgrid-section .fc-scrollgrid-sync-table tbody .fc-day{width:55px;}
@@ -54,6 +54,11 @@
 #remaining{border: 1px solid #ddd;height: 200px;margin-top: 15px;padding: 10px; }
 #remainingSeats h2{height: 55px;}
 #remainingSeats .fc-view-harness{padding: 10px;}
+.rn-product-area3 #precautions{color:red;}
+.fc-event{cursor: pointer;}
+#container {align-items: center;}
+#container .item {color: black;}
+.item {width: 23px;height: 23px;background-color: #efdfdf;border-radius: 8px 8px 0 0;border: solid 1px #fff;text-align: center;font-size: 17px;box-sizing: border-box;}
 </style>
 </head>
 <body>
@@ -62,7 +67,7 @@
 	<!-- //헤더 -->
 	<section>
 		<div class="renew-wrap">
-			<div class="renew-content">				
+			<div class="renew-content">
 				<div class="rn-02">
 					<!--제목-->
 					<p class="rn-big-title">${show.showName}</p>
@@ -139,7 +144,6 @@
 												</span>원
 												</li>
 											</c:forEach>
-
 										</ul>
 									</div>
 								</div>
@@ -147,50 +151,27 @@
 						</dl>
 					</div>
 					<!--포인트-->
-
+					<div></div>
 					<div class="rn-product-area3">
 						<!--공연시간안내, 배송정보-->
 						<dl>
-							<dt>공연시간 안내</dt>
+							<dt>
+								<strong id="precautions">양도거래간 유의사항</strong>
+							</dt>
 							<dd>
-								2023년 8월 11일(금) ~ 2023년 8월 20일(일) <br>수,목,금 오후 7시 30분 / 토
-								오후 2시, 6시 30분 / 일 오후 2시 <br>* 8월 15일(화) 오후 2시, 6시 30분 <br>*
-								8월 18일(금) 오후 3시, 7시 30분
+								예매는 PC, 모바일, 고객센터 를 통해 신용카드, 가상계좌(무통장 입금) 등으로 예매하실 수 있습니다. <br>
+								무통장입금 결제 선택 시 입금 마감시간은 예매일 익일 밤 11시 29분까지입니다.<br> 입금 마감시간 내
+								미입금 된 경우 예매가 자동 취소됩니다. <br> (단, 상품에 따라 예매 당일 밤 11시 29분에
+								마감되는 경우가 있으니 예매 전후 반드시 확인해주시기 바랍니다.)<br>
+
 							</dd>
 						</dl>
 					</div>
 				</div>
 			</div>
-			
-				<!-- ==================== 캘린더 영역 시작 ==================== -->
-				<div class="concertHall">
-					<div class="inpRow">
-						<div class="concertHall">							
-							<div class="position">
-								<div id='calendar' class="calendar"></div>
-								<div id='dayList' class="calendar"></div>
-								
-								<div id="remainingSeats"> 		
-									<div class="fc-header-toolbar fc-toolbar ">
-										<div class="fc-toolbar-chunk">
-											<h2 class="fc-toolbar-title" id="fc-dom-87">예매가능 좌석</h2>
-										</div>										
-									</div>
-									<div aria-labelledby="fc-dom-86"
-										class="fc-view-harness fc-view-harness-active"
-										style="height: 288.889px;">
-										<div>										
-										</div>
-										<div id ="remaining">
-											<div id="remainingSeat" class="fc-listDay-view fc-view fc-list fc-list-sticky"></div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>			
-				<!-- ==================== 캘린더 영역 끝 ==================== -->				
+		</div>
+		<div id="ContentsArea" class="container"></div>		
+		<div class="concertHall">		
 			<div id="ticketingdiv">
 				<div>
 					<a id="ticketing" href="#none" class="ticketing">예매하기</a>
@@ -202,187 +183,115 @@
 		<!-- 지도를 표시할 div 입니다 -->
 		<div id="map" style="width: 1200px; height: 350px;"></div>
 	</section>
-
-
 	<!-- Footer -->
 	<c:import url="/WEB-INF/views/includes/footer.jsp"></c:import>
 	<!-- //Footer -->
 </body>
 
 <script>
-$(document).ready(function() {
-	let dayListEl;
-	let dayList;
-	let date;
-	// 오늘날짜
-	var currentDate = new Date();
-	var formattedDate = currentDate.toISOString().split('T')[0];
-	// 페리이 로드되면 오늘날짜로 회차정보 가지고오기
-	getShowingInfo(formattedDate);
-	
-	// 날짜를 클릭하면 데이터 가져오기
-	function dayEvent(date) { 
-		  console.log(date);
-		  dayList.removeAllEvents();
-		  var Seat = $("#remainingSeat");
-	      // 회차클릭시 잔여좌석 비우기
-	      Seat.empty();	
-		  getShowingInfo(date);
-		 
-		}
-
-	// 달력 초기화
-	var calendarEl = $('#calendar')[0];
-	var calendar = new FullCalendar.Calendar(calendarEl, {
-		initialView : 'dayGridMonth',
-		selectable : true,
-		// dateClick: true,
-		locale : 'ko',
-		timeZone : 'ko',
-		dateClick : function(arg) {
-			console.log(arg);
-			date = moment(arg.date).format("YYYY-MM-DD");
-			// date = arg.dateStr;
-			dayEvent(date);
-			dayList.gotoDate(date);
-		}
-	});
-	calendar.render();
-	
-	// 리스트 초기화
-	dayListEl = $('#dayList')[0];
-	// 리스트 클릭이벤트 
-	dayList = new FullCalendar.Calendar(dayListEl, {
-		initialView : 'listDay',
-		locale : 'ko',
-		timeZone : 'local',
-		initialDate : moment().toDate(),
-		eventClick : function(arg) {
-    	var Seat = $("#remainingSeat");
-    	// 회차클릭시 잔여좌석 비우기
-    	Seat.empty();
-		var showingSq = arg.event.extendedProps.hiddenValue; 
-					
-		var ShowingVO = {showingSq : showingSq};
-		// 회차 정보 가져오기
+	$(document).ready(function() {
+		var showSq = '${show.showSq}';
+		var container = $("#ContentsArea");
 		  $.ajax({
-		    url: "${pageContext.request.contextPath}/showing/remainingSeats",
-		    type: "post",
-		    //contentType: "application/json",
-		    data: ShowingVO,
-		    
-		    dataType: "json",
-		    success: function(result) {		          	     
-		               	  console.log(result);
-			   
-			    for (let index in result.data) {
-			        if (result.data.hasOwnProperty(index)) {
-			            //금액 포맷
-			        	var seatPriceFormatted = new Intl.NumberFormat('ko-KR').format(result.data[index].seatPrice);
-
-			            var item = '<div style="margin-bottom: 5px;">' + result.data[index].seatClass +'석'			            
-			            	item += '&nbsp;&nbsp;';
-			            	item += seatPriceFormatted  +'원';
-			            	item += '&nbsp;&nbsp;';
-			            	item += '<span style="color: orange"> 잔여 : ('+result.data[index].seatEa +'석)</span>';
-			            	item +='</div>';
-			            Seat.append(item);
-			        }
-			    }
-		    },
-		    error: function(XHR, status, error) {
-		      console.error(status + " : " + error);
-		    }
-		  });
-		}
-	});
-	dayList.render();
-
-
-	//예매버튼 클릭시
-	$("#ticketing").on("click", function(e){
-		e.preventDefault()
-		console.log("예매");
-		popup();
+			    url: "${pageContext.request.contextPath}/transferTicket/drawingSeat",
+			    type: "post",
+			    //contentType: "application/json",
+			    
+			    data: { showSq : showSq},
+			    dataType: "json",
+			    success: function(result) {
+			      console.log(result);
+			      // 공연의 좌석 리스트
+			      var seatClassList = result.data;			      
+			      // 공연장 가로좌석크기		      
+			      var width = parseInt('${concertHall.concertHallWidth}');
+			      // 공연장 세로 좌석 크기
+			      var height = parseInt('${concertHall.concertHallHeight}');
+			      var container = $('#container');
+			      container.empty();
+			      container.css({
+			        'grid-template-columns': 'repeat(' + width + ', 23px)',
+			        'display': 'grid',
+			        'width': width * 23 + 'px'
+			      });
+			      var index = 0;
+			      var seatClassSq; // 좌석클래스 시퀀스
+			      var seatClass; // 좌석클래스 명
+			      var seatNo; // 좌석 번호
+			      const set = new Set(); // 중복제거를 위한 셋 선언
+			      for (var i = 0; i < width; i++) {
+			        for (var j = 0; j < height; j++) {
+			          seatClassSq = seatClassList[index].seatClassSq;
+			          seatClass = seatClassList[index].seatClass;
+			          seatNo = seatClassList[index].seatNo;		      
+			          index++; // 좌석 갯수 만큼 인덱스 증가
+			          set.add(seatClass);
 		
-	});
-	//팝업창
-	function popup() {
-		var url = '${pageContext.request.contextPath}/order/orderForm/${show.showSq}';
-		var name = "ticketing";
-		var option = "width=990, height=640, top=100, left=200, location=no";
-		window.open(url, name, option);
-	}
-
-	var mapContainer = $("#map"); // 지도를 표시할 div 
-	var mapOption = {
-		center : new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-		level : 3
-	// 지도의 확대 레벨
-	};
-
-	// 지도를 표시할 div와 지도 옵션으로 지도를 생성합니다
-	var map = new kakao.maps.Map(mapContainer.get(0), mapOption);
-
-	// 주소-좌표 변환 객체를 생성합니다
-	var geocoder = new kakao.maps.services.Geocoder();
-
-	// 주소로 좌표를 검색합니다
-	geocoder.addressSearch('${concertHall.concertHallJibunAddr}', function(result, status) {
-		// 정상적으로 검색이 완료됐으면
-		if (status === kakao.maps.services.Status.OK) {
-			var coords = new kakao.maps.LatLng(result[0].y,
-					result[0].x);
-
-			// 결과값으로 받은 위치를 마커로 표시합니다
-			var marker = new kakao.maps.Marker({
-				map : map,
-				position : coords
-			});
-
-			// 인포윈도우로 장소에 대한 설명을 표시합니다
-			var infowindow = new kakao.maps.InfoWindow(
-					{
-						content : '<div id="cName">&nbsp;&nbsp;<img src="${pageContext.request.contextPath}/assets/images/극장.png"/> ${concertHall.concertHallName}</div>'
-					});
-			infowindow.open(map, marker);
-
-			// 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-			map.setCenter(coords);
-		}
-	});
-	
-	// 날짜로 회차 데이터 가져오기
-	function getShowingInfo(date) {
-			console.log("호출");
-		  var ShowingVO = { showingDate: date, showSq: '${show.showSq}'};
-		  console.log(ShowingVO);
-		  $.ajax({
-		    url: "${pageContext.request.contextPath}/showing/getShowing",
-		    type: "post",
-		    //contentType: "application/json",
-		    data: ShowingVO,
-		    dataType: "json",
-		    success: function(result) {
-		    	console.log(result);
-		      for (var i = 0; i < result.data.length; i++) {
-		        var startTime = result.data[i].showingDate + 'T' + result.data[i].startTime;
-		        var endTime = result.data[i].showingDate + 'T' + result.data[i].endTime;
-		        var showingSq = result.data[i].showingSq;
-		        dayList.addEvent({
-		          title: [i + 1] + '회차',
-		          start: startTime,
-		          end: endTime,
-		          hiddenValue: showingSq
-		        });
-		      }
-		    },
-		    error: function(XHR, status, error) {
-		      console.error(status + " : " + error);
-		    }
+			          var item = $('<button type="button" data-seatclasssq="' + seatClassSq + '" data-seatno="' + seatNo + '" data-seatclass="'+seatClass+'">')
+			            .attr('id', seatNo)
+			            .addClass('item')
+			            .addClass(seatClass)
+			            .val(seatNo);
+			            //.text(seatNo);
+		
+			          container.append(item);
+			        }
+			      }
+			    },
+			    error: function(XHR, status, error) {
+			      console.error(status + " : " + error);
+			    }
 		  });
-		}
-	
-});
+		//예매버튼 클릭시
+		$("#ticketing").on("click", function(e) {
+			e.preventDefault()
+			console.log("예매");
+			popup();
+
+		});
+
+		var mapContainer = $("#map"); // 지도를 표시할 div 
+		var mapOption = {
+			center : new kakao.maps.LatLng(33.450701,
+					126.570667), // 지도의 중심좌표
+			level : 3
+		// 지도의 확대 레벨
+		};
+
+		// 지도를 표시할 div와 지도 옵션으로 지도를 생성합니다
+		var map = new kakao.maps.Map(mapContainer.get(0),
+				mapOption);
+
+		// 주소-좌표 변환 객체를 생성합니다
+		var geocoder = new kakao.maps.services.Geocoder();
+
+		// 주소로 좌표를 검색합니다
+		geocoder.addressSearch('${concertHall.concertHallJibunAddr}',function(result, status) {
+			// 정상적으로 검색이 완료됐으면
+			if (status === kakao.maps.services.Status.OK) {
+				var coords = new kakao.maps.LatLng(
+						result[0].y,
+						result[0].x);
+
+				// 결과값으로 받은 위치를 마커로 표시합니다
+				var marker = new kakao.maps.Marker(
+						{
+							map : map,
+							position : coords
+						});
+
+				// 인포윈도우로 장소에 대한 설명을 표시합니다
+				var infowindow = new kakao.maps.InfoWindow(
+						{
+							content : '<div id="cName">&nbsp;&nbsp;<img src="${pageContext.request.contextPath}/assets/images/극장.png"/> ${concertHall.concertHallName}</div>'
+						});
+				infowindow.open(map, marker);
+
+				// 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+				map.setCenter(coords);
+			}
+		});
+
+	});
 </script>
 </html>

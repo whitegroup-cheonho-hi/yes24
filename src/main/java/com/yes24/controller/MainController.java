@@ -57,8 +57,6 @@ public class MainController {
 
 		List<TransferBoardVO> transferBoardList = transferBoardService.getTransferboardList();
 
-		System.out.println(transferBoardList);
-
 		model.addAttribute("transferBoardList", transferBoardList);
 
 		return "main/transferBoard";

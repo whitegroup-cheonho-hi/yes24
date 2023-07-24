@@ -1,7 +1,5 @@
 package com.yes24.vo;
 
-import java.sql.Date;
-
 import org.springframework.stereotype.Component;
 
 @Component
@@ -16,19 +14,22 @@ public class TransferBoardVO {
 	// 회원
 	private int buyUserSq;
 	private int sellUserSq;
+	private String userId;
 	// 티켓
 	private int ticketSq;
+	private String ticketSeat;
 	// 공연
 	private int showSq;
 	private String subImage;
+	private String showName;
 
 	public TransferBoardVO() {
 		super();
 	}
 
 	public TransferBoardVO(int transferBoardSq, int hopePrice, String transferStat, String transferBoardContent,
-			String transferBoardRegDate, String transferDate, int buyUserSq, int sellUserSq, int ticketSq, int showSq,
-			String subImage) {
+			String transferBoardRegDate, String transferDate, int buyUserSq, int sellUserSq, String userId,
+			int ticketSq, String ticketSeat, int showSq, String subImage, String showName) {
 		super();
 		this.transferBoardSq = transferBoardSq;
 		this.hopePrice = hopePrice;
@@ -38,9 +39,12 @@ public class TransferBoardVO {
 		this.transferDate = transferDate;
 		this.buyUserSq = buyUserSq;
 		this.sellUserSq = sellUserSq;
+		this.userId = userId;
 		this.ticketSq = ticketSq;
+		this.ticketSeat = ticketSeat;
 		this.showSq = showSq;
 		this.subImage = subImage;
+		this.showName = showName;
 	}
 
 	public int getTransferBoardSq() {
@@ -107,12 +111,28 @@ public class TransferBoardVO {
 		this.sellUserSq = sellUserSq;
 	}
 
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
 	public int getTicketSq() {
 		return ticketSq;
 	}
 
 	public void setTicketSq(int ticketSq) {
 		this.ticketSq = ticketSq;
+	}
+
+	public String getTicketSeat() {
+		return ticketSeat;
+	}
+
+	public void setTicketSeat(String ticketSeat) {
+		this.ticketSeat = ticketSeat;
 	}
 
 	public int getShowSq() {
@@ -131,13 +151,21 @@ public class TransferBoardVO {
 		this.subImage = subImage;
 	}
 
+	public String getShowName() {
+		return showName;
+	}
+
+	public void setShowName(String showName) {
+		this.showName = showName;
+	}
+
 	@Override
 	public String toString() {
 		return "TransferBoardVO [transferBoardSq=" + transferBoardSq + ", hopePrice=" + hopePrice + ", transferStat="
 				+ transferStat + ", transferBoardContent=" + transferBoardContent + ", transferBoardRegDate="
 				+ transferBoardRegDate + ", transferDate=" + transferDate + ", buyUserSq=" + buyUserSq + ", sellUserSq="
-				+ sellUserSq + ", ticketSq=" + ticketSq + ", showSq=" + showSq + ", subImage=" + subImage + "]";
+				+ sellUserSq + ", userId=" + userId + ", ticketSq=" + ticketSq + ", ticketSeat=" + ticketSeat
+				+ ", showSq=" + showSq + ", subImage=" + subImage + ", showName=" + showName + "]";
 	}
 
-	
 }

@@ -18,8 +18,6 @@ public class ShowDAO {
 
 	@Autowired
 	private SqlSession sqlSession;
-	@Autowired
-	private Map<String, Object> seatClass;
 
 	// ------------------ 공연등록
 	public int insertShow(ShowVO vo) {

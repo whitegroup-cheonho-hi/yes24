@@ -6,7 +6,6 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.yes24.vo.MyTicketingVO;
 import com.yes24.vo.TransferBoardVO;
 
 @Repository
@@ -34,6 +33,13 @@ public class TransferBoardDAO {
 		System.out.println("getTransferboardList DAO()");
 
 		return sqlSession.selectList("transferboard.getTransferboardList");
+	}
+
+	// -------------------- 양도게시글 가져오기
+	public TransferBoardVO getTransferboard(int no) {
+		System.out.println("getTransferboard DAO()");
+
+		return sqlSession.selectOne("transferboard.getTransferboard",no);
 	}
 
 }

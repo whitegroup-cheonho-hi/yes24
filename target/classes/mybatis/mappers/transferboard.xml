@@ -55,12 +55,12 @@
 				    z.transfer_stat            AS transferstat,
 				    z.transfer_board_content   AS transferboardcontent,
 				    TO_CHAR(z.transfer_board_reg_date, 'YYYY.MM.DD') AS transferboardregdate,
-				    TO_CHAR(z.transfer_date, 'YYYY.MM.DD') AS transferdate,
-				    z.buy_user_sq              AS buyusersq,
+				    a.ticket_seat              AS ticketseat,
 				    z.ticket_sq                AS ticketsq,
 				    z.sell_user_sq             AS sellusersq,
 				    d.show_sq                  AS showsq,
-				    d.sub_image                AS subimage
+				    d.sub_image                AS subimage,
+				    d.show_name                AS showname
 				FROM
 				    transfer_board z
 				    LEFT JOIN ticket a ON z.ticket_sq = a.ticket_sq
@@ -72,6 +72,104 @@
 	    ]]>
 	    
 	</select>
+	
+	<!-- 양도게시판 정보 가져오기 -->
+	<select id="getTransferboard" parameterType="int" resultType="TransferBoardVO">
+	
+		<![CDATA[
+		
+			      SELECT
+					    a.transfer_board_sq        AS transferboardsq,
+					    a.hope_price               AS hopeprice,
+					    a.transfer_stat            AS transferstat,
+					    a.transfer_board_content   AS transferboardcontent,
+					    TO_CHAR(a.transfer_board_reg_date, 'YYYY.MM.DD') AS transferboardregdate,
+					    b.ticket_seat              AS ticketseat,
+					    a.ticket_sq                AS ticketsq,
+					    a.sell_user_sq             AS sellusersq,
+					    c.show_sq                  AS showsq,
+                        d.user_id                  AS userid
+					FROM
+					    transfer_board a
+					    LEFT JOIN ticket b ON a.ticket_sq = b.ticket_sq
+					    LEFT JOIN showing c ON b.showing_sq = c.showing_sq
+                        LEFT JOIN users d ON d.user_sq = a.sell_user_sq
+				   WHERE 
+				        a.transfer_board_sq = #{transferBoardSq}		
+						
+		]]>
+	
+	</select>
+	
+	
+	<!-- 공연정보가져오기 -->
+	<select id="getShow" parameterType="int" resultType="ShowVO">
+		
+		<![CDATA[
 
+		      SELECT
+				    show_sq AS showsq,
+				    main_image AS mainimage,
+				    sub_image AS subimage,
+				    TO_CHAR(start_date, 'YYYY.MM.DD') AS startdate,
+				    TO_CHAR(end_date, 'YYYY.MM.DD') AS enddate,
+				    TO_CHAR(reservation_date, 'YYYY.MM.DD') AS reservationdate,
+				    show_name AS showname,
+				    cast,
+				    director,
+				    show_time AS showtime,
+				    viewing_age AS viewingage,
+				    show_content AS showcontent,
+				    category,
+				    show_stat AS showstat,
+				    concert_hall_sq AS concerthallsq
+				FROM
+				    show
+			   WHERE
+				    show_sq = (
+						        SELECT
+						            c.show_sq   AS showsq
+						        FROM
+						            transfer_board z
+						            INNER JOIN ticket a ON z.ticket_sq = a.ticket_sq
+						            INNER JOIN ticketing b ON a.ticketing_sq = b.ticketing_sq
+						            INNER JOIN showing c ON a.showing_sq = c.showing_sq
+						        WHERE
+						            z.transfer_board_sq = #{transferBoardSq}
+						   	 )		
+		
+		]]>
+
+	</select>
+	
+	<!-- 좌석클래스리스트 -->
+	<select id="getSeatClassList" parameterType="int" resultType="SeatClassVO">
+			
+		<![CDATA[
+		
+			  SELECT
+				    seat_class_sq   AS SEATCLASSSQ,
+				    seat_class      AS SEATCLASS,
+				    seat_price      AS SEATPRICE,
+				    show_sq         AS SHOWSQ
+				FROM
+				    seat_class
+			   WHERE
+				    show_sq = (
+						        SELECT
+						            c.show_sq   AS showsq
+						        FROM
+						            transfer_board z
+						            INNER JOIN ticket a ON z.ticket_sq = a.ticket_sq
+						            INNER JOIN ticketing b ON a.ticketing_sq = b.ticketing_sq
+						            INNER JOIN showing c ON a.showing_sq = c.showing_sq
+						        WHERE
+						            z.transfer_board_sq = #{transferBoardSq}
+						    )
+		    ORDER BY 
+				    seat_price DESC    
+		]]>
+		
+	</select>
 
 </mapper>

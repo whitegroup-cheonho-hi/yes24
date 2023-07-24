@@ -31,15 +31,14 @@ public class ShowController {
 	private ShowService showService;
 	@Autowired
 	private ConcertHallService concertHallService;
-	
 
 	// ------------------- 공연 등록폼
 	@RequestMapping(value = "/showInsertForm", method = RequestMethod.GET)
 	public String showInsertForm(Model model) {
 		System.out.println("showInsertForm()");
-		
+
 		List<ConcertHallVO> concertHallList = concertHallService.getConcertHallList();
-	
+
 		model.addAttribute("concertHallList", concertHallList);
 
 		return "admin/showInsertForm";
@@ -76,7 +75,7 @@ public class ShowController {
 	public String updateShow(@ModelAttribute ShowVO vo, @RequestParam("file1") MultipartFile file1,
 			@RequestParam("file2") MultipartFile file2) {
 		System.out.println("updateShow()");
-	
+
 		int result = showService.updateShow(vo, file1, file2);
 
 		return "";
@@ -91,24 +90,24 @@ public class ShowController {
 
 		model.addAttribute("show", map.get("showVO"));
 		model.addAttribute("concertHall", map.get("concertHallVO"));
-		
+
 		return "admin/showSeatClassInsertForm";
 	}
-	
-	// ------------------- 공연 좌석 클래스수정폼
-		@RequestMapping(value = "/showSeatClassModifyForm/{no}", method = RequestMethod.GET)
-		public String showSeatClassModifyForm(Model model, @PathVariable("no") int no) {
-			System.out.println("showSeatClassModifyForm()");
 
-			Map<String, Object> map = showService.getShow(no);
-						
-			model.addAttribute("show", map.get("showVO"));
-			model.addAttribute("concertHall", map.get("concertHallVO"));			
-			model.addAttribute("seatClassList", map.get("seatClassList"));
-		
-			System.out.println(map.get("seatClassList"));
-			return "admin/showSeatClassModifyForm";
-		}
+	// ------------------- 공연 좌석 클래스수정폼
+	@RequestMapping(value = "/showSeatClassModifyForm/{no}", method = RequestMethod.GET)
+	public String showSeatClassModifyForm(Model model, @PathVariable("no") int no) {
+		System.out.println("showSeatClassModifyForm()");
+
+		Map<String, Object> map = showService.getShow(no);
+
+		model.addAttribute("show", map.get("showVO"));
+		model.addAttribute("concertHall", map.get("concertHallVO"));
+		model.addAttribute("seatClassList", map.get("seatClassList"));
+
+		System.out.println(map.get("seatClassList"));
+		return "admin/showSeatClassModifyForm";
+	}
 
 	// ------------------- 공연 상세
 	@RequestMapping(value = "/detail/{no}", method = RequestMethod.GET)
@@ -128,32 +127,30 @@ public class ShowController {
 	@RequestMapping(value = "/insertSeatClass", method = RequestMethod.POST)
 	public JsonResult insertSeatClass(@RequestBody List<SeatClassListVO> list) {
 		System.out.println("insertSeatClass()");
-		
+
 		System.out.println(list);
 		int result = showService.insertSeatClass(list);
 
 		JsonResult jsonResult = new JsonResult();
-		
+
 		jsonResult.success(result);
-		
+
 		return jsonResult;
 
 	}
-	
+
 	// ------------------- 공연 좌석클래스 수정
 	@ResponseBody
 	@RequestMapping(value = "/updateSeatClass", method = RequestMethod.POST)
 	public JsonResult updateSeatClass(@RequestBody List<SeatClassListVO> list) {
-		System.out.println("updateSeatClass()");		
+		System.out.println("updateSeatClass()");
 
 		int result = showService.updateSeatClass(list);
 
 		JsonResult jsonResult = new JsonResult();
-		
+
 		return jsonResult;
 
 	}
-	
-		
 
 }

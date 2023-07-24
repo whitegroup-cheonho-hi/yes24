@@ -224,6 +224,8 @@
 	<!-- 좌석클래스리스트 -->
 	<select id="getSeatClassList" parameterType="int" resultType="SeatClassVO">
 			
+		<![CDATA[
+		
 			  SELECT
 				    seat_class_sq   AS SEATCLASSSQ,
 				    seat_class      AS SEATCLASS,
@@ -234,7 +236,9 @@
 				WHERE
 				    show_sq = #{showSq}
 		    ORDER BY 
-				    seat_price DESC    
+				    seat_price DESC
+	    
+	    ]]>    
 	
 	</select>
 	
