@@ -50,7 +50,7 @@
 				            )
 				    ) )
 				    AND a.ticket_stat = #{stat}
-				ORDER BY
+				ORDER BY 
 				    a.ticket_sq desc
 		
 		]]>
@@ -63,7 +63,7 @@
 		<![CDATA[
 		
 			  SELECT
-				    y.transfer_board_reg_date   AS transferboardregdate,
+				    TO_CHAR(y.transfer_board_reg_date , 'YYYY.MM.DD') AS transferBoardRegDate,
 				    y.transfer_board_sq         AS transferboardsq,
 				    z.ticket_sq                 AS ticketsq,
 				    z.show_name                 AS showname,
@@ -115,6 +115,7 @@
 				        ORDER BY
 				            a.ticket_sq DESC
 				    ) z ON y.ticket_sq = z.ticket_sq
+				    ORDER BY transferboardsq desc
 		
 		]]>
 	

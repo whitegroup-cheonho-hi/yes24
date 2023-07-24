@@ -22,14 +22,6 @@ public class TransferTicketControll {
 	@Autowired
 	private TransferBoardService transferBoardService;
 
-	// ---------------- 양도게시판
-	@RequestMapping(value = "/transferBoardForm", method = RequestMethod.GET)
-	public String transferBoardForm() {
-		System.out.println("transferBoardForm()");
-
-		return "main/transferBoard";
-	}
-
 	// ---------------- 티켓 양도 등록
 	@ResponseBody
 	@RequestMapping(value = "/insertTransferTicket", method = RequestMethod.POST)

@@ -1,5 +1,7 @@
 package com.yes24.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,6 +34,13 @@ public class TransferBoardService {
 		ticketDAO.cancelTransferTicket(vo.getTicketSq());
 
 		return transferBoardDAO.deleteTransferboard(vo.getTransferBoardSq());
+	}
+	
+	// -------------------- 양도게시글 리스트 가져오기
+	public List<TransferBoardVO> getTransferboardList() {
+		System.out.println("getTransferboardList DAO()");
+
+		return transferBoardDAO.getTransferboardList();
 	}
 
 }

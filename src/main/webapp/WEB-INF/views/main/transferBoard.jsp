@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>.
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -49,7 +50,20 @@
 			<!-- ==================== 정보 입력 영역 시작 ==================== -->
 			<div class="">
 				<div class="listItem">
-				
+				<section>
+				<ul>
+					<c:forEach items="${transferBoardList}" var="transferBoard">
+						<li><a
+							href="${pageContext.request.contextPath}/">
+								<img
+								src="${pageContext.request.contextPath}/upload/${transferBoard.subImage}">							
+								<span class="price jb"> 
+								<fmt:formatNumber type="number"	maxFractionDigits="3" value="${transferBoard.hopePrice}" />원
+								</span>						
+						</a></li>
+					</c:forEach>
+				</ul>
+			</section>
 					
 				
 				
@@ -70,15 +84,7 @@
 
 <script>
 	$(document).on('ready', function() {
-		$(".center").slick({
-			//dots: true,
-			centerPadding : "200px",
-			autoplay : true,
-			infinite : true,
-			centerMode : true,
-			slidesToShow : 3,
-			slidesToScroll : 1
-		});
+		
 	});
 </script>
 

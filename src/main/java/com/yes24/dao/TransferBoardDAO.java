@@ -1,5 +1,7 @@
 package com.yes24.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -25,6 +27,13 @@ public class TransferBoardDAO {
 		System.out.println("deleteTransferboard DAO()");
 
 		return sqlSession.delete("transferboard.deleteTransferboard", no);
+	}
+
+	// -------------------- 양도게시글 리스트 가져오기
+	public List<TransferBoardVO> getTransferboardList() {
+		System.out.println("getTransferboardList DAO()");
+
+		return sqlSession.selectList("transferboard.getTransferboardList");
 	}
 
 }

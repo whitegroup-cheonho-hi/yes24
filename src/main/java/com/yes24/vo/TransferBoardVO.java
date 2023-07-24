@@ -11,20 +11,24 @@ public class TransferBoardVO {
 	private int hopePrice;
 	private String transferStat;
 	private String transferBoardContent;
-	private Date transferBoardRegDate;
-	private Date transferDate;
+	private String transferBoardRegDate;
+	private String transferDate;
 	// 회원
 	private int buyUserSq;
 	private int sellUserSq;
 	// 티켓
 	private int ticketSq;
+	// 공연
+	private int showSq;
+	private String subImage;
 
 	public TransferBoardVO() {
 		super();
 	}
 
 	public TransferBoardVO(int transferBoardSq, int hopePrice, String transferStat, String transferBoardContent,
-			Date transferBoardRegDate, Date transferDate, int buyUserSq, int sellUserSq, int ticketSq) {
+			String transferBoardRegDate, String transferDate, int buyUserSq, int sellUserSq, int ticketSq, int showSq,
+			String subImage) {
 		super();
 		this.transferBoardSq = transferBoardSq;
 		this.hopePrice = hopePrice;
@@ -35,6 +39,8 @@ public class TransferBoardVO {
 		this.buyUserSq = buyUserSq;
 		this.sellUserSq = sellUserSq;
 		this.ticketSq = ticketSq;
+		this.showSq = showSq;
+		this.subImage = subImage;
 	}
 
 	public int getTransferBoardSq() {
@@ -69,19 +75,19 @@ public class TransferBoardVO {
 		this.transferBoardContent = transferBoardContent;
 	}
 
-	public Date getTransferBoardRegDate() {
+	public String getTransferBoardRegDate() {
 		return transferBoardRegDate;
 	}
 
-	public void setTransferBoardRegDate(Date transferBoardRegDate) {
+	public void setTransferBoardRegDate(String transferBoardRegDate) {
 		this.transferBoardRegDate = transferBoardRegDate;
 	}
 
-	public Date getTransferDate() {
+	public String getTransferDate() {
 		return transferDate;
 	}
 
-	public void setTransferDate(Date transferDate) {
+	public void setTransferDate(String transferDate) {
 		this.transferDate = transferDate;
 	}
 
@@ -109,12 +115,29 @@ public class TransferBoardVO {
 		this.ticketSq = ticketSq;
 	}
 
+	public int getShowSq() {
+		return showSq;
+	}
+
+	public void setShowSq(int showSq) {
+		this.showSq = showSq;
+	}
+
+	public String getSubImage() {
+		return subImage;
+	}
+
+	public void setSubImage(String subImage) {
+		this.subImage = subImage;
+	}
+
 	@Override
 	public String toString() {
 		return "TransferBoardVO [transferBoardSq=" + transferBoardSq + ", hopePrice=" + hopePrice + ", transferStat="
 				+ transferStat + ", transferBoardContent=" + transferBoardContent + ", transferBoardRegDate="
 				+ transferBoardRegDate + ", transferDate=" + transferDate + ", buyUserSq=" + buyUserSq + ", sellUserSq="
-				+ sellUserSq + ", ticketSq=" + ticketSq + "]";
+				+ sellUserSq + ", ticketSq=" + ticketSq + ", showSq=" + showSq + ", subImage=" + subImage + "]";
 	}
 
+	
 }

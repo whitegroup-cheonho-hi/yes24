@@ -29,10 +29,10 @@
 			                            #{sellUserSq}
                            			   )
 				
-		]]>	
-	
+		]]>
+
 	</insert>
-	
+
 	<!-- 양도게시글 삭제 -->
 	<delete id="deleteTransferboard" parameterType="int">
 	
@@ -41,9 +41,37 @@
 			DELETE transfer_board WHERE transfer_board_sq = #{transferBoardSq}
 		
 		]]>
-		
+
 	</delete>
+
+	<!-- 양도리스트가지고오기 -->
+	<select id="getTransferboardList" resultType="TransferBoardVO">
 	
-	
+	    <![CDATA[
+	    
+	          SELECT
+				    z.transfer_board_sq        AS transferboardsq,
+				    z.hope_price               AS hopeprice,
+				    z.transfer_stat            AS transferstat,
+				    z.transfer_board_content   AS transferboardcontent,
+				    TO_CHAR(z.transfer_board_reg_date, 'YYYY.MM.DD') AS transferboardregdate,
+				    TO_CHAR(z.transfer_date, 'YYYY.MM.DD') AS transferdate,
+				    z.buy_user_sq              AS buyusersq,
+				    z.ticket_sq                AS ticketsq,
+				    z.sell_user_sq             AS sellusersq,
+				    d.show_sq                  AS showsq,
+				    d.sub_image                AS subimage
+				FROM
+				    transfer_board z
+				    LEFT JOIN ticket a ON z.ticket_sq = a.ticket_sq
+				    LEFT JOIN ticketing b ON a.ticketing_sq = b.ticketing_sq
+				    LEFT JOIN showing c ON a.showing_sq = c.showing_sq
+				    LEFT JOIN show d ON c.show_sq = d.show_sq
+				ORDER BY
+				    transfer_board_sq DESC
+	    ]]>
+	    
+	</select>
+
 
 </mapper>

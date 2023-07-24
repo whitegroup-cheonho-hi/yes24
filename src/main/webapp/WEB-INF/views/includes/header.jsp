@@ -35,7 +35,7 @@
 			<li><a href="${pageContext.request.contextPath}/category/2">콘서트</a></li>
 			<li><a href="${pageContext.request.contextPath}/category/3">연극</a></li>
 			<li><a href="${pageContext.request.contextPath}/category/4">클래식</a></li>
-			<li><a href="${pageContext.request.contextPath}/transferTicket/transferBoardForm">양도티켓</a></li>
+			<li><a href="${pageContext.request.contextPath}/transferBoardForm">양도티켓</a></li>
 			<li><a href="">리뷰</a></li>
 		</ul>
 		<input type="text" id="searchWord" autocomplete="off"> <a
