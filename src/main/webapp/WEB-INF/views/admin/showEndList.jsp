@@ -68,7 +68,7 @@
 							</a>
 							<div class="listItemTxt">
 								<p class="listItemTit">&lt;${showList.showName}&gt;</p>
-								<button type="button" class="btnstat" data-sq="${showList.showSq}">예매시작</button>
+								<button type="button" class="btnstat" data-sq="${showList.showSq}">예매대기</button>
 								<button type="button" class="btndelete" data-sq="${showList.showSq}">삭 제</button>
 							</div>
 						</div>
@@ -111,7 +111,7 @@
 	$('.btnstat').on('click', function() {
 		//넘길 데이터 모으기
 		var showSq = $(this).data("sq");
-		var showVO = {showSq : showSq, showStat : 2};
+		var showVO = {showSq : showSq, showStat : 1};
 		/* var url = "${pageContext.request.contextPath}/show1/showUpdateStat/" + showSq; */
 		showUpdateStat(showVO)
 		
