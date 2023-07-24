@@ -75,6 +75,9 @@ public class TransferTicketControll {
 		model.addAttribute("transferBoard", map.get("transferBoardVO"));
 		model.addAttribute("show", map.get("showVO"));
 		model.addAttribute("concertHall", map.get("concertHallVO"));	
+		model.addAttribute("showSeatList", map.get("showSeatList"));
+		System.out.println(map.get("transferBoardVO"));
+		System.out.println(map.get("showSeatList"));
 
 		return "/show/showDetail2";
 

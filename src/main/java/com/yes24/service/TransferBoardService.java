@@ -71,6 +71,8 @@ public class TransferBoardService {
 		TransferBoardVO transferBoardVO = transferBoardDAO.getTransferboard(no);
 		// 공연 정보
 		ShowVO showVO = showDAO.getShow(transferBoardVO.getShowSq());
+		// 공연 좌석
+		List<SeatClassVO> showSeatList = showingDAO.getShowSeats(transferBoardVO.getShowSq());
 		// 공연장 정보
 		ConcertHallVO concertHallVO = concertHallDAO.getConcertHall(showVO.getConcertHallSq());
 		// 좌석클레스
@@ -87,6 +89,7 @@ public class TransferBoardService {
 		map.put("transferBoardVO", transferBoardVO);
 		map.put("showVO", showVO);
 		map.put("concertHallVO", concertHallVO);
+		map.put("showSeatList", showSeatList);
 
 		return map;
 	}

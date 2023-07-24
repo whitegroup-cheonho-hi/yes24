@@ -88,7 +88,8 @@
 					    a.ticket_sq                AS ticketsq,
 					    a.sell_user_sq             AS sellusersq,
 					    c.show_sq                  AS showsq,
-                        d.user_id                  AS userid
+                        d.user_id                  AS userid,
+                        TO_CHAR(c.start_time, 'YYYY.MM.DD" "HH24"시 "MI"분') AS starttime
 					FROM
 					    transfer_board a
 					    LEFT JOIN ticket b ON a.ticket_sq = b.ticket_sq

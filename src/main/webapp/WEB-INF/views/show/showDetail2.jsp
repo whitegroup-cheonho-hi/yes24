@@ -27,19 +27,16 @@
 <!-- 다음지도API -->
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1d8e22ec81bcdc862373ee6f17fdef96&libraries=services"></script>
-<!-- 풀켈린더js -->
+<!-- iamport.payment.js -->
 <script type="text/javascript"
-	src='${pageContext.request.contextPath }/assets/js/index.global.min.js'></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+	src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 <style>
 #map {margin: 0 auto;}
 #cName {width: 150px;text-align: center;padding: 4px 0;font-size: 19px;}
 #cName img {width: 20px;}
-#ticketingdiv {text-align: center;}
+#ticketingdiv {text-align: center; margin-top: 20px;}
 #ticketingdiv div {padding: 5px;width: 250px;background: #f43142;margin: 0 auto;border: 2px solid #f43142;}
 .ticketing {font-size: 20px;color: #fff;display: block; height:100%;}
-
 .concertHall .position{margin-bottom: 50px;}
 .concertHall .position{width: 1178px;display: flex;border: solid 1px #ec7d2c; padding: 10px;}
 .concertHall .position #calendar,#dayList{margin-right: 20px; width: 390px;}
@@ -55,10 +52,27 @@
 #remainingSeats h2{height: 55px;}
 #remainingSeats .fc-view-harness{padding: 10px;}
 .rn-product-area3 #precautions{color:red;}
-.fc-event{cursor: pointer;}
+.fc-event{cursor: pointer; }
 #container {align-items: center;}
-#container .item {color: black;}
-.item {width: 23px;height: 23px;background-color: #efdfdf;border-radius: 8px 8px 0 0;border: solid 1px #fff;text-align: center;font-size: 17px;box-sizing: border-box;}
+#container .item {color: black; }
+.item {width: 30px;height: 30px;background-color: #efdfdf;border-radius: 8px 8px 0 0;border: solid 1px #fff;text-align: center;font-size: 17px;box-sizing: border-box;}
+.check {
+  background-image: url("${pageContext.request.contextPath}/assets/images/체크버튼.PNG"); 
+  background-size: cover; 
+  background-position: center center; 
+}
+.red {background-color: #e24647;}
+.pink {background-color: #dfa5ff;}
+.blue {background-color: #8fbfee;}
+.green {background-color: #a5ea7b;}
+.seatClass{width: 100px; height: 30px; font-size: 20px; display: inline-block; text-align: center;}
+#seatClassForm{text-align: center;}
+.rn-03-right .rn-product-area1{height: 490px;}
+.rn-03-right .rn-product-area3 {min-height: 95px;} 
+#divhopePrice{font-size: 20px; color: red;}
+.rn-03-right dd { margin: -3px 0 3px 86px;}
+.rn-03-right .rn-product-area1 dd .rn-product-price1 li{line-height: 25px;}
+.rn-03-right .rn-product-area1 .rn-product-price { padding-bottom: 5px;}
 </style>
 </head>
 <body>
@@ -148,6 +162,33 @@
 									</div>
 								</div>
 							</dd>
+							<dt id="startTime">공연 날짜</dt>
+							<dd id="divstartTime" class="rn-product-price">
+							&nbsp;
+							${transferBoard.startTime}
+							</dd>
+							<dt id="ticketSeat">좌석 번호</dt>
+							<dd id="divticketSeat" class="rn-product-price">
+							&nbsp;
+							<span id="ticketSeatClass"></span>&nbsp;:&nbsp;${transferBoard.ticketSeat}좌석
+							</dd>
+							<dt id="hopePrice">판매 희망가</dt>
+							<dd id="divhopePrice" class="rn-product-price">
+							&nbsp;
+							<span>
+							<fmt:formatNumber type="number" maxFractionDigits="3"
+							value="${transferBoard.hopePrice}" />원</span>
+							</dd>
+							<dt id="sellUserId">판매자</dt>
+							<dd id="divsellUserId" class="rn-product-price">
+							&nbsp;
+							${transferBoard.userId}
+							</dd>
+							<dt id="transferBoardContent">게시내용</dt>
+							<dd id="divtransferBoardContent" class="rn-product-price">
+							&nbsp;
+							${transferBoard.transferBoardContent}
+							</dd>
 						</dl>
 					</div>
 					<!--포인트-->
@@ -159,22 +200,30 @@
 								<strong id="precautions">양도거래간 유의사항</strong>
 							</dt>
 							<dd>
-								예매는 PC, 모바일, 고객센터 를 통해 신용카드, 가상계좌(무통장 입금) 등으로 예매하실 수 있습니다. <br>
-								무통장입금 결제 선택 시 입금 마감시간은 예매일 익일 밤 11시 29분까지입니다.<br> 입금 마감시간 내
-								미입금 된 경우 예매가 자동 취소됩니다. <br> (단, 상품에 따라 예매 당일 밤 11시 29분에
-								마감되는 경우가 있으니 예매 전후 반드시 확인해주시기 바랍니다.)<br>
-
+								양도 거래 완료 후 환불을 원하시면 환불 규정을 확인해주세요<br>
 							</dd>
 						</dl>
 					</div>
 				</div>
 			</div>
-		</div>
-		<div id="ContentsArea" class="container"></div>		
-		<div class="concertHall">		
+			<div>
+				<div id="seatClassForm">
+					<c:forEach items="${show.seatClass}" var="seatClass">
+					<span class="${seatClass} seatClass">${seatClass}</span>
+					</c:forEach>	
+				</div>
+				<br>
+				<div id="container" class="container">
+				<c:forEach items="${showSeatList}" var="showSeat">
+					<span class="item ${showSeat.seatClass}" id="${showSeat.seatNo}" data-seatClass="${showSeat.seatClass}"></span>
+				</c:forEach>
+				</div>
+			</div>		
+		</div>	
+		<div class="concertHall">					
 			<div id="ticketingdiv">
 				<div>
-					<a id="ticketing" href="#none" class="ticketing">예매하기</a>
+					<a id="ticketing" href="#none" class="ticketing">구매하기</a>
 				</div>
 			</div>
 		</div>
@@ -190,64 +239,89 @@
 
 <script>
 	$(document).ready(function() {
-		var showSq = '${show.showSq}';
-		var container = $("#ContentsArea");
-		  $.ajax({
-			    url: "${pageContext.request.contextPath}/transferTicket/drawingSeat",
-			    type: "post",
-			    //contentType: "application/json",
-			    
-			    data: { showSq : showSq},
-			    dataType: "json",
-			    success: function(result) {
-			      console.log(result);
-			      // 공연의 좌석 리스트
-			      var seatClassList = result.data;			      
-			      // 공연장 가로좌석크기		      
-			      var width = parseInt('${concertHall.concertHallWidth}');
-			      // 공연장 세로 좌석 크기
-			      var height = parseInt('${concertHall.concertHallHeight}');
-			      var container = $('#container');
-			      container.empty();
-			      container.css({
-			        'grid-template-columns': 'repeat(' + width + ', 23px)',
-			        'display': 'grid',
-			        'width': width * 23 + 'px'
-			      });
-			      var index = 0;
-			      var seatClassSq; // 좌석클래스 시퀀스
-			      var seatClass; // 좌석클래스 명
-			      var seatNo; // 좌석 번호
-			      const set = new Set(); // 중복제거를 위한 셋 선언
-			      for (var i = 0; i < width; i++) {
-			        for (var j = 0; j < height; j++) {
-			          seatClassSq = seatClassList[index].seatClassSq;
-			          seatClass = seatClassList[index].seatClass;
-			          seatNo = seatClassList[index].seatNo;		      
-			          index++; // 좌석 갯수 만큼 인덱스 증가
-			          set.add(seatClass);
+		//결제 API
+		var IMP = window.IMP;
+		IMP.init("imp61438883");
 		
-			          var item = $('<button type="button" data-seatclasssq="' + seatClassSq + '" data-seatno="' + seatNo + '" data-seatclass="'+seatClass+'">')
-			            .attr('id', seatNo)
-			            .addClass('item')
-			            .addClass(seatClass)
-			            .val(seatNo);
-			            //.text(seatNo);
 		
-			          container.append(item);
-			        }
-			      }
-			    },
-			    error: function(XHR, status, error) {
-			      console.error(status + " : " + error);
-			    }
-		  });
-		//예매버튼 클릭시
+		// 양도표 좌석
+		var seatNo = '${transferBoard.ticketSeat}';
+		// 좌석 체크
+		$("#"+seatNo).addClass("check");
+		var ticketSeatClass = $(".check").data("seatclass");
+		$("#ticketSeatClass").text(ticketSeatClass+'석');
+		
+		// 공연장 그리기
+		var width = parseInt('${concertHall.concertHallWidth}');
+	      // 공연장 세로 좌석 크기
+	      var height = parseInt('${concertHall.concertHallHeight}');
+	      var container = $('.container');
+	      // 좌석 css
+	      container.css({
+	        'grid-template-columns': 'repeat(' + width + ', 30px)',
+	        'display': 'grid',
+	        'justify-content': 'center'
+	      });
+	      
+	      const set = new Set();
+	      // 모든 좌석의 등급가지고오기
+	      var seatClassList = $("#container").children("span").map(function() {
+	    	    return $(this).data("seatclass");
+	    	}).get();
+	      // 좌석등급 중복제거
+	      for(index of seatClassList){
+	    	  set.add(index);
+	      }
+	      
+	      // 클래스 명 배열에 저장
+	      var cssarr = ['red', 'pink', 'blue', 'green'];
+	      var index2 = 0; // 클래스배열에서 사용할 인덱스
+	      for (let index of set) {
+	        $("." + index).addClass(cssarr[index2]);
+	        index2++;
+	      }
+	    
+	      
+	    // 결제 번호 생성 ex)VIPB12023-07-24 10:42:37
+	    var today = new Date();
+	    var formattedDateTime = today.toISOString().slice(0, 19).replace('T', ' ');
+	    var PaymentNumber = ticketSeatClass + seatNo + formattedDateTime;
+	    console.log(PaymentNumber);
+	      	      
+		//구매버튼 클릭시
 		$("#ticketing").on("click", function(e) {
 			e.preventDefault()
-			console.log("예매");
-			popup();
-
+			console.log("구매");
+			var result = confirm("정말 구매 하시겠습니까?");
+			if(result){
+				IMP.request_pay({
+					pg : 'kakaopay',
+					pay_method : 'card', //생략 가능
+					merchant_uid : PaymentNumber, // 상점에서 관리하는 주문 번호
+					name : '주문명:결제테스트',
+					amount : 100,
+					buyer_email : 'iamport@siot.do',
+					buyer_name : '구매자이름',
+					buyer_tel : '010-1234-5678',
+					buyer_addr : '서울특별시 강남구 삼성동',
+					buyer_postcode : '123-456'
+				}, function(rsp) { // callback
+					if (rsp.success) {		
+						console.log("결제 성공");
+						
+						
+					
+				
+					} else {
+						// 결제 실패 시 로직
+						console.log("결제 실패");
+						// 결제 실패시 예매삭제
+						deleteTicketing();
+						
+						
+					}
+				});
+			}else{}
 		});
 
 		var mapContainer = $("#map"); // 지도를 표시할 div 
