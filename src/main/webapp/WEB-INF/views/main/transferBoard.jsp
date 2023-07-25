@@ -38,6 +38,17 @@ section ul li a img{width: 100%;}
 section ul li a span{display: block; text-align: center; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;}
 section ul li a span.tit{font-size: 14px; margin-top:15px;}
 section ul li a span.price{font-weight: 600; font-size: 17px; margin-top: 2px;}
+
+.paging{width: 1000px; margin: 20px auto; display: flex; justify-content: center;}
+.paging li{margin: 0 10px; width: 14px;}
+.paging li a{font-size: 18px; height: 100%;}
+.paging li.on a{color: #4982cf;}
+.paging li.first{width: 14px; margin-right: 0; background: url('https://flyairseoul.com/CW/public/images/icons/common-s57efedab2d.png') no-repeat; background-position: 0 -6983px;}
+.paging li.pre{width: 9px; background: url('https://flyairseoul.com/CW/public/images/icons/common-s57efedab2d.png') no-repeat; background-position: 0 -7151px;}
+.paging li.next{width: 9px; background: url('https://flyairseoul.com/CW/public/images/icons/common-s57efedab2d.png') no-repeat; background-position: 0 -7095px;}
+.paging li.last{width: 14px;margin-left: 0; background: url('https://flyairseoul.com/CW/public/images/icons/common-s57efedab2d.png') no-repeat; background-position: 0 -7039px;}
+.paging-area{width:1100px; margin: 0 auto;margin-left: 16%;}
+.active .anum {color: #4982cf; font-weight: bold; font-size: 19px;}
 </style>
 </head>
 <body>
@@ -54,7 +65,15 @@ section ul li a span.price{font-weight: 600; font-size: 17px; margin-top: 2px;}
 			<!-- ==================== 정보 입력 영역 시작 ==================== -->
 			<div class="">
 				<div class="listItem">
+				
 					<section>
+						<ul id="nav">
+							<li id=l1 ><a id="a1"
+								href="#none">최신순</a></li>
+							<li id=l2 ><a id="a2" href="#none">금액낮은순</a></li>
+							<li id=l3><a id="a3" href="#none">공연임박순</a></li>
+							
+						</ul>
 						<ul>
 							<c:forEach items="${transferBoardList}" var="transferBoard">
 								<li><span>${transferBoard.transferBoardSq}</span> <a
@@ -72,7 +91,33 @@ section ul li a span.price{font-weight: 600; font-size: 17px; margin-top: 2px;}
 			</div>
 
 			<!-- ==================== 정보 입력 영역 끝 ==================== -->
-
+			<!-- 페이징 -->
+			<c:if test="${empty keyword}">
+				<ul class="paging pageInfo">
+					<c:if test="${pageMaker.prev}">
+						<li class="pageInfo_btn previous"><a
+							href="${pageMaker.startPage - 1}">◀</a></li>
+					</c:if>
+					<!-- 각 번호 페이지 버튼 -->
+					<c:forEach var="num" begin="${pageMaker.startPage}"
+						end="${pageMaker.endPage}">
+						<li class="pageInfo_btn ${pageMaker.cri.pageNum == num ? "active":"" }">
+							<a class="anum" href="${num}">${num}</a>
+						</li>
+					</c:forEach>
+					<!-- 다음페이지 버튼 -->
+					<c:if test="${pageMaker.next}">
+						<li class="pageInfo_btn next"><a
+							href="${pageMaker.endPage + 1}">▶</a></li>
+					</c:if>
+				</ul>
+			</c:if>
+			<form id="moveForm"
+				action="${pageContext.request.contextPath}/transferBoardForm" method="get">
+				<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
+				<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
+				<input type="hidden" id="keyword" name="keyword" value="${pageMaker.cri.keyword}">
+			</form>
 		</div>
 	</section>
 
@@ -85,7 +130,46 @@ section ul li a span.price{font-weight: 600; font-size: 17px; margin-top: 2px;}
 
 <script>
 	$(document).on('ready', function() {
-
+		//페이징 버튼 클릭
+	
+		$(".pageInfo a").on("click", function(e) {
+			e.preventDefault();
+			var pageNum = $(this).attr("href");
+			$("#moveForm input[name='pageNum']").val(pageNum);
+			$("#moveForm").submit();
+		});
+				
+		// 최신순
+		 $("#a1").on("click",function(e){
+			e.preventDefault();			
+			$("#keyword").val("1");
+			$("#moveForm").submit();
+		 });
+		// 금액낮은순
+		 $("#a2").on("click",function(e){
+			e.preventDefault();			
+			$("#keyword").val("2");
+			$("#moveForm").submit();
+		 });  
+		// 공연임박순
+		 $("#a3").on("click",function(e){
+			e.preventDefault();			
+			$("#keyword").val("3");
+			$("#moveForm").submit();
+		 });
+		
+		//on 이벤트
+	 	let keyword = $("#keyword").val()+'';
+	 	$("#nav .nav-link").removeClass("on");	 
+		if (keyword === '1') {
+		  $("#nav #l1").addClass("on");
+		} else if (keyword === '2') {
+		  $("#nav #l2").addClass("on");
+		} else if (keyword === '3') {
+		  $("#nav #l3").addClass("on");
+		}
+				
+		
 	});
 </script>
 

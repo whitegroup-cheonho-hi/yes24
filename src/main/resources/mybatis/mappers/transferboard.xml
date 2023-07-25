@@ -46,9 +46,9 @@
 				    transfer_board_sq = #{transferBoardSq}
 		
 		]]>
-		
+
 	</update>
-	
+
 	<!-- 양도게시글 삭제 -->
 	<delete id="deleteTransferboard" parameterType="int">
 	
@@ -61,38 +61,87 @@
 	</delete>
 
 	<!-- 양도리스트가지고오기 -->
-	<select id="getTransferboardList" resultType="TransferBoardVO">
+	<select id="getTransferboardList" parameterType="Criteria"
+		resultType="TransferBoardVO">
 	
 	    <![CDATA[
 	    
 	          SELECT
-		            a.transfer_board_sq        AS transferboardsq,
-		            a.hope_price               AS hopeprice,
-		            a.transfer_stat            AS transferstat,
-		            a.transfer_board_content   AS transferboardcontent,
-		            TO_CHAR(a.transfer_board_reg_date, 'YYYY.MM.DD') AS transferboardregdate,
-		            b.ticket_seat              AS ticketseat,
-		            a.ticket_sq                AS ticketsq,
-		            a.sell_user_sq             AS sellusersq,
-		            e.show_sq                  AS showsq,
-		            e.sub_image                AS subimage,
-		            e.show_name                AS showname
-		        FROM
-		            transfer_board a
-		            LEFT JOIN ticket b ON a.ticket_sq = b.ticket_sq
-		            LEFT JOIN ticketing c ON b.ticketing_sq = c.ticketing_sq
-		            LEFT JOIN showing d ON b.showing_sq = d.showing_sq
-		            LEFT JOIN show e ON d.show_sq = e.show_sq
-		       WHERE 
-		            a.transfer_stat = 'Y'
-		    ORDER BY
-		            transfer_board_sq DESC
+				    transferboardsq,
+				    hopeprice,
+				    transferstat,
+				    transferboardcontent,
+				    transferboardregdate,
+				    ticketseat,
+				    ticketsq,
+				    sellusersq,
+				    showsq,
+				    subimage,
+				    showname
+				FROM
+				    (
+				        SELECT
+				            ROWNUM AS rn,
+				            transferboardsq,
+				            hopeprice,
+				            transferstat,
+				            transferboardcontent,
+				            transferboardregdate,
+				            ticketseat,
+				            ticketsq,
+				            sellusersq,
+				            showsq,
+				            subimage,
+				            showname
+				        FROM
+				            (
+				                SELECT
+				                    a.transfer_board_sq        AS transferboardsq,
+				                    a.hope_price               AS hopeprice,
+				                    a.transfer_stat            AS transferstat,
+				                    a.transfer_board_content   AS transferboardcontent,
+				                    TO_CHAR(a.transfer_board_reg_date, 'YYYY.MM.DD') AS transferboardregdate,
+				                    b.ticket_seat              AS ticketseat,
+				                    a.ticket_sq                AS ticketsq,
+				                    a.sell_user_sq             AS sellusersq,
+				                    e.show_sq                  AS showsq,
+				                    e.sub_image                AS subimage,
+				                    e.show_name                AS showname
+				                FROM
+				                    transfer_board a
+				                    LEFT JOIN ticket b ON a.ticket_sq = b.ticket_sq
+				                    LEFT JOIN ticketing c ON b.ticketing_sq = c.ticketing_sq
+				                    LEFT JOIN showing d ON b.showing_sq = d.showing_sq
+				                    LEFT JOIN show e ON d.show_sq = e.show_sq
+				               WHERE
+				                    a.transfer_stat = 'Y'
+				            ORDER BY
+		]]>
+							<choose>
+				                <when test="keyword == 1">
+				                    transfer_board_sq DESC
+				                </when>
+				                <when test="keyword == 2">
+				                    a.hope_price
+				                </when>
+				                <when test="keyword == 3">
+				                    d.showing_date
+				                </when>
+				            </choose>				                    
+		<![CDATA[	                    
+				            )
+				    )
+				WHERE
+				     rn > (#{pageNum}-1) * #{amount}
+				    AND rn <= #{pageNum} * #{amount}
+    
 	    ]]>
-	    
+
 	</select>
-	
+
 	<!-- 양도게시판 정보 가져오기 -->
-	<select id="getTransferboard" parameterType="int" resultType="TransferBoardVO">
+	<select id="getTransferboard" parameterType="int"
+		resultType="TransferBoardVO">
 	
 		<![CDATA[
 		
@@ -117,10 +166,10 @@
 				        a.transfer_board_sq = #{transferBoardSq}		
 						
 		]]>
-	
+
 	</select>
-	
-	
+
+
 	<!-- 공연정보가져오기 -->
 	<select id="getShow" parameterType="int" resultType="ShowVO">
 		
@@ -160,9 +209,10 @@
 		]]>
 
 	</select>
-	
+
 	<!-- 좌석클래스리스트 -->
-	<select id="getSeatClassList" parameterType="int" resultType="SeatClassVO">
+	<select id="getSeatClassList" parameterType="int"
+		resultType="SeatClassVO">
 			
 		<![CDATA[
 		
@@ -188,7 +238,23 @@
 		    ORDER BY 
 				    seat_price DESC    
 		]]>
+
+	</select>
+
+	<!-- 양도게시판 토탈개수 -->
+	<select id="getTotal" resultType="int">
+	
+		<![CDATA[
 		
+			  SELECT
+				    COUNT(transfer_board_sq)
+				FROM
+				    transfer_board
+				WHERE
+				    transfer_stat = 'Y'
+							
+		]]>
+
 	</select>
 
 </mapper>

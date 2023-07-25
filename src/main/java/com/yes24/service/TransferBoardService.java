@@ -13,7 +13,9 @@ import com.yes24.dao.ShowDAO;
 import com.yes24.dao.ShowingDAO;
 import com.yes24.dao.TicketDAO;
 import com.yes24.dao.TransferBoardDAO;
+import com.yes24.dto.PageMakerDTO;
 import com.yes24.vo.ConcertHallVO;
+import com.yes24.vo.Criteria;
 import com.yes24.vo.MyTicketingVO;
 import com.yes24.vo.SeatClassVO;
 import com.yes24.vo.ShowVO;
@@ -52,10 +54,21 @@ public class TransferBoardService {
 	}
 
 	// -------------------- 양도게시글 리스트 가져오기
-	public List<TransferBoardVO> getTransferboardList() {
+	public Map<String, Object> getTransferboardList(Criteria cri) {
 		System.out.println("getTransferboardList Service()");
 
-		return transferBoardDAO.getTransferboardList();
+		Map<String, Object> map = new HashMap<>();
+
+		int total = transferBoardDAO.getTotal();
+
+		List<TransferBoardVO> transferBoardList = transferBoardDAO.getTransferboardList(cri);
+
+		PageMakerDTO pageMaker = new PageMakerDTO(total, cri);
+
+		map.put("transferBoardList", transferBoardList);
+		map.put("pageMaker", pageMaker);
+
+		return map;
 	}
 
 	// -------------------- 양도게시판 디테일 가져오기
@@ -96,7 +109,7 @@ public class TransferBoardService {
 
 	public List<SeatClassVO> drawingSeat(int no) {
 		System.out.println("drawingSeat Service()");
-		
+
 		// 공연좌석
 		return showingDAO.getShowSeats(no);
 	}

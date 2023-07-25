@@ -1,6 +1,7 @@
 package com.yes24.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,11 +10,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.yes24.dao.TransferBoardDAO;
 import com.yes24.service.ShowService;
 import com.yes24.service.TransferBoardService;
+import com.yes24.vo.Criteria;
 import com.yes24.vo.ShowVO;
-import com.yes24.vo.TransferBoardVO;
 
 @Controller
 public class MainController {
@@ -52,13 +52,14 @@ public class MainController {
 
 	// ------------------- 양도게시판
 	@RequestMapping(value = "/transferBoardForm", method = RequestMethod.GET)
-	public String transferBoardForm(Model model) {
+	public String transferBoardForm(Model model,Criteria cri) {
 		System.out.println("transferBoardForm()");
-
-		List<TransferBoardVO> transferBoardList = transferBoardService.getTransferboardList();
+		System.out.println(cri);
+		Map<String, Object> map = transferBoardService.getTransferboardList(cri);
 	
-		model.addAttribute("transferBoardList", transferBoardList);
-
+		model.addAttribute("transferBoardList", map.get("transferBoardList"));
+		model.addAttribute("pageMaker", map.get("pageMaker"));
+		System.out.println(map.get("pageMaker"));
 		return "main/transferBoard";
 	}
 
