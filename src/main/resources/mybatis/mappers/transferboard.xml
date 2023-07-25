@@ -114,26 +114,26 @@
 				                    LEFT JOIN show e ON d.show_sq = e.show_sq
 				               WHERE
 				                    a.transfer_stat = 'Y'
-		]]>		                    
-				                <if test="keyword2 != null and keyword2 != ''">
-									AND  CONCAT(e.cast,e.show_name) like '%'||#{keyword2}||'%'
-								</if>
+		]]>
+		<if test="keyword2 != null and keyword2 != ''">
+			AND CONCAT(e.cast,e.show_name) like '%'||#{keyword2}||'%'
+		</if>
 								 				                    
 		<![CDATA[		                    
 				                    
 				            ORDER BY
 		]]>
-							<choose>
-				                <when test="keyword == 1">
-				                    transfer_board_sq DESC
-				                </when>
-				                <when test="keyword == 2">
-				                    a.hope_price
-				                </when>
-				                <when test="keyword == 3">
-				                    d.showing_date
-				                </when>
-				            </choose>				                    
+		<choose>
+			<when test="keyword == 1">
+				transfer_board_sq DESC
+			</when>
+			<when test="keyword == 2">
+				a.hope_price
+			</when>
+			<when test="keyword == 3">
+				d.showing_date
+			</when>
+		</choose>				                    
 		<![CDATA[	                    
 				            )
 				    )
@@ -262,9 +262,56 @@
 			   WHERE
 				    transfer_stat = 'Y'							
 		]]>
-			<if test="keyword2 != null and keyword2 != ''">
-				AND  CONCAT(e.cast,e.show_name) like '%'||#{keyword2}||'%'
-			</if>
+		<if test="keyword2 != null and keyword2 != ''">
+			AND CONCAT(e.cast,e.show_name) like '%'||#{keyword2}||'%'
+		</if>
+
+	</select>
+
+	<!-- 양도게시판 임박 5개 가져오기 -->
+	<select id="getImminentShowing" resultType="TransferBoardVO">
+	
+		<![CDATA[
+		
+			      SELECT
+					    transferboardsq,
+					    transferboardregdate,
+					    showsq,
+					    subimage,
+					    showname
+					FROM
+					    (
+					        SELECT
+					            ROWNUM AS rn,
+					            transferboardsq,
+					            transferboardregdate,
+					            showsq,
+					            subimage,
+					            showname
+					        FROM
+					            (
+					                SELECT
+					                    a.transfer_board_sq   AS transferboardsq,
+					                    TO_CHAR(a.transfer_board_reg_date, 'YYYY.MM.DD') AS transferboardregdate,
+					                    e.show_sq             AS showsq,
+					                    e.sub_image           AS subimage,
+					                    e.show_name           AS showname
+					                FROM
+					                    transfer_board a
+					                    LEFT JOIN ticket b ON a.ticket_sq = b.ticket_sq
+					                    LEFT JOIN showing d ON b.showing_sq = d.showing_sq
+					                    LEFT JOIN show e ON d.show_sq = e.show_sq
+					                WHERE
+					                    a.transfer_stat = 'Y'                 
+					            ORDER BY
+					                    d.showing_date
+					            )
+					    )
+					WHERE
+					    rn > 0
+					    AND rn <= 5		
+						
+		]]>
 
 	</select>
 

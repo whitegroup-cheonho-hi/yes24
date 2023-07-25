@@ -54,12 +54,14 @@ public class MainController {
 	@RequestMapping(value = "/transferBoardForm", method = RequestMethod.GET)
 	public String transferBoardForm(Model model,Criteria cri) {
 		System.out.println("transferBoardForm()");
-		System.out.println(cri);
+	
 		Map<String, Object> map = transferBoardService.getTransferboardList(cri);
 	
 		model.addAttribute("transferBoardList", map.get("transferBoardList"));
+		model.addAttribute("imminentShowing", map.get("imminentShowing"));		
 		model.addAttribute("pageMaker", map.get("pageMaker"));
-		System.out.println(map.get("pageMaker"));
+		System.out.println(map.get("imminentShowing"));
+	
 		return "main/transferBoard";
 	}
 

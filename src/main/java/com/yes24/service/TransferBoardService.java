@@ -62,10 +62,13 @@ public class TransferBoardService {
 		int total = transferBoardDAO.getTotal(cri);
 
 		List<TransferBoardVO> transferBoardList = transferBoardDAO.getTransferboardList(cri);
+		
+		List<TransferBoardVO> imminentShowing = transferBoardDAO.getImminentShowing();
 
 		PageMakerDTO pageMaker = new PageMakerDTO(total, cri);
 
 		map.put("transferBoardList", transferBoardList);
+		map.put("imminentShowing", imminentShowing);
 		map.put("pageMaker", pageMaker);
 
 		return map;

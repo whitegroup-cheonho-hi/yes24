@@ -56,5 +56,12 @@ public class TransferBoardDAO {
 
 		return sqlSession.selectOne("transferboard.getTotal", cri);
 	}
+	
+	
+	// -------------------- 양도게시글 리스트 가져오기
+		public List<TransferBoardVO> getImminentShowing() {
+			System.out.println("getImminentShowing DAO()");
 
+			return sqlSession.selectList("transferboard.getImminentShowing");
+		}
 }

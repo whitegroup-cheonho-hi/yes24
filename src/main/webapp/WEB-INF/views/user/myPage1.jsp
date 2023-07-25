@@ -50,6 +50,8 @@ section {
 .btn_wrap a{padding: 15px 50px; margin: 0 5px; font-weight: 600;}
 .btn_wrap a.order_btn{background: #f43142; border: 1px solid #f43142; color: #fff;}
 .btn_wrap a.shopping_btn{background: #fff; border: 1px solid #f43142; color: #5c5c5c;}
+.transferButton {background-color: #f43142;color: #fff; width: 50px; height: 21px; border: none;}
+.transferCancelButton {background-color: #f43142;color: #fff; width: 50px; height: 21px; border: none;}
 </style>
 </head>
 <body>
