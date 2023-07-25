@@ -2,6 +2,43 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="test">
+
+<!-- 공연장리스트 정보가져오기 -->
+	<select id="getConcertHallList" parameterType="Criteria" resultType="ShowVO">
+		
+		<![CDATA[
+		
+		SELECT
+		        CONCERT_HALL_SQ,
+		        CONCERT_HALL_NAME,
+		        CONCERT_HALL_BASIC_ADDR
+		FROM (
+		        SELECT 
+		        ROWNUM as rn,
+		                    CONCERT_HALL_SQ,
+		                    CONCERT_HALL_NAME,
+		                    CONCERT_HALL_BASIC_ADDR
+		        FROM (
+		                SELECT
+		                        CONCERT_HALL_SQ,
+		                        CONCERT_HALL_NAME,
+		                        CONCERT_HALL_BASIC_ADDR
+		                FROM 
+		                        concert_hall
+		                WHERE 
+		                        CONCERT_HALL_NAME LIKE '%#{keyword2}%' OR CONCERT_HALL_BASIC_ADDR LIKE '%#{keyword2}%'
+		                ORDER BY 
+		                        CONCERT_HALL_NAME DESC
+		            ) t
+		)
+		WHERE 
+		    rn 
+		    BETWEEN ((#{pageNum} -1) * #{amount} + 1) AND #{pageNum} * #{amount}
+		
+		]]>
+
+	</select>
+
 <!-- 공연리스트 정보가져오기 -->
 	<select id="adminShowList" parameterType="Criteria" resultType="ShowVO">
 		
@@ -202,7 +239,7 @@
 	</update>
 	
 	<!-- 상태별 공연갯수 가져오기 -->
-	<select id="getShowTotal" parameterType="int" resultType="int">
+	<select id="getShowTotal" parameterType="String" resultType="int">
 		<![CDATA[
 
 			SELECT COUNT(*) 
@@ -210,6 +247,19 @@
 				show
 			WHERE
 				show_stat = #{showStat}
+			
+		]]>
+	</select>
+
+	<!-- 공연장수 검색 후 가져오기 -->
+	<select id="getConcertHallTotal" parameterType="Criteria" resultType="int">
+		<![CDATA[
+
+			SELECT COUNT(*) 
+			FROM 
+				show
+			WHERE
+				show_stat = #{keyword2}
 			
 		]]>
 	</select>

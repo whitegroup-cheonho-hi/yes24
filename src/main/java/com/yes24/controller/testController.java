@@ -143,6 +143,13 @@ public class testController {
 		return "admin/showEndList";
 	}
 	
+	//공연장홀 리스트
+	@RequestMapping(value = "/getConcertHallList", method = RequestMethod.GET)
+	public String getConcertHallList(Model model, Criteria cri) {
+		System.out.println("getConcertHallList");
+		return "admin/concertHallList";
+	}
+	
 	// 회차등록 폼
 	@RequestMapping(value = "/showingInsertForm/{no}", method = RequestMethod.GET)
 	public String showingInsertForm(@PathVariable("no") int no, Model model) {
