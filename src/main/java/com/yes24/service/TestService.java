@@ -26,21 +26,12 @@ public class TestService {
 	
 	// 공연상태로 공연정보 가져오기
 	public Map<String, Object> getShowList(Criteria cri){
-		System.out.println("getShowList Service()");
-		
 		Map<String, Object> map = new HashMap<>();
-		System.out.println(cri);
 		List<ShowVO> list = testdao.getShowList(cri);
 		int total = testdao.getTotal(cri);
-		
 		PageMakerDTO pageMake = new PageMakerDTO(total, cri);
-		System.out.println(pageMake);
-		System.out.println(list);
-		
 		map.put("pageMake", pageMake);
 		map.put("list", list);
-		
-		
 		return map;
 	}
 
@@ -75,9 +66,5 @@ public class TestService {
 		return testdao.showUpdateStat(vo);
 	}
 		
-	//상태별 공연갯수 가져오기
-	public int getTotal(Criteria cri) {
-		return testdao.getTotal(cri);
-	}
 	
 }

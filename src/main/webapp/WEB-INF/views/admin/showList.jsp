@@ -31,6 +31,9 @@
 	#paging ul>li { display: inline-block; margin: 0px 8px 0px 8px; }
 	#paging ul>li.active { font-size: 16px; font-weight: bold; }
 	
+	.admimTit{ color: #333; font-family: 'Noto Sans KR','맑은 고딕' !important; font-weight: 500; font-size: 25px;}
+	.titletxt{ margin-bottom: 30px }
+	
 	/* 상품페이지 카테고리 */
 	#show .category{width: 1200px; display: flex; justify-content: center; margin-bottom: 20px;}
 	#show .category li{ margin: 0 5px;}
@@ -50,6 +53,9 @@
 
 	<section>
 		<div id="ySContent">
+			<div class="titletxt">
+				<h3><em><strong class="admimTit">예정공연</strong></em></h3>
+			</div>
 			<div id="show">
 		         <c:if test="${empty Search}">
 		            <ul class="category">
@@ -74,8 +80,8 @@
 							</a>
 							<div class="listItemTxt">
 								<p class="listItemTit">&lt;${showList.showName}&gt;</p>
-								<button type="button" class="btnstat" data-sq="${showList.showSq}">예매시작</button>
-								<button type="button" class="btndelete" data-sq="${showList.showSq}">삭 제</button>
+								<button type="button" class="btnstat" data-sq="${showList.showSq}" style="background-color: #196ab3">예매대기</button>
+								<button type="button" class="btndelete" data-sq="${showList.showSq}" style="background-color: #f20055">삭 제</button>
 							</div>
 						</div>
 					</c:forEach>
@@ -143,7 +149,7 @@
 	        dataType: "json",
 	        success: function(result) {
 	        	// 성공적으로 처리된 경우 리다이렉트
-                window.location.href = "${pageContext.request.contextPath}/show1/adminShowList/" + showVO.showStat;
+                window.location.href = "${pageContext.request.contextPath}/show1/adminShowList/";
 	        },
 	        error: function(XHR, status, error) {
 	        	console.error(status + " : " + error);

@@ -118,30 +118,30 @@ public class testController {
 	public String adminShowList(Model modle, Criteria cri) {
 		cri.setShowStat(1);
 		Map<String, Object> map = testservice.getShowList(cri);
-		
 		modle.addAttribute("showList", map.get("list"));
 		modle.addAttribute("pageMake", map.get("pageMake"));
-		
 		return "admin/showList";
 	}
-//	
-//	//어드민 공연리스트(예매중)
-//	@RequestMapping(value = "/ticketingShowList", method = RequestMethod.GET)
-//	public String showTicketingList(Model modle, Criteria cri) {
-//		cri.setShowStat(2);
-//		List<ShowVO> list = testservice.getShowList(cri);
-//		modle.addAttribute("showList", list);
-//		return "admin/showTicketingList";
-//	}
 	
-//	//어드민 공연리스트(공연완료)
-//	@RequestMapping(value = "/showEndList", method = RequestMethod.GET)
-//	public String showEndList(Model modle, Criteria cri) {
-//		cri.setShowStat(3);
-//		List<ShowVO> list = testservice.getShowList(cri);
-//		modle.addAttribute("showList", list);
-//		return "admin/showEndList";
-//	}
+	//어드민 공연리스트(예매중)
+	@RequestMapping(value = "/ticketingShowList", method = RequestMethod.GET)
+	public String showTicketingList(Model modle, Criteria cri) {
+		cri.setShowStat(2);
+		Map<String, Object> map = testservice.getShowList(cri);
+		modle.addAttribute("showList", map.get("list"));
+		modle.addAttribute("pageMake", map.get("pageMake"));
+		return "admin/showTicketingList";
+	}
+	
+	//어드민 공연리스트(공연완료)
+	@RequestMapping(value = "/showEndList", method = RequestMethod.GET)
+	public String showEndList(Model modle, Criteria cri) {
+		cri.setShowStat(3);
+		Map<String, Object> map = testservice.getShowList(cri);
+		modle.addAttribute("showList", map.get("list"));
+		modle.addAttribute("pageMake", map.get("pageMake"));
+		return "admin/showEndList";
+	}
 	
 	// 회차등록 폼
 	@RequestMapping(value = "/showingInsertForm/{no}", method = RequestMethod.GET)
