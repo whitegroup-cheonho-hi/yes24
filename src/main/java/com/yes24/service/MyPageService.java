@@ -27,7 +27,7 @@ public class MyPageService {
 		Map<String, Object> map = new HashMap<>();
 		Map<String, Object> parameter = new HashMap<>();
 		parameter.put("userSq", no);
-		parameter.put("stat", stat);
+		parameter.put("stat", stat);		
 
 		List<MyTicketingVO> myTicketingList = myPageDAO.myTicketingList(parameter);
 		if (stat == 1) {

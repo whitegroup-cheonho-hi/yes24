@@ -25,8 +25,8 @@
 				    FULL OUTER JOIN ticketing b ON a.ticketing_sq = b.ticketing_sq
 				    LEFT JOIN showing c ON a.showing_sq = c.showing_sq
 				    LEFT JOIN show d ON c.show_sq = d.show_sq
-			   WHERE
-				    ( a.ticketing_sq IN (
+				WHERE
+				    a.ticketing_sq IN (
 				        SELECT
 				            ticketing_sq
 				        FROM
@@ -34,7 +34,8 @@
 				        WHERE
 				            user_sq = #{userSq}
 				    )
-				      OR c.showing_sq IN (
+				    AND a.ticket_stat = #{stat}
+				    AND a.showing_sq IN (
 				        SELECT DISTINCT
 				            showing_sq
 				        FROM
@@ -48,10 +49,7 @@
 				                WHERE
 				                    user_sq = #{userSq}
 				            )
-				    ) )
-				    AND a.ticket_stat = #{stat}
-				ORDER BY 
-				    a.ticket_sq desc
+				    )
 		
 		]]>
 	
@@ -63,59 +61,31 @@
 		<![CDATA[
 		
 			  SELECT
-				    TO_CHAR(y.transfer_board_reg_date , 'YYYY.MM.DD') AS transferBoardRegDate,
-				    y.transfer_board_sq         AS transferboardsq,
-				    z.ticket_sq                 AS ticketsq,
-				    z.show_name                 AS showname,
-				    z.ticket_seat               AS ticketseat,
-				    z.ticket_seat_price         AS ticketseatprice,
-				    y.hope_price                AS hopeprice,
-				    z.ticket_stat               AS ticketstat,
-				    z.ticket_active             AS ticketactive
+				    TO_CHAR(b.transfer_board_reg_date, 'YYYY.MM.DD') AS transferboardregdate,
+				    b.transfer_board_sq   AS transferboardsq,
+				    a.ticket_sq           AS ticketsq,
+				    d.show_name           AS showname,
+				    a.ticket_seat         AS ticketseat,
+				    a.ticket_seat_price   AS ticketseatprice,
+				    b.hope_price          AS hopeprice,
+				    a.ticket_stat         AS ticketstat,
+				    a.ticket_active       AS ticketactive
 				FROM
-				    transfer_board y
-				    INNER JOIN (
+				    ticket a
+				    INNER JOIN transfer_board b ON a.ticket_sq = b.ticket_sq
+				    LEFT JOIN showing c ON a.showing_sq = c.showing_sq
+				    LEFT JOIN show d ON c.show_sq = d.show_sq
+				WHERE
+				    a.ticket_stat = 4
+				    AND a.ticketing_sq IN (
 				        SELECT
-				            a.ticket_sq,
-				            d.show_name,
-				            a.ticket_seat,
-				            a.ticket_seat_price,
-				            a.ticket_stat,
-				            a.ticket_active
+				            ticketing_sq
 				        FROM
-				            ticket a
-				            FULL OUTER JOIN ticketing b ON a.ticketing_sq = b.ticketing_sq
-				            LEFT JOIN showing c ON a.showing_sq = c.showing_sq
-				            LEFT JOIN show d ON c.show_sq = d.show_sq
+				            ticketing
 				        WHERE
-				            ( a.ticketing_sq IN (
-				                SELECT
-				                    ticketing_sq
-				                FROM
-				                    ticketing
-				                WHERE
-				                    user_sq = #{userSq}
-				            )
-				              OR c.showing_sq IN (
-				                SELECT DISTINCT
-				                    showing_sq
-				                FROM
-				                    ticket
-				                WHERE
-				                    ticketing_sq IN (
-				                        SELECT
-				                            ticketing_sq
-				                        FROM
-				                            ticketing
-				                        WHERE
-				                            user_sq = #{userSq}
-				                    )
-				            ) )
-				            AND a.ticket_stat = 4
-				        ORDER BY
-				            a.ticket_sq DESC
-				    ) z ON y.ticket_sq = z.ticket_sq
-				    ORDER BY transferboardsq desc
+				            user_sq = #{userSq}
+				    )
+				ORDER BY transferboardsq desc
 		
 		]]>
 	

@@ -45,7 +45,7 @@
 				<div class="tm_grp">
 					<h3 class="tmM_txt">
 						<em class="tit_txt"><strong id="adminTit"
-							style="margin-left: 20px;">회차 등록&수정</strong></em>
+							style="margin-left: 20px;">공연 등록&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp; 공연 좌석클래스 등록&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;회차 등록&수정</strong></em>
 					</h3>
 				</div>
 
