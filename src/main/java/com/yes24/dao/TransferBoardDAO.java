@@ -51,10 +51,10 @@ public class TransferBoardDAO {
 	}
 
 	// -------------------- 양도게시글 가져오기
-	public int getTotal() {
+	public int getTotal(Criteria cri) {
 		System.out.println("getTotal DAO()");
 
-		return sqlSession.selectOne("transferboard.getTotal");
+		return sqlSession.selectOne("transferboard.getTotal", cri);
 	}
 
 }

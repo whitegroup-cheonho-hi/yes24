@@ -67,13 +67,28 @@ section ul li a span.price{font-weight: 600; font-size: 17px; margin-top: 2px;}
 				<div class="listItem">
 				
 					<section>
-						<ul id="nav">
+						<ul id="nav2">
 							<li id=l1 ><a id="a1"
 								href="#none">최신순</a></li>
 							<li id=l2 ><a id="a2" href="#none">금액낮은순</a></li>
 							<li id=l3><a id="a3" href="#none">공연임박순</a></li>
+							<li>
+								<!--키워드 검색 폼-->
+								<form
+									action="${pageContext.request.contextPath}/transferBoardForm"
+									method="get">
+									<table>
+										<tr>
+											<td><input type="text" id="searchKeyword" name="keyword2"
+												value="${pageMaker.cri.keyword2}" />
+												<button type="submit" class="btn btn-secondary" id="Search">Search</button>
+											</td>											
+										</tr>
+									</table>
+								</form>							
+							</li>
 							
-						</ul>
+						</ul>						
 						<ul>
 							<c:forEach items="${transferBoardList}" var="transferBoard">
 								<li><span>${transferBoard.transferBoardSq}</span> <a
@@ -117,6 +132,7 @@ section ul li a span.price{font-weight: 600; font-size: 17px; margin-top: 2px;}
 				<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
 				<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
 				<input type="hidden" id="keyword" name="keyword" value="${pageMaker.cri.keyword}">
+				<input type="hidden" id="keyword2" name="keyword2" value="${pageMaker.cri.keyword2}">
 			</form>
 		</div>
 	</section>
@@ -160,13 +176,13 @@ section ul li a span.price{font-weight: 600; font-size: 17px; margin-top: 2px;}
 		
 		//on 이벤트
 	 	let keyword = $("#keyword").val()+'';
-	 	$("#nav .nav-link").removeClass("on");	 
+	 	$("#nav2 .nav2-link").removeClass("on");	 
 		if (keyword === '1') {
-		  $("#nav #l1").addClass("on");
+		  $("#nav2 #l1").addClass("on");
 		} else if (keyword === '2') {
-		  $("#nav #l2").addClass("on");
+		  $("#nav2 #l2").addClass("on");
 		} else if (keyword === '3') {
-		  $("#nav #l3").addClass("on");
+		  $("#nav2 #l3").addClass("on");
 		}
 				
 		

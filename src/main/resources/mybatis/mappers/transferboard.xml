@@ -110,11 +110,17 @@
 				                FROM
 				                    transfer_board a
 				                    LEFT JOIN ticket b ON a.ticket_sq = b.ticket_sq
-				                    LEFT JOIN ticketing c ON b.ticketing_sq = c.ticketing_sq
 				                    LEFT JOIN showing d ON b.showing_sq = d.showing_sq
 				                    LEFT JOIN show e ON d.show_sq = e.show_sq
 				               WHERE
 				                    a.transfer_stat = 'Y'
+		]]>		                    
+				                <if test="keyword2 != null and keyword2 != ''">
+									AND  CONCAT(e.cast,e.show_name) like '%'||#{keyword2}||'%'
+								</if>
+								 				                    
+		<![CDATA[		                    
+				                    
 				            ORDER BY
 		]]>
 							<choose>
@@ -242,18 +248,23 @@
 	</select>
 
 	<!-- 양도게시판 토탈개수 -->
-	<select id="getTotal" resultType="int">
+	<select id="getTotal" parameterType="Criteria" resultType="int">
 	
 		<![CDATA[
 		
 			  SELECT
 				    COUNT(transfer_board_sq)
 				FROM
-				    transfer_board
-				WHERE
-				    transfer_stat = 'Y'
-							
+				    transfer_board a
+				    LEFT JOIN ticket b ON a.ticket_sq = b.ticket_sq   
+				    LEFT JOIN showing d ON b.showing_sq = d.showing_sq
+				    LEFT JOIN show e ON d.show_sq = e.show_sq
+			   WHERE
+				    transfer_stat = 'Y'							
 		]]>
+			<if test="keyword2 != null and keyword2 != ''">
+				AND  CONCAT(e.cast,e.show_name) like '%'||#{keyword2}||'%'
+			</if>
 
 	</select>
 

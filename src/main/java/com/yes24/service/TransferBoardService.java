@@ -59,7 +59,7 @@ public class TransferBoardService {
 
 		Map<String, Object> map = new HashMap<>();
 
-		int total = transferBoardDAO.getTotal();
+		int total = transferBoardDAO.getTotal(cri);
 
 		List<TransferBoardVO> transferBoardList = transferBoardDAO.getTransferboardList(cri);
 

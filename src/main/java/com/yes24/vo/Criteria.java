@@ -6,17 +6,18 @@ import org.springframework.stereotype.Component;
 public class Criteria {
 	private int pageNum, amount; // 현재 페이지, 페이지 당 보여질 게시물 갯수
 	private int showStat;
-	private String keyword;
-	// private String keyword, type; //검색 키워드, 검색 타입
+	private int keyword;
+	private String keyword2;
+	private String type; // 검색 키워드, 검색 타입
 	// private String[] typeArr; //검색 타입 배열
 
 	// 기본 생성자 -> 기본세팅 : pageNum=1, amount=10
 	public Criteria() {
-		this(1, 10, "1");
+		this(1, 10, 1);
 	}
 
 	// 생성자 -> 원하는 pageNum, 원하는 amount
-	public Criteria(int pageNum, int amount, String keyword) {
+	public Criteria(int pageNum, int amount, int keyword) {
 		super();
 		this.pageNum = pageNum;
 		this.amount = amount;
@@ -47,19 +48,34 @@ public class Criteria {
 		this.showStat = showStat;
 	}
 
-	public String getKeyword() {
+	public int getKeyword() {
 		return keyword;
 	}
 
-	public void setKeyword(String keyword) {
+	public void setKeyword(int keyword) {
 		this.keyword = keyword;
+	}
+
+	public String getKeyword2() {
+		return keyword2;
+	}
+
+	public void setKeyword2(String keyword2) {
+		this.keyword2 = keyword2;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 	@Override
 	public String toString() {
 		return "Criteria [pageNum=" + pageNum + ", amount=" + amount + ", showStat=" + showStat + ", keyword=" + keyword
-				+ "]";
+				+ ", keyword2=" + keyword2 + ", type=" + type + "]";
 	}
-
 
 }

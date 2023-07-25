@@ -373,29 +373,36 @@ section {
 			$("#insertTransfer").on("click", function() {
 				console.log("양도등록");
 				
-				var transferBoardContent = $("#content").val();
-				var hopePrice = $("#hopePrice").val();
-				 
-				TransferBoardVO = {ticketSq : ticketSq, transferBoardContent : transferBoardContent, hopePrice : hopePrice}
+				var priceCheck = $("#hopePrice").val();
 				
-							
-			 	$.ajax({
-				    url: "${pageContext.request.contextPath}/transferTicket/insertTransferTicket",
-				    type: "post",
-				    //contentType: "application/json", 				    
-				    data: TransferBoardVO ,
-				    
-				    dataType: "json",				    
-				    success: function(result) {
-				    	console.log(result);
-				    
-				    	location.reload();
-				    },
-				    error: function(XHR, status, error) {
-				      console.error(status + " : " + error);
-				    }
-			 	});
-
+				if(priceCheck < price){
+					var transferBoardContent = $("#content").val();
+					var hopePrice = $("#hopePrice").val();
+					 
+					TransferBoardVO = {ticketSq : ticketSq, transferBoardContent : transferBoardContent, hopePrice : hopePrice}
+					
+								
+				 	$.ajax({
+					    url: "${pageContext.request.contextPath}/transferTicket/insertTransferTicket",
+					    type: "post",
+					    //contentType: "application/json", 				    
+					    data: TransferBoardVO ,
+					    
+					    dataType: "json",				    
+					    success: function(result) {
+					    	console.log(result);
+					    
+					    	location.reload();
+					    },
+					    error: function(XHR, status, error) {
+					      console.error(status + " : " + error);
+					    }
+				 	});
+				}else{
+					
+					alert("원래가격보다 높게 등록할수없습니다.");
+				}
+				
 			});
 
 		});
