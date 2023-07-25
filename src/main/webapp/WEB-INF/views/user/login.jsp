@@ -52,6 +52,7 @@
 
 #join a span{background-color: #f8f8f8;;}
 .section2 {	padding-top: 0px;}
+#header #nav {margin-right: 16px;}
 </style>
 </head>
 <body>

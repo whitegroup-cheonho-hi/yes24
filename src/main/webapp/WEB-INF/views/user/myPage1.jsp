@@ -19,6 +19,9 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath }/assets/css/myPage.css"
 	type="text/css">
+<link rel="stylesheet" type="text/css"
+	href="https://image.yes24.com/sysimage/yesUI/yesUI.css?v=20230403"
+	media="all">
 <!-- 구글폰트 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -52,6 +55,7 @@ section {
 .btn_wrap a.shopping_btn{background: #fff; border: 1px solid #f43142; color: #5c5c5c;}
 .transferButton {background-color: #f43142;color: #fff; width: 50px; height: 21px; border: none;}
 .transferCancelButton {background-color: #f43142;color: #fff; width: 50px; height: 21px; border: none;}
+#moveForm1 input{width: 98%; height: 25px}
 </style>
 </head>
 <body>
@@ -282,7 +286,7 @@ section {
 	<!-- //Footer -->
 
 
-	<!-- 상품 등록 -->
+	<!-- 양도 등록 -->
 	<section id="inquiry_popup" class="inquiry_popup"
 		style="display: none;">
 		<a href="#none" class="inquiry_close"><img

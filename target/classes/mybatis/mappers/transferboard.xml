@@ -139,7 +139,8 @@
 				    )
 				WHERE
 				     rn > (#{pageNum}-1) * #{amount}
-				    AND rn <= #{pageNum} * #{amount}
+				  AND 
+				     rn <= #{pageNum} * #{amount}
     
 	    ]]>
 

@@ -28,9 +28,9 @@ header.pc #header #nav li a{font-weight: 600; font-size: 18px;}
 nav #nav{width: 1250px; height: 100%; margin: 0 auto; display: flex; justify-content:flex-start; align-items: center; flex-wrap: nowrap;}
 nav #nav li {margin-right: 25px;}
 nav #nav li a{font-size: 16px; font-weight: 500;}
-#header #searchWord{width: 250px; border:none; border-bottom: 2px solid #000; color: #333;}
+#header #searchKeyword{ outline: none; width: 250px; border:none; border-bottom: 2px solid #000; color: #333;}
 .trans{margin-left: -15px;}
-#nav input{width: 250px; border:none; border-bottom: 2px solid #000; color: #333; margin-left: 250px;}
+#nav input{font-size: 20px; width: 250px; border:none; border-bottom: 2px solid #000; color: #333; margin-left: 250px;}
 
 .on a{color: #4982cf;}
 

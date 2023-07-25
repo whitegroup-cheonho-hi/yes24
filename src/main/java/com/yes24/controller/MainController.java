@@ -39,13 +39,16 @@ public class MainController {
 
 	// ------------------- 카테고리별 페이지
 	@RequestMapping(value = "/category/{no}", method = RequestMethod.GET)
-	public String category(@PathVariable("no") int no, Model model) {
+	public String category(@PathVariable("no") int no, Model model,Criteria cri) {
 		System.out.println("category()");
+		cri.setKeyword(no);
+		System.out.println(cri);
+		Map<String, Object> map = showService.getShowList(cri);
 
-		List<ShowVO> showList = showService.getShowList(no);
-
-		model.addAttribute("showList", showList);
-
+		model.addAttribute("showList", map.get("showList"));
+		model.addAttribute("showList2", map.get("showList2"));
+		model.addAttribute("pageMaker", map.get("pageMaker"));
+		System.out.println(map.get("pageMaker"));
 		return "main/category";
 
 	}

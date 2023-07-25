@@ -18,7 +18,9 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath }/assets/css/slick-theme.css"
 	type="text/css">
-
+<link rel="stylesheet" type="text/css"
+	href="https://image.yes24.com/sysimage/yesUI/yesUI.css?v=20230403"
+	media="all">
 <!-- 구글폰트 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -35,7 +37,6 @@
 <script src="${pageContext.request.contextPath }/assets/js/slick.js"
 	type="text/javascript" charset="utf-8"></script>
 <style>
-* {	box-sizing: border-box;}
 .wrapper {max-width: 1920px;margin: 0 auto;}
 .center {width: 100%;}
 .slider {margin: 100px auto;}
@@ -50,6 +51,25 @@
 .slick-slide {transition: all ease-in-out .3s;opacity: 0.7;}
 .slick-current {opacity: 1;transform: scaleY(1.1) scaleX(1.05);}
 .slick-active {	opacity: 1;}
+
+section{width: 1200px; margin: 0 auto;     text-align: center;}
+section ul {  display: flex;  justify-content: flex-start; flex-direction: row; flex-wrap: wrap; margin: 0 -15px; }
+section ul li{ width: calc(25% - 92px); margin: 0 15px; margin-bottom: 70px;}
+section ul li a img{width: 100%;}
+section ul li a span{display: block; text-align: center; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;}
+section ul li a span.tit{font-size: 14px; margin-top:15px;}
+section ul li a span.price{font-weight: 600; font-size: 17px; margin-top: 2px;}
+
+.paging{width: 1000px; margin: 20px auto; display: flex; justify-content: center;}
+.paging li{margin: 0 10px; width: 14px;}
+.paging li a{font-size: 18px; height: 100%;}
+.paging li.on a{color: #4982cf;}
+.paging li.first{width: 14px; margin-right: 0; background: url('https://flyairseoul.com/CW/public/images/icons/common-s57efedab2d.png') no-repeat; background-position: 0 -6983px;}
+.paging li.pre{width: 9px; background: url('https://flyairseoul.com/CW/public/images/icons/common-s57efedab2d.png') no-repeat; background-position: 0 -7151px;}
+.paging li.next{width: 9px; background: url('https://flyairseoul.com/CW/public/images/icons/common-s57efedab2d.png') no-repeat; background-position: 0 -7095px;}
+.paging li.last{width: 14px;margin-left: 0; background: url('https://flyairseoul.com/CW/public/images/icons/common-s57efedab2d.png') no-repeat; background-position: 0 -7039px;}
+.paging-area{width:1100px; margin: 0 auto;margin-left: 16%;}
+.active .anum {color: #4982cf; font-weight: bold; font-size: 19px;}
 </style>
 </head>
 <body>
@@ -61,15 +81,77 @@
 	<div class="wrapper">
 		<section class="center slider">
 			<c:forEach items="${showList}" var="show">
-			    <div>
-			        <a href="${pageContext.request.contextPath}/show/detail/${show.showSq}">
-			            <img src="${pageContext.request.contextPath}/upload/${show.subImage}">
-			        </a>
-			    </div>
+				<div>
+					<a
+						href="${pageContext.request.contextPath}/show/detail/${show.showSq}">
+						<img
+						src="${pageContext.request.contextPath}/upload/${show.subImage}">
+					</a>
+				</div>
 			</c:forEach>
 		</section>
 	</div>
 
+	<section>
+		<div id="ySContent">
+			<div id="show"></div>
+			<!-- ==================== 정보 입력 영역 시작 ==================== -->
+			<div class="">
+				<div class="listItem">
+
+					<section>
+						<ul>
+							<c:forEach items="${showList2}" var="show">
+								<li><a
+									href="${pageContext.request.contextPath}/show/detail/${show.showSq}">
+										<img
+										src="${pageContext.request.contextPath}/upload/${show.subImage}">
+										<span>${show.showName}</span> <span>${show.startDate}&nbsp;~&nbsp;${show.endDate}</span>
+								</a></li>
+							</c:forEach>
+						</ul>
+					</section>
+					<!-- 페이징 -->
+					<c:if test="${empty keyword}">
+						<ul class="paging pageInfo">
+							<c:if test="${pageMaker.prev}">
+								<li class="pageInfo_btn previous"><a
+									href="${pageMaker.startPage - 1}">◀</a></li>
+							</c:if>
+							<!-- 각 번호 페이지 버튼 -->
+							<c:forEach var="num" begin="${pageMaker.startPage}"
+								end="${pageMaker.endPage}">
+								<li class="pageInfo_btn ${pageMaker.cri.pageNum == num ? "active":"" }">
+									<a class="anum" href="${num}">${num}</a>
+								</li>
+							</c:forEach>
+							<!-- 다음페이지 버튼 -->
+							<c:if test="${pageMaker.next}">
+								<li class="pageInfo_btn next"><a
+									href="${pageMaker.endPage + 1}">▶</a></li>
+							</c:if>
+						</ul>
+					</c:if>
+					<form id="moveForm"
+						action="${pageContext.request.contextPath}/category/${pageMaker.cri.keyword}"
+						method="get">
+						<input type="hidden" name="pageNum"
+							value="${pageMaker.cri.pageNum}"> <input type="hidden"
+							name="amount" value="${pageMaker.cri.amount}"> <input
+							type="hidden" id="keyword" name="keyword"
+							value="${pageMaker.cri.keyword}"> <input type="hidden"
+							id="keyword2" name="keyword2" value="${pageMaker.cri.keyword2}">
+					</form>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!--키워드 검색 폼-->
+		<form id="keywordForm" style="display: none;"
+			action="${pageContext.request.contextPath}/category/${pageMaker.cri.keyword}"
+			method="get">
+			<input type="text" id="searchKeyword2" name="keyword2" value="${pageMaker.cri.keyword2}" />						
+		</form>	
 	<!-- Footer -->
 	<c:import url="/WEB-INF/views/includes/footer.jsp"></c:import>
 	<!-- //Footer -->
@@ -78,6 +160,7 @@
 
 <script>
 	$(document).on('ready', function() {
+		// 롤링
 		$(".center").slick({
 			//dots: true,
 			centerPadding : "200px",
@@ -87,6 +170,30 @@
 			slidesToShow : 3,
 			slidesToScroll : 1
 		});
+		
+		//페이징 버튼 클릭
+		$(".pageInfo a").on("click", function(e) {
+			e.preventDefault();
+			var pageNum = $(this).attr("href");
+			$("#moveForm input[name='pageNum']").val(pageNum);
+			$("#moveForm").submit();
+		});
+		
+		// 검색기능
+		$("#searchButton").on("click",function(e){
+			e.preventDefault();
+			console.log("검색버튼");
+			var keyword = $("#searchKeyword").val();
+			console.log(keyword);
+			
+			$("#searchKeyword2").val(keyword);
+			var k = $("#searchKeyword").val();
+			console.log(k);
+			
+			$("#keywordForm").submit();
+			
+		});
+		
 	});
 </script>
 

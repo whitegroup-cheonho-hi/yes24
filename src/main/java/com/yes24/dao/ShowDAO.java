@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.yes24.vo.Criteria;
 import com.yes24.vo.SeatClassListVO;
 import com.yes24.vo.SeatClassVO;
 import com.yes24.vo.ShowSeatVO;
@@ -76,6 +77,21 @@ public class ShowDAO {
 
 		return sqlSession.selectList("show.getShowList", no);
 
+	}
+
+	// ------------------ 공연리스트가져오기
+	public List<ShowVO> getShowList(Criteria cri) {
+		System.out.println("getShowList DAO()");
+
+		return sqlSession.selectList("show.getShowListPaging", cri);
+
+	}
+
+	// -------------------- 양도게시글 가져오기
+	public int getTotal(Criteria cri) {
+		System.out.println("getTotal DAO()");
+
+		return sqlSession.selectOne("show.getTotal", cri);
 	}
 
 	// ------------------ 좌석클래스 리스트가져오기

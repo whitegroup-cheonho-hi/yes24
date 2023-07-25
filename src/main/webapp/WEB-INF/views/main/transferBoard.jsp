@@ -13,6 +13,9 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath }/assets/css/sub.css"
 	type="text/css">
+<link rel="stylesheet" type="text/css"
+	href="https://image.yes24.com/sysimage/yesUI/yesUI.css?v=20230403"
+	media="all">
 <!-- 구글폰트 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -45,6 +48,7 @@
 .listItemTxt button { margin: auto; width: 70px; height: 35px; font-size: 14px; font-weight: bold; 
 	background-color: #196ab3; color: white; border: none; border-radius: 5px;}
 .listItemTxt p { width: 200px; height: 40px; margin-bottom: 10px; }
+
 section{width: 1200px; margin: 0 auto;     text-align: center;}
 section ul {  display: flex;  justify-content: flex-start; flex-direction: row; flex-wrap: wrap; margin: 0 -15px; }
 section ul li{ width: calc(25% - 92px); margin: 0 15px; margin-bottom: 70px;}
@@ -83,6 +87,28 @@ section > h2{margin-top: 80px;    margin-bottom: 75px;}
 #nav2 #l4 #searchKeyword{margin-left: 58px; outline:none; width: 190px; border: none; border-bottom: 2px solid #000;  color: #333;}
 #Search{background-color: #196ab3; color: #fff; width: 46px; height: 27px;  border: none; font-size: 17px;}
 
+/* 양도알림창 */
+.inquiry_popup{position: fixed; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 9999999; top: 0; left: 0;}
+.inquiry_popup .inquiry_close{display: none;}
+.inquiry_popup .inquiry_write{border-radius: 5px; box-sizing: border-box; padding: 60px; width: 700px; height: 560px; position: absolute; top: 10%; left: 50%; margin-left: -350px; background: #fff;}
+.inquiry_popup .inquiry_write h3{ font-weight: 700; font-size: 28px; margin-bottom: 20px; text-align: center;}
+.inquiry_popup .inquiry_write table { width: 100%;border: 1px solid #ccc; border-collapse: collapse; }
+.inquiry_popup .inquiry_write th,
+.inquiry_popup .inquiry_write td {vertical-align: middle; border: 1px solid #ccc; padding: 10px; text-align: left;}
+.inquiry_popup .inquiry_write td input#secret_write_N{margin-left: 20px;}
+.inquiry_popup .inquiry_write td input#inquiry_tit{border-radius: 5px; border: 1px solid #ccc; padding: 10px; font-size: 16px; width: 100%; box-sizing: border-box;}
+.inquiry_popup .inquiry_write td textarea#content{border-radius: 5px;  resize: none;border: 1px solid #ccc; padding: 10px; font-size: 16px; width: 100%; height: 120px; box-sizing: border-box;}
+.inquiry_popup .inquiry_write td .textLengthWrap{text-align: right; color: #aaa;}
+/* 버튼 */
+.btn_wrap{margin-top: 40px; display: flex; justify-content: center;}
+.btn_wrap a{padding: 15px 50px; margin: 0 5px; font-weight: 600;}
+.btn_wrap a.order_btn{background: #f43142; border: 1px solid #f43142; color: #fff;}
+.btn_wrap a.shopping_btn{background: #fff; border: 1px solid #f43142; color: #5c5c5c;}
+.transferButton {background-color: #f43142;color: #fff; width: 50px; height: 21px; border: none;}
+.transferCancelButton {background-color: #f43142;color: #fff; width: 50px; height: 21px; border: none;}
+#moveForm1 input{height: 40px; vertical-align:middle; }
+#moveForm1 label{vertical-align:middle; }
+#header #nav {margin-right: 4px;}
 </style>
 </head>
 <body>
@@ -118,35 +144,18 @@ section > h2{margin-top: 80px;    margin-bottom: 75px;}
 			<div class="">
 				<div class="listItem">
 				
-					<section>
-						<ul >
-							<li id="l0" ><button type="button" id="alarm">알람신청</button></li>					
-						</ul>	
+					<section>						
 						<ul id="nav2">
 							<li id="l1" ><a id="a1"
 								href="#none">최신순</a></li>
 							<li id="l2" ><a id="a2" href="#none">금액 낮은순</a></li>
-							<li id="l3"><a id="a3" href="#none">공연 임박순</a></li>		
+							<li id="l3"><a id="a3" href="#none">공연 임박순</a></li>
 							<li></li>
 							<li></li>
 							<li></li>
 							<li></li>
-							<li id="l4">
-								<!--키워드 검색 폼-->
-								<form
-									action="${pageContext.request.contextPath}/transferBoardForm"
-									method="get">
-									<table>
-										<tr>
-											<td><input type="text" id="searchKeyword" name="keyword2"  
-												value="${pageMaker.cri.keyword2}" />
-												<button type="submit" class="btn btn-secondary" id="Search">검색</button>
-											</td>											
-										</tr>
-									</table>
-								</form>							
-							</li>
-							
+							<li></li>
+							<li id="l0" ><button type="button" id="alarm">알람신청</button></li>
 						</ul>						
 						<ul>
 							<c:forEach items="${transferBoardList}" var="transferBoard">
@@ -200,13 +209,98 @@ section > h2{margin-top: 80px;    margin-bottom: 75px;}
 	<!-- Footer -->
 	<c:import url="/WEB-INF/views/includes/footer.jsp"></c:import>
 	<!-- //Footer -->
+	
+		<!--키워드 검색 폼-->
+		<form id="keywordForm" style="display: none;"
+			action="${pageContext.request.contextPath}/transferBoardForm"
+			method="get">
+			<input type="text" id="searchKeyword2" name="keyword2" value="${pageMaker.cri.keyword2}" />						
+		</form>
+	
+	<!-- 양도 등록 -->
+   <section id="inquiry_popup" class="inquiry_popup"
+      style="display: none;">
+      <a href="#none" class="inquiry_close"><img
+         src="images/ver02/close.png" alt=""></a>
+      <div class="inquiry_write">
+         <h3>양도등록</h3>
+         <form id="moveForm1" action="#none" >
+            <table>
+               <colgroup>
+                  <col width="20%">
+                  <col width="80%">
+               </colgroup>
+               <tr>
+                  <th><label for="">제목</label></th>
+                  <td>
+                     <span><input id="" type="text"></span>                     
+                     <span><input type="checkbox" id=""> <label for="">조건없음</label></span>
+                  </td>
+               </tr>
+               <tr>
+                  <th><label for="">날짜</label></th>
+                  <td><input id="" type="date">&nbsp;&nbsp;~&nbsp;&nbsp;<input id="" type="date"></td>
+               </tr>
+               <tr>
+                  <th><label>좌석</label></th>
+                  <td>
+                     <input type="checkbox" id=""> <label for="">VIP</label>
+                     <input type="checkbox" id=""> <label for="">R</label>
+                     <input type="checkbox" id=""> <label for="">S</label>
+                     <input type="checkbox" id=""> <label for="">A</label>
+                     <input type="checkbox" id=""> <label for="">조건없음</label>
+                  </td>
+               </tr>
+
+               <tr>
+                  <th><label for="">금액</label></th>
+                  <td> 
+                     <span><input id="" type="number"></span>                     
+                     <span><input type="checkbox" id=""> <label for="">조건없음</label></span>               
+                  </td>
+               </tr>
+            </table>
+            
+            <div class="btn_wrap">
+               <a id="insertTransfer" href="#none" class="order_btn">알림신청</a> <a
+                  href="#none" class="shopping_btn">취소</a>
+            </div>
+         </form>
+      </div>
+   </section>
 
 </body>
 
 <script>
 	$(document).on('ready', function() {
+		
+		// 검색기능
+		$("#searchButton").on("click",function(e){
+			e.preventDefault();
+			console.log("검색버튼");
+			var keyword = $("#searchKeyword").val();
+			console.log(keyword);
+			
+			$("#searchKeyword2").val(keyword);
+			var k = $("#searchKeyword").val();
+			console.log(k);
+			
+			$("#keywordForm").submit();
+			
+		});
+
+		//  양도버튼 클릭
+		$("#alarm").on("click", function() {
+			$("#inquiry_popup").show();
+		});
+		
+		// 양도등록폼 취소버튼
+		$(".btn_wrap .shopping_btn").on("click", function() {
+			console.log("취소");
+			$('#inquiry_popup').hide();
+		});	
+		
 		//페이징 버튼 클릭
-	
 		$(".pageInfo a").on("click", function(e) {
 			e.preventDefault();
 			var pageNum = $(this).attr("href");

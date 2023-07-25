@@ -51,7 +51,7 @@
 		]]>
 
 	</insert>
-	
+
 	<!-- 공연수정 -->
 	<update id="updateShow" parameterType="ShowVO">
 	
@@ -74,12 +74,12 @@
 						   show_sq = #{showSq}
 			
 		]]>
-	
+
 	</update>
 
 	<!-- 좌석클래스 등록 -->
 	<insert id="insertSeatClass" parameterType="SeatClassListVO">
-	
+
 		<selectKey keyProperty="seatClassSq" resultType="int"
 			order="BEFORE">
 			SELECT seq_seat_class_sq.NEXTVAL AS seatClassSq FROM dual
@@ -105,7 +105,7 @@
 		]]>
 
 	</insert>
-	
+
 	<!-- 공연좌석 등록 -->
 	<insert id="insertShowSeat" parameterType="SeatClassListVO">
 	
@@ -124,9 +124,9 @@
 		]]>
 
 	</insert>
-	
-	
-	
+
+
+
 	<!-- 공연수정 -->
 	<update id="updateSeatClass" parameterType="SeatClassVO">
 	
@@ -139,7 +139,7 @@
 				        WHERE
 						     seat_class_sq = #{seatClassSq}
 		]]>
-	
+
 	</update>
 
 	<!-- 공연정보가져오기 -->
@@ -171,7 +171,7 @@
 		]]>
 
 	</select>
-	
+
 	<!-- 공연장 시퀀스로 공연 시퀀스 가지고오기 -->
 	<select id="getShowSq" parameterType="int" resultType="ShowVO">
 		
@@ -188,7 +188,7 @@
 		
 		]]>
 
-	</select>	
+	</select>
 
 
 	<!-- 공연리스트가져오기 -->
@@ -220,9 +220,107 @@
 		]]>
 
 	</select>
+
+	<!-- 공연리스트가져오기 페이징 -->
+	<select id="getShowListPaging" parameterType="Criteria"
+		resultType="ShowVO">
+
+		<![CDATA[
+						
+			  SELECT
+				    showsq,
+				    mainimage,
+				    subimage,
+				    startdate,
+				    enddate,
+				    reservationdate,
+				    showname,
+				    cast,
+				    director,
+				    showtime,
+				    viewingage,
+				    showcontent,
+				    category,
+				    showstat,
+				    concerthallsq
+				FROM
+				    (
+				        SELECT
+				            ROWNUM AS rn,
+				            showsq,
+				            mainimage,
+				            subimage,
+				            startdate,
+				            enddate,
+				            reservationdate,
+				            showname,
+				            cast,
+				            director,
+				            showtime,
+				            viewingage,
+				            showcontent,
+				            category,
+				            showstat,
+				            concerthallsq
+				        FROM
+				            (
+				                SELECT
+				                    show_sq           AS showsq,
+				                    main_image        AS mainimage,
+				                    sub_image         AS subimage,
+				                    TO_CHAR(start_date, 'YYYY.MM.DD') AS startdate,
+				                    TO_CHAR(end_date, 'YYYY.MM.DD') AS enddate,
+				                    TO_CHAR(reservation_date, 'YYYY.MM.DD') AS reservationdate,
+				                    show_name         AS showname,
+				                    cast,
+				                    director,
+				                    show_time         AS showtime,
+				                    viewing_age       AS viewingage,
+				                    show_content      AS showcontent,
+				                    category,
+				                    show_stat         AS showstat,
+				                    concert_hall_sq   AS concerthallsq
+				                FROM
+				                    show
+				                WHERE
+				                    category = 1
+         ]]>
+		<if test="keyword2 != null and keyword2 != ''">
+			AND CONCAT(cast,show_name) like '%'||#{keyword2}||'%'
+		</if>
+								 				                    
+		<![CDATA[
+				                ORDER BY
+				                    show_sq DESC
+				            )
+				    )
+				WHERE
+				     rn > (#{pageNum}-1) * #{amount}
+				  AND 
+				     rn <= #{pageNum} * #{amount}
+		]]>
+
+	</select>
+
+	<!-- 카테고리 토탈개수 -->
+	<select id="getTotal" parameterType="Criteria" resultType="int">
 	
+		<![CDATA[
+		
+			  SELECT COUNT(show_sq)
+				FROM show
+			   WHERE category = ${keyword}						
+		]]>
+		<if test="keyword2 != null and keyword2 != ''">
+			AND CONCAT(cast,show_name) like '%'||#{keyword2}||'%'
+		</if>
+
+
+	</select>
+
 	<!-- 좌석클래스리스트 -->
-	<select id="getSeatClassList" parameterType="int" resultType="SeatClassVO">
+	<select id="getSeatClassList" parameterType="int"
+		resultType="SeatClassVO">
 			
 		<![CDATA[
 		
@@ -238,10 +336,10 @@
 		    ORDER BY 
 				    seat_price DESC
 	    
-	    ]]>    
-	
+	    ]]>
+
 	</select>
-	
+
 
 	<!-- 공연좌석삭제 -->
 	<delete id="deleteShowSeat" parameterType="int">
@@ -251,10 +349,10 @@
 			DELETE show_seat WHERE SEAT_CLASS_SQ =  #{seatClassSq}
 				    
 		]]>
-		
+
 	</delete>
-	
-	
+
+
 	<!-- 공연정보가져오기 -->
 	<select id="getShow2" parameterType="int" resultType="ShowVO">
 		

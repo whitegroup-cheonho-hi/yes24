@@ -15,7 +15,9 @@ import org.springframework.web.multipart.MultipartFile;
 import com.yes24.dao.ConcertHallDAO;
 import com.yes24.dao.ShowDAO;
 import com.yes24.dao.ShowingDAO;
+import com.yes24.dto.PageMakerDTO;
 import com.yes24.vo.ConcertHallVO;
+import com.yes24.vo.Criteria;
 import com.yes24.vo.SaveTicketVO;
 import com.yes24.vo.SeatClassListVO;
 import com.yes24.vo.SeatClassVO;
@@ -23,6 +25,7 @@ import com.yes24.vo.SeatVO;
 import com.yes24.vo.ShowSeatVO;
 import com.yes24.vo.ShowVO;
 import com.yes24.vo.ShowingVO;
+import com.yes24.vo.TransferBoardVO;
 
 @Service
 public class ShowService {
@@ -262,7 +265,28 @@ public class ShowService {
 
 	}
 
-	
+	// ------------------ 공연리스트가져오기 상태값때문에 no가 필요
+	public Map<String, Object> getShowList(Criteria cri) {
+		System.out.println("getShowList Service()");
+
+		Map<String, Object> map = new HashMap<>();
+
+		int total = showDAO.getTotal(cri);
+
+		List<ShowVO> showList = showDAO.getShowList(cri.getKeyword());
+
+		List<ShowVO> showList2 = showDAO.getShowList(cri);
+
+		PageMakerDTO pageMaker = new PageMakerDTO(total, cri);
+
+		map.put("showList", showList);
+		map.put("showList2", showList2);
+		map.put("pageMaker", pageMaker);
+
+		return map;
+
+	}
+
 	// ------------- 파일체크 & 저장
 	public void fileCheck(ShowVO vo, MultipartFile file1, MultipartFile file2) {
 

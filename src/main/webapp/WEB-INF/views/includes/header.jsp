@@ -18,8 +18,7 @@
 					<li class="myPage"><a
 						href="${pageContext.request.contextPath}/myPage/myTicketingList">마이페이지</a></li>
 				</c:otherwise>
-			</c:choose>
-			<li class="search"><a href="#none">검색</a></li>
+			</c:choose>			
 			<li class="notice"><a href="#none">커뮤니티</a></li>
 		</ul>
 	</div>
@@ -37,10 +36,11 @@
 			<li><a href="${pageContext.request.contextPath}/category/4">클래식</a></li>
 			<li><a href="${pageContext.request.contextPath}/transferBoardForm">양도티켓</a></li>
 			<li><a href="">리뷰</a></li>
+			<li><input type="text" id="searchKeyword" autocomplete="off"> <a
+			href="#"><img id="searchButton"
+			src="http://tkfile.yes24.com/imgNew/common/pf-srch-w.png" alt=""></a></li>
 		</ul>
-		<input type="text" id="searchWord" autocomplete="off"> <a
-			href="#"><img
-			src="http://tkfile.yes24.com/imgNew/common/pf-srch-w.png" alt=""></a>
+		
 		<!-- /메뉴 (nav) -->
 	</div>
 </header>
