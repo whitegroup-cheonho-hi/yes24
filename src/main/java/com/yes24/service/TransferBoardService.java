@@ -44,17 +44,28 @@ public class TransferBoardService {
 		System.out.println("insertTransferboard Service()");
 
 		ticketDAO.updateTicket(vo.getTicketSq());
-		
-		transferBoardDAO.insertTransferboard(vo);
-				
+
+		int result = transferBoardDAO.insertTransferboard(vo);
+
 		AlarmVO alarmVO = alarmDAO.getAlarm(vo.getTicketSq());
-		
-		
+
 		List<AlarmVO> alarmList = alarmDAO.alarmCheck(alarmVO);
-		
-		System.out.println("진짜 마지막"+alarmList);
-				
-		return 0;
+
+		// 등록된 양도알림신청이 있으면
+		if (alarmList != null) {
+
+			for (AlarmVO a : alarmList) {
+
+				// 알림함등록
+				int reslut = alarmDAO.insertNotification(a);
+				// 알림게시판 상태변경
+				int re = alarmDAO.updateTransferAlarm(a.getTransferAlarmSq());
+
+			}
+
+		}
+
+		return result;
 	}
 
 	// -------------------- 양도 게시글 삭제
@@ -75,7 +86,7 @@ public class TransferBoardService {
 		int total = transferBoardDAO.getTotal(cri);
 
 		List<TransferBoardVO> transferBoardList = transferBoardDAO.getTransferboardList(cri);
-		
+
 		List<TransferBoardVO> imminentShowing = transferBoardDAO.getImminentShowing();
 
 		PageMakerDTO pageMaker = new PageMakerDTO(total, cri);
@@ -122,7 +133,7 @@ public class TransferBoardService {
 
 		return map;
 	}
-	
+
 	// -------------- 양도 디테일 좌석그리기
 	public List<SeatClassVO> drawingSeat(int no) {
 		System.out.println("drawingSeat Service()");

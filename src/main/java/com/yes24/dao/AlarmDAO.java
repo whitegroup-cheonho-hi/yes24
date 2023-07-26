@@ -26,7 +26,7 @@ public class AlarmDAO {
 	public AlarmVO getAlarm(int no) {
 		System.out.println("getAlarm DAO()");
 
-		return sqlSession.selectOne("alarm.f", no);
+		return sqlSession.selectOne("alarm.getAlarm", no);
 
 	}
 
@@ -34,7 +34,24 @@ public class AlarmDAO {
 	public List<AlarmVO> alarmCheck(AlarmVO vo) {
 		System.out.println("alarmCheck DAO()");
 
-		return sqlSession.selectList("alarm.f2", vo);
+		return sqlSession.selectList("alarm.alarmCheck", vo);
 
 	}
+
+	// ------------ 알림함 등
+	public int insertNotification(AlarmVO vo) {
+		System.out.println("insertNotification DAO()");
+
+		return sqlSession.insert("alarm.insertNotification", vo);
+
+	}
+
+	// ------------ 알림함 등록후 양도알림 상태변경
+	public int updateTransferAlarm(int no) {
+		System.out.println("updateTransferAlarm DAO()");
+
+		return sqlSession.update("alarm.updateTransferAlarm", no);
+
+	}
+
 }

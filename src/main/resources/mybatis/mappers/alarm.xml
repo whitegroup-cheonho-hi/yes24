@@ -36,7 +36,7 @@
 	</insert>
 
 	<!-- 티켓번호로 알람비교문 -->
-	<select id="f" parameterType="int" resultType="AlarmVO">
+	<select id="getAlarm" parameterType="int" resultType="AlarmVO">
 
 		<![CDATA[
 		
@@ -61,7 +61,7 @@
 	</select>
 	
 	<!-- 양도알람 체크 -->
-	<select id="f2" parameterType="AlarmVO" resultType="AlarmVO">
+	<select id="alarmCheck" parameterType="AlarmVO" resultType="AlarmVO">
 
 		<![CDATA[
 		
@@ -87,6 +87,47 @@
 	
 
 	</select>
+
+	<!-- 알림함 등록 -->
+	<insert id="insertNotification" parameterType="AlarmVO">
+	
+		<![CDATA[
+		
+			INSERT INTO notification 
+			                        (
+			                         NOTIFICATION_SQ,
+			                         RECIPIENTS,
+			                         RECIPIENTS_TITLE,
+			                         RECIPIENTS_CONTENT                       
+			                        )
+			                  VALUES
+			                        (
+			                        seq_notification_sq.NEXTVAL ,
+			                        #{userSq},
+			                        '양도표 알림',
+			                        '요청하신 양도티켓이 게시되었습니다. 게시글을 확인해주세요'
+			                        )
+		
+		]]>
+	
+	</insert>
+
+	<!-- 알림함 등록후 양도알림 상태변경 -->
+	<update id="updateTransferAlarm" parameterType="int">
+	
+		<![CDATA[
+		
+			UPDATE transfer_alarm
+			SET
+			    transfer_alarm_stat = 'N'
+			WHERE
+			    transfer_alarm_sq = #{transferAlarmSq}
+		
+		]]>
+	
+	</update>
+
+
 
 
 
