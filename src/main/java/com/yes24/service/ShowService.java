@@ -272,9 +272,9 @@ public class ShowService {
 		Map<String, Object> map = new HashMap<>();
 
 		int total = showDAO.getTotal(cri);
-
+		// 롤링
 		List<ShowVO> showList = showDAO.getShowList(cri.getKeyword());
-
+		// 검색포함 
 		List<ShowVO> showList2 = showDAO.getShowList(cri);
 
 		PageMakerDTO pageMaker = new PageMakerDTO(total, cri);

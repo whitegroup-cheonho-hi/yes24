@@ -109,6 +109,7 @@ section > h2{margin-top: 80px;    margin-bottom: 75px;}
 #moveForm1 input{height: 40px; vertical-align:middle; }
 #moveForm1 label{vertical-align:middle; }
 #header #nav {margin-right: 4px;}
+header.pc #header h1 {margin-right: -1px;}
 </style>
 </head>
 <body>

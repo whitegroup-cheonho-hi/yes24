@@ -43,6 +43,9 @@
 }
 .btnC.w_90 .bWrap {width:305px;}
 .btnC.w_90 .bWrap em{width:65px;}
+header.pc #header #rogo{margin-left: -51px;}
+
+
 </style>
 </head>
 <body>

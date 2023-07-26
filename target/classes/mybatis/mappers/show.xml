@@ -283,7 +283,7 @@
 				                FROM
 				                    show
 				                WHERE
-				                    category = 1
+				                    category = ${keyword}
          ]]>
 		<if test="keyword2 != null and keyword2 != ''">
 			AND CONCAT(cast,show_name) like '%'||#{keyword2}||'%'

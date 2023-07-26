@@ -24,7 +24,7 @@
 	</div>
 	<div id="header">
 		<h1>
-			<a href="${pageContext.request.contextPath}/"><img
+			<a href="${pageContext.request.contextPath}/"><img id="rogo"
 				src="${pageContext.request.contextPath}/assets/images/로고.png"></a>
 		</h1>
 		<!-- 메뉴 (nav) -->
