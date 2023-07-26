@@ -235,11 +235,12 @@ public class ShowService {
 		map.put("concertHallVO", concertHallVO);
 		map.put("concertHallList", concertHallList);
 		map.put("seatClassList", SeatClassList);
-
+	
 		return map;
 
 	}
-
+	
+	
 	// ------------------ 공연정보가져오기 필요없는 값 보내지 않기 위해 파라미터를 추가 수정예정
 	public Map<String, Object> getShow(SaveTicketVO vo) {
 		System.out.println("getShow Service()");

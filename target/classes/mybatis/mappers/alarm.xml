@@ -3,6 +3,91 @@
 
 <mapper namespace="alarm">
 
+	<!-- 양도알람등록 -->
+	<insert id="insertAlarm" parameterType="AlarmVO">
+	
+		<![CDATA[
+		
+			 INSERT INTO transfer_alarm
+							           (
+							            TRANSFER_ALARM_SQ,
+							            SHOW_SQ,
+							            START_DATE,
+							            END_DATE,
+							            SEAT,
+							            PRICE,
+							            TRANSFER_ALARM_STAT,
+							            USER_SQ
+							           )
+							     VALUES
+							           (
+							            seq_transfer_alarm_sq.NEXTVAL ,
+							            #{showSq} ,
+							            #{startDate} ,
+							            #{endDate},
+							            #{seatClasss},
+							            #{price},
+							            'Y',
+							            #{userSq}          
+     						           )
+		
+		]]>
+
+	</insert>
+
+	<!-- 티켓번호로 알람비교문 -->
+	<select id="f" parameterType="int" resultType="AlarmVO">
+
+		<![CDATA[
+		
+			  SELECT
+				    sc.seat_class   AS seatclasss,
+				    s.show_sq     AS showsq,
+				    TO_CHAR(sw.end_time, 'YYYY-MM-DD') AS enddate,
+				    tb.hope_price   AS price
+				FROM
+				    ticket t
+				    INNER JOIN showing_seat ss ON t.showing_sq = ss.showing_sq
+				                                  AND t.ticket_seat = ss.showing_seat_no
+				    INNER JOIN seat_class sc ON ss.seat_class_sq = sc.seat_class_sq
+				    INNER JOIN showing sw ON ss.showing_sq = sw.showing_sq
+				    INNER JOIN show s ON sw.show_sq = s.show_sq
+				    INNER JOIN transfer_board tb ON t.ticket_sq = tb.ticket_sq
+			   WHERE
+				    t.ticket_sq = #{ticketSq}
+		
+		]]>
+
+	</select>
+	
+	<!-- 양도알람 체크 -->
+	<select id="f2" parameterType="AlarmVO" resultType="AlarmVO">
+
+		<![CDATA[
+		
+			  SELECT
+				    transfer_alarm_sq     AS transferalarmsq,
+				    show_sq             AS showsq,
+				    start_date            AS startdate,
+				    end_date              AS enddate,
+				    seat                  AS seatclasss,
+				    price,
+				    transfer_alarm_stat   AS transferalarmstat,
+				    user_sq               AS usersq
+				FROM
+				    transfer_alarm
+			   WHERE
+		            TO_CHAR(end_date, 'YYYY-MM-DD') > #{endDate}
+		            AND price <= #{price}
+		            AND (show_sq = #{showSq} OR show_sq = 0 )
+		            AND (seat LIKE '%'||#{seatClasss}||'%' OR seat LIKE '%ALL%')
+		    ORDER BY 
+		   			transfer_alarm_sq		      
+		]]>	
+	
+
+	</select>
+
 
 
 </mapper>

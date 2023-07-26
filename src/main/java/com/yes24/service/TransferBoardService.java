@@ -8,12 +8,14 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.yes24.dao.AlarmDAO;
 import com.yes24.dao.ConcertHallDAO;
 import com.yes24.dao.ShowDAO;
 import com.yes24.dao.ShowingDAO;
 import com.yes24.dao.TicketDAO;
 import com.yes24.dao.TransferBoardDAO;
 import com.yes24.dto.PageMakerDTO;
+import com.yes24.vo.AlarmVO;
 import com.yes24.vo.ConcertHallVO;
 import com.yes24.vo.Criteria;
 import com.yes24.vo.MyTicketingVO;
@@ -34,14 +36,25 @@ public class TransferBoardService {
 	private ConcertHallDAO concertHallDAO;
 	@Autowired
 	private ShowingDAO showingDAO;
+	@Autowired
+	private AlarmDAO alarmDAO;
 
 	// ------------------- 양도게시판 등록
 	public int insertTransferboard(TransferBoardVO vo) {
 		System.out.println("insertTransferboard Service()");
 
 		ticketDAO.updateTicket(vo.getTicketSq());
-
-		return transferBoardDAO.insertTransferboard(vo);
+		
+		transferBoardDAO.insertTransferboard(vo);
+				
+		AlarmVO alarmVO = alarmDAO.getAlarm(vo.getTicketSq());
+		
+		
+		List<AlarmVO> alarmList = alarmDAO.alarmCheck(alarmVO);
+		
+		System.out.println("진짜 마지막"+alarmList);
+				
+		return 0;
 	}
 
 	// -------------------- 양도 게시글 삭제
@@ -109,7 +122,8 @@ public class TransferBoardService {
 
 		return map;
 	}
-
+	
+	// -------------- 양도 디테일 좌석그리기
 	public List<SeatClassVO> drawingSeat(int no) {
 		System.out.println("drawingSeat Service()");
 

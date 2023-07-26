@@ -389,6 +389,7 @@
 		<![CDATA[
 
 		      SELECT
+		      		show_sq   AS showSq ,
 				    show_name AS showName
 				FROM
 				    show

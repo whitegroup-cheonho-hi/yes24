@@ -238,7 +238,8 @@ header.pc #header h1 {margin-right: -1px;}
                <tr>
                   <th><label for="">제목</label></th>
                   <td>
-                     <span><input id="showName" name="showName" type="text" autocomplete="off"></span>                     
+                     <span><input id="showName" name="showName" type="text" autocomplete="off">
+                     <input id="showSq" name="showSq" type="hidden" value="0" ></span>                     
                      <span><input type="checkbox" id="noneShowName"> <label for="noneShowName">조건없음</label></span>
                   </td>                 
                </tr>
@@ -249,10 +250,10 @@ header.pc #header h1 {margin-right: -1px;}
                <tr>
                   <th><label>좌석</label></th>
                   <td>
-                     <input type="checkbox" id="seatClass1" name="seatClass" value="VIP"> <label for="seatClass1">VIP</label>
-                     <input type="checkbox" id="seatClass2" name="seatClass" value="R"> <label for="seatClass2">R</label>
-                     <input type="checkbox" id="seatClass3" name="seatClass" value="S"> <label for="seatClass3">S</label>
-                     <input type="checkbox" id="seatClass4" name="seatClass" value="A"> <label for="seatClass4">A</label>
+                     <input type="checkbox" id="seatClass1" name="seatClass" value="ALL"> <label for="seatClass1"></label>
+                     <input type="checkbox" id="seatClass2" name="seatClass" value="ALL"> <label for="seatClass2"></label>
+                     <input type="checkbox" id="seatClass3" name="seatClass" value="ALL"> <label for="seatClass3"></label>
+                     <input type="checkbox" id="seatClass4" name="seatClass" value="ALL"> <label for="seatClass4"></label>
                      <input type="checkbox" id="noneSeatClass" > <label for="noneSeatClass">조건없음</label>
                   </td>
                </tr>
@@ -280,19 +281,17 @@ header.pc #header h1 {margin-right: -1px;}
 <script>
 	$(document).on('ready', function() {
 		
-		// 알림등록
+		// 알림신청
 		$("#insertAlarm").on("click", function() {
 		    var price = $("#price").val();
 		    var nonePriceChecked = $("#nonePrice").prop("checked");
-		
-		    if (nonePriceChecked) {
+		    var startDate = $("#startDate").val();
+		    var endDate = $("#endDate").val();
+		    
+		    if ((nonePriceChecked || price !== "") && startDate !== "" && endDate !== "") {
 		        $("#moveForm1").submit();
 		    } else {
-		        if (price != "") {
-		            $("#moveForm1").submit();
-		        } else {
-		            alert("금액을 입력하거나 '조건없음'을 체크해주세요.");
-		        }
+		        alert("금액을 입력하거나 '조건없음'을 체크하고 시작일과 종료일을 입력해주세요.");
 		    }
 		});
 		
@@ -340,26 +339,54 @@ header.pc #header h1 {margin-right: -1px;}
 		                data: { showName: showName },
 		                dataType: "json",
 		                success: function(result) {
+		                	
 		                    if (result.data != null) {
 		                        console.log(result.data);
 		                        var searchShowName = $("#searchShowName");
 		                        searchShowName.empty(); // 이전 검색 결과 제거
-		
+		                    	
 		                        // 검색 옵션 반복 그리기
 		                        for (var i = 0; i < result.data.length; i++) {
 		                            var item = result.data[i];
-		                            var showName = '<span class="showName">' + item.showName + '</span>';
+		                            var showName = '<span class="showName" data-showsq ="'+item.showSq +'">' + item.showName + '</span>';
 		                            searchShowName.append(showName);
 		                        }
-		
+								
+		                        // 검색된 제목 눌렀을때 값 넣어주기
 		                        $(".showName").on("click", function() {
 		                            let showName = $(this).text();
+		                            let showSq = $(this).data("showsq");
 		                            $("#showName").val(showName);
+		                            $("#showSq").val(showSq);
+		                            
+		                             $.ajax({
+		        		                url: "${pageContext.request.contextPath}/alarm/getShowSeatClass",
+		        		                type: "post",
+		        		                data: { showSq: showSq },
+		        		                dataType: "json",
+		        		                success: function(result) {
+		        		                	
+		        		                	console.log(result.data);
+		        		                	
+		        		                	for (var i = 0; i < result.data.length; i++) {
+		        		                	    $("#seatClass" + (i + 1)).val(result.data[i].seatClass);
+		        		                	    $("label[for='seatClass"+(i + 1)+"']").text(result.data[i].seatClass);
+		        		                	   
+		        		                	}
+		        		                	
+		        		                			                            
+		        		                },
+		        		                error: function(XHR, status, error) {
+		        		                    console.error(status + " : " + error);
+		        		                },
+		        		            }); 
+		                       
 		
 		                            searchShowName.hide();
 		                        });
 		
 		                        searchShowName.show();
+		                		
 		                    }
 		                },
 		                error: function(XHR, status, error) {
