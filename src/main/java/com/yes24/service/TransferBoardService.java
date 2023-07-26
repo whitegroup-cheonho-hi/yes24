@@ -58,9 +58,7 @@ public class TransferBoardService {
 
 				// 알림함등록
 				int reslut = alarmDAO.insertNotification(a);
-				// 알림게시판 상태변경
-				int re = alarmDAO.updateTransferAlarm(a.getTransferAlarmSq());
-
+				
 			}
 
 		}

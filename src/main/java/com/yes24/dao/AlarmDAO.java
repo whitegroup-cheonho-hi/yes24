@@ -45,13 +45,6 @@ public class AlarmDAO {
 		return sqlSession.insert("alarm.insertNotification", vo);
 
 	}
-
-	// ------------ 알림함 등록후 양도알림 상태변경
-	public int updateTransferAlarm(int no) {
-		System.out.println("updateTransferAlarm DAO()");
-
-		return sqlSession.update("alarm.updateTransferAlarm", no);
-
-	}
+	
 
 }

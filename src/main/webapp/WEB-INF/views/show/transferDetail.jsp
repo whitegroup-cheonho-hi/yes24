@@ -294,12 +294,7 @@
 	    var today = new Date();
 	    var formattedDateTime = today.toISOString().slice(0, 19).replace('T', ' ');
 	    var PaymentNumber = ticketSeatClass + seatNo + formattedDateTime;
-	    
-	  /*   $("#ticketing").on("click", function() {
-	    	$("#buyTicketButton").submit();
-	    }); */
-	    
-	      	      
+	    	   	      	      
 		 //구매버튼 클릭시
 		$("#ticketing").on("click", function(e) {
 			e.preventDefault()
