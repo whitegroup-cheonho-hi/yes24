@@ -39,7 +39,7 @@ public class MainController {
 
 	// ------------------- 카테고리별 페이지
 	@RequestMapping(value = "/category/{no}", method = RequestMethod.GET)
-	public String category(@PathVariable("no") int no, Model model,Criteria cri) {
+	public String category(@PathVariable("no") int no, Model model, Criteria cri) {
 		System.out.println("category()");
 		cri.setKeyword(no);
 		System.out.println(cri);
@@ -55,16 +55,16 @@ public class MainController {
 
 	// ------------------- 양도게시판
 	@RequestMapping(value = "/transferBoardForm", method = RequestMethod.GET)
-	public String transferBoardForm(Model model,Criteria cri) {
+	public String transferBoardForm(Model model, Criteria cri) {
 		System.out.println("transferBoardForm()");
-	
+
 		Map<String, Object> map = transferBoardService.getTransferboardList(cri);
-	
+
 		model.addAttribute("transferBoardList", map.get("transferBoardList"));
-		model.addAttribute("imminentShowing", map.get("imminentShowing"));		
+		model.addAttribute("imminentShowing", map.get("imminentShowing"));
 		model.addAttribute("pageMaker", map.get("pageMaker"));
 		System.out.println(map.get("imminentShowing"));
-	
+
 		return "main/transferBoard";
 	}
 

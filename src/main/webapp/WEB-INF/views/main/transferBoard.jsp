@@ -110,6 +110,10 @@ section > h2{margin-top: 80px;    margin-bottom: 75px;}
 #moveForm1 label{vertical-align:middle; }
 #header #nav {margin-right: 4px;}
 header.pc #header h1 {margin-right: -1px;}
+#searchShowName{position: absolute; top: 168px;left: 186px;z-index: 200;width: 155px; border: solid 1px black;
+    background-color: #fff;  border-top: none; font-size: 13px; text-align: left; padding: 10px 3px 10px; }
+.showName{display: block;cursor: pointer;}
+#showName{outline: none;}
 </style>
 </head>
 <body>
@@ -224,8 +228,8 @@ header.pc #header h1 {margin-right: -1px;}
       <a href="#none" class="inquiry_close"><img
          src="images/ver02/close.png" alt=""></a>
       <div class="inquiry_write">
-         <h3>양도등록</h3>
-         <form id="moveForm1" action="#none" >
+         <h3>알림 신청</h3>
+         <form id="moveForm1" action="${pageContext.request.contextPath}/alarm/insertAlarm" method="POST" >
             <table>
                <colgroup>
                   <col width="20%">
@@ -234,39 +238,40 @@ header.pc #header h1 {margin-right: -1px;}
                <tr>
                   <th><label for="">제목</label></th>
                   <td>
-                     <span><input id="" type="text"></span>                     
-                     <span><input type="checkbox" id=""> <label for="">조건없음</label></span>
-                  </td>
+                     <span><input id="showName" name="showName" type="text" autocomplete="off"></span>                     
+                     <span><input type="checkbox" id="noneShowName"> <label for="noneShowName">조건없음</label></span>
+                  </td>                 
                </tr>
                <tr>
                   <th><label for="">날짜</label></th>
-                  <td><input id="" type="date">&nbsp;&nbsp;~&nbsp;&nbsp;<input id="" type="date"></td>
+                  <td><input id="startDate" name="startDate" type="date" required="required">&nbsp;&nbsp;~&nbsp;&nbsp;<input id="endDate" name="endDate" type="date" required="required"></td>
                </tr>
                <tr>
                   <th><label>좌석</label></th>
                   <td>
-                     <input type="checkbox" id=""> <label for="">VIP</label>
-                     <input type="checkbox" id=""> <label for="">R</label>
-                     <input type="checkbox" id=""> <label for="">S</label>
-                     <input type="checkbox" id=""> <label for="">A</label>
-                     <input type="checkbox" id=""> <label for="">조건없음</label>
+                     <input type="checkbox" id="seatClass1" name="seatClass" value="VIP"> <label for="seatClass1">VIP</label>
+                     <input type="checkbox" id="seatClass2" name="seatClass" value="R"> <label for="seatClass2">R</label>
+                     <input type="checkbox" id="seatClass3" name="seatClass" value="S"> <label for="seatClass3">S</label>
+                     <input type="checkbox" id="seatClass4" name="seatClass" value="A"> <label for="seatClass4">A</label>
+                     <input type="checkbox" id="noneSeatClass" > <label for="noneSeatClass">조건없음</label>
                   </td>
                </tr>
 
                <tr>
-                  <th><label for="">금액</label></th>
-                  <td> 
-                     <span><input id="" type="number"></span>                     
-                     <span><input type="checkbox" id=""> <label for="">조건없음</label></span>               
-                  </td>
-               </tr>
+				    <th><label for="price">금액</label></th>
+				    <td> 
+				        <span><input id="price" name="price" type="number" min="20000" step="1000"></span>                     
+				        <span><input type="checkbox" id="nonePrice"> <label for="nonePrice">조건없음</label></span>               
+				    </td>
+				</tr>
             </table>
             
             <div class="btn_wrap">
-               <a id="insertTransfer" href="#none" class="order_btn">알림신청</a> <a
+               <a id="insertAlarm" href="#none" class="order_btn">알림신청</a> <a
                   href="#none" class="shopping_btn">취소</a>
             </div>
          </form>
+          <div id="searchShowName" style="display: none;"> </div>
       </div>
    </section>
 
@@ -275,30 +280,134 @@ header.pc #header h1 {margin-right: -1px;}
 <script>
 	$(document).on('ready', function() {
 		
+		// 알림등록
+		$("#insertAlarm").on("click", function() {
+		    var price = $("#price").val();
+		    var nonePriceChecked = $("#nonePrice").prop("checked");
+		
+		    if (nonePriceChecked) {
+		        $("#moveForm1").submit();
+		    } else {
+		        if (price != "") {
+		            $("#moveForm1").submit();
+		        } else {
+		            alert("금액을 입력하거나 '조건없음'을 체크해주세요.");
+		        }
+		    }
+		});
+		
+		// 제목 조건없음 눌렀을때
+		$("#noneShowName").on("change", function() {
+		    if ($(this).prop("checked")) {
+		        $("#showName").val("").prop("readonly", true);
+		    } else {
+		        $("#showName").prop("readonly", false);
+		    }
+		});
+		
+		// 좌석 조건 없음 눌렀을때ㅑ
+		$("#noneSeatClass").on("change", function() {
+		    var isChecked = $(this).prop("checked");
+		    $("#seatClass1, #seatClass2, #seatClass3, #seatClass4").prop("checked", isChecked);
+		});
+		
+		// 제목 조건없음 눌렀을때
+		$("#nonePrice").on("change", function() {
+		    if ($(this).prop("checked")) {
+		        $("#price").val("0").prop("readonly", true);
+		        
+		    } else {
+		        $("#price").val("").prop("readonly", false);
+		    }
+		});
+		
+		// 알림신청 제목검색
+		// 타이머 변수 초기화
+		var debounceTimer;
+		
+		$("#showName").on("keyup", function() {
+		    var showName = $(this).val();
+		    console.log(showName);
+		
+		    // 이전에 등록된 타이머가 있다면 취소
+		    clearTimeout(debounceTimer);
+		
+		    if (showName.length >= 2) {
+		        debounceTimer = setTimeout(function() {
+		            $.ajax({
+		                url: "${pageContext.request.contextPath}/alarm/getShowName",
+		                type: "post",
+		                data: { showName: showName },
+		                dataType: "json",
+		                success: function(result) {
+		                    if (result.data != null) {
+		                        console.log(result.data);
+		                        var searchShowName = $("#searchShowName");
+		                        searchShowName.empty(); // 이전 검색 결과 제거
+		
+		                        // 검색 옵션 반복 그리기
+		                        for (var i = 0; i < result.data.length; i++) {
+		                            var item = result.data[i];
+		                            var showName = '<span class="showName">' + item.showName + '</span>';
+		                            searchShowName.append(showName);
+		                        }
+		
+		                        $(".showName").on("click", function() {
+		                            let showName = $(this).text();
+		                            $("#showName").val(showName);
+		
+		                            searchShowName.hide();
+		                        });
+		
+		                        searchShowName.show();
+		                    }
+		                },
+		                error: function(XHR, status, error) {
+		                    console.error(status + " : " + error);
+		                },
+		            });
+		        }, 100); // 500ms의 디바운싱 시간 설정 (조절 가능)
+		    } else {
+		        // 검색어가 없는 경우 검색 결과 제거
+		        $("#searchShowName").empty();
+		    }
+		});
+				
+				
 		// 검색기능
 		$("#searchButton").on("click",function(e){
-			e.preventDefault();
-			console.log("검색버튼");
-			var keyword = $("#searchKeyword").val();
-			console.log(keyword);
-			
-			$("#searchKeyword2").val(keyword);
-			var k = $("#searchKeyword").val();
-			console.log(k);
-			
-			$("#keywordForm").submit();
-			
+				e.preventDefault();
+				console.log("검색버튼");
+				var keyword = $("#searchKeyword").val();
+				console.log(keyword);
+				
+				if(keyword != ""){
+				
+					$("#searchKeyword2").val(keyword);
+					var k = $("#searchKeyword").val();
+					console.log(k);
+					
+					$("#keywordForm").submit();
+				}else{
+					alert("검색어를 입력해주세요");
+				}
 		});
 
-		//  양도버튼 클릭
+		//  알림신청폼
 		$("#alarm").on("click", function() {
 			$("#inquiry_popup").show();
 		});
 		
-		// 양도등록폼 취소버튼
+		// 알림신청 취소버튼
 		$(".btn_wrap .shopping_btn").on("click", function() {
 			console.log("취소");
+			
+			$("#showName").val("");
+			
+			$("#searchShowName").hide();
 			$('#inquiry_popup').hide();
+			
+			
 		});	
 		
 		//페이징 버튼 클릭
@@ -308,25 +417,27 @@ header.pc #header h1 {margin-right: -1px;}
 			$("#moveForm input[name='pageNum']").val(pageNum);
 			$("#moveForm").submit();
 		});
-				
-		// 최신순
-		 $("#a1").on("click",function(e){
-			e.preventDefault();			
-			$("#keyword").val("1");
-			$("#moveForm").submit();
-		 });
-		// 금액낮은순
-		 $("#a2").on("click",function(e){
-			e.preventDefault();			
-			$("#keyword").val("2");
-			$("#moveForm").submit();
-		 });  
-		// 공연임박순
-		 $("#a3").on("click",function(e){
-			e.preventDefault();			
-			$("#keyword").val("3");
-			$("#moveForm").submit();
-		 });
+		
+		 // 클릭 이벤트 처리 함수	
+		 function handleSortClick(keyword) {
+			    $("#keyword").val(keyword);
+			    $("#moveForm").submit();
+			  }
+
+		$("#a1").on("click", function(e) {
+	      e.preventDefault();
+	      handleSortClick("1"); // 최신순
+	    });
+	
+	    $("#a2").on("click", function(e) {
+	      e.preventDefault();
+	      handleSortClick("2"); // 금액낮은순
+	    });
+	
+	    $("#a3").on("click", function(e) {
+	      e.preventDefault();
+	      handleSortClick("3"); // 공연임박순
+	    });
 		
 		//on 이벤트
 	 	let keyword = $("#keyword").val()+'';
@@ -340,7 +451,7 @@ header.pc #header h1 {margin-right: -1px;}
 		}
 				
 
-		 //베스트셀러 롤링
+		 //양도 임박 롤링
 	    $('#best_seller_div').slick({
 	      slide: 'div',        //슬라이드 되어야 할 태그 ex) div, li 
 	      infinite : true,     //무한 반복 옵션     

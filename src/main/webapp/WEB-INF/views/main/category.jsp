@@ -184,13 +184,18 @@ section ul li a span.price{font-weight: 600; font-size: 17px; margin-top: 2px;}
 			e.preventDefault();
 			console.log("검색버튼");
 			var keyword = $("#searchKeyword").val();
-			console.log(keyword);
+			console.log(keyword);			
+
+			if(keyword != ""){
 			
-			$("#searchKeyword2").val(keyword);
-			var k = $("#searchKeyword").val();
-			console.log(k);
-			
-			$("#keywordForm").submit();
+				$("#searchKeyword2").val(keyword);
+				var k = $("#searchKeyword").val();
+				console.log(k);
+				
+				$("#keywordForm").submit();
+			}else{
+				alert("검색어를 입력해주세요");
+			}		
 			
 		});
 		

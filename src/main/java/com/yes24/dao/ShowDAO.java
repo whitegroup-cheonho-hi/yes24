@@ -108,6 +108,13 @@ public class ShowDAO {
 
 		return sqlSession.delete("show.deleteShowSeat", no);
 	}
+	
+	// -------------- 공연이름으로 검색
+	public List<ShowVO> getShowName(String showName) {
+		System.out.println("getShowName DAO()");
+		
+		return sqlSession.selectList("show.getShowName", showName);
+	}
 
 	// -----------------------------------------------------------------------------------
 	public ShowVO getShow2(int no) {

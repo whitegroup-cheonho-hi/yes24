@@ -382,6 +382,22 @@
 		]]>
 
 	</select>
+	
+	<!-- 검색으로 공연제목리스트 -->
+	<select id="getShowName" parameterType="String" resultType="ShowVO">
+		
+		<![CDATA[
+
+		      SELECT
+				    show_name AS showName
+				FROM
+				    show
+				WHERE
+				    show_name LIKE '%'||#{showName}||'%'
+    
+		]]>
+
+	</select>
 
 </mapper>
 

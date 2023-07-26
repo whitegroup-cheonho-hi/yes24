@@ -234,7 +234,7 @@ header.pc #header #rogo{margin-left: -51px;}
 
 	//아이디 체크
 	$("#userId").on("keyup", function () {
-	  var id = $("#userId").val();
+	  var id = $(this).val();
 	
 	  if (id === "") {
 	    $("#idCheck").text(""); // 입력 필드가 비어있을 때, #idCheck의 내용을 비웁니다.

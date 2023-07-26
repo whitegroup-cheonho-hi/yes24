@@ -3,6 +3,7 @@
 
 <configuration>
     <typeAliases>	  
+		<typeAlias alias="AlarmVO" type="com.yes24.vo.AlarmVO" />
 		<typeAlias alias="ConcertHallVO" type="com.yes24.vo.ConcertHallVO" />
 		<typeAlias alias="Criteria" type="com.yes24.vo.Criteria" />		
 		<typeAlias alias="NotificationVO" type="com.yes24.vo.NotificationVO" />
@@ -25,6 +26,7 @@
     </typeAliases>
 
     <mappers>     
+		<mapper resource="mybatis/mappers/alarm.xml" />
 		<mapper resource="mybatis/mappers/concerthall.xml" />
 		<mapper resource="mybatis/mappers/notification.xml" />
 		<mapper resource="mybatis/mappers/mypage.xml" />

@@ -21,7 +21,7 @@ public class TicketingController {
 	@Autowired
 	private TicketingService ticketingService;
 
-	// ----------------- 티켓 등록
+	// ----------------- 예매 등록
 	@ResponseBody
 	@RequestMapping(value = "/insertTicketing", method = RequestMethod.GET)
 	public JsonResult insertTicketing(HttpSession session) {
@@ -38,7 +38,7 @@ public class TicketingController {
 		return jsonResult;
 	}
 
-	// ----------------- 티켓 등록
+	// ----------------- 예매 삭제
 	@ResponseBody
 	@RequestMapping(value = "/deleteTicketing", method = RequestMethod.GET)
 	public JsonResult deleteTicketing(HttpSession session) {
@@ -60,10 +60,7 @@ public class TicketingController {
 	@RequestMapping(value = "/insertTicket", method = RequestMethod.POST)
 	public JsonResult insertTicket(HttpSession session,@ModelAttribute SaveTicketVO vo) {
 		System.out.println("insertTicket()");
-		System.out.println(vo);
-		
-		
-		
+				
 		int result = ticketingService.insertTicket(vo);
 		
 		JsonResult jsonResult = new JsonResult();
