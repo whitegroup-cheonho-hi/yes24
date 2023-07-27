@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.yes24.vo.AlarmVO;
+import com.yes24.vo.MessageVO;
 
 @Repository
 public class AlarmDAO {
@@ -19,6 +20,14 @@ public class AlarmDAO {
 		System.out.println("insertAlarm DAO()");
 
 		return sqlSession.insert("alarm.insertAlarm", vo);
+
+	}
+
+	// ------------ 알림 취소
+	public int arlarmCance(int no) {
+		System.out.println("arlarmCance DAO()");
+
+		return sqlSession.delete("alarm.arlarmCance", no);
 
 	}
 
@@ -38,13 +47,21 @@ public class AlarmDAO {
 
 	}
 
-	// ------------ 알림함 등
-	public int insertNotification(AlarmVO vo) {
+	// ------------ 알림함 등록
+	public int insertNotification(MessageVO vo) {
 		System.out.println("insertNotification DAO()");
-
+		System.out.println("메시지다 " + vo);
+		
 		return sqlSession.insert("alarm.insertNotification", vo);
 
 	}
-	
+
+	// ------------ 알림함 삭제
+	public int deleteNotification(int no) {
+		System.out.println("deleteNotification DAO()");
+
+		return sqlSession.delete("alarm.deleteNotification", no);
+
+	}
 
 }

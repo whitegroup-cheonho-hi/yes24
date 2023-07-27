@@ -212,7 +212,10 @@ $(document).ready(function() {
 	    // form에 hidden으로 추가
 	    var inputseatClass = '<input type="hidden" name="seatClass" value="' + seatClass + '" data-seat="' + seat + '">';
 	    var inputseatNo = '<input type="hidden" name="seatNo" value="' + seatNo + '" data-seat="' + seat + '">';
-	    var price = $("#" + seatClass + "2").data("price");
+	    var price = $("#" + seatClass + "-2").data("price");
+	    
+	    console.log(seatClass);
+	    console.log(price);
 	    var inputseatPrice = '<input type="hidden" name="seatPrice" value="' + price + '" data-seat="' + seat + '">';
 
 	    insertform.append(inputseatClass);
@@ -324,7 +327,7 @@ $(document).ready(function() {
 			        	var seatPriceFormatted = new Intl.NumberFormat('ko-KR').format(result.data[index].seatPrice);
 	
 			            var item = '<li id="'+result.data[index].seatClass;
-		           			item +='2" data-price="'+result.data[index].seatPrice;
+		           			item +='-2" data-price="'+result.data[index].seatPrice;
 		           			item +='"style="margin-bottom: 5px;">' + result.data[index].seatClass +'석'			            
 			            	item += '&nbsp;&nbsp;';
 			            	item += seatPriceFormatted  +'원';

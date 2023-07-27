@@ -56,4 +56,12 @@ public class AlarmService {
 
 	}
 
+	// ------------ 알림 취소
+	public int arlarmCance(int no) {
+		System.out.println("arlarmCance DAO()");
+
+		return alarmDAO.arlarmCance(no);
+
+	}
+
 }

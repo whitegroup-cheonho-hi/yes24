@@ -32,7 +32,7 @@ public class AlarmController {
 	@RequestMapping(value = "/insertAlarm", method = RequestMethod.POST)
 	public String insertAlarm(@ModelAttribute AlarmVO vo, HttpSession session) {
 		System.out.println("insertAlarm()");
-		
+
 		UserVO userVO = (UserVO) session.getAttribute("authUser");
 
 		vo.setUserSq(userVO.getUserSq());
@@ -66,12 +66,28 @@ public class AlarmController {
 	@RequestMapping(value = "/getShowSeatClass", method = RequestMethod.POST)
 	public JsonResult getShowSeatClass(@RequestParam("showSq") int showSq) {
 		System.out.println("getShowSeatClass()");
-		
-		List<SeatClassVO> seatClassList =  alarmService.getSeatClassList(showSq);
-		
+
+		List<SeatClassVO> seatClassList = alarmService.getSeatClassList(showSq);
+
 		JsonResult jsonResult = new JsonResult();
-		
+
 		jsonResult.success(seatClassList);
+
+		return jsonResult;
+
+	}
+
+	// ------------------ 알림신청 취소
+	@ResponseBody
+	@RequestMapping(value = "/arlarmCance", method = RequestMethod.POST)
+	public JsonResult arlarmCance(@RequestParam("transferAlarmSq") int transferAlarmSq) {
+		System.out.println("arlarmCance()");
+
+		int result = alarmService.arlarmCance(transferAlarmSq);
+
+		JsonResult jsonResult = new JsonResult();
+
+		jsonResult.success(result);
 
 		return jsonResult;
 

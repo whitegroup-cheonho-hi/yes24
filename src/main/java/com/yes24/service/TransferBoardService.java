@@ -18,6 +18,7 @@ import com.yes24.dto.PageMakerDTO;
 import com.yes24.vo.AlarmVO;
 import com.yes24.vo.ConcertHallVO;
 import com.yes24.vo.Criteria;
+import com.yes24.vo.MessageVO;
 import com.yes24.vo.MyTicketingVO;
 import com.yes24.vo.SeatClassVO;
 import com.yes24.vo.ShowVO;
@@ -42,23 +43,40 @@ public class TransferBoardService {
 	// ------------------- 양도게시판 등록
 	public int insertTransferboard(TransferBoardVO vo) {
 		System.out.println("insertTransferboard Service()");
-
+		
+		
+		// 티켓 상태 변경 4
 		ticketDAO.updateTicket(vo.getTicketSq());
-
+		// 양도게시판 등록
 		int result = transferBoardDAO.insertTransferboard(vo);
-
+		// 비교할 티켓 정보들 가져오기
 		AlarmVO alarmVO = alarmDAO.getAlarm(vo.getTicketSq());
-
+		// 티켓정보로 양도알림테이블에서 비교 후 값 가져오기
 		List<AlarmVO> alarmList = alarmDAO.alarmCheck(alarmVO);
-
-		// 등록된 양도알림신청이 있으면
+		System.out.println(alarmVO);
+		System.out.println(alarmList);
+		
+		StringBuffer sb = new StringBuffer();
+		sb.append("<a href=\'/yes24/transferTicket/transferTicketDetail/");
+		sb.append(vo.getTransferBoardSq());
+		sb.append("'>게시글보기</a>");
+	
+		
+		// 조건에 맞는 등록된 양도알림신청이 있으면
 		if (alarmList != null) {
 
 			for (AlarmVO a : alarmList) {
-
-				// 알림함등록
-				int reslut = alarmDAO.insertNotification(a);
 				
+				MessageVO message = new MessageVO();
+				
+				message.setUserSq(a.getUserSq());
+				message.setTransferBoardSq(vo.getTransferBoardSq());
+				message.setShowName(a.getShowName());
+				message.setContent(sb.toString());
+				// 알림함등록
+				alarmDAO.insertNotification(message);
+				
+
 			}
 
 		}
@@ -70,8 +88,13 @@ public class TransferBoardService {
 	public int deleteTransferboard(MyTicketingVO vo) {
 		System.out.println("deleteTransferboard Service()");
 
+		// 티켓 상태 변경
 		ticketDAO.cancelTransferTicket(vo.getTicketSq());
+		
+		// 양도취소하면 알림도 제거
+		alarmDAO.deleteNotification(vo.getTransferBoardSq());
 
+		// 양도게시글 삭제
 		return transferBoardDAO.deleteTransferboard(vo.getTransferBoardSq());
 	}
 

@@ -7,6 +7,11 @@
 	<!-- 양도표 등록 -->
 	<insert id="insertTransferboard" parameterType="TransferBoardVO">
 	
+		<selectKey keyProperty="transferBoardSq" resultType="int"
+			order="BEFORE">
+			SELECT seq_transfer_board_sq.NEXTVAL AS transferBoardSq FROM dual
+		</selectKey>
+	
 		<![CDATA[
 		
 			INSERT INTO transfer_board (
@@ -20,7 +25,7 @@
 			                           ) 
 			                     VALUES 
 			                           (
-			                            seq_transfer_board_sq.NEXTVAL ,
+			                            #{transferBoardSq} ,
 			                            #{hopePrice} ,
 			                            'Y',
 			                            #{transferBoardContent} ,

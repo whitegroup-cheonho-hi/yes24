@@ -304,6 +304,7 @@ section {
 						<td><input type="text" id="showName" name="showName"
 							required readonly>
 							<input type="hidden" id="ticketSq">
+							<input type="hidden" id="domain">
 							</td>
 					</tr>
 					<tr>
@@ -349,6 +350,7 @@ section {
 <script>
 	$(document).ready(function() {
 
+			      
 		//  양도버튼 클릭
 		$(".transferButton").on("click", function() {
 			$("#inquiry_popup").show();

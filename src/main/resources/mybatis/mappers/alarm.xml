@@ -48,7 +48,7 @@
 				FROM
 				    ticket t
 				    INNER JOIN showing_seat ss ON t.showing_sq = ss.showing_sq
-				                                  AND t.ticket_seat = ss.showing_seat_no
+				    	   AND t.ticket_seat = ss.showing_seat_no
 				    INNER JOIN seat_class sc ON ss.seat_class_sq = sc.seat_class_sq
 				    INNER JOIN showing sw ON ss.showing_sq = sw.showing_sq
 				    INNER JOIN show s ON sw.show_sq = s.show_sq
@@ -59,37 +59,79 @@
 		]]>
 
 	</select>
-	
+
 	<!-- 양도알람 체크 -->
-	<select id="alarmCheck" parameterType="AlarmVO" resultType="AlarmVO">
+	<select id="alarmCheck" parameterType="AlarmVO"
+		resultType="AlarmVO">
 
 		<![CDATA[
 		
 			  SELECT
-				    transfer_alarm_sq     AS transferalarmsq,
-				    show_sq             AS showsq,
-				    start_date            AS startdate,
-				    end_date              AS enddate,
-				    seat                  AS seatclasss,
-				    price,
-				    transfer_alarm_stat   AS transferalarmstat,
-				    user_sq               AS usersq
+				    a.transfer_alarm_sq     AS transferalarmsq,
+				    a.show_sq               AS showsq,
+				    b.show_name             AS showname,
+				    a.start_date            AS startdate,
+				    a.end_date              AS enddate,
+				    a.seat                  AS seatclasss,
+				    a.price,
+				    a.transfer_alarm_stat   AS transferalarmstat,
+				    a.user_sq               AS usersq
 				FROM
-				    transfer_alarm
+				    transfer_alarm a
+				    JOIN show b ON a.show_sq = b.show_sq
 			   WHERE
-			   		(TO_CHAR(start_date, 'YYYY-MM-DD') < #{endDate} AND TO_CHAR(end_date, 'YYYY-MM-DD') > #{endDate})
-		            AND price <= #{price}
-		            AND (show_sq = #{showSq} OR show_sq = 0 )
-		            AND (seat LIKE '%'||#{seatClasss}||'%' OR seat LIKE '%ALL%')
+			   		(TO_CHAR(a.start_date, 'YYYY-MM-DD') < #{endDate} AND TO_CHAR(a.end_date, 'YYYY-MM-DD') > #{endDate})
+		            AND a.price >= #{price}
+		            AND (a.show_sq = #{showSq} OR a.show_sq = 0 )
+		            AND (a.seat LIKE '%'||#{seatClasss}||'%' OR a.seat LIKE '%ALL%')
 		    ORDER BY 
 		   			transfer_alarm_sq		      
-		]]>	
-	
+		]]>
+
 
 	</select>
 
+	<!-- 알림신청 리스트 -->
+	<select id="myTransferAlarmList" parameterType="int"
+		resultType="AlarmVO">
+	
+		<![CDATA[
+		
+			  SELECT
+				    a.transfer_alarm_sq     AS transferalarmsq,
+				    b.show_name             AS showname,
+				    TO_CHAR(a.start_date, 'YYYY.MM.DD') AS startdate,
+				    TO_CHAR(a.end_date, 'YYYY.MM.DD') AS enddate,
+				    a.seat                  AS seatclasss,
+				    a.price,
+				    a.transfer_alarm_stat   AS transferalarmstat,
+				    a.user_sq               AS usersq
+			    FROM
+				    transfer_alarm a
+				    INNER JOIN show b ON a.show_sq = b.show_sq
+			   WHERE
+				    user_sq = #{userSp}		
+				 AND 
+				    a.end_date > SYSDATE
+		]]>
+
+	</select>
+	
+	<!-- 알림등록취소 -->
+	<delete id="arlarmCance" parameterType="int">
+	
+		<![CDATA[
+		
+			DELETE transfer_alarm
+			WHERE
+			    transfer_alarm_sq =	#{transferAlarmSq}	
+		
+		]]>
+	
+	</delete>
+
 	<!-- 알림함 등록 -->
-	<insert id="insertNotification" parameterType="AlarmVO">
+	<insert id="insertNotification" parameterType="MessageVO">
 	
 		<![CDATA[
 		
@@ -97,21 +139,56 @@
 			                        (
 			                         NOTIFICATION_SQ,
 			                         RECIPIENTS,
+			                         TRANSFER_BOARD_SQ,
 			                         RECIPIENTS_TITLE,
 			                         RECIPIENTS_CONTENT                       
 			                        )
 			                  VALUES
 			                        (
 			                        seq_notification_sq.NEXTVAL ,
-			                        #{userSq},
-			                        '양도표 알림',
-			                        '요청하신 양도티켓이 게시되었습니다. 게시글을 확인해주세요'
+			                        #{userSq} ,
+			                        #{transferBoardSq} ,
+			                        #{showName} ,
+			                        #{content}
 			                        )
 		
 		]]>
-	
+
 	</insert>
 
+	<!-- 알림함리스트 가져오기 -->
+	<select id="myNotificationList" parameterType="int"
+		resultType="NotificationVO">
 	
+		<![CDATA[
+		
+			  SELECT
+				    notification_sq       AS notificationsq,
+				    recipients,
+				    recipients_title      AS recipientstitle,
+				    recipients_content    AS recipientscontent,
+				    TO_CHAR(recipients_reg_date, 'YYYY.MM.DD') AS recipientsregdate
+				FROM
+				    notification
+			   WHERE
+				    recipients = #{userSp}		
+		
+		]]>
+
+	</select>
+	
+	<!-- 알림창 삭제  양도취소시-->
+	<delete id="deleteNotification" parameterType="int">
+	
+		<![CDATA[
+	
+			DELETE notification
+			WHERE
+			    transfer_alarm_sq =  #{transferAlarmSq}
+	
+		]]>
+		
+	</delete>
+
 
 </mapper>

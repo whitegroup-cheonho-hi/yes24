@@ -429,10 +429,15 @@ header.pc #header h1 {margin-right: -1px;}
 		$(".btn_wrap .shopping_btn").on("click", function() {
 			console.log("취소");
 			
-			$("#showName").val("");
-			
-			$("#searchShowName").hide();
-			$('#inquiry_popup').hide();
+			// 초기값 설정 및 입력 필드 초기화
+			$("#showName").val("").prop("readonly", false);
+			$("#startDate, #endDate").val("");
+			$("#seatClass1, #seatClass2, #seatClass3, #seatClass4, #noneShowName, #noneSeatClass, #nonePrice").prop("checked", false);
+			$("#price").val("").prop("readonly", false);
+			$("#showSq").val("");
+
+			// 요소 숨기기
+			$("#searchShowName, #inquiry_popup").hide();
 			
 			
 		});	
