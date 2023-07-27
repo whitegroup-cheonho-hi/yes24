@@ -1,6 +1,7 @@
 package com.yes24.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -13,12 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 
-import com.yes24.dto.PageMakerDTO;
-import com.yes24.service.ConcertHallService;
-import com.yes24.service.ShowService;
-import com.yes24.service.ShowingService;
 import com.yes24.service.TestService;
 import com.yes24.vo.ConcertHallVO;
 import com.yes24.vo.Criteria;
@@ -33,85 +29,10 @@ public class testController {
 	@Autowired
 	private TestService testservice;
 	
-	@Autowired
-	private ShowService showService;
-	@Autowired
-	private ShowingService showingService;
-	@Autowired
-	private ConcertHallService concertHallService;
+	
 	List<ConcertHallVO> concertHallList = new ArrayList<>();
 
-	// ------------------- 공연 등록폼
-	@RequestMapping(value = "/showInsertForm", method = RequestMethod.GET)
-	public String showInsertForm(Model model) {
-		System.out.println("showInsertForm()");
-
-		concertHallList = concertHallService.getConcertHallList();
-
-		model.addAttribute("concertHallList", concertHallList);
-		
-		System.out.println(concertHallList);
-		return "admin/showInsertForm";
-	}
-
-	// ------------------- 공연 등록
-	@RequestMapping(value = "/insertShow", method = RequestMethod.POST)
-	public String insertShow(@ModelAttribute ShowVO vo, @RequestParam("file1") MultipartFile file1,
-			@RequestParam("file2") MultipartFile file2) {
-		System.out.println("insertShow()");
-
-		showService.insertShow(vo, file1, file2);
-		
-		int showSq = vo.getshowSq();
-
-		return "redirect:/show/showSeatClassInsertForm/"+showSq;
-	}
-
-	// ------------------- 공연 수정폼
-	@RequestMapping(value = "/showModifyForm/{no}", method = RequestMethod.GET)
-	public String showModifyForm(@PathVariable("no") int no, Model model) {
-		System.out.println("showModifyForm()");
-
-		Map<String, Object> map = showService.getShow(no);
-
-		model.addAttribute("show", map.get("showVO"));
-		model.addAttribute("concertHallList", map.get("concertHallList"));
-
-		return "admin/showModifyForm";
-	}
-
-	// ------------------- 공연 수정
-	@RequestMapping(value = "/updateShow", method = RequestMethod.POST)
-	public String updateShow(@ModelAttribute ShowVO vo, @RequestParam("file1") MultipartFile file1,
-			@RequestParam("file2") MultipartFile file2) {
-		System.out.println("updateShow()");
-		int result = showService.updateShow(vo, file1, file2);
-
-		return "";
-	}
 	
-	// ------------------- 공연 좌석 클래스등록폼
-		@RequestMapping(value = "/showSeatClassInsertForm/{no}", method = RequestMethod.GET)
-		public String showSeatClassInsertForm(Model model,@PathVariable("no")int no) {
-			System.out.println("showSeatClassInsertForm()");
-
-			Map<String, Object> map = showService.getShow(no);
-
-			model.addAttribute("show", map.get("showVO"));
-			model.addAttribute("concertHall", map.get("concertHallVO"));
-		
-			return "admin/showSeatClassInsertForm";
-		}
-
-	// ------------------- 공연 상세
-	@RequestMapping(value = "/detail/{no}", method = RequestMethod.GET)
-	public String detailForm(@PathVariable("no") int no, Model model) {
-		System.out.println("detailForm()");
-		Map<String, Object> map = showService.getShow(no);
-		model.addAttribute("show", map.get("showVO"));
-		model.addAttribute("concertHall", map.get("concertHallVO"));
-		return "show/showDetail";
-	}
 	
 	//어드민 공연리스트(예매전)
 	@RequestMapping(value = "/adminShowList", method = RequestMethod.GET)
@@ -135,11 +56,11 @@ public class testController {
 	
 	//어드민 공연리스트(공연완료)
 	@RequestMapping(value = "/showEndList", method = RequestMethod.GET)
-	public String showEndList(Model modle, Criteria cri) {
+	public String showEndList(Model model, Criteria cri) {
 		cri.setShowStat(3);
 		Map<String, Object> map = testservice.getShowList(cri);
-		modle.addAttribute("showList", map.get("list"));
-		modle.addAttribute("pageMake", map.get("pageMake"));
+		model.addAttribute("showList", map.get("list"));
+		model.addAttribute("pageMake", map.get("pageMake"));
 		return "admin/showEndList";
 	}
 	
@@ -147,8 +68,21 @@ public class testController {
 	@RequestMapping(value = "/getConcertHallList", method = RequestMethod.GET)
 	public String getConcertHallList(Model model, Criteria cri) {
 		System.out.println("getConcertHallList");
+		Map<String, Object> map = testservice.getConcertHallList(cri);
+		model.addAttribute("hallList", map.get("hallList"));
+		model.addAttribute("pageMake", map.get("pageMake"));
 		return "admin/concertHallList";
 	}
+	
+	//예매상태 페이지
+		@RequestMapping(value = "/ticketingDetail/{no}", method = RequestMethod.GET)
+		public String getTicketingDetail(@PathVariable("no") int no, Model model) {
+			Map<String, Object> map = testservice.getTicketingDetailHallName(no);
+			model.addAttribute("show", map.get("show"));
+			model.addAttribute("hallName", map.get("hallName"));
+			System.out.println(map);
+			return "admin/ticketingDetail";
+		}
 	
 	// 회차등록 폼
 	@RequestMapping(value = "/showingInsertForm/{no}", method = RequestMethod.GET)
@@ -216,7 +150,6 @@ public class testController {
 		jsonResult.success(cnt);
 		return jsonResult;
 	}
-	
 		
 		
 		

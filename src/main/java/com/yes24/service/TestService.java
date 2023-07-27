@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.yes24.dao.TestDAO;
 import com.yes24.dto.PageMakerDTO;
+import com.yes24.vo.ConcertHallVO;
 import com.yes24.vo.Criteria;
 import com.yes24.vo.ShowVO;
 import com.yes24.vo.ShowingVO;
@@ -19,10 +20,34 @@ public class TestService {
 	@Autowired
 	private TestDAO testdao;
 	
-
+	//공연시퀀스로 공연정보 가져오기
 	public ShowVO getShow(int no) {
 		return testdao.getShow(no);
-	}  
+	}
+	
+	//예매현황 정보 가져오기
+	public Map<String, Object> getTicketingDetailHallName(int no){
+		System.out.println("getTicketingDetailHallName Service()");
+		Map<String, Object> map = new HashMap<>();
+		ShowVO vo = testdao.getShow(no);
+		ConcertHallVO hallName = testdao.getTicketingDetailHallName(vo);
+		map.put("show", vo);
+		map.put("hallName", hallName);
+		System.out.println(map);
+		return map;
+	}
+	
+	
+	//공연장 리스트 검색&페이징
+	public Map<String, Object> getConcertHallList(Criteria cri){
+		Map<String, Object> map = new HashMap<>();
+		List<ConcertHallVO> hallList = testdao.getConcertHallList(cri);
+		int total = testdao.getConcertHallTotal(cri);
+		PageMakerDTO pageMake = new PageMakerDTO(total, cri);
+		map.put("pageMake", pageMake);
+		map.put("hallList", hallList);
+		return map;
+	}
 	
 	// 공연상태로 공연정보 가져오기
 	public Map<String, Object> getShowList(Criteria cri){

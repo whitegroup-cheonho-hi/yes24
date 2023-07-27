@@ -20,20 +20,26 @@
 	.tableList table { margin: auto; width: 1000px;}
 	.tableList a { width: 200px; height: 400px; margin: 0 15px; vertical-align: top; }
 	.tableList button { margin: auto; width: 70px; height: 35px; font-size: 15px; font-weight: bold; 
-		background-color: #196ab3; color: white; border: none; border-radius: 5px;}
+		background-color: #196ab3; color: white; border: none; border-radius: 5px; cursor: pointer;}
 	.tableList p { height: 40px; margin-bottom: 10px;}
 	
 	.admimTit{ color: #333; font-family: 'Noto Sans KR','맑은 고딕' !important; font-weight: 500; font-size: 25px;}
 	.titletxt{ margin-bottom: 30px; margin-right: 850px;}
+	
+	#paging{ text-align: center; padding: 0; margin: 0px auto; width: 310px; }
+	.pageInfo{font: 14px "맑은 고딕", 돋움, 굴림; text-align: center; padding: 0; list-style-type: none; margin: 10px 5px 10px 5px; display: inline;}
+	#paging ul { display: inline-block; }
+	#paging ul>li { display: inline-block; margin: 0px 8px 0px 8px; }
+	#paging ul>li.active { font-size: 16px; font-weight: bold; }
 
 	.concertHallList{ line-height: 1; font-weight: 400; margin: 0; padding: 0; border: 0; font-size: inherit; font-style: normal; 
 		vertical-align: baseline; border-top: solid 2px rgb(62, 62, 62); border-bottom: solid 2px rgb(62, 62, 62); border-collapse: collapse; border-spacing: 0; width: 100%; }
 	.concertHallList tr{line-height: 45px; font-weight: 400; border-collapse: collapse; border-spacing: 0; margin: 0; border-bottom: solid 1px #ddd; }
 	
-	.search_cols{ margin-left: auto; border: 0; display: flex; width: 30%; align-items: center; }
+	.search_cols{ margin-bottom: 35px; margin-left: auto; border: 0; display: flex; width: 30%; align-items: center; }
 	.search_wrap{ border: solid 1px #ebebeb; padding: 3px 10px 3px; display: block;}
 	.search_cols input{ width: 192px; height: 25px; border: solid 1px lightgray; border-radius: 5px; padding-left: 8px; box-sizing: border-box;}
-	.search_cols button{ height: 25px; border: solid 1px lightgray; border-radius: 5px; padding-left: 8px; box-sizing: border-box;}
+	.search_cols button{ height: 25px; border: solid 1px lightgray; border-radius: 5px; padding-left: 8px; box-sizing: border-box; cursor: pointer;}
     
     #search_btn{display: inline-block; margin: 0 10px; }
     
@@ -55,8 +61,8 @@
 			
 			<!-- ==================== 검색 영역 ==================== -->
 			<div class="search_cols">
-				<form onsubmit="return false;" autocomplete="off">
-					<input id="keyword" name="keyword" value="${pageMake.cri.keyword }" size="5" type="text" placeholder="검색어 입력">
+				<form id="search_form" onsubmit="return false;" autocomplete="off">
+					<input id="keyword" name="keyword2" value="${pageMake.cri.keyword2 }" size="5" type="text" placeholder="검색어 입력">
 					<button type="submit" id="search_btn">검 색</button>
 				</form>
 			</div>
@@ -64,11 +70,11 @@
 			<div class="tableList">
 				<table class="concertHallList">
 					<!-- ==================== 리스트 영역 ==================== -->
-					<c:forEach var = "concertHallList" items="${concertHallList}">
+					<c:forEach var = "hallList" items="${hallList}">
 					<tr>
-						<td><a href="${pageContext.request.contextPath}/show/concertHallModifyForm/${concertHallList}" >${concertHallList.concertHallName}</a></td>
-						<td>${concertHallList.concertHallRoadAddr}</td>
-						<td><button type="button" class="modifyBtn" data-sq="${concertHallList.concertHallSq}" >수 정</button></td>
+						<td><a href="${pageContext.request.contextPath}/concertHall/concertHallModifyForm/${hallList.concertHallSq}" >${hallList.concertHallName}</a></td>
+						<td><a href="${pageContext.request.contextPath}/concertHall/concertHallModifyForm/${hallList.concertHallSq}" >${hallList.concertHallRoadAddr}</a></td>
+						<td><button type="button" class="modifyBtn" data-sq="${hallList.concertHallSq}" >수 정</button></td>
 					</tr>
 					</c:forEach>
 				</table>
@@ -98,10 +104,10 @@
 
 				<div class="clear"></div>
 			</div>
-			<form action="adminShowList" id="moveForm" method="get">
+			<form action="getConcertHallList" id="moveForm" method="get">
 				<input type="hidden" name="pageNum" value="${pageMake.cri.pageNum }">
 				<input type="hidden" name="amount" value="${pageMake.cri.amount }">
-				<input type="hidden" name="keyword" value="${pageMake.cri.keyword }">
+				<input type="hidden" id="keyword2" name="keyword2" value="${pageMake.cri.keyword2}">
 				
 			</form>
 			
@@ -112,12 +118,27 @@
 
 <script type="text/javascript">
 
+//검색 파라미터를 추가하는 함수 searchParam()
 function searchParam() {
+    // 빈 문자열로 초기화된 변수 schAdd를 선언합니다.
     let schAdd = "";
-    if(trim($('#keyword').val()) !== "") schAdd += "&keyword=" + trim($('#keyword').val());
-    if(trim(schAdd) !== "") schAdd = "?"+schAdd.substr(1, schAdd.length-1);
+
+    // #keyword 요소에서 값을 가져와서 공백을 제거한 후, 검색어가 비어있지 않다면 실행합니다.
+    // 검색어가 있을 경우, schAdd 변수에 "&keyword=검색어" 형식으로 추가합니다.
+    if (trim($('#keyword2').val()) !== "") {
+        schAdd += "&keyword=" + trim($('#keyword2').val());
+    }
+
+    // schAdd 변수가 빈 문자열이 아닌 경우에 실행합니다.
+    // 쿼리 파라미터를 생성하기 위해 URL에 물음표를 추가한 후, 앞의 &를 제거합니다.
+    if (trim(schAdd) !== "") {
+        schAdd = "?" + schAdd.substr(1, schAdd.length - 1);
+    }
+
+    // 최종적으로 생성된 검색 파라미터를 반환합니다.
     return schAdd;
 }
+
 
 
 //페이징 버튼 클릭
@@ -135,12 +156,16 @@ $(document).ready(function() {
 	    const newURL = window.location.protocol + "//" + window.location.host + window.location.pathname;
 	    const schAdd = searchParam();
 	    location.href = newURL + schAdd;
+	    let keyword = $('#keyword').val();
+	    $('#keyword2').val(keyword);
+	    $("#moveForm").submit();
 	});
+	
 	//수정버튼
 	$('.modifyBtn').on('click', function() {
 		//넘길 데이터 모으기
 		const sq = $(this).data("sq");
-		const url = "${pageContext.request.contextPath}/show1/showUpdateStat/" + sq;
+		const url = "${pageContext.request.contextPath}/concertHall/concertHallModifyForm/" + sq;
 		// 페이지 이동
 		location.href = url;
 		

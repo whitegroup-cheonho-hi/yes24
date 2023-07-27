@@ -15,6 +15,13 @@ public class Criteria {
 	public Criteria() {
 		this(1, 10, 1);
 	}
+	
+	public Criteria(int pageNum, int amount, String keyword2) {
+		super();
+		this.pageNum = pageNum;
+		this.amount = amount;
+		this.keyword2 = keyword2;
+	}
 
 	// 생성자 -> 원하는 pageNum, 원하는 amount
 	public Criteria(int pageNum, int amount, int keyword) {

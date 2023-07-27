@@ -4,14 +4,14 @@
 <mapper namespace="test">
 
 <!-- 공연장리스트 정보가져오기 -->
-	<select id="getConcertHallList" parameterType="Criteria" resultType="ShowVO">
+	<select id="getConcertHallList" parameterType="Criteria" resultType="ConcertHallVO">
 		
 		<![CDATA[
 		
 		SELECT
-		        CONCERT_HALL_SQ,
-		        CONCERT_HALL_NAME,
-		        CONCERT_HALL_BASIC_ADDR
+		        CONCERT_HALL_SQ AS concertHallSq,
+		        CONCERT_HALL_NAME AS concertHallName,
+		        CONCERT_HALL_BASIC_ADDR AS concertHallRoadAddr
 		FROM (
 		        SELECT 
 		        ROWNUM as rn,
@@ -25,8 +25,17 @@
 		                        CONCERT_HALL_BASIC_ADDR
 		                FROM 
 		                        concert_hall
-		                WHERE 
-		                        CONCERT_HALL_NAME LIKE '%#{keyword2}%' OR CONCERT_HALL_BASIC_ADDR LIKE '%#{keyword2}%'
+		]]>
+		
+		<if test="keyword2 != null and keyword2 != ''">
+        <![CDATA[		                    
+            	WHERE 
+                		CONCERT_HALL_NAME like '%'||#{keyword2}||'%' OR CONCERT_HALL_BASIC_ADDR like '%'||#{keyword2}||'%'
+        ]]>
+    	</if>
+		
+		
+		<![CDATA[		                    
 		                ORDER BY 
 		                        CONCERT_HALL_NAME DESC
 		            ) t
@@ -193,7 +202,7 @@
 
 	</insert>
 	
-	<!-- 공연좌석삭제 -->
+	<!-- 공연회차삭제 -->
 	<delete id="deleteShowing" parameterType="int">
 	
 		<![CDATA[
@@ -257,43 +266,33 @@
 
 			SELECT COUNT(*) 
 			FROM 
-				show
-			WHERE
-				show_stat = #{keyword2}
-			
+				concert_hall
+				
 		]]>
+		<if test="keyword2 != null and keyword2 != ''">
+		<![CDATA[		                    
+		                WHERE 
+		                        CONCERT_HALL_NAME like '%'||#{keyword2}||'%' OR CONCERT_HALL_BASIC_ADDR like '%'||#{keyword2}||'%'
+		]]>
+		</if>
 	</select>
 	
-
-
-	<!-- 공연리스트가져오기 -->
-	<select id="getShowList" parameterType="int" resultType="ShowVO">
-
+	<!-- 공연장수 검색 후 가져오기 -->
+	<select id="getTicketingDetailHallName" parameterType="ShowVO" resultType="ConcertHallVO">
 		<![CDATA[
-			
-			  SELECT
-				    show_sq            AS showSq,
-				    main_image         AS mainImage,
-				    sub_image          AS subImage,
-				    TO_CHAR(start_date, 'YYYY.MM.DD') AS startDate,
-				    TO_CHAR(end_date, 'YYYY.MM.DD') AS endDate,
-				    TO_CHAR(reservation_date, 'YYYY.MM.DD') AS reservationDate,
-				    show_name          AS showName,
-				    cast,
-				    director,
-				    show_time          AS showTime,
-				    viewing_age        AS viewingAge,
-				    show_content       AS showContent,
-				    category,
-				    show_stat          AS showStat,
-				    concert_hall_sq    AS concertHallSq
-				FROM
-				    show
-			  WHERE category = #{category}	    
-			ORDER BY
-				    show_sq DESC
+			SELECT
+					concert_hall_name as concertHallName
+			FROM 
+					concert_hall c, show s
+			WHERE
+					s.show_sq = #{concertHallSq} and c.concert_hall_sq = #{concertHallSq}
 		]]>
-
 	</select>
 	
+	
+	
+	
+	
+	
+
 </mapper>
