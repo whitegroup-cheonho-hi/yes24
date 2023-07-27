@@ -23,18 +23,19 @@ public class OrderController {
 	@Autowired
 	private ShowingService showingService;
 
+	// ----------------- 결제1 팝업창
 	@RequestMapping(value = "/orderForm/{no}", method = RequestMethod.GET)
 	public String orderForm(@PathVariable("no") int no, Model model) {
 		System.out.println("orderForm()");
 
-		Map<String, Object> map = showService.getShow(no);
+		Map<String, Object> map = showService.getShow(no,1);
 
 		model.addAttribute("show", map.get("showVO"));
 		model.addAttribute("concertHall", map.get("concertHallVO"));
 
 		return "show/ticketing1";
 	}
-
+	// ----------------- 결제2 팝업창
 	@RequestMapping(value = "/orderForm2/{no}/{String}", method = RequestMethod.GET)
 	public String orderForm2(@PathVariable("no") int no, @PathVariable("String") String date, Model model) {
 		System.out.println("orderForm2()");
@@ -42,15 +43,15 @@ public class OrderController {
 
 		Map<String, Object> map = showingService.getShowingDateList(no);
 
-		model.addAttribute("showingList", map.get("showingList"));
 		model.addAttribute("show", map.get("show"));
 		model.addAttribute("concertHall", map.get("concertHall"));
+		model.addAttribute("showingList", map.get("showingList"));
 		model.addAttribute("date", date);
 	
 
 		return "show/ticketing2";
 	}
-	
+	// ----------------- 결제3 팝업창
 	@RequestMapping(value = "/orderForm3", method = RequestMethod.POST)
 	public String orderForm3(@ModelAttribute SaveTicketVO vo, Model model) {
 		System.out.println("orderForm3()");

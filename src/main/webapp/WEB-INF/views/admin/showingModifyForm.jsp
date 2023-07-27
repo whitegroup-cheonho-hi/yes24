@@ -27,8 +27,11 @@
 #bWrap2{height: 50px;}
 #bWrap1 .txt{height: 20px;width: 150px; display: flex; align-items: center; justify-content: center; }
 #bWrap2 .txt{height: 20px;width: 150px; display: flex; align-items: center; justify-content: center;}
+.adminTit { font-size: 25px;}
+#adminTit3 a{color: #4982cf;}
 #ySContent{ width: 1200px; padding: 40px 0;}
-.tmM_txt{ margin-left: 129px;}
+.concertHall .position{margin: 0 auto;}
+.tmM_txt{ margin-left: 15px;}
 #lnb{border-radius:0}
 </style>
 </head>
@@ -47,8 +50,7 @@
 				<!-- ==================== 정보 입력 영역 시작 ==================== -->
 				<div class="tm_grp">
 					<h3 class="tmM_txt">
-						<em class="tit_txt"><strong id="adminTit"
-							style="margin-left: 20px;">공연 등록&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp; 공연 좌석클래스 등록&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;회차 등록&수정</strong></em>
+						<em class="tit_txt"><strong id="adminTit" class="adminTit"><a href="${pageContext.request.contextPath}/show/showModifyForm/${show.showSq}">공연정보 수정</a>&nbsp;&nbsp;>&nbsp;&nbsp;</strong><strong id="adminTit2" class="adminTit on"><a href="${pageContext.request.contextPath}/show/showSeatClassModifyForm/${show.showSq}">공연좌석등급 수정</a></strong>&nbsp;&nbsp;>&nbsp;&nbsp;<strong id="adminTit3" class="adminTit"><a href="${pageContext.request.contextPath}/showing/showingModifyForm/${show.showSq}">회차 수정</a></strong></em>
 					</h3>
 				</div>
 
@@ -56,7 +58,7 @@
 				<div class="concertHall">
 					<div class="inpRow">
 						<div class="concertHall">
-							<div class="imgCol" style="text-align: left; margin-left: 20px;">
+							<div class="imgCol" style="text-align: left; margin-left: 25px;">
 								<strong>회차정보</strong>
 							</div>
 							<div class="position">

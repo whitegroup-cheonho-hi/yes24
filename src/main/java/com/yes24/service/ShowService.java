@@ -202,45 +202,53 @@ public class ShowService {
 		return index;
 	}
 
-	// ------------------ 공연정보가져오기 필요없는 값 보내지 않기 위해 파라미터를 추가 수정예정
-	public Map<String, Object> getShow(int no) {
+	// ------------------ 공연정보가져오기 필요없는 값 보내지 않기 위해 파라미터를 추가 수정완료23/07/27
+	public Map<String, Object> getShow(int no, int sortation) {
 		System.out.println("getShow Service()");
 		Map<String, Object> map = new HashMap<>();
 		List<Integer> seatClassSqList = new ArrayList<>();
 		List<String> seatClassList = new ArrayList<>();
 		List<Integer> seatPriceSqList = new ArrayList<>();
-		List<ConcertHallVO> concertHallList = new ArrayList<>();
-
-		// 공연장 리스트
-		concertHallList = concertHallDAO.getConcertHallList();
+		List<ConcertHallVO> concertHallList;
 
 		// 공연정보
 		showVO = showDAO.getShow(no);
 
-		// 공연장정보
-		ConcertHallVO concertHallVO = concertHallDAO.getConcertHall(showVO.getConcertHallSq());
+		if (sortation == 1 || sortation == 3) {
+			// 1.공연장정보
+			ConcertHallVO concertHallVO = concertHallDAO.getConcertHall(showVO.getConcertHallSq());
 
-		// 좌석클레스
-		List<SeatClassVO> SeatClassList = showDAO.getSeatClassList(no);
-		for (SeatClassVO seatClassSq : SeatClassList) {
-			seatClassSqList.add(seatClassSq.getSeatClassSq());
-			seatClassList.add(seatClassSq.getSeatClass());
-			seatPriceSqList.add(seatClassSq.getSeatPrice());
+			map.put("concertHallVO", concertHallVO);
+
 		}
-		showVO.setSeatClassSq(seatClassSqList);
-		showVO.setSeatClass(seatClassList);
-		showVO.setSeatPrice(seatPriceSqList);
+		if (sortation == 2) {
+			// 2.공연장 리스트
+			concertHallList = concertHallDAO.getConcertHallList();
+
+			map.put("concertHallList", concertHallList);
+
+		}
+		if (sortation == 3) {
+			// 3.좌석클레스
+			List<SeatClassVO> SeatClassList = showDAO.getSeatClassList(no);
+			for (SeatClassVO seatClassSq : SeatClassList) {
+				seatClassSqList.add(seatClassSq.getSeatClassSq());
+				seatClassList.add(seatClassSq.getSeatClass());
+				seatPriceSqList.add(seatClassSq.getSeatPrice());
+			}
+			showVO.setSeatClassSq(seatClassSqList);
+			showVO.setSeatClass(seatClassList);
+			showVO.setSeatPrice(seatPriceSqList);
+
+			map.put("seatClassList", SeatClassList);
+		}
 
 		map.put("showVO", showVO);
-		map.put("concertHallVO", concertHallVO);
-		map.put("concertHallList", concertHallList);
-		map.put("seatClassList", SeatClassList);
-	
+
 		return map;
 
 	}
-	
-	
+
 	// ------------------ 공연정보가져오기 필요없는 값 보내지 않기 위해 파라미터를 추가 수정예정
 	public Map<String, Object> getShow(SaveTicketVO vo) {
 		System.out.println("getShow Service()");
@@ -275,7 +283,7 @@ public class ShowService {
 		int total = showDAO.getTotal(cri);
 		// 롤링
 		List<ShowVO> showList = showDAO.getShowList(cri.getKeyword());
-		// 검색포함 
+		// 검색포함
 		List<ShowVO> showList2 = showDAO.getShowList(cri);
 
 		PageMakerDTO pageMaker = new PageMakerDTO(total, cri);

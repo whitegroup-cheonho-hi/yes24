@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.yes24.service.ShowService;
 import com.yes24.service.ShowingService;
 import com.yes24.vo.JsonResult;
 import com.yes24.vo.RemainingSeatsVO;
-import com.yes24.vo.SeatClassVO;
 import com.yes24.vo.ShowVO;
 import com.yes24.vo.ShowingVO;
 
@@ -33,15 +33,11 @@ public class ShowingController {
 	public JsonResult getShowing(@ModelAttribute ShowingVO vo) {
 		System.out.println("getShowing()");
 
-		System.out.println(vo);
-
 		List<ShowingVO> showingList = showingService.getShowing(vo);
 
 		JsonResult jsonResult = new JsonResult();
 
 		jsonResult.success(showingList);
-
-		System.out.println(showingList);
 
 		return jsonResult;
 
@@ -106,6 +102,18 @@ public class ShowingController {
 
 		return "admin/showingInsertForm";
 	}
+	
+	// 회차등록 폼
+		@RequestMapping(value = "/showingModifyForm/{no}", method = RequestMethod.GET)
+		public String showingModifyForm(@PathVariable("no") int no, Model model) {
+			System.out.println("showingModifyForm()");
+
+			ShowVO vo = showingService.getShow2(no);
+
+			model.addAttribute("show", vo);
+
+			return "admin/showingModifyForm";
+		}
 
 	@ResponseBody
 	@RequestMapping(value = "/insertShowing", method = RequestMethod.POST)
@@ -127,6 +135,7 @@ public class ShowingController {
 		System.out.println("insertShowing()");
 
 		int cnt = showingService.deleteShowing(showingSq);
+
 		JsonResult jsonResult = new JsonResult();
 
 		jsonResult.success(cnt);

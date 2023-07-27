@@ -132,6 +132,6 @@ button.btnC.b_size .bWrap { height:48px; }
 .colCell{display: inline-block;}
 .colCell.pal10{text-align: right;}
 .colCell w_130{}
-#spanCertifyIpt_AddrNo{width: 347px; display: inline-block;}
+#spanCertifyIpt_AddrNo{width: 360px; display: inline-block;}
 #spanCertifyIpt_txtBirthDay{width: 600px; display: inline-block;}
 #warp .date_list ul {    margin-left: 0px;};

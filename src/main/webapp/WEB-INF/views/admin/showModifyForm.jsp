@@ -50,6 +50,7 @@
 #category {
 	width: 890px;
 }
+#adminTit a{color: #4982cf;}
 </style>
 </head>
 <body>
@@ -67,7 +68,7 @@
 						<!-- ==================== 정보 입력 영역 시작 ==================== -->
 						<div class="tm_grp">
 							<h3 class="tmM_txt">
-								<em class="tit_txt"><strong id="adminTit">공연정보 수정</strong></em>
+								<em class="tit_txt"><strong id="adminTit" class="adminTit on"><a href="${pageContext.request.contextPath}/show/showModifyForm/${show.showSq}">공연정보 수정</a>&nbsp;&nbsp;>&nbsp;&nbsp;</strong><strong id="adminTit2" class="adminTit"><a href="${pageContext.request.contextPath}/show/showSeatClassModifyForm/${show.showSq}">공연좌석등급 수정</a></strong>&nbsp;&nbsp;>&nbsp;&nbsp;<strong id="adminTit3" class="adminTit"><a href="${pageContext.request.contextPath}/showing/showingModifyForm/${show.showSq}">회차 수정</a></strong></em>
 							</h3>
 						</div>
 

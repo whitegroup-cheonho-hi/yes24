@@ -99,7 +99,7 @@ public class UserController {
 		userVO.setUserSq(vo.getUserSq());
 
 		UserVO user = userService.getUser(userVO);
-		System.out.println(user);
+		
 		model.addAttribute("user", user);
 
 		return "user/modifyForm";

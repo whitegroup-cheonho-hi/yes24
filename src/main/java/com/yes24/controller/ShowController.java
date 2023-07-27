@@ -49,7 +49,7 @@ public class ShowController {
 	public String insertShow(@ModelAttribute ShowVO vo, @RequestParam("file1") MultipartFile file1,
 			@RequestParam("file2") MultipartFile file2) {
 		System.out.println("insertShow()");
-		System.out.println(vo);
+
 		showService.insertShow(vo, file1, file2);
 
 		int showSq = vo.getshowSq();
@@ -62,7 +62,7 @@ public class ShowController {
 	public String showModifyForm(@PathVariable("no") int no, Model model) {
 		System.out.println("showModifyForm()");
 
-		Map<String, Object> map = showService.getShow(no);
+		Map<String, Object> map = showService.getShow(no,2);
 
 		model.addAttribute("show", map.get("showVO"));
 		model.addAttribute("concertHallList", map.get("concertHallList"));
@@ -86,7 +86,7 @@ public class ShowController {
 	public String showSeatClassInsertForm(Model model, @PathVariable("no") int no) {
 		System.out.println("showSeatClassInsertForm()");
 
-		Map<String, Object> map = showService.getShow(no);
+		Map<String, Object> map = showService.getShow(no,1);
 
 		model.addAttribute("show", map.get("showVO"));
 		model.addAttribute("concertHall", map.get("concertHallVO"));
@@ -99,7 +99,7 @@ public class ShowController {
 	public String showSeatClassModifyForm(Model model, @PathVariable("no") int no) {
 		System.out.println("showSeatClassModifyForm()");
 
-		Map<String, Object> map = showService.getShow(no);
+		Map<String, Object> map = showService.getShow(no,3);
 
 		model.addAttribute("show", map.get("showVO"));
 		model.addAttribute("concertHall", map.get("concertHallVO"));
@@ -114,7 +114,7 @@ public class ShowController {
 	public String detailForm(@PathVariable("no") int no, Model model) {
 		System.out.println("detailForm()");
 
-		Map<String, Object> map = showService.getShow(no);
+		Map<String, Object> map = showService.getShow(no,1);
 
 		model.addAttribute("show", map.get("showVO"));
 		model.addAttribute("concertHall", map.get("concertHallVO"));

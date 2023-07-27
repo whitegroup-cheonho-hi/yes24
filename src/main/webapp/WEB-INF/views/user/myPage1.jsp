@@ -78,7 +78,7 @@ section {
 							<ul>
 								<li class="sec"><span>예매일자별 조회</span> <input id="txtStart"
 									type="text" class="date imedisable w70 hasDatepicker"
-									style="width: 90px; z-index: 999;" autocomplete="off"><img
+									style="width: 90px; " autocomplete="off"><img
 									class="ui-datepicker-trigger"
 									src="https://stkfile.yes24.com/img/mypage/btn_cal.gif"
 									alt="날짜를 선택하세요.
@@ -93,7 +93,7 @@ section {
 					월(月)단위 이동: PgUp/PgDn 키">
 									~ <input id="txtEnd" type="text"
 									class="date imedisable w70 hasDatepicker"
-									style="width: 90px; z-index: 999; position: relative;"
+									style="width: 90px; position: relative;"
 									autocomplete="off"><img class="ui-datepicker-trigger"
 									src="https://stkfile.yes24.com/img/mypage/btn_cal.gif"
 									alt="날짜를 선택하세요.

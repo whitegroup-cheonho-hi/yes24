@@ -74,25 +74,25 @@ public class TransferTicketControll {
 
 		model.addAttribute("transferBoard", map.get("transferBoardVO"));
 		model.addAttribute("show", map.get("showVO"));
-		model.addAttribute("concertHall", map.get("concertHallVO"));	
-		model.addAttribute("showSeatList", map.get("showSeatList"));		
+		model.addAttribute("concertHall", map.get("concertHallVO"));
+		model.addAttribute("showSeatList", map.get("showSeatList"));
 
 		return "/show/transferDetail";
 
 	}
-	
+
 	// ---------------------- 티켓 양도 완료
-	@RequestMapping(value="/buyTransferTicket", method = RequestMethod.POST)
+	@RequestMapping(value = "/buyTransferTicket", method = RequestMethod.POST)
 	public String buyTransferTicket(@ModelAttribute TransferBoardVO vo, HttpSession session) {
 		System.out.println("buyTransferTicket()");
-		
+
 		UserVO userVO = (UserVO) session.getAttribute("authUser");
-		
+
 		vo.setBuyUserSq(userVO.getUserSq());
-		
+
 		int result = ticketingService.buyTransferTicket(vo);
-		
-		return "";
+
+		return "redirect:/myPage/myTicketingList";
 	}
 
 }
