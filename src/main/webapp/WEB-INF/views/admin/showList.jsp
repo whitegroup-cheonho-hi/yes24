@@ -18,12 +18,17 @@
 <style>
 	#ySContent{ margin: 120px auto; }
 	.listItem { width: 1200px; display: grid; grid-template-columns: repeat(5, 200px); justify-content: space-around; justify-items: center; }
-	.listItem .listItemdiv { display: inline-block; width: 200px; height: 300px; margin: 0 15px; vertical-align: top; }
-	.listItem img {width: 100%;}
-	.listItemTxt { display: flex; align-items: center; flex-wrap: wrap; justify-content: center;}
+	.listItem .listItemdiv { display: inline-block; width: 200px; margin: 0 15px; }
+	.listItem img {width: 95%;}
+	.listItemTxt { display: flex; flex-wrap: wrap; }
 	.listItemTxt button { margin: auto; width: 70px; height: 35px; font-size: 14px; font-weight: bold; 
-		background-color: #196ab3; color: white; border: none; border-radius: 5px;}
-	.listItemTxt p { width: 200px; height: 40px; margin-bottom: 10px; }
+		background-color: #196ab3; color: white; border: none; border-radius: 5px; margin-bottom: 20px;}
+	.listItemTxt p { width: 200px; margin-bottom: 10px; white-space: nowrap; }
+	/* 첫 글자는 "<"로 표시 */
+	.listItemTit::before { content: "\003C"; /* "<"의 유니코드 값을 사용 */ }
+	/* 마지막 글자는 ">"로 표시 */
+	.listItemTit::after { content: "\003E"; /* ">"의 유니코드 값을 사용 */ }
+
 	
 	#paging{ text-align: center; padding: 0; margin: 0px auto; width: 310px; }
 	.pageInfo{font: 14px "맑은 고딕", 돋움, 굴림; text-align: center; padding: 0; list-style-type: none; margin: 10px 5px 10px 5px; display: inline;}
@@ -70,17 +75,17 @@
 		         </c:if>
 			</div>
 			<!-- ==================== 리스트 영역 ==================== -->
-			<div class="">
+			<div style="height: 750px;">
 				<div class="listItem">
 					<c:forEach var = "showList" items="${showList}">
 					
 						<div class="listItemdiv">
-							<a href="${pageContext.request.contextPath}/show/showModifyForm/${showList}">
+							<a href="${pageContext.request.contextPath}/show/showModifyForm/${showList.showSq}">
 									<img class="listItemImg" src="${pageContext.request.contextPath}/upload/${showList.subImage}">
 							</a>
 							<div class="listItemTxt">
-								<p class="listItemTit">&lt;${showList.showName}&gt;</p>
-								<button type="button" class="btnstat" data-sq="${showList.showSq}" style="background-color: #196ab3">예매대기</button>
+								<p class="listItemTit">${showList.showName}</p>
+								<button type="button" class="btnstat" data-sq="${showList.showSq}" >예매대기</button>
 								<button type="button" class="btndelete" data-sq="${showList.showSq}" style="background-color: #f20055">삭 제</button>
 							</div>
 						</div>
