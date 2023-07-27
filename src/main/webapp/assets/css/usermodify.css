@@ -68,7 +68,7 @@ button.btnC:disabled { opacity:0.4; }
 .btnC.btn_disabled { opacity:0.4; }
 .btnC.btn_blue { }
 .btnC.btn_blue .bWrap {height: 40px; border-color:#196ab3;border-bottom-color:#165fa1;border-right-color:#165fa1;background-color:#196ab3;     width: 130px;}
-.btnC.btn_blue .bWrap em.txt {margin-top: 6px; font-size: 19px; color:#fff !important;     width: 130px;}
+.btnC.btn_blue .bWrap em.txt {font-size: 19px; color:#fff !important;     width: 130px;}
 .btnC.b_size .bWrap { padding:0 19px;height:48px;text-align:center;     width: 340px; }
 .btnC.b_size .bWrap em.txt {width: 226px; height:47px;line-height:47px;font-size:16px;font-weight:bold;letter-spacing:0; }
 .btnC.b_size.btn_2ln .bWrap { padding:14px 19px;height:40px;text-align:center; }
@@ -80,7 +80,7 @@ button.btnC.b_size .bWrap { height:48px; }
 
 /* radioBtn - 사각탭모양 라디오기능 */
 /* 모바일웹의 common.css btnRadio_wrap 동일 */
-.yesRadioTab { height: 27px; border:solid 1px #d8d8d8;border-radius:3px;background-color:#f8f8f8;   display: inline-block;   width: 124px; }
+.yesRadioTab { height: 27px; border-radius:3px;background-color:#f8f8f8;   display: inline-block;   width: 124px; }
 .yesRadioTab ul { display:table;width:100%;table-layout:fixed; }
 .yesRadioTab li { display:table-cell;position:relative;z-index:1;height:28px;text-align:center; }
 .yesRadioTab li a { display:block;position:relative;z-index:2;height:28px; }
@@ -134,4 +134,4 @@ button.btnC.b_size .bWrap { height:48px; }
 .colCell w_130{}
 #spanCertifyIpt_AddrNo{width: 360px; display: inline-block;}
 #spanCertifyIpt_txtBirthDay{width: 600px; display: inline-block;}
-#warp .date_list ul {    margin-left: 0px;};
+#warp .date_list ul {    margin-left: 227px;};

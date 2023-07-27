@@ -10,6 +10,7 @@ public class ShowVO {
 	private int showSq;
 	private String mainImage;
 	private String subImage;
+	private String detailedImage;
 	private String startDate;
 	private String endDate;
 	private String reservationDate;
@@ -20,13 +21,11 @@ public class ShowVO {
 	private String viewingAge;
 	private int category;
 	private int showStat;
-	//공연장
+	// 공연장
 	private int concertHallSq;
 	private String concertHallName;
-	//상세이미지 배열
-	private List<Integer> detailedImageSq; 
-	private List<String> detailedImage;
-	//좌석클래스 배열
+
+	// 좌석클래스 배열
 	private List<Integer> seatClassSq;
 	private List<String> seatClass;
 	private List<Integer> seatPrice;
@@ -35,14 +34,16 @@ public class ShowVO {
 		super();
 	}
 
-	public ShowVO(int showSq, String mainImage, String subImage, String startDate, String endDate,
+	
+	public ShowVO(int showSq, String mainImage, String subImage, String detailedImage, String startDate, String endDate,
 			String reservationDate, String showName, String cast, String director, String showTime, String viewingAge,
-			int category, int showStat, int concertHallSq, String concertHallName, List<Integer> detailedImageSq,
-			List<String> detailedImage, List<Integer> seatClassSq, List<String> seatClass, List<Integer> seatPrice) {
+			int category, int showStat, int concertHallSq, String concertHallName, List<Integer> seatClassSq,
+			List<String> seatClass, List<Integer> seatPrice) {
 		super();
 		this.showSq = showSq;
 		this.mainImage = mainImage;
 		this.subImage = subImage;
+		this.detailedImage = detailedImage;
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.reservationDate = reservationDate;
@@ -55,18 +56,17 @@ public class ShowVO {
 		this.showStat = showStat;
 		this.concertHallSq = concertHallSq;
 		this.concertHallName = concertHallName;
-		this.detailedImageSq = detailedImageSq;
-		this.detailedImage = detailedImage;
 		this.seatClassSq = seatClassSq;
 		this.seatClass = seatClass;
 		this.seatPrice = seatPrice;
 	}
 
-	public int getshowSq() {
+
+	public int getShowSq() {
 		return showSq;
 	}
 
-	public void setshowSq(int showSq) {
+	public void setShowSq(int showSq) {
 		this.showSq = showSq;
 	}
 
@@ -84,6 +84,14 @@ public class ShowVO {
 
 	public void setSubImage(String subImage) {
 		this.subImage = subImage;
+	}
+
+	public String getDetailedImage() {
+		return detailedImage;
+	}
+
+	public void setDetailedImage(String detailedImage) {
+		this.detailedImage = detailedImage;
 	}
 
 	public String getStartDate() {
@@ -182,22 +190,6 @@ public class ShowVO {
 		this.concertHallName = concertHallName;
 	}
 
-	public List<Integer> getDetailedImageSq() {
-		return detailedImageSq;
-	}
-
-	public void setDetailedImageSq(List<Integer> detailedImageSq) {
-		this.detailedImageSq = detailedImageSq;
-	}
-
-	public List<String> getDetailedImage() {
-		return detailedImage;
-	}
-
-	public void setDetailedImage(List<String> detailedImage) {
-		this.detailedImage = detailedImage;
-	}
-
 	public List<Integer> getSeatClassSq() {
 		return seatClassSq;
 	}
@@ -222,18 +214,16 @@ public class ShowVO {
 		this.seatPrice = seatPrice;
 	}
 
+
 	@Override
 	public String toString() {
-		return "ShowVO [showSq=" + showSq + ", mainImage=" + mainImage + ", subImage=" + subImage + ", startDate="
-				+ startDate + ", endDate=" + endDate + ", reservationDate=" + reservationDate + ", showName=" + showName
-				+ ", cast=" + cast + ", director=" + director + ", showTime=" + showTime + ", viewingAge=" + viewingAge
-				+ ", category=" + category + ", showStat=" + showStat + ", concertHallSq=" + concertHallSq
-				+ ", concertHallName=" + concertHallName + ", detailedImageSq=" + detailedImageSq + ", detailedImage="
-				+ detailedImage + ", seatClassSq=" + seatClassSq + ", seatClass=" + seatClass + ", seatPrice="
-				+ seatPrice + "]";
+		return "ShowVO [showSq=" + showSq + ", mainImage=" + mainImage + ", subImage=" + subImage + ", detailedImage="
+				+ detailedImage + ", startDate=" + startDate + ", endDate=" + endDate + ", reservationDate="
+				+ reservationDate + ", showName=" + showName + ", cast=" + cast + ", director=" + director
+				+ ", showTime=" + showTime + ", viewingAge=" + viewingAge + ", category=" + category + ", showStat="
+				+ showStat + ", concertHallSq=" + concertHallSq + ", concertHallName=" + concertHallName
+				+ ", seatClassSq=" + seatClassSq + ", seatClass=" + seatClass + ", seatPrice=" + seatPrice + "]";
 	}
-
-	
 
 	
 

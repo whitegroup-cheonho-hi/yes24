@@ -92,7 +92,7 @@ public class ConcertHallService {
 				//공연시퀀스 가지고와서
 				ShowVO showVO = showDAO.getShowSq(vo.getConcertHallSq());
 				// 리턴값으로 넣어준다
-				result = showVO.getshowSq();
+				result = showVO.getShowSq();
 			}
 
 			// 기존 좌석을 삭제

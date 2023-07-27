@@ -41,7 +41,8 @@ section {width: 1000px;margin: 0 auto;padding-top: 70px;height: 1200px;}
 #showHref {text-decoration: none;}
 #mypage_contain2 {height: 200px;}
 .btnC.w_90 .bWrap{width:361px;}
- 
+.btnC.btn_blue .bWrap{width:200px;}
+#g{border:none;}
 </style>
 </head>
 <body>
@@ -132,7 +133,7 @@ section {width: 1000px;margin: 0 auto;padding-top: 70px;height: 1200px;}
 													value="${user.userBirthday}" maxlength="8">
 												</span>
 											</div>											
-											<div class="yesRadioTab col_2 b_size mgl10">
+											<div id ="g" class="yesRadioTab col_2 b_size mgl10">
 												<input id="gender" type="hidden" value="${user.gender}">
 												<ul>
 													<li><input value="M" name="gender" type="radio" id="M"
@@ -218,7 +219,7 @@ section {width: 1000px;margin: 0 auto;padding-top: 70px;height: 1200px;}
 										<span class="bWrap"><em class="txt">회원정보 수정</em></span>
 									</button>
 									<a href="#none" id="deleteUser" class="btnC xb_size btn_blue">
-										<span class="bWrap"><em class="txt">탈퇴</em></span>
+										<span class="bWrap"><em class="txt">탈 퇴</em></span>
 									</a>
 								</div>
 							</div>

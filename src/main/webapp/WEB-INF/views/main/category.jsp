@@ -49,7 +49,7 @@
 .slick-prev {left: 100px;}
 .slick-track {padding: 30px 0;}
 .slick-slide {transition: all ease-in-out .3s;opacity: 0.7;}
-.slick-current {opacity: 1;transform: scaleY(1.1) scaleX(1.05);}
+.slick-current {opacity: 1;transform: scaleY(1.1) scaleX(1.1);}
 .slick-active {	opacity: 1;}
 
 section{width: 1200px; margin: 0 auto;     text-align: center;}
@@ -160,6 +160,12 @@ section ul li a span.price{font-weight: 600; font-size: 17px; margin-top: 2px;}
 
 <script>
 	$(document).on('ready', function() {
+		
+		// 포커스
+		var category = '${category}';
+		$("#l"+category).addClass("on");
+				
+		
 		// 롤링
 		$(".center").slick({
 			//dots: true,
@@ -167,7 +173,7 @@ section ul li a span.price{font-weight: 600; font-size: 17px; margin-top: 2px;}
 			autoplay : true,
 			infinite : true,
 			centerMode : true,
-			slidesToShow : 3,
+			slidesToShow : 5,
 			slidesToScroll : 1
 		});
 		

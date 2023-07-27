@@ -14,7 +14,7 @@
 	type="text/css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath }/assets/css/admin.css"
-	type="text/css">	
+	type="text/css">
 <link rel="stylesheet" type="text/css"
 	href="https://image.yes24.com/sysimage/yesUI/yesUI.css?v=20230403"
 	media="all">
@@ -53,7 +53,6 @@
 }
 .tm_grp {height: 72px; margin-bottom: 25px;}
 .tm_grp .tmM_txt{ display: inline-block;}
-
 </style>
 </head>
 <body>
@@ -72,7 +71,7 @@
 						<div class="tm_grp">
 							<h3 class="tmM_txt">
 								<em class="tit_txt"><strong id="adminTit">공연 등록</strong></em>
-							</h3>												
+							</h3>
 						</div>
 
 						<!-- ==================== 이미지 입력 영역 시작 ==================== -->
@@ -102,11 +101,16 @@
 										</div>
 									</div>
 									<div class="inpRow">
-										<dl class="concertHall">
-											<dt class="imgCol">
-												<strong>공연정보</strong>
-											</dt>
-										</dl>
+										<div class="concertHall">
+											<div class="imgCol">
+												<strong>상세 이미지 등록</strong>
+											</div>
+											<div class="colCell w_280">
+												<span class="yesIpt b_size ipt_wSizeF hallWidth"> <input
+													id="detailedImage" name="file3" type="file">
+												</span>
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -307,7 +311,7 @@
 			console.log("등록");
 			$("#insertShow").submit();
 		});
-		
+
 	});
 </script>
 </html>

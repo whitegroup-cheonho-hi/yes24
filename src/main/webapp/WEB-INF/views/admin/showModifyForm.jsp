@@ -101,11 +101,17 @@
 										</div>
 									</div>
 									<div class="inpRow">
-										<dl class="concertHall">
-											<dt class="imgCol">
-												<strong>공연정보</strong>
-											</dt>
-										</dl>
+										<div class="concertHall">
+											<div class="imgCol">
+												<strong>상세 이미지 수정</strong>
+											</div>
+											<div class="colCell w_280">
+												<span class="yesIpt b_size ipt_wSizeF hallWidth"> <input
+													id="detailedImage" name="file3" type="file">
+												<input id="detailedImage" name="detailedImage" type="hidden" value="${show.detailedImage}">
+												</span>
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>

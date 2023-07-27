@@ -14,37 +14,39 @@
 		<![CDATA[
 				
 		  INSERT INTO show (
-					        show_sq,
-					        main_image,
-					        sub_image,
-					        start_date,
-					        end_date,
-					        reservation_date,
-					        show_name,
-					        cast,
-					        director,
-					        show_time,
-					        viewing_age,
-					        show_content,
-					        category,
-					        show_stat,
+					        show_sq ,
+					        main_image ,
+					        sub_image ,
+					        detailed_image ,
+					        start_date ,
+					        end_date ,
+					        reservation_date ,
+					        show_name ,
+					        cast ,
+					        director ,
+					        show_time ,
+					        viewing_age ,
+					        show_content , 
+					        category ,
+					        show_stat ,
 					        concert_hall_sq
 					       )
 			        VALUES ( 
-			                #{showSq},
-			                #{mainImage},
-			                #{subImage},
-			                #{startDate},
-			                #{endDate},
-			                #{reservationDate},
-			                #{showName},
-			                #{cast},
-			                #{director},
-			                #{showTime},
-			                #{viewingAge},
-			                #{cast},
-			                #{category},
-			                1,
+			                #{showSq} ,
+			                #{mainImage} ,
+			                #{subImage} ,
+			                #{detailedImage} ,
+			                #{startDate} ,
+			                #{endDate} ,
+			                #{reservationDate} ,
+			                #{showName} ,
+			                #{cast} ,
+			                #{director} ,
+			                #{showTime} ,
+			                #{viewingAge} ,
+			                #{showName} ,
+			                #{category} ,
+			                1 ,
 			                #{concertHallSq}                
 			               )
 		
@@ -148,21 +150,22 @@
 		<![CDATA[
 
 		      SELECT
-				    show_sq AS showsq,
-				    main_image AS mainimage,
-				    sub_image AS subimage,
+				    show_sq           AS showsq,
+				    main_image        AS mainimage,
+				    sub_image         AS subimage,
+				    detailed_image    AS detailedimage,
 				    TO_CHAR(start_date, 'YYYY.MM.DD') AS startdate,
 				    TO_CHAR(end_date, 'YYYY.MM.DD') AS enddate,
 				    TO_CHAR(reservation_date, 'YYYY.MM.DD') AS reservationdate,
-				    show_name AS showname,
+				    show_name         AS showname,
 				    cast,
 				    director,
-				    show_time AS showtime,
-				    viewing_age AS viewingage,
-				    show_content AS showcontent,
+				    show_time         AS showtime,
+				    viewing_age       AS viewingage,
+				    show_content      AS showcontent,
 				    category,
-				    show_stat AS showstat,
-				    concert_hall_sq AS concerthallsq
+				    show_stat         AS showstat,
+				    concert_hall_sq   AS concerthallsq
 				FROM
 				    show
 			   WHERE
@@ -199,7 +202,7 @@
 			  SELECT
 				    show_sq            AS showsq,
 				    main_image         AS mainimage,
-				    sub_image          AS subimage,
+				    sub_image          AS subimage,			
 				    start_date         AS startdate,
 				    end_date           AS enddate,
 				    reservation_date   AS reservationdate,

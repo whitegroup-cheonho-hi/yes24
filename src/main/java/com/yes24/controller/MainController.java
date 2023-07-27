@@ -41,14 +41,15 @@ public class MainController {
 	@RequestMapping(value = "/category/{no}", method = RequestMethod.GET)
 	public String category(@PathVariable("no") int no, Model model, Criteria cri) {
 		System.out.println("category()");
+		
 		cri.setKeyword(no);
-		System.out.println(cri);
 		Map<String, Object> map = showService.getShowList(cri);
 
 		model.addAttribute("showList", map.get("showList"));
 		model.addAttribute("showList2", map.get("showList2"));
 		model.addAttribute("pageMaker", map.get("pageMaker"));
-		System.out.println(map.get("pageMaker"));
+		model.addAttribute("category", no);
+		
 		return "main/category";
 
 	}

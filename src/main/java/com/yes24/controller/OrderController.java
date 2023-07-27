@@ -39,7 +39,6 @@ public class OrderController {
 	@RequestMapping(value = "/orderForm2/{no}/{String}", method = RequestMethod.GET)
 	public String orderForm2(@PathVariable("no") int no, @PathVariable("String") String date, Model model) {
 		System.out.println("orderForm2()");
-		System.out.println(date);
 
 		Map<String, Object> map = showingService.getShowingDateList(no);
 

@@ -320,7 +320,16 @@ $(document).ready(function() {
 	$("#ticketing").on("click", function(e){
 		e.preventDefault()
 		console.log("예매");
-		popup();
+		
+		var authUser = '${sessionScope.authUser}'+'';
+		// 로그인 안되면 로그인 페이지로
+		if(authUser == ''){
+			alert("로그인이 필요합니다.");
+			window.location.href = '${pageContext.request.contextPath}/user/loginForm';
+			
+		}else{		
+			popup();
+		}
 		
 	});
 	//팝업창

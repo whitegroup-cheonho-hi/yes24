@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import org.apache.taglibs.standard.tag.common.fmt.BundleSupport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -42,14 +43,14 @@ public class ShowService {
 	String saveDir = "C:/yes24/img/upload/";
 
 	// ------------------ 공연등록
-	public int insertShow(ShowVO vo, MultipartFile file1, MultipartFile file2) {
+	public int insertShow(ShowVO vo, MultipartFile file1, MultipartFile file2, MultipartFile file3) {
 		System.out.println("insertShow Service()");
 
 		int result = 0;
 
-		if (!file1.isEmpty() && !file2.isEmpty()) {
+		if (!file1.isEmpty() && !file2.isEmpty() && !file3.isEmpty()) {
 
-			fileCheck(vo, file1, file2);
+			fileCheck(vo, file1, file2, file3);
 
 			result = showDAO.insertShow(vo);
 
@@ -119,23 +120,43 @@ public class ShowService {
 	}
 
 	// ------------------ 공연수정
-	public int updateShow(ShowVO vo, MultipartFile file1, MultipartFile file2) {
+	public int updateShow(ShowVO vo, MultipartFile file1, MultipartFile file2, MultipartFile file3) {
 		System.out.println("updateShow Service()");
 
-		// 파일두개가 수정될때
-		if (!file1.isEmpty() && !file2.isEmpty()) {
+		// 파일세개가 수정될때
+		if (!file1.isEmpty() && !file2.isEmpty() && !file3.isEmpty()) {
 
-			fileCheck(vo, file1, file2);
+			fileCheck(vo, file1, file2, file3);
 
-			// 메인이미지만 수정될때
+			// 메인 서브 이미지 수정될때
+		} else if (!file1.isEmpty() && !file2.isEmpty()) {
+
+			fileCheck(vo, file1, file2, 1);
+
+			// 메인 상세 이미지 수정될때
+		} else if (!file1.isEmpty() && !file3.isEmpty()) {
+
+			fileCheck(vo, file1, file3, 2);
+
+			// 서브 상세 이미지 수정될때
+		} else if (!file2.isEmpty() && !file3.isEmpty()) {
+
+			fileCheck(vo, file2, file3, 3);
+
+			// 메인 이미지 수정될때
 		} else if (!file1.isEmpty()) {
 
 			fileCheck(vo, file1, 1);
 
-			// 서브이미지만 수정될떄
+			// 서브 이미지 수정될떄
 		} else if (!file2.isEmpty()) {
 
 			fileCheck(vo, file2, 2);
+			
+			// 상세 이미지 수정될때
+		} else if (!file3.isEmpty()) {
+
+			fileCheck(vo, file3, 3);
 		}
 
 		return showDAO.updateShow(vo);
@@ -297,7 +318,51 @@ public class ShowService {
 	}
 
 	// ------------- 파일체크 & 저장
-	public void fileCheck(ShowVO vo, MultipartFile file1, MultipartFile file2) {
+	public void fileCheck(ShowVO vo, MultipartFile file1, MultipartFile file2, MultipartFile file3) {
+
+		if (!file1.isEmpty() && !file2.isEmpty() && !file3.isEmpty()) {
+			// 오리지널파일
+			String orgName = file1.getOriginalFilename();
+			String orgName2 = file2.getOriginalFilename();
+			String orgName3 = file3.getOriginalFilename();
+
+			// 확장자
+			String exName = orgName.substring(orgName.indexOf("."));
+			String exName2 = orgName2.substring(orgName2.indexOf("."));
+			String exName3 = orgName3.substring(orgName3.indexOf("."));
+
+			// 저장파일 이름
+			String saveName = System.currentTimeMillis() + UUID.randomUUID().toString() + exName;
+			String saveName2 = System.currentTimeMillis() + UUID.randomUUID().toString() + exName2;
+			String saveName3 = System.currentTimeMillis() + UUID.randomUUID().toString() + exName3;
+
+			// 파일패스
+			String filePath = saveDir + saveName;
+			String filePath2 = saveDir + saveName2;
+			String filePath3 = saveDir + saveName3;
+
+			try {
+				file1.transferTo(new File(filePath));
+				file2.transferTo(new File(filePath2));
+				file3.transferTo(new File(filePath3));
+
+				vo.setMainImage(saveName);
+				vo.setSubImage(saveName2);
+				vo.setDetailedImage(saveName3);
+
+			} catch (IOException e) {
+				// 파일 처리 중 예외가 발생한 경우 예외 처리 로직을 추가합니다.
+				System.out.println("Error occurred while uploading file.");
+				e.printStackTrace();
+			}
+		} else {
+			// 업로드된 파일이 없는 경우에 대한 처리를 수행합니다.
+			System.out.println("No file uploaded.");
+		}
+	}
+
+	// ------------- 파일체크 & 저장
+	public void fileCheck(ShowVO vo, MultipartFile file1, MultipartFile file2, int no) {
 
 		if (!file1.isEmpty() && !file2.isEmpty()) {
 			// 오리지널파일
@@ -319,9 +384,21 @@ public class ShowService {
 			try {
 				file1.transferTo(new File(filePath));
 				file2.transferTo(new File(filePath2));
+				if (no == 1) {
 
-				vo.setMainImage(saveName);
-				vo.setSubImage(saveName2);
+					vo.setMainImage(saveName);
+					vo.setSubImage(saveName2);
+
+				} else if (no == 2) {
+
+					vo.setMainImage(saveName);
+					vo.setDetailedImage(saveName2);
+
+				} else if (no == 3) {
+
+					vo.setSubImage(saveName);
+					vo.setDetailedImage(saveName2);
+				}
 
 			} catch (IOException e) {
 				// 파일 처리 중 예외가 발생한 경우 예외 처리 로직을 추가합니다.
@@ -353,11 +430,18 @@ public class ShowService {
 				file.transferTo(new File(filePath));
 
 				if (no == 1) {
+					
 					vo.setMainImage(saveName);
-					System.out.println(saveName);
-				} else {
+					
+				} else if (no == 2) {
+					
 					vo.setSubImage(saveName);
-					System.out.println(saveName);
+					
+
+				} else if (no == 3) {
+					
+					vo.setDetailedImage(saveName);
+					
 				}
 			} catch (IOException e) {
 				// 파일 처리 중 예외가 발생한 경우 예외 처리 로직을 추가합니다.

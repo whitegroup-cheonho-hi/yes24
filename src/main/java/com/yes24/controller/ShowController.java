@@ -47,12 +47,12 @@ public class ShowController {
 	// ------------------- 공연 등록
 	@RequestMapping(value = "/insertShow", method = RequestMethod.POST)
 	public String insertShow(@ModelAttribute ShowVO vo, @RequestParam("file1") MultipartFile file1,
-			@RequestParam("file2") MultipartFile file2) {
+			@RequestParam("file2") MultipartFile file2, @RequestParam("file3") MultipartFile file3) {
 		System.out.println("insertShow()");
 
-		showService.insertShow(vo, file1, file2);
+		showService.insertShow(vo, file1, file2, file3);
 
-		int showSq = vo.getshowSq();
+		int showSq = vo.getShowSq();
 
 		return "redirect:/show/showSeatClassInsertForm/" + showSq;
 	}
@@ -62,7 +62,7 @@ public class ShowController {
 	public String showModifyForm(@PathVariable("no") int no, Model model) {
 		System.out.println("showModifyForm()");
 
-		Map<String, Object> map = showService.getShow(no,2);
+		Map<String, Object> map = showService.getShow(no, 2);
 
 		model.addAttribute("show", map.get("showVO"));
 		model.addAttribute("concertHallList", map.get("concertHallList"));
@@ -73,10 +73,10 @@ public class ShowController {
 	// ------------------- 공연 수정
 	@RequestMapping(value = "/updateShow", method = RequestMethod.POST)
 	public String updateShow(@ModelAttribute ShowVO vo, @RequestParam("file1") MultipartFile file1,
-			@RequestParam("file2") MultipartFile file2) {
+			@RequestParam("file2") MultipartFile file2, @RequestParam("file3") MultipartFile file3) {
 		System.out.println("updateShow()");
 
-		int result = showService.updateShow(vo, file1, file2);
+		int result = showService.updateShow(vo, file1, file2, file3);
 
 		return "";
 	}
@@ -86,7 +86,7 @@ public class ShowController {
 	public String showSeatClassInsertForm(Model model, @PathVariable("no") int no) {
 		System.out.println("showSeatClassInsertForm()");
 
-		Map<String, Object> map = showService.getShow(no,1);
+		Map<String, Object> map = showService.getShow(no, 1);
 
 		model.addAttribute("show", map.get("showVO"));
 		model.addAttribute("concertHall", map.get("concertHallVO"));
@@ -99,7 +99,7 @@ public class ShowController {
 	public String showSeatClassModifyForm(Model model, @PathVariable("no") int no) {
 		System.out.println("showSeatClassModifyForm()");
 
-		Map<String, Object> map = showService.getShow(no,3);
+		Map<String, Object> map = showService.getShow(no, 3);
 
 		model.addAttribute("show", map.get("showVO"));
 		model.addAttribute("concertHall", map.get("concertHallVO"));
@@ -114,7 +114,7 @@ public class ShowController {
 	public String detailForm(@PathVariable("no") int no, Model model) {
 		System.out.println("detailForm()");
 
-		Map<String, Object> map = showService.getShow(no,1);
+		Map<String, Object> map = showService.getShow(no, 1);
 
 		model.addAttribute("show", map.get("showVO"));
 		model.addAttribute("concertHall", map.get("concertHallVO"));

@@ -281,6 +281,10 @@ header.pc #header h1 {margin-right: -1px;}
 <script>
 	$(document).on('ready', function() {
 		
+		// 포커스
+		var category = '${category}';
+		$("#l5").addClass("on");
+		
 		// 알림신청
 		$("#insertAlarm").on("click", function() {
 		    var price = $("#price").val();

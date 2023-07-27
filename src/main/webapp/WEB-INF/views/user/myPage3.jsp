@@ -63,7 +63,7 @@
 					<c:import url="/WEB-INF/views/includes/userNav.jsp"></c:import>
 					<!-- //aside -->
 					<div class="date_list bg">
-						<br> <b class="subtitle">나의 맟춤 설정</b>
+						<br> <b class="subtitle">나의 알림함</b>
 						<div>
 							<ul>
 								<li class="sec"><span>알림일자별 조회</span> <input id="txtStart"
@@ -106,7 +106,7 @@
 					<div class="mypage_contain">
 						<div class="mycont">
 							<h2 class="tit">
-								&nbsp;<b class="subtitle">알림 신청 내역 </b>
+								&nbsp;<b class="subtitle">양도알림 신청 내역 </b>
 							</h2>
 							<div id="divOrderList" style="">
 								<table class="tmypage" summary="티켓 오픈 알람">
@@ -148,7 +148,7 @@
 					<div class="mypage_contain">
 						<div class="mycont">
 							<h2 class="tit">
-								&nbsp;<b class="subtitle">알림함</b>
+								&nbsp;<b class="subtitle">양도 알림함</b>
 							</h2>
 							<div id="divOrderList" style="">
 								<table class="tmypage" summary="최근 예매내역 리스트">
