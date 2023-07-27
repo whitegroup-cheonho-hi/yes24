@@ -41,7 +41,7 @@ section {width: 1000px;margin: 0 auto;padding-top: 70px;height: 1200px;}
 #showHref {text-decoration: none;}
 #mypage_contain2 {height: 200px;}
 .btnC.w_90 .bWrap{width:361px;}
-
+ 
 </style>
 </head>
 <body>
