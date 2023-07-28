@@ -114,9 +114,10 @@ public class ShowController {
 	public String detailForm(@PathVariable("no") int no, Model model) {
 		System.out.println("detailForm()");
 
-		Map<String, Object> map = showService.getShow(no, 1);
+		Map<String, Object> map = showService.getShow(no, 3);
 
 		model.addAttribute("show", map.get("showVO"));
+		System.out.println(map.get("showVO"));
 		model.addAttribute("concertHall", map.get("concertHallVO"));
 
 		return "show/showDetail";

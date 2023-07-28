@@ -39,7 +39,7 @@
 #map {margin: 0 auto;}
 #cName {width: 150px;text-align: center;padding: 4px 0;font-size: 19px;}
 #cName img {width: 20px;}
-#ticketingdiv {text-align: center;}
+#ticketingdiv {text-align: center;    margin-bottom: 40px;}
 #ticketingdiv div {padding: 5px;width: 250px;background: #f43142;margin: 0 auto;border: 2px solid #f43142;}
 .ticketing {font-size: 20px;color: #fff;display: block; height:100%;}
 
@@ -59,6 +59,11 @@
 #remainingSeats .fc-view-harness{padding: 10px;}
 .rn-product-area3 #precautions{color:red;}
 .fc-event{cursor: pointer;}
+#detailedImage{ text-align: center;    margin-bottom: 30px;}
+/* 탑버튼 */
+.top_btn{position: fixed; right: 100px; bottom: 100px; }
+.top_btn img{width: 50px;}
+
 
 </style>
 </head>
@@ -116,7 +121,7 @@
 							<dt>등급</dt>
 							<dd>&nbsp;${show.viewingAge}세 이상</dd>
 							<dt>관람시간</dt>
-							<dd>&nbsp;총 ${show.showTime}분 (인터미션 20분)</dd>
+							<dd>&nbsp;총 ${show.showTime}</dd>
 							<dt>출연</dt>
 							<dd>
 								&nbsp;<a href="https://www.google.com/search?q=${show.cast}"
@@ -204,13 +209,19 @@
 					<a id="ticketing" href="#none" class="ticketing">예매하기</a>
 				</div>
 			</div>
+			<div id="detailedImage"><img src="${pageContext.request.contextPath}/upload/${show.detailedImage}"></div>
 		</div>
 		<br>
 		<h2>공연장 위치 정보</h2>
 		<!-- 지도를 표시할 div 입니다 -->
 		<div id="map" style="width: 1200px; height: 350px;"></div>
 	</section>
-
+	
+	<!-- 탑버튼 -->
+	<a href="#none" class="top_btn"><img
+		src="${pageContext.request.contextPath }/assets/images/ver02/top.png"
+		alt=""></a>
+	<!-- /탑버튼 -->
 
 	<!-- Footer -->
 	<c:import url="/WEB-INF/views/includes/footer.jsp"></c:import>
@@ -219,6 +230,24 @@
 
 <script>
 $(document).ready(function() {
+	
+	  //top버튼
+    $( window ).scroll( function() {
+      if ( $( this ).scrollTop() > 200 ) {
+        $( '.top_btn' ).fadeIn();
+      } else {
+        $( '.top_btn' ).fadeOut();
+      }
+    } );
+    $( '.top_btn' ).click( function() {
+      $( 'html, body' ).animate( { scrollTop : 0 }, 400 );
+      return false;
+    } );
+
+	
+	
+	
+	
 	let dayListEl;
 	let dayList;
 	let date;

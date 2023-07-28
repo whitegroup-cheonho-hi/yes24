@@ -39,9 +39,9 @@
 <style>
 .wrapper {max-width: 1920px;margin: 0 auto;}
 .center {width: 100%;}
-.slider {margin: 100px auto;}
-.slick-slide {margin: 0px 15px;}
-.slick-slide img {width: 100%;}
+.slider {margin: 100px auto 30px;}
+.slick-slide {margin: 0px 15px ;}
+.slick-slide img {width: 100%;height: 400px; }
 .slick-prev, .slick-next {top: 48%;width: 50px;height: 60px;z-index: 99;}
 .slick-next:before {content: '';display: block;width: 50px;height: 60px;background:	url('http://tkfile.yes24.com/imgNew/common/slide-dir-next.png')	no-repeat;}
 .slick-prev:before {content: '';display: block;width: 50px;height: 60px;background:	url('http://tkfile.yes24.com/imgNew/common/slide-dir-prev.png')	no-repeat;}
@@ -49,14 +49,15 @@
 .slick-prev {left: 100px;}
 .slick-track {padding: 30px 0;}
 .slick-slide {transition: all ease-in-out .3s;opacity: 0.7;}
-.slick-current {opacity: 1;transform: scaleY(1.1) scaleX(1.1);}
+.slick-current {opacity: 1;transform: scaleY(1.2) scaleX(1.1);}
 .slick-active {	opacity: 1;}
 
 section{width: 1200px; margin: 0 auto;     text-align: center;}
 section ul {  display: flex;  justify-content: flex-start; flex-direction: row; flex-wrap: wrap; margin: 0 -15px; }
 section ul li{ width: calc(25% - 92px); margin: 0 15px; margin-bottom: 70px;}
-section ul li a img{width: 100%;}
-section ul li a span{display: block; text-align: center; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;}
+section ul li a img{width: 100%;margin-bottom:5px;}
+section ul li a .gray{ color: #888;}
+section ul li a span{margin-bottom:5px; display: block; text-align: center; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;}
 section ul li a span.tit{font-size: 14px; margin-top:15px;}
 section ul li a span.price{font-weight: 600; font-size: 17px; margin-top: 2px;}
 
@@ -91,13 +92,13 @@ section ul li a span.price{font-weight: 600; font-size: 17px; margin-top: 2px;}
 			</c:forEach>
 		</section>
 	</div>
-
 	<section>
 		<div id="ySContent">
 			<div id="show"></div>
 			<!-- ==================== 정보 입력 영역 시작 ==================== -->
 			<div class="">
 				<div class="listItem">
+				<p class="m2-tit"><img src="http://tkfile.yes24.com/imgNew/genre/m2-tit02.png" alt=""></p>
 
 					<section>
 						<ul>
@@ -106,7 +107,7 @@ section ul li a span.price{font-weight: 600; font-size: 17px; margin-top: 2px;}
 									href="${pageContext.request.contextPath}/show/detail/${show.showSq}">
 										<img
 										src="${pageContext.request.contextPath}/upload/${show.subImage}">
-										<span>${show.showName}</span> <span>${show.startDate}&nbsp;~&nbsp;${show.endDate}</span>
+										<span class="gray">${show.showName}</span> <span>${show.startDate}&nbsp;~&nbsp;${show.endDate}</span>
 								</a></li>
 							</c:forEach>
 						</ul>
@@ -169,11 +170,11 @@ section ul li a span.price{font-weight: 600; font-size: 17px; margin-top: 2px;}
 		// 롤링
 		$(".center").slick({
 			//dots: true,
-			centerPadding : "200px",
+			centerPadding : "300px",
 			autoplay : true,
 			infinite : true,
 			centerMode : true,
-			slidesToShow : 5,
+			slidesToShow : 3,
 			slidesToScroll : 1
 		});
 		

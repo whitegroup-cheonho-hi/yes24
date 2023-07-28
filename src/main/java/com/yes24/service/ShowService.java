@@ -240,6 +240,7 @@ public class ShowService {
 			ConcertHallVO concertHallVO = concertHallDAO.getConcertHall(showVO.getConcertHallSq());
 
 			map.put("concertHallVO", concertHallVO);
+						
 
 		}
 		if (sortation == 2) {
