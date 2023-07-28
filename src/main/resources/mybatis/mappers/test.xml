@@ -28,10 +28,8 @@
 		]]>
 		
 		<if test="keyword2 != null and keyword2 != ''">
-        <![CDATA[		                    
             	WHERE 
                 		CONCERT_HALL_NAME like '%'||#{keyword2}||'%' OR CONCERT_HALL_BASIC_ADDR like '%'||#{keyword2}||'%'
-        ]]>
     	</if>
 		
 		
@@ -270,11 +268,29 @@
 				
 		]]>
 		<if test="keyword2 != null and keyword2 != ''">
-		<![CDATA[		                    
 		                WHERE 
 		                        CONCERT_HALL_NAME like '%'||#{keyword2}||'%' OR CONCERT_HALL_BASIC_ADDR like '%'||#{keyword2}||'%'
-		]]>
 		</if>
+	</select>
+	
+	<!-- 양도리스트수 가져오기 -->
+	<select id="getTransferTotal" resultType="int" parameterType="Criteria">
+		<![CDATA[
+
+			SELECT COUNT(*) 
+			FROM 
+				transfer_board
+			WHERE
+				1 = 1		
+		]]>
+
+		<if test='keyword2 != "A"'>
+	
+	
+           	AND
+			        transfer_stat = #{keyword2}
+		</if>
+    	
 	</select>
 	
 	<!-- 공연장수 검색 후 가져오기 -->
@@ -289,8 +305,90 @@
 		]]>
 	</select>
 	
-	
-	
+	<!-- 양도리스트 가져오기 -->
+	<select id="getTransferList" parameterType="Criteria" resultType="TransferBoardVO">
+		<![CDATA[
+			SELECT
+			        showName,
+			        sellUser,
+			        buyUser,
+			        ticketSeatPrice,
+			        hopePrice,
+			        ticketSeat,
+			        transferDate,
+			        startTime,
+			        seatClass,
+			        transferStat
+			FROM
+			    (SELECT 
+			        ROWNUM as rn,
+			                showName,
+			                sellUser,
+			                buyUser,
+			                ticketSeatPrice,
+			                hopePrice,
+			                ticketSeat,
+			                transferDate,
+			                startTime,
+			                seatClass,
+        					transferStat
+			            
+			    FROM
+			                (SELECT DISTINCT
+				                        a.transfer_board_Sq,
+				                        d.show_name AS showName,
+				                        g.user_id AS sellUser,
+				                        h.user_id AS buyUser,
+				                        b.ticket_seat_price AS ticketSeatPrice,
+				                        a.hope_price AS hopePrice,
+				                        b.ticket_seat AS ticketSeat,
+				                        TO_CHAR(a.transfer_date, 'YYYY-MM-DD') AS transferDate,
+				                        TO_CHAR(c.start_time, 'YYYY-MM-DD') AS startTime,
+				                        e.seat_class AS seatClass,
+				                        CASE 
+				                            WHEN a.transfer_stat = 'N' THEN '거래완료'
+				                            WHEN a.transfer_stat = 'Y' THEN '거래중'
+				                        END AS transferStat
+				                FROM 
+				                        transfer_board a
+				                INNER JOIN
+				                        ticket b ON b.ticket_sq = a.ticket_sq
+				                INNER JOIN
+				                        showing c ON c.showing_sq = b.showing_sq 
+				                INNER JOIN
+				                        show d ON d.show_sq = c.show_sq
+				                INNER JOIN 
+				                        seat_class e ON e.show_sq = d.show_sq
+				                INNER JOIN
+				                        showing_seat f ON f.seat_class_sq = e.seat_class_sq
+				                INNER JOIN
+				                        users g ON a.sell_user_sq = g.user_sq
+				                LEFT JOIN
+				                        users h ON a.buy_user_sq = h.user_sq
+				                WHERE
+										1 = 1
+
+		]]>
+		<if test='keyword2 != "A"'>
+				            	AND
+					        			a.transfer_stat = #{keyword2}
+		</if>
+
+
+		
+		
+		<![CDATA[
+				                        
+				                        
+				                
+				                ORDER BY 
+										a.transfer_board_Sq DESC
+			                ) 
+			            )
+			WHERE 
+			    rn BETWEEN ((#{pageNum} -1) * #{amount} + 1) AND #{pageNum} * #{amount}
+		]]>
+	</select>
 	
 	
 	

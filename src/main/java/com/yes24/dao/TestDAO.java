@@ -10,6 +10,7 @@ import com.yes24.vo.ConcertHallVO;
 import com.yes24.vo.Criteria;
 import com.yes24.vo.ShowVO;
 import com.yes24.vo.ShowingVO;
+import com.yes24.vo.TransferBoardVO;
 
 @Repository
 public class TestDAO {
@@ -67,9 +68,20 @@ public class TestDAO {
 		int num = sqlSession.selectOne("test.getShowTotal", cri);
 		return num;
 	}
-	//공연장 검색후  가져오기
+	//공연장수 검색후  가져오기
 	public int getConcertHallTotal(Criteria cri) {
 		return sqlSession.selectOne("test.getConcertHallTotal", cri);
+	}
+	//양도리스트수 가져오기
+	public int getTransferTotal(Criteria cri) {
+		int total = sqlSession.selectOne("test.getTransferTotal", cri);
+		return total;
+	}
+	
+	//양도리스트 가져오기
+	public List<TransferBoardVO> getTransferList(Criteria cri) {
+		List<TransferBoardVO> list = sqlSession.selectList("test.getTransferList", cri);
+		return list;
 	}
 	
 	

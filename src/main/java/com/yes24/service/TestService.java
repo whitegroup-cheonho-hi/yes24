@@ -13,6 +13,7 @@ import com.yes24.vo.ConcertHallVO;
 import com.yes24.vo.Criteria;
 import com.yes24.vo.ShowVO;
 import com.yes24.vo.ShowingVO;
+import com.yes24.vo.TransferBoardVO;
 
 @Service
 public class TestService {
@@ -25,15 +26,24 @@ public class TestService {
 		return testdao.getShow(no);
 	}
 	
+	//양도리스트 가져오기
+	public Map<String, Object> getTransferList(Criteria cri){
+		Map<String, Object> map = new HashMap<>();
+		int total = testdao.getTransferTotal(cri);
+		List<TransferBoardVO>list = testdao.getTransferList(cri);
+		PageMakerDTO pageMake = new PageMakerDTO(total, cri);
+		map.put("pageMake", pageMake);
+		map.put("list", list);
+		return map;
+	}
+	
 	//예매현황 정보 가져오기
 	public Map<String, Object> getTicketingDetailHallName(int no){
-		System.out.println("getTicketingDetailHallName Service()");
 		Map<String, Object> map = new HashMap<>();
 		ShowVO vo = testdao.getShow(no);
 		ConcertHallVO hallName = testdao.getTicketingDetailHallName(vo);
 		map.put("show", vo);
 		map.put("hallName", hallName);
-		System.out.println(map);
 		return map;
 	}
 	

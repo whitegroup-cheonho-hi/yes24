@@ -74,15 +74,27 @@ public class testController {
 		return "admin/concertHallList";
 	}
 	
+	//양도리스트
+	@RequestMapping(value = "/getTransferList/{key}", method = RequestMethod.GET)
+	public String getTransferList(@PathVariable("key") String key ,Model model, Criteria cri) {
+		cri.setKeyword2(key);
+		Map<String, Object> map = testservice.getTransferList(cri);
+		model.addAttribute("list", map.get("list"));
+		model.addAttribute("pageMake", map.get("pageMake"));
+		model.addAttribute("key", key);
+		System.out.println(map);
+		return "admin/transferList";
+	}
+	
 	//예매상태 페이지
-		@RequestMapping(value = "/ticketingDetail/{no}", method = RequestMethod.GET)
-		public String getTicketingDetail(@PathVariable("no") int no, Model model) {
-			Map<String, Object> map = testservice.getTicketingDetailHallName(no);
-			model.addAttribute("show", map.get("show"));
-			model.addAttribute("hallName", map.get("hallName"));
-			System.out.println(map);
-			return "admin/ticketingDetail";
-		}
+	@RequestMapping(value = "/ticketingDetail/{no}", method = RequestMethod.GET)
+	public String getTicketingDetail(@PathVariable("no") int no, Model model) {
+		Map<String, Object> map = testservice.getTicketingDetailHallName(no);
+		model.addAttribute("show", map.get("show"));
+		model.addAttribute("hallName", map.get("hallName"));
+		System.out.println(map);
+		return "admin/ticketingDetail";
+	}
 	
 	// 회차등록 폼
 	@RequestMapping(value = "/showingInsertForm/{no}", method = RequestMethod.GET)
