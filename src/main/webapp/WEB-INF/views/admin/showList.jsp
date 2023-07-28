@@ -86,7 +86,7 @@
 							<div class="listItemTxt">
 								<p class="listItemTit">${showList.showName}</p>
 								<button type="button" class="btnstat" data-sq="${showList.showSq}" >예매대기</button>
-								<button type="button" class="ticketing btnstat" data-sq="${showList.showSq}" >예매현황</button>
+								<button type="button" class="ticketing" data-sq="${showList.showSq}" >예매현황</button>
 								<button type="button" class="btndelete" data-sq="${showList.showSq}" style="background-color: #f20055">삭 제</button>
 							</div>
 						</div>
@@ -174,12 +174,14 @@
 	});
 	
 	//예매현황버튼
-	$('.ticketing .btnstat').on('click', function() {
+	$('.ticketing').on('click', function() {
+		console.log("버튼클릭");
+		
 		//넘길 데이터 모으기
-		var showSq = $(this).data("sq");
-		var showVO = {showSq : showSq, showStat : 2};
-		/* var url = "${pageContext.request.contextPath}/show1/showUpdateStat/" + showSq; */
-		showUpdateStat(showVO)
+	 	var showSq = $(this).data("sq");
+		var url = "${pageContext.request.contextPath}/show1/ticketingDetail/" + showSq;
+		console.log(url);
+		location.href = url; 
 		
 	});
 	
