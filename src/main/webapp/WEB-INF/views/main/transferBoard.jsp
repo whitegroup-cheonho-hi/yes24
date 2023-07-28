@@ -83,7 +83,7 @@ section ul li a span.price{font-weight: 600; font-size: 17px; margin-top: 2px;}
 .slick-slide{height: 30%;}
 section > h2{margin-top: 80px;    margin-bottom: 75px;}
 #l0{width: 1230px; text-align: right;}
-#alarm{cursor: pointer; width: 160px; height: 35px; background: #f43142; color: #fff; font-size: 22px; border: none;}
+#alarm{border-radius: 5px;cursor: pointer; width: 160px; height: 35px; background: #f43142; color: #fff; font-size: 22px; border: none;}
 #nav2 li{width: 98px;    font-size: 20px;}
 #nav2 #l4{width: 300px;}
 #nav2 #l4 #searchKeyword{margin-left: 58px; outline:none; width: 190px; border: none; border-bottom: 2px solid #000;  color: #333;}
@@ -104,8 +104,8 @@ section > h2{margin-top: 80px;    margin-bottom: 75px;}
 /* 버튼 */
 .btn_wrap{margin-top: 40px; display: flex; justify-content: center;}
 .btn_wrap a{padding: 15px 50px; margin: 0 5px; font-weight: 600;}
-.btn_wrap a.order_btn{background: #f43142; border: 1px solid #f43142; color: #fff;}
-.btn_wrap a.shopping_btn{background: #fff; border: 1px solid #f43142; color: #5c5c5c;}
+.btn_wrap a.order_btn{border-radius: 5px;background: #f43142; border: 1px solid #f43142; color: #fff;}
+.btn_wrap a.shopping_btn{border-radius: 5px;background: #fff; border: 1px solid #f43142; color: #5c5c5c;}
 .transferButton {background-color: #f43142;color: #fff; width: 50px; height: 21px; border: none;}
 .transferCancelButton {background-color: #f43142;color: #fff; width: 50px; height: 21px; border: none;}
 #moveForm1 input{height: 40px; vertical-align:middle; }

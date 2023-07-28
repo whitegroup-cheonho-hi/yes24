@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.yes24.service.ConcertHallService;
 import com.yes24.service.ShowService;
 import com.yes24.vo.ConcertHallVO;
+import com.yes24.vo.Criteria;
 import com.yes24.vo.JsonResult;
 import com.yes24.vo.SeatClassListVO;
 import com.yes24.vo.ShowVO;
@@ -111,13 +112,14 @@ public class ShowController {
 
 	// ------------------- 공연 상세
 	@RequestMapping(value = "/detail/{no}", method = RequestMethod.GET)
-	public String detailForm(@PathVariable("no") int no, Model model) {
+	public String detailForm(@PathVariable("no") int no, Model model, Criteria cri) {
 		System.out.println("detailForm()");
 
-		Map<String, Object> map = showService.getShow(no, 3);
+		Map<String, Object> map = showService.getShow(no, cri);
 
 		model.addAttribute("show", map.get("showVO"));
-		System.out.println(map.get("showVO"));
+		model.addAttribute("pageMaker", map.get("pageMaker"));
+		model.addAttribute("reviewList", map.get("reviewList"));
 		model.addAttribute("concertHall", map.get("concertHallVO"));
 
 		return "show/showDetail";

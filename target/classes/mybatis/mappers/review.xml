@@ -3,4 +3,152 @@
 
 <mapper namespace="review">
 
+
+	<!-- 리뷰등록 -->
+	<insert id="insertReview" parameterType="ReviewVO">
+
+		<selectKey keyProperty="reviewSq" resultType="int"
+			order="BEFORE">
+			SELECT seq_review_sq.NEXTVAL AS reviewSq FROM dual
+		</selectKey>
+	
+		<![CDATA[
+		
+			INSERT INTO review (
+						        review_sq,
+						        review_content,
+						        review_reg_date,
+						        grade,
+						        user_sq,
+						        show_sq
+						   	   )
+					    VALUES ( 
+					            #{reviewSq} ,
+						        #{reviewContent} ,
+						        SYSDATE ,
+						        #{grade} ,
+						        #{userSq} ,
+						        #{showSq}
+						       )
+				
+		]]>
+
+	</insert>
+
+	<!-- 리뷰정보 가져오기 -->
+	<select id="getReview" parameterType="int" resultType="ReviewVO">
+	
+		<![CDATA[
+
+			 SELECT DISTINCT
+				            review_sq        AS reviewsq,
+				            b.user_id        AS userid,
+				            grade,
+				            TO_CHAR(e.end_time, 'YYYY.MM.DD') AS viewingday,
+				            review_content   AS reviewcontent,
+				            TO_CHAR(review_reg_date, 'YYYY.MM.DD') AS reviewregdate,
+				            a.user_sq        AS usersq,
+				            a.show_sq        AS showsq
+				        FROM
+				            review a
+				            INNER JOIN users b ON a.user_sq = b.user_sq
+				            INNER JOIN ticketing c ON b.user_sq = c.user_sq
+				            LEFT JOIN ticket d ON c.ticketing_sq = d.ticketing_sq
+				            LEFT JOIN showing e ON d.showing_sq = e.showing_sq
+				       WHERE
+				            review_sq =	#{reviewSq}	
+		
+		]]>
+
+	</select>
+
+	<!-- 리뷰리스트 가져오기 -->
+	<select id="getReviewList" parameterType="Criteria"
+		resultType="ReviewVO">
+	
+		<![CDATA[
+
+			  SELECT
+				    reviewsq,
+				    userid,
+				    grade,
+				    viewingday,
+				    reviewcontent,
+				    reviewregdate,
+				    usersq,
+				    showsq
+				FROM
+				    (
+				        SELECT
+				            ROWNUM AS rn,
+				            reviewsq,
+				            userid,
+				            grade,
+				            viewingday,
+				            reviewcontent,
+				            reviewregdate,
+				            usersq,
+				            showsq
+				        FROM
+				            (
+				                SELECT DISTINCT
+				                    review_sq        AS reviewsq,
+				                    CASE
+				                        WHEN length(b.user_id) <= 3 THEN '
+				                     ]]>
+									***
+				                    <![CDATA[    
+				                        '  
+				                        ELSE substr(b.user_id, 1, length(b.user_id) - 3)
+				                             || '
+				                         ]]>
+										***
+				                         <![CDATA[    
+				                      
+				                         		' 
+				                    END AS userid,
+				                    grade,
+				                    TO_CHAR(e.end_time, 'YYYY.MM.DD') AS viewingday,
+				                    review_content   AS reviewcontent,
+				                    TO_CHAR(review_reg_date, 'YYYY.MM.DD') AS reviewregdate,
+				                    a.user_sq        AS usersq,
+				                    a.show_sq        AS showsq
+				                FROM
+				                    review a
+				                    INNER JOIN users b ON a.user_sq = b.user_sq
+				                    INNER JOIN ticketing c ON b.user_sq = c.user_sq
+				                    LEFT JOIN ticket d ON c.ticketing_sq = d.ticketing_sq
+				                    LEFT JOIN showing e ON d.showing_sq = e.showing_sq
+				                WHERE
+				                    a.show_sq = #{keyword}
+				                ORDER BY
+				                    review_sq DESC
+				            )
+				    )
+				WHERE
+				    rn > (#{pageNum}-1) * #{amount}
+				    AND rn <= #{pageNum} * #{amount}
+		
+		]]>
+
+	</select>
+
+
+	<!-- 리뷰개수 가져오기 -->
+	<select id="getTotal" parameterType="int" resultType="int">
+	
+		<![CDATA[
+
+			  SELECT
+				    COUNT(review_sq)
+				FROM
+				    review
+			   WHERE
+				    show_sq = #{showSq}
+		
+		]]>
+
+	</select>
+
+
 </mapper>

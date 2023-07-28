@@ -43,7 +43,7 @@
 #cName {width: 150px;text-align: center;padding: 4px 0;font-size: 19px;}
 #cName img {width: 20px;}
 #ticketingdiv {text-align: center;    margin-bottom: 60px;}
-#ticketingdiv div {padding: 5px;width: 250px;background: #f43142;margin: 0 auto;border: 2px solid #f43142;}
+#ticketingdiv div {border-radius: 5px;padding: 5px;width: 250px;background: #f43142;margin: 0 auto;border: 2px solid #f43142;}
 .ticketing {font-size: 20px;color: #fff;display: block; height:100%;}
 
 .concertHall .position{margin-bottom: 50px;}
@@ -68,6 +68,41 @@
 .top_btn img{width: 50px;}
 .rn-0803{text-align: center;font-size: 30px; margin-bottom: 40px;}
 
+
+/* 리뷰등록창 */
+.inquiry_popup{position: fixed; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 9999999; top: 0; left: 0;}
+.inquiry_popup .inquiry_close{display: none;}
+.inquiry_popup .inquiry_write{border-radius: 5px; box-sizing: border-box; padding: 60px; width: 700px; height: 540px; position: absolute; top: 10%; left: 50%; margin-left: -350px; background: #fff;}
+.inquiry_popup .inquiry_write h3{ font-weight: 700; font-size: 28px; margin-bottom: 20px; text-align: center;}
+.inquiry_popup .inquiry_write table { width: 100%;border: 1px solid #ccc; border-collapse: collapse; }
+.inquiry_popup .inquiry_write th,
+.inquiry_popup .inquiry_write td {vertical-align: middle; border: 1px solid #ccc; padding: 10px; text-align: left;}
+.inquiry_popup .inquiry_write td input#secret_write_N{margin-left: 20px;}
+.inquiry_popup .inquiry_write td input#inquiry_tit{border-radius: 5px; border: 1px solid #ccc; padding: 10px; font-size: 16px; width: 100%; box-sizing: border-box;}
+.inquiry_popup .inquiry_write td textarea#content{border-radius: 5px;  resize: none;border: 1px solid #ccc; padding: 10px; font-size: 16px; width: 100%; height: 190px; box-sizing: border-box;}
+.inquiry_popup .inquiry_write td .textLengthWrap{text-align: right; color: #aaa;}
+/* 버튼 */
+.btn_wrap{margin-top: 40px; display: flex; justify-content: center;}
+.btn_wrap a{padding: 15px 50px; margin: 0 5px; font-weight: 600;}
+.btn_wrap a.order_btn{ border-radius: 5px;background: #ec7d2c; border: 1px solid #ec7d2c; color: #fff;}
+.btn_wrap a.shopping_btn{  border-radius: 5px;background: #fff; border: 1px solid #ec7d2c; color: #ec7d2c;}
+.transferButton { border-radius: 3px; background-color: #f43142;color: #fff; width: 50px; height: 21px; border: none;}
+.transferCancelButton {border-radius: 3px; background-color: #f43142;color: #fff; width: 50px; height: 21px; border: none;}
+#moveForm1 input{width: 98%; height: 25px}
+.grade{    color: #ec7d2c;}
+
+/* 페이징 */
+.paging{width: 1000px; margin: 20px auto; display: flex; justify-content: center;}
+.paging li{margin: 0 10px; width: 14px;}
+.paging li a{font-size: 18px; height: 100%;}
+.paging li.on a{color: #4982cf;}
+.paging li.first{width: 14px; margin-right: 0; background: url('https://flyairseoul.com/CW/public/images/icons/common-s57efedab2d.png') no-repeat; background-position: 0 -6983px;}
+.paging li.pre{width: 9px; background: url('https://flyairseoul.com/CW/public/images/icons/common-s57efedab2d.png') no-repeat; background-position: 0 -7151px;}
+.paging li.next{width: 9px; background: url('https://flyairseoul.com/CW/public/images/icons/common-s57efedab2d.png') no-repeat; background-position: 0 -7095px;}
+.paging li.last{width: 14px;margin-left: 0; background: url('https://flyairseoul.com/CW/public/images/icons/common-s57efedab2d.png') no-repeat; background-position: 0 -7039px;}
+.paging-area{width:1100px; margin: 0 auto;margin-left: 16%;}
+.active .anum {color: #4982cf; font-weight: bold; font-size: 19px;}
+
 </style>
 </head>
 <body>
@@ -83,8 +118,9 @@
 					<div class="rn-product-short-data">
 						<p>
 							<span class="ps-date">${show.startDate} ~ ${show.endDate}</span><a
-								href="#map" id="ps-location"><span class="ps-location">공연장
+								href="#maptitle" id="ps-location"><span class="ps-location">공연장
 									위치보기</span></a>
+								<a href="#review" id="ps-location2"><span class="ps-location">리뷰 보기</span></a>
 						</p>
 					</div>
 				</div>
@@ -216,80 +252,84 @@
 				<h1>공연 정보</h1>					
 			</div>
 			<div id="detailedImage"><img src="${pageContext.request.contextPath}/upload/${show.detailedImage}"></div>
-		</div>
+		<br id="maptitle">
 		<br>
+		<br>
+		<br>
+		<br>		
+		<br>
+		<br>
+		<br>
+		</div>
 		<h2>공연장 위치 정보</h2>
+		<br>
 		<!-- 지도를 표시할 div 입니다 -->
 		<div id="map" style="width: 1200px; height: 350px;"></div>
-		<section id="review " style="width: 1200px;">
+		<section id="review" style="width: 1200px;">
 			<p class="rn-tab-area-tit"><span>관람후기</span></p>
 			<div class="rn-0903"><!--후기등록전 안내문, 팝업버튼-->
 				<div class="rn-09-tit tab02-afterword">
 					<p class="rn-red">매매, 욕설 등 예스24 게시판 운영 규정에 위반되는 글은 사전 통보없이 삭제될 수 있습니다.</p>
 					<p>개인정보가 포함된 내용은 삼가 주시기 바라며, 게시물로 인해 발생하는 문제는 작성자 본인에게 책임이 있습니다.</p>
-					<a href="#"><img src="http://tkfile.yes24.com/imgNew/sub/rn-btn-review.png" alt=""></a>
+					<a id="insertReviewForm" href="#none"><img src="http://tkfile.yes24.com/imgNew/sub/rn-btn-review.png" alt=""></a>
 				</div>
 			</div>
 			<div class="rn-0904-container">
-				<ul class="rn-0904">
-					<li>
-						<div class="rn-0904-ttbox">
-							<span class="rn-0904-tt1">예매자</span>
-							<span class="rn-0904-tt2">limg***</span>
-							<span class="rn-0904-tt3">2023.07.28</span>
-							<span class="rn-0904-tt4" data-star="4">
-								<img src="http://tkfile.yes24.com/imgNew/common/rn-ico-tt4-1.png" alt="">
-								<img src="http://tkfile.yes24.com/imgNew/common/rn-ico-tt4-1.png" alt="">
-								<img src="http://tkfile.yes24.com/imgNew/common/rn-ico-tt4-1.png" alt="">
-								<img src="http://tkfile.yes24.com/imgNew/common/rn-ico-tt4-1.png" alt="">
-								<img src="http://tkfile.yes24.com/imgNew/common/rn-ico-tt4-2.png" alt="">
-							</span>
-							<span class="rn-0904-tt7">(관람일:2023.07.21)</span>
-						</div>
-						<div class="rn-0904-txt-wrap">
-						<div class="rn-0904-txt">무대 디자인과 의상 등  배우분들과 어울려서 극 몰입하는데 도움이 되었던거 같아요 잔잔하게 스토리를 이어가는데 동화를 읽는 둣한 느낌이 들기도 하는 경험이었습니다</div>
-						</div>
-					</li>
-					<li>
-						<div class="rn-0904-ttbox">
-							<span class="rn-0904-tt1">예매자</span>
-							<span class="rn-0904-tt2">limg***</span>
-							<span class="rn-0904-tt3">2023.07.28</span>
-							<span class="rn-0904-tt4" data-star="4">
-								<img src="http://tkfile.yes24.com/imgNew/common/rn-ico-tt4-1.png" alt="">
-								<img src="http://tkfile.yes24.com/imgNew/common/rn-ico-tt4-1.png" alt="">
-								<img src="http://tkfile.yes24.com/imgNew/common/rn-ico-tt4-1.png" alt="">
-								<img src="http://tkfile.yes24.com/imgNew/common/rn-ico-tt4-1.png" alt="">
-								<img src="http://tkfile.yes24.com/imgNew/common/rn-ico-tt4-2.png" alt="">
-							</span>
-							<span class="rn-0904-tt7">(관람일:2023.07.21)</span>
-						</div>
-						<div class="rn-0904-txt-wrap">
-						<div class="rn-0904-txt">무대 디자인과 의상 등  배우분들과 어울려서 극 몰입하는데 도움이 되었던거 같아요 잔잔하게 스토리를 이어가는데 동화를 읽는 둣한 느낌이 들기도 하는 경험이었습니다</div>
-						</div>
-					</li>
-					<li>
-						<div class="rn-0904-ttbox">
-							<span class="rn-0904-tt1">예매자</span>
-							<span class="rn-0904-tt2">limg***</span>
-							<span class="rn-0904-tt3">2023.07.28</span>
-							<span class="rn-0904-tt4" data-star="4">
-								<img src="http://tkfile.yes24.com/imgNew/common/rn-ico-tt4-1.png" alt="">
-								<img src="http://tkfile.yes24.com/imgNew/common/rn-ico-tt4-1.png" alt="">
-								<img src="http://tkfile.yes24.com/imgNew/common/rn-ico-tt4-1.png" alt="">
-								<img src="http://tkfile.yes24.com/imgNew/common/rn-ico-tt4-1.png" alt="">
-								<img src="http://tkfile.yes24.com/imgNew/common/rn-ico-tt4-2.png" alt="">
-							</span>
-							<span class="rn-0904-tt7">(관람일:2023.07.21)</span>
-						</div>
-						<div class="rn-0904-txt-wrap">
-						<div class="rn-0904-txt">무대 디자인과 의상 등  배우분들과 어울려서 극 몰입하는데 도움이 되었던거 같아요 잔잔하게 스토리를 이어가는데 동화를 읽는 둣한 느낌이 들기도 하는 경험이었습니다</div>
-						</div>
-					</li>
+				<ul id="reviewul" class="rn-0904">
+					<c:forEach items="${reviewList}" var="review">
+						<li>
+							<div class="rn-0904-ttbox">
+								<span class="rn-0904-tt1">예매자</span>
+								<span class="rn-0904-tt2">${review.userId}</span>
+								<span class="rn-0904-tt3">${review.reviewRegDate}</span>
+								<span class="rn-0904-tt4" data-star="4">
+								<c:set var="endValue" value="${review.grade-1}" />
+									<c:forEach begin="0" end="${endValue}">
+										<c:if test="${review.grade != 0}">
+											<img src="http://tkfile.yes24.com/imgNew/common/rn-ico-tt4-1.png" alt="">
+										</c:if>
+									</c:forEach>									
+								</span>
+								<span class="rn-0904-tt7">(관람일:${review.viewingday})</span>
+							</div>
+							<div class="rn-0904-txt-wrap">
+							<div class="rn-0904-txt">${review.reviewContent}</div>
+							</div>
+						</li>
+					</c:forEach>
 				</ul>
-			</div>
-		</section>
-			
+				<!-- 페이징 -->
+				<c:if test="${empty keyword}">
+					<ul class="paging pageInfo">
+						<c:if test="${pageMaker.prev}">
+							<li class="pageInfo_btn previous"><a
+								href="${pageMaker.startPage - 1}">◀</a></li>
+						</c:if>
+						<!-- 각 번호 페이지 버튼 -->
+						<c:forEach var="num" begin="${pageMaker.startPage}"
+							end="${pageMaker.endPage}">
+							<li class="pageInfo_btn ${pageMaker.cri.pageNum == num ? "active":"" }">
+								<a class="anum" href="${num}">${num}</a>
+							</li>
+						</c:forEach>
+						<!-- 다음페이지 버튼 -->
+						<c:if test="${pageMaker.next}">
+							<li class="pageInfo_btn next"><a
+								href="${pageMaker.endPage + 1}">▶</a></li>
+						</c:if>
+					</ul>
+				</c:if>
+				<form id="moveForm"
+					action="${pageContext.request.contextPath}/show/detail/${pageMaker.cri.keyword}?#review"
+					method="get">
+					<input type="hidden" name="pageNum"
+						value="${pageMaker.cri.pageNum}"> <input type="hidden"
+						name="amount" value="${pageMaker.cri.amount}"> <input
+						type="hidden" id="keyword" name="keyword"
+						value="${pageMaker.cri.keyword}"> 
+				</form>
+			</div>			
+		</section>			
 	</section>
 	
 	<!-- 탑버튼 -->
@@ -301,10 +341,117 @@
 	<!-- Footer -->
 	<c:import url="/WEB-INF/views/includes/footer.jsp"></c:import>
 	<!-- //Footer -->
+	
+	<!-- 리뷰 등록 -->	
+		<section id="inquiry_popup" class="inquiry_popup"
+			style="display: none;">
+			<a href="#none" class="inquiry_close"><img
+				src="images/ver02/close.png" alt=""></a>
+			<div class="inquiry_write">
+				<h3>리뷰</h3>
+				<form id="moveForm1"
+					action="#none">
+					<table>
+						<colgroup>
+							<col width="20%">
+							<col width="80%">
+						</colgroup>						
+						<tr>
+							<th><label for="inquiry_tit">평점</label></th>
+							<td><select id="grade" name="grade" class="grade">
+										<option value="1" selected="selected">★☆☆☆☆</option>
+										<option value="2">★★☆☆☆</option>
+										<option value="3">★★★☆☆</option>
+										<option value="4">★★★★☆</option>
+										<option value="5">★★★★★</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<th><label for="inquiry_cont">리뷰 내용</label></th>
+							<td><textarea name="reviewContent" id="content"
+									placeholder="700자 이하 입력가능" required></textarea>
+								<div class="textLengthWrap">
+									<span class="textCount">0자</span> <span class="textTotal">/
+										700자</span>
+								</div></td>
+						</tr>
+					</table>
+					<div class="btn_wrap">
+						<a id="insertReviewButton" href="#none" class="order_btn">리뷰작성</a> <a
+							href="#none" class="shopping_btn">취소</a>
+					</div>
+				</form>
+			</div>
+		</section>
 </body>
 
 <script>
 $(document).ready(function() {
+	
+	let dayListEl;
+	let dayList;
+	let date;
+	var showSq = '${show.showSq}';
+		
+	//페이징 버튼 클릭
+	$(".pageInfo a").on("click", function(e) {
+		e.preventDefault();
+		var pageNum = $(this).attr("href");
+		$("#moveForm input[name='pageNum']").val(pageNum);
+		$("#moveForm").submit();
+	});
+	
+	// 관람후기 등록폼
+	$("#insertReviewForm").on("click",function(){
+		console.log("리뷰등록폼");
+		$("#inquiry_popup").show();
+		
+	});
+	
+	// 후기등록폼 취소버튼
+	$(".btn_wrap .shopping_btn").on("click", function() {
+		console.log("취소");
+		
+		$("#grade").val("1").prop("selected", true);
+		$("#content").val("");
+		$('#inquiry_popup').hide();
+		
+	});	
+	
+	//후기 등록
+	$("#insertReviewButton").on("click",function(){
+		console.log("후기 등록");
+		
+		var grade = $("#grade").val();
+		var reviewContent = $("#content").val();
+		
+		var ReviewVO = {grade : grade,reviewContent : reviewContent , showSq : showSq };
+		
+		$.ajax({
+			
+			url : "${pageContext.request.contextPath}/review/insertReview",		
+			type : "post",
+			//contentType : "application/json",
+			data : ReviewVO,
+
+			dataType : "json",
+			success : function(result){
+				console.log(result);
+				var review = result.data;
+				$("#grade").val("1").prop("selected", true);
+				$("#content").val("");
+				$('#inquiry_popup').hide();
+				
+				addReview(review);
+				
+			},
+			error : function(XHR, status, error) {
+				console.error(status + " : " + error);
+			}
+		});
+	});
+	
 	
 	  //top버튼
     $( window ).scroll( function() {
@@ -321,12 +468,6 @@ $(document).ready(function() {
 
 	
 	
-	
-	
-	let dayListEl;
-	let dayList;
-	let date;
-	var showSq = '${show.showSq}';
 		
 	// 오늘날짜
 	var currentDate = new Date();
@@ -557,6 +698,32 @@ $(document).ready(function() {
 	        }
 	    });
 	}
+	
+	// 리뷰 그리기
+	function addReview(review){
+		var item = '';
+		item +='<li>';
+		item +='	 <div class="rn-0904-ttbox">';
+		item +='		<span class="rn-0904-tt1">예매자</span>';
+		item +='		<span class="rn-0904-tt2">' + review.userId + '</span>';
+		item +='		<span class="rn-0904-tt3">' + review.reviewRegDate + '</span>';
+		item +='		<span class="rn-0904-tt4" data-star="4">';
+		
+		for (var i = 0; i < review.grade; i++) {
+			
+			item +='<img src="http://tkfile.yes24.com/imgNew/common/rn-ico-tt4-1.png" alt="">';
+			
+		}
+		item +='		</span>';
+		item +='		<span class="rn-0904-tt7">(관람일:' + review.viewingday + ')</span>';
+		item +='	 </div>';
+		item +='	 <div class="rn-0904-txt-wrap">';
+		item +='	 <div class="rn-0904-txt">' + review.reviewContent + '</div>';
+		item +='	 </div>';
+		item +='</li>';
+		
+		$("#reviewul").prepend(item);
+	};
 	
 });
 </script>

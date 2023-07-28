@@ -14,11 +14,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.yes24.dao.ConcertHallDAO;
+import com.yes24.dao.ReviewDAO;
 import com.yes24.dao.ShowDAO;
 import com.yes24.dao.ShowingDAO;
 import com.yes24.dto.PageMakerDTO;
 import com.yes24.vo.ConcertHallVO;
 import com.yes24.vo.Criteria;
+import com.yes24.vo.ReviewVO;
 import com.yes24.vo.SaveTicketVO;
 import com.yes24.vo.SeatClassListVO;
 import com.yes24.vo.SeatClassVO;
@@ -39,6 +41,8 @@ public class ShowService {
 	private ConcertHallDAO concertHallDAO;
 	@Autowired
 	private ShowingDAO showingDAO;
+	@Autowired
+	private ReviewDAO reviewDAO;
 
 	String saveDir = "C:/yes24/img/upload/";
 
@@ -152,7 +156,7 @@ public class ShowService {
 		} else if (!file2.isEmpty()) {
 
 			fileCheck(vo, file2, 2);
-			
+
 			// 상세 이미지 수정될때
 		} else if (!file3.isEmpty()) {
 
@@ -240,7 +244,6 @@ public class ShowService {
 			ConcertHallVO concertHallVO = concertHallDAO.getConcertHall(showVO.getConcertHallSq());
 
 			map.put("concertHallVO", concertHallVO);
-						
 
 		}
 		if (sortation == 2) {
@@ -263,9 +266,59 @@ public class ShowService {
 			showVO.setSeatPrice(seatPriceSqList);
 
 			map.put("seatClassList", SeatClassList);
+
+			// 리뷰페이징
+
 		}
 
 		map.put("showVO", showVO);
+
+		return map;
+
+	}
+
+	// -------------- 공연상세페이지 리뷰때문에 나눔
+	public Map<String, Object> getShow(int no, Criteria cri) {
+		System.out.println("getShow Service()");
+		Map<String, Object> map = new HashMap<>();
+		List<Integer> seatClassSqList = new ArrayList<>();
+		List<String> seatClassList = new ArrayList<>();
+		List<Integer> seatPriceSqList = new ArrayList<>();
+
+		// 공연정보
+		showVO = showDAO.getShow(no);
+
+		// 공연장정보
+		ConcertHallVO concertHallVO = concertHallDAO.getConcertHall(showVO.getConcertHallSq());
+
+		// 좌석클레스
+		List<SeatClassVO> SeatClassList = showDAO.getSeatClassList(no);
+		for (SeatClassVO seatClassSq : SeatClassList) {
+			seatClassSqList.add(seatClassSq.getSeatClassSq());
+			seatClassList.add(seatClassSq.getSeatClass());
+			seatPriceSqList.add(seatClassSq.getSeatPrice());
+		}
+		showVO.setSeatClassSq(seatClassSqList);
+		showVO.setSeatClass(seatClassList);
+		showVO.setSeatPrice(seatPriceSqList);
+
+		// 리뷰페이징
+		List<ReviewVO> reviewList = reviewDAO.getReviewList(cri);
+
+		// 키워드에 공연시퀀스 담기
+		cri.setKeyword(no);
+		int total = reviewDAO.getTotal(no);
+
+		// 페이지메이커
+		PageMakerDTO pageMaker = new PageMakerDTO(total, cri);
+		
+		System.out.println(reviewList);
+
+		map.put("showVO", showVO);
+		map.put("pageMaker", pageMaker);
+		map.put("reviewList", reviewList);
+		map.put("concertHallVO", concertHallVO);
+		map.put("seatClassList", SeatClassList);
 
 		return map;
 
@@ -431,18 +484,17 @@ public class ShowService {
 				file.transferTo(new File(filePath));
 
 				if (no == 1) {
-					
+
 					vo.setMainImage(saveName);
-					
+
 				} else if (no == 2) {
-					
+
 					vo.setSubImage(saveName);
-					
 
 				} else if (no == 3) {
-					
+
 					vo.setDetailedImage(saveName);
-					
+
 				}
 			} catch (IOException e) {
 				// 파일 처리 중 예외가 발생한 경우 예외 처리 로직을 추가합니다.
