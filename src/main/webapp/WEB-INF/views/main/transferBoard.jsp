@@ -53,6 +53,8 @@ section{width: 1200px; margin: 0 auto;     text-align: center;}
 section ul {  display: flex;  justify-content: flex-start; flex-direction: row; flex-wrap: wrap; margin: 0 -15px; }
 section ul li{ width: calc(25% - 92px); margin: 0 15px; margin-bottom: 70px;}
 section ul li a img{width: 100%;}
+section ul li a .gray{ color: #888;font-size: 18px;}
+section ul li a .orange{ color: #ec7d2c; margin-top: 10px;}
 section ul li a span{display: block; text-align: center; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;}
 section ul li a span.tit{font-size: 14px; margin-top:15px;}
 section ul li a span.price{font-weight: 600; font-size: 17px; margin-top: 2px;}
@@ -116,6 +118,7 @@ header.pc #header h1 {margin-right: -1px;}
 #showName{outline: none;}
 .buyTransferTicket{opacity: 0.5}
 .soldout{color: red; font-size: 20px;}
+
 </style>
 </head>
 <body>
@@ -171,8 +174,8 @@ header.pc #header h1 {margin-right: -1px;}
 								        <li>
 								            <a href="${pageContext.request.contextPath}/transferTicket/transferTicketDetail/${transferBoard.transferBoardSq}">
 								                <img src="${pageContext.request.contextPath}/upload/${transferBoard.subImage}">
-								                <span>${transferBoard.showName}&nbsp;&nbsp;${transferBoard.ticketSeat}석</span>
-								                <span class="price jb">
+								                <span class="gray">${transferBoard.showName}&nbsp;&nbsp;${transferBoard.ticketSeat}석</span>
+								                <span class="orange price jb">
 								                    <fmt:formatNumber type="number" maxFractionDigits="3" value="${transferBoard.hopePrice}" />원
 								                </span>
 								            </a>
@@ -182,8 +185,8 @@ header.pc #header h1 {margin-right: -1px;}
 								        <li>
 								            <a href="#none">
 								                <img class="buyTransferTicket" src="${pageContext.request.contextPath}/upload/${transferBoard.subImage}">
-								                <span>${transferBoard.showName}&nbsp;&nbsp;${transferBoard.ticketSeat}석</span>
-								                <span><strong class="soldout">판매완료</strong></span>
+								                <span class="gray">${transferBoard.showName}&nbsp;&nbsp;${transferBoard.ticketSeat}석</span>
+								                <span ><strong class="soldout">판매완료</strong></span>
 								            </a>
 								        </li>
 								    </c:otherwise>

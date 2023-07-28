@@ -56,8 +56,9 @@ section{width: 1200px; margin: 0 auto;     text-align: center;}
 section ul {  display: flex;  justify-content: flex-start; flex-direction: row; flex-wrap: wrap; margin: 0 -15px; }
 section ul li{ width: calc(25% - 92px); margin: 0 15px; margin-bottom: 70px;}
 section ul li a img{width: 100%;margin-bottom:5px;}
-section ul li a .gray{ color: #888;}
-section ul li a span{margin-bottom:5px; display: block; text-align: center; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;}
+section ul li a .gray{ color: #888;font-size: 18px;}
+section ul li a .orange{ color: #ec7d2c; margin-top: 10px;}
+section ul li a span{margin:0 6px; display: block; text-align: center; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;}
 section ul li a span.tit{font-size: 14px; margin-top:15px;}
 section ul li a span.price{font-weight: 600; font-size: 17px; margin-top: 2px;}
 
@@ -107,7 +108,7 @@ section ul li a span.price{font-weight: 600; font-size: 17px; margin-top: 2px;}
 									href="${pageContext.request.contextPath}/show/detail/${show.showSq}">
 										<img
 										src="${pageContext.request.contextPath}/upload/${show.subImage}">
-										<span class="gray">${show.showName}</span> <span>${show.startDate}&nbsp;~&nbsp;${show.endDate}</span>
+										<span class="gray">${show.showName}</span> <span class="orange">${show.startDate}&nbsp;~&nbsp;${show.endDate}</span>
 								</a></li>
 							</c:forEach>
 						</ul>

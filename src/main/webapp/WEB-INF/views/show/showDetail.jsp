@@ -16,6 +16,9 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath }/assets/css/detail.css"
 	type="text/css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath }/assets/css/review.css"
+	type="text/css">
 <link rel="stylesheet" type="text/css"
 	href="https://image.yes24.com/sysimage/yesUI/yesUI.css?v=20230403"
 	media="all">
@@ -218,6 +221,75 @@
 		<h2>공연장 위치 정보</h2>
 		<!-- 지도를 표시할 div 입니다 -->
 		<div id="map" style="width: 1200px; height: 350px;"></div>
+		<section id="review " style="width: 1200px;">
+			<p class="rn-tab-area-tit"><span>관람후기</span></p>
+			<div class="rn-0903"><!--후기등록전 안내문, 팝업버튼-->
+				<div class="rn-09-tit tab02-afterword">
+					<p class="rn-red">매매, 욕설 등 예스24 게시판 운영 규정에 위반되는 글은 사전 통보없이 삭제될 수 있습니다.</p>
+					<p>개인정보가 포함된 내용은 삼가 주시기 바라며, 게시물로 인해 발생하는 문제는 작성자 본인에게 책임이 있습니다.</p>
+					<a href="#"><img src="http://tkfile.yes24.com/imgNew/sub/rn-btn-review.png" alt=""></a>
+				</div>
+			</div>
+			<div class="rn-0904-container">
+				<ul class="rn-0904">
+					<li>
+						<div class="rn-0904-ttbox">
+							<span class="rn-0904-tt1">예매자</span>
+							<span class="rn-0904-tt2">limg***</span>
+							<span class="rn-0904-tt3">2023.07.28</span>
+							<span class="rn-0904-tt4" data-star="4">
+								<img src="http://tkfile.yes24.com/imgNew/common/rn-ico-tt4-1.png" alt="">
+								<img src="http://tkfile.yes24.com/imgNew/common/rn-ico-tt4-1.png" alt="">
+								<img src="http://tkfile.yes24.com/imgNew/common/rn-ico-tt4-1.png" alt="">
+								<img src="http://tkfile.yes24.com/imgNew/common/rn-ico-tt4-1.png" alt="">
+								<img src="http://tkfile.yes24.com/imgNew/common/rn-ico-tt4-2.png" alt="">
+							</span>
+							<span class="rn-0904-tt7">(관람일:2023.07.21)</span>
+						</div>
+						<div class="rn-0904-txt-wrap">
+						<div class="rn-0904-txt">무대 디자인과 의상 등  배우분들과 어울려서 극 몰입하는데 도움이 되었던거 같아요 잔잔하게 스토리를 이어가는데 동화를 읽는 둣한 느낌이 들기도 하는 경험이었습니다</div>
+						</div>
+					</li>
+					<li>
+						<div class="rn-0904-ttbox">
+							<span class="rn-0904-tt1">예매자</span>
+							<span class="rn-0904-tt2">limg***</span>
+							<span class="rn-0904-tt3">2023.07.28</span>
+							<span class="rn-0904-tt4" data-star="4">
+								<img src="http://tkfile.yes24.com/imgNew/common/rn-ico-tt4-1.png" alt="">
+								<img src="http://tkfile.yes24.com/imgNew/common/rn-ico-tt4-1.png" alt="">
+								<img src="http://tkfile.yes24.com/imgNew/common/rn-ico-tt4-1.png" alt="">
+								<img src="http://tkfile.yes24.com/imgNew/common/rn-ico-tt4-1.png" alt="">
+								<img src="http://tkfile.yes24.com/imgNew/common/rn-ico-tt4-2.png" alt="">
+							</span>
+							<span class="rn-0904-tt7">(관람일:2023.07.21)</span>
+						</div>
+						<div class="rn-0904-txt-wrap">
+						<div class="rn-0904-txt">무대 디자인과 의상 등  배우분들과 어울려서 극 몰입하는데 도움이 되었던거 같아요 잔잔하게 스토리를 이어가는데 동화를 읽는 둣한 느낌이 들기도 하는 경험이었습니다</div>
+						</div>
+					</li>
+					<li>
+						<div class="rn-0904-ttbox">
+							<span class="rn-0904-tt1">예매자</span>
+							<span class="rn-0904-tt2">limg***</span>
+							<span class="rn-0904-tt3">2023.07.28</span>
+							<span class="rn-0904-tt4" data-star="4">
+								<img src="http://tkfile.yes24.com/imgNew/common/rn-ico-tt4-1.png" alt="">
+								<img src="http://tkfile.yes24.com/imgNew/common/rn-ico-tt4-1.png" alt="">
+								<img src="http://tkfile.yes24.com/imgNew/common/rn-ico-tt4-1.png" alt="">
+								<img src="http://tkfile.yes24.com/imgNew/common/rn-ico-tt4-1.png" alt="">
+								<img src="http://tkfile.yes24.com/imgNew/common/rn-ico-tt4-2.png" alt="">
+							</span>
+							<span class="rn-0904-tt7">(관람일:2023.07.21)</span>
+						</div>
+						<div class="rn-0904-txt-wrap">
+						<div class="rn-0904-txt">무대 디자인과 의상 등  배우분들과 어울려서 극 몰입하는데 도움이 되었던거 같아요 잔잔하게 스토리를 이어가는데 동화를 읽는 둣한 느낌이 들기도 하는 경험이었습니다</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</section>
+			
 	</section>
 	
 	<!-- 탑버튼 -->
