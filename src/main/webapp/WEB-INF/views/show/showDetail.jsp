@@ -39,7 +39,7 @@
 #map {margin: 0 auto;}
 #cName {width: 150px;text-align: center;padding: 4px 0;font-size: 19px;}
 #cName img {width: 20px;}
-#ticketingdiv {text-align: center;    margin-bottom: 40px;}
+#ticketingdiv {text-align: center;    margin-bottom: 60px;}
 #ticketingdiv div {padding: 5px;width: 250px;background: #f43142;margin: 0 auto;border: 2px solid #f43142;}
 .ticketing {font-size: 20px;color: #fff;display: block; height:100%;}
 
@@ -63,7 +63,7 @@
 /* 탑버튼 */
 .top_btn{position: fixed; right: 100px; bottom: 100px; }
 .top_btn img{width: 50px;}
-
+.rn-0803{text-align: center;font-size: 30px; margin-bottom: 40px;}
 
 </style>
 </head>
@@ -208,6 +208,9 @@
 				<div>
 					<a id="ticketing" href="#none" class="ticketing">예매하기</a>
 				</div>
+			</div>
+			<div class="rn-0803"><!--공연정보-->
+				<h1>공연 정보</h1>					
 			</div>
 			<div id="detailedImage"><img src="${pageContext.request.contextPath}/upload/${show.detailedImage}"></div>
 		</div>
@@ -368,7 +371,7 @@ $(document).ready(function() {
 
     
     var width = 990;
-    var height = 680;
+    var height = 720;
 
     // 모니터의 가로 길이와 세로 길이를 구한다
     var screenWidth = window.screen.width;

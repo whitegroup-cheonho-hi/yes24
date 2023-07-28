@@ -58,7 +58,7 @@ public class TransferBoardDAO {
 	}
 	
 	
-	// -------------------- 양도게시글 리스트 가져오기
+	// -------------------- // 임박 5개 가져오기
 		public List<TransferBoardVO> getImminentShowing() {
 			System.out.println("getImminentShowing DAO()");
 

@@ -621,8 +621,8 @@
 }
 
 .rn-03-left .rn-product-imgbox > img {
-    width: 400px;
-    height: 500px;
+    width: 430px;
+    height: 602px;
 }
 
 .rn-03-left .rn-product-imgbox a {
@@ -670,6 +670,7 @@
 
 .rn-03-left .rn-product-social {
     width: 100%;
+    margin-top: 80px;
     height: 75px;
     border-bottom: 1px solid #000;
     position: relative;
@@ -820,7 +821,7 @@
 .rn-03-right .rn-product-area1 {
     border-bottom: 1px solid #000;
     position: relative;
-    height: 410px;
+    height: 490px;
 }
 
 .rn-03-right .rn-product-area1 .rn-product-price {

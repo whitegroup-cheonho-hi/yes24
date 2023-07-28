@@ -68,7 +68,8 @@
 				WHERE
 				    show_sq = #{showSq}
 				    AND TO_CHAR(showing_date, 'YYYY-MM-DD') = #{showingDate}
-			
+		    ORDER BY 
+			        start_time
 		]]>
 	
 	</select>

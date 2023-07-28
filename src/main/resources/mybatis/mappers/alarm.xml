@@ -184,7 +184,7 @@
 	
 			DELETE notification
 			WHERE
-			    transfer_alarm_sq =  #{transferAlarmSq}
+			    transfer_board_sq =  #{transferBoardSq}
 	
 		]]>
 		

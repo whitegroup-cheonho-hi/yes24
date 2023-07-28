@@ -105,9 +105,9 @@ public class TransferBoardService {
 		Map<String, Object> map = new HashMap<>();
 
 		int total = transferBoardDAO.getTotal(cri);
-
+		// 양도 게시판 리스트
 		List<TransferBoardVO> transferBoardList = transferBoardDAO.getTransferboardList(cri);
-
+		// 임박 5개 가져오기
 		List<TransferBoardVO> imminentShowing = transferBoardDAO.getImminentShowing();
 
 		PageMakerDTO pageMaker = new PageMakerDTO(total, cri);

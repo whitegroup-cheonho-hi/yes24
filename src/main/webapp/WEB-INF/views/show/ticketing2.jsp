@@ -26,7 +26,7 @@
 .minimap_m>* {padding: 5px;}
 .ulLegend {height: 150px;width: 239px;}
 .gnb li {float: left;background:url("${pageContext.request.contextPath}/assets/images/예매순서.png");height: 52px;width: 120px;}
-.admRow {margin-top: 10px;height: 530px;}
+.admRow {margin-top: 10px;height: 560px;}
 .admSpan {display: flex;justify-content: center;box-sizing: border-box;background-color: #fff;padding: 9px 14px 11px;line-height: 28px;display: flex;text-align: center;}
 #container {align-items: center;display: none;}
 #container .item {color: black;}

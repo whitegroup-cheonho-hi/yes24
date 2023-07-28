@@ -62,6 +62,7 @@
 			UPDATE show SET	
 				           main_image = #{mainImage},
 						   sub_image = #{subImage},	 
+						   detailed_image = #{detailedImage},	 
 						   start_date = #{startDate},
 						   end_date = #{endDate},
 						   reservation_date = #{reservationDate},

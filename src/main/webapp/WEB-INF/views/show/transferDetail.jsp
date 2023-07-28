@@ -37,7 +37,7 @@
 #map {margin: 0 auto;}
 #cName {width: 150px;text-align: center;padding: 4px 0;font-size: 19px;}
 #cName img {width: 20px;}
-#ticketingdiv {text-align: center; margin-top: 20px;}
+#ticketingdiv {text-align: center; margin-top: 20px;margin-bottom: 60px;}
 #ticketingdiv div {padding: 5px;width: 250px;background: #f43142;margin: 0 auto;border: 2px solid #f43142;}
 .ticketing {font-size: 20px;color: #fff;display: block; height:100%;}
 .concertHall .position{margin-bottom: 50px;}
@@ -70,12 +70,18 @@
 .green {background-color: #a5ea7b;}
 .seatClass{width: 100px; height: 30px; font-size: 20px; display: inline-block; text-align: center;}
 #seatClassForm{text-align: center;}
-.rn-03-right .rn-product-area1{height: 490px;}
-.rn-03-right .rn-product-area3 {min-height: 95px;} 
+.rn-03-right .rn-product-area1{height: 550px;}
+.rn-03-right .rn-product-area3 {min-height: 114px;} 
 #divhopePrice{font-size: 20px; color: red;}
-.rn-03-right dd { margin: -3px 0 3px 86px;}
+/* .rn-03-right dd { margin: -3px 0 3px 86px;} */
 .rn-03-right .rn-product-area1 dd .rn-product-price1 li{line-height: 25px;}
 .rn-03-right .rn-product-area1 .rn-product-price { padding-bottom: 5px;}
+#detailedImage{ text-align: center;   margin-bottom: 30px;}
+/* 탑버튼 */
+.top_btn{position: fixed; right: 100px; bottom: 100px; }
+.top_btn img{width: 50px;}
+.rn-0803{text-align: center;font-size: 30px; margin-bottom: 40px;}
+
 </style>
 </head>
 <body>
@@ -216,6 +222,9 @@
 				</div>
 			</div>
 			<div>
+				<div class="rn-0803"><!--공연정보-->
+					<h1>좌석 정보</h1>					
+				</div>
 				<div id="seatClassForm">
 					<c:forEach items="${show.seatClass}" var="seatClass">
 					<span class="${seatClass} seatClass">${seatClass}</span>
@@ -232,15 +241,24 @@
 		<div class="concertHall">					
 			<div id="ticketingdiv">
 				<div>
-					<a id="ticketing" href="#none" class="ticketing">구매하기</a>
+					<a id="ticketing" href="#none" class="ticketing">양도표 구매하기</a>
 				</div>
 			</div>
+			<div class="rn-0803"><!--공연정보-->
+				<h1>공연 정보</h1>					
+			</div>
+			<div id="detailedImage"><img src="${pageContext.request.contextPath}/upload/${show.detailedImage}"></div>
 		</div>
 		<br>
 		<h2>공연장 위치 정보</h2>
 		<!-- 지도를 표시할 div 입니다 -->
 		<div id="map" style="width: 1200px; height: 350px;"></div>
 	</section>
+	<!-- 탑버튼 -->
+	<a href="#none" class="top_btn"><img
+		src="${pageContext.request.contextPath }/assets/images/ver02/top.png"
+		alt=""></a>
+	<!-- /탑버튼 -->
 	<!-- Footer -->
 	<c:import url="/WEB-INF/views/includes/footer.jsp"></c:import>
 	<!-- //Footer -->
@@ -248,6 +266,20 @@
 
 <script>
 	$(document).ready(function() {
+		
+		  //top버튼
+	    $( window ).scroll( function() {
+	      if ( $( this ).scrollTop() > 200 ) {
+	        $( '.top_btn' ).fadeIn();
+	      } else {
+	        $( '.top_btn' ).fadeOut();
+	      }
+	    } );
+	    $( '.top_btn' ).click( function() {
+	      $( 'html, body' ).animate( { scrollTop : 0 }, 400 );
+	      return false;
+	    } );
+		
 		//결제 API
 		var IMP = window.IMP;
 		IMP.init("imp61438883");

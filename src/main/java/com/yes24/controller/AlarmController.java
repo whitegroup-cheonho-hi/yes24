@@ -39,9 +39,8 @@ public class AlarmController {
 
 		int result = alarmService.insertAlarm(vo);
 
-		// return "redirect:/user/myPage/1";
+		return "redirect:/user/myPage/1";
 
-		return "";
 
 	}
 

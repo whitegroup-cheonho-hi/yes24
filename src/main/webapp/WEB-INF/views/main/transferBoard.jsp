@@ -110,10 +110,12 @@ section > h2{margin-top: 80px;    margin-bottom: 75px;}
 #moveForm1 label{vertical-align:middle; }
 #header #nav {margin-right: 4px;}
 header.pc #header h1 {margin-right: -1px;}
-#searchShowName{position: absolute; top: 168px;left: 186px;z-index: 200;width: 155px; border: solid 1px black;
+#searchShowName{position: absolute; top: 168px;left: 187px;z-index: 200;width: 155px; border: solid 1px black;
     background-color: #fff;  border-top: none; font-size: 13px; text-align: left; padding: 10px 3px 10px; }
 .showName{display: block;cursor: pointer;}
 #showName{outline: none;}
+.buyTransferTicket{opacity: 0.5}
+.soldout{color: red; font-size: 20px;}
 </style>
 </head>
 <body>
@@ -164,14 +166,28 @@ header.pc #header h1 {margin-right: -1px;}
 						</ul>						
 						<ul>
 							<c:forEach items="${transferBoardList}" var="transferBoard">
-								<li><span>${transferBoard.transferBoardSq}</span> <a
-									href="${pageContext.request.contextPath}/transferTicket/transferTicketDetail/${transferBoard.transferBoardSq}"> <img
-										src="${pageContext.request.contextPath}/upload/${transferBoard.subImage}">
-										<span>${transferBoard.showName}&nbsp;&nbsp;${transferBoard.ticketSeat}석</span>
-										<span class="price jb"> <fmt:formatNumber type="number"
-												maxFractionDigits="3" value="${transferBoard.hopePrice}" />원
-									</span>
-								</a></li>
+								<c:choose>
+								    <c:when test="${transferBoard.transferStat == 'Y'}">
+								        <li>
+								            <a href="${pageContext.request.contextPath}/transferTicket/transferTicketDetail/${transferBoard.transferBoardSq}">
+								                <img src="${pageContext.request.contextPath}/upload/${transferBoard.subImage}">
+								                <span>${transferBoard.showName}&nbsp;&nbsp;${transferBoard.ticketSeat}석</span>
+								                <span class="price jb">
+								                    <fmt:formatNumber type="number" maxFractionDigits="3" value="${transferBoard.hopePrice}" />원
+								                </span>
+								            </a>
+								        </li>
+								    </c:when>
+								    <c:otherwise>
+								        <li>
+								            <a href="#none">
+								                <img class="buyTransferTicket" src="${pageContext.request.contextPath}/upload/${transferBoard.subImage}">
+								                <span>${transferBoard.showName}&nbsp;&nbsp;${transferBoard.ticketSeat}석</span>
+								                <span><strong class="soldout">판매완료</strong></span>
+								            </a>
+								        </li>
+								    </c:otherwise>
+								</c:choose>
 							</c:forEach>
 						</ul>
 					</section>
@@ -279,7 +295,14 @@ header.pc #header h1 {margin-right: -1px;}
 </body>
 
 <script>
-	$(document).on('ready', function() {
+	$(document).on('ready', function(e) {
+		
+		// 판매티켓 알림
+		$(".buyTransferTicket").on("click",function(){
+			e.preventDefault();
+			alert("이미 판매된 티켓입니다");
+			
+		});
 		
 		// 포커스
 		var category = '${category}';

@@ -118,7 +118,7 @@
 				                    LEFT JOIN showing d ON b.showing_sq = d.showing_sq
 				                    LEFT JOIN show e ON d.show_sq = e.show_sq
 				               WHERE
-				                    a.transfer_stat = 'Y'
+				                    1 = 1
 		]]>
 		<if test="keyword2 != null and keyword2 != ''">
 			AND CONCAT(e.cast,e.show_name) like '%'||#{keyword2}||'%'

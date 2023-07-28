@@ -31,22 +31,11 @@
 <!-- 제이쿼리 최신버전 -->
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <style>
-#warp {
-	height: 530px;
-}
-
-.mypage_contain {
-	margin-bottom: 112px;
-}
-.arlarmCancelButton {
-    background-color: #f43142;
-    color: #fff;
-    width: 50px;
-    height: 21px;
-    border: none;
-    cursor: pointer;
-}
-#aLink a{text-decoration: none;}
+#warp {	height: 530px;}
+.mypage_contain {margin-bottom: 112px;}
+.arlarmCancelButton { background-color: #f43142;  color: #fff;  width: 50px; height: 21px; border: none; cursor: pointer;  border-radius: 3px;}
+#aLink a{text-decoration: none;color: #fff;     font-size: 14px;}
+#aLinkdiv{ padding-top: 7px; border-radius: 5px; display: inline-block; background-color: #f43142;width: 80px;height: 25px; border: none;    cursor: pointer;}
 </style>
 </head>
 <body>
@@ -169,7 +158,7 @@
 										<tr>
 											<td>${notification.recipientsRegDate}</td>
 											<td>${notification.recipientsTitle}</td>
-											<td id="aLink">${notification.recipientsContent}</td>
+											<td id="aLink"><div id="aLinkdiv" >${notification.recipientsContent}</div></td>
 											
 										</tr>
 									</c:forEach>
