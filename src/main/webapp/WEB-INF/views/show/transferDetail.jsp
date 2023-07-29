@@ -82,6 +82,7 @@
 .top_btn img{width: 50px;}
 .rn-0803{text-align: center;font-size: 30px; margin-bottom: 40px;}
 
+
 </style>
 </head>
 <body>
@@ -267,6 +268,8 @@
 <script>
 	$(document).ready(function() {
 		
+		var authUser = '${sessionScope.authUser}'+'';
+		
 		  //top버튼
 	    $( window ).scroll( function() {
 	      if ( $( this ).scrollTop() > 200 ) {
@@ -331,33 +334,38 @@
 		$("#ticketing").on("click", function(e) {
 			e.preventDefault()
 			console.log("구매");
-			var result = confirm("정말 구매 하시겠습니까?");
-			if(result){
-				IMP.request_pay({
-					pg : 'kakaopay',
-					pay_method : 'card', //생략 가능
-					merchant_uid : PaymentNumber, // 상점에서 관리하는 주문 번호
-					name : '주문명:결제테스트',
-					amount : 100,
-					buyer_email : 'iamport@siot.do',
-					buyer_name : '구매자이름',
-					buyer_tel : '010-1234-5678',
-					buyer_addr : '서울특별시 강남구 삼성동',
-					buyer_postcode : '123-456'
-				}, function(rsp) { // callback
-					if (rsp.success) {		
-						console.log("결제 성공");
+			if(authUser == ''){
+				alert("로그인이 필요합니다.");
+				window.location.href = '${pageContext.request.contextPath}/user/loginForm';
+			}else{		
+				var result = confirm("정말 구매 하시겠습니까?");
+				if(result){
+					IMP.request_pay({
+						pg : 'kakaopay',
+						pay_method : 'card', //생략 가능
+						merchant_uid : PaymentNumber, // 상점에서 관리하는 주문 번호
+						name : '주문명:결제테스트',
+						amount : 100,
+						buyer_email : 'iamport@siot.do',
+						buyer_name : '구매자이름',
+						buyer_tel : '010-1234-5678',
+						buyer_addr : '서울특별시 강남구 삼성동',
+						buyer_postcode : '123-456'
+					}, function(rsp) { // callback
+						if (rsp.success) {		
+							console.log("결제 성공");
+							
+							$("#buyTicketButton").submit();
 						
-						$("#buyTicketButton").submit();
 					
-				
-					} else {
-						// 결제 실패 시 로직
-						console.log("결제 실패");												
-						
-					}
-				});
-			}else{}
+						} else {
+							// 결제 실패 시 로직
+							console.log("결제 실패");												
+							
+						}
+					});
+				}else{   }
+			}	
 		}); 
 
 		var mapContainer = $("#map"); // 지도를 표시할 div 

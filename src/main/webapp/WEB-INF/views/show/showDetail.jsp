@@ -393,6 +393,7 @@ $(document).ready(function() {
 	let dayList;
 	let date;
 	var showSq = '${show.showSq}';
+	var authUser = '${sessionScope.authUser}'+'';
 		
 	//페이징 버튼 클릭
 	$(".pageInfo a").on("click", function(e) {
@@ -405,7 +406,16 @@ $(document).ready(function() {
 	// 관람후기 등록폼
 	$("#insertReviewForm").on("click",function(){
 		console.log("리뷰등록폼");
-		$("#inquiry_popup").show();
+
+		// 로그인 안되면 로그인 페이지로
+		if(authUser == ''){
+			alert("로그인이 필요합니다.");
+			window.location.href = '${pageContext.request.contextPath}/user/loginForm';
+			
+		}else{		
+			$("#inquiry_popup").show();
+		}
+		
 		
 	});
 	
@@ -566,7 +576,6 @@ $(document).ready(function() {
 		e.preventDefault()
 		console.log("예매");
 		
-		var authUser = '${sessionScope.authUser}'+'';
 		// 로그인 안되면 로그인 페이지로
 		if(authUser == ''){
 			alert("로그인이 필요합니다.");

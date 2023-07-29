@@ -49,7 +49,7 @@
 	background-color: #196ab3; color: white; border: none; border-radius: 5px;}
 .listItemTxt p { width: 200px; height: 40px; margin-bottom: 10px; }
 
-section{width: 1200px; margin: 0 auto;     text-align: center;}
+section{width: 1200px; margin: 0 auto; height: fit-content;  text-align: center;}
 section ul {  display: flex;  justify-content: flex-start; flex-direction: row; flex-wrap: wrap; margin: 0 -15px; }
 section ul li{ width: calc(25% - 92px); margin: 0 15px; margin-bottom: 70px;}
 section ul li a img{width: 100%;}
@@ -300,6 +300,8 @@ header.pc #header h1 {margin-right: -1px;}
 <script>
 	$(document).on('ready', function(e) {
 		
+		var authUser = '${sessionScope.authUser}'+'';
+		
 		// 판매티켓 알림
 		$(".buyTransferTicket").on("click",function(){
 			e.preventDefault();
@@ -452,7 +454,15 @@ header.pc #header h1 {margin-right: -1px;}
 
 		//  알림신청폼
 		$("#alarm").on("click", function() {
-			$("#inquiry_popup").show();
+			// 로그인 안되면 로그인 페이지로
+			if(authUser == ''){
+				alert("로그인이 필요합니다.");
+				window.location.href = '${pageContext.request.contextPath}/user/loginForm';
+				
+			}else{		
+				$("#inquiry_popup").show();
+			}
+			
 		});
 		
 		// 알림신청 취소버튼

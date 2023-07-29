@@ -114,7 +114,8 @@ public class ShowController {
 	@RequestMapping(value = "/detail/{no}", method = RequestMethod.GET)
 	public String detailForm(@PathVariable("no") int no, Model model, Criteria cri) {
 		System.out.println("detailForm()");
-
+		
+		cri.setAmount(6);
 		Map<String, Object> map = showService.getShow(no, cri);
 
 		model.addAttribute("show", map.get("showVO"));
