@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/reset.css" type="text/css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/adminForm.css" type="text/css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/admin2.css" type="text/css">
+<%-- <link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/admin.css" type="text/css"> --%>
 <link rel="stylesheet" type="text/css" href="https://image.yes24.com/sysimage/yesUI/yesUI.css?v=20230403" media="all">
 <!-- 구글폰트 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">

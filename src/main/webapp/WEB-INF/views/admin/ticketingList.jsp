@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Show List</title>
+<title>예매현황 리스트</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/reset.css" type="text/css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/adminForm.css" type="text/css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/admin2.css" type="text/css">
@@ -59,7 +59,7 @@
 	<section>
 		<div id="ySContent">
 			<div class="titletxt">
-				<h3><em><strong class="admimTit">예정공연</strong></em></h3>
+				<h3><em><strong class="admimTit">예매현황 리스트</strong></em></h3>
 			</div>
 			<div id="show">
 		         <c:if test="${empty Search}">
@@ -79,15 +79,9 @@
 				<div class="listItem">
 					<c:forEach var = "showList" items="${showList}">
 						<div class="listItemdiv">
-							<a href="${pageContext.request.contextPath}/show/showModifyForm/${showList.showSq}">
+							<a href="${pageContext.request.contextPath}/show1/ticketingDetail/${showList.showSq}">
 								<img class="listItemImg" src="${pageContext.request.contextPath}/upload/${showList.subImage}">
 							</a>
-							<div class="listItemTxt">
-								<p class="listItemTit">${showList.showName}</p>
-								<button type="button" class="btnstat" data-sq="${showList.showSq}" >예매대기</button>
-								<button type="button" class="ticketing" data-sq="${showList.showSq}" >예매현황</button>
-								<button type="button" class="btndelete" data-sq="${showList.showSq}" style="background-color: #f20055">삭 제</button>
-							</div>
 						</div>
 					</c:forEach>
 				</div>
@@ -141,38 +135,9 @@
 	});
 	
 	
-	//공연상태변경
-	function showUpdateStat(showVO) {
-		console.log(showVO);
-        
-        /* console.log(ShowingVO); */
-        $.ajax({
-	        url: "${pageContext.request.contextPath}/show1/showUpdateStat",
-	        type: "post",
-	        //contentType: "application/json",
-	        data: showVO,
-	        dataType: "json",
-	        success: function(result) {
-	        	// 성공적으로 처리된 경우 리다이렉트
-                window.location.href = "${pageContext.request.contextPath}/show1/adminShowList/";
-	        },
-	        error: function(XHR, status, error) {
-	        	console.error(status + " : " + error);
-	        }
-	    });
-	}
 	
-	//상태변경버튼1
-	$('.btnstat').on('click', function() {
-		//넘길 데이터 모으기
-		var showSq = $(this).data("sq");
-		var showVO = {showSq : showSq, showStat : 2};
-		/* var url = "${pageContext.request.contextPath}/show1/showUpdateStat/" + showSq; */
-		showUpdateStat(showVO)
-		
-	});
 	
-	//예매현황버튼
+	/* //예매현황버튼
 	$('.ticketing').on('click', function() {
 		console.log("버튼클릭");
 		
@@ -182,14 +147,8 @@
 		console.log(url);
 		location.href = url; 
 		
-	});
+	}); */
 	
-	//상태변경버튼2
-	$('.btndelete').on('click', function() {
-		var showSq = $(this).data("sq");
-		var showVO = {showSq : showSq, showStat : 3};
-		showUpdateStat(showVO)
-	});
 	
 	
 </script>

@@ -126,7 +126,7 @@ function searchParam() {
     // #keyword 요소에서 값을 가져와서 공백을 제거한 후, 검색어가 비어있지 않다면 실행합니다.
     // 검색어가 있을 경우, schAdd 변수에 "&keyword=검색어" 형식으로 추가합니다.
     if (trim($('#keyword2').val()) !== "") {
-        schAdd += "&keyword=" + trim($('#keyword2').val());
+        schAdd += "&keyword2=" + trim($('#keyword2').val());
     }
 
     // schAdd 변수가 빈 문자열이 아닌 경우에 실행합니다.

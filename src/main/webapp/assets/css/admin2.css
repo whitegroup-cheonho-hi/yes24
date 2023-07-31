@@ -2,8 +2,8 @@
 /* 공통 */
 *{font-family: 'Noto Sans KR', 'NanumBarunGothic', '맑은 고딕', 'Malgun Gothic', sans-serif;}
 /* header */
-header.pc{width: 100%; height: 121px; border-bottom: 1px solid #858585; position: fixed; top: 0; left: 0; background: #fff; z-index: 99;}
-header.pc #lnb{width: 100%; height: 35px; border-bottom: 1px solid #e5e7eb; box-sizing: border-box;  background-color: #000;}
+header.pc{width: 100%; height: 121px; border-bottom: 1px solid #858585; position: fixed; top: 0; left: 0; background: #999; z-index: 99;}
+header.pc #lnb{width: 100%; height: 35px; box-sizing: border-box;  background-color: #000;}
 header.pc #lnb #lnba a{color: #fff;}
 header.pc #lnb .lnb{width: 90%; height: 100%; margin: 0 auto; display: flex; justify-content:flex-end; align-items: center;}
 header.pc #lnb .lnb li{margin-left: 29px; position: relative;}
@@ -11,27 +11,22 @@ header.pc #lnb .lnb li a{font-size: 15px;}
 header.pc #lnb p{font-size: 15px; display: block; color: #fff; margin:0;}
 
 header.pc #header{height: 75px; width: 90%; margin: 0 auto; display: flex; align-items: center; justify-content:space-between;}
-/* header.pc #header h1{width: 145px; height: 54px; background: url('../images/logo.png') 0 0/contain no-repeat;} */
 #header h1 a{margin-bottom: 25px;}
 header.pc #header h1 a{font-size: 0; display: block; height: 100%;}
-header.pc #header #navigation{display: flex; align-items: center;}
-header.pc #header #navigation li{margin-left: 80px;}
-header.pc #header #navigation li:first-of-type{margin-left: 0px;}
-header.pc #header #navigation li a{font-weight: 600; font-size: 18px;}
 /* nav */
-nav #navigation{width: 1250px; height: 100%; margin: 0 auto; display: flex; justify-content:flex-start; align-items: center; flex-wrap: nowrap;}
-nav #navigation li {margin-right: 25px;}
-nav #navigation li a{font-size: 16px; font-weight: 500;}
+.navigation { margin: auto; width: 1000px; height: 260px; margin-top: 5px; }
+ul.navigation::after{content: ""; display: block; clear: both;}/*float:left; 넣는 요소의 부모::after*/
+ul.navigation > li{float: left; width: 20%; line-height: 50px;}
+ul.navigation > li > a{color: #ffffff; font-size: 20px; font-weight: bold; display: block; text-align: center;}
+ul.navigation > li ul.drop_menu2{display: none;}/*drop_menu2 안보이게 하기*/
+ul.navigation > li > a:hover{color: purple;}
+ul.navigation > li > a:hover + ul.drop_menu2{display: block;}/*menu2에 마우스오버했을 때 drop_menu2 보이게하기(이럴경우 drop_menu2가 보이기는 하지만 마우스떼면 사라짐)*/
+ul.navigation > li ul.drop_menu2:hover{display: block;}/*drop_menu2에 마우스오버했을 때 drop_menu2 보이게하기(마우스오버 옮겨도 나오게 유지시키기)*/
+ul.navigation > li ul.drop_menu2 li{text-align: center;}
+ul.navigation > li ul.drop_menu2 li a{padding: 20px 0; display: block; color: #424242; font-weight: bold;}
+ul.navigation > li ul.drop_menu2 li a:hover{color: purple;}
+.drop_menu2 > li {line-height: 0;}
 
-#navigation { margin: auto; width: 1000px; display: flex; justify-content: space-between; }
-#navigation .submenu:hover>a { background-color: #f7f7f7; color: #db2931; text-decoration: none; }
-#navigation .submenu:hover .menus a { background-color: #fff; color: #6c6c6c; text-decoration: none; }
-#navigation .submenu:hover .menus2 a { background-color: #fff; color: #6c6c6c; text-decoration: none; }
-#navigation .submenu { position: relative; width: 130px; text-align: center; }
-#navigation .submenu .menus { display: none; position: absolute; top:0;  z-index: 1; white-space: nowrap; padding-top:30px;}
-#navigation .submenu .menus2 { display: none; position: absolute; top: 0; right: 10px; z-index: 1; white-space: nowrap; padding-top:30px;}
-#navigation .submenu:hover .menus { display: flex; }
-#navigation .submenu:hover .menus2 { display: flex; }
 /* 입력 폼 */
 .tm_grp+.concertHall { margin-top:15px; }
 .concertHall+.concertHall { margin-top:55px; }

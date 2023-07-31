@@ -31,12 +31,11 @@ public class testController {
 	
 	
 	List<ConcertHallVO> concertHallList = new ArrayList<>();
-
-	
 	
 	//어드민 공연리스트(예매전)
 	@RequestMapping(value = "/adminShowList", method = RequestMethod.GET)
 	public String adminShowList(Model modle, Criteria cri) {
+		System.out.println(cri);
 		cri.setShowStat(1);
 		Map<String, Object> map = testservice.getShowList(cri);
 		modle.addAttribute("showList", map.get("list"));
@@ -67,7 +66,6 @@ public class testController {
 	//공연장홀 리스트
 	@RequestMapping(value = "/getConcertHallList", method = RequestMethod.GET)
 	public String getConcertHallList(Model model, Criteria cri) {
-		System.out.println("getConcertHallList");
 		Map<String, Object> map = testservice.getConcertHallList(cri);
 		model.addAttribute("hallList", map.get("hallList"));
 		model.addAttribute("pageMake", map.get("pageMake"));
@@ -82,11 +80,22 @@ public class testController {
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("pageMake", map.get("pageMake"));
 		model.addAttribute("key", key);
-		System.out.println(map);
 		return "admin/transferList";
 	}
 	
-	//예매상태 페이지
+	//예매현황 리스트
+	@RequestMapping(value = "getTicketingList", method = RequestMethod.GET)
+	public String getTicketingList(Model model, Criteria cri) {
+		cri.setShowStat(0);
+		System.out.println("getTicketingList");
+		Map<String, Object> map = testservice.getShowList(cri);
+		model.addAttribute("showList", map.get("list"));
+		model.addAttribute("pageMake", map.get("pageMake"));
+		System.out.println(map);
+		return "admin/ticketingList";
+	}
+	
+	//예매현황 페이지
 	@RequestMapping(value = "/ticketingDetail/{no}", method = RequestMethod.GET)
 	public String getTicketingDetail(@PathVariable("no") int no, Model model) {
 		Map<String, Object> map = testservice.getTicketingDetailHallName(no);
