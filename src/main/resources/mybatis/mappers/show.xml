@@ -195,7 +195,7 @@
 	</select>
 
 
-	<!-- 공연리스트가져오기 -->
+	<!-- 카테고리 롤링 공연리스트가져오기 -->
 	<select id="getShowList" parameterType="int" resultType="ShowVO">
 
 		<![CDATA[
@@ -203,19 +203,7 @@
 			  SELECT
 				    show_sq            AS showsq,
 				    main_image         AS mainimage,
-				    sub_image          AS subimage,			
-				    start_date         AS startdate,
-				    end_date           AS enddate,
-				    reservation_date   AS reservationdate,
-				    show_name          AS showname,
-				    cast,
-				    director,
-				    show_time          AS showtime,
-				    viewing_age        AS viewingage,
-				    show_content       AS showcontent,
-				    category,
-				    show_stat          AS showstat,
-				    concert_hall_sq    AS concerthallsq
+				    sub_image          AS subimage
 				FROM
 				    show
 			  WHERE category = #{category}	    
@@ -224,8 +212,33 @@
 		]]>
 
 	</select>
+
+	<!-- 티케팅예정작 5개 -->
+	<select id="getWhatsHot" resultType="ShowVO">
 	
-	<!-- 티케팅예정작 5개-->
+		<![CDATA[
+		
+			  SELECT
+				    show_sq               AS showsq,
+				    sub_image             AS subimage,
+				    TO_CHAR(start_date, 'YYYY.MM.DD') AS startdate,
+				    TO_CHAR(end_date, 'YYYY.MM.DD') AS enddate,
+				    CASE WHEN LENGTH(show_name) > 8 THEN CONCAT(SUBSTR(show_name, 1, 8), '...') ELSE show_name END AS showname,
+				    b.concert_hall_name   AS concerthallname
+				FROM
+				    show a
+	  	  INNER JOIN 
+	  	            concert_hall b 
+	  	          ON 
+	  	            a.concert_hall_sq = b.concert_hall_sq
+			   WHERE
+				    ROWNUM <= 7
+						
+		]]>
+
+	</select>
+
+	<!-- 티케팅예정작 5개 -->
 	<select id="getTicketingScheduled" resultType="ShowVO">
 	
 		<![CDATA[
@@ -250,8 +263,8 @@
 		    ORDER BY
 				    reservation_date		
 						
-		]]>	
-	
+		]]>
+
 	</select>
 
 	<!-- 공연리스트가져오기 페이징 -->
@@ -415,9 +428,10 @@
 		]]>
 
 	</select>
-	
+
 	<!-- 검색으로 공연제목리스트 -->
-	<select id="getShowName" parameterType="String" resultType="ShowVO">
+	<select id="getShowName" parameterType="String"
+		resultType="ShowVO">
 		
 		<![CDATA[
 
@@ -432,9 +446,9 @@
 		]]>
 
 	</select>
-	
-	
-	
+
+
+
 
 </mapper>
 

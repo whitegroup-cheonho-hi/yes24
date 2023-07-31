@@ -26,13 +26,11 @@ public class MainController {
 	public String main(Model model) {
 		System.out.println("main()");
 
-		// 나중에 개봉예정작으로 수정해야함5
 		Map<String, Object> map = showService.getShowList(1);
 
 		model.addAttribute("showList", map.get("showList"));
+		model.addAttribute("getWhatsHot", map.get("getWhatsHot"));
 		model.addAttribute("ticketingScheduled", map.get("ticketingScheduled"));
-		
-		System.out.println(map.get("ticketingScheduled"));
 
 		return "main/main";
 

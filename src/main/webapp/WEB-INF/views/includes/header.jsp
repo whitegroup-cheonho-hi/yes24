@@ -35,7 +35,6 @@
 			<li id="l3"><a href="${pageContext.request.contextPath}/category/3">연극</a></li>
 			<li id="l4"><a href="${pageContext.request.contextPath}/category/4">클래식</a></li>
 			<li id="l5"><a href="${pageContext.request.contextPath}/transferBoardForm">양도티켓</a></li>
-			<li><a href="">리뷰</a></li>
 			<li><input type="text" id="searchKeyword" autocomplete="off"> <a
 			href="#"><img id="searchButton"
 			src="http://tkfile.yes24.com/imgNew/common/pf-srch-w.png" alt=""></a></li>

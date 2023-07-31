@@ -80,6 +80,14 @@ public class ShowDAO {
 	}
 
 	// ------------------ 티케팅예정작
+	public List<ShowVO> getWhatsHot() {
+		System.out.println("getWhatsHot DAO()");
+
+		return sqlSession.selectList("show.getWhatsHot");
+
+	}
+
+	// ------------------ 티케팅예정작
 	public List<ShowVO> getTicketingScheduled() {
 		System.out.println("getTicketingScheduled DAO()");
 

@@ -58,6 +58,7 @@
 }
 
 section {
+	padding-top: 120px;
 	width: 1200px;
 	margin: 0 auto;
 	text-align: center;
@@ -112,9 +113,18 @@ section ul li a span {
 	font-size: 17px;
 	margin-top: 2px;
 }
-#sec02div{ margin-top: 80px;}
 
+#sec02div {
+	margin-top: 80px;
+}
 
+.cont-tit {
+	margin-bottom: 70px;
+}
+
+section .sec01, .sec02 {
+	padding-top: 150px;
+}
 </style>
 </head>
 <body>
@@ -139,41 +149,63 @@ section ul li a span {
 		<div class="swiper-button-next"></div>
 	</div>
 	<!-- /메인 롤링배너 (KV) -->
+
+	<!-- 이스핫 -->
 	<section class="sec01">
-    <p class="cont-tit"><img src="http://tkfile.yes24.com/imgNew/main/tit1.png" alt=""></p>
- 	
-
-
-<div class="cont">
-	<div class="whot-area">
-		<ul id="ulWhatshot"><li><div class="big-one"><a href="/Perf/46310?Gcode=009_207"><img src="http://tkfile.yes24.com/upload2/perfblog/202306/20230619/20230619-46310.jpg/dims/quality/70/" alt=""><div class="big-one-txt"><p class="big-tit">뮤지컬 구텐버그</p><p class="big-detail">2023. 08. 02.~2023. 10. 22. 플러스씨어터 / <span>조기예매 할인 20%</span></p></div><p class="big-circle">20%</p></a></div></li><li><div class="whot-list"><a href="/Perf/46296?Gcode=009_207"><img src="http://tkfile.yes24.com/upload2/perfblog/202306/20230619/20230619-46296.jpg/dims/quality/70/" alt="" class="lazyload"><div class="whot-list-txt"><div><p class="whot-tit">연극 라스트 세션</p><p class="whot-detail">2023. 07. 08.~2023. 09. 10.<br>대학로 TOM 1관</p><p class="whot-event">청소년 할인 35%</p></div></div><p class="whot-list-circle"><span>35%</span></p></a></div></li><li><div class="whot-list"><a href="/Perf/46523?Gcode=009_207"><img src="http://tkfile.yes24.com/upload2/perfblog/202307/20230712/20230712-46523.jpg/dims/quality/70/" alt="" class="lazyload"><div class="whot-list-txt"><div><p class="whot-tit">김기태 전국투어 콘서트</p><p class="whot-detail">2023. 09. 02.<br>한전아트센터</p><p class="whot-event"></p></div></div></a></div></li><li><div class="whot-list"><a href="http://ticket.yes24.com/New/Search/SearchList.aspx?SearchText=%EC%9B%8C%ED%84%B0%EB%B0%A4%202023&amp;Gcode=009_207"><img src="http://tkfile.yes24.com/upload2/perfblog/202305/20230502/20230502-45215.jpg/dims/quality/70/" alt="" class="lazyload"><div class="whot-list-txt"><div><p class="whot-tit">워터밤 2023</p><p class="whot-detail">2023. 07.~<br>전국투어</p><p class="whot-event"></p></div></div><p class="whot-list-circle"><span>전국</span></p></a></div></li><li><div class="whot-list"><a href="http://ticket.yes24.com/New/Genre/GenreBridge.aspx?genre=15457&amp;id=1130&amp;Gcode=009_207"><img src="http://tkfile.yes24.com/upload2/perfblog/202305/20230511/20230511-45925.jpg/dims/quality/70/" alt="" class="lazyload"><div class="whot-list-txt"><div><p class="whot-tit">뮤지컬 맘마미아</p><p class="whot-detail">2023. 07.~<br>전국투어</p><p class="whot-event"></p></div></div><p class="whot-list-circle"><span>전국</span></p></a></div></li><li><div class="whot-list"><a href="/Perf/45677?Gcode=009_207"><img src="http://tkfile.yes24.com/upload2/perfblog/202306/20230626/20230626-45677.jpg/dims/quality/70/" alt="" class="lazyload"><div class="whot-list-txt"><div><p class="whot-tit">뮤지컬 보이A</p><p class="whot-detail">2023. 05. 30.~2023. 08. 20.<br>예스24스테이지 3관</p><p class="whot-event">재관람 할인 30%</p></div></div><p class="whot-list-circle"><span>30%</span></p></a></div></li><li><div class="whot-list"><a href="/Perf/45419?Gcode=009_207"><img src="http://tkfile.yes24.com/upload2/perfblog/202306/20230628/20230628-45419.jpg/dims/quality/70/" alt="" class="lazyload"><div class="whot-list-txt"><div><p class="whot-tit">연극 나무 위의 군대</p><p class="whot-detail">2023. 06. 20.~2023. 08. 12.<br>LG아트센터 서울 U+스테이지</p><p class="whot-event"></p></div></div></a></div></li></ul>
-	</div>
-</div>
- </section>
+		<p class="cont-tit">
+			<img src="http://tkfile.yes24.com/imgNew/main/tit1.png" alt="">
+		</p>
+		<div class="cont">
+			<div class="whot-area">
+				<ul id="ulWhatshot">
+					<c:forEach items="${getWhatsHot}" var="show" varStatus="loop">
+						<li>
+							<div class="big-one${loop.index}">
+								<a
+									href="${pageContext.request.contextPath}/show/detail/${show.showSq}">
+									<img
+									src="${pageContext.request.contextPath}/upload/${show.subImage}"
+									alt=""> <span class="whot-list-txt"> <span>
+											<span class="whot-tit">${show.showName}</span><br> <span
+											class="whot-detail">${show.startDate} ~
+												${show.endDate}<br>${show.concertHallName}
+										</span>
+									</span>
+								</span>
+								</a>
+							</div>
+						</li>
+					</c:forEach>
+				</ul>
+			</div>
+		</div>
+	</section>
 	<!-- 개봉예정작 -->
 	<section id="section" class="sec02">
-	<p class="cont-tit"><img src="http://tkfile.yes24.com/imgNew/main/tit2-1.png" alt=""></p>
+		<p class="cont-tit">
+			<img src="http://tkfile.yes24.com/imgNew/main/tit2-1.png" alt="">
+		</p>
 		<div id="sec02div">
 			<ul>
 				<c:forEach items="${ticketingScheduled}" var="show">
-					<li class="donut-area"><a href="${pageContext.request.contextPath}/show/detail/${show.showSq}">
-							<img src="${pageContext.request.contextPath}/upload/${show.subImage}">
+					<li class="donut-area"><a
+						href="${pageContext.request.contextPath}/show/detail/${show.showSq}">
+							<img
+							src="${pageContext.request.contextPath}/upload/${show.subImage}">
 							<c:choose>
-							    <c:when test="${show.dDay > 0}">
-							        <span class="donut-dday">D-${show.dDay}</span>
-							    </c:when>
-							    <c:otherwise>
-							        <span class="donut-dday today">Today</span>
-							    </c:otherwise>
-							</c:choose>
-							<span class="orange">${show.reservationDate}</span>
-							<span class="gray">(${show.categoryName}) ${show.showName}</span> 
+								<c:when test="${show.dDay > 0}">
+									<span class="donut-dday">D-${show.dDay}</span>
+								</c:when>
+								<c:otherwise>
+									<span class="donut-dday today">Today</span>
+								</c:otherwise>
+							</c:choose> <span class="orange">${show.reservationDate}</span> <span
+							class="gray">(${show.categoryName}) ${show.showName}</span>
 					</a></li>
 				</c:forEach>
 			</ul>
 		</div>
 	</section>
-
 	<!-- Footer -->
 	<c:import url="/WEB-INF/views/includes/footer.jsp"></c:import>
 	<!-- //Footer -->

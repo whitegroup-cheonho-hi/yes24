@@ -344,9 +344,11 @@ public class ShowService {
 		Map<String, Object> map = new HashMap<>();
 
 		List<ShowVO> showList = showDAO.getShowList(no);
+		List<ShowVO> getWhatsHot = showDAO.getWhatsHot();
 		List<ShowVO> ticketingScheduled = showDAO.getTicketingScheduled();
 
 		map.put("showList", showList);
+		map.put("getWhatsHot", getWhatsHot);
 		map.put("ticketingScheduled", ticketingScheduled);
 
 		return map;
