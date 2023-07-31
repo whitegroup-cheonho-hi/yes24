@@ -48,6 +48,8 @@ public class MainController {
 		model.addAttribute("showList2", map.get("showList2"));
 		model.addAttribute("pageMaker", map.get("pageMaker"));
 		model.addAttribute("category", no);
+		
+		System.out.println(map.get("showList2"));
 
 		return "main/category";
 

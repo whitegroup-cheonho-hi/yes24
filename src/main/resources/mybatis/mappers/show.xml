@@ -166,7 +166,18 @@
 				    show_content      AS showcontent,
 				    category,
 				    show_stat         AS showstat,
-				    concert_hall_sq   AS concerthallsq
+				    concert_hall_sq   AS concerthallsq,
+					(
+			        SELECT
+			            round(AVG(a.grade), 2)
+			        FROM
+			            review a
+			            JOIN show b ON a.show_sq = b.show_sq
+			        WHERE
+			            a.show_sq = #{showSq}
+			        GROUP BY
+			            a.show_sq
+			    	) AS gradeavg
 				FROM
 				    show
 			   WHERE
@@ -219,19 +230,41 @@
 		<![CDATA[
 		
 			  SELECT
-				    show_sq               AS showsq,
-				    sub_image             AS subimage,
-				    TO_CHAR(start_date, 'YYYY.MM.DD') AS startdate,
-				    TO_CHAR(end_date, 'YYYY.MM.DD') AS enddate,
-				    CASE WHEN LENGTH(show_name) > 8 THEN CONCAT(SUBSTR(show_name, 1, 8), '...') ELSE show_name END AS showname,
-				    b.concert_hall_name   AS concerthallname
+				    showsq,
+				    subimage,
+				    startdate,
+				    enddate,
+				    showname,
+				    concerthallname,
+				    gradeavg
 				FROM
-				    show a
-	  	  INNER JOIN 
-	  	            concert_hall b 
-	  	          ON 
-	  	            a.concert_hall_sq = b.concert_hall_sq
-			   WHERE
+				    (
+				      SELECT
+				            a.show_sq             AS showsq,
+				            sub_image             AS subimage,
+				            TO_CHAR(start_date, 'YYYY.MM.DD') AS startdate,
+				            TO_CHAR(end_date, 'YYYY.MM.DD') AS enddate,
+				            CASE
+				                WHEN length(show_name) > 8 THEN concat(substr(show_name, 1, 8), '...')
+				                ELSE show_name
+				            END AS showname,
+				            b.concert_hall_name   AS concerthallname,
+				            round(AVG(nvl(c.grade, 0)), 2) AS gradeavg
+				        FROM
+				            show a
+				            INNER JOIN concert_hall b ON a.concert_hall_sq = b.concert_hall_sq
+				            LEFT OUTER JOIN review c ON a.show_sq = c.show_sq
+				    GROUP BY
+				            a.show_sq,
+				            sub_image,
+				            start_date,
+				            end_date,
+				            show_name,
+				            b.concert_hall_name
+				    ORDER BY
+				            gradeavg DESC
+				    )
+				WHERE
 				    ROWNUM <= 7
 						
 		]]>
@@ -316,8 +349,14 @@
 				                    sub_image         AS subimage,
 				                    TO_CHAR(start_date, 'YYYY.MM.DD') AS startdate,
 				                    TO_CHAR(end_date, 'YYYY.MM.DD') AS enddate,
-				                    TO_CHAR(reservation_date, 'YYYY.MM.DD') AS reservationdate,
-				                    show_name         AS showname,
+				                    CASE
+				                        WHEN reservation_date < TRUNC(SYSDATE) THEN 'Y'
+				                        ELSE 'N'
+				                    END AS reservationdate,  
+				                    CASE
+						                WHEN length(show_name) > 6 THEN concat(substr(show_name, 1, 6), '..')
+						                ELSE show_name
+						            END AS showname,
 				                    cast,
 				                    director,
 				                    show_time         AS showtime,
@@ -328,7 +367,7 @@
 				                    concert_hall_sq   AS concerthallsq
 				                FROM
 				                    show
-				                WHERE
+				               WHERE
 				                    category = ${keyword}
          ]]>
 		<if test="keyword2 != null and keyword2 != ''">
@@ -336,8 +375,8 @@
 		</if>
 								 				                    
 		<![CDATA[
-				                ORDER BY
-				                    show_sq DESC
+				            ORDER BY
+				                    reservationdate DESC , show_sq DESC
 				            )
 				    )
 				WHERE

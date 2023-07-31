@@ -112,7 +112,7 @@ section > h2{margin-top: 80px;    margin-bottom: 75px;}
 #moveForm1 label{vertical-align:middle; }
 #header #nav {margin-right: 4px;}
 header.pc #header h1 {margin-right: -1px;}
-#searchShowName{position: absolute; top: 168px;left: 187px;z-index: 200;width: 155px; border: solid 1px black;
+#searchShowName{position: absolute; top: 168px;left: 186px;z-index: 200;width: 155px; border: solid 1px black;
     background-color: #fff;  border-top: none; font-size: 13px; text-align: left; padding: 10px 3px 10px; }
 .showName{display: block;cursor: pointer;}
 #showName{outline: none;}

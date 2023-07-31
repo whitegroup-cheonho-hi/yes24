@@ -42,6 +42,7 @@
 #map {margin: 0 auto;}
 #cName {width: 150px;text-align: center;padding: 4px 0;font-size: 19px;}
 #cName img {width: 20px;}
+#noneTicketing {color: orange;}
 #ticketingdiv {text-align: center;    margin-bottom: 60px;}
 #ticketingdiv div {border-radius: 5px;padding: 5px;width: 250px;background: #f43142;margin: 0 auto;border: 2px solid #f43142;}
 .ticketing {font-size: 20px;color: #fff;display: block; height:100%;}
@@ -114,7 +115,7 @@
 			<div class="renew-content">				
 				<div class="rn-02">
 					<!--제목-->
-					<p class="rn-big-title">${show.showName}</p>
+					<p class="rn-big-title">${show.showName}<span id="noneTicketing"></span> </p>
 					<div class="rn-product-short-data">
 						<p>
 							<span class="ps-date">${show.startDate} ~ ${show.endDate}</span><a
@@ -145,8 +146,8 @@
 							src="http://tkfile.yes24.com/imgNew/sub/rn-product-good1.png"
 							alt=""><img
 							src="http://tkfile.yes24.com/imgNew/sub/rn-product-good2.png"
-							alt=""><span class="rn-pdg-txt2">33</span><span
-							class="rn-pdg-txt1">Likes</span>
+							alt=""><span class="rn-pdg-txt2">평점</span><span
+							class="rn-pdg-txt1">${show.gradeAvg}점</span>
 						</a>
 
 					</div>
@@ -389,11 +390,30 @@
 <script>
 $(document).ready(function() {
 	
+	 var today = new Date();
+     var year = today.getFullYear();
+     var month = today.getMonth() + 1; // 월은 0부터 시작하므로 1을 더해줌
+     var day = today.getDate();
+
+     // 월과 일이 10보다 작은 경우 앞에 0을 붙여 두 자리로 만듭니다.
+     if (month < 10) {
+       month = '0' + month;
+     }
+     if (day < 10) {
+       day = '0' + day;
+     }
+
+     // 결과를 특정 요소에 출력합니다. 원하는 형식으로 문자열을 생성합니다.
+   	var sysdate =(year + '.' + month + '.' + day);
+	
 	let dayListEl;
 	let dayList;
 	let date;
+	
 	var showSq = '${show.showSq}';
+	var reservationDate = '${show.reservationDate}';
 	var authUser = '${sessionScope.authUser}'+'';
+
 		
 	//페이징 버튼 클릭
 	$(".pageInfo a").on("click", function(e) {
@@ -569,23 +589,31 @@ $(document).ready(function() {
 		}
 	});
 	dayList.render();
+	
+	
+	
 
-
-	//예매버튼 클릭시
-	$("#ticketing").on("click", function(e){
-		e.preventDefault()
-		console.log("예매");
-		
-		// 로그인 안되면 로그인 페이지로
-		if(authUser == ''){
-			alert("로그인이 필요합니다.");
-			window.location.href = '${pageContext.request.contextPath}/user/loginForm';
+	if(reservationDate > sysdate){
+				
+		 $("#ticketingdiv").css("display", "none");
+		 $("#noneTicketing").text("(개봉 예정작)");
+		 
+	}else{
+		//예매버튼 클릭시
+		$("#ticketing").on("click", function(e){
+			e.preventDefault()
+			console.log("예매");
 			
-		}else{		
-			popup();
-		}
-		
-	});
+				// 로그인 안되면 로그인 페이지로
+				if(authUser == ''){
+					alert("로그인이 필요합니다.");
+					window.location.href = '${pageContext.request.contextPath}/user/loginForm';
+					
+				}else{		
+					popup();
+				}
+		});
+	}
 	//팝업창
 	function popup() {
     var url = '${pageContext.request.contextPath}/order/orderForm/'+showSq;

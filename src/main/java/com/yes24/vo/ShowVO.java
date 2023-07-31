@@ -23,6 +23,8 @@ public class ShowVO {
 	private String categoryName;
 	private int showStat;
 	private int dDay;
+	private double gradeAvg;
+
 	// 공연장
 	private int concertHallSq;
 	private String concertHallName;
@@ -38,8 +40,8 @@ public class ShowVO {
 
 	public ShowVO(int showSq, String mainImage, String subImage, String detailedImage, String startDate, String endDate,
 			String reservationDate, String showName, String cast, String director, String showTime, String viewingAge,
-			int category, String categoryName, int showStat, int dDay, int concertHallSq, String concertHallName,
-			List<Integer> seatClassSq, List<String> seatClass, List<Integer> seatPrice) {
+			int category, String categoryName, int showStat, int dDay, double gradeAvg, int concertHallSq,
+			String concertHallName, List<Integer> seatClassSq, List<String> seatClass, List<Integer> seatPrice) {
 		super();
 		this.showSq = showSq;
 		this.mainImage = mainImage;
@@ -57,6 +59,7 @@ public class ShowVO {
 		this.categoryName = categoryName;
 		this.showStat = showStat;
 		this.dDay = dDay;
+		this.gradeAvg = gradeAvg;
 		this.concertHallSq = concertHallSq;
 		this.concertHallName = concertHallName;
 		this.seatClassSq = seatClassSq;
@@ -192,6 +195,14 @@ public class ShowVO {
 		this.dDay = dDay;
 	}
 
+	public double getGradeAvg() {
+		return gradeAvg;
+	}
+
+	public void setGradeAvg(double gradeAvg) {
+		this.gradeAvg = gradeAvg;
+	}
+
 	public int getConcertHallSq() {
 		return concertHallSq;
 	}
@@ -238,9 +249,9 @@ public class ShowVO {
 				+ detailedImage + ", startDate=" + startDate + ", endDate=" + endDate + ", reservationDate="
 				+ reservationDate + ", showName=" + showName + ", cast=" + cast + ", director=" + director
 				+ ", showTime=" + showTime + ", viewingAge=" + viewingAge + ", category=" + category + ", categoryName="
-				+ categoryName + ", showStat=" + showStat + ", dDay=" + dDay + ", concertHallSq=" + concertHallSq
-				+ ", concertHallName=" + concertHallName + ", seatClassSq=" + seatClassSq + ", seatClass=" + seatClass
-				+ ", seatPrice=" + seatPrice + "]";
+				+ categoryName + ", showStat=" + showStat + ", dDay=" + dDay + ", gradeAvg=" + gradeAvg
+				+ ", concertHallSq=" + concertHallSq + ", concertHallName=" + concertHallName + ", seatClassSq="
+				+ seatClassSq + ", seatClass=" + seatClass + ", seatPrice=" + seatPrice + "]";
 	}
 
 }

@@ -51,6 +51,7 @@
 .slick-slide {transition: all ease-in-out .3s;opacity: 0.7;}
 .slick-current {opacity: 1;transform: scaleY(1.2) scaleX(1.1);}
 .slick-active {	opacity: 1;}
+#noneTicketing{color:orange;}
 
 section{width: 1200px; margin: 0 auto;     text-align: center;}
 section ul {  display: flex;  justify-content: flex-start; flex-direction: row; flex-wrap: wrap; margin: 0 -15px; }
@@ -108,7 +109,12 @@ section ul li a span.price{font-weight: 600; font-size: 17px; margin-top: 2px;}
 									href="${pageContext.request.contextPath}/show/detail/${show.showSq}">
 										<img
 										src="${pageContext.request.contextPath}/upload/${show.subImage}">
-										<span class="gray">${show.showName}</span> <span class="orange">${show.startDate}&nbsp;~&nbsp;${show.endDate}</span>
+										<span class="gray">${show.showName}
+										<c:if test="${show.reservationDate eq 'N'}">
+										<b id="noneTicketing">(개봉 예정작)</b>
+										</c:if>
+										</span>
+										<span class="orange">${show.startDate}&nbsp;~&nbsp;${show.endDate}</span>
 								</a></li>
 							</c:forEach>
 						</ul>
@@ -163,6 +169,22 @@ section ul li a span.price{font-weight: 600; font-size: 17px; margin-top: 2px;}
 <script>
 	$(document).on('ready', function() {
 		
+		 var today = new Date();
+	     var year = today.getFullYear();
+	     var month = today.getMonth() + 1; // 월은 0부터 시작하므로 1을 더해줌
+	     var day = today.getDate();
+	 	 var reservationDate = '${show.reservationDate}';
+	     // 월과 일이 10보다 작은 경우 앞에 0을 붙여 두 자리로 만듭니다.
+	     if (month < 10) {
+	       month = '0' + month;
+	     }
+	     if (day < 10) {
+	       day = '0' + day;
+	     }
+
+	     // 결과를 특정 요소에 출력합니다. 원하는 형식으로 문자열을 생성합니다.
+	   	var sysdate =(year + '.' + month + '.' + day);
+	        		
 		// 포커스
 		var category = '${category}';
 		$("#l"+category).addClass("on");
