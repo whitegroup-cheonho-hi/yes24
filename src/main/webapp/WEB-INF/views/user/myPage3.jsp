@@ -6,28 +6,18 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>myPage</title>
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath }/assets/css/reset.css"
-	type="text/css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath }/assets/css/sub.css"
-	type="text/css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath }/assets/css/user.css"
-	type="text/css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath }/assets/css/myPage.css"
-	type="text/css">
-<link rel="stylesheet" type="text/css"
-	href="https://image.yes24.com/sysimage/yesUI/yesUI.css?v=20230403"
-	media="all">
+<title>myPage alarm</title>
+<link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/reset.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/sub.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/user.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/myPage.css" type="text/css">
+<link rel="stylesheet" type="text/css" href="https://image.yes24.com/sysimage/yesUI/yesUI.css?v=20230403" media="all">
+
 <!-- 구글폰트 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com">
-<link
-	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300&display=swap"
-	rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300&display=swap" rel="stylesheet">
+
 <!-- 제이쿼리 최신버전 -->
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <style>
@@ -35,7 +25,7 @@
 .mypage_contain {margin-bottom: 112px;}
 .arlarmCancelButton { background-color: #f43142;  color: #fff;  width: 50px; height: 21px; border: none; cursor: pointer;  border-radius: 3px;}
 #aLink a{text-decoration: none;color: #fff;     font-size: 14px;}
-#aLinkdiv{ padding-top: 7px; border-radius: 5px; display: inline-block; background-color: #f43142;width: 80px;height: 25px; border: none;    cursor: pointer;}
+#aLinkdiv{ padding-top: 7px; border-radius: 5px; display: inline-block; background-color: #f43142;width: 80px;height: 25px; border: none;   cursor: pointer;}
 </style>
 </head>
 <body>
@@ -150,7 +140,7 @@
 										<tr>
 											<th scope="row" class="fst">알림날짜</th>
 											<th scope="row">제목</th>
-											<th scope="row">게시글보기</th>
+											<th scope="row">알림 내용</th>
 										</tr>
 									</thead>
 									<tbody>

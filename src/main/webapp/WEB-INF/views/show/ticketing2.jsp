@@ -5,49 +5,21 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>ticketing</title>
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath }/assets/css/reset.css"
-	type="text/css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath }/assets/css/ticketing.css"
-	type="text/css">
+<title>ticketing seat choice</title>
+<link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/reset.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/ticketing.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/ticketingseatchoice.css" type="text/css">
+
 <!-- 제이쿼리 최신 버전 -->
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <style>
-#guideview {margin-left: 25px;}
-.f_header {margin-top: 70px;margin-left: 10px;height: 34px;}
-#br {margin-bottom: 5px;margin-left: 25px;}
-#header{background-color: #363636;}
-.result{background-color: #363636; color : #fff;}
-#ptitle a{color: #FFFFFF; font-size: 15px;}
-#brup{padding: 0;}
-.minimap_m h2{font-size: 15px;}
-.minimap_m>* {padding: 5px;}
-.ulLegend {height: 150px;width: 239px;}
 .gnb li {float: left;background:url("${pageContext.request.contextPath}/assets/images/예매순서.png");height: 52px;width: 120px;}
-.admRow {margin-top: 10px;height: 560px;}
-.admSpan {display: flex;justify-content: center;box-sizing: border-box;background-color: #fff;padding: 9px 14px 11px;line-height: 28px;display: flex;text-align: center;}
-#container {align-items: center;display: none;}
-#container .item {color: black;}
-.item {width: 23px;height: 23px;background-color: #efdfdf;border-radius: 8px 8px 0 0;border: solid 1px #fff;text-align: center;font-size: 17px;box-sizing: border-box;}
-#cover {margin-top: 46px;background-color: lightgray;}
-#cover .admRow .admSpan{background-color: lightgray; margin-top: 40px;}
-.red {background-color: #e24647;}
-.pink {background-color: #dfa5ff;}
-.blue {background-color: #8fbfee;}
-.green {background-color: #a5ea7b;}
-.gray {background-color: gray;  pointer-events: none;}
 .check {
   background-image: url("${pageContext.request.contextPath}/assets/images/체크버튼.PNG"); 
   background-size: cover; 
   background-position: center center; 
 }
-#selFlashDateAll, #selFlashTime {font-size: 15px;}
-#ulLegend, #ulLegend2 {font-size: 14px;	color: #fff;margin: auto; border: solid 1px #ec7d2c;}
-#screen{width: 690px;height: 50px;}
-#clearButton img{width: 240px; height: 37px; margin-left: 10px;}
-.btn{height:29px;}
+
 </style>
 </head>
 <body>

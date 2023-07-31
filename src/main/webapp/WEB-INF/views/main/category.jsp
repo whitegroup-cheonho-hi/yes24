@@ -6,73 +6,26 @@
 <head>
 <meta charset="UTF-8">
 <title>category</title>
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath }/assets/css/reset.css"
-	type="text/css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath }/assets/css/sub.css"
-	type="text/css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath }/assets/css/slick.css"
-	type="text/css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath }/assets/css/slick-theme.css"
-	type="text/css">
-<link rel="stylesheet" type="text/css"
-	href="https://image.yes24.com/sysimage/yesUI/yesUI.css?v=20230403"
-	media="all">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/reset.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/sub.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/slick.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/slick-theme.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/category.css" type="text/css">
+<link rel="stylesheet" type="text/css" href="https://image.yes24.com/sysimage/yesUI/yesUI.css?v=20230403" media="all">
+
 <!-- 구글폰트 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com">
-<link
-	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300&display=swap"
-	rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300&display=swap" rel="stylesheet">
+
 <!-- 스와이퍼 js -->
 <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
 <!-- 스와이퍼 CSS -->
-<link rel="stylesheet"
-	href="https://unpkg.com/swiper@8/swiper-bundle.min.css" type="text/css">
+<link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" type="text/css">
 <!-- 제이쿼리 최신버전 -->
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script src="${pageContext.request.contextPath }/assets/js/slick.js"
-	type="text/javascript" charset="utf-8"></script>
+<script src="${pageContext.request.contextPath }/assets/js/slick.js" type="text/javascript" charset="utf-8"></script>
 <style>
-.wrapper {max-width: 1920px;margin: 0 auto;}
-.center {width: 100%;}
-.slider {margin: 100px auto 30px;}
-.slick-slide {margin: 0px 15px ;}
-.slick-slide img {width: 100%;height: 400px; }
-.slick-prev, .slick-next {top: 48%;width: 50px;height: 60px;z-index: 99;}
-.slick-next:before {content: '';display: block;width: 50px;height: 60px;background:	url('http://tkfile.yes24.com/imgNew/common/slide-dir-next.png')	no-repeat;}
-.slick-prev:before {content: '';display: block;width: 50px;height: 60px;background:	url('http://tkfile.yes24.com/imgNew/common/slide-dir-prev.png')	no-repeat;}
-.slick-next {right: 100px;}
-.slick-prev {left: 100px;}
-.slick-track {padding: 30px 0;}
-.slick-slide {transition: all ease-in-out .3s;opacity: 0.7;}
-.slick-current {opacity: 1;transform: scaleY(1.2) scaleX(1.1);}
-.slick-active {	opacity: 1;}
-#noneTicketing{color:orange;}
-
-section{width: 1200px; margin: 0 auto;     text-align: center;}
-section ul {  display: flex;  justify-content: flex-start; flex-direction: row; flex-wrap: wrap; margin: 0 -15px; }
-section ul li{ width: calc(25% - 92px); margin: 0 15px; margin-bottom: 70px;}
-section ul li a img{width: 100%;margin-bottom:5px;}
-section ul li a .gray{ color: #888;font-size: 18px;}
-section ul li a .orange{ color: #ec7d2c; margin-top: 10px;}
-section ul li a span{margin:0 6px; display: block; text-align: center; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;}
-section ul li a span.tit{font-size: 14px; margin-top:15px;}
-section ul li a span.price{font-weight: 600; font-size: 17px; margin-top: 2px;}
-
-.paging{width: 1000px; margin: 20px auto; display: flex; justify-content: center;}
-.paging li{margin: 0 10px; width: 14px;}
-.paging li a{font-size: 18px; height: 100%;}
-.paging li.on a{color: #4982cf;}
-.paging li.first{width: 14px; margin-right: 0; background: url('https://flyairseoul.com/CW/public/images/icons/common-s57efedab2d.png') no-repeat; background-position: 0 -6983px;}
-.paging li.pre{width: 9px; background: url('https://flyairseoul.com/CW/public/images/icons/common-s57efedab2d.png') no-repeat; background-position: 0 -7151px;}
-.paging li.next{width: 9px; background: url('https://flyairseoul.com/CW/public/images/icons/common-s57efedab2d.png') no-repeat; background-position: 0 -7095px;}
-.paging li.last{width: 14px;margin-left: 0; background: url('https://flyairseoul.com/CW/public/images/icons/common-s57efedab2d.png') no-repeat; background-position: 0 -7039px;}
-.paging-area{width:1100px; margin: 0 auto;margin-left: 16%;}
-.active .anum {color: #4982cf; font-weight: bold; font-size: 19px;}
 </style>
 </head>
 <body>

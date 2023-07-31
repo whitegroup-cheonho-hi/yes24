@@ -6,103 +6,27 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>detail</title>
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath }/assets/css/reset.css"
-	type="text/css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath }/assets/css/sub.css"
-	type="text/css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath }/assets/css/detail.css"
-	type="text/css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath }/assets/css/review.css"
-	type="text/css">
-<link rel="stylesheet" type="text/css"
-	href="https://image.yes24.com/sysimage/yesUI/yesUI.css?v=20230403"
-	media="all">
+<title>show detail</title>
+<link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/reset.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/sub.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/detail.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/review.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/showDetail.css" type="text/css">
+<link rel="stylesheet" type="text/css" href="https://image.yes24.com/sysimage/yesUI/yesUI.css?v=20230403" media="all">
+
 <!-- 구글폰트 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com">
-<link
-	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300&display=swap"
-	rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300&display=swap" rel="stylesheet">
+
 <!-- 제이쿼리 최신 버전 -->
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <!-- 다음지도API -->
-<script type="text/javascript"
-	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1d8e22ec81bcdc862373ee6f17fdef96&libraries=services"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1d8e22ec81bcdc862373ee6f17fdef96&libraries=services"></script>
 <!-- 풀켈린더js -->
-<script type="text/javascript"
-	src='${pageContext.request.contextPath }/assets/js/index.global.min.js'></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+<script type="text/javascript" src='${pageContext.request.contextPath }/assets/js/index.global.min.js'></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 <style>
-#map {margin: 0 auto;}
-#cName {width: 150px;text-align: center;padding: 4px 0;font-size: 19px;}
-#cName img {width: 20px;}
-#noneTicketing {color: orange;}
-#ticketingdiv {text-align: center;    margin-bottom: 60px;}
-#ticketingdiv div {border-radius: 5px;padding: 5px;width: 250px;background: #f43142;margin: 0 auto;border: 2px solid #f43142;}
-.ticketing {font-size: 20px;color: #fff;display: block; height:100%;}
-
-.concertHall .position{margin-bottom: 50px;}
-.concertHall .position{width: 1178px;display: flex;border: solid 1px #ec7d2c; padding: 10px;}
-.concertHall .position #calendar,#dayList{margin-right: 20px; width: 390px;}
-.concertHall .position #remainingSeats{ width: 355px;}
-.concertHall .position h2{font-size: 20px;}
-.concertHall .position .fc-scrollgrid-sync-table a{font-size: 15px; cursor: pointer;}
-.concertHall .position .fc .fc-button{font-size: 12px;}
-.position #calendar .fc-view-harness .fc-col-header .fc-col-header-cell{width:55px;}
-.position #calendar .fc-scrollgrid-section .fc-scrollgrid-sync-table tbody .fc-day{width:55px;}
-.fc .fc-daygrid-body-unbalanced .fc-daygrid-day-events {min-height: 0em;}
-#fc-dom-87{border-bottom: solid 2px;}
-#remaining{border: 1px solid #ddd;height: 200px;margin-top: 15px;padding: 10px; }
-#remainingSeats h2{height: 55px;}
-#remainingSeats .fc-view-harness{padding: 10px;}
-.rn-product-area3 #precautions{color:red;}
-.fc-event{cursor: pointer;}
-#detailedImage{ text-align: center;    margin-bottom: 30px;}
-/* 탑버튼 */
-.top_btn{position: fixed; right: 100px; bottom: 100px; }
-.top_btn img{width: 50px;}
-.rn-0803{text-align: center;font-size: 30px; margin-bottom: 40px;}
-
-
-/* 리뷰등록창 */
-.inquiry_popup{position: fixed; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 9999999; top: 0; left: 0;}
-.inquiry_popup .inquiry_close{display: none;}
-.inquiry_popup .inquiry_write{border-radius: 5px; box-sizing: border-box; padding: 60px; width: 700px; height: 540px; position: absolute; top: 10%; left: 50%; margin-left: -350px; background: #fff;}
-.inquiry_popup .inquiry_write h3{ font-weight: 700; font-size: 28px; margin-bottom: 20px; text-align: center;}
-.inquiry_popup .inquiry_write table { width: 100%;border: 1px solid #ccc; border-collapse: collapse; }
-.inquiry_popup .inquiry_write th,
-.inquiry_popup .inquiry_write td {vertical-align: middle; border: 1px solid #ccc; padding: 10px; text-align: left;}
-.inquiry_popup .inquiry_write td input#secret_write_N{margin-left: 20px;}
-.inquiry_popup .inquiry_write td input#inquiry_tit{border-radius: 5px; border: 1px solid #ccc; padding: 10px; font-size: 16px; width: 100%; box-sizing: border-box;}
-.inquiry_popup .inquiry_write td textarea#content{border-radius: 5px;  resize: none;border: 1px solid #ccc; padding: 10px; font-size: 16px; width: 100%; height: 190px; box-sizing: border-box;}
-.inquiry_popup .inquiry_write td .textLengthWrap{text-align: right; color: #aaa;}
-/* 버튼 */
-.btn_wrap{margin-top: 40px; display: flex; justify-content: center;}
-.btn_wrap a{padding: 15px 50px; margin: 0 5px; font-weight: 600;}
-.btn_wrap a.order_btn{ border-radius: 5px;background: #ec7d2c; border: 1px solid #ec7d2c; color: #fff;}
-.btn_wrap a.shopping_btn{  border-radius: 5px;background: #fff; border: 1px solid #ec7d2c; color: #ec7d2c;}
-.transferButton { border-radius: 3px; background-color: #f43142;color: #fff; width: 50px; height: 21px; border: none;}
-.transferCancelButton {border-radius: 3px; background-color: #f43142;color: #fff; width: 50px; height: 21px; border: none;}
-#moveForm1 input{width: 98%; height: 25px}
-.grade{    color: #ec7d2c;}
-
-/* 페이징 */
-.paging{width: 1000px; margin: 20px auto; display: flex; justify-content: center;}
-.paging li{margin: 0 10px; width: 14px;}
-.paging li a{font-size: 18px; height: 100%;}
-.paging li.on a{color: #4982cf;}
-.paging li.first{width: 14px; margin-right: 0; background: url('https://flyairseoul.com/CW/public/images/icons/common-s57efedab2d.png') no-repeat; background-position: 0 -6983px;}
-.paging li.pre{width: 9px; background: url('https://flyairseoul.com/CW/public/images/icons/common-s57efedab2d.png') no-repeat; background-position: 0 -7151px;}
-.paging li.next{width: 9px; background: url('https://flyairseoul.com/CW/public/images/icons/common-s57efedab2d.png') no-repeat; background-position: 0 -7095px;}
-.paging li.last{width: 14px;margin-left: 0; background: url('https://flyairseoul.com/CW/public/images/icons/common-s57efedab2d.png') no-repeat; background-position: 0 -7039px;}
-.paging-area{width:1100px; margin: 0 auto;margin-left: 16%;}
-.active .anum {color: #4982cf; font-weight: bold; font-size: 19px;}
 
 </style>
 </head>

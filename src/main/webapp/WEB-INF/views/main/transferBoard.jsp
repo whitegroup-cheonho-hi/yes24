@@ -7,118 +7,29 @@
 <head>
 <meta charset="UTF-8">
 <title>transferBoard</title>
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath }/assets/css/reset.css"
-	type="text/css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath }/assets/css/sub.css"
-	type="text/css">
-<link rel="stylesheet" type="text/css"
-	href="https://image.yes24.com/sysimage/yesUI/yesUI.css?v=20230403"
-	media="all">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/reset.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/sub.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/transferBoard.css" type="text/css">
+<link rel="stylesheet" type="text/css" href="https://image.yes24.com/sysimage/yesUI/yesUI.css?v=20230403" media="all">
+<!-- 슬릭슬라이더 css -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css">
+<!-- 스와이퍼 css -->
+<!-- <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" type="text/css"> -->
+
 <!-- 구글폰트 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com">
-<link
-	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300&display=swap"
-	rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300&display=swap" rel="stylesheet">
+
 <!-- 제이쿼리 최신버전 -->
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
 <!-- 스와이퍼 js -->
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
+<script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
 <!-- 슬릭슬라이더 js -->
-<link rel="stylesheet"
-	href="https://unpkg.com/swiper@8/swiper-bundle.min.css" type="text/css">
-<!-- 스와이퍼 css -->
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css">
-<!-- 슬릭슬라이더 css -->
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css">
-<!-- 슬릭슬라이더 css -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
 
 <style>
-#ySContent{ margin: 0px auto; }
-.listItem { width: 1200px; display: grid; grid-template-columns: repeat(5, 200px); justify-content: space-around; justify-items: center; }
-.listItem .listItemdiv { display: inline-block; width: 200px; height: 300px; margin: 0 15px; vertical-align: top; }
-.listItem img {width: 100%;}
-.listItemTxt { display: flex; align-items: center; flex-wrap: wrap; justify-content: center;}
-.listItemTxt button { margin: auto; width: 70px; height: 35px; font-size: 14px; font-weight: bold; 
-	background-color: #196ab3; color: white; border: none; border-radius: 5px;}
-.listItemTxt p { width: 200px; height: 40px; margin-bottom: 10px; }
-
-section{width: 1200px; margin: 0 auto; height: fit-content;  text-align: center;}
-section ul {  display: flex;  justify-content: flex-start; flex-direction: row; flex-wrap: wrap; margin: 0 -15px; }
-section ul li{ width: calc(25% - 92px); margin: 0 15px; margin-bottom: 70px;}
-section ul li a img{width: 100%;}
-section ul li a .gray{ color: #888;font-size: 18px;}
-section ul li a .orange{ color: #ec7d2c; margin-top: 10px;}
-section ul li a span{display: block; text-align: center; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;}
-section ul li a span.tit{font-size: 14px; margin-top:15px;}
-section ul li a span.price{font-weight: 600; font-size: 17px; margin-top: 2px;}
-
-.paging{width: 1000px; margin: 20px auto; display: flex; justify-content: center;}
-.paging li{margin: 0 10px; width: 14px;}
-.paging li a{font-size: 18px; height: 100%;}
-.paging li.on a{color: #4982cf;}
-.paging li.first{width: 14px; margin-right: 0; background: url('https://flyairseoul.com/CW/public/images/icons/common-s57efedab2d.png') no-repeat; background-position: 0 -6983px;}
-.paging li.pre{width: 9px; background: url('https://flyairseoul.com/CW/public/images/icons/common-s57efedab2d.png') no-repeat; background-position: 0 -7151px;}
-.paging li.next{width: 9px; background: url('https://flyairseoul.com/CW/public/images/icons/common-s57efedab2d.png') no-repeat; background-position: 0 -7095px;}
-.paging li.last{width: 14px;margin-left: 0; background: url('https://flyairseoul.com/CW/public/images/icons/common-s57efedab2d.png') no-repeat; background-position: 0 -7039px;}
-.paging-area{width:1100px; margin: 0 auto;margin-left: 16%;}
-.active .anum {color: #4982cf; font-weight: bold; font-size: 19px;}
-
-/* 베스트셀러 */
-#best_seller .best_kv{width: 100%; height: 280px; display: flex; justify-content: center; align-items: center; flex-direction:column;}
-#best_seller .best_kv h3{font-size: 30px; margin-bottom: 20px; font-weight: 500;}
-#best_seller .best_kv h3 span{color:#4982cf}
-#best_seller .best_kv p{text-align: center; line-height: 1.3; font-size: 20px; font-weight: 400;}
-#best_seller #best_seller_div{margin: 0 -10px; margin-top: 20px;}
-#best_seller #best_seller_div div.slick-slide{margin: 0 10px;}
-#best_seller #best_seller_div div.cont img{width: 100%;}
-#best_seller #best_seller_div div.cont .tit{display: block; font-size: 14px; margin-top: 15px; text-align: center; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;}
-#best_seller #best_seller_div div.cont .price{display: block; font-size: 17px; font-weight: 600;  margin-top: 2px; text-align: center;}
-.slick-slide{height: 30%;}
-section > h2{margin-top: 80px;    margin-bottom: 75px;}
-#l0{width: 1230px; text-align: right;}
-#alarm{border-radius: 5px;cursor: pointer; width: 160px; height: 35px; background: #f43142; color: #fff; font-size: 22px; border: none;}
-#nav2 li{width: 98px;    font-size: 20px;}
-#nav2 #l4{width: 300px;}
-#nav2 #l4 #searchKeyword{margin-left: 58px; outline:none; width: 190px; border: none; border-bottom: 2px solid #000;  color: #333;}
-#Search{background-color: #196ab3; color: #fff; width: 46px; height: 27px;  border: none; font-size: 17px;}
-
-/* 양도알림창 */
-.inquiry_popup{position: fixed; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 9999999; top: 0; left: 0;}
-.inquiry_popup .inquiry_close{display: none;}
-.inquiry_popup .inquiry_write{border-radius: 5px; box-sizing: border-box; padding: 60px; width: 700px; height: 560px; position: absolute; top: 10%; left: 50%; margin-left: -350px; background: #fff;}
-.inquiry_popup .inquiry_write h3{ font-weight: 700; font-size: 28px; margin-bottom: 20px; text-align: center;}
-.inquiry_popup .inquiry_write table { width: 100%;border: 1px solid #ccc; border-collapse: collapse; }
-.inquiry_popup .inquiry_write th,
-.inquiry_popup .inquiry_write td {vertical-align: middle; border: 1px solid #ccc; padding: 10px; text-align: left;}
-.inquiry_popup .inquiry_write td input#secret_write_N{margin-left: 20px;}
-.inquiry_popup .inquiry_write td input#inquiry_tit{border-radius: 5px; border: 1px solid #ccc; padding: 10px; font-size: 16px; width: 100%; box-sizing: border-box;}
-.inquiry_popup .inquiry_write td textarea#content{border-radius: 5px;  resize: none;border: 1px solid #ccc; padding: 10px; font-size: 16px; width: 100%; height: 120px; box-sizing: border-box;}
-.inquiry_popup .inquiry_write td .textLengthWrap{text-align: right; color: #aaa;}
-/* 버튼 */
-.btn_wrap{margin-top: 40px; display: flex; justify-content: center;}
-.btn_wrap a{padding: 15px 50px; margin: 0 5px; font-weight: 600;}
-.btn_wrap a.order_btn{border-radius: 5px;background: #f43142; border: 1px solid #f43142; color: #fff;}
-.btn_wrap a.shopping_btn{border-radius: 5px;background: #fff; border: 1px solid #f43142; color: #5c5c5c;}
-.transferButton {background-color: #f43142;color: #fff; width: 50px; height: 21px; border: none;}
-.transferCancelButton {background-color: #f43142;color: #fff; width: 50px; height: 21px; border: none;}
-#moveForm1 input{height: 40px; vertical-align:middle; }
-#moveForm1 label{vertical-align:middle; }
-#header #nav {margin-right: 4px;}
-header.pc #header h1 {margin-right: -1px;}
-#searchShowName{position: absolute; top: 168px;left: 186px;z-index: 200;width: 155px; border: solid 1px black;
-    background-color: #fff;  border-top: none; font-size: 13px; text-align: left; padding: 10px 3px 10px; }
-.showName{display: block;cursor: pointer;}
-#showName{outline: none;}
-.buyTransferTicket{opacity: 0.5}
-.soldout{color: red; font-size: 20px;}
-
 </style>
 </head>
 <body>

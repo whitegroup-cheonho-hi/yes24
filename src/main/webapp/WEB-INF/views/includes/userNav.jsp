@@ -8,8 +8,7 @@
 		</h2>
 		<div class="infor">
 			<span class="grade"><em>${user.userName}</em>님은 <em>일반회원</em>입니다.
-			</span>
-			<br>
+			</span> <br>
 			<div class="btn">
 				<div class="tc">
 					<a href="${pageContext.request.contextPath}/user/modifyForm"
@@ -23,13 +22,21 @@
 	</div>
 	<div class="my_lmenu">
 		<ul>
-			<li><a href="${pageContext.request.contextPath}/myPage/myTicketingList"> <img
-					src="http://tkfile.yes24.com/img/mypage/lmenu_01.gif" alt="예매확인/취소">
+			<li><a
+				href="${pageContext.request.contextPath}/myPage/myTicketingList">
+					<img src="http://tkfile.yes24.com/img/mypage/lmenu_01.gif"
+					alt="예매확인/취소">
 			</a></li>
-			<li><a href="${pageContext.request.contextPath}/myPage/myViewingShowList"> <img
-					src="http://tkfile.yes24.com/img/mypage/lmenu_04.gif" alt="나의관람공연"></a></li>
-			<li><a href="${pageContext.request.contextPath}/myPage/myNotificationList"> <img
-					src="http://tkfile.yes24.com/img/mypage/lmenu_05.gif" alt="나의맞춤설정"></a></li>
+			<li><a
+				href="${pageContext.request.contextPath}/myPage/myViewingShowList">
+					<img src="http://tkfile.yes24.com/img/mypage/lmenu_04.gif"
+					alt="나의관람공연">
+			</a></li>
+			<li><a
+				href="${pageContext.request.contextPath}/myPage/myNotificationList">
+					<img src="http://tkfile.yes24.com/img/mypage/lmenu_05.gif"
+					alt="나의맞춤설정">
+			</a></li>
 		</ul>
 	</div>
 	<div>

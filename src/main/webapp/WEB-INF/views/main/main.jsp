@@ -6,125 +6,24 @@
 <head>
 <meta charset="UTF-8">
 <title>main</title>
-
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath }/assets/css/reset.css"
-	type="text/css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath }/assets/css/sub.css"
-	type="text/css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath }/assets/css/main.css"
-	type="text/css">
-<link rel="stylesheet" type="text/css"
-	href="https://image.yes24.com/sysimage/yesUI/yesUI.css?v=20230403"
-	media="all">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/reset.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/sub.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/main.css" type="text/css">
+<link rel="stylesheet" type="text/css" href="https://image.yes24.com/sysimage/yesUI/yesUI.css?v=20230403" media="all">
 <!-- 스와이퍼 CSS -->
-<link rel="stylesheet"
-	href="https://unpkg.com/swiper@8/swiper-bundle.min.css" type="text/css">
+<link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" type="text/css">
 
 <!-- 구글폰트 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com">
-<link
-	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300&display=swap"
-	rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300&display=swap" rel="stylesheet">
 
 <!-- 스와이퍼 js -->
 <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
 <!-- 제이쿼리 최신버전 -->
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 
-
 <style>
-.swiper-wrapper {
-	margin-top: 110px;
-}
-
-.swiper1 .swiper-slide img {
-	width: 100%;
-	margin: auto;
-	display: block;
-}
-
-.swiper1 .swiper-button-prev {
-	color: #8f9090;
-	left: 50px;
-}
-
-.swiper1 .swiper-button-next {
-	color: #8f9090;
-	right: 50px;
-}
-
-section {
-	padding-top: 120px;
-	width: 1200px;
-	margin: 0 auto;
-	text-align: center;
-}
-
-#section ul {
-	display: flex;
-	justify-content: flex-start;
-	flex-direction: row;
-	flex-wrap: wrap;
-	margin: 0 -15px;
-}
-
-#section ul li {
-	width: calc(25% - 92px);
-	margin: 0 15px;
-	margin-bottom: 70px;
-}
-
-#section ul li a img {
-	width: 100%;
-	margin-bottom: 5px;
-}
-
-#section ul li a .gray {
-	color: #888;
-	margin-top: 10px;
-	font-size: 18px;
-}
-
-#section ul li a .orange {
-	margin-top: 10px;
-	color: #ec7d2c;
-}
-
-section ul li a span {
-	margin: 0 6px;
-	display: block;
-	text-align: center;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-}
-
-#section ul li a span.tit {
-	font-size: 14px;
-	margin-top: 15px;
-}
-
-#section ul li a span.price {
-	font-weight: 600;
-	font-size: 17px;
-	margin-top: 2px;
-}
-
-#sec02div {
-	margin-top: 80px;
-}
-
-.cont-tit {
-	margin-bottom: 70px;
-}
-
-section .sec01, .sec02 {
-	padding-top: 150px;
-}
 </style>
 </head>
 <body>
@@ -206,6 +105,7 @@ section .sec01, .sec02 {
 			</ul>
 		</div>
 	</section>
+
 	<!-- Footer -->
 	<c:import url="/WEB-INF/views/includes/footer.jsp"></c:import>
 	<!-- //Footer -->

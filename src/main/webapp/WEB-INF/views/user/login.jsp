@@ -6,52 +6,26 @@
 <head>
 <meta charset="UTF-8">
 <title>login</title>
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath }/assets/css/reset.css"
-	type="text/css">
-<link rel="stylesheet" type="text/css"
-	href="https://image.yes24.com/sysimage/yesUI/yesUI.css?v=20230403"
-	media="all">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath }/assets/css/login.css"
-	type="text/css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath }/assets/css/sub.css"
-	type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/reset.css" type="text/css">
+<link rel="stylesheet" type="text/css" href="https://image.yes24.com/sysimage/yesUI/yesUI.css?v=20230403" media="all">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/login.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/sub.css" type="text/css">
+
 <!-- 구글폰트 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com">
-<link
-	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300&display=swap"
-	rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300&display=swap" rel="stylesheet">
+
 <!-- 제이쿼리 최신버전 -->
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <style>
-#memLoginForm input {
-	color: black;
-}
-
-#memLoginForm .blind {
-	margin-bottom: 10px;
-}
-
-.section {
-	width: 450px;
-	height: 300px;
-	margin: 200px auto;
-}
-
-#memLoginForm input input {
-	font-weight: initial;
-}
-
-#fail {
-	color: red;
-	font-size: 12px;
-}
-
-#join a span{background-color: #f8f8f8;;}
+#memLoginForm .blind { margin-bottom: 10px; }
+#memLoginForm input { color: black;}
+/* #memLoginForm input input {	font-weight: initial;} */
+.section { width: 450px; height: 300px;	margin: 200px auto;}
 .section2 {	padding-top: 0px;}
+#fail {color: red;font-size: 12px;}
+#join a span{background-color: #f8f8f8;}
 #header #nav {margin-right: 16px;}
 header.pc #header #rogo{margin-left: -1px;}
 </style>

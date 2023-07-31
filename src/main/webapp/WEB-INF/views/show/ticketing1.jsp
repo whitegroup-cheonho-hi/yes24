@@ -4,55 +4,18 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>ticketing</title>
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath }/assets/css/reset.css"
-	type="text/css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath }/assets/css/ticketing2.css"
-	type="text/css">
+<title>ticketing showing choice</title>
+<link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/reset.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/ticketing2.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/ticketingshowingchoice.css" type="text/css">
+
 <!-- 제이쿼리 최신 버전 -->
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <!-- 풀켈린더js -->
-<script type="text/javascript"
-	src='${pageContext.request.contextPath }/assets/js/index.global.min.js'></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+<script type="text/javascript" src='${pageContext.request.contextPath }/assets/js/index.global.min.js'></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 <style>
-.position .calendar{padding:0px;}
-#guideview {margin-left: 25px;}
-.step01_date {height: 417px;}
-.step01_time {height: 417px;}
-#header{background-color: #363636;}
-.result{background-color: #363636; color : #fff}
-#ptitle a{color: #FFFFFF; font-size: 15px;}
-.select_infor{height: 422px;}
-.select_infor h2{font-size: 15px;}
-#StepCtrlBtn01 img{width: 240px;}
-#day,#tk_day{font-size: 15px;}
-#ContentsArea .position{width: 665px; height: 374px;display: flex;padding: 10px;}
-#ContentsArea .position h2{font-size: 15px; background:none; border:none;}
-#ContentsArea .position #calendar{margin-right: 20px; width: 238px;}
-#ContentsArea .position #dayList{margin-right: 8px; width: 241px;}
-#ContentsArea .position #remainingSeats{ width: 165px;}
-#ContentsArea .position .fc-daygrid-day-frame{height: 10px}
-#ContentsArea .position .fc-today-button{display: none;}
-#ContentsArea .position .fc .fc-button { font-size: 10px;}
-#ContentsArea .position .fc .fc-scrollgrid-sync-inner {font-size: 14px;}
-#ContentsArea .position .fc-scrollgrid-sync-table a{font-size: 11px; cursor: pointer;}
-#ContentsArea .position .fc .fc-daygrid-body-unbalanced .fc-daygrid-day-events {min-height: 0em;}
-#ContentsArea .position .fc-daygrid-body .fc-scrollgrid-sync-table .fc-day {height: 36px;}
-#ContentsArea .position .fc-daygrid-body .fc-scrollgrid-sync-table .fc-day .fc-daygrid-day-events{display: none;}
-#ContentsArea .concertHall .position .fc .fc-scrollgrid-sync-inner{font-size: 12px;}
 .gnb li{float:left;  background: url("${pageContext.request.contextPath}/assets/images/예매순서.png"); height:52px; width:120px;}
-#dayList .fc-view-harness{font-size: 12px;}
-#fc-dom-87{border-bottom: solid 2px;}
-#remaining{border: 1px solid #ddd;height: 308px;margin-top: 15px;padding: 10px;}
-#remainingSeats .fc-header-toolbar{height: 15px; margin-top: 4px;}
-#remainingSeats h2{height: 51px;padding-top: 3px;}
-#remainingSeats .fc-view-harness{padding: 10px; font-size: 12px;}
-.focus{background-color : red;}
-.fc-event{cursor: pointer;}
 </style>
 </head>
 <body>

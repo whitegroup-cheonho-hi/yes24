@@ -6,53 +6,18 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>ticketing</title>
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath }/assets/css/reset.css"
-	type="text/css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath }/assets/css/ticketing.css"
-	type="text/css">
+<title>ticketing payment</title>
+<link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/reset.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/ticketing.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/ticketingpayment.css" type="text/css">
+
 <!-- 제이쿼리 최신 버전 -->
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <!-- iamport.payment.js -->
-<script type="text/javascript"
-	src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 <style>
-#guideview {margin-left: 25px;}
-#StepCtrlBtnPanel a {cursor: pointer;}
-.gnb li {float: left;background:url("${pageContext.request.contextPath}/assets/images/예매순서.png");
-	height: 52px;width: 120px;}
-#View {width: 688px;height: 300px;
-background:	url("${pageContext.request.contextPath}/assets/images/페이결제.png");}
-#header{background-color: #363636;}
-.result{background-color: #363636; color : #fff;}
-#ptitle a{color: #FFFFFF; font-size: 15px;}
-.boardListTypeA { margin-top:11px; table-layout:fixed; width:600px; border:0; border-collapse:collapse; border-spacing:0; font-size:11px; }
-.boardListTypeA.etc { margin-top:18px; }
-.boardListTypeA thead th { height:23px; background:#f8f2f3; border-top:1px solid #666; border-bottom:1px solid #d3d3d3; color:#666; }
-.boardListTypeA.etc thead th.tit1 { padding-left:62px; text-align:left; *padding-left:60px; }
-.boardListTypeA.etc thead th.tit2 { padding-left:145px; text-align:left; }
-.boardListTypeA.etc thead th { background:#f4f8fe; }
-.boardListTypeA tbody td { padding:6px 0 4px 40px; line-height:14px; border-bottom:1px solid #d3d3d3; color:#888; }
-.boardListTypeA.dtc tbody td { padding:6px 0 4px 53px; }
-.boardListTypeA td.vr { vertical-align:top; }
-.boardListTypeA.etc col.one { width:169px; *width:109px; }
-.boardListTypeA.etc col.two {  }
-.boardListTypeB { margin-top:11px; table-layout:fixed; width:650px; border:0; border-collapse:collapse; border-spacing:0; font-size:11px; }
-.boardListTypeB thead th { height:23px; background:#f8f2f3; border-top:1px solid #666; border-bottom:1px solid #d3d3d3; color:#666; }
-.boardListTypeB tbody td { padding:6px 0 4px 0; line-height:14px; border-bottom:1px solid #d3d3d3; color:#888;}
-.boardListTypeB td.vr { vertical-align:top; }
-.ta_c {text-align:center;}
-.tb_w {width:100%;}
-.tb_w tbody {background:#fff;text-align:center;}
-.tb_w .bl_p {border-left:1px solid #d3d3d3;padding:0 8px;}
-.select_infor{height: 380px;}
-.pay_infor{height: 165px;}
-.select_infor em{font-size: 15px;}
-.select_infor #tk_day{font-size: 15px;}
-#setaView{font-size: 14px;}
-#setaView div{margin-bottom: 5px;}
+.gnb li {float: left;background:url("${pageContext.request.contextPath}/assets/images/예매순서.png");	height: 52px;width: 120px;}
+#View {width: 688px;height: 300px; background:	url("${pageContext.request.contextPath}/assets/images/페이결제.png");}
 </style>
 </head>
 <body>

@@ -6,83 +6,30 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>detail</title>
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath }/assets/css/reset.css"
-	type="text/css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath }/assets/css/sub.css"
-	type="text/css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath }/assets/css/detail.css"
-	type="text/css">
-<link rel="stylesheet" type="text/css"
-	href="https://image.yes24.com/sysimage/yesUI/yesUI.css?v=20230403"
-	media="all">
+<title>transfer detail</title>
+<link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/reset.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/sub.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/detail.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/transferdetail.css" type="text/css">
+<link rel="stylesheet" type="text/css" href="https://image.yes24.com/sysimage/yesUI/yesUI.css?v=20230403" media="all">
+
 <!-- 구글폰트 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com">
-<link
-	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300&display=swap"
-	rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300&display=swap" rel="stylesheet">
+
 <!-- 제이쿼리 최신 버전 -->
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <!-- 다음지도API -->
-<script type="text/javascript"
-	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1d8e22ec81bcdc862373ee6f17fdef96&libraries=services"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1d8e22ec81bcdc862373ee6f17fdef96&libraries=services"></script>
 <!-- iamport.payment.js -->
-<script type="text/javascript"
-	src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 <style>
-#map {margin: 0 auto;}
-#cName {width: 150px;text-align: center;padding: 4px 0;font-size: 19px;}
-#cName img {width: 20px;}
-#ticketingdiv {text-align: center; margin-top: 20px;margin-bottom: 60px;}
-#ticketingdiv div {padding: 5px;width: 250px;background: #f43142;margin: 0 auto;border: 2px solid #f43142;}
-.ticketing {font-size: 20px;color: #fff;display: block; height:100%;}
-.concertHall .position{margin-bottom: 50px;}
-.concertHall .position{width: 1178px;display: flex;border: solid 1px #ec7d2c; padding: 10px;}
-.concertHall .position #calendar,#dayList{margin-right: 20px; width: 390px;}
-.concertHall .position #remainingSeats{ width: 355px;}
-.concertHall .position h2{font-size: 20px;}
-.concertHall .position .fc-scrollgrid-sync-table a{font-size: 15px; cursor: pointer;}
-.concertHall .position .fc .fc-button{font-size: 12px;}
-.position #calendar .fc-view-harness .fc-col-header .fc-col-header-cell{width:55px;}
-.position #calendar .fc-scrollgrid-section .fc-scrollgrid-sync-table tbody .fc-day{width:55px;}
-.fc .fc-daygrid-body-unbalanced .fc-daygrid-day-events {min-height: 0em;}
-#fc-dom-87{border-bottom: solid 2px;}
-#remaining{border: 1px solid #ddd;height: 200px;margin-top: 15px;padding: 10px; }
-#remainingSeats h2{height: 55px;}
-#remainingSeats .fc-view-harness{padding: 10px;}
-.rn-product-area3 #precautions{color:red;}
-.fc-event{cursor: pointer; }
-#container {align-items: center;}
-#container .item {color: black; }
-.item {width: 30px;height: 30px;background-color: #efdfdf;border-radius: 8px 8px 0 0;border: solid 1px #fff;text-align: center;font-size: 17px;box-sizing: border-box;}
 .check {
   background-image: url("${pageContext.request.contextPath}/assets/images/체크버튼.PNG"); 
   background-size: cover; 
   background-position: center center; 
 }
-.red {background-color: #e24647;}
-.pink {background-color: #dfa5ff;}
-.blue {background-color: #8fbfee;}
-.green {background-color: #a5ea7b;}
-.seatClass{width: 100px; height: 30px; font-size: 20px; display: inline-block; text-align: center;}
-#seatClassForm{text-align: center;}
-.rn-03-right .rn-product-area1{height: 550px;}
-.rn-03-right .rn-product-area3 {min-height: 114px;} 
-#divhopePrice{font-size: 20px; color: red;}
-/* .rn-03-right dd { margin: -3px 0 3px 86px;} */
-.rn-03-right .rn-product-area1 dd .rn-product-price1 li{line-height: 25px;}
-.rn-03-right .rn-product-area1 .rn-product-price { padding-bottom: 5px;}
-#detailedImage{ text-align: center;   margin-bottom: 30px;}
-/* 탑버튼 */
-.top_btn{position: fixed; right: 100px; bottom: 100px; }
-.top_btn img{width: 50px;}
-.rn-0803{text-align: center;font-size: 30px; margin-bottom: 40px;}
-
-
 </style>
 </head>
 <body>
@@ -124,8 +71,8 @@
 							src="http://tkfile.yes24.com/imgNew/sub/rn-product-good1.png"
 							alt=""><img
 							src="http://tkfile.yes24.com/imgNew/sub/rn-product-good2.png"
-							alt=""><span class="rn-pdg-txt2">33</span><span
-							class="rn-pdg-txt1">Likes</span>
+							alt=""><span class="rn-pdg-txt2">평점</span><span
+							class="rn-pdg-txt1">${show.gradeAvg}점</span>
 						</a>
 
 					</div>

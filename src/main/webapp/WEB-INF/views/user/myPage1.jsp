@@ -6,56 +6,23 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>myPage</title>
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath }/assets/css/reset.css"
-	type="text/css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath }/assets/css/sub.css"
-	type="text/css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath }/assets/css/user.css"
-	type="text/css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath }/assets/css/myPage.css"
-	type="text/css">
-<link rel="stylesheet" type="text/css"
-	href="https://image.yes24.com/sysimage/yesUI/yesUI.css?v=20230403"
-	media="all">
+<title>myPage ticketing check</title>
+<link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/reset.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/sub.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/user.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/myPage.css" type="text/css">
+<link rel="stylesheet" type="text/css" href="https://image.yes24.com/sysimage/yesUI/yesUI.css?v=20230403" media="all">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/myPageticketingcheck.css" type="text/css">
+
 <!-- 구글폰트 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com">
-<link
-	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300&display=swap"
-	rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300&display=swap" rel="stylesheet">
+
 <!-- 제이쿼리 최신버전 -->
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <style>
-section {
-	width: 1000px;
-	margin: 0 auto;
-	padding-top: 70px;
-}
-/* 양도등록창 */
-.inquiry_popup{position: fixed; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 9999999; top: 0; left: 0;}
-.inquiry_popup .inquiry_close{display: none;}
-.inquiry_popup .inquiry_write{border-radius: 5px; box-sizing: border-box; padding: 60px; width: 700px; height: 750px; position: absolute; top: 10%; left: 50%; margin-left: -350px; background: #fff;}
-.inquiry_popup .inquiry_write h3{ font-weight: 700; font-size: 28px; margin-bottom: 20px; text-align: center;}
-.inquiry_popup .inquiry_write table { width: 100%;border: 1px solid #ccc; border-collapse: collapse; }
-.inquiry_popup .inquiry_write th,
-.inquiry_popup .inquiry_write td {vertical-align: middle; border: 1px solid #ccc; padding: 10px; text-align: left;}
-.inquiry_popup .inquiry_write td input#secret_write_N{margin-left: 20px;}
-.inquiry_popup .inquiry_write td input#inquiry_tit{border-radius: 5px; border: 1px solid #ccc; padding: 10px; font-size: 16px; width: 100%; box-sizing: border-box;}
-.inquiry_popup .inquiry_write td textarea#content{border-radius: 5px;  resize: none;border: 1px solid #ccc; padding: 10px; font-size: 16px; width: 100%; height: 120px; box-sizing: border-box;}
-.inquiry_popup .inquiry_write td .textLengthWrap{text-align: right; color: #aaa;}
-/* 버튼 */
-.btn_wrap{margin-top: 40px; display: flex; justify-content: center;}
-.btn_wrap a{padding: 15px 50px; margin: 0 5px; font-weight: 600;}
-.btn_wrap a.order_btn{background: #f43142; border: 1px solid #f43142; color: #fff;}
-.btn_wrap a.shopping_btn{background: #fff; border: 1px solid #f43142; color: #5c5c5c;}
-.transferButton { border-radius: 3px; background-color: #f43142;color: #fff; width: 50px; height: 21px; border: none;}
-.transferCancelButton {border-radius: 3px; background-color: #f43142;color: #fff; width: 50px; height: 21px; border: none;}
-#moveForm1 input{width: 98%; height: 25px}
+
 </style>
 </head>
 <body>

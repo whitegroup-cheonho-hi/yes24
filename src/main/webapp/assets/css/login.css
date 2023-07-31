@@ -1,14 +1,4 @@
-@charset "utf-8"; /* bgMem 클래스 myInfo.css에도 동일하게 적용되어있습니다. 수정시 같이 수정 */
-.bgMem {
-    display: -moz-inline-stack;
-    display: inline-block;
-    zoom:1;*display: inline;
-    overflow: hidden;
-    text-align: left;
-    text-indent: -999em;
-    vertical-align: top;
-    background-image: url('/sysimage/renew/member/bgC_member.png?ver=220322a');
-}
+@charset "UTF-8";
 
 /* 기본 이미지 대체 태그 */
 * html .bgMem {
@@ -2866,3 +2856,4 @@ button.btnC.xb_size.btn_2ln .bWrap { height:48px; }
 .yesFormBtn.cols .colGrp .colCell .btnC { display:block;margin:0 5px; }
 .yesFormBtn.cols .colGrp .colCell .btnC .bWrap { display:block; }
 .yesPopUp .popYUI_cont .yesFormBtn { margin-top:20px; }
+
