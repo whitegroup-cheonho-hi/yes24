@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import org.apache.taglibs.standard.tag.common.fmt.BundleSupport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -28,7 +27,6 @@ import com.yes24.vo.SeatVO;
 import com.yes24.vo.ShowSeatVO;
 import com.yes24.vo.ShowVO;
 import com.yes24.vo.ShowingVO;
-import com.yes24.vo.TransferBoardVO;
 
 @Service
 public class ShowService {
@@ -130,13 +128,16 @@ public class ShowService {
 		int caseNumber = 0;
 
 		// 파일 세 개 중 하나 이상이 수정되었을 때 caseNumber를 적절한 값으로 설정합니다.
-		if (!file[0].isEmpty())	caseNumber += 1; // 메인 이미지가 수정된 경우
-		if (!file[1].isEmpty())	caseNumber += 2; // 서브 이미지가 수정된 경우
-		if (!file[2].isEmpty())	caseNumber += 4; // 상세 이미지가 수정된 경우
+		if (!file[0].isEmpty())
+			caseNumber += 1; // 메인 이미지가 수정된 경우
+		if (!file[1].isEmpty())
+			caseNumber += 2; // 서브 이미지가 수정된 경우
+		if (!file[2].isEmpty())
+			caseNumber += 4; // 상세 이미지가 수정된 경우
 
 		// caseNumber에 따라 적절한 처리를 위해 switch 문을 사용합니다.
 		switch (caseNumber) {
-		
+
 		case 1: // 메인 이미지만 수정된 경우
 			fileCheck(vo, file[0], 1);
 			break;
@@ -309,8 +310,6 @@ public class ShowService {
 		// 페이지메이커
 		PageMakerDTO pageMaker = new PageMakerDTO(total, cri);
 
-		System.out.println(reviewList);
-
 		map.put("showVO", showVO);
 		map.put("pageMaker", pageMaker);
 		map.put("reviewList", reviewList);
@@ -339,10 +338,18 @@ public class ShowService {
 	}
 
 	// ------------------ 공연리스트가져오기 상태값때문에 no가 필요
-	public List<ShowVO> getShowList(int no) {
+	public Map<String, Object> getShowList(int no) {
 		System.out.println("getShowList Service()");
 
-		return showDAO.getShowList(no);
+		Map<String, Object> map = new HashMap<>();
+
+		List<ShowVO> showList = showDAO.getShowList(no);
+		List<ShowVO> ticketingScheduled = showDAO.getTicketingScheduled();
+
+		map.put("showList", showList);
+		map.put("ticketingScheduled", ticketingScheduled);
+
+		return map;
 
 	}
 
@@ -435,7 +442,7 @@ public class ShowService {
 			try {
 				file1.transferTo(new File(filePath));
 				file2.transferTo(new File(filePath2));
-				
+
 				if (no == 1) {
 
 					vo.setMainImage(saveName);

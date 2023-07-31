@@ -224,6 +224,35 @@
 		]]>
 
 	</select>
+	
+	<!-- 티케팅예정작 5개-->
+	<select id="getTicketingScheduled" resultType="ShowVO">
+	
+		<![CDATA[
+		
+			  SELECT
+				    show_sq AS showsq,
+				    sub_image AS subimage,
+				    TO_CHAR(reservation_date, 'YYYY.MM.DD (DY)') AS reservationdate,
+				    show_name AS showname,
+				    b.category_name AS categoryname,
+				    (reservation_date - TRUNC(SYSDATE)) AS dday
+				FROM
+				    show a
+		  INNER JOIN
+				    category b 
+				  ON 
+				    a.category = b.category_sq
+			   WHERE
+				    reservation_date >= SYSDATE
+				 AND 
+				    ROWNUM <= 5
+		    ORDER BY
+				    reservation_date		
+						
+		]]>	
+	
+	</select>
 
 	<!-- 공연리스트가져오기 페이징 -->
 	<select id="getShowListPaging" parameterType="Criteria"
@@ -403,6 +432,9 @@
 		]]>
 
 	</select>
+	
+	
+	
 
 </mapper>
 

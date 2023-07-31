@@ -79,6 +79,14 @@ public class ShowDAO {
 
 	}
 
+	// ------------------ 티케팅예정작
+	public List<ShowVO> getTicketingScheduled() {
+		System.out.println("getTicketingScheduled DAO()");
+
+		return sqlSession.selectList("show.getTicketingScheduled");
+
+	}
+
 	// ------------------ 공연리스트가져오기
 	public List<ShowVO> getShowList(Criteria cri) {
 		System.out.println("getShowList DAO()");
@@ -108,11 +116,11 @@ public class ShowDAO {
 
 		return sqlSession.delete("show.deleteShowSeat", no);
 	}
-	
+
 	// -------------- 공연이름으로 검색
 	public List<ShowVO> getShowName(String showName) {
 		System.out.println("getShowName DAO()");
-		
+
 		return sqlSession.selectList("show.getShowName", showName);
 	}
 

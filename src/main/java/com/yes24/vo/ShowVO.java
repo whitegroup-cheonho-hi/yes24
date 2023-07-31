@@ -20,7 +20,9 @@ public class ShowVO {
 	private String showTime;
 	private String viewingAge;
 	private int category;
+	private String categoryName;
 	private int showStat;
+	private int dDay;
 	// 공연장
 	private int concertHallSq;
 	private String concertHallName;
@@ -34,11 +36,10 @@ public class ShowVO {
 		super();
 	}
 
-	
 	public ShowVO(int showSq, String mainImage, String subImage, String detailedImage, String startDate, String endDate,
 			String reservationDate, String showName, String cast, String director, String showTime, String viewingAge,
-			int category, int showStat, int concertHallSq, String concertHallName, List<Integer> seatClassSq,
-			List<String> seatClass, List<Integer> seatPrice) {
+			int category, String categoryName, int showStat, int dDay, int concertHallSq, String concertHallName,
+			List<Integer> seatClassSq, List<String> seatClass, List<Integer> seatPrice) {
 		super();
 		this.showSq = showSq;
 		this.mainImage = mainImage;
@@ -53,14 +54,15 @@ public class ShowVO {
 		this.showTime = showTime;
 		this.viewingAge = viewingAge;
 		this.category = category;
+		this.categoryName = categoryName;
 		this.showStat = showStat;
+		this.dDay = dDay;
 		this.concertHallSq = concertHallSq;
 		this.concertHallName = concertHallName;
 		this.seatClassSq = seatClassSq;
 		this.seatClass = seatClass;
 		this.seatPrice = seatPrice;
 	}
-
 
 	public int getShowSq() {
 		return showSq;
@@ -166,12 +168,28 @@ public class ShowVO {
 		this.category = category;
 	}
 
+	public String getCategoryName() {
+		return categoryName;
+	}
+
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
+	}
+
 	public int getShowStat() {
 		return showStat;
 	}
 
 	public void setShowStat(int showStat) {
 		this.showStat = showStat;
+	}
+
+	public int getdDay() {
+		return dDay;
+	}
+
+	public void setdDay(int dDay) {
+		this.dDay = dDay;
 	}
 
 	public int getConcertHallSq() {
@@ -214,17 +232,15 @@ public class ShowVO {
 		this.seatPrice = seatPrice;
 	}
 
-
 	@Override
 	public String toString() {
 		return "ShowVO [showSq=" + showSq + ", mainImage=" + mainImage + ", subImage=" + subImage + ", detailedImage="
 				+ detailedImage + ", startDate=" + startDate + ", endDate=" + endDate + ", reservationDate="
 				+ reservationDate + ", showName=" + showName + ", cast=" + cast + ", director=" + director
-				+ ", showTime=" + showTime + ", viewingAge=" + viewingAge + ", category=" + category + ", showStat="
-				+ showStat + ", concertHallSq=" + concertHallSq + ", concertHallName=" + concertHallName
-				+ ", seatClassSq=" + seatClassSq + ", seatClass=" + seatClass + ", seatPrice=" + seatPrice + "]";
+				+ ", showTime=" + showTime + ", viewingAge=" + viewingAge + ", category=" + category + ", categoryName="
+				+ categoryName + ", showStat=" + showStat + ", dDay=" + dDay + ", concertHallSq=" + concertHallSq
+				+ ", concertHallName=" + concertHallName + ", seatClassSq=" + seatClassSq + ", seatClass=" + seatClass
+				+ ", seatPrice=" + seatPrice + "]";
 	}
-
-	
 
 }

@@ -1,6 +1,5 @@
 package com.yes24.controller;
 
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.yes24.service.ShowService;
 import com.yes24.service.TransferBoardService;
 import com.yes24.vo.Criteria;
-import com.yes24.vo.ShowVO;
 
 @Controller
 public class MainController {
@@ -29,9 +27,12 @@ public class MainController {
 		System.out.println("main()");
 
 		// 나중에 개봉예정작으로 수정해야함5
-		List<ShowVO> showList = showService.getShowList(1);
+		Map<String, Object> map = showService.getShowList(1);
 
-		model.addAttribute("showList", showList);
+		model.addAttribute("showList", map.get("showList"));
+		model.addAttribute("ticketingScheduled", map.get("ticketingScheduled"));
+		
+		System.out.println(map.get("ticketingScheduled"));
 
 		return "main/main";
 
@@ -41,7 +42,7 @@ public class MainController {
 	@RequestMapping(value = "/category/{no}", method = RequestMethod.GET)
 	public String category(@PathVariable("no") int no, Model model, Criteria cri) {
 		System.out.println("category()");
-		
+
 		cri.setKeyword(no);
 		Map<String, Object> map = showService.getShowList(cri);
 
@@ -49,7 +50,7 @@ public class MainController {
 		model.addAttribute("showList2", map.get("showList2"));
 		model.addAttribute("pageMaker", map.get("pageMaker"));
 		model.addAttribute("category", no);
-		
+
 		return "main/category";
 
 	}
@@ -64,7 +65,6 @@ public class MainController {
 		model.addAttribute("transferBoardList", map.get("transferBoardList"));
 		model.addAttribute("imminentShowing", map.get("imminentShowing"));
 		model.addAttribute("pageMaker", map.get("pageMaker"));
-		System.out.println(map.get("imminentShowing"));
 
 		return "main/transferBoard";
 	}
