@@ -65,6 +65,7 @@
 				    TO_CHAR(b.transfer_board_reg_date, 'YYYY.MM.DD') AS transferboardregdate,
 				    b.transfer_board_sq   AS transferboardsq,
 				    a.ticket_sq           AS ticketsq,
+				    d.show_sq             AS showsq,
 				    d.show_name           AS showname,
 				    a.ticket_seat         AS ticketseat,
 				    a.ticket_seat_price   AS ticketseatprice,
