@@ -220,7 +220,7 @@ header.pc #header h1 {margin-right: -1px;}
 				</ul>
 			</c:if>
 			<form id="moveForm"
-				action="${pageContext.request.contextPath}/transferBoardForm" method="get">
+				action="${pageContext.request.contextPath}/transferBoardForm/?#nav2" method="get">
 				<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
 				<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
 				<input type="hidden" id="keyword" name="keyword" value="${pageMaker.cri.keyword}">

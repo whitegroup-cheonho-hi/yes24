@@ -88,13 +88,13 @@
 										<div class="colGrp">
 											<div class="colCell w_280">
 												<span class="yesIpt b_size ipt_wSizeF hallWidth"> <input
-													id="mainImage" name="file1" type="file">
+													id="mainImage" name="file" type="file">
 													<input id="mainImage" name="mainImage" type="hidden" value="${show.mainImage}">
 												</span>
 											</div>
 											<div class="colCell w_280">
 												<span class="yesIpt b_size ipt_wSizeF hallWidth"> <input
-													id="subImage" name="file2" type="file">
+													id="subImage" name="file" type="file">
 													<input id="subImage" name="subImage" type="hidden" value="${show.subImage}">
 												</span>
 											</div>
@@ -107,7 +107,7 @@
 											</div>
 											<div class="colCell w_280">
 												<span class="yesIpt b_size ipt_wSizeF hallWidth"> <input
-													id="detailedImage" name="file3" type="file">
+													id="detailedImage" name="file" type="file">
 												<input id="detailedImage" name="detailedImage" type="hidden" value="${show.detailedImage}">
 												</span>
 											</div>

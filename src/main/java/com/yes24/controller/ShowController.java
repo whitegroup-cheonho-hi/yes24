@@ -47,11 +47,10 @@ public class ShowController {
 
 	// ------------------- 공연 등록
 	@RequestMapping(value = "/insertShow", method = RequestMethod.POST)
-	public String insertShow(@ModelAttribute ShowVO vo, @RequestParam("file1") MultipartFile file1,
-			@RequestParam("file2") MultipartFile file2, @RequestParam("file3") MultipartFile file3) {
+	public String insertShow(@ModelAttribute ShowVO vo, @RequestParam("file") MultipartFile[] file) {
 		System.out.println("insertShow()");
 
-		showService.insertShow(vo, file1, file2, file3);
+		showService.insertShow(vo, file);
 
 		int showSq = vo.getShowSq();
 
@@ -73,11 +72,10 @@ public class ShowController {
 
 	// ------------------- 공연 수정
 	@RequestMapping(value = "/updateShow", method = RequestMethod.POST)
-	public String updateShow(@ModelAttribute ShowVO vo, @RequestParam("file1") MultipartFile file1,
-			@RequestParam("file2") MultipartFile file2, @RequestParam("file3") MultipartFile file3) {
+	public String updateShow(@ModelAttribute ShowVO vo, @RequestParam("file") MultipartFile[] file) {
 		System.out.println("updateShow()");
 
-		int result = showService.updateShow(vo, file1, file2, file3);
+		int result = showService.updateShow(vo, file);
 
 		return "";
 	}
@@ -114,7 +112,7 @@ public class ShowController {
 	@RequestMapping(value = "/detail/{no}", method = RequestMethod.GET)
 	public String detailForm(@PathVariable("no") int no, Model model, Criteria cri) {
 		System.out.println("detailForm()");
-		
+
 		cri.setAmount(6);
 		Map<String, Object> map = showService.getShow(no, cri);
 
