@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.yes24.vo.Criteria;
 import com.yes24.vo.ReviewVO;
+import com.yes24.vo.ShowingVO;
 
 @Repository
 public class ReviewDAO {
@@ -41,5 +42,13 @@ public class ReviewDAO {
 		System.out.println("getTotal DAO()");
 
 		return sqlSession.selectOne("review.getTotal", no);
+	}
+
+	// ------------------- 리뷰등록가능 체크
+	public List<ShowingVO> reviewCheck(ReviewVO vo) {
+		System.out.println("reviewCheck DAO()");
+		System.out.println(vo);
+
+		return sqlSession.selectList("review.reviewCheck", vo);
 	}
 }

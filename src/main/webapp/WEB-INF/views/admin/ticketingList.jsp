@@ -44,8 +44,12 @@
 	#show .category li{ margin: 0 5px;}
 	#show .category li a{font-weight: 900; font-size: 18px; padding: 7px 15px; display: block;}
 	#show .category li.on{border-bottom: 2px solid #4982cf;}
-	#show .category li.on a{color: #4982cf;}
+	#show .category li.on a{color: #4982cf;text-decoration: none;}
 	#show .category li a:hover{color: #4982cf;}
+	
+	#header h2{margin-left: 0px;}
+	#header div{top: -90px;}
+
 </style>
 </head>
 <body>
@@ -65,7 +69,7 @@
 		         <c:if test="${empty Search}">
 		            <ul class="category">
 		               <li><a href="">전체</a></li>
-		               <li><a href="">뮤지컬</a></li>
+		               <li class="on"><a href="">뮤지컬</a></li>
 		               <li><a href="">콘서트</a></li>
 		               <li><a href="">연  극</a></li>
 		               <li><a href="">전  시</a></li>
@@ -146,7 +150,7 @@
 		
 		//넘길 데이터 모으기
 	 	var showSq = $(this).data("sq");
-		var url = "${pageContext.request.contextPath}/show1/ticketingDetail/" + showSq;
+		var url = "${pageContext.request.contextPath}/admin/ticketingDetail/" + showSq;
 		console.log(url);
 		location.href = url; 
 		

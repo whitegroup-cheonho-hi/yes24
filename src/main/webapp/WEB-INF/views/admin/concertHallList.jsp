@@ -45,6 +45,9 @@
     .inserttHall{ height: 35px; width: 100px; }
     
     .searchCell_input{ width: 230px; }
+    
+    #header h2{margin-left: 0px;}
+	#header div{top: -90px;}
 	
 </style>
 </head>

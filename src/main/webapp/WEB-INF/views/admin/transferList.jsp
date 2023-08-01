@@ -26,7 +26,7 @@
 	.concertHallList th { width: 10%; }
 	
 	.admimTit{ color: #333; font-family: 'Noto Sans KR','맑은 고딕' !important; font-weight: 500; font-size: 25px;}
-	.titletxt{ margin-bottom: 30px; margin-right: 850px;}
+	.titletxt{ margin-bottom: 75px; margin-right: 850px;}
 	
 	#paging{ text-align: center; padding: 0; margin: 0px auto; width: 310px; }
 	.pageInfo{font: 14px "맑은 고딕", 돋움, 굴림; text-align: center; padding: 0; list-style-type: none; margin: 10px 5px 10px 5px; display: inline;}
@@ -56,6 +56,8 @@
 	#category_list .category li.on a{color: #4982cf;}
 	#category_list .category li a:hover{color: #4982cf;}
 	
+	#header h2{margin-left: 0px;}
+	#header div{top: -90px;}
 </style>
 </head>
 <body>
@@ -124,9 +126,13 @@
 			        	</li>
 			        </c:if>
 				</ul>
-
 				<div class="clear"></div>
 			</div>
+			<form action="${pageMake.cri.keyword2}" id="moveForm" method="get">
+			<input type="hidden" name="pageNum" value="${pageMake.cri.pageNum }">
+			<input type="hidden" name="amount" value="${pageMake.cri.amount }">
+			<input type="hidden" id="keyword2" name="keyword2" value="${pageMake.cri.keyword2}">
+			</form>
 		</div>
 	</section>
 

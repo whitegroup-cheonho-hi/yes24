@@ -171,7 +171,9 @@
 				FROM
 				    notification
 			   WHERE
-				    recipients = #{userSp}		
+				    recipients = #{userSp}
+			ORDER BY 
+			        notification_sq	DESC	
 		
 		]]>
 

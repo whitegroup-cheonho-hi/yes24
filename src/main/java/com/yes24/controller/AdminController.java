@@ -44,7 +44,7 @@ public class AdminController {
 
 	// 어드민 공연리스트(예매중)
 	@RequestMapping(value = "/ticketingShowList", method = RequestMethod.GET)
-	public String showTicketingList(Model modle, Criteria cri) {
+	public String ticketingShowList(Model modle, Criteria cri) {
 		cri.setShowStat(2);
 		Map<String, Object> map = adminservice.getShowList(cri);
 		modle.addAttribute("showList", map.get("list"));
@@ -83,7 +83,7 @@ public class AdminController {
 	}
 	
 	//회원별 예매리시트
-	@RequestMapping(value = "getUserTicketingList", method = RequestMethod.GET)
+	@RequestMapping(value = "/getUserTicketingList", method = RequestMethod.GET)
 	public String getUserTicketingList(Model model, Criteria cri) {
 		System.out.println("getUserTicketingList");
 		Map<String, Object> map = adminservice.getUserTicketingList(cri);
@@ -93,7 +93,7 @@ public class AdminController {
 	}
 
 	// 예매현황 리스트
-	@RequestMapping(value = "getTicketingList", method = RequestMethod.GET)
+	@RequestMapping(value = "/getTicketingList", method = RequestMethod.GET)
 	public String getTicketingList(Model model, Criteria cri) {
 		cri.setShowStat(0);
 		System.out.println("getTicketingList");
@@ -186,7 +186,7 @@ public class AdminController {
 		return jsonResult;
 	}
 
-	// 예매시작 상태변경
+	// 회차종료 
 	@ResponseBody
 	@RequestMapping(value = "/endShowing", method = RequestMethod.GET)
 	public JsonResult endShowing() {

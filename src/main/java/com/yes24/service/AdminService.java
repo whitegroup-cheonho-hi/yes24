@@ -69,10 +69,10 @@ public class AdminService {
 		map.put("list", list);
 		return map;
 	}
-	
+
 	// 회원별 예매리스트
-	public Map<String, Object> getUserTicketingList(Criteria cri){
-		Map<String, Object> map	 = new HashMap<>();
+	public Map<String, Object> getUserTicketingList(Criteria cri) {
+		Map<String, Object> map = new HashMap<>();
 		List<UserTicketingVO> list = admindao.getUserTicketingList(cri);
 		int total = admindao.getUserTicketingTotal();
 		PageMakerDTO pageMake = new PageMakerDTO(total, cri);
@@ -118,11 +118,13 @@ public class AdminService {
 
 		List<ShowingVO> showingSqList = admindao.getEndshowingSq();
 
-		for (ShowingVO s : showingSqList) {
+		if (showingSqList != null) {
+			for (ShowingVO s : showingSqList) {
 
-			admindao.endTicket(s.getShowingSq());
+				admindao.endTicket(s.getShowingSq());
+			}
 		}
-
+		
 		return admindao.endShowing();
 
 	}

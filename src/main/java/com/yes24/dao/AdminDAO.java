@@ -103,7 +103,7 @@ public class AdminDAO {
 		return list;
 	}
 
-	// 회차 날짜로 종류
+	// 회차 날짜로 종료
 	public int endShowing() {
 		System.out.println("endShowing DAO()");
 

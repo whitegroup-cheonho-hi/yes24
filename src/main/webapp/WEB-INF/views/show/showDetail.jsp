@@ -215,7 +215,7 @@
 										</c:if>
 									</c:forEach>									
 								</span>
-								<span class="rn-0904-tt7">(관람일:${review.viewingday})</span>
+								<%-- <span class="rn-0904-tt7">(관람일:${review.viewingday})</span> --%>
 							</div>
 							<div class="rn-0904-txt-wrap">
 							<div class="rn-0904-txt">${review.reviewContent}</div>
@@ -356,11 +356,34 @@ $(document).ready(function() {
 			alert("로그인이 필요합니다.");
 			window.location.href = '${pageContext.request.contextPath}/user/loginForm';
 			
-		}else{		
-			$("#inquiry_popup").show();
+		}else{	
+			
+			ReviewVO = {showSq : showSq};
+			
+			$.ajax({
+				
+				url : "${pageContext.request.contextPath }/review/viewingCheck",		
+				type : "post",
+				data : ReviewVO,
+
+				dataType : "json",
+				success : function(result){
+						
+					if(result.data[0] != null){ 
+	
+						$("#inquiry_popup").show();
+					
+					}else{
+						
+						alert("관람후 작성 가능합니다.");
+					}
+					
+				},
+				error : function(XHR, status, error) {
+					console.error(status + " : " + error);
+				}
+			});
 		}
-		
-		
 	});
 	
 	// 후기등록폼 취소버튼

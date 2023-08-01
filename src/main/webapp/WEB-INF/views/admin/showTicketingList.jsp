@@ -46,6 +46,10 @@
 	#show .category li.on{border-bottom: 2px solid #4982cf;}
 	#show .category li.on a{color: #4982cf;}
 	#show .category li a:hover{color: #4982cf;}
+	
+	#header h2{margin-left: 0px;}
+	#header div{top: -90px;}
+	#endShowingButton{width: 200px; font-size: 25px;background-color: #f43142;}
 </style>
 </head>
 <body>
@@ -65,15 +69,15 @@
 		         <c:if test="${empty Search}">
 		            <ul class="category">
 		               <li><a href="">전체</a></li>
-		               <li><a href="">뮤지컬</a></li>
+		               <li class="on"><a href="">뮤지컬</a></li>
 		               <li><a href="">콘서트</a></li>
 		               <li><a href="">연  극</a></li>
 		               <li><a href="">전  시</a></li>
 		               <li><a href="">클래식</a></li>
-		               <li><a href="">아  동</a></li>
 		            </ul>
 		         </c:if>
 			</div>
+            <div id="endShowingButtonDiv" class="listItemTxt"><button id="endShowingButton" class="" type="button">회차 종료</button></div>
 			<!-- ==================== 리스트 영역 ==================== -->
 			<div class="">
 				<div class="listItem">
@@ -86,7 +90,7 @@
 							<div class="listItemTxt">
 								<p class="listItemTit">${showList.showName}</p>
 								<button type="button" class="btnstat" data-sq="${showList.showSq}" style="background-color: #196ab3">예매대기</button>
-								<button type="button" class="btndelete" data-sq="${showList.showSq}" style="background-color: #f20055">삭 제</button>
+								<button type="button" class="btndelete" data-sq="${showList.showSq}" style="background-color: #f43142">삭 제</button>
 							</div>
 						</div>
 					</c:forEach>
@@ -117,7 +121,7 @@
 
 				<div class="clear"></div>
 			</div>
-			<form action="adminShowList" id="moveForm" method="get">
+			<form action="ticketingShowList" id="moveForm" method="get">
 				<input type="hidden" name="pageNum" value="${pageMake.cri.pageNum }">
 				<input type="hidden" name="amount" value="${pageMake.cri.amount }">
 				
@@ -129,32 +133,58 @@
 </body>
 
 <script>
+	
+	
+	
+	
+	
+$(document).ready(function() {
 
 	//페이징 버튼 클릭
-	$(document).ready(function() {
 	  $("#paging .pageInfo a").on("click", function(e) {
 	     e.preventDefault();
 	     var pageNum = $(this).attr("href");
 	     $("#moveForm input[name='pageNum']").val(pageNum);
 	     $("#moveForm").submit();
 	  });
-	});
 	
+	// 회차종료
+	$("#endShowingButton").on("click",function(e){
+		 e.preventDefault();
+		 $.ajax({
+		        url: "${pageContext.request.contextPath}/admin/endShowing",
+		        type: "get",
+		        		        
+		        dataType: "json",
+		        success: function(result) {
+		        	// 성공적으로 처리된 경우 리다이렉트
+		        	console.log(result.data);
+		        	let index = result.data;
+		        	
+		        	alert(index+" 개의 회차가 종료되었습니다");
+	                
+		        },
+		        error: function(XHR, status, error) {
+		        	console.error(status + " : " + error);
+		        }
+		    });		
+		
+	});
 	
 	//공연상태변경
 	function showUpdateStat(showVO) {
-		console.log(showVO);
+		
         
-        /* console.log(ShowingVO); */
+       
         $.ajax({
-	        url: "${pageContext.request.contextPath}/show1/showUpdateStat",
+	        url: "${pageContext.request.contextPath}/admin/showUpdateStat",
 	        type: "post",
 	        //contentType: "application/json",
 	        data: showVO,
 	        dataType: "json",
 	        success: function(result) {
 	        	// 성공적으로 처리된 경우 리다이렉트
-                window.location.href = "${pageContext.request.contextPath}/show1/showTicketingList/";
+                window.location.href = "${pageContext.request.contextPath}/admin/ticketingShowList/";
 	        },
 	        error: function(XHR, status, error) {
 	        	console.error(status + " : " + error);
@@ -167,7 +197,7 @@
 		//넘길 데이터 모으기
 		var showSq = $(this).data("sq");
 		var showVO = {showSq : showSq, showStat : 1};
-		/* var url = "${pageContext.request.contextPath}/show1/showUpdateStat/" + showSq; */
+		/* var url = "${pageContext.request.contextPath}/admin/showUpdateStat/" + showSq; */
 		showUpdateStat(showVO)
 		
 	});
@@ -179,6 +209,7 @@
 		showUpdateStat(showVO)
 	});
 	
+});
 	
 </script>
 </html>

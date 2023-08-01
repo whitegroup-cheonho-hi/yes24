@@ -12,6 +12,7 @@ header.pc #lnb p{font-size: 15px; display: block; color: #fff; margin:0;}
 
 header.pc #header{height: 75px; width: 90%; margin: 15px auto; display: flex; align-items: center; justify-content:space-between; flex-wrap: wrap;}
 #header h1 a{margin-bottom: 25px;}
+#header h2 {z-index: 300;}
 header.pc #header h1 a{font-size: 0; display: block; height: 100%;}
 /* nav */
 .navigation { margin-top: 43px; width: 80%; margin-left: 127px; }

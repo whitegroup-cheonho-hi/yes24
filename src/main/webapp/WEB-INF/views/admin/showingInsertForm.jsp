@@ -67,8 +67,8 @@ header.pc #lnb .lnb li {margin-top: 1px;}
 								<strong>회차정보</strong>
 							</div>
 							<div class="position">
-								<div id='calendar' class="calendar">1</div>
-								<div id='dayList' class="calendar">2</div>
+								<div id='calendar' class="calendar"></div>
+								<div id='dayList' class="calendar"></div>
 							</div>
 						</div>
 					</div>

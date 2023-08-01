@@ -45,6 +45,8 @@
     
     .searchCell_input{ width: 230px; }
 	
+	#header h2{margin-left: 0px;}
+	#header div{top: -90px;}
 </style>
 </head>
 <body>
@@ -113,13 +115,12 @@
 
 				<div class="clear"></div>
 			</div>
-			<form action="getConcertHallList" id="moveForm" method="get">
+			<form action="getUserTicketingList" id="moveForm" method="get">
 				<input type="hidden" name="pageNum" value="${pageMake.cri.pageNum }">
 				<input type="hidden" name="amount" value="${pageMake.cri.amount }">
 				<input type="hidden" id="keyword2" name="keyword2" value="${pageMake.cri.keyword2}">
 				
 			</form>
-			
 		</div>
 	</section>
 
@@ -127,58 +128,41 @@
 
 <script type="text/javascript">
 
-//검색 파라미터를 추가하는 함수 searchParam()
-function searchParam() {
-    // 빈 문자열로 초기화된 변수 schAdd를 선언합니다.
-    let schAdd = "";
-
-    // #keyword 요소에서 값을 가져와서 공백을 제거한 후, 검색어가 비어있지 않다면 실행합니다.
-    // 검색어가 있을 경우, schAdd 변수에 "&keyword=검색어" 형식으로 추가합니다.
-    if (trim($('#keyword2').val()) !== "") {
-        schAdd += "&keyword2=" + trim($('#keyword2').val());
-    }
-
-    // schAdd 변수가 빈 문자열이 아닌 경우에 실행합니다.
-    // 쿼리 파라미터를 생성하기 위해 URL에 물음표를 추가한 후, 앞의 &를 제거합니다.
-    if (trim(schAdd) !== "") {
-        schAdd = "?" + schAdd.substr(1, schAdd.length - 1);
-    }
-
-    // 최종적으로 생성된 검색 파라미터를 반환합니다.
-    return schAdd;
-}
+$(document).ready(function() {
+	//검색 파라미터를 추가하는 함수 searchParam()
+	function searchParam() {
+	    // 빈 문자열로 초기화된 변수 schAdd를 선언합니다.
+	    let schAdd = "";
+	
+	    // #keyword 요소에서 값을 가져와서 공백을 제거한 후, 검색어가 비어있지 않다면 실행합니다.
+	    // 검색어가 있을 경우, schAdd 변수에 "&keyword=검색어" 형식으로 추가합니다.
+	    if (trim($('#keyword2').val()) !== "") {
+	        schAdd += "&keyword2=" + trim($('#keyword2').val());
+	    }
+	
+	    // schAdd 변수가 빈 문자열이 아닌 경우에 실행합니다.
+	    // 쿼리 파라미터를 생성하기 위해 URL에 물음표를 추가한 후, 앞의 &를 제거합니다.
+	    if (trim(schAdd) !== "") {
+	        schAdd = "?" + schAdd.substr(1, schAdd.length - 1);
+	    }
+	
+	    // 최종적으로 생성된 검색 파라미터를 반환합니다.
+	    return schAdd;
+	}
 
 
 
 //페이징 버튼 클릭
-$(document).ready(function() {
+	
 	  $("#paging .pageInfo a").on("click", function(e) {
 	     e.preventDefault();
 	     const pageNum = $(this).attr("href");
 	     $("#moveForm input[name='pageNum']").val(pageNum);
 	     $("#moveForm").submit();
+	     
 	  });
   
-  
-	//검색버튼
-	/* $('#search_btn').on('click', function(){
-	    const newURL = window.location.protocol + "//" + window.location.host + window.location.pathname;
-	    const schAdd = searchParam();
-	    location.href = newURL + schAdd;
-	    let keyword = $('#keyword').val();
-	    $('#keyword2').val(keyword);
-	    $("#moveForm").submit(); */
-	});
-	
-	//수정버튼
-	/* $('.modifyBtn').on('click', function() {
-		//넘길 데이터 모으기
-		const sq = $(this).data("sq");
-		const url = "${pageContext.request.contextPath}/concertHall/concertHallModifyForm/" + sq;
-		// 페이지 이동
-		location.href = url; */
-		
-	});
+
 });
 
 //모든공백제거

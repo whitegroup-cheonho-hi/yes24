@@ -71,8 +71,7 @@
 			  SELECT
 				    reviewsq,
 				    userid,
-				    grade,
-				    viewingday,
+				    grade,				  
 				    reviewcontent,
 				    reviewregdate,
 				    usersq,
@@ -83,8 +82,7 @@
 				            ROWNUM AS rn,
 				            reviewsq,
 				            userid,
-				            grade,
-				            viewingday,
+				            grade,				            
 				            reviewcontent,
 				            reviewregdate,
 				            usersq,
@@ -107,11 +105,7 @@
 				                      
 				                         		' 
 				                    END AS userid,
-				                    grade,
-				                    CASE
-				                        WHEN e.end_time IS NULL THEN '관람이력없음'
-				                        ELSE TO_CHAR(e.end_time, 'YYYY.MM.DD')
-				                    END AS viewingday,
+				                    grade,				                   
 				                    review_content   AS reviewcontent,
 				                    TO_CHAR(review_reg_date, 'YYYY.MM.DD') AS reviewregdate,
 				                    a.user_sq        AS usersq,
@@ -120,8 +114,7 @@
 				                    review a
 				                    INNER JOIN users b ON a.user_sq = b.user_sq
 				                    INNER JOIN ticketing c ON b.user_sq = c.user_sq
-				                    LEFT JOIN ticket d ON c.ticketing_sq = d.ticketing_sq
-				                    LEFT JOIN showing e ON d.showing_sq = e.showing_sq
+				                    LEFT JOIN ticket d ON c.ticketing_sq = d.ticketing_sq				                   
 				                WHERE
 				                    a.show_sq = #{keyword}
 				                ORDER BY
@@ -152,6 +145,38 @@
 		]]>
 
 	</select>
-
+	
+	<!-- 리뷰등록가능 체크 -->
+	<select id="reviewCheck" parameterType="ReviewVO" resultType="ShowingVO">
+		
+		<![CDATA[
+		
+			  SELECT
+				    showing_sq AS showingsq
+				FROM
+				    showing
+			   WHERE
+				    showing_sq IN (
+				        SELECT DISTINCT
+				            showing_sq
+				        FROM
+				            ticket
+				        WHERE
+				            ticketing_sq in (
+				                SELECT
+				                    ticketing_sq
+				                FROM
+				                    ticketing
+				                WHERE
+				                    user_sq = #{userSq}
+				            )
+				    )
+				    AND end_time < SYSDATE
+				    AND show_sq = #{showSq}
+    
+		]]>
+	
+	</select>
+	
 
 </mapper>

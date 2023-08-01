@@ -1,10 +1,13 @@
 package com.yes24.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.yes24.dao.ReviewDAO;
 import com.yes24.vo.ReviewVO;
+import com.yes24.vo.ShowingVO;
 
 @Service
 public class ReviewService {
@@ -18,11 +21,17 @@ public class ReviewService {
 
 		int result = reviewDAO.insertReview(vo);
 
-		System.out.println("리뷰시퀀스"+vo.getReviewSq());
-		
+		System.out.println("리뷰시퀀스" + vo.getReviewSq());
+
 		ReviewVO reviewVO = reviewDAO.getReview(vo.getReviewSq());
-		
 
 		return reviewVO;
+	}
+
+	// ------------------- 리뷰등록가능 체크
+	public List<ShowingVO> reviewCheck(ReviewVO vo) {
+		System.out.println("reviewCheck DAO()");
+
+		return reviewDAO.reviewCheck(vo);
 	}
 }

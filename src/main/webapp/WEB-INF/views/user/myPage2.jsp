@@ -127,10 +127,10 @@
 				<!-- //본문-->
 			</div>
 		</div>
-	</section>
 	<!-- Footer -->
 	<c:import url="/WEB-INF/views/includes/footer.jsp"></c:import>
 	<!-- //Footer -->
+	</section>
 
 </body>
 </html>

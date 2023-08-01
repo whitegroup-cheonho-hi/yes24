@@ -297,11 +297,11 @@ public class ShowService {
 		showVO.setSeatClass(seatClassList);
 		showVO.setSeatPrice(seatPriceSqList);
 
+		// 키워드에 공연시퀀스 담기
+		cri.setKeyword(no);
 		// 리뷰페이징
 		List<ReviewVO> reviewList = reviewDAO.getReviewList(cri);
 
-		// 키워드에 공연시퀀스 담기
-		cri.setKeyword(no);
 		int total = reviewDAO.getTotal(no);
 
 		// 페이지메이커

@@ -247,10 +247,10 @@
 			</div>
 			<!--//container -->
 		</div>
-	</section>
 	<!-- Footer -->
 	<c:import url="/WEB-INF/views/includes/footer.jsp"></c:import>
 	<!-- //Footer -->
+	</section>
 
 
 	<!-- 양도 등록 -->
