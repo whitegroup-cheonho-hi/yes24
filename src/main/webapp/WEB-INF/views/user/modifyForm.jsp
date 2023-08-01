@@ -60,7 +60,7 @@ section {width: 1000px;margin: 0 auto;padding-top: 70px;height: 1200px;}
 										<span id="spanCertifyIpt_txtMemId"
 											class="yesIpt b_size ipt_wSizeF chkVal"> <input
 											name="userSq" type="hidden" value="${user.userSq}"> <input
-											name="userId" type="text" readonly value="${user.userId}">
+											name="userId" type="text" readonly="readonly" value="${user.userId}">
 										</span>
 									</div>
 
@@ -102,7 +102,7 @@ section {width: 1000px;margin: 0 auto;padding-top: 70px;height: 1200px;}
 										<span id="spanCertifyIpt_txtMemNm"
 											class="yesIpt b_size ipt_wSizeF ipt_readonly"> <input
 											name="userName" type="text" required="required"
-											value="${user.userName}">
+											value="${user.userName}" readonly="readonly">
 										</span>
 									</div>
 								</dd>
@@ -117,7 +117,7 @@ section {width: 1000px;margin: 0 auto;padding-top: 70px;height: 1200px;}
 													class="yesIpt b_size ipt_wSizeF labelHide ipt_readonly">
 													<input name="userBirthday" type="text"
 													placeholder="ex)20230101" required="required"
-													value="${user.userBirthday}" maxlength="8">
+													value="${user.userBirthday}" maxlength="8" readonly="readonly">
 												</span>
 											</div>											
 											<div id ="g" class="yesRadioTab col_2 b_size mgl10">

@@ -128,12 +128,9 @@ public class ShowService {
 		int caseNumber = 0;
 
 		// 파일 세 개 중 하나 이상이 수정되었을 때 caseNumber를 적절한 값으로 설정합니다.
-		if (!file[0].isEmpty())
-			caseNumber += 1; // 메인 이미지가 수정된 경우
-		if (!file[1].isEmpty())
-			caseNumber += 2; // 서브 이미지가 수정된 경우
-		if (!file[2].isEmpty())
-			caseNumber += 4; // 상세 이미지가 수정된 경우
+		if (!file[0].isEmpty()) caseNumber += 1; // 메인 이미지가 수정된 경우
+		if (!file[1].isEmpty()) caseNumber += 2; // 서브 이미지가 수정된 경우
+		if (!file[2].isEmpty()) caseNumber += 4; // 상세 이미지가 수정된 경우
 
 		// caseNumber에 따라 적절한 처리를 위해 switch 문을 사용합니다.
 		switch (caseNumber) {

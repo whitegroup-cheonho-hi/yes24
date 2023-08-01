@@ -77,7 +77,7 @@ public class ShowController {
 
 		int result = showService.updateShow(vo, file);
 
-		return "";
+		return "redirect:/show/showSeatClassModifyForm/"+vo.getShowSq();
 	}
 
 	// ------------------- 공연 좌석 클래스등록폼

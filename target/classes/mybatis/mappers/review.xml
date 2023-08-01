@@ -108,7 +108,10 @@
 				                         		' 
 				                    END AS userid,
 				                    grade,
-				                    TO_CHAR(e.end_time, 'YYYY.MM.DD') AS viewingday,
+				                    CASE
+				                        WHEN e.end_time IS NULL THEN '관람이력없음'
+				                        ELSE TO_CHAR(e.end_time, 'YYYY.MM.DD')
+				                    END AS viewingday,
 				                    review_content   AS reviewcontent,
 				                    TO_CHAR(review_reg_date, 'YYYY.MM.DD') AS reviewregdate,
 				                    a.user_sq        AS usersq,

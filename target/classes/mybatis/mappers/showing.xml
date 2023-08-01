@@ -110,6 +110,7 @@
 		<![CDATA[
 		
 			  SELECT
+			  		b.seat_sq,
 				    a.seat_class_sq   AS seatclasssq,
 				    b.seat_no         AS seatno,
 				    c.seat_class      AS seatclass
@@ -127,7 +128,7 @@
 				            show_sq = #{showSq}
 				    )
 				ORDER BY
-				    b.seat_no
+				    b.seat_sq
 		
 		]]>
 	

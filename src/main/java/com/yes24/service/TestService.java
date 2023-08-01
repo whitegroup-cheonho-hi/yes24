@@ -20,25 +20,25 @@ public class TestService {
 
 	@Autowired
 	private TestDAO testdao;
-	
-	//공연시퀀스로 공연정보 가져오기
+
+	// 공연시퀀스로 공연정보 가져오기
 	public ShowVO getShow(int no) {
 		return testdao.getShow(no);
 	}
-	
-	//양도리스트 가져오기
-	public Map<String, Object> getTransferList(Criteria cri){
+
+	// 양도리스트 가져오기
+	public Map<String, Object> getTransferList(Criteria cri) {
 		Map<String, Object> map = new HashMap<>();
 		int total = testdao.getTransferTotal(cri);
-		List<TransferBoardVO>list = testdao.getTransferList(cri);
+		List<TransferBoardVO> list = testdao.getTransferList(cri);
 		PageMakerDTO pageMake = new PageMakerDTO(total, cri);
 		map.put("pageMake", pageMake);
 		map.put("list", list);
 		return map;
 	}
-	
-	//예매현황 정보 가져오기
-	public Map<String, Object> getTicketingDetailHallName(int no){
+
+	// 예매현황 정보 가져오기
+	public Map<String, Object> getTicketingDetailHallName(int no) {
 		Map<String, Object> map = new HashMap<>();
 		ShowVO vo = testdao.getShow(no);
 		ConcertHallVO hallName = testdao.getTicketingDetailHallName(vo);
@@ -46,10 +46,9 @@ public class TestService {
 		map.put("hallName", hallName);
 		return map;
 	}
-	
-	
-	//공연장 리스트 검색&페이징
-	public Map<String, Object> getConcertHallList(Criteria cri){
+
+	// 공연장 리스트 검색&페이징
+	public Map<String, Object> getConcertHallList(Criteria cri) {
 		Map<String, Object> map = new HashMap<>();
 		List<ConcertHallVO> hallList = testdao.getConcertHallList(cri);
 		int total = testdao.getConcertHallTotal(cri);
@@ -58,9 +57,9 @@ public class TestService {
 		map.put("hallList", hallList);
 		return map;
 	}
-	
+
 	// 공연상태로 공연정보 가져오기
-	public Map<String, Object> getShowList(Criteria cri){
+	public Map<String, Object> getShowList(Criteria cri) {
 		Map<String, Object> map = new HashMap<>();
 		List<ShowVO> list = testdao.getShowList(cri);
 		int total = testdao.getTotal(cri);
@@ -94,12 +93,26 @@ public class TestService {
 		List<String> list = testdao.getShowingDay(showSq);
 		return list;
 	}
-	
-	//예매시작 상태변경
+
+	// 예매시작 상태변경
 	public int showUpdateStat(ShowVO vo) {
 		System.out.println("showUpdateStat Service()");
 		return testdao.showUpdateStat(vo);
 	}
-		
-	
+
+	// 회차 날짜로 종류
+	public int endShowing() {
+		System.out.println("endShowing Service()");
+
+		List<ShowingVO> showingSqList = testdao.getEndshowingSq();
+
+		for (ShowingVO s : showingSqList) {
+
+			testdao.endTicket(s.getShowingSq());
+		}
+
+		return testdao.endShowing();
+
+	}
+
 }
