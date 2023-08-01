@@ -18,7 +18,7 @@
 <style>
 	#ySContent{ margin: 120px auto; }
 	.listItem { width: 1200px; display: grid; grid-template-columns: repeat(5, 200px); justify-content: space-around; justify-items: center; }
-	.listItem .listItemdiv { display: inline-block; width: 200px; margin: 0 15px; }
+	.listItem .listItemdiv { display: inline-block; width: 200px; margin: 5px 15px; }
 	.listItem img {width: 95%;}
 	.listItemTxt { display: flex; flex-wrap: wrap; }
 	.listItemTxt button { margin: auto; width: 61px; height: 35px; font-size: 14px; font-weight: bold; 
@@ -84,8 +84,7 @@
 							</a>
 							<div class="listItemTxt">
 								<p class="listItemTit">${showList.showName}</p>
-								<button type="button" class="btnstat" data-sq="${showList.showSq}" >예매대기</button>
-								<button type="button" class="ticketing" data-sq="${showList.showSq}" >예매현황</button>
+								<button type="button" class="btnstat" data-sq="${showList.showSq}" >예매시작</button>
 								<button type="button" class="btndelete" data-sq="${showList.showSq}" style="background-color: #f20055">삭 제</button>
 							</div>
 						</div>
@@ -169,18 +168,6 @@
 		var showVO = {showSq : showSq, showStat : 2};
 		/* var url = "${pageContext.request.contextPath}/show1/showUpdateStat/" + showSq; */
 		showUpdateStat(showVO)
-		
-	});
-	
-	//예매현황버튼
-	$('.ticketing').on('click', function() {
-		console.log("버튼클릭");
-		
-		//넘길 데이터 모으기
-	 	var showSq = $(this).data("sq");
-		var url = "${pageContext.request.contextPath}/show1/ticketingDetail/" + showSq;
-		console.log(url);
-		location.href = url; 
 		
 	});
 	

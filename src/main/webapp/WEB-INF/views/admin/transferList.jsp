@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>양도리스트 게시판</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/reset.css" type="text/css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/adminForm.css" type="text/css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/admin2.css" type="text/css">

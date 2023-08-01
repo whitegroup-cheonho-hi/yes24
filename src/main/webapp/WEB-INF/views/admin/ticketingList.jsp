@@ -18,7 +18,7 @@
 <style>
 	#ySContent{ margin: 120px auto; }
 	.listItem { width: 1200px; display: grid; grid-template-columns: repeat(5, 200px); justify-content: space-around; justify-items: center; }
-	.listItem .listItemdiv { display: inline-block; width: 200px; margin: 0 15px; }
+	.listItem .listItemdiv { display: inline-block; width: 200px; margin: 5px 15px; }
 	.listItem img {width: 95%;}
 	.listItemTxt { display: flex; flex-wrap: wrap; }
 	.listItemTxt button { margin: auto; width: 61px; height: 35px; font-size: 14px; font-weight: bold; 
@@ -82,6 +82,9 @@
 							<a href="${pageContext.request.contextPath}/show1/ticketingDetail/${showList.showSq}">
 								<img class="listItemImg" src="${pageContext.request.contextPath}/upload/${showList.subImage}">
 							</a>
+							<div class="listItemTxt">
+								<p class="listItemTit">${showList.showName}</p>
+							</div>
 						</div>
 					</c:forEach>
 				</div>
