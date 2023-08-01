@@ -1,7 +1,6 @@
 package com.yes24.controller;
 
 import javax.servlet.http.HttpSession;
-import javax.websocket.Session;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -50,7 +49,13 @@ public class UserController {
 		} else {
 			session.setAttribute("authUser", userVO);
 			session.setMaxInactiveInterval(6000);
-			Uri = "redirect:/";
+			
+			if(userVO.getUserRole() ==2) {
+				Uri = "redirect:/admin/adminShowList";
+				
+			}else {
+				Uri = "redirect:/";
+			}
 		}
 
 		return Uri;

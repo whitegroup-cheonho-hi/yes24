@@ -5,12 +5,8 @@
 	<!--웹에서의 헤더-->
 	<div id="lnb">
 		<ul id="lnba" class="lnb">
-			<p>관리자 페이지</p>
-			<!-- 관리자로그인시
-				관리자 페이지 / 로그아웃->메인페이지 -->
-			<li class="login"><a href="#none">로그아웃</a></li>
-			<!-- <li class="search"><a href="#none">검색</a></li>
-				<li class="notice"><a href="#none">커뮤니티</a></li> -->
+			<li><p>관리자 페이지</p></li>
+			<li class="login"><a href="${pageContext.request.contextPath}/user/logout">로그아웃</a></li>
 		</ul>
 	</div>
 	<div id="header">
