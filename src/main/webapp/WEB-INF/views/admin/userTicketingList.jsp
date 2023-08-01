@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>공연장 리스트</title>
+<title>예매 리스트</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/reset.css" type="text/css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/adminForm.css" type="text/css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/admin2.css" type="text/css">
@@ -56,7 +56,7 @@
 	<section>
 		<div id="ySContent">
 			<div class="titletxt">
-				<h3><em><strong class="admimTit">공연장 리스트</strong></em></h3>
+				<h3><em><strong class="admimTit">예매 리스트</strong></em></h3>
 			</div>
 			
 			<!-- ==================== 검색 영역 ==================== -->
@@ -70,11 +70,20 @@
 			<div class="tableList">
 				<table class="concertHallList">
 					<!-- ==================== 리스트 영역 ==================== -->
-					<c:forEach var = "hallList" items="${hallList}">
+					<tr style="border-bottom: solid 2px rgb(62, 62, 62);">
+						<th>I D</th><th>회원이름</th><th>성별</th><th>공연명</th>
+						<th>예매금액</th><th>좌석정보</th><th>예매일시</th><th>공연장명</th>
+					</tr>
+					<c:forEach var = "list" items="${list}">
 					<tr>
-						<td><a href="${pageContext.request.contextPath}/concertHall/concertHallModifyForm/${hallList.concertHallSq}" >${hallList.concertHallName}</a></td>
-						<td><a href="${pageContext.request.contextPath}/concertHall/concertHallModifyForm/${hallList.concertHallSq}" >${hallList.concertHallRoadAddr}</a></td>
-						<td><button type="button" class="modifyBtn" data-sq="${hallList.concertHallSq}" >수 정</button></td>
+						<td>${list.userId}</td>
+						<td>${list.userName}</td>
+						<td>${list.gender}</td>
+						<td>${list.showName}</td>
+						<td>${list.totalPrice}</td>
+						<td>${list.ticketSeat}</td>
+						<td>${list.showingDate}</td>
+						<td>${list.concertHallName}</td>
 					</tr>
 					</c:forEach>
 				</table>
@@ -152,22 +161,22 @@ $(document).ready(function() {
   
   
 	//검색버튼
-	$('#search_btn').on('click', function(){
+	/* $('#search_btn').on('click', function(){
 	    const newURL = window.location.protocol + "//" + window.location.host + window.location.pathname;
 	    const schAdd = searchParam();
 	    location.href = newURL + schAdd;
 	    let keyword = $('#keyword').val();
 	    $('#keyword2').val(keyword);
-	    $("#moveForm").submit();
+	    $("#moveForm").submit(); */
 	});
 	
 	//수정버튼
-	$('.modifyBtn').on('click', function() {
+	/* $('.modifyBtn').on('click', function() {
 		//넘길 데이터 모으기
 		const sq = $(this).data("sq");
 		const url = "${pageContext.request.contextPath}/concertHall/concertHallModifyForm/" + sq;
 		// 페이지 이동
-		location.href = url;
+		location.href = url; */
 		
 	});
 });

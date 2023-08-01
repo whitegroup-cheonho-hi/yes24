@@ -23,6 +23,7 @@
 		<typeAlias alias="TicketingVO" type="com.yes24.vo.TicketingVO" />
 		<typeAlias alias="TransferBoardVO" type="com.yes24.vo.TransferBoardVO" />
 		<typeAlias alias="UserVO" type="com.yes24.vo.UserVO" />
+		<typeAlias alias="UserTicketingVO" type="com.yes24.vo.UserTicketingVO" />
     </typeAliases>
 
     <mappers>     
@@ -37,6 +38,6 @@
 		<mapper resource="mybatis/mappers/ticketing.xml" />
 		<mapper resource="mybatis/mappers/transferboard.xml" />
 		<mapper resource="mybatis/mappers/user.xml" />  
-		<mapper resource="mybatis/mappers/test.xml" />  
+		<mapper resource="mybatis/mappers/admin.xml" />  
     </mappers>
 </configuration>

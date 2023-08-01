@@ -19,42 +19,44 @@
 			<img src="${pageContext.request.contextPath}/assets/images/로고3.png" style="width: 95px"></a>
 		</h2>
 		<!-- 메뉴 (nav) -->
+		<div>
+			<ul class="navigation">
+				<li><a href="#none">공연관리</a></li>
+				<li><a href="#none">회원관리</a></li>
+				<li><a href="#none">티켓관리</a></li>
+				<li><a href="#none">게시판관리</a></li>
+				<li><a href="#none">통계관리</a></li>
+			</ul>
+			<ul class="drop_menu" style="border: solid 1px;">
+				<li>
+					<a href="${pageContext.request.contextPath}/show1/getConcertHallList">공연장관리</a>
+					<a href="${pageContext.request.contextPath}/show/showInsertForm">공연등록</a>
+					<a href="${pageContext.request.contextPath}/show1/adminShowList">예정공연</a>
+					<a href="${pageContext.request.contextPath}/show1/ticketingShowList">진행공연</a>
+					<a href="${pageContext.request.contextPath}/show1/showEndList">종료공연</a>
+				</li>
+				<li>
+					<a href="">전체회원</a>
+					<a href="">신고회원</a>
+					<a href="">정지회원</a>
+					<a href="">탈퇴회원</a>
+				</li>
+				<li>
+					<a href="">예매리스트</a>
+					<a href="${pageContext.request.contextPath}/show1/getTransferList/A">양도리스트</a>
+					<a href="${pageContext.request.contextPath}/show1/getTicketingList">예매현황</a>
+				</li>
+				<li>
+					<a href="">Q&A 게시판</a>
+					<a href="">리뷰 게시판</a>
+				</li>
+				<li>
+					<a href="">통계1</a>
+					<a href="">통계2</a>
+				</li>
+			</ul>
+		</div>
 
-		<ul class="navigation">
-			<li><a href="#none">공연관리</a></li>
-			<li><a href="#none">회원관리</a></li>
-			<li><a href="#none">티켓관리</a></li>
-			<li><a href="#none">게시판관리</a></li>
-			<li><a href="#none">통계관리</a></li>
-		</ul>
-		<ul class="drop_menu">
-			<li>
-				<a href="${pageContext.request.contextPath}/show1/getConcertHallList">공연장관리</a>
-				<a href="${pageContext.request.contextPath}/show/showInsertForm">공연등록</a>
-				<a href="${pageContext.request.contextPath}/show1/adminShowList">예정공연</a>
-				<a href="${pageContext.request.contextPath}/show1/ticketingShowList">진행공연</a>
-				<a href="${pageContext.request.contextPath}/show1/showEndList">종료공연</a>
-			</li>
-			<li>
-				<a href="">전체회원</a>
-				<a href="">신고회원</a>
-				<a href="">정지회원</a>
-				<a href="">탈퇴회원</a>
-			</li>
-			<li>
-				<li><a href="">예매리스트</a></li>
-				<li><a href="${pageContext.request.contextPath}/show1/getTransferList/A">양도리스트</a></li>
-				<li><a href="${pageContext.request.contextPath}/show1/getTicketingList">예매현황</a></li>
-			</li>
-			<li>
-				<a href="">Q&A 게시판</a>
-				<a href="">리뷰 게시판</a>
-			</li>
-			<li>
-				<a href="">통계1</a>
-				<a href="">통계2</a>
-			</li>
-		</ul>
 		<!-- /메뉴 (nav) -->
 	</div>
 </header>

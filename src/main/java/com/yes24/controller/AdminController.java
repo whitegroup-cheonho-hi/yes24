@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.yes24.service.TestService;
+import com.yes24.service.AdminService;
 import com.yes24.vo.ConcertHallVO;
 import com.yes24.vo.Criteria;
 import com.yes24.vo.JsonResult;
@@ -23,11 +23,11 @@ import com.yes24.vo.ShowVO;
 import com.yes24.vo.ShowingVO;
 
 @Controller
-@RequestMapping("/show1")
-public class testController {
+@RequestMapping("/admin")
+public class AdminController {
 
 	@Autowired
-	private TestService testservice;
+	private AdminService adminservice;
 
 	List<ConcertHallVO> concertHallList = new ArrayList<>();
 
@@ -36,7 +36,7 @@ public class testController {
 	public String adminShowList(Model modle, Criteria cri) {
 		System.out.println(cri);
 		cri.setShowStat(1);
-		Map<String, Object> map = testservice.getShowList(cri);
+		Map<String, Object> map = adminservice.getShowList(cri);
 		modle.addAttribute("showList", map.get("list"));
 		modle.addAttribute("pageMake", map.get("pageMake"));
 		return "admin/showList";
@@ -46,7 +46,7 @@ public class testController {
 	@RequestMapping(value = "/ticketingShowList", method = RequestMethod.GET)
 	public String showTicketingList(Model modle, Criteria cri) {
 		cri.setShowStat(2);
-		Map<String, Object> map = testservice.getShowList(cri);
+		Map<String, Object> map = adminservice.getShowList(cri);
 		modle.addAttribute("showList", map.get("list"));
 		modle.addAttribute("pageMake", map.get("pageMake"));
 		return "admin/showTicketingList";
@@ -56,7 +56,7 @@ public class testController {
 	@RequestMapping(value = "/showEndList", method = RequestMethod.GET)
 	public String showEndList(Model model, Criteria cri) {
 		cri.setShowStat(3);
-		Map<String, Object> map = testservice.getShowList(cri);
+		Map<String, Object> map = adminservice.getShowList(cri);
 		model.addAttribute("showList", map.get("list"));
 		model.addAttribute("pageMake", map.get("pageMake"));
 		return "admin/showEndList";
@@ -65,7 +65,7 @@ public class testController {
 	// 공연장홀 리스트
 	@RequestMapping(value = "/getConcertHallList", method = RequestMethod.GET)
 	public String getConcertHallList(Model model, Criteria cri) {
-		Map<String, Object> map = testservice.getConcertHallList(cri);
+		Map<String, Object> map = adminservice.getConcertHallList(cri);
 		model.addAttribute("hallList", map.get("hallList"));
 		model.addAttribute("pageMake", map.get("pageMake"));
 		return "admin/concertHallList";
@@ -75,11 +75,21 @@ public class testController {
 	@RequestMapping(value = "/getTransferList/{key}", method = RequestMethod.GET)
 	public String getTransferList(@PathVariable("key") String key, Model model, Criteria cri) {
 		cri.setKeyword2(key);
-		Map<String, Object> map = testservice.getTransferList(cri);
+		Map<String, Object> map = adminservice.getTransferList(cri);
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("pageMake", map.get("pageMake"));
 		model.addAttribute("key", key);
 		return "admin/transferList";
+	}
+	
+	//회원별 예매리시트
+	@RequestMapping(value = "getUserTicketingList", method = RequestMethod.GET)
+	public String getUserTicketingList(Model model, Criteria cri) {
+		System.out.println("getUserTicketingList");
+		Map<String, Object> map = adminservice.getUserTicketingList(cri);
+		model.addAttribute("list", map.get("list"));
+		model.addAttribute("pageMake", map.get("pageMake"));
+		return "admin/userTicketingList";
 	}
 
 	// 예매현황 리스트
@@ -87,7 +97,7 @@ public class testController {
 	public String getTicketingList(Model model, Criteria cri) {
 		cri.setShowStat(0);
 		System.out.println("getTicketingList");
-		Map<String, Object> map = testservice.getShowList(cri);
+		Map<String, Object> map = adminservice.getShowList(cri);
 		model.addAttribute("showList", map.get("list"));
 		model.addAttribute("pageMake", map.get("pageMake"));
 		System.out.println(map);
@@ -97,7 +107,7 @@ public class testController {
 	// 예매현황 페이지
 	@RequestMapping(value = "/ticketingDetail/{no}", method = RequestMethod.GET)
 	public String getTicketingDetail(@PathVariable("no") int no, Model model) {
-		Map<String, Object> map = testservice.getTicketingDetailHallName(no);
+		Map<String, Object> map = adminservice.getTicketingDetailHallName(no);
 		model.addAttribute("show", map.get("show"));
 		model.addAttribute("hallName", map.get("hallName"));
 		System.out.println(map);
@@ -108,7 +118,7 @@ public class testController {
 	@RequestMapping(value = "/showingInsertForm/{no}", method = RequestMethod.GET)
 	public String showingInsertForm(@PathVariable("no") int no, Model model) {
 		// System.out.println("showingInsertForm");
-		ShowVO vo = testservice.getShow(no);
+		ShowVO vo = adminservice.getShow(no);
 		model.addAttribute("show", vo);
 		System.out.println(vo);
 		return "admin/showingInsertForm";
@@ -119,7 +129,7 @@ public class testController {
 	@RequestMapping(value = "/getShowing", method = RequestMethod.POST)
 	public JsonResult getShowing(@ModelAttribute ShowingVO vo) {
 		// System.out.println(vo);
-		List<ShowingVO> showingList = testservice.getShowing(vo);
+		List<ShowingVO> showingList = adminservice.getShowing(vo);
 		JsonResult jsonResult = new JsonResult();
 		jsonResult.success(showingList);
 		System.out.println("getShowing()");
@@ -134,7 +144,7 @@ public class testController {
 		System.out.println("InsertShowing()");
 		// System.out.println(vo);
 		// List<ShowingVO> showingList = testservice.getShowing(vo);
-		int cnt = testservice.InsertShowing(vo);
+		int cnt = adminservice.InsertShowing(vo);
 		JsonResult jsonResult = new JsonResult();
 		System.out.println(cnt);
 		jsonResult.success(cnt);
@@ -146,7 +156,7 @@ public class testController {
 	@RequestMapping(value = "/DeleteShowing", method = RequestMethod.POST)
 	public JsonResult DeleteShowing(@RequestParam("showingSq") String showingSq) {
 		System.out.println("DeleteShowing()");
-		int cnt = testservice.DeleteShowing(showingSq);
+		int cnt = adminservice.DeleteShowing(showingSq);
 		JsonResult jsonResult = new JsonResult();
 		System.out.println(cnt);
 		jsonResult.success(cnt);
@@ -158,7 +168,7 @@ public class testController {
 	@RequestMapping(value = "/getShowingDay", method = RequestMethod.POST)
 	public JsonResult getShowingDay(@RequestParam("showSq") int showSq) {
 		System.out.println("getShowingDay()");
-		List<String> dayList = testservice.getShowingDay(showSq);
+		List<String> dayList = adminservice.getShowingDay(showSq);
 		JsonResult jsonResult = new JsonResult();
 		System.out.println(dayList);
 		jsonResult.success(dayList);
@@ -171,7 +181,7 @@ public class testController {
 	public JsonResult showUpdateStat(@ModelAttribute ShowVO vo) {
 		System.out.println("showUpdateStat");
 		JsonResult jsonResult = new JsonResult();
-		int cnt = testservice.showUpdateStat(vo);
+		int cnt = adminservice.showUpdateStat(vo);
 		jsonResult.success(cnt);
 		return jsonResult;
 	}
@@ -184,7 +194,7 @@ public class testController {
 
 		JsonResult jsonResult = new JsonResult();
 
-		int cnt = testservice.endShowing();
+		int cnt = adminservice.endShowing();
 
 		jsonResult.success(cnt);
 

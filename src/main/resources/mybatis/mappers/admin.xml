@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="test">
+<mapper namespace="admin">
 
 <!-- 공연장리스트 정보가져오기 -->
 	<select id="getConcertHallList" parameterType="Criteria" resultType="ConcertHallVO">
@@ -304,6 +304,18 @@
     	
 	</select>
 	
+	<!-- 예매리스트(회원기준)수 가져오기 -->
+	<select id="getUserTicketingTotal" resultType="int">
+		<![CDATA[
+
+			SELECT
+				COUNT(ticketing_sq)
+			FROM
+				ticketing		
+		]]>
+    	
+	</select>
+	
 	<!-- 공연장수 검색 후 가져오기 -->
 	<select id="getTicketingDetailHallName" parameterType="ShowVO" resultType="ConcertHallVO">
 		<![CDATA[
@@ -401,59 +413,72 @@
 		]]>
 	</select>
 	
-	<!-- 회차 날짜로 종료 -->
-	<update id="endShowing" >
-		
+	<!-- 회원별 예매리스트 가져오기 -->
+	<select id="getUserTicketingList" parameterType="Criteria" resultType="UserTicketingVO">
 		<![CDATA[
-
-			UPDATE 
-			      showing
-			   SET
-			      showing_stat = 'N'
-			 WHERE
-				  end_time < SYSDATE
-		
-		]]>	
-	
-	</update>
-	
-	<!-- 종료된 회차 시퀀스 가져오기 리스트로 -->
-	<select id="getEndShowingSq" resultType="ShowingVO">
-	
-		<![CDATA[
-		
-			  SELECT
-				    showing_sq   AS showingsq
-				FROM
-				    showing
-			   WHERE
-				    end_time < SYSDATE
-		    ORDER BY
-				    showing_sq
-		
+			SELECT
+				    userid,
+				    username,
+				    gender,
+				    showname,
+				    totalprice,
+				    ticketseat,
+				    showingdate,
+				    concerthallname
+			FROM
+				    (
+				        SELECT
+					            ROWNUM AS rn,
+					            userid,
+					            username,
+					            gender,
+					            showname,
+					            totalprice,
+					            ticketseat,
+					            showingdate,
+					            concerthallname
+				        FROM
+				            (
+				                SELECT
+					                    a.ticketing_date,
+					                    c.user_id                             AS userId,
+					                    c.user_name                           AS userName,
+					                    c.gender,
+					                    e.show_name                           AS showName,
+					                    SUM(b.ticket_seat_price)              AS totalPrice,
+					                    LISTAGG(b.ticket_seat, ',') WITHIN GROUP(
+					                    ORDER BY
+					                        b.ticket_seat
+					                    )                                     AS ticketSeat,
+					                    to_char(d.showing_date, 'YYYY-MM-DD') AS showingDate,
+					                    f.concert_hall_name                   AS concertHallName
+				                FROM
+				                        ticketing a
+					                    JOIN ticket       b ON a.ticketing_sq = b.ticketing_sq
+					                    INNER JOIN users        c ON a.user_sq = c.user_sq
+					                    INNER JOIN showing      d ON b.showing_sq = d.showing_sq
+					                    INNER JOIN show         e ON e.show_sq = d.show_sq
+					                    INNER JOIN concert_hall f ON f.concert_hall_sq = e.concert_hall_sq
+				                WHERE
+				                    	b.ticket_active <> 'N'
+				                GROUP BY
+					                    a.ticketing_date,
+					                    f.concert_hall_name,
+					                    e.show_name,
+					                    d.showing_date,
+					                    c.gender,
+					                    c.user_name,
+					                    c.user_id
+				                ORDER BY
+				                    	a.ticketing_date DESC
+				            )
+				    )
+				WHERE 
+				    rn BETWEEN ((#{pageNum} -1) * #{amount} + 1) AND #{pageNum} * #{amount}
 		]]>
-	
 	</select>
 	
-	<!-- 종료된 회차 시퀀스로 티켓 상태변경 -->
-	<update id="endTicket" parameterType="int">
 	
-		<![CDATA[
-		
-			UPDATE 
-			      ticket
-			   SET
-			      ticket_stat = 2 
-			 WHERE 
-			      showing_sq = #{showingsq}
-		
-		]]>
 	
-	</update>
 
 </mapper>
-
-
-
-
-
