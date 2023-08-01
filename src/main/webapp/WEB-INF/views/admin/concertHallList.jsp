@@ -19,7 +19,7 @@
 	.tableList { width: 100%; display: flex; justify-content: center; }
 	.tableList table { margin: auto; width: 1000px;}
 	.tableList a { width: 200px; height: 400px; margin: 0 15px; vertical-align: top; }
-	.tableList button { margin: auto; width: 70px; height: 35px; font-size: 15px; font-weight: bold; 
+	.inserttHall, .tableList button { margin: auto; width: 90%; height: 35px; font-size: 15px; font-weight: bold; 
 		background-color: #196ab3; color: white; border: none; border-radius: 5px; cursor: pointer;}
 	.tableList p { height: 40px; margin-bottom: 10px;}
 	
@@ -36,12 +36,13 @@
 		vertical-align: baseline; border-top: solid 2px rgb(62, 62, 62); border-bottom: solid 2px rgb(62, 62, 62); border-collapse: collapse; border-spacing: 0; width: 100%; }
 	.concertHallList tr{line-height: 45px; font-weight: 400; border-collapse: collapse; border-spacing: 0; margin: 0; border-bottom: solid 1px #ddd; }
 	
-	.search_cols{ margin-bottom: 35px; margin-left: auto; border: 0; display: flex; width: 30%; align-items: center; }
+	.search_cols{ margin-bottom: 35px; margin-left: 140px; border: 0; display: flex; width: 80%; justify-content: space-between; }
 	.search_wrap{ border: solid 1px #ebebeb; padding: 3px 10px 3px; display: block;}
-	.search_cols input{ width: 192px; height: 25px; border: solid 1px lightgray; border-radius: 5px; padding-left: 8px; box-sizing: border-box;}
-	.search_cols button{ height: 25px; border: solid 1px lightgray; border-radius: 5px; padding-left: 8px; box-sizing: border-box; cursor: pointer;}
+	.search_cols input{ width: 192px; height: 30px; border: solid 1px lightgray; border-radius: 5px; padding-left: 8px; box-sizing: border-box;}
+	.search_cols button{ height: 30px; border: solid 1px lightgray; border-radius: 5px; padding-left: 8px; box-sizing: border-box; cursor: pointer;}
     
     #search_btn{display: inline-block; margin: 0 10px; }
+    .inserttHall{ height: 35px; width: 100px; }
     
     .searchCell_input{ width: 230px; }
 	
@@ -61,10 +62,15 @@
 			
 			<!-- ==================== 검색 영역 ==================== -->
 			<div class="search_cols">
-				<form id="search_form" onsubmit="return false;" autocomplete="off">
-					<input id="keyword" name="keyword2" value="${pageMake.cri.keyword2 }" size="5" type="text" placeholder="검색어 입력">
-					<button type="submit" id="search_btn">검 색</button>
-				</form>
+				<div>
+					<button type="button" class="inserttHall" >공연장 등록</button>
+				</div>
+				<div>
+					<form id="search_form" onsubmit="return false;" autocomplete="off">
+						<input id="keyword" name="keyword2" value="${pageMake.cri.keyword2 }" size="5" type="text" placeholder="검색어 입력">
+						<button type="submit" id="search_btn">검 색</button>
+					</form>
+				</div>
 			</div>
 			
 			<div class="tableList">
@@ -170,6 +176,16 @@ $(document).ready(function() {
 		location.href = url;
 		
 	});
+	
+	//공연등록버튼
+	$('.inserttHall').on('click', function() {
+		//넘길 데이터 모으기
+		const url = "${pageContext.request.contextPath}/concertHall/concertHallInsertForm/";
+		// 페이지 이동
+		location.href = url;
+		
+	});
+	
 });
 
 //모든공백제거
