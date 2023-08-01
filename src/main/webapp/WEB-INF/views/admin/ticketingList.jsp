@@ -18,12 +18,12 @@
 <style>
 	#ySContent{ margin: 120px auto; }
 	.listItem { width: 1200px; display: grid; grid-template-columns: repeat(5, 200px); justify-content: space-around; justify-items: center; }
-	.listItem .listItemdiv { display: inline-block; width: 200px; margin: 5px 15px; }
+	.listItem .listItemdiv { display: inline-block; width: 200px; margin: 10px 15px; }
 	.listItem img {width: 95%;}
 	.listItemTxt { display: flex; flex-wrap: wrap; }
 	.listItemTxt button { margin: auto; width: 61px; height: 35px; font-size: 14px; font-weight: bold; 
 		background-color: #196ab3; color: white; border: none; border-radius: 5px; margin-bottom: 20px;}
-	.listItemTxt p { width: 200px; margin-bottom: 10px; white-space: nowrap; }
+	.listItemTxt p { width: 200px; margin: 10px; white-space: nowrap; }
 	/* 첫 글자는 "<"로 표시 */
 	.listItemTit::before { content: "\003C"; /* "<"의 유니코드 값을 사용 */ }
 	/* 마지막 글자는 ">"로 표시 */
@@ -40,7 +40,7 @@
 	.titletxt{ margin-bottom: 30px }
 	
 	/* 상품페이지 카테고리 */
-	#show .category{width: 1200px; display: flex; justify-content: center; margin-bottom: 20px;}
+	#show .category{width: 1200px; display: flex; justify-content: center; margin-bottom: 30px;}
 	#show .category li{ margin: 0 5px;}
 	#show .category li a{font-weight: 900; font-size: 18px; padding: 7px 15px; display: block;}
 	#show .category li.on{border-bottom: 2px solid #4982cf;}
@@ -75,11 +75,11 @@
 		         </c:if>
 			</div>
 			<!-- ==================== 리스트 영역 ==================== -->
-			<div style="height: 750px;">
+			<div>
 				<div class="listItem">
 					<c:forEach var = "showList" items="${showList}">
 						<div class="listItemdiv">
-							<a href="${pageContext.request.contextPath}/show1/ticketingDetail/${showList.showSq}">
+							<a href="${pageContext.request.contextPath}/admin/ticketingDetail/${showList.showSq}">
 								<img class="listItemImg" src="${pageContext.request.contextPath}/upload/${showList.subImage}">
 							</a>
 							<div class="listItemTxt">
@@ -114,7 +114,7 @@
 
 				<div class="clear"></div>
 			</div>
-			<form action="adminShowList" id="moveForm" method="get">
+			<form action="getTicketingList" id="moveForm" method="get">
 				<input type="hidden" name="pageNum" value="${pageMake.cri.pageNum }">
 				<input type="hidden" name="amount" value="${pageMake.cri.amount }">
 				

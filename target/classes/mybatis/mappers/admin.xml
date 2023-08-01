@@ -264,9 +264,20 @@
 			FROM 
 				show
 			WHERE
-				show_stat = #{showStat}
+				1 = 1
 			
 		]]>
+		<if test='showStat == 0'>
+				            AND			           
+									show_stat != 1
+		</if>
+		
+		<if test='showStat != 0'>
+				            AND			           
+									show_stat = #{showStat}
+		</if>
+		
+		
 	</select>
 
 	<!-- 공연장수 검색 후 가져오기 -->

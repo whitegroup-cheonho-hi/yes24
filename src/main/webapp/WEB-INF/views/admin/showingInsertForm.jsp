@@ -30,6 +30,13 @@
 #ySContent{ width: 1200px; padding: 40px 0;}
 .tmM_txt{ margin-left: 129px;}
 #lnb{border-radius:0}
+
+#header div{top: -93px;}
+#header h2{    margin-left: 0px;    margin-top: -2px; }
+.drop_menu{ font-size: 16px;}
+header.pc{height: 122px;}
+header.pc #lnb .lnb li {margin-top: 1px;}
+.pc #header a{text-decoration: none;}
 </style>
 </head>
 <body>

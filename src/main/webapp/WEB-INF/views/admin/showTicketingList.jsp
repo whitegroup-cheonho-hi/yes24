@@ -80,7 +80,7 @@
 					<c:forEach var = "showList" items="${showList}">
 					
 						<div class="listItemdiv">
-							<a href="${pageContext.request.contextPath}/show/showModifyForm/${showList}">
+							<a href="${pageContext.request.contextPath}/show/showModifyForm/${showList.showSq}">
 									<img class="listItemImg" src="${pageContext.request.contextPath}/upload/${showList.subImage}">
 							</a>
 							<div class="listItemTxt">

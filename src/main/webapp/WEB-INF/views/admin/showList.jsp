@@ -75,7 +75,7 @@
 		         </c:if>
 			</div>
 			<!-- ==================== 리스트 영역 ==================== -->
-			<div style="height: 750px;">
+			<div>
 				<div class="listItem">
 					<c:forEach var = "showList" items="${showList}">
 						<div class="listItemdiv">

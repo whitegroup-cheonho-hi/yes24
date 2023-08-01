@@ -16,10 +16,10 @@
 	<div id="header">
 		<h2>
 			<a href="${pageContext.request.contextPath}/">
-			<img src="${pageContext.request.contextPath}/assets/images/로고3.png" style="width: 95px"></a>
+			<img src="${pageContext.request.contextPath}/assets/images/로고4.png" style="width: 95px"></a>
 		</h2>
 		<!-- 메뉴 (nav) -->
-		<div>
+		<div style="position: relative;">
 			<ul class="navigation">
 				<li><a href="#none">공연관리</a></li>
 				<li><a href="#none">회원관리</a></li>
@@ -27,13 +27,13 @@
 				<li><a href="#none">게시판관리</a></li>
 				<li><a href="#none">통계관리</a></li>
 			</ul>
-			<ul class="drop_menu" style="border: solid 1px;">
+			<ul class="drop_menu">
 				<li>
-					<a href="${pageContext.request.contextPath}/show1/getConcertHallList">공연장관리</a>
+					<a href="${pageContext.request.contextPath}/admin/getConcertHallList">공연장관리</a>
 					<a href="${pageContext.request.contextPath}/show/showInsertForm">공연등록</a>
-					<a href="${pageContext.request.contextPath}/show1/adminShowList">예정공연</a>
-					<a href="${pageContext.request.contextPath}/show1/ticketingShowList">진행공연</a>
-					<a href="${pageContext.request.contextPath}/show1/showEndList">종료공연</a>
+					<a href="${pageContext.request.contextPath}/admin/adminShowList">예정공연</a>
+					<a href="${pageContext.request.contextPath}/admin/ticketingShowList">진행공연</a>
+					<a href="${pageContext.request.contextPath}/admin/showEndList">종료공연</a>
 				</li>
 				<li>
 					<a href="">전체회원</a>
@@ -42,9 +42,9 @@
 					<a href="">탈퇴회원</a>
 				</li>
 				<li>
-					<a href="">예매리스트</a>
-					<a href="${pageContext.request.contextPath}/show1/getTransferList/A">양도리스트</a>
-					<a href="${pageContext.request.contextPath}/show1/getTicketingList">예매현황</a>
+					<a href="${pageContext.request.contextPath}/admin/getUserTicketingList">예매리스트</a>
+					<a href="${pageContext.request.contextPath}/admin/getTransferList/A">양도리스트</a>
+					<a href="${pageContext.request.contextPath}/admin/getTicketingList">예매현황</a>
 				</li>
 				<li>
 					<a href="">Q&A 게시판</a>

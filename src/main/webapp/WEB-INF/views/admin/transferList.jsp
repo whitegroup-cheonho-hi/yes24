@@ -72,9 +72,9 @@
 			<!-- ==================== 검색 영역 ==================== -->
 			<div id="category_list">
 	            <ul class="category">
-	               <li id="cateAll"><a href="${pageContext.request.contextPath}/show1/getTransferList/A">전체</a></li>
-	               <li id="cateYes"><a href="${pageContext.request.contextPath}/show1/getTransferList/Y">거래중</a></li>
-	               <li id="cateNo"><a href="${pageContext.request.contextPath}/show1/getTransferList/N">거래완료</a></li>
+	               <li id="cateAll"><a href="${pageContext.request.contextPath}/admin/getTransferList/A">전체</a></li>
+	               <li id="cateYes"><a href="${pageContext.request.contextPath}/admin/getTransferList/Y">거래중</a></li>
+	               <li id="cateNo"><a href="${pageContext.request.contextPath}/admin/getTransferList/N">거래완료</a></li>
 	            </ul>
 			</div>
 			
