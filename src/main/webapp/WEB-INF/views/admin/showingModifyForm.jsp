@@ -39,6 +39,8 @@
 .drop_menu{ font-size: 16px;}
 header.pc{height: 122px;}
 header.pc #lnb .lnb li {margin-top: 1px;}
+.fc .fc-daygrid-day-number{text-decoration: none;cursor: pointer;}
+.fc-event{cursor: pointer;}
 </style>
 </head>
 <body>

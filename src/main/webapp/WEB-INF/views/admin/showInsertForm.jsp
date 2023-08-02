@@ -53,6 +53,7 @@
 }
 .tm_grp {height: 72px; margin-bottom: 25px;}
 .tm_grp .tmM_txt{ display: inline-block;}
+#concertHallName{cursor: pointer;}
 </style>
 </head>
 <body>

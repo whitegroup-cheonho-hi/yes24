@@ -10,12 +10,12 @@
 .minimap_m>* {padding: 5px;}
 .ulLegend {height: 150px;width: 239px;}
 .admRow {margin-top: 10px;height: 560px;}
-.admSpan {display: flex;justify-content: center;box-sizing: border-box;background-color: #fff;padding: 9px 14px 11px;line-height: 28px;display: flex;text-align: center;}
+.admSpan {display: flex;justify-content: center;box-sizing: border-box;line-height: 28px;display: flex;text-align: center;}
 #container {align-items: center;display: none;}
 #container .item {color: black;}
-.item {width: 23px;height: 23px;background-color: #efdfdf;border-radius: 8px 8px 0 0;border: solid 1px #fff;text-align: center;font-size: 17px;box-sizing: border-box;}
+.item {width: 19px;height: 19px;background-color: #efdfdf;border-radius: 8px 8px 0 0;border: solid 1px #fff;text-align: center;font-size: 17px;box-sizing: border-box;}
 #cover {margin-top: 46px;background-color: lightgray;}
-#cover .admRow .admSpan{background-color: lightgray; margin-top: 40px;}
+/* #cover .admRow .admSpan{margin-top: 40px;} */
 .red {background-color: #e24647;}
 .pink {background-color: #dfa5ff;}
 .blue {background-color: #8fbfee;}
@@ -23,6 +23,6 @@
 .gray {background-color: gray;  pointer-events: none;}
 #selFlashDateAll, #selFlashTime {font-size: 15px;}
 #ulLegend, #ulLegend2 {font-size: 14px;	color: #fff;margin: auto; border: solid 1px #ec7d2c;}
-#screen{width: 690px;height: 50px;}
+ #screen{width: 690px;height: 50px;} 
 #clearButton img{width: 240px; height: 37px; margin-left: 10px;}
 .btn{height:29px;}

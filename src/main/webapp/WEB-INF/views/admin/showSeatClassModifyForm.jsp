@@ -133,7 +133,7 @@
     cursor: pointer;}
   #imgCol2{    display: flex;
     justify-content: space-between;}
-    
+#seatClass button{width: 40px; height: 26px; font-size: 14px; cursor: pointer; border-radius: 5px; border: solid 1px gray;}
 /* #seatClass{margin-left: 560px;} */
 </style>
 </head>

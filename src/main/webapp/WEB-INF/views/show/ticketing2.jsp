@@ -14,11 +14,10 @@
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <style>
 .gnb li {float: left;background:url("${pageContext.request.contextPath}/assets/images/예매순서.png");height: 52px;width: 120px;}
-.check {
-  background-image: url("${pageContext.request.contextPath}/assets/images/체크버튼.PNG"); 
-  background-size: cover; 
-  background-position: center center; 
-}
+.check { background-image: url("${pageContext.request.contextPath}/assets/images/체크버튼.PNG"); 
+  background-size: cover;  background-position: center center;}
+.admRow{background-image: url("${pageContext.request.contextPath}/assets/images/좌석배치도.png");  background-size: cover; 
+background-position: center center;height: 71vh; display: flex; align-items: center; justify-content: center; padding-top: 80px;}
 
 </style>
 </head>
@@ -59,10 +58,11 @@
 			<!-- 제 1 단계 : 관람일/회차 -->
 			<div id="step01"></div>
 			<div id=cover>
-				<div class="admRow">
-					<img id="screen" src="${pageContext.request.contextPath}/assets/images/screen.png">
-					<span class="admSpan"> <span id="container"></span>
-					</span>
+				<div  class="admRow">
+					<%-- <img id="screen" src="${pageContext.request.contextPath}/assets/images/screen.png"> --%> 
+					<div class="admSpan"> 
+						<span id="container"></span>
+					</div>
 				</div>
 			</div>
 			<!-- //제 1 단계 : 관람일/회차 -->
@@ -341,9 +341,9 @@ $(document).ready(function() {
 		      var container = $('#container');
 		      container.empty();
 		      container.css({
-		        'grid-template-columns': 'repeat(' + width + ', 23px)',
+		        'grid-template-columns': 'repeat(' + width + ', 19px)',
 		        'display': 'grid',
-		        'width': width * 23 + 'px'
+		        'width': width * 19 + 'px'
 		      });
 		      var index = 0;
 		      var seatClassSq; // 좌석클래스 시퀀스

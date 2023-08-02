@@ -51,6 +51,7 @@
 	width: 890px;
 }
 #adminTit a{color: #4982cf;}
+#concertHallName{cursor: pointer;}
 </style>
 </head>
 <body>

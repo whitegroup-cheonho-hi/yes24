@@ -37,6 +37,8 @@
 header.pc{height: 122px;}
 header.pc #lnb .lnb li {margin-top: 1px;}
 .pc #header a{text-decoration: none;}
+.fc .fc-daygrid-day-number{text-decoration: none;cursor: pointer;}
+.fc-event{cursor: pointer;}
 </style>
 </head>
 <body>

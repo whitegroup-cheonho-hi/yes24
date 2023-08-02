@@ -85,8 +85,7 @@
 					<!-- ==================== 리스트 영역 ==================== -->
 					<tr>
 						<th>공연명</th><th>판매회원</th><th>구매회원</th><th>구입금액</th>
-						<th>판매금액</th><th>공연일시</th><th>좌석등급</th><th>좌석정보</th>
-						<th>거래완료일</th><th>거래상태</th>
+						<th>판매금액</th><th>공연일시</th><th>좌석정보</th><th>거래완료일</th><th>거래상태</th>
 					</tr>
 					<c:forEach var = "list" items="${list}">
 					<tr>
@@ -96,7 +95,6 @@
 						<td>${list.ticketSeatPrice}</td>
 						<td>${list.hopePrice}</td>
 						<td>${list.startTime}</td>
-						<td>${list.seatClass}</td>
 						<td>${list.ticketSeat}</td>
 						<td>${list.transferDate}</td>
 						<td>${list.transferStat}</td>
