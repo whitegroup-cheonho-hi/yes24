@@ -203,9 +203,9 @@
 							<div class="listItemTxt">
 								<p class="listItemTit">${showList.showName}</p>
 								<button type="button" class="btnstat"
+									data-sq="${showList.showSq}" style="background-color: #196ab3">예매대기</button>
+								<button type="button" class="btnticketing"
 									data-sq="${showList.showSq}" style="background-color: #196ab3">예매진행</button>
-								<button type="button" class="btndelete"
-									data-sq="${showList.showSq}" style="background-color: #f43142">삭 제</button>
 							</div>
 						</div>
 					</c:forEach>
@@ -293,15 +293,16 @@
 		showUpdateStat(showVO)
 
 	});
-
+	
 	//상태변경버튼1
-	$('.btndelete').on('click', function() {
+	$('.btnticketing').on('click', function() {
+		//넘길 데이터 모으기
 		var showSq = $(this).data("sq");
-		var showVO = {
-			showSq : showSq,
-			showStat : 3
-		};
+		var showVO = {showSq : showSq, showStat : 2};
+		/* var url = "${pageContext.request.contextPath}/admin/showUpdateStat/" + showSq; */
 		showUpdateStat(showVO)
+		
 	});
+
 </script>
 </html>

@@ -3,6 +3,8 @@ package com.yes24.controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,10 +17,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yes24.service.ShowService;
 import com.yes24.service.ShowingService;
+import com.yes24.service.UserService;
 import com.yes24.vo.JsonResult;
 import com.yes24.vo.RemainingSeatsVO;
 import com.yes24.vo.ShowVO;
 import com.yes24.vo.ShowingVO;
+import com.yes24.vo.UserVO;
 
 @Controller
 @RequestMapping("/showing")
@@ -26,6 +30,8 @@ public class ShowingController {
 
 	@Autowired
 	private ShowingService showingService;
+	@Autowired
+	private UserService userService;
 
 	// ---------------------- 공연회차 가져오기
 	@ResponseBody
@@ -93,27 +99,33 @@ public class ShowingController {
 
 	// 회차등록 폼
 	@RequestMapping(value = "/showingInsertForm/{no}", method = RequestMethod.GET)
-	public String showingInsertForm(@PathVariable("no") int no, Model model) {
+	public String showingInsertForm(@PathVariable("no") int no, Model model, HttpSession session) {
 		System.out.println("showingInsertForm()");
+
+		String Uri = "admin/showingInsertForm";
+		Uri = loginCheck(Uri, session);
 
 		ShowVO vo = showingService.getShow2(no);
 
 		model.addAttribute("show", vo);
 
-		return "admin/showingInsertForm";
+		return Uri;
 	}
-	
-	// 회차등록 폼
-		@RequestMapping(value = "/showingModifyForm/{no}", method = RequestMethod.GET)
-		public String showingModifyForm(@PathVariable("no") int no, Model model) {
-			System.out.println("showingModifyForm()");
 
-			ShowVO vo = showingService.getShow2(no);
+	// 회차수정 폼
+	@RequestMapping(value = "/showingModifyForm/{no}", method = RequestMethod.GET)
+	public String showingModifyForm(@PathVariable("no") int no, Model model, HttpSession session) {
+		System.out.println("showingModifyForm()");
 
-			model.addAttribute("show", vo);
+		String Uri = "admin/showingModifyForm";
+		Uri = loginCheck(Uri, session);
 
-			return "admin/showingModifyForm";
-		}
+		ShowVO vo = showingService.getShow2(no);
+
+		model.addAttribute("show", vo);
+
+		return Uri;
+	}
 
 	@ResponseBody
 	@RequestMapping(value = "/insertShowing", method = RequestMethod.POST)
@@ -155,6 +167,27 @@ public class ShowingController {
 		jsonResult.success(dayList);
 
 		return jsonResult;
+	}
+
+	// 로그인 체크
+	public String loginCheck(String Uri, HttpSession session) {
+
+		UserVO userVO = (UserVO) session.getAttribute("authUser");
+
+		if (userVO == null) {
+
+			Uri = "redirect:/user/loginForm";
+		} else {
+
+			UserVO vo = userService.getUser(userVO);
+
+			if (vo.getUserRole() == 1) {
+
+				Uri = "redirect:/";
+			}
+
+		}
+		return Uri;
 	}
 
 }

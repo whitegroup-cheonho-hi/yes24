@@ -1,12 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- 헤더 -->
 <header class="pc">
 	<!--웹에서의 헤더-->
 	<div id="lnb">
 		<ul id="lnba" class="lnb">
 			<li><p>관리자 페이지</p></li>
-			<li class="login"><a href="${pageContext.request.contextPath}/user/logout">로그아웃</a></li>
+			<c:choose>
+				<c:when test="${empty authUser}">
+					<li class="login"><a
+						href="${pageContext.request.contextPath}/user/loginForm">로그인</a></li>
+				</c:when>
+				<c:otherwise>
+					<li class="logout"><a
+						href="${pageContext.request.contextPath}/user/logout">로그아웃</a></li>
+				</c:otherwise>
+			</c:choose>
 		</ul>
 	</div>
 	<div id="header">

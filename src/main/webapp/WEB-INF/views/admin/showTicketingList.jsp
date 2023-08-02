@@ -90,7 +90,7 @@
 							<div class="listItemTxt">
 								<p class="listItemTit">${showList.showName}</p>
 								<button type="button" class="btnstat" data-sq="${showList.showSq}" style="background-color: #196ab3">예매대기</button>
-								<button type="button" class="btndelete" data-sq="${showList.showSq}" style="background-color: #f43142">삭 제</button>
+								<button type="button" class="btndelete" data-sq="${showList.showSq}" style="background-color: #f43142">공연종료</button>
 							</div>
 						</div>
 					</c:forEach>

@@ -3,6 +3,8 @@ package com.yes24.controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,12 +19,14 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.yes24.service.ConcertHallService;
 import com.yes24.service.ShowService;
+import com.yes24.service.UserService;
 import com.yes24.vo.ConcertHallVO;
 import com.yes24.vo.Criteria;
 import com.yes24.vo.JsonResult;
 import com.yes24.vo.SeatClassListVO;
 import com.yes24.vo.ShowVO;
 import com.yes24.vo.ShowingVO;
+import com.yes24.vo.UserVO;
 
 @Controller
 @RequestMapping("/show")
@@ -32,17 +36,22 @@ public class ShowController {
 	private ShowService showService;
 	@Autowired
 	private ConcertHallService concertHallService;
-
+	@Autowired
+	private UserService userService;
+	
 	// ------------------- 공연 등록폼
 	@RequestMapping(value = "/showInsertForm", method = RequestMethod.GET)
-	public String showInsertForm(Model model) {
+	public String showInsertForm(Model model, HttpSession session) {
 		System.out.println("showInsertForm()");
+
+		String Uri = "admin/showInsertForm";
+		Uri = loginCheck(Uri, session);
 
 		List<ConcertHallVO> concertHallList = concertHallService.getConcertHallList();
 
 		model.addAttribute("concertHallList", concertHallList);
 
-		return "admin/showInsertForm";
+		return Uri;
 	}
 
 	// ------------------- 공연 등록
@@ -59,15 +68,18 @@ public class ShowController {
 
 	// ------------------- 공연 수정폼
 	@RequestMapping(value = "/showModifyForm/{no}", method = RequestMethod.GET)
-	public String showModifyForm(@PathVariable("no") int no, Model model) {
+	public String showModifyForm(@PathVariable("no") int no, Model model, HttpSession session) {
 		System.out.println("showModifyForm()");
+
+		String Uri = "admin/showModifyForm";
+		Uri = loginCheck(Uri, session);
 
 		Map<String, Object> map = showService.getShow(no, 2);
 
 		model.addAttribute("show", map.get("showVO"));
 		model.addAttribute("concertHallList", map.get("concertHallList"));
 
-		return "admin/showModifyForm";
+		return Uri;
 	}
 
 	// ------------------- 공연 수정
@@ -77,26 +89,32 @@ public class ShowController {
 
 		int result = showService.updateShow(vo, file);
 
-		return "redirect:/show/showSeatClassModifyForm/"+vo.getShowSq();
+		return "redirect:/show/showSeatClassModifyForm/" + vo.getShowSq();
 	}
 
 	// ------------------- 공연 좌석 클래스등록폼
 	@RequestMapping(value = "/showSeatClassInsertForm/{no}", method = RequestMethod.GET)
-	public String showSeatClassInsertForm(Model model, @PathVariable("no") int no) {
+	public String showSeatClassInsertForm(Model model, @PathVariable("no") int no, HttpSession session) {
 		System.out.println("showSeatClassInsertForm()");
+
+		String Uri = "admin/showSeatClassInsertForm";
+		Uri = loginCheck(Uri, session);
 
 		Map<String, Object> map = showService.getShow(no, 1);
 
 		model.addAttribute("show", map.get("showVO"));
 		model.addAttribute("concertHall", map.get("concertHallVO"));
 
-		return "admin/showSeatClassInsertForm";
+		return Uri;
 	}
 
 	// ------------------- 공연 좌석 클래스수정폼
 	@RequestMapping(value = "/showSeatClassModifyForm/{no}", method = RequestMethod.GET)
-	public String showSeatClassModifyForm(Model model, @PathVariable("no") int no) {
+	public String showSeatClassModifyForm(Model model, @PathVariable("no") int no, HttpSession session) {
 		System.out.println("showSeatClassModifyForm()");
+
+		String Uri = "admin/showSeatClassModifyForm";
+		Uri = loginCheck(Uri, session);
 
 		Map<String, Object> map = showService.getShow(no, 3);
 
@@ -104,8 +122,7 @@ public class ShowController {
 		model.addAttribute("concertHall", map.get("concertHallVO"));
 		model.addAttribute("seatClassList", map.get("seatClassList"));
 
-		System.out.println(map.get("seatClassList"));
-		return "admin/showSeatClassModifyForm";
+		return Uri;
 	}
 
 	// ------------------- 공연 상세
@@ -153,6 +170,27 @@ public class ShowController {
 
 		return jsonResult;
 
+	}
+
+	// 로그인 체크
+	public String loginCheck(String Uri, HttpSession session) {
+		
+		UserVO userVO = (UserVO) session.getAttribute("authUser");
+
+		if (userVO == null) {
+
+			Uri = "redirect:/user/loginForm";
+		} else {
+
+			UserVO vo = userService.getUser(userVO);
+
+			if (vo.getUserRole() == 1) {
+
+				Uri = "redirect:/";
+			}
+
+		}
+		return Uri;
 	}
 
 }

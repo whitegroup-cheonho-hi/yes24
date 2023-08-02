@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,11 +18,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yes24.service.AdminService;
+import com.yes24.service.UserService;
 import com.yes24.vo.ConcertHallVO;
 import com.yes24.vo.Criteria;
 import com.yes24.vo.JsonResult;
 import com.yes24.vo.ShowVO;
 import com.yes24.vo.ShowingVO;
+import com.yes24.vo.UserVO;
 
 @Controller
 @RequestMapping("/admin")
@@ -28,100 +32,149 @@ public class AdminController {
 
 	@Autowired
 	private AdminService adminservice;
+	@Autowired
+	private UserService userService;
 
 	List<ConcertHallVO> concertHallList = new ArrayList<>();
 
 	// 어드민 공연리스트(예매전)
 	@RequestMapping(value = "/adminShowList", method = RequestMethod.GET)
-	public String adminShowList(Model modle, Criteria cri) {
-		System.out.println(cri);
+	public String adminShowList(Model modle, Criteria cri, HttpSession session) {
+
+		String Uri = "admin/showList";
+		Uri = loginCheck(Uri, session);
+
 		cri.setShowStat(1);
 		Map<String, Object> map = adminservice.getShowList(cri);
+
 		modle.addAttribute("showList", map.get("list"));
 		modle.addAttribute("pageMake", map.get("pageMake"));
-		return "admin/showList";
+
+		return Uri;
 	}
 
 	// 어드민 공연리스트(예매중)
 	@RequestMapping(value = "/ticketingShowList", method = RequestMethod.GET)
-	public String ticketingShowList(Model modle, Criteria cri) {
+	public String ticketingShowList(Model modle, Criteria cri, HttpSession session) {
+
+		String Uri = "admin/showTicketingList";
+		Uri = loginCheck(Uri, session);
+
 		cri.setShowStat(2);
 		Map<String, Object> map = adminservice.getShowList(cri);
+
 		modle.addAttribute("showList", map.get("list"));
 		modle.addAttribute("pageMake", map.get("pageMake"));
-		return "admin/showTicketingList";
+
+		return Uri;
 	}
 
 	// 어드민 공연리스트(공연완료)
 	@RequestMapping(value = "/showEndList", method = RequestMethod.GET)
-	public String showEndList(Model model, Criteria cri) {
+	public String showEndList(Model model, Criteria cri, HttpSession session) {
+
+		String Uri = "admin/showEndList";
+		Uri = loginCheck(Uri, session);
+
 		cri.setShowStat(3);
 		Map<String, Object> map = adminservice.getShowList(cri);
+
 		model.addAttribute("showList", map.get("list"));
 		model.addAttribute("pageMake", map.get("pageMake"));
-		return "admin/showEndList";
+
+		return Uri;
 	}
 
 	// 공연장홀 리스트
 	@RequestMapping(value = "/getConcertHallList", method = RequestMethod.GET)
-	public String getConcertHallList(Model model, Criteria cri) {
+	public String getConcertHallList(Model model, Criteria cri, HttpSession session) {
+
+		String Uri = "admin/concertHallList";
+		Uri = loginCheck(Uri, session);
+
 		Map<String, Object> map = adminservice.getConcertHallList(cri);
+
 		model.addAttribute("hallList", map.get("hallList"));
 		model.addAttribute("pageMake", map.get("pageMake"));
-		return "admin/concertHallList";
+
+		return Uri;
 	}
 
 	// 양도리스트
 	@RequestMapping(value = "/getTransferList/{key}", method = RequestMethod.GET)
-	public String getTransferList(@PathVariable("key") String key, Model model, Criteria cri) {
+	public String getTransferList(@PathVariable("key") String key, Model model, Criteria cri, HttpSession session) {
+
+		String Uri = "admin/transferList";
+		Uri = loginCheck(Uri, session);
+
 		cri.setKeyword2(key);
 		Map<String, Object> map = adminservice.getTransferList(cri);
+
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("pageMake", map.get("pageMake"));
 		model.addAttribute("key", key);
-		return "admin/transferList";
+
+		return Uri;
 	}
-	
-	//회원별 예매리시트
+
+	// 회원별 예매리시트
 	@RequestMapping(value = "/getUserTicketingList", method = RequestMethod.GET)
-	public String getUserTicketingList(Model model, Criteria cri) {
+	public String getUserTicketingList(Model model, Criteria cri, HttpSession session) {
 		System.out.println("getUserTicketingList");
+
+		String Uri = "admin/userTicketingList";
+		Uri = loginCheck(Uri, session);
+
 		Map<String, Object> map = adminservice.getUserTicketingList(cri);
+
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("pageMake", map.get("pageMake"));
-		return "admin/userTicketingList";
+
+		return Uri;
 	}
 
 	// 예매현황 리스트
 	@RequestMapping(value = "/getTicketingList", method = RequestMethod.GET)
-	public String getTicketingList(Model model, Criteria cri) {
+	public String getTicketingList(Model model, Criteria cri, HttpSession session) {
+
+		String Uri = "admin/ticketingList";
+		Uri = loginCheck(Uri, session);
+
 		cri.setShowStat(0);
-		System.out.println("getTicketingList");
 		Map<String, Object> map = adminservice.getShowList(cri);
+
 		model.addAttribute("showList", map.get("list"));
 		model.addAttribute("pageMake", map.get("pageMake"));
-		System.out.println(map);
-		return "admin/ticketingList";
+
+		return Uri;
 	}
 
 	// 예매현황 페이지
 	@RequestMapping(value = "/ticketingDetail/{no}", method = RequestMethod.GET)
-	public String getTicketingDetail(@PathVariable("no") int no, Model model) {
+	public String getTicketingDetail(@PathVariable("no") int no, Model model, HttpSession session) {
+
+		String Uri = "admin/ticketingDetail";
+		Uri = loginCheck(Uri, session);
+
 		Map<String, Object> map = adminservice.getTicketingDetailHallName(no);
+
 		model.addAttribute("show", map.get("show"));
 		model.addAttribute("hallName", map.get("hallName"));
-		System.out.println(map);
-		return "admin/ticketingDetail";
+
+		return Uri;
 	}
 
 	// 회차등록 폼
 	@RequestMapping(value = "/showingInsertForm/{no}", method = RequestMethod.GET)
-	public String showingInsertForm(@PathVariable("no") int no, Model model) {
-		// System.out.println("showingInsertForm");
+	public String showingInsertForm(@PathVariable("no") int no, Model model, HttpSession session) {
+
+		String Uri = "admin/showingInsertForm";
+		Uri = loginCheck(Uri, session);
+
 		ShowVO vo = adminservice.getShow(no);
 		model.addAttribute("show", vo);
-		System.out.println(vo);
-		return "admin/showingInsertForm";
+
+		return Uri;
 	}
 
 	// 회차리스트
@@ -186,7 +239,7 @@ public class AdminController {
 		return jsonResult;
 	}
 
-	// 회차종료 
+	// 회차종료
 	@ResponseBody
 	@RequestMapping(value = "/endShowing", method = RequestMethod.GET)
 	public JsonResult endShowing() {
@@ -199,6 +252,27 @@ public class AdminController {
 		jsonResult.success(cnt);
 
 		return jsonResult;
+	}
+
+	// 로그인 체크
+	public String loginCheck(String Uri, HttpSession session) {
+
+		UserVO userVO = (UserVO) session.getAttribute("authUser");
+
+		if (userVO == null) {
+
+			Uri = "redirect:/user/loginForm";
+		} else {
+
+			UserVO vo = userService.getUser(userVO);
+
+			if (vo.getUserRole() == 1) {
+
+				Uri = "redirect:/";
+			}
+
+		}
+		return Uri;
 	}
 
 }
