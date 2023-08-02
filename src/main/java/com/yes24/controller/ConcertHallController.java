@@ -44,7 +44,7 @@ public class ConcertHallController {
 
 		int result = concertHallService.insertConcertHall(vo);
 
-		return "redirect:/concertHall/concertHallModifyForm/" + vo.getConcertHallSq();
+		return "redirect:/admin/getConcertHallList";
 	}
 
 	// -------------------- 공연장 수정폼
@@ -68,12 +68,12 @@ public class ConcertHallController {
 		System.out.println("concertHallModify()");
 
 		String Uri = "redirect:/concertHall/concertHallModifyForm/" + vo.getConcertHallSq();
-		int result = concertHallService.updateConcertHall(vo);
+		int showSq = concertHallService.updateConcertHall(vo);
 
-		if (result > 0) {
-			Uri = "redirect:/show/showSeatClassModifyForm/" + result;
+		if (showSq > 0) {
+			Uri = "redirect:/show/showSeatClassModifyForm/" + showSq;
 		}
-		System.out.println(result);
+
 		return Uri;
 	}
 

@@ -59,6 +59,21 @@
 .color2 {background-color: #dfa5ff;}
 .color3 {background-color: #8fbfee;}
 .color4 {background-color: #a5ea7b;}
+
+#resetButton{    
+    width: 70px;
+    height: 35px;
+    font-size: 14px;
+    font-weight: bold;
+    background-color:  #f43142;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    cursor: pointer;}
+  #imgCol2{    display: flex;
+    justify-content: space-between;}
+    
 </style>
 </head>
 <body>
@@ -176,7 +191,8 @@
 						</div>
 						<div class="admRow" id="dragForm">
 							<div class="imgCol" id="imgCol2">
-								<strong id="seatClass">등급선택</strong>
+								<strong id="seatClass">등급선택 : </strong>
+								<button type="button" id="resetButton">리셋</button>
 							</div>
 							<span class="admSpan"> <span class="container"></span>
 							</span>
@@ -417,7 +433,14 @@
 		
 		$.drop({ multi: true }); // 다중 드롭 설정
 	
-		
+		// 리셋버튼
+		$("#resetButton").on("click",function(){
+			console.log("리셋");
+			
+			$(".item").removeClass("dropped color1 seat1 color2 seat2 color3 seat3 color4 seat4");
+			
+		});
+	
 	});
 </script>
 </html>

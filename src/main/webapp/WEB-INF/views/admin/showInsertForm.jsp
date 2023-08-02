@@ -263,7 +263,7 @@
 								<div class="inpRow cols">
 									<div id="category">
 										<div class="cateGrp">
-											<input type="radio" name="category" value="1">뮤지컬
+											<input type="radio" name="category" value="1" checked="checked">뮤지컬
 										</div>
 										<div class="cateGrp">
 											<input type="radio" name="category" value="2">콘서트
@@ -276,9 +276,6 @@
 										</div>
 										<div class="cateGrp">
 											<input type="radio" name="category" value="5">클래식
-										</div>
-										<div class="cateGrp">
-											<input type="radio" name="category" value="6">아동
 										</div>
 									</div>
 								</div>

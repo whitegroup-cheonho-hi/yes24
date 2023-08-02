@@ -180,10 +180,10 @@
                <tr>
                   <th><label>좌석</label></th>
                   <td>
-                     <input type="checkbox" id="seatClass1" name="seatClass" value="ALL"> <label for="seatClass1"></label>
-                     <input type="checkbox" id="seatClass2" name="seatClass" value="ALL"> <label for="seatClass2"></label>
-                     <input type="checkbox" id="seatClass3" name="seatClass" value="ALL"> <label for="seatClass3"></label>
-                     <input type="checkbox" id="seatClass4" name="seatClass" value="ALL"> <label for="seatClass4"></label>
+                     <input type="checkbox" id="seatClass1" name="seatClass" value="ALL"> <label class="label" for="seatClass1"></label>
+                     <input type="checkbox" id="seatClass2" name="seatClass" value="ALL"> <label class="label" for="seatClass2"></label>
+                     <input type="checkbox" id="seatClass3" name="seatClass" value="ALL"> <label class="label" for="seatClass3"></label>
+                     <input type="checkbox" id="seatClass4" name="seatClass" value="ALL"> <label class="label" for="seatClass4"></label>
                      <input type="checkbox" id="noneSeatClass" > <label for="noneSeatClass">조건없음</label>
                   </td>
                </tr>
@@ -384,6 +384,7 @@
 			$("#showName").val("").prop("readonly", false);
 			$("#startDate, #endDate").val("");
 			$("#seatClass1, #seatClass2, #seatClass3, #seatClass4, #noneShowName, #noneSeatClass, #nonePrice").prop("checked", false);
+			$(".label").text("");
 			$("#price").val("").prop("readonly", false);
 			$("#showSq").val("");
 

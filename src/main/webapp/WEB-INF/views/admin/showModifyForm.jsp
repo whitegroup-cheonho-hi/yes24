@@ -283,9 +283,6 @@
 										<div class="cateGrp">
 											<input id="category5" type="radio" name="category" value="5">클래식
 										</div>
-										<div class="cateGrp">
-											<input id="category6" type="radio" name="category" value="6">아동
-										</div>
 									</div>
 								</div>
 							</dd>
@@ -296,7 +293,7 @@
 								<a id="updateButton" href="#none"
 									class="btnC xb_size btn_blue btn_wSizeH "> <span
 									class="bWrap"><em id="emtxt" class="txt">수정</em></span>
-								</a> <a id="cencleConcertHall" href=""
+								</a> <a id="cencleShow" href=""
 									class="btnC xb_size btn_blue btn_wSizeH "> <span
 									class="bWrap"><em id="emtxt" class="txt">취소</em></span>
 								</a>
@@ -346,6 +343,12 @@
 			$("#updateShow").submit();
 		});
 	
+		// 등록취소
+		$("#cencleShow").on("click",function(e){
+			console.log("등록취소버튼");
+			e.preventDefault();
+			window.location.href = '${pageContext.request.contextPath}/admin/adminShowList';
+		});
 	});
 </script>
 </html>

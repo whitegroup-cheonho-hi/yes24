@@ -77,10 +77,10 @@ header.pc #lnb .lnb li {margin-top: 1px;}
 
 				<div class="yesFormBtn">
 					<div class="formBtn_btn">
-						<a id="insertConcertHall" href="" onclick=""
+						<a id="insertConcertHall" href="" 
 							class="btnC xb_size btn_blue btn_wSizeH "> <span id="bWrap1"
-							class="bWrap"><em id="insertShowing" class="txt">등록</em></span>
-						</a> <a id="cencleConcertHall" href="" onclick=""
+							class="bWrap"><em id="insertShowing" class="txt">등록완료</em></span>
+						</a> <a id="cencleConcertHall" href="" 
 							class="btnC xb_size btn_blue btn_wSizeH "> <span id="bWrap2"
 							class="bWrap"><em id="emtxt" class="txt">취소</em></span>
 						</a>
@@ -145,6 +145,20 @@ $(document).ready(function() {
 	let date;
 	let showingSq;
 	let showSq = '${show.showSq}';
+	
+	// 등록완료
+	$("#insertConcertHall").on("click",function(e){
+		console.log("등록완료버튼");
+		e.preventDefault();
+		window.location.href = '${pageContext.request.contextPath}/admin/adminShowList';
+	});
+	// 등록취소
+	$("#cencleConcertHall").on("click",function(e){
+		console.log("등록취소버튼");
+		e.preventDefault();
+		window.location.href = '${pageContext.request.contextPath}/show/showSeatClassModifyForm/'+showSq;
+	});
+	
 	
 	function getShowingDay() {
         console.log('getShowingDay');

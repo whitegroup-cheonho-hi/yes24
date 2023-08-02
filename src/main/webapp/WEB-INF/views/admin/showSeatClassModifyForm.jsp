@@ -121,7 +121,20 @@
 	background-color: #a5ea7b;
 }
 #adminTit2 a{color: #4982cf;}
-
+#resetButton{     width: 70px;
+    height: 35px;
+    font-size: 14px;
+    font-weight: bold;
+    background-color:  #f43142;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    cursor: pointer;}
+  #imgCol2{    display: flex;
+    justify-content: space-between;}
+    
+/* #seatClass{margin-left: 560px;} */
 </style>
 </head>
 <body>
@@ -177,7 +190,10 @@
 						</div>
 						<div class="admRow" id="dragForm">
 							<div class="imgCol" id="imgCol2">
-								<strong id="seatClass">등급선택</strong>
+								<strong id="seatClass">등급선택 : </strong>
+								<button type="button" id="resetButton">리셋</button>
+							</div>
+							<div>
 							</div>
 							<span class="admSpan"> <span class="container"></span>
 							</span>
@@ -189,7 +205,7 @@
 								<a id="insertButton" href="#none"
 									class="btnC xb_size btn_blue btn_wSizeH "> <span
 									class="bWrap"><em id="emtxt" class="txt">수정</em></span>
-								</a> <a id="cencleConcertHall" href=""
+								</a> <a id="cencleSeatClass" href=""
 									class="btnC xb_size btn_blue btn_wSizeH "> <span
 									class="bWrap"><em id="emtxt" class="txt">취소</em></span>
 								</a>
@@ -436,6 +452,23 @@
 		  });
 		
 		$.drop({ multi: true }); // 다중 드롭 설정
+		
+		
+		// 리셋버튼
+		$("#resetButton").on("click",function(){
+			console.log("리셋");
+			
+			$(".item").removeClass("dropped color1 seat1 color2 seat2 color3 seat3 color4 seat4");
+			
+		});
+		
+		// 등록취소
+		$("#cencleSeatClass").on("click",function(e){
+			console.log("등록취소버튼");
+			e.preventDefault();
+			window.location.href = '${pageContext.request.contextPath}/show/showModifyForm/'+showSq;
+		});
+		
 	
 		
 	});

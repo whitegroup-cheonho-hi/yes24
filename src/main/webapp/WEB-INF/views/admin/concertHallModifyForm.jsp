@@ -30,7 +30,9 @@
 <script
 	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <style>
-
+.concertHall .inpRow.cols .colGrp .colCell{ width: 282px;}
+.btnC.b_size .bWrap{ width: 373px;}
+.btnC.b_size .bWrap em.txt{ width: 100%;}
 </style>
 </head>
 <body>
