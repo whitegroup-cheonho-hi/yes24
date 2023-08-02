@@ -401,7 +401,6 @@
 					        			a.transfer_stat = #{keyword2}
 		</if>
 
-
 		
 		
 		<![CDATA[

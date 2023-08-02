@@ -103,7 +103,8 @@ public class AdminController {
 	// 양도리스트
 	@RequestMapping(value = "/getTransferList/{key}", method = RequestMethod.GET)
 	public String getTransferList(@PathVariable("key") String key, Model model, Criteria cri, HttpSession session) {
-
+		System.out.println("getTransferList()");
+		
 		String Uri = "admin/transferList";
 		Uri = loginCheck(Uri, session);
 
@@ -113,6 +114,8 @@ public class AdminController {
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("pageMake", map.get("pageMake"));
 		model.addAttribute("key", key);
+		
+		System.out.println(map.get("list"));
 
 		return Uri;
 	}

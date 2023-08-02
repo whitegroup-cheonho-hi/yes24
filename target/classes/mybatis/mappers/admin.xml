@@ -351,7 +351,6 @@
 			        ticketSeat,
 			        transferDate,
 			        startTime,
-			        seatClass,
 			        transferStat
 			FROM
 			    (SELECT 
@@ -364,7 +363,6 @@
 			                ticketSeat,
 			                transferDate,
 			                startTime,
-			                seatClass,
         					transferStat
 			            
 			    FROM
@@ -378,7 +376,6 @@
 				                        b.ticket_seat AS ticketSeat,
 				                        TO_CHAR(a.transfer_date, 'YYYY-MM-DD') AS transferDate,
 				                        TO_CHAR(c.start_time, 'YYYY-MM-DD') AS startTime,
-				                        e.seat_class AS seatClass,
 				                        CASE 
 				                            WHEN a.transfer_stat = 'N' THEN '거래완료'
 				                            WHEN a.transfer_stat = 'Y' THEN '거래중'
@@ -391,10 +388,6 @@
 				                        showing c ON c.showing_sq = b.showing_sq 
 				                INNER JOIN
 				                        show d ON d.show_sq = c.show_sq
-				                INNER JOIN 
-				                        seat_class e ON e.show_sq = d.show_sq
-				                INNER JOIN
-				                        showing_seat f ON f.seat_class_sq = e.seat_class_sq
 				                INNER JOIN
 				                        users g ON a.sell_user_sq = g.user_sq
 				                LEFT JOIN
@@ -407,7 +400,6 @@
 				            	AND
 					        			a.transfer_stat = #{keyword2}
 		</if>
-
 
 		
 		
