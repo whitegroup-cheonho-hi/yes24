@@ -4,7 +4,7 @@
 <!-- 헤더 -->
 <header class="pc">
 	<!--웹에서의 헤더-->
-	<div id="lnb">
+	<div id="lnb"> 
 		<ul id="lnba" class="lnb">
 			<li><p>관리자 페이지</p></li>
 			<c:choose>
