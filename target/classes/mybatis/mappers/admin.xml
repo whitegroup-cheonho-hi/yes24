@@ -446,7 +446,10 @@
 					                    a.ticketing_date,
 					                    c.user_id                             AS userId,
 					                    c.user_name                           AS userName,
-					                    c.gender,
+					                    CASE 
+				                            WHEN c.gender = 'M' THEN '남성'
+				                            WHEN c.gender = 'F' THEN '여성'
+				                        END AS gender,
 					                    e.show_name                           AS showName,
 					                    SUM(b.ticket_seat_price)              AS totalPrice,
 					                    LISTAGG(b.ticket_seat, ',') WITHIN GROUP(
