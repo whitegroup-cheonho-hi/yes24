@@ -66,26 +66,28 @@
 
 		<![CDATA[
 		
-			  SELECT
-				    a.transfer_alarm_sq     AS transferalarmsq,
-				    a.show_sq               AS showsq,
-				    b.show_name             AS showname,
-				    a.start_date            AS startdate,
-				    a.end_date              AS enddate,
-				    a.seat                  AS seatclasss,
-				    a.price,
-				    a.transfer_alarm_stat   AS transferalarmstat,
-				    a.user_sq               AS usersq
-				FROM
-				    transfer_alarm a
-				    JOIN show b ON a.show_sq = b.show_sq
-			   WHERE
-			   		(TO_CHAR(a.start_date, 'YYYY-MM-DD') < #{endDate} AND TO_CHAR(a.end_date, 'YYYY-MM-DD') > #{endDate})
-		            AND a.price >= #{price}
-		            AND (a.show_sq = #{showSq} OR a.show_sq = 0 )
-		            AND (a.seat LIKE '%'||#{seatClasss}||'%' OR a.seat LIKE '%ALL%')
-		    ORDER BY 
-		   			transfer_alarm_sq		      
+			    SELECT
+				      transfer_alarm_sq     AS transferalarmsq,
+				      a.show_sq             AS showsq,
+				      b.show_name           AS showname,
+				      a.start_date          AS startdate,
+				      a.end_date            AS enddate,
+				      seat                  AS seatclasss,
+				      price,
+				      transfer_alarm_stat   AS transferalarmstat,
+				      user_sq               AS usersq
+				  FROM
+				      transfer_alarm a
+				      JOIN show b ON a.show_sq = b.show_sq
+			     WHERE
+				      ( TO_CHAR(a.start_date, 'YYYY-MM-DD') < #{endDate}
+				      AND TO_CHAR(a.end_date, 'YYYY-MM-DD') > #{endDate} )
+				      AND price <= #{price}
+				      AND (a.show_sq = #{showSq}
+				          OR a.show_sq = 0 )
+		              AND (seat LIKE '%'||#{seatClasss}||'%' OR seat LIKE '%ALL%')
+		      ORDER BY 
+		   			  transfer_alarm_sq		      
 		]]>
 
 

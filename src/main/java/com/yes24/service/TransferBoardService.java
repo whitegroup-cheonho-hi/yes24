@@ -44,23 +44,22 @@ public class TransferBoardService {
 	public int insertTransferboard(TransferBoardVO vo) {
 		System.out.println("insertTransferboard Service()");
 		
-		
 		// 티켓 상태 변경 4
 		ticketDAO.updateTicket(vo.getTicketSq());
 		// 양도게시판 등록
 		int result = transferBoardDAO.insertTransferboard(vo);
 		// 비교할 티켓 정보들 가져오기
 		AlarmVO alarmVO = alarmDAO.getAlarm(vo.getTicketSq());
+		
 		// 티켓정보로 양도알림테이블에서 비교 후 값 가져오기
 		List<AlarmVO> alarmList = alarmDAO.alarmCheck(alarmVO);
-		System.out.println(alarmVO);
+		
 		System.out.println(alarmList);
 		
 		StringBuffer sb = new StringBuffer();
 		sb.append("<a href=\'/yes24/transferTicket/transferTicketDetail/");
 		sb.append(vo.getTransferBoardSq());
 		sb.append("'>게시글보기</a>");
-	
 		
 		// 조건에 맞는 등록된 양도알림신청이 있으면
 		if (alarmList != null) {
@@ -76,9 +75,7 @@ public class TransferBoardService {
 				// 알림함등록
 				alarmDAO.insertNotification(message);
 				
-
 			}
-
 		}
 
 		return result;

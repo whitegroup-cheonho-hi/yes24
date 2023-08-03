@@ -222,7 +222,7 @@ $(document).ready(function() {
 				insertFormSubmit(ticketingSq);
 				// 팝업창 닫기					
 				setTimeout(function() {
-				    // 팝업창 닫기					
+				   	
 				    closeParentWindow();
 				}, 1000);
 		

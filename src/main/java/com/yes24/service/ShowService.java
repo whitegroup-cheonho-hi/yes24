@@ -124,38 +124,26 @@ public class ShowService {
 	// ------------------ 공연수정
 	public int updateShow(ShowVO vo, MultipartFile[] file) {
 		System.out.println("updateShow Service()");
-
 		int caseNumber = 0;
-
 		if (!file[0].isEmpty()) caseNumber += 1; // 메인 이미지가 수정된 경우
 		if (!file[1].isEmpty()) caseNumber += 2; // 서브 이미지가 수정된 경우
 		if (!file[2].isEmpty()) caseNumber += 4; // 상세 이미지가 수정된 경우
-
 		switch (caseNumber) {
-
 		case 1: // 메인 이미지만 수정된 경우
-			fileCheck(vo, file[0], 1);
-			break;
+			fileCheck(vo, file[0], 1); break;
 		case 2: // 서브 이미지만 수정된 경우
-			fileCheck(vo, file[1], 2);
-			break;
+			fileCheck(vo, file[1], 2); break;
 		case 3: // 메인 이미지와 서브 이미지가 모두 수정된 경우
-			fileCheck(vo, file[0], file[1], 1);
-			break;
+			fileCheck(vo, file[0], file[1], 1); break;
 		case 4: // 상세 이미지만 수정된 경우
-			fileCheck(vo, file[2], 3);
-			break;
+			fileCheck(vo, file[2], 3); break;
 		case 5: // 메인 이미지와 상세 이미지가 모두 수정된 경우
-			fileCheck(vo, file[0], file[2], 2);
-			break;
+			fileCheck(vo, file[0], file[2], 2); break;
 		case 6: // 서브 이미지와 상세 이미지가 모두 수정된 경우
-			fileCheck(vo, file[1], file[2], 3);
-			break;
+			fileCheck(vo, file[1], file[2], 3); break;
 		case 7: // 모든 이미지가 수정된 경우
-			fileCheck(vo, file);
-			break;
+			fileCheck(vo, file); break;
 		}
-
 		return showDAO.updateShow(vo);
 	}
 

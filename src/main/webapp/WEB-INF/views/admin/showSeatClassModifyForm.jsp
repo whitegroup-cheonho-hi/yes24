@@ -404,53 +404,37 @@
 		
 		
 		// 드래그 시작 시에 처리할 내용
-		$("#dragForm")
-		  .on('dragstart', function(ev, dd) {
-		    return $('<div class="selection" />')
-		      .css('opacity', 0.65)
-		      .appendTo(document.body);
-		  })
-		  .on('drag', function(ev, dd) {
-		    $(dd.proxy).css({
+		$("#dragForm").on('dragstart', function(ev, dd) {
+		    return $('<div class="selection" />').css('opacity', 0.65).appendTo(document.body);
+		  }).on('drag', function(ev, dd) {// 드래그 중일 때 드래그 프록시의 위치와 크기를 설정하여 선택 영역을 나타냄
+			  $(dd.proxy).css({
 		      top: Math.min(ev.pageY, dd.startY),
 		      left: Math.min(ev.pageX, dd.startX),
 		      height: Math.abs(ev.pageY - dd.startY),
 		      width: Math.abs(ev.pageX - dd.startX)
 		    });
-		  })
-		  .on('dragend', function(ev, dd) {
+		  }).on('dragend', function(ev, dd) {
 		    $(dd.proxy).remove();
-		    console.log('drag');
-		    
 		    values = []; // 배열초기화
-		
+		    // 드래그 종료 시 드래그 프록시를 제거하고 배열을 초기화하여 선택된 요소를 저장
 		    $(".dropped").each(function(index) {
 		      var text = $(this).text();
-		      var hasClass = $(this).hasClass("dropped");
-		
-		      // "dropped" 클래스가 있는 경우에만 추가
+		      var hasClass = $(this).hasClass("dropped"); // "dropped" 클래스가 있는 경우에만 추가
 		      if (hasClass && !values.includes(text)) {
 		        values.push(text);
-		       
 		      } else if (!hasClass && values.includes(text)) {
-		    	
 		        values.splice(values.indexOf(text), 1);
 		      }
 		    });		
-		    
 		  });
-		$('.drop')
-		  .on('dropstart', function() {
+		$('.drop').on('dropstart', function() {
 		    $(this).addClass('active'); // 드롭 시작 시 활성화 클래스 추가
-		  })
-		  .on('drop', function(ev, dd) {	
+		  }).on('drop', function(ev, dd) {	
 		    $(this).toggleClass('dropped'); // 드롭 시 드롭된 요소에 드롭 클래스 토글
-		  })
-		  .on('dropend', function() {		 
-		    $(this).removeClass('active color1 color2 color3 color4 seat1 seat2 seat3 seat4'); // 드롭 종료 시 활성화 클래스 제거
-
+		  }).on('dropend', function() {		 
+			// 드롭 종료 시 활성화 클래스 제거  
+		    $(this).removeClass('active color1 color2 color3 color4 seat1 seat2 seat3 seat4'); 
 		  });
-		
 		$.drop({ multi: true }); // 다중 드롭 설정
 		
 		
