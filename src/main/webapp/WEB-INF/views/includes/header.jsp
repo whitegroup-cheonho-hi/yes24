@@ -6,6 +6,9 @@
 	<!--웹에서의 헤더-->
 	<div id="lnb">
 		<ul id="lnba" class="lnb">
+			<c:if test="${!empty authUser && authUser.userRole != 1}">
+				<a href="${pageContext.request.contextPath}/admin/getTicketingList">관리자페이지로 이동</a>
+			</c:if>
 			<c:choose>
 				<c:when test="${empty authUser}">
 					<li class="login"><a
