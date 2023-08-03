@@ -219,9 +219,12 @@ $(document).ready(function() {
 				// 결제 성공 시 로직
 				console.log("결제 성공");
 				// 폼데이터 보내기
-				insertFormSubmit(ticketingSq)
+				insertFormSubmit(ticketingSq);
 				// 팝업창 닫기					
-				closeParentWindow();
+				setTimeout(function() {
+				    // 팝업창 닫기					
+				    closeParentWindow();
+				}, 1000);
 		
 			} else {
 				// 결제 실패 시 로직
