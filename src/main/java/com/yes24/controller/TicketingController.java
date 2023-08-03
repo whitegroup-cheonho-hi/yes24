@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yes24.service.TicketingService;
@@ -41,11 +42,13 @@ public class TicketingController {
 	// ----------------- 예매 삭제
 	@ResponseBody
 	@RequestMapping(value = "/deleteTicketing", method = RequestMethod.GET)
-	public JsonResult deleteTicketing(HttpSession session) {
+	public JsonResult deleteTicketing(@RequestParam("ticketingSq")int no,HttpSession session) {
 		System.out.println("deleteTicketing()");
 
 		UserVO userVO = (UserVO) session.getAttribute("authUser");
-
+		
+		userVO.setTicketingSq(no);
+		
 		int result = ticketingService.deleteTicketing(userVO);
 
 		JsonResult jsonResult = new JsonResult();

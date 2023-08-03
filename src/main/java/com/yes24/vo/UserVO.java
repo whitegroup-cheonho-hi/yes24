@@ -22,6 +22,7 @@ public class UserVO {
 	private Date userWithdrawalDate;
 	private int userRole;
 	private int userStat;
+	private int ticketingSq;
 
 
 	public UserVO() {
@@ -31,7 +32,7 @@ public class UserVO {
 
 	public UserVO(int userSq, String userId, String userPassword, String userName, String userBirthday, String gender,
 			String userPhone, String userEmail, String userPost, String userBasicAddr, String userDetailAddr,
-			Date userJoinDate, Date userWithdrawalDate, int userRole, int userStat) {
+			Date userJoinDate, Date userWithdrawalDate, int userRole, int userStat, int ticketingSq) {
 		super();
 		this.userSq = userSq;
 		this.userId = userId;
@@ -48,6 +49,7 @@ public class UserVO {
 		this.userWithdrawalDate = userWithdrawalDate;
 		this.userRole = userRole;
 		this.userStat = userStat;
+		this.ticketingSq = ticketingSq;
 	}
 
 
@@ -201,15 +203,28 @@ public class UserVO {
 	}
 
 
+	public int getTicketingSq() {
+		return ticketingSq;
+	}
+
+
+	public void setTicketingSq(int ticketingSq) {
+		this.ticketingSq = ticketingSq;
+	}
+
+
 	@Override
 	public String toString() {
 		return "UserVO [userSq=" + userSq + ", userId=" + userId + ", userPassword=" + userPassword + ", userName="
-				+ userName + ", userBirthday=" + userBirthday + ", gender=" + gender + ", userPhone=" + userPhone
+				+ userName + ", userBirthday="
+				+ userBirthday + ", gender=" + gender + ", userPhone=" + userPhone
 				+ ", userEmail=" + userEmail + ", userPost=" + userPost + ", userBasicAddr=" + userBasicAddr
 				+ ", userDetailAddr=" + userDetailAddr + ", userJoinDate=" + userJoinDate + ", userWithdrawalDate="
-				+ userWithdrawalDate + ", userRole=" + userRole + ", userStat=" + userStat + "]";
+				+ userWithdrawalDate + ", userRole=" + userRole + ", userStat=" + userStat + ", ticketingSq="
+				+ ticketingSq + "]";
 	}
 
-	
+
+
 
 }

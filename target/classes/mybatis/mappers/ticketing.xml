@@ -34,7 +34,7 @@
 	
 		<![CDATA[
 		
-			DELETE ticketing WHERE USER_SQ = #{userSq}
+			DELETE ticketing WHERE USER_SQ = #{userSq} AND ticketing_sq = #{ticketingSq}
 		
 		]]>
 	

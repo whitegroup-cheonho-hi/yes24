@@ -185,8 +185,11 @@ $(document).ready(function() {
 	      dataType: "json",
 	      success: function(result) {
 	        console.log(result.data);
+	        
+	        
 	        // 예매번호로 결제 API호출
 	        requestPay(result.data);
+	        
 	       	            
 	      },
 	      error: function(XHR, status, error) {
@@ -224,7 +227,7 @@ $(document).ready(function() {
 				// 결제 실패 시 로직
 				console.log("결제 실패");
 				// 결제 실패시 예매삭제
-				deleteTicketing();
+				deleteTicketing(ticketingSq);
 				
 				
 			}
@@ -286,10 +289,11 @@ $(document).ready(function() {
 	};
 	
 	// 결제 실패시 예매삭제
-	function deleteTicketing(){
+	function deleteTicketing(ticketingSq){
 		$.ajax({
 		      url: "${pageContext.request.contextPath}/ticketing/deleteTicketing",
 		      type: "get",
+		      data : {ticketingSq:ticketingSq},
 		      
 		      dataType: "json",
 		      success: function(result) {
