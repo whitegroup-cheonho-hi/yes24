@@ -513,21 +513,26 @@ $(document).ready(function() {
 		    dataType: "json",
 		    success: function(result) {		          	     
 		               	  console.log(result);
-			   
-			    for (let index in result.data) {
-			        if (result.data.hasOwnProperty(index)) {
-			            //금액 포맷
-			        	var seatPriceFormatted = new Intl.NumberFormat('ko-KR').format(result.data[index].seatPrice);
-
-			            var item = '<div style="margin-bottom: 5px;">' + result.data[index].seatClass +'석'			            
-			            	item += '&nbsp;&nbsp;';
-			            	item += seatPriceFormatted  +'원';
-			            	item += '&nbsp;&nbsp;';
-			            	item += '<span style="color: orange"> 잔여 : ('+result.data[index].seatEa +'석)</span>';
-			            	item +='</div>';
-			            Seat.append(item);
-			        }
-			    }
+		        if (result.data[0] != null) {
+				    for (let index in result.data) {
+				        if (result.data.hasOwnProperty(index)) {
+				            //금액 포맷
+				        	var seatPriceFormatted = new Intl.NumberFormat('ko-KR').format(result.data[index].seatPrice);
+	
+				            var item = '<div style="margin-bottom: 5px;">' + result.data[index].seatClass +'석'			            
+				            	item += '&nbsp;&nbsp;';
+				            	item += seatPriceFormatted  +'원';
+				            	item += '&nbsp;&nbsp;';
+				            	item += '<span style="color: orange"> 잔여 : ('+result.data[index].seatEa +'석)</span>';
+				            	item +='</div>';
+				            Seat.append(item);
+				        }
+				    }
+			   	}else{
+			   		console.log("비었음");
+			   		var item2 = '<div style="margin-bottom: 5px;">잔여 좌석이 없습니다</div>';
+			   		Seat.append(item2);
+			   	}    
 		    },
 		    error: function(XHR, status, error) {
 		      console.error(status + " : " + error);

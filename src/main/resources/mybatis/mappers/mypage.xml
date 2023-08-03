@@ -69,7 +69,7 @@
 				            ticketsq
 				    )
 				WHERE
-				    rn < 5
+				    rn <= 5
 	
 		]]>
 	

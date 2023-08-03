@@ -9,39 +9,39 @@
 		<![CDATA[
 		
 			  SELECT
-				    a.ticketing_sq        AS ticketingsq,
-				    a.ticket_sq           AS ticketsq,
-				    TO_CHAR(b.ticketing_date, 'YYYY.MM.DD') AS ticketingdate,
-				    d.show_name           AS showname,
-				    a.ticket_no           AS ticketno,
-				    a.ticket_seat         AS ticketseat,
-				    TO_CHAR(c.start_time, 'YYYY.MM.DD" "HH24"시 "MI"분') AS starttime,
-				    a.ticket_seat_price   AS ticketseatprice,
-				    a.ticket_stat         AS ticketstat,
-				    a.ticket_active       AS ticketactive,
-				    c.show_sq             AS showsq
+				    ticketingsq,
+				    ticketsq,
+				    ticketingdate,
+				    showname,
+				    ticketno,
+				    ticketseat,
+				    starttime,
+				    ticketseatprice,
+				    ticketstat,
+				    ticketactive,
+				    showsq
 				FROM
-				    ticket a
-				    FULL OUTER JOIN ticketing b ON a.ticketing_sq = b.ticketing_sq
-				    LEFT JOIN showing c ON a.showing_sq = c.showing_sq
-				    LEFT JOIN show d ON c.show_sq = d.show_sq
-				WHERE
-				    a.ticketing_sq IN (
+				    (
 				        SELECT
-				            ticketing_sq
+				            ROWNUM AS rn,
+				            a.ticketing_sq        AS ticketingsq,
+				            a.ticket_sq           AS ticketsq,
+				            TO_CHAR(b.ticketing_date, 'YYYY.MM.DD') AS ticketingdate,
+				            d.show_name           AS showname,
+				            a.ticket_no           AS ticketno,
+				            a.ticket_seat         AS ticketseat,
+				            TO_CHAR(c.start_time, 'YYYY.MM.DD" "HH24"시 "MI"분') AS starttime,
+				            a.ticket_seat_price   AS ticketseatprice,
+				            a.ticket_stat         AS ticketstat,
+				            a.ticket_active       AS ticketactive,
+				            c.show_sq             AS showsq
 				        FROM
-				            ticketing
+				            ticket a
+				            FULL OUTER JOIN ticketing b ON a.ticketing_sq = b.ticketing_sq
+				            LEFT JOIN showing c ON a.showing_sq = c.showing_sq
+				            LEFT JOIN show d ON c.show_sq = d.show_sq
 				        WHERE
-				            user_sq = #{userSq}
-				    )
-				    AND a.ticket_stat = #{stat}
-				    AND a.showing_sq IN (
-				        SELECT DISTINCT
-				            showing_sq
-				        FROM
-				            ticket
-				        WHERE
-				            ticketing_sq IN (
+				            a.ticketing_sq IN (
 				                SELECT
 				                    ticketing_sq
 				                FROM
@@ -49,9 +49,28 @@
 				                WHERE
 				                    user_sq = #{userSq}
 				            )
+				            AND a.ticket_stat = #{stat}
+				            AND a.showing_sq IN (
+				                SELECT DISTINCT
+				                    showing_sq
+				                FROM
+				                    ticket
+				                WHERE
+				                    ticketing_sq IN (
+				                        SELECT
+				                            ticketing_sq
+				                        FROM
+				                            ticketing
+				                        WHERE
+				                            user_sq = #{userSq}
+				                    )
+				            )
+				        ORDER BY
+				            ticketsq
 				    )
-			ORDER BY
-	    			ticketsq
+				WHERE
+				    rn <= 5
+	
 		]]>
 	
 	</select>
