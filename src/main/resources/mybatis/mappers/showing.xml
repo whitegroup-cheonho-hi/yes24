@@ -42,7 +42,7 @@
 		     WHERE
 			      show_sq = #{showSq}
 			   AND 
-                  showing_date > sysdate    
+                  start_time > sysdate    
           ORDER BY
                   showingDate
 				    
