@@ -335,7 +335,7 @@ $(document).ready(function() {
 	let date;
 	
 	var showSq = '${show.showSq}';
-	var reservationDate = '${show.reservationDate}';
+	var showStat = '${show.showStat}';
 	var authUser = '${sessionScope.authUser}'+'';
 
 		
@@ -540,7 +540,7 @@ $(document).ready(function() {
 	
 	
 
-	if(reservationDate > sysdate){
+	if(showStat == 1){
 				
 		 $("#ticketingdiv").css("display", "none");
 		 $("#noneTicketing").text("(개봉 예정작)");

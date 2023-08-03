@@ -63,7 +63,7 @@
 										<img
 										src="${pageContext.request.contextPath}/upload/${show.subImage}">
 										<span class="gray">${show.showName}
-										<c:if test="${show.reservationDate eq 'N'}">
+										<c:if test="${show.showStat == 1 }">
 										<b id="noneTicketing">(개봉 예정작)</b>
 										</c:if>
 										</span>
