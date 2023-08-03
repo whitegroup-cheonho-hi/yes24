@@ -34,13 +34,26 @@
 				<li><a href="#none">통계관리</a></li>
 			</ul>
 			<ul class="drop_menu">
-				<li>
-					<a href="${pageContext.request.contextPath}/admin/getConcertHallList">공연장관리</a>
-					<a href="${pageContext.request.contextPath}/show/showInsertForm">공연등록</a>
-					<a href="${pageContext.request.contextPath}/admin/adminShowList">예정공연</a>
-					<a href="${pageContext.request.contextPath}/admin/ticketingShowList">진행공연</a>
-					<a href="${pageContext.request.contextPath}/admin/showEndList">종료공연</a>
-				</li>
+				<c:choose>
+				    <c:when test="${authUser.userRole == 3}">
+				        <li>
+				            <a href="${pageContext.request.contextPath}/admin/getConcertHallList">공연장관리</a>
+				            <a href="${pageContext.request.contextPath}/show/showInsertForm">공연등록</a>
+				            <a href="${pageContext.request.contextPath}/admin/adminShowList">예정공연</a>
+				            <a href="${pageContext.request.contextPath}/admin/ticketingShowList">진행공연</a>
+				            <a href="${pageContext.request.contextPath}/admin/showEndList">종료공연</a>
+				        </li>
+				    </c:when>
+				    <c:when test="${authUser.userRole == 2}">
+				        <li>
+				            <a href="${pageContext.request.contextPath}/admin/noRing">공연장관리</a>
+				            <a href="${pageContext.request.contextPath}/admin/noRing">공연등록</a>
+				            <a href="${pageContext.request.contextPath}/admin/noRing">예정공연</a>
+				            <a href="${pageContext.request.contextPath}/admin/noRing">진행공연</a>
+				            <a href="${pageContext.request.contextPath}/admin/noRing">종료공연</a>
+				        </li>
+				    </c:when>
+				</c:choose>
 				<li>
 					<a href="">전체회원</a>
 					<a href="">신고회원</a>

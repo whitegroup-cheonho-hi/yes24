@@ -49,12 +49,18 @@ public class UserController {
 		} else {
 			session.setAttribute("authUser", userVO);
 			session.setMaxInactiveInterval(6000);
-			
-			if(userVO.getUserRole() ==2) {
+
+			int userRole = userVO.getUserRole();
+			switch (userRole) {
+			case 3:
 				Uri = "redirect:/admin/adminShowList";
-				
-			}else {
+				break;
+			case 2:
+				Uri = "redirect:/admin/getTicketingList";
+				break;
+			default:
 				Uri = "redirect:/";
+				break;
 			}
 		}
 
@@ -104,7 +110,7 @@ public class UserController {
 		userVO.setUserSq(vo.getUserSq());
 
 		UserVO user = userService.getUser(userVO);
-		
+
 		model.addAttribute("user", user);
 
 		return "user/modifyForm";
@@ -149,23 +155,17 @@ public class UserController {
 
 	// ------------------- 아이디중복 체크
 	@ResponseBody
-	@RequestMapping(value = "/idCheck",method = RequestMethod.POST)
-	public JsonResult idCheck(@RequestParam("id")String id){
+	@RequestMapping(value = "/idCheck", method = RequestMethod.POST)
+	public JsonResult idCheck(@RequestParam("id") String id) {
 		System.out.println("idCheck()");
-		
+
 		JsonResult jsonResult = new JsonResult();
-		
+
 		boolean result = userService.idCheck(id);
-				
+
 		jsonResult.success(result);
 
 		return jsonResult;
 	}
 
 }
-
-
-
-
-
-

@@ -170,6 +170,8 @@
 				                WHERE
 				                    user_sq = #{userSq}
 				            )
+				         AND 
+				            ticket_active = 'Y'
 				    )
 				    AND end_time < SYSDATE
 				    AND show_sq = #{showSq}

@@ -115,8 +115,6 @@ public class AdminController {
 		model.addAttribute("pageMake", map.get("pageMake"));
 		model.addAttribute("key", key);
 		
-		System.out.println(map.get("list"));
-
 		return Uri;
 	}
 
@@ -241,6 +239,14 @@ public class AdminController {
 		jsonResult.success(cnt);
 		return jsonResult;
 	}
+	
+	// 권환 없음
+	@RequestMapping(value = "/noRing", method = RequestMethod.GET)
+	public String noRing() {
+		System.out.println("noRing()");
+				
+		return "admin/noRing";
+	} 
 
 	// 회차종료
 	@ResponseBody
