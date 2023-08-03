@@ -58,12 +58,14 @@ public class TicketingController {
 	// -------------- 티켓등록
 	@ResponseBody
 	@RequestMapping(value = "/insertTicket", method = RequestMethod.POST)
-	public JsonResult insertTicket(HttpSession session,@ModelAttribute SaveTicketVO vo) {
+	public JsonResult insertTicket(HttpSession session, @ModelAttribute SaveTicketVO vo) {
 		System.out.println("insertTicket()");
-				
+
 		int result = ticketingService.insertTicket(vo);
-		
+
 		JsonResult jsonResult = new JsonResult();
+
+		jsonResult.success(result);
 
 		return jsonResult;
 	}
