@@ -9,7 +9,6 @@
 		<typeAlias alias="NotificationVO" type="com.yes24.vo.NotificationVO" />
 		<typeAlias alias="MessageVO" type="com.yes24.vo.MessageVO" />		
 		<typeAlias alias="MyTicketingVO" type="com.yes24.vo.MyTicketingVO" />		
-		<typeAlias alias="QnAVO" type="com.yes24.vo.QnAVO" />
 		<typeAlias alias="RemainingSeatsVO" type="com.yes24.vo.RemainingSeatsVO" />
 		<typeAlias alias="ReviewVO" type="com.yes24.vo.ReviewVO" />
 		<typeAlias alias="SeatClassListVO" type="com.yes24.vo.SeatClassListVO" />

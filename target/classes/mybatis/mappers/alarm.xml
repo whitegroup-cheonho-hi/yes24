@@ -79,15 +79,15 @@
 				  FROM
 				      transfer_alarm a
 				      JOIN show b ON a.show_sq = b.show_sq
-			  WHERE
-				    ( TO_CHAR(a.start_date, 'YYYY-MM-DD') < #{endDate}
+			     WHERE
+				      ( TO_CHAR(a.start_date, 'YYYY-MM-DD') < #{endDate}
 				      AND TO_CHAR(a.end_date, 'YYYY-MM-DD') > #{endDate} )
-				    AND price <= #{price}
-				    AND (a.show_sq = #{showSq}
+				      AND price <= #{price}
+				      AND (a.show_sq = #{showSq}
 				          OR a.show_sq = 0 )
-		            AND (seat LIKE '%'||#{seatClasss}||'%' OR seat LIKE '%ALL%')
-		    ORDER BY 
-		   			transfer_alarm_sq		      
+		              AND (seat LIKE '%'||#{seatClasss}||'%' OR seat LIKE '%ALL%')
+		      ORDER BY 
+		   			  transfer_alarm_sq		      
 		]]>
 
 

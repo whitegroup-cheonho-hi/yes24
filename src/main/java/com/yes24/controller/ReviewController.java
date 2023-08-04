@@ -25,6 +25,7 @@ public class ReviewController {
 	@Autowired
 	private ReviewService reviewService;
 
+	// ----------------- 관람공연 체크
 	@ResponseBody
 	@RequestMapping(value = "/viewingCheck", method = RequestMethod.POST)
 	public JsonResult viewingCheck(@ModelAttribute ReviewVO vo,HttpSession session) {
@@ -43,18 +44,17 @@ public class ReviewController {
 		return jsonResult;
 	}
 
+	// ----------------- 리뷰등록
 	@ResponseBody
 	@RequestMapping(value = "/insertReview", method = RequestMethod.POST)
 	public JsonResult insertReview(@ModelAttribute ReviewVO vo, HttpSession session) {
 		System.out.println("insertReview()");
-
+		
 		UserVO userVO = (UserVO) session.getAttribute("authUser");
 
 		vo.setUserSq(userVO.getUserSq());
 
 		ReviewVO reviewVO = reviewService.insertReview(vo);
-
-		System.out.println(reviewVO);
 
 		JsonResult jsonResult = new JsonResult();
 

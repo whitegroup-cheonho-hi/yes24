@@ -38,6 +38,7 @@ public class UserController {
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String login(@ModelAttribute UserVO vo, HttpSession session, Model model) {
 		System.out.println("login()");
+		
 		String message = "아이디 또는 비밀번호를 잘못입력했습니다. \n<br> 입력하신 내용을 다시 확인해주세요.";
 		String Uri = "";
 

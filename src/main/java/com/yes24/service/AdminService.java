@@ -115,12 +115,13 @@ public class AdminService {
 	// 회차 날짜로 종류
 	public int endShowing() {
 		System.out.println("endShowing Service()");
-
+		
+		// endDate가 지났지만 상태가 Y인 showing 리스트 가지고오기
 		List<ShowingVO> showingSqList = admindao.getEndshowingSq();
-
+		// 종료 되지 않은 showing이 있을시
 		if (showingSqList != null) {
 			for (ShowingVO s : showingSqList) {
-
+				// 티켓 비활성화
 				admindao.endTicket(s.getShowingSq());
 			}
 		}

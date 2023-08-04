@@ -18,7 +18,7 @@ public class AlarmDAO {
 	// ------------ 양도 알람 등록
 	public int insertAlarm(AlarmVO vo) {
 		System.out.println("insertAlarm DAO()");
-		
+
 		System.out.println(vo);
 
 		return sqlSession.insert("alarm.insertAlarm", vo);
@@ -53,7 +53,7 @@ public class AlarmDAO {
 	public int insertNotification(MessageVO vo) {
 		System.out.println("insertNotification DAO()");
 		System.out.println("메시지다 " + vo);
-		
+
 		return sqlSession.insert("alarm.insertNotification", vo);
 
 	}

@@ -68,47 +68,40 @@ public class ConcertHallService {
 		int height = vo.getConcertHallHeight();
 		int width = vo.getConcertHallWidth();
 		int result = 0;
+		
 		ConcertHallVO concertHallVO = concertHallDAO.getConcertHall(vo.getConcertHallSq());
-
-		concertHallDAO.updateConcertHall(vo);
-		// 저장되어있는 공연장정보 가져오기
-
-		// width or height 값이 바뀌지 않았을때
-		if (concertHallVO.getConcertHallHeight() != height || concertHallVO.getConcertHallWidth() != width) {
-
+		
+		concertHallDAO.updateConcertHall(vo); // 저장되어있는 공연장정보 가져오기
+		// width or height 값이 바뀌었을때
+		if (concertHallVO.getConcertHallHeight() != height 
+			|| concertHallVO.getConcertHallWidth() != width) {
+			
 			List<SeatVO> deleteSeatList = new ArrayList<>();
 			Map<String, Object> seat = new HashMap<>();
+			
 			// 공연장 시퀀스로 공연장 좌석 시퀀스가져오기
 			deleteSeatList = concertHallDAO.getConcertHallSeatList(vo.getConcertHallSq());
-			// 삭제된 공연좌석 카운트
-			int cnt = 0;
-			// 공연좌석 삭제
-			for (SeatVO seatVO : deleteSeatList) {
-
-				cnt += concertHallDAO.deleteShowSeat(seatVO.getSeatSq());
-			}
-			// 공연좌석이 삭제가 되면
-			if (cnt > 0) {
-				//공연시퀀스 가지고와서
-				ShowVO showVO = showDAO.getShowSq(vo.getConcertHallSq());
-				// 리턴값으로 넣어준다
-				result = showVO.getShowSq();
-			}
-
-			// 기존 좌석을 삭제
-			concertHallDAO.deleteConcertHallSeat(vo.getConcertHallSq());
-
-			 seatList = seat(vo, height, width);
-		
+			if(deleteSeatList != null) {
+				
+				int cnt = 0; // 삭제된 공연좌석 카운트
+				for (SeatVO seatVO : deleteSeatList) { // 공연좌석 삭제
+					cnt += concertHallDAO.deleteShowSeat(seatVO.getSeatSq());
+				}
+				if (cnt > 0) { 	// 공연좌석이 삭제가 되면
+					ShowVO showVO = showDAO.getShowSq(vo.getConcertHallSq()); //공연시퀀스 가지고와서
+					result = showVO.getShowSq(); // 리턴값으로 넣어준다
+				}
+			}	
+			
+			concertHallDAO.deleteConcertHallSeat(vo.getConcertHallSq()); // 기존 좌석을 삭제
+			
+			seatList = seat(vo, height, width);
 			for (int i = 0; i < (height * width); i++) {
-
 				seat.put("seatNo", seatList.get(i));
 				seat.put("concerthallsq", vo.getConcertHallSq());
-
 				concertHallDAO.insertConcertHallSeat(seat);
 			}
 		}
-
 		return result;
 	}
 
@@ -122,10 +115,8 @@ public class ConcertHallService {
 			for (int j = 1; j <= width; j++) {
 				String seatNo = (char) i + String.valueOf(j);
 				seatList.add(seatNo);
-			
 			}
 		}
-		
 		return seatList;
 	}
 

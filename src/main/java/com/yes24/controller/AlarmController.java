@@ -41,7 +41,6 @@ public class AlarmController {
 
 		return "redirect:/myPage/myNotificationList";
 
-
 	}
 
 	// ------------------ 제목 검색으로 공연리스트
@@ -51,7 +50,7 @@ public class AlarmController {
 		System.out.println("getShowName()");
 
 		List<ShowVO> showNameList = alarmService.getShowName(showName);
-		System.out.println(showNameList);
+
 		JsonResult jsonResult = new JsonResult();
 
 		jsonResult.success(showNameList);

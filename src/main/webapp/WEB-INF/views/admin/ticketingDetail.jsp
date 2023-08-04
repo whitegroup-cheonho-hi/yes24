@@ -6,18 +6,19 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>detail</title>
+<title>ticketing detail</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/reset.css" type="text/css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/admin2.css" type="text/css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/detail.css" type="text/css">
 <link rel="stylesheet" type="text/css" href="https://image.yes24.com/sysimage/yesUI/yesUI.css?v=20230403" media="all">
+
 <!-- 구글폰트 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300&display=swap" rel="stylesheet">
+
 <!-- 제이쿼리 최신 버전 -->
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
-
 <!-- 풀켈린더js -->
 <script type="text/javascript" src='${pageContext.request.contextPath }/assets/js/index.global.min.js'></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>

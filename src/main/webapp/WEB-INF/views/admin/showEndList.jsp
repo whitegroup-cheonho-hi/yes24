@@ -5,161 +5,50 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Show List</title>
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath }/assets/css/reset.css"
-	type="text/css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath }/assets/css/adminForm.css"
-	type="text/css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath }/assets/css/admin2.css"
-	type="text/css">
-<link rel="stylesheet" type="text/css"
-	href="https://image.yes24.com/sysimage/yesUI/yesUI.css?v=20230403"
-	media="all">
+<title>show list</title>
+<link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/reset.css"	type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/adminForm.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/admin2.css" type="text/css">
+<link rel="stylesheet" type="text/css" href="https://image.yes24.com/sysimage/yesUI/yesUI.css?v=20230403" media="all">
+
 <!-- 구글폰트 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com">
-<link
-	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300&display=swap"
-	rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300&display=swap" rel="stylesheet">
+
 <!-- 제이쿼리 최신버전 -->
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <style>
-#ySContent {
-	margin: 120px auto;
-}
-
-.listItem {
-	width: 1200px;
-	display: grid;
-	grid-template-columns: repeat(5, 200px);
-	justify-content: space-around;
-	justify-items: center;
-}
-
-.listItem .listItemdiv {
-	display: inline-block;
-	width: 200px;
-	margin: 0 15px;
-}
-
-.listItem img {
-	width: 95%;
-}
-
-.listItemTxt {
-	display: flex;
-	flex-wrap: wrap;
-}
-
-.listItemTxt button {
-	margin: auto;
-	width: 70px;
-	height: 35px;
-	font-size: 14px;
-	font-weight: bold;
-	background-color: #196ab3;
-	color: white;
-	border: none;
-	border-radius: 5px;
-	margin-bottom: 20px;
-}
-
-.listItemTxt p {
-	width: 200px;
-	margin-bottom: 10px;
-	white-space: nowrap;
-}
+#ySContent { margin: 120px auto; }
+.listItem { width: 1200px; display: grid; grid-template-columns: repeat(5, 200px); justify-content: space-around; justify-items: center; }
+.listItem .listItemdiv { display: inline-block; width: 200px; margin: 0 15px; }
+.listItem img {	width: 95%; }
+.listItemTxt { display: flex; flex-wrap: wrap; }
+.listItemTxt button { margin: auto; width: 70px; height: 35px; font-size: 14px; font-weight: bold; background-color: #196ab3; 
+					  color: white;	border: none;border-radius: 5px;margin-bottom: 20px;}
+.listItemTxt p { width: 200px; margin-bottom: 10px; white-space: nowrap;}
 /* 첫 글자는 "<"로 표시 */
-.listItemTit::before {
-	content: "\003C"; /* "<"의 유니코드 값을 사용 */
-}
+.listItemTit::before { 	content: "\003C"; /* "<"의 유니코드 값을 사용 */ }
 /* 마지막 글자는 ">"로 표시 */
-.listItemTit::after {
-	content: "\003E"; /* ">"의 유니코드 값을 사용 */
-}
-
-#paging {
-	text-align: center;
-	padding: 0;
-	margin: 0px auto;
-	width: 310px;
-}
-
-.pageInfo {
-	font: 14px "맑은 고딕", 돋움, 굴림;
-	text-align: center;
-	padding: 0;
-	list-style-type: none;
-	margin: 10px 5px 10px 5px;
-	display: inline;
-}
-
-#paging ul {
-	display: inline-block;
-}
-
-#paging ul>li {
-	display: inline-block;
-	margin: 0px 8px 0px 8px;
-}
-
-#paging ul>li.active {
-	font-size: 16px;
-	font-weight: bold;
-}
-
-.admimTit {
-	color: #333;
-	font-family: 'Noto Sans KR', '맑은 고딕' !important;
-	font-weight: 500;
-	font-size: 25px;
-}
-
-.titletxt {
-	margin-bottom: 30px
-}
-
+.listItemTit::after { content: "\003E"; /* ">"의 유니코드 값을 사용 */  }
+#paging { text-align: center; padding: 0; margin: 0px auto; width: 310px; }
+.pageInfo {	font: 14px "맑은 고딕", 돋움, 굴림;	text-align: center;	padding: 0;	list-style-type: none;
+			margin: 10px 5px 10px 5px;	display: inline;}
+#paging ul { display: inline-block; }
+#paging ul>li { display: inline-block; margin: 0px 8px 0px 8px;}
+#paging ul>li.active { font-size: 16px;	font-weight: bold;}
+.admimTit {	color: #333; font-family: 'Noto Sans KR', '맑은 고딕' !important;font-weight: 500;	font-size: 25px;}
+.titletxt { margin-bottom: 30px}
 /* 상품페이지 카테고리 */
-#show .category {
-	width: 1200px;
-	display: flex;
-	justify-content: center;
-	margin-bottom: 20px;
-}
+#show .category { width: 1200px; display: flex;	justify-content: center; margin-bottom: 20px;}
+#show .category li {margin: 0 5px;}
+#show .category li a {font-weight: 900;font-size: 18px;	padding: 7px 15px;display: block;}
+#show .category li.on {	border-bottom: 2px solid #4982cf;}
+#show .category li.on a {color: #4982cf;}
+#show .category li a:hover {color: #4982cf;}
 
-#show .category li {
-	margin: 0 5px;
-}
-
-#show .category li a {
-	font-weight: 900;
-	font-size: 18px;
-	padding: 7px 15px;
-	display: block;
-}
-
-#show .category li.on {
-	border-bottom: 2px solid #4982cf;
-}
-
-#show .category li.on a {
-	color: #4982cf;
-}
-
-#show .category li a:hover {
-	color: #4982cf;
-}
-
-#header h2 {
-	margin-left: 0px;
-}
-
-#header div {
-	top: -90px;
-}
+#header h2 {margin-left: 0px;}
+#header div {top: -90px;}
 </style>
 </head>
 <body>

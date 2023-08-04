@@ -403,7 +403,7 @@ $(document).ready(function() {
 		var grade = $("#grade").val();
 		var reviewContent = $("#content").val();
 		
-		var ReviewVO = {grade : grade,reviewContent : reviewContent , showSq : showSq };
+		var ReviewVO = {grade : grade, reviewContent : reviewContent , showSq : showSq };
 		
 		$.ajax({
 			

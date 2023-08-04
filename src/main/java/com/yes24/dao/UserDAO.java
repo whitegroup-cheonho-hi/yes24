@@ -36,7 +36,7 @@ public class UserDAO {
 	// -------------------- 회원정보수정
 	public int updateUser(UserVO vo) {
 		System.out.println("updateUser DAO()");
-		
+
 		System.out.println(vo);
 		return sqlSession.update("user.updateUser", vo);
 	}
@@ -51,7 +51,7 @@ public class UserDAO {
 	// -------------------- 아이디 체크
 	public UserVO idCheck(String id) {
 		System.out.println("idCheck DAO()");
-		
+
 		return sqlSession.selectOne("user.idCheck", id);
 	}
 

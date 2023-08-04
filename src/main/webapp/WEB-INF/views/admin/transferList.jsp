@@ -4,60 +4,62 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>양도리스트 게시판</title>
+<title>transfer list</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/reset.css" type="text/css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/adminForm.css" type="text/css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/admin2.css" type="text/css">
 <%-- <link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/admin.css" type="text/css"> --%>
 <link rel="stylesheet" type="text/css" href="https://image.yes24.com/sysimage/yesUI/yesUI.css?v=20230403" media="all">
+
 <!-- 구글폰트 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300&display=swap" rel="stylesheet">
+
 <!-- 제이쿼리 최신버전 -->
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <style>
-	.tableList { width: 100%; display: flex; justify-content: center; }
-	.tableList table { margin: auto; width: 90%; border-collapse: collapse;}
-	.tableList a { width: 200px; height: 400px; margin: 0 15px; vertical-align: top; }
-	.tableList button { margin: auto; width: 70px; height: 35px; font-size: 15px; font-weight: bold; 
-		background-color: #196ab3; color: white; border: none; border-radius: 5px; cursor: pointer;}
-	.tableList p { height: 40px; margin-bottom: 10px;}
-	.concertHallList th { width: 10%; }
-	
-	.admimTit{ color: #333; font-family: 'Noto Sans KR','맑은 고딕' !important; font-weight: 500; font-size: 25px;}
-	.titletxt{ margin-bottom: 75px; margin-right: 850px;}
-	
-	#paging{ text-align: center; padding: 0; margin: 0px auto; width: 310px; }
-	.pageInfo{font: 14px "맑은 고딕", 돋움, 굴림; text-align: center; padding: 0; list-style-type: none; margin: 10px 5px 10px 5px; display: inline;}
-	#paging ul { display: inline-block; }
-	#paging ul>li { display: inline-block; margin: 0px 8px 0px 8px; }
-	#paging ul>li.active { font-size: 16px; font-weight: bold; }
+.tableList { width: 100%; display: flex; justify-content: center; }
+.tableList table { margin: auto; width: 90%; border-collapse: collapse;}
+.tableList a { width: 200px; height: 400px; margin: 0 15px; vertical-align: top; }
+.tableList button { margin: auto; width: 70px; height: 35px; font-size: 15px; font-weight: bold; 
+	background-color: #196ab3; color: white; border: none; border-radius: 5px; cursor: pointer;}
+.tableList p { height: 40px; margin-bottom: 10px;}
+.concertHallList th { width: 10%; }
 
-	.concertHallList{ line-height: 1; font-weight: 400; margin: 0; padding: 0; border: 0; font-size: inherit; font-style: normal; 
-		vertical-align: baseline; border-top: solid 2px rgb(62, 62, 62); border-bottom: solid 2px rgb(62, 62, 62); border-collapse: collapse; border-spacing: 0; width: 100%; }
-	.concertHallList tr{line-height: 45px; font-weight: 400; border-collapse: collapse; border-spacing: 0; margin: 0; border-bottom: solid 1px #ddd; }
-	
-	.search_cols{ margin-bottom: 35px; margin-left: auto; border: 0; display: flex; width: 30%; align-items: center; }
-	.search_wrap{ border: solid 1px #ebebeb; padding: 3px 10px 3px; display: block;}
-	.search_cols input{ width: 192px; height: 25px; border: solid 1px lightgray; border-radius: 5px; padding-left: 8px; box-sizing: border-box;}
-	.search_cols button{ height: 25px; border: solid 1px lightgray; border-radius: 5px; padding-left: 8px; box-sizing: border-box; cursor: pointer;}
-    
-    #search_btn{display: inline-block; margin: 0 10px; }
-    
-    .searchCell_input{ width: 230px; }
-    
-    /* 상품페이지 카테고리 */
-	#category_list .category{width: 1200px; display: flex; margin-left: 59px; margin-bottom: -2px;}
-	#category_list .category li{ margin: 2px 0px; background: #d8d8d8; border-left: solid 1px white;
-	 							border-top-right-radius: 5px; border-top-left-radius: 5px; }
-	#category_list .category li a{font-weight: 500; font-size: 18px; padding: 7px 15px; display: block;}
-	#category_list .category li.on{ background-color: #ccc; }
-	#category_list .category li.on a{color: #4982cf;}
-	#category_list .category li a:hover{color: #4982cf;}
-	
-	#header h2{margin-left: 0px;}
-	#header div{top: -90px;}
+.admimTit{ color: #333; font-family: 'Noto Sans KR','맑은 고딕' !important; font-weight: 500; font-size: 25px;}
+.titletxt{ margin-bottom: 75px; margin-right: 850px;}
+
+#paging{ text-align: center; padding: 0; margin: 0px auto; width: 310px; }
+.pageInfo{font: 14px "맑은 고딕", 돋움, 굴림; text-align: center; padding: 0; list-style-type: none; margin: 10px 5px 10px 5px; display: inline;}
+#paging ul { display: inline-block; }
+#paging ul>li { display: inline-block; margin: 0px 8px 0px 8px; }
+#paging ul>li.active { font-size: 16px; font-weight: bold; }
+
+.concertHallList{ line-height: 1; font-weight: 400; margin: 0; padding: 0; border: 0; font-size: inherit; font-style: normal; 
+	vertical-align: baseline; border-top: solid 2px rgb(62, 62, 62); border-bottom: solid 2px rgb(62, 62, 62); border-collapse: collapse; border-spacing: 0; width: 100%; }
+.concertHallList tr{line-height: 45px; font-weight: 400; border-collapse: collapse; border-spacing: 0; margin: 0; border-bottom: solid 1px #ddd; }
+
+.search_cols{ margin-bottom: 35px; margin-left: auto; border: 0; display: flex; width: 30%; align-items: center; }
+.search_wrap{ border: solid 1px #ebebeb; padding: 3px 10px 3px; display: block;}
+.search_cols input{ width: 192px; height: 25px; border: solid 1px lightgray; border-radius: 5px; padding-left: 8px; box-sizing: border-box;}
+.search_cols button{ height: 25px; border: solid 1px lightgray; border-radius: 5px; padding-left: 8px; box-sizing: border-box; cursor: pointer;}
+   
+#search_btn{display: inline-block; margin: 0 10px; }
+
+.searchCell_input{ width: 230px; }
+
+   /* 상품페이지 카테고리 */
+#category_list .category{width: 1200px; display: flex; margin-left: 59px; margin-bottom: -2px;}
+#category_list .category li{ margin: 2px 0px; background: #d8d8d8; border-left: solid 1px white;
+ 							border-top-right-radius: 5px; border-top-left-radius: 5px; }
+#category_list .category li a{font-weight: 500; font-size: 18px; padding: 7px 15px; display: block;}
+#category_list .category li.on{ background-color: #ccc; }
+#category_list .category li.on a{color: #4982cf;}
+#category_list .category li a:hover{color: #4982cf;}
+
+#header h2{margin-left: 0px;}
+#header div{top: -90px;}
 </style>
 </head>
 <body>

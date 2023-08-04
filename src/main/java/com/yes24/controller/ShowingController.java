@@ -42,7 +42,7 @@ public class ShowingController {
 		List<ShowingVO> showingList = showingService.getShowing(vo);
 
 		JsonResult jsonResult = new JsonResult();
-
+			
 		jsonResult.success(showingList);
 
 		return jsonResult;
@@ -126,7 +126,8 @@ public class ShowingController {
 
 		return Uri;
 	}
-
+	
+	// 회차등록
 	@ResponseBody
 	@RequestMapping(value = "/insertShowing", method = RequestMethod.POST)
 	public JsonResult insertShowing(@ModelAttribute ShowingVO vo) {
@@ -140,7 +141,8 @@ public class ShowingController {
 
 		return jsonResult;
 	}
-
+	
+	// 회차삭제
 	@ResponseBody
 	@RequestMapping(value = "/deleteShowing", method = RequestMethod.POST)
 	public JsonResult deleteShowing(@RequestParam("showingSq") String showingSq) {
@@ -154,7 +156,8 @@ public class ShowingController {
 
 		return jsonResult;
 	}
-
+	
+	// 회차날짜 가져오기
 	@ResponseBody
 	@RequestMapping(value = "/getShowingDay", method = RequestMethod.POST)
 	public JsonResult getShowingDay(@RequestParam("showSq") int showSq) {

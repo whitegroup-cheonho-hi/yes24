@@ -5,52 +5,27 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>showInsertForm</title>
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath }/assets/css/reset.css"
-	type="text/css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath }/assets/css/joinForm.css"
-	type="text/css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath }/assets/css/admin.css"
-	type="text/css">
-<link rel="stylesheet" type="text/css"
-	href="https://image.yes24.com/sysimage/yesUI/yesUI.css?v=20230403"
-	media="all">
+<title>show insert form</title>
+<link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/reset.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/joinForm.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/admin.css" type="text/css">
+<link rel="stylesheet" type="text/css" href="https://image.yes24.com/sysimage/yesUI/yesUI.css?v=20230403" media="all">
+
 <!-- 구글폰트 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com">
-<link
-	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300&display=swap"
-	rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300&display=swap" rel="stylesheet">
+
 <!-- 제이쿼리 최신버전 -->
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 
 <style>
-#ySContent {
-	width: 1200px;
-}
-
-#ySContent .ySContRow {
-	width: 900px;
-}
-
-#ySContent .yesIpt {
-	margin-right: 10px;
-	margin-top: 10px;
-}
-
-#category {
-	width: 890px;
-}
-
-.admRow .admSpan .container {
-	border-top: solid 1px rgb(0, 0, 0);
-	border-left: solid 1px rgb(0, 0, 0);
-	align-items: center;
-	display: none;
-}
+#ySContent { width: 1200px;}
+#ySContent .ySContRow { width: 900px;}
+#ySContent .yesIpt { margin-right: 10px; margin-top: 10px;}
+#category {	width: 890px;}
+.admRow .admSpan .container {border-top: solid 1px rgb(0, 0, 0);border-left: solid 1px rgb(0, 0, 0);
+							 align-items: center;display: none;}
 .tm_grp {height: 72px; margin-bottom: 25px;}
 .tm_grp .tmM_txt{ display: inline-block;}
 #concertHallName{cursor: pointer;}

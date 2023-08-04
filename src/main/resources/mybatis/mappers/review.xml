@@ -43,8 +43,7 @@
 			 SELECT DISTINCT
 				            review_sq        AS reviewsq,
 				            b.user_id        AS userid,
-				            grade,
-				            TO_CHAR(e.end_time, 'YYYY.MM.DD') AS viewingday,
+				            grade,				            
 				            review_content   AS reviewcontent,
 				            TO_CHAR(review_reg_date, 'YYYY.MM.DD') AS reviewregdate,
 				            a.user_sq        AS usersq,
@@ -53,8 +52,7 @@
 				            review a
 				            INNER JOIN users b ON a.user_sq = b.user_sq
 				            INNER JOIN ticketing c ON b.user_sq = c.user_sq
-				            LEFT JOIN ticket d ON c.ticketing_sq = d.ticketing_sq
-				            LEFT JOIN showing e ON d.showing_sq = e.showing_sq
+				            LEFT JOIN ticket d ON c.ticketing_sq = d.ticketing_sq				           
 				       WHERE
 				            review_sq =	#{reviewSq}	
 		

@@ -32,7 +32,7 @@ public class MyPageController {
 		model.addAttribute("myTicketingList", map.get("myTicketingList"));
 		model.addAttribute("myTransferTicketList", map.get("myTransferTicketList"));
 		model.addAttribute("user", map.get("userVO"));
-		System.out.println(map.get("myTransferTicketList"));
+
 		return "user/myPage1";
 
 	}
@@ -65,9 +65,6 @@ public class MyPageController {
 		model.addAttribute("user", map.get("userVO"));
 		model.addAttribute("alarmList", map.get("alarmList"));
 		model.addAttribute("notificationList", map.get("notificationList"));
-
-		System.out.println(map.get("alarmList"));
-		System.out.println(map.get("notificationList"));
 
 		return "user/myPage3";
 

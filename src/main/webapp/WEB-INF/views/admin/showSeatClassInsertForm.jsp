@@ -5,37 +5,26 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>showInsertForm</title>
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath }/assets/css/reset.css"
-	type="text/css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath }/assets/css/joinForm.css"
-	type="text/css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath }/assets/css/admin.css"
-	type="text/css">
-<link rel="stylesheet" type="text/css"
-	href="https://image.yes24.com/sysimage/yesUI/yesUI.css?v=20230403"
-	media="all">
+<title>show seat class insert form</title>
+<link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/reset.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/joinForm.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/admin.css" type="text/css">
+<link rel="stylesheet" type="text/css" href="https://image.yes24.com/sysimage/yesUI/yesUI.css?v=20230403" media="all">
+
 <!-- 구글폰트 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com">
-<link
-	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300&display=swap"
-	rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300&display=swap" rel="stylesheet">
+
 <!-- 제이쿼리 최신버전 -->
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <!-- 드레그 -->
-<script type="text/javascript"
-	src="http://www.google-analytics.com/ga.js"></script>
+<script type="text/javascript" src="http://www.google-analytics.com/ga.js"></script>
 <script src="http://threedubmedia.com/inc/js/jquery-1.7.2.js"></script>
 <script src="http://threedubmedia.com/inc/js/jquery.event.drag-2.2.js"></script>
-<script
-	src="http://threedubmedia.com/inc/js/jquery.event.drag.live-2.2.js"></script>
+<script src="http://threedubmedia.com/inc/js/jquery.event.drag.live-2.2.js"></script>
 <script src="http://threedubmedia.com/inc/js/jquery.event.drop-2.2.js"></script>
-<script
-	src="http://threedubmedia.com/inc/js/jquery.event.drop.live-2.2.js"></script>
+<script src="http://threedubmedia.com/inc/js/jquery.event.drop.live-2.2.js"></script>
 <script src="http://threedubmedia.com/inc/js/excanvas.min.js"></script>
 
 <style>
@@ -46,10 +35,10 @@
 #seatClass {height: 50px;}
 #imgCol2 {margin-bottom: 10px;}
 .admRow .admSpan .container {border-top: solid 1px rgb(0, 0, 0);border-left: solid 1px rgb(0, 0, 0);
-	align-items: center;display: none;}
+							 align-items: center;display: none;}
 /* 드레그 */
 .selection {position: absolute;	border: 1px solid #89B;	background: #BCE;background-color: #BEC;
-	border-color: #8B9;}
+			border-color: #8B9;}
 .size2 {height: 118px;line-height: 118px;}
 .size3 {height: 178px;line-height: 178px;}
 .drop {float: left;background: #EEE;text-align: center;}
@@ -60,20 +49,10 @@
 .color3 {background-color: #8fbfee;}
 .color4 {background-color: #a5ea7b;}
 
-#resetButton{    
-    width: 70px;
-    height: 35px;
-    font-size: 14px;
-    font-weight: bold;
-    background-color:  #f43142;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    margin-bottom: 5px;
-    cursor: pointer;}
-  #imgCol2{    display: flex;
-    justify-content: space-between;}
- #seatClass button{width: 40px; height: 26px; font-size: 14px; cursor: pointer; border-radius: 5px; border: solid 1px gray;} 
+#resetButton{ width: 70px; height: 35px; font-size: 14px; font-weight: bold; background-color:  #f43142;
+    		  color: white; border: none; border-radius: 5px; margin-bottom: 5px; cursor: pointer;}
+#imgCol2{  display: flex; justify-content: space-between;}
+#seatClass button{width: 40px; height: 26px; font-size: 14px; cursor: pointer; border-radius: 5px; border: solid 1px gray;} 
 </style>
 </head>
 <body>

@@ -147,7 +147,6 @@ public class ShowController {
 	public JsonResult insertSeatClass(@RequestBody List<SeatClassListVO> list) {
 		System.out.println("insertSeatClass()");
 
-		System.out.println(list);
 		int result = showService.insertSeatClass(list);
 
 		JsonResult jsonResult = new JsonResult();

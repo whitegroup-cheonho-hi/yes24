@@ -35,7 +35,7 @@
 		
 		<![CDATA[		                    
 		                ORDER BY 
-		                        CONCERT_HALL_NAME DESC
+		                        CONCERT_HALL_SQ DESC
 		            ) t
 		)
 		WHERE 
@@ -496,6 +496,8 @@
 				      showing
 				 WHERE
 				      end_time < SYSDATE
+				   AND 
+				      showing_stat ='Y'
 		      ORDER BY
 				      showing_sq
 			    
@@ -514,6 +516,8 @@
 			      showing_stat = 'N'
 		  	 WHERE
 			      end_time < SYSDATE
+			   AND 
+			      showing_stat='Y'
 	
 		]]>
 	</update>

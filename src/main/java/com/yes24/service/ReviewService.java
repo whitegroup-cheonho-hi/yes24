@@ -21,8 +21,6 @@ public class ReviewService {
 
 		int result = reviewDAO.insertReview(vo);
 
-		System.out.println("리뷰시퀀스" + vo.getReviewSq());
-
 		ReviewVO reviewVO = reviewDAO.getReview(vo.getReviewSq());
 
 		return reviewVO;

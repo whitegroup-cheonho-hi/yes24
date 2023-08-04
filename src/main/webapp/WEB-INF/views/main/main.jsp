@@ -112,31 +112,52 @@
 </body>
 
 <script>
-	$(document).ready(function() {
-		//메인 롤링배너(kv)
-		var swiper = new Swiper(".swiper", {
-			effect : 'fade', // 페이드 효과 사용		
-			type : 'horizontal',
-			spaceBetween : 50, // 슬라이드 사이 여백
-			slidesPerView : 'auto', // 한 슬라이드에 보여줄 갯수
-			centeredSlides : true, //센터모드
-			autoplay : { //자동슬라이드 (false-비활성화)
-				delay : 2500, // 시간 설정
-				disableOnInteraction : false, // false-스와이프 후 자동 재생
-			},
-			loop : true, // 슬라이드 반복 여부
-			loopAdditionalSlides : 1, // 슬라이드 반복 시 마지막 슬라이드에서 다음 슬라이드가 보여지지 않는 현상 수정
-			// pagination: { // 호출(pager) 여부
-			//   el: ".swiper-pagination", //버튼을 담을 태그 설정
-			//   clickable: true, // 버튼 클릭 여부
-			// },
-			navigation : { // 버튼
-				nextEl : ".swiper-button-next",
-				prevEl : ".swiper-button-prev",
-			},
-		});
+$(document).ready(function() {
+	//메인 롤링배너(kv)
+	var swiper = new Swiper(".swiper", {
+		effect : 'fade', // 페이드 효과 사용		
+		type : 'horizontal',
+		spaceBetween : 50, // 슬라이드 사이 여백
+		slidesPerView : 'auto', // 한 슬라이드에 보여줄 갯수
+		centeredSlides : true, //센터모드
+		autoplay : { //자동슬라이드 (false-비활성화)
+			delay : 2500, // 시간 설정
+			disableOnInteraction : false, // false-스와이프 후 자동 재생
+		},
+		loop : true, // 슬라이드 반복 여부
+		loopAdditionalSlides : 1, // 슬라이드 반복 시 마지막 슬라이드에서 다음 슬라이드가 보여지지 않는 현상 수정
+		// pagination: { // 호출(pager) 여부
+		//   el: ".swiper-pagination", //버튼을 담을 태그 설정
+		//   clickable: true, // 버튼 클릭 여부
+		// },
+		navigation : { // 버튼
+			nextEl : ".swiper-button-next",
+			prevEl : ".swiper-button-prev",
+		},
 	});
+	
+	// 검색기능
+	$("#searchButton").on("click",function(e){
+		e.preventDefault();
+		console.log("검색버튼");
+		var keyword = $("#searchKeyword").val();
+		console.log(keyword);			
 
+		if(keyword != ""){
+		
+			$("#searchKeyword2").val(keyword);
+			var k = $("#searchKeyword").val();
+			console.log(k);
+			
+			location.href = '${pageContext.request.contextPath}/category/1?keyword2=' + keyword;
+			
+			$("#keywordForm").submit();
+		}else{
+			alert("검색어를 입력해주세요");
+		}		
+		
+	});
+	
 	$("#nav li").on("click", function() {
 		// 다른 li 요소들에서 on 클래스 제거
 		$("#nav li").removeClass("on");
@@ -147,6 +168,10 @@
 		// 추가로 수행하고자 하는 동작 작성
 		// ...
 	});
+	
+});
+
+	
 </script>
 
 </html>
