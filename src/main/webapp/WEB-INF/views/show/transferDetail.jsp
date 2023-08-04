@@ -41,7 +41,11 @@
 			<div class="renew-content">
 				<div class="rn-02">
 					<!--제목-->
-					<p class="rn-big-title">${show.showName}</p>
+					<p class="rn-big-title">${show.showName}
+						<c:if test="${transferBoard.transferStat == 'N'}">
+						<span style="color:red">(판매 완료)</span>
+						</c:if>
+					</p>
 					<div class="rn-product-short-data">
 						<p>
 							<span class="ps-date">${show.startDate} ~ ${show.endDate}</span><a
@@ -188,9 +192,11 @@
 		</div>	
 		<div class="concertHall">					
 			<div id="ticketingdiv">
-				<div>
-					<a id="ticketing" href="#none" class="ticketing">양도표 구매하기</a>
-				</div>
+			    <c:if test="${transferBoard.transferStat == 'Y'}">
+					<div>
+					        <a id="ticketing" href="#none" class="ticketing">양도표 구매하기</a>
+					</div>
+			    </c:if>					 				  
 			</div>
 			<div class="rn-0803"><!--공연정보-->
 				<h1>공연 정보</h1>					

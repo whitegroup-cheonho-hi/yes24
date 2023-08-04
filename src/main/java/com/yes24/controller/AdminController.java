@@ -130,6 +130,8 @@ public class AdminController {
 
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("pageMake", map.get("pageMake"));
+		
+		System.out.println(map.get("list"));
 
 		return Uri;
 	}

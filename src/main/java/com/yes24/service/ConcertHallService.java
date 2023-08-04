@@ -81,12 +81,14 @@ public class ConcertHallService {
 			
 			// 공연장 시퀀스로 공연장 좌석 시퀀스가져오기
 			deleteSeatList = concertHallDAO.getConcertHallSeatList(vo.getConcertHallSq());
+			System.out.println("지울 시트리스트"+deleteSeatList);
 			if(deleteSeatList != null) {
 				
 				int cnt = 0; // 삭제된 공연좌석 카운트
 				for (SeatVO seatVO : deleteSeatList) { // 공연좌석 삭제
 					cnt += concertHallDAO.deleteShowSeat(seatVO.getSeatSq());
 				}
+				System.out.println("카운트"+cnt);
 				if (cnt > 0) { 	// 공연좌석이 삭제가 되면
 					ShowVO showVO = showDAO.getShowSq(vo.getConcertHallSq()); //공연시퀀스 가지고와서
 					result = showVO.getShowSq(); // 리턴값으로 넣어준다

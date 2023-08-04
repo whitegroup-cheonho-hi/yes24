@@ -19,14 +19,16 @@
 				FROM 
 					showing w, show s
 				where 
-					w.show_sq = s.show_sq and s.show_sq = #{showSq}
-			     AND 
-			        to_char(w.end_time, 'YYYY-MM-DD') > #{showingDate}
+					w.show_sq = s.show_sq 
+				AND 
+				    s.show_sq = #{showSq}
+			    AND 
+			        w.showing_date = #{showingDate}
 			ORDER BY 
 			   		w.start_time     		
 		]]>
 	</select>
-
+	
 
 	<!-- 공연번호로 회차날짜 가져오기 -->
 	<select id="getShowingDateList" parameterType="int" resultType="ShowingVO">

@@ -69,6 +69,7 @@ public class ConcertHallController {
 
 		String Uri = "redirect:/concertHall/concertHallModifyForm/" + vo.getConcertHallSq();
 		int showSq = concertHallService.updateConcertHall(vo);
+		System.out.println("쇼시퀀스"+showSq);
 
 		if (showSq > 0) {
 			Uri = "redirect:/show/showSeatClassModifyForm/" + showSq;

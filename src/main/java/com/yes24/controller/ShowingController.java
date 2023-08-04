@@ -74,6 +74,8 @@ public class ShowingController {
 		List<ShowingVO> showingList = showingService.getShowingList(vo);
 
 		JsonResult jsonResult = new JsonResult();
+		
+		System.out.println("이거다"+showingList);
 
 		jsonResult.success(showingList);
 

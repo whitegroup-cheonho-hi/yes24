@@ -66,12 +66,12 @@
 										<div class="colGrp">
 											<div class="colCell w_280">
 												<span class="yesIpt b_size ipt_wSizeF hallWidth"> <input
-													id="mainImage" name="file" type="file">
+													id="mainImage" name="file" type="file" required="required">
 												</span>
 											</div>
 											<div class="colCell w_280">
 												<span class="yesIpt b_size ipt_wSizeF hallWidth"> <input
-													id="subImage" name="file" type="file">
+													id="subImage" name="file" type="file" required="required">
 												</span>
 											</div>
 										</div>
@@ -83,7 +83,7 @@
 											</div>
 											<div class="colCell w_280">
 												<span class="yesIpt b_size ipt_wSizeF hallWidth"> <input
-													id="detailedImage" name="file" type="file">
+													id="detailedImage" name="file" type="file" required="required">
 												</span>
 											</div>
 										</div>
@@ -108,13 +108,13 @@
 											<div class="colGrp">
 												<div class="colCell w_280">
 													<span class="yesIpt b_size ipt_wSizeF hallWidth"> <input
-														id="reservationDate" name="reservationDate" type="date">
+														id="reservationDate" name="reservationDate" type="date" required="required">
 													</span>
 												</div>
 												<div class="colCell w_280">
 													<span class="yesIpt b_size ipt_wSizeF hallWidth"> <input
 														id="showTime" name="showTime" type="text"
-														placeholder="공연시간 입력" class="inpwid">분
+														placeholder="공연시간 입력" class="inpwid" required="required">분
 													</span>
 												</div>
 											</div>
@@ -137,12 +137,12 @@
 											<div class="colGrp">
 												<div class="colCell w_280">
 													<span class="yesIpt b_size ipt_wSizeF hallWidth"> <input
-														id="startDate" name="startDate" type="date">
+														id="startDate" name="startDate" type="date" required="required">
 													</span>
 												</div>
 												<div class="colCell w_280">
 													<span class="yesIpt b_size ipt_wSizeF hallWidth"> <input
-														id="endDate" name="endDate" type="date">
+														id="endDate" name="endDate" type="date" required="required">
 													</span>
 												</div>
 											</div>
@@ -172,19 +172,19 @@
 												<div class="colCell w_280">
 													<span class="yesIpt b_size ipt_wSizeF hallWidth"> <input
 														id="showName" name="showName" type="text"
-														placeholder="제목 입력">
+														placeholder="제목 입력" required="required">
 													</span>
 												</div>
 												<div class="colCell w_280">
 													<span class="yesIpt b_size ipt_wSizeF hallWidth"> <input
 														id="viewingAge" name="viewingAge" type="text"
-														placeholder="관람연령 입력" class="inpwid">세
+														placeholder="관람연령 입력" class="inpwid" required="required">세
 													</span>
 												</div>
 												<div class="colCell w_280">
 													<span class="yesIpt b_size ipt_wSizeF hallWidth"> <select
 														id="concertHallName" name="concertHallSq"
-														aria-selected="undefined">
+														aria-selected="undefined" required="required">
 															<option id="concertHall0" value="0" data-width="0">극장선택</option>
 															<c:forEach items="${concertHallList}" var="concertHall">
 																<option id="concertHall${concertHall.concertHallSq}"
@@ -216,12 +216,12 @@
 												<div class="colCell w_280">
 													<span class="yesIpt b_size ipt_wSizeF hallWidth"> <input
 														id="director" name="director" type="text"
-														placeholder="연출자 입력">
+														placeholder="연출자 입력" required="required">
 													</span>
 												</div>
 												<div class="colCell w_280">
 													<span class="yesIpt b_size ipt_wSizeF hallWidth"> <input
-														id="cast" name="cast" type="text" placeholder="출연진 입력">
+														id="cast" name="cast" type="text" placeholder="출연진 입력" required="required">
 													</span>
 												</div>
 											</div>

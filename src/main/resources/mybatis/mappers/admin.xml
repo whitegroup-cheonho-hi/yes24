@@ -62,8 +62,7 @@
 					cast,
 					director,
 					show_time AS showTime,
-					viewing_age AS viewingAge,
-					show_content AS showContent,
+					viewing_age AS viewingAge,					
 					category,
 					show_stat AS showStat,
 					concert_hall_sq AS concertHallSq
@@ -80,8 +79,7 @@
 							cast,
 							director,
 							show_time,
-							viewing_age,
-							show_content,
+							viewing_age,							
 							category,
 							show_stat,
 							concert_hall_sq
@@ -97,8 +95,7 @@
 									cast,
 									director,
 									show_time,
-									viewing_age,
-									show_content,
+									viewing_age,									
 									category,
 									show_stat,
 									concert_hall_sq
@@ -143,8 +140,7 @@
 				    cast,
 				    director,
 				    show_time AS showtime,
-				    viewing_age AS viewingage,
-				    show_content AS showcontent,
+				    viewing_age AS viewingage,				   
 				    category,
 				    show_stat AS showstat,
 				    concert_hall_sq AS concerthallsq
@@ -205,7 +201,7 @@
                     TO_DATE(#{endTime}, 'YYYY-MM-DD-HH24:MI'),
                     'Y',
                     #{showSq},
-                    '이거 누가하자했냐..2'
+                    '회차등록'
             		)  		
 		]]>
 
@@ -452,10 +448,11 @@
 				                        END AS gender,
 					                    e.show_name                           AS showName,
 					                    SUM(b.ticket_seat_price)              AS totalPrice,
-					                    LISTAGG(b.ticket_seat, ',') WITHIN GROUP(
-					                    ORDER BY
-					                        b.ticket_seat
-					                    )                                     AS ticketSeat,
+					                    CASE 
+					                        WHEN LENGTH(SUBSTR(LISTAGG(b.ticket_seat, ',') WITHIN GROUP (ORDER BY b.ticket_seat), 1, 6)) > 5
+					                        THEN CONCAT(SUBSTR(LISTAGG(b.ticket_seat, ',') WITHIN GROUP (ORDER BY b.ticket_seat), 1, 6), '...')
+					                        ELSE SUBSTR(LISTAGG(b.ticket_seat, ',') WITHIN GROUP (ORDER BY b.ticket_seat), 1, 5)
+					                    END AS ticketSeat,
 					                    to_char(d.showing_date, 'YYYY-MM-DD') AS showingDate,
 					                    f.concert_hall_name                   AS concertHallName
 				                FROM
