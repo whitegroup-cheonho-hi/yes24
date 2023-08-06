@@ -89,20 +89,7 @@
 				            (
 				                SELECT DISTINCT
 				                    review_sq        AS reviewsq,
-				                    CASE
-				                        WHEN length(b.user_id) <= 3 THEN '
-				                     ]]>
-		***
-				                    <![CDATA[    
-				                        '  
-				                        ELSE substr(b.user_id, 1, length(b.user_id) - 3)
-				                             || '
-				                         ]]>
-		***
-				                         <![CDATA[    
-				                      
-				                         		' 
-				                    END AS userid,
+				                    b.user_id        AS userid,				                  
 				                    grade,				                   
 				                    review_content   AS reviewcontent,
 				                    TO_CHAR(review_reg_date, 'YYYY.MM.DD') AS reviewregdate,

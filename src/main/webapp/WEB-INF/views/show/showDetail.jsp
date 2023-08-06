@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -205,7 +206,14 @@
 						<li id="review${review.reviewSq}">
 							<div class="rn-0904-ttbox">
 								<span class="rn-0904-tt1">예매자</span>
-								<span class="rn-0904-tt2">${review.userId}</span>
+								<c:choose>
+								  <c:when test="${authUser.userSq != review.userSq}">
+								     <span class="rn-0904-tt2 hiddenUserId">${review.userId}</span>
+								  </c:when>
+								  <c:otherwise>
+								    <span class="rn-0904-tt2">${review.userId}</span>
+								  </c:otherwise>
+								</c:choose>
 								<span class="rn-0904-tt3">${review.reviewRegDate}</span>
 								<span class="rn-0904-tt4" data-star="4">
 								<c:set var="endValue" value="${review.grade-1}" />
@@ -342,7 +350,16 @@ $(document).ready(function() {
 	var showSq = '${show.showSq}';
 	var showStat = '${show.showStat}';
 	var authUser = '${sessionScope.authUser}'+'';
-
+	
+	// 아이디 비공개
+	 $(".hiddenUserId").each(function() {
+	    var userId = $(this).text();
+	    var userIdLength = userId.length;
+	    if (userIdLength > 3) {
+	      var hiddenUserId =userId.substring(0,2) + "***"; 
+	      $(this).text(hiddenUserId);
+	    }	    
+	  });
 		
 	//페이징 버튼 클릭
 	$(".pageInfo a").on("click", function(e) {
