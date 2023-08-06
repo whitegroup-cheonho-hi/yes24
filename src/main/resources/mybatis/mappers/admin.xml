@@ -33,7 +33,9 @@
     	</if>
 		
 		
-		<![CDATA[		                    
+		<![CDATA[		
+						   WHERE
+                  				concert_hall_stat = 'Y'                    
 		                ORDER BY 
 		                        CONCERT_HALL_SQ DESC
 		            ) t
@@ -130,24 +132,30 @@
 		<![CDATA[
 
 		      SELECT
-				    show_sq AS showsq,
-				    main_image AS mainimage,
-				    sub_image AS subimage,
+				    show_sq           AS showsq,
+				    main_image        AS mainimage,
+				    sub_image         AS subimage,
 				    TO_CHAR(start_date, 'YYYY.MM.DD') AS startdate,
 				    TO_CHAR(end_date, 'YYYY.MM.DD') AS enddate,
 				    TO_CHAR(reservation_date, 'YYYY.MM.DD') AS reservationdate,
-				    show_name AS showname,
-				    cast,
+				    show_name         AS showname,
+				    CASE
+				        WHEN length(cast) <= 30 THEN cast
+				        ELSE substr(cast, 1, 27)
+				             || '...'
+				    END AS cast,
 				    director,
-				    show_time AS showtime,
-				    viewing_age AS viewingage,				   
+				    show_time         AS showtime,
+				    viewing_age       AS viewingage,
+				    b.category_name   AS categoryname,
 				    category,
-				    show_stat AS showstat,
-				    concert_hall_sq AS concerthallsq
+				    show_stat         AS showstat,
+				    concert_hall_sq   AS concerthallsq
 				FROM
-				    show
-			   WHERE
-				    show_sq = #{showSq}			
+				    show a
+				    INNER JOIN category b ON a.category = b.category_sq
+			   WHERE 
+			        show_sq = #{showSq}			
 		
 		]]>
 
@@ -283,6 +291,8 @@
 			SELECT COUNT(*) 
 			FROM 
 				concert_hall
+		   WHERE
+                concert_hall_stat = 'Y'	
 				
 		]]>
 		<if test="keyword2 != null and keyword2 != ''">
@@ -323,7 +333,7 @@
     	
 	</select>
 	
-	<!-- 공연장수 검색 후 가져오기 -->
+	<!-- 공연장이름 가져오기 -->
 	<select id="getTicketingDetailHallName" parameterType="ShowVO" resultType="ConcertHallVO">
 		<![CDATA[
 			SELECT
@@ -331,7 +341,7 @@
 			FROM 
 					concert_hall c, show s
 			WHERE
-					s.show_sq = #{concertHallSq} and c.concert_hall_sq = #{concertHallSq}
+					s.show_sq = #{showSq} and c.concert_hall_sq = #{concertHallSq}
 		]]>
 	</select>
 	

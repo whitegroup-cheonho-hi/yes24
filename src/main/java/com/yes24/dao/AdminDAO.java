@@ -39,6 +39,7 @@ public class AdminDAO {
 
 	// 공연장이름 가지고 오기
 	public ConcertHallVO getTicketingDetailHallName(ShowVO vo) {
+		System.out.println(vo);
 		return sqlSession.selectOne("admin.getTicketingDetailHallName", vo);
 	}
 

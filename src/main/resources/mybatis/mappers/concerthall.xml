@@ -96,6 +96,8 @@
 			      concert_hall_height        AS concerthallheight
 			  FROM
 			      concert_hall
+		     WHERE
+                  concert_hall_stat = 'Y'
 		  ORDER BY 
 		          concert_hall_sq     	
 		
@@ -148,17 +150,34 @@
 	
 		<![CDATA[
 		
-			UPDATE concert_hall
-			                SET
-			                    concert_hall_name = #{concertHallName},
-			                    concert_hall_post = #{concertHallPost},
-			                    concert_hall_basic_addr = #{concertHallRoadAddr},
-			                    concert_hall_detail_addr = #{concertHallJibunAddr},
-			                    concert_hall_width = #{concertHallWidth},
-			                    concert_hall_height = #{concertHallHeight}
-			                WHERE
-			                    concert_hall_sq = #{concertHallSq}
+			UPDATE 
+			      concert_hall
+               SET
+                  concert_hall_name = #{concertHallName},
+                  concert_hall_post = #{concertHallPost},
+                  concert_hall_basic_addr = #{concertHallRoadAddr},
+                  concert_hall_detail_addr = #{concertHallJibunAddr},
+                  concert_hall_width = #{concertHallWidth},
+                  concert_hall_height = #{concertHallHeight}
+             WHERE
+                  concert_hall_sq = #{concertHallSq}
 						
+		]]>
+	
+	</update>
+	
+	<!-- 극장상태 변경(삭제) -->
+	<update id="deleteConcertHall" parameterType="int">
+	
+		<![CDATA[
+		
+			UPDATE 
+			      concert_hall
+			   SET
+			      concert_hall_stat = 'N'
+		  	 WHERE
+			      concert_hall_sq = #{concertHallSq}
+		
 		]]>
 	
 	</update>

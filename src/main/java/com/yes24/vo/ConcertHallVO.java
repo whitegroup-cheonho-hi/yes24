@@ -12,6 +12,7 @@ public class ConcertHallVO {
 	private String concertHallPost;
 	private String concertHallRoadAddr;
 	private String concertHallJibunAddr;
+	private String concertHallStat;
 	private int concertHallWidth;
 	private int concertHallHeight;
 	// 좌석
@@ -23,14 +24,15 @@ public class ConcertHallVO {
 	}
 
 	public ConcertHallVO(int concertHallSq, String concertHallName, String concertHallPost, String concertHallRoadAddr,
-			String concertHallJibunAddr, int concertHallWidth, int concertHallHeight, List<Integer> seatSq,
-			List<String> seatNo) {
+			String concertHallJibunAddr, String concertHallStat, int concertHallWidth, int concertHallHeight,
+			List<Integer> seatSq, List<String> seatNo) {
 		super();
 		this.concertHallSq = concertHallSq;
 		this.concertHallName = concertHallName;
 		this.concertHallPost = concertHallPost;
 		this.concertHallRoadAddr = concertHallRoadAddr;
 		this.concertHallJibunAddr = concertHallJibunAddr;
+		this.concertHallStat = concertHallStat;
 		this.concertHallWidth = concertHallWidth;
 		this.concertHallHeight = concertHallHeight;
 		this.seatSq = seatSq;
@@ -77,6 +79,14 @@ public class ConcertHallVO {
 		this.concertHallJibunAddr = concertHallJibunAddr;
 	}
 
+	public String getConcertHallStat() {
+		return concertHallStat;
+	}
+
+	public void setConcertHallStat(String concertHallStat) {
+		this.concertHallStat = concertHallStat;
+	}
+
 	public int getConcertHallWidth() {
 		return concertHallWidth;
 	}
@@ -113,9 +123,9 @@ public class ConcertHallVO {
 	public String toString() {
 		return "ConcertHallVO [concertHallSq=" + concertHallSq + ", concertHallName=" + concertHallName
 				+ ", concertHallPost=" + concertHallPost + ", concertHallRoadAddr=" + concertHallRoadAddr
-				+ ", concertHallJibunAddr=" + concertHallJibunAddr + ", concertHallWidth=" + concertHallWidth
-				+ ", concertHallHeight=" + concertHallHeight + ", seatSq=" + seatSq + ", seatNo=" + seatNo + "]";
+				+ ", concertHallJibunAddr=" + concertHallJibunAddr + ", concertHallStat=" + concertHallStat
+				+ ", concertHallWidth=" + concertHallWidth + ", concertHallHeight=" + concertHallHeight + ", seatSq="
+				+ seatSq + ", seatNo=" + seatNo + "]";
 	}
 
-	
 }

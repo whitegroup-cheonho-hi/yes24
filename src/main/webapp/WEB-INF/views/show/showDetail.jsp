@@ -27,7 +27,7 @@
 <script type="text/javascript" src='${pageContext.request.contextPath }/assets/js/index.global.min.js'></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 <style>
-
+#deleteReviewButton{border-radius: 3px; background-color: #f43142; color: #fff; width: 80px; height: 27px; border: none;cursor: pointer; margin-left: 1115px;}
 </style>
 </head>
 <body>
@@ -202,7 +202,7 @@
 			<div class="rn-0904-container">
 				<ul id="reviewul" class="rn-0904">
 					<c:forEach items="${reviewList}" var="review">
-						<li>
+						<li id="review${review.reviewSq}">
 							<div class="rn-0904-ttbox">
 								<span class="rn-0904-tt1">예매자</span>
 								<span class="rn-0904-tt2">${review.userId}</span>
@@ -213,8 +213,13 @@
 										<c:if test="${review.grade != 0}">
 											<img src="http://tkfile.yes24.com/imgNew/common/rn-ico-tt4-1.png" alt="">
 										</c:if>
-									</c:forEach>									
+									</c:forEach>
 								</span>
+								<c:if test="${authUser.userSq == review.userSq}">
+								<span>
+									<button id="deleteReviewButton" data-reviewsq="${review.reviewSq}" class="order_btn">리뷰 삭제</button>
+								</span>
+								</c:if>								
 								<%-- <span class="rn-0904-tt7">(관람일:${review.viewingday})</span> --%>
 							</div>
 							<div class="rn-0904-txt-wrap">
@@ -295,7 +300,7 @@
 						<tr>
 							<th><label for="inquiry_cont">리뷰 내용</label></th>
 							<td><textarea name="reviewContent" id="content"
-									placeholder="700자 이하 입력가능" required></textarea>
+									placeholder="700자 이하 입력가능" required ="required"></textarea>
 								<div class="textLengthWrap">
 									<span class="textCount">0자</span> <span class="textTotal">/
 										700자</span>
@@ -402,31 +407,65 @@ $(document).ready(function() {
 		
 		var grade = $("#grade").val();
 		var reviewContent = $("#content").val();
-		
-		var ReviewVO = {grade : grade, reviewContent : reviewContent , showSq : showSq };
-		
-		$.ajax({
+		if(reviewContent != ""){
+			var ReviewVO = {grade : grade, reviewContent : reviewContent , showSq : showSq };
 			
-			url : "${pageContext.request.contextPath}/review/insertReview",		
-			type : "post",
-			//contentType : "application/json",
-			data : ReviewVO,
+			$.ajax({
+				
+				url : "${pageContext.request.contextPath}/review/insertReview",		
+				type : "post",
+				//contentType : "application/json",
+				data : ReviewVO,
+	
+				dataType : "json",
+				success : function(result){
+					console.log(result);
+					var review = result.data;
+					$("#grade").val("1").prop("selected", true);
+					$("#content").val("");
+					$('#inquiry_popup').hide();
+					
+					addReview(review);
+					
+				},
+				error : function(XHR, status, error) {
+					console.error(status + " : " + error);
+				}
+			});
+		}else{
+			alert("내용을 작성해주세요");
+		}	
+	});
+	
+	// 후기 삭제
+	$("#reviewul").on("click","#deleteReviewButton",function(){
+		console.log("리뷰삭제");
+		
+		let result = confirm("리뷰를 삭제 하시겠습니까?");
+		if(result){
+			let reviewSq = $(this).data("reviewsq");
+			
+			
+		 	$.ajax({
+				
+				url : "${pageContext.request.contextPath}/review/deleteReview",		
+				type : "GET",
+				data: { reviewSq: reviewSq },
 
-			dataType : "json",
-			success : function(result){
-				console.log(result);
-				var review = result.data;
-				$("#grade").val("1").prop("selected", true);
-				$("#content").val("");
-				$('#inquiry_popup').hide();
-				
-				addReview(review);
-				
-			},
-			error : function(XHR, status, error) {
-				console.error(status + " : " + error);
-			}
-		});
+				dataType : "json",
+				success : function(result){
+					
+					$("#review"+reviewSq).remove();
+					
+				},
+				error : function(XHR, status, error) {
+					console.error(status + " : " + error);
+				}
+			}); 
+		
+		}
+		
+		
 	});
 	
 	
@@ -691,7 +730,7 @@ $(document).ready(function() {
 	// 리뷰 그리기
 	function addReview(review){
 		var item = '';
-		item +='<li>';
+		item +='<li id="review'+ review.reviewSq + '">';
 		item +='	 <div class="rn-0904-ttbox">';
 		item +='		<span class="rn-0904-tt1">예매자</span>';
 		item +='		<span class="rn-0904-tt2">' + review.userId + '</span>';
@@ -704,7 +743,7 @@ $(document).ready(function() {
 			
 		}
 		item +='		</span>';
-		item +='		<span class="rn-0904-tt7">(관람일:' + review.viewingday + ')</span>';
+		item +='		<span><button id="deleteReviewButton" data-reviewsq="' + review.reviewSq + '" class="order_btn">리뷰 삭제</button></span>';
 		item +='	 </div>';
 		item +='	 <div class="rn-0904-txt-wrap">';
 		item +='	 <div class="rn-0904-txt">' + review.reviewContent + '</div>';

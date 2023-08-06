@@ -51,4 +51,11 @@ public class ReviewDAO {
 
 		return sqlSession.selectList("review.reviewCheck", vo);
 	}
+
+	// ------------------- 리뷰 삭제
+	public int deleteReview(int no) {
+		System.out.println("deleteReview DAO()");
+
+		return sqlSession.delete("review.deleteReview", no);
+	}
 }

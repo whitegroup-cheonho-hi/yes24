@@ -92,13 +92,13 @@
 				                    CASE
 				                        WHEN length(b.user_id) <= 3 THEN '
 				                     ]]>
-									***
+		***
 				                    <![CDATA[    
 				                        '  
 				                        ELSE substr(b.user_id, 1, length(b.user_id) - 3)
 				                             || '
 				                         ]]>
-										***
+		***
 				                         <![CDATA[    
 				                      
 				                         		' 
@@ -143,9 +143,10 @@
 		]]>
 
 	</select>
-	
+
 	<!-- 리뷰등록가능 체크 -->
-	<select id="reviewCheck" parameterType="ReviewVO" resultType="ShowingVO">
+	<select id="reviewCheck" parameterType="ReviewVO"
+		resultType="ShowingVO">
 		
 		<![CDATA[
 		
@@ -175,8 +176,20 @@
 				    AND show_sq = #{showSq}
     
 		]]>
-	
+
 	</select>
+
+	<!-- 리뷰삭제 -->
+	<delete id="deleteReview" parameterType="int">
 	
+		<![CDATA[
+		
+			DELETE review WHERE review_sq = #{reviewSq}
+			
+		]]>
+
+	</delete>
+
+
 
 </mapper>

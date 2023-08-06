@@ -69,11 +69,23 @@ public class ConcertHallController {
 
 		String Uri = "redirect:/concertHall/concertHallModifyForm/" + vo.getConcertHallSq();
 		int showSq = concertHallService.updateConcertHall(vo);
-		System.out.println("쇼시퀀스"+showSq);
 
 		if (showSq > 0) {
 			Uri = "redirect:/show/showSeatClassModifyForm/" + showSq;
 		}
+
+		return Uri;
+	}
+	
+	// --------------- 공연장 삭제
+	@RequestMapping(value = "/concertHallDelete/{no}", method = RequestMethod.GET)
+	public String concertHallDelete(HttpSession session, @PathVariable("no") int no) {
+		System.out.println("concertHallDelete()");
+
+		String Uri = "redirect:/admin/getConcertHallList";
+		Uri = loginCheck(Uri, session);
+		
+		concertHallService.deleteConcertHall(no);
 
 		return Uri;
 	}

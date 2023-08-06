@@ -66,6 +66,13 @@ public class ConcertHallDAO {
 		return sqlSession.update("concerthall.updateConcertHall", vo);
 	}
 
+	// -------------------- 극장 상태변경(삭제)
+	public int deleteConcertHall(int no) {
+		System.out.println("deleteConcertHall DAO()");
+
+		return sqlSession.update("concerthall.deleteConcertHall", no);
+	}
+	
 	// -------------------- 좌석삭제
 	public int deleteConcertHallSeat(int no) {
 		System.out.println("deleteConcertHallSeat DAO()");

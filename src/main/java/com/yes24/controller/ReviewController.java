@@ -28,13 +28,13 @@ public class ReviewController {
 	// ----------------- 관람공연 체크
 	@ResponseBody
 	@RequestMapping(value = "/viewingCheck", method = RequestMethod.POST)
-	public JsonResult viewingCheck(@ModelAttribute ReviewVO vo,HttpSession session) {
+	public JsonResult viewingCheck(@ModelAttribute ReviewVO vo, HttpSession session) {
 		System.out.println("viewingCheck()");
 
 		UserVO userVO = (UserVO) session.getAttribute("authUser");
 
 		vo.setUserSq(userVO.getUserSq());
-		
+
 		List<ShowingVO> showingSqList = reviewService.reviewCheck(vo);
 
 		JsonResult jsonResult = new JsonResult();
@@ -49,7 +49,7 @@ public class ReviewController {
 	@RequestMapping(value = "/insertReview", method = RequestMethod.POST)
 	public JsonResult insertReview(@ModelAttribute ReviewVO vo, HttpSession session) {
 		System.out.println("insertReview()");
-		
+
 		UserVO userVO = (UserVO) session.getAttribute("authUser");
 
 		vo.setUserSq(userVO.getUserSq());
@@ -59,6 +59,21 @@ public class ReviewController {
 		JsonResult jsonResult = new JsonResult();
 
 		jsonResult.success(reviewVO);
+
+		return jsonResult;
+	}
+
+	// ----------------- 리뷰등록
+	@ResponseBody
+	@RequestMapping(value = "/deleteReview", method = RequestMethod.GET)
+	public JsonResult deleteReview(@RequestParam("reviewSq") int no) {
+		System.out.println("deleteReview()");
+
+		int result = reviewService.deleteReview(no);
+		
+		JsonResult jsonResult = new JsonResult();
+
+		jsonResult.success(result);
 
 		return jsonResult;
 	}

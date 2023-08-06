@@ -143,9 +143,9 @@
 								<a id="updateConcertHall" href="#none" 
 									class="btnC xb_size btn_blue btn_wSizeH"> <span
 									class="bWrap"><em id="emtxt" class="txt">수정</em></span>
-								</a> <a id="cencleConcertHall" href="" 
+								</a> <a id="deleteConcertHall" href="${pageContext.request.contextPath}/concertHall/concertHallDelete/${concertHall.concertHallSq}" 
 									class="btnC xb_size btn_blue btn_wSizeH"> <span
-									class="bWrap"><em id="emtxt" class="txt">취소</em></span>
+									class="bWrap"><em id="emtxt" class="txt">삭제</em></span>
 								</a>
 							</div>
 						</div>

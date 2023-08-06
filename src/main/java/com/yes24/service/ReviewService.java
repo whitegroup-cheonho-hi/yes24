@@ -28,8 +28,15 @@ public class ReviewService {
 
 	// ------------------- 리뷰등록가능 체크
 	public List<ShowingVO> reviewCheck(ReviewVO vo) {
-		System.out.println("reviewCheck DAO()");
+		System.out.println("reviewCheck Service()");
 
 		return reviewDAO.reviewCheck(vo);
+	}
+
+	// ------------------- 리뷰 삭제
+	public int deleteReview(int no) {
+		System.out.println("deleteReview Service()");
+
+		return reviewDAO.deleteReview(no);
 	}
 }

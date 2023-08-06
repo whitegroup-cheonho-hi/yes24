@@ -85,7 +85,7 @@
 							<th>관람연령</th><td>${show.viewingAge}세</td>
 						</tr>
 						<tr>
-							<th>카테고리</th><td>${show.category}</td>
+							<th>카테고리</th><td>${show.categoryName}</td>
 							<th>평점</th><td>0.0</td>
 						</tr>
 						<tr>
