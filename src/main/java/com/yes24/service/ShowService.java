@@ -41,7 +41,8 @@ public class ShowService {
 	private ShowingDAO showingDAO;
 	@Autowired
 	private ReviewDAO reviewDAO;
-
+	
+	// String saveDir = "/Users/yangjun-u/upload/";// 맥호환
 	String saveDir = "C:/yes24/img/upload/";
 
 	// ------------------ 공연등록

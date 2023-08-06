@@ -62,6 +62,6 @@
 	<!-- url매핑 -->
 	<mvc:resources mapping="/upload/**"
 		location="file:C:/yes24/img/upload/" />
-
+	<!--  location="file:/Users/yangjun-u/upload/" />  -->
 
 </beans>
