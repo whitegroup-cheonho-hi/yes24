@@ -75,8 +75,8 @@ a:hover{color:#888888;text-decoration:none}
 /* 예매창 */
 #warp{ background:url(https://stkfile.yes24.com/img/perfsale/bg_warp.gif) repeat-y; width:970px; height:635px;}
 .header{ width:698px; height:60px;}
-.header h1 { float: left; padding: 18px 14px 0; width: 81px;} 
-.header h1 img { width: 100%;} 
+.header h1 { float: left; padding: 3px 14px 0; width: 81px;} 
+.header h1 img { width: 128%;} 
 
 .gnb{padding-top:8px; float:right;}
 .gnb li span{display: block;font-size: 11px; height: 11px; overflow-x: hidden;overflow-y: hidden;position: relative; z-index: -1;}

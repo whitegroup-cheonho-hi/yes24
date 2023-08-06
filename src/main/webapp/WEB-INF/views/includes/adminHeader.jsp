@@ -22,7 +22,7 @@
 	<div id="header">
 		<h2>
 			<a href="${pageContext.request.contextPath}/">
-			<img src="${pageContext.request.contextPath}/assets/images/로고4.png" style="width: 95px"></a>
+			<img src="${pageContext.request.contextPath}/assets/images/로고3.png" style="width: 109px"></a>
 		</h2>
 		<!-- 메뉴 (nav) -->
 		<div style="position: relative;">

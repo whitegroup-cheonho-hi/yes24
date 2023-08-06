@@ -21,7 +21,7 @@
 <body>
 	<div id="header" class="header">
 		<h1>
-			<img src="${pageContext.request.contextPath}/assets/images/로고2.PNG"
+			<img src="${pageContext.request.contextPath}/assets/images/로고2.png"
 				alt="YES24.com">
 		</h1>
 		<ul class="gnb">

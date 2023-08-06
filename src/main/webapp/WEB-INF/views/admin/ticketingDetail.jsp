@@ -52,7 +52,8 @@
 .showTit p{ font-size: 35px; color: #333; font-weight: bold;}
 .showTit{  margin: 20px;}
 .renew-content{ margin-top: 140px; }
-
+h2 {margin-left: 0px;}
+.navigation{margin-top: 40px;}
 </style>
 </head>
 <body>
