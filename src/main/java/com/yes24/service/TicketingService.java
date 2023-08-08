@@ -87,7 +87,6 @@ public class TicketingService {
 	// --------------- 양도표 구매
 	public int buyTransferTicket(TransferBoardVO vo) {
 		System.out.println("buyTransferTicket Service()");
-		System.out.println(vo);
 				
 		// 기존 티켓 상태변경
 		ticketDAO.buyTransferTicket(vo.getTicketSq());
@@ -111,7 +110,7 @@ public class TicketingService {
 		return transferBoardDAO.updateTransferboard(vo);
 	}
 
-	// --------------- 티켓번호 난수 생성
+	// --------------- 티켓번호 난수 생성 ex) 20230807A195A7T6F
 	public String generateTicketNumber(String seatNo) {
 		StringBuilder sb = new StringBuilder();
 		Random random = new Random();

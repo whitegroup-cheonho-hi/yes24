@@ -16,38 +16,38 @@ public class TransferBoardDAO {
 	private SqlSession sqlSession;
 
 	// ------------------- 양도게시판 등록
-	public int insertTransferboard(TransferBoardVO vo) {
-		System.out.println("insertTransferboard DAO()");
+	public int insertTransferBoard(TransferBoardVO vo) {
+		System.out.println("insertTransferBoard DAO()");
 
-		return sqlSession.insert("transferboard.insertTransferboard", vo);
+		return sqlSession.insert("transferboard.insertTransferBoard", vo);
 	}
 
 	// ------------------- 양도완료후 게시판 업데이트
-	public int updateTransferboard(TransferBoardVO vo) {
-		System.out.println("updateTransferboard DAO()");
+	public int updateTransferBoard(TransferBoardVO vo) {
+		System.out.println("updateTransferBoard DAO()");
 
-		return sqlSession.update("transferboard.updateTransferboard", vo);
+		return sqlSession.update("transferboard.updateTransferBoard", vo);
 	}
 
 	// -------------------- 양도 게시글 삭제
-	public int deleteTransferboard(int no) {
-		System.out.println("deleteTransferboard DAO()");
+	public int deleteTransferBoard(int no) {
+		System.out.println("deleteTransferBoard DAO()");
 
-		return sqlSession.delete("transferboard.deleteTransferboard", no);
+		return sqlSession.delete("transferboard.deleteTransferBoard", no);
 	}
 
 	// -------------------- 양도게시글 리스트 가져오기
-	public List<TransferBoardVO> getTransferboardList(Criteria cri) {
-		System.out.println("getTransferboardList DAO()");
+	public List<TransferBoardVO> getTransferBoardList(Criteria cri) {
+		System.out.println("getTransferBoardList DAO()");
 
-		return sqlSession.selectList("transferboard.getTransferboardList", cri);
+		return sqlSession.selectList("transferboard.getTransferBoardList", cri);
 	}
 
 	// -------------------- 양도게시글 가져오기
-	public TransferBoardVO getTransferboard(int no) {
-		System.out.println("getTransferboard DAO()");
+	public TransferBoardVO getTransferBoard(int no) {
+		System.out.println("getTransferBoard DAO()");
 
-		return sqlSession.selectOne("transferboard.getTransferboard", no);
+		return sqlSession.selectOne("transferboard.getTransferBoard", no);
 	}
 
 	// -------------------- 양도게시글 가져오기

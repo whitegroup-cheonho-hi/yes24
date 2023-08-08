@@ -5,7 +5,7 @@
 
 
 	<!-- 양도표 등록 -->
-	<insert id="insertTransferboard" parameterType="TransferBoardVO">
+	<insert id="insertTransferBoard" parameterType="TransferBoardVO">
 	
 		<selectKey keyProperty="transferBoardSq" resultType="int"
 			order="BEFORE">
@@ -38,7 +38,7 @@
 
 	</insert>
 	<!-- 양도 완료시 양도게시글 업데이트 -->
-	<update id="updateTransferboard" parameterType="TransferBoardVO">
+	<update id="updateTransferBoard" parameterType="TransferBoardVO">
 		
 		<![CDATA[
 		
@@ -55,7 +55,7 @@
 	</update>
 
 	<!-- 양도게시글 삭제 -->
-	<delete id="deleteTransferboard" parameterType="int">
+	<delete id="deleteTransferBoard" parameterType="int">
 	
 		<![CDATA[
 		
@@ -66,7 +66,7 @@
 	</delete>
 
 	<!-- 양도리스트가지고오기 -->
-	<select id="getTransferboardList" parameterType="Criteria"
+	<select id="getTransferBoardList" parameterType="Criteria"
 		resultType="TransferBoardVO">
 	
 	    <![CDATA[
@@ -152,7 +152,7 @@
 	</select>
 
 	<!-- 양도게시판 정보 가져오기 -->
-	<select id="getTransferboard" parameterType="int"
+	<select id="getTransferBoard" parameterType="int"
 		resultType="TransferBoardVO">
 	
 		<![CDATA[
