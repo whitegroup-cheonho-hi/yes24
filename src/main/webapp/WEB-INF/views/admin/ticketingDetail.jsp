@@ -54,6 +54,8 @@
 .renew-content{ margin-top: 140px; }
 h2 {margin-left: 0px;}
 .navigation{margin-top: 40px;}
+
+.fc-event{  cursor: pointer;}
 </style>
 </head>
 <body>
@@ -87,7 +89,7 @@ h2 {margin-left: 0px;}
 						</tr>
 						<tr>
 							<th>카테고리</th><td>${show.categoryName}</td>
-							<th>평점</th><td>0.0</td>
+							<th>평점</th><td>${show.gradeAvg}</td>
 						</tr>
 						<tr>
 							<th>공연시작</th><td>${show.startDate}</td>

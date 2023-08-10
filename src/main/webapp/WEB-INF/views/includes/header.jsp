@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <style>
-#rogo{height: 110%;width: 80%;}
+#rogo{height: 110%;width: 85%;}
 </style>
 <!-- 헤더 -->
 <header class="pc">

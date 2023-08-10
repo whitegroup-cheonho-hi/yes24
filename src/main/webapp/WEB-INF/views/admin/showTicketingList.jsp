@@ -23,7 +23,7 @@
 .listItem .listItemdiv { display: inline-block; width: 200px; margin: 0 15px; }
 .listItem img {width: 95%;}
 .listItemTxt { display: flex; flex-wrap: wrap; }
-.listItemTxt button { margin: auto; width: 70px; height: 35px; font-size: 14px; font-weight: bold; 
+.listItemTxt button {    cursor: pointer; margin: auto; width: 70px; height: 35px; font-size: 14px; font-weight: bold; 
 	background-color: #196ab3; color: white; border: none; border-radius: 5px; margin-bottom: 20px;}
 .listItemTxt p { width: 200px; margin-bottom: 10px; white-space: nowrap; }
 /* 첫 글자는 "<"로 표시 */

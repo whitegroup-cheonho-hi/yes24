@@ -150,7 +150,18 @@
 				    b.category_name   AS categoryname,
 				    category,
 				    show_stat         AS showstat,
-				    concert_hall_sq   AS concerthallsq
+				    concert_hall_sq   AS concerthallsq,
+				    (
+			        SELECT
+			            round(AVG(a.grade), 2)
+			        FROM
+			            review a
+			            JOIN show b ON a.show_sq = b.show_sq
+			        WHERE
+			            a.show_sq = #{showSq}
+			        GROUP BY
+			            a.show_sq
+			    	) AS gradeavg
 				FROM
 				    show a
 				    INNER JOIN category b ON a.category = b.category_sq

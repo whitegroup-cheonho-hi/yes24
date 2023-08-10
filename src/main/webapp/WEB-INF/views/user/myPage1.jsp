@@ -280,18 +280,18 @@
 							required readonly></td>
 					</tr>
 					<tr>
-						<th><label for="inquiry_cont">일시</label></th>
-						<td><input type="text" id="ticketingDate" name="ticketingDate" required readonly></td>
+						<th><label for="inquiry_cont">공연 일시</label></th>
+						<td><input type="text" id="startTime" name="startTime" required readonly></td>
 					</tr>
 
 					<tr>
-						<th><label for="inquiry_cont">구입금액</label></th>
+						<th><label for="inquiry_cont">구입 금액</label></th>
 						<td> 
 						<input type="text" id="byPrice" name="byPrice" required readonly />  						
 						</td>
 					</tr>
 					<tr>
-						<th><label for="inquiry_cont">판매금액</label></th>
+						<th><label for="inquiry_cont">판매 금액</label></th>
 						<td><input type="number" id="hopePrice" name="hopePrice" step="100"
 							placeholder="판매희망 금액" required>
 							</td>
@@ -339,7 +339,7 @@
 			$("#ticketSq").val(ticketSq);
 			$("#showName").val(showName);
 			$("#seatNo").val(ticketSeat);
-			$("#ticketingDate").val(ticketingDate);
+			$("#startTime").val(startTime);
 			$("#byPrice").val(ticketSeatPrice+" 원");
 			$("#hopePrice").attr("max",price);
 			

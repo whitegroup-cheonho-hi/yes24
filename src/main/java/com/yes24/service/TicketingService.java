@@ -107,7 +107,7 @@ public class TicketingService {
 		ticketingDAO.buyTransferTicket(ticket);
 		
 		// 양도 게시판 상태 변경
-		return transferBoardDAO.updateTransferboard(vo);
+		return transferBoardDAO.updateTransferBoard(vo);
 	}
 
 	// --------------- 티켓번호 난수 생성 ex) 20230807A195A7T6F
