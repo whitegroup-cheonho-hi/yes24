@@ -205,6 +205,7 @@
 		</div>
 		<br>
 		<h2>공연장 위치 정보</h2>
+		
 		<!-- 지도를 표시할 div 입니다 -->
 		<div id="map" style="width: 1200px; height: 350px;"></div>
 	</section>

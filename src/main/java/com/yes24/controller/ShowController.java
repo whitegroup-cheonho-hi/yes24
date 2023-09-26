@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -32,13 +33,14 @@ import com.yes24.vo.UserVO;
 @RequestMapping("/show")
 public class ShowController {
 
+
 	@Autowired
 	private ShowService showService;
 	@Autowired
 	private ConcertHallService concertHallService;
 	@Autowired
 	private UserService userService;
-	
+
 	// ------------------- 공연 등록폼
 	@RequestMapping(value = "/showInsertForm", method = RequestMethod.GET)
 	public String showInsertForm(Model model, HttpSession session) {
@@ -173,7 +175,7 @@ public class ShowController {
 
 	// 로그인 체크
 	public String loginCheck(String Uri, HttpSession session) {
-		
+
 		UserVO userVO = (UserVO) session.getAttribute("authUser");
 
 		if (userVO == null) {

@@ -281,7 +281,7 @@
 					</tr>
 					<tr>
 						<th><label for="inquiry_cont">일시</label></th>
-						<td><input type="text" id="ticketingDate" name="ticketingDate" required readonly></td>
+						<td><input type="text" id="startTime" name="startTime" required readonly></td>
 					</tr>
 
 					<tr>
@@ -339,7 +339,7 @@
 			$("#ticketSq").val(ticketSq);
 			$("#showName").val(showName);
 			$("#seatNo").val(ticketSeat);
-			$("#ticketingDate").val(ticketingDate);
+			$("#startTime").val(startTime);
 			$("#byPrice").val(ticketSeatPrice+" 원");
 			$("#hopePrice").attr("max",price);
 			

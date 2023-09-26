@@ -61,7 +61,13 @@
 
 	<!-- url매핑 -->
 	<mvc:resources mapping="/upload/**"
-		location="file:C:/yes24/img/upload/" />
-	<!--  location="file:/Users/yangjun-u/upload/" />  -->
+		location="file:/Users/yangjun-u/upload/" />
+	<!-- location="file:C:/yes24/img/upload/" /> -->
+	
+	<bean
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations" value="classpath:/key.properties" />
+	</bean>
+
 
 </beans>

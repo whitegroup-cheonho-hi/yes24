@@ -42,8 +42,8 @@ public class ShowService {
 	@Autowired
 	private ReviewDAO reviewDAO;
 	
-	// String saveDir = "/Users/yangjun-u/upload/";// 맥호환
-	String saveDir = "C:/yes24/img/upload/";
+	String saveDir = "/Users/yangjun-u/upload/";// 맥호환
+	//String saveDir = "C:/yes24/img/upload/";
 
 	// ------------------ 공연등록
 	public int insertShow(ShowVO vo, MultipartFile[] file) {

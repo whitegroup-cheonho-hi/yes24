@@ -24,12 +24,13 @@
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <!-- 다음지도API -->
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1d8e22ec81bcdc862373ee6f17fdef96&libraries=services"></script>
-<!-- 풀켈린더js -->
+
 <script type="text/javascript" src='${pageContext.request.contextPath }/assets/js/index.global.min.js'></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 <style>
 #deleteReviewButton{border-radius: 3px; background-color: #f43142; color: #fff; width: 80px; height: 27px; border: none;cursor: pointer; margin-left: 1115px;}
 </style>
+ 
 </head>
 <body>
 	<!-- 헤더 -->
@@ -189,6 +190,7 @@
 		</div>
 		<h2>공연장 위치 정보</h2>
 		<br>
+		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=${kakaoApiKey}&libraries=services"></script>
 		<!-- 지도를 표시할 div 입니다 -->
 		<div id="map" style="width: 1200px; height: 350px;"></div>
 		<section id="review" style="width: 1200px;">
@@ -326,6 +328,7 @@
 
 <script>
 $(document).ready(function() {
+	
 	
 	 var today = new Date();
      var year = today.getFullYear();
@@ -695,11 +698,13 @@ $(document).ready(function() {
 		    data: ShowingVO,
 		    dataType: "json",
 		    success: function(result) {
+		    	console.log("회차그린");
 		    	console.log(result);
 		      for (var i = 0; i < result.data.length; i++) {
 		        var startTime = result.data[i].showingDate + 'T' + result.data[i].startTime;
 		        var endTime = result.data[i].showingDate + 'T' + result.data[i].endTime;
 		        var showingSq = result.data[i].showingSq;
+		        console.log(endTime);
 		        dayList.addEvent({
 		          title: [i + 1] + '회차',
 		          start: startTime,
