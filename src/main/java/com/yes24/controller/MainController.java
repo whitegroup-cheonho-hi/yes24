@@ -15,7 +15,7 @@ import com.yes24.vo.Criteria;
 
 @Controller
 public class MainController {
-
+ 
 	@Autowired
 	private ShowService showService;
 	@Autowired
