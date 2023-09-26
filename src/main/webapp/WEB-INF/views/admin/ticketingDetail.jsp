@@ -54,6 +54,8 @@
 .renew-content{ margin-top: 140px; }
 h2 {margin-left: 0px;}
 .navigation{margin-top: 40px;}
+
+.fc-event{  cursor: pointer;}
 </style>
 </head>
 <body>
@@ -87,7 +89,7 @@ h2 {margin-left: 0px;}
 						</tr>
 						<tr>
 							<th>카테고리</th><td>${show.categoryName}</td>
-							<th>평점</th><td>0.0</td>
+							<th>평점</th><td>${show.gradeAvg}</td>
 						</tr>
 						<tr>
 							<th>공연시작</th><td>${show.startDate}</td>
@@ -204,22 +206,28 @@ $(document).ready(function() {
 		    
 		    dataType: "json",
 		    success: function(result) {		          	     
-		               	  console.log(result);
-			   
-			    for (let index in result.data) {
-			        if (result.data.hasOwnProperty(index)) {
-			            //금액 포맷
-			        	var seatPriceFormatted = new Intl.NumberFormat('ko-KR').format(result.data[index].seatPrice);
-
-			            var item = '<div style="margin-bottom: 5px;">' + result.data[index].seatClass +'석'			            
-			            	item += '&nbsp;&nbsp;';
-			            	item += seatPriceFormatted  +'원';
-			            	item += '&nbsp;&nbsp;';
-			            	item += '<span style="color: orange"> 잔여 : ('+result.data[index].seatEa +'석)</span>';
-			            	item +='</div>';
-			            Seat.append(item);
-			        }
-			    }
+		         console.log(result);
+	   
+               	 if (result.data[0] != null) {
+ 				    for (let index in result.data) {
+ 				        if (result.data.hasOwnProperty(index)) {
+ 				            //금액 포맷
+ 				        	var seatPriceFormatted = new Intl.NumberFormat('ko-KR').format(result.data[index].seatPrice);
+ 	
+ 				            var item = '<div style="margin-bottom: 5px;">' + result.data[index].seatClass +'석'			            
+ 				            	item += '&nbsp;&nbsp;';
+ 				            	item += seatPriceFormatted  +'원';
+ 				            	item += '&nbsp;&nbsp;';
+ 				            	item += '<span style="color: orange"> 잔여 : ('+result.data[index].seatEa +'석)</span>';
+ 				            	item +='</div>';
+ 				            Seat.append(item);
+ 				        }
+ 				    }
+ 			   	}else{
+ 			   		console.log("비었음");
+ 			   		var item2 = '<div style="margin-bottom: 5px;">매진 되었습니다</div>';
+ 			   		Seat.append(item2);
+ 			   	}    
 		    },
 		    error: function(XHR, status, error) {
 		      console.error(status + " : " + error);

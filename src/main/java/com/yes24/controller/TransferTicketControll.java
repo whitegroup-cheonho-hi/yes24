@@ -39,7 +39,7 @@ public class TransferTicketControll {
 
 		vo.setSellUserSq(userVO.getUserSq());
 
-		int result = transferBoardService.insertTransferboard(vo);
+		int result = transferBoardService.insertTransferBoard(vo);
 
 		JsonResult jsonResult = new JsonResult();
 
@@ -55,7 +55,7 @@ public class TransferTicketControll {
 	public JsonResult cancelTransferTicket(@ModelAttribute MyTicketingVO vo) {
 		System.out.println("cancelTransferTicket()");
 
-		int result = transferBoardService.deleteTransferboard(vo);
+		int result = transferBoardService.deleteTransferBoard(vo);
 
 		JsonResult jsonResult = new JsonResult();
 
@@ -70,7 +70,7 @@ public class TransferTicketControll {
 	public String transferTicketDetail(@PathVariable("no") int no, Model model) {
 		System.out.println("transferTicketDetail()");
 
-		Map<String, Object> map = transferBoardService.getTransferboard(no);
+		Map<String, Object> map = transferBoardService.getTransferBoard(no);
 
 		model.addAttribute("transferBoard", map.get("transferBoardVO"));
 		model.addAttribute("show", map.get("showVO"));

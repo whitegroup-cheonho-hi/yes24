@@ -280,18 +280,22 @@
 							required readonly></td>
 					</tr>
 					<tr>
+<<<<<<< HEAD
 						<th><label for="inquiry_cont">일시</label></th>
+=======
+						<th><label for="inquiry_cont">공연 일시</label></th>
+>>>>>>> branch 'master' of https://github.com/whitegroup-cheonho-hi/yes24.git
 						<td><input type="text" id="startTime" name="startTime" required readonly></td>
 					</tr>
 
 					<tr>
-						<th><label for="inquiry_cont">구입금액</label></th>
+						<th><label for="inquiry_cont">구입 금액</label></th>
 						<td> 
 						<input type="text" id="byPrice" name="byPrice" required readonly />  						
 						</td>
 					</tr>
 					<tr>
-						<th><label for="inquiry_cont">판매금액</label></th>
+						<th><label for="inquiry_cont">판매 금액</label></th>
 						<td><input type="number" id="hopePrice" name="hopePrice" step="100"
 							placeholder="판매희망 금액" required>
 							</td>

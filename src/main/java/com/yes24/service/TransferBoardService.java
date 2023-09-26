@@ -41,14 +41,14 @@ public class TransferBoardService {
 	private AlarmDAO alarmDAO;
 
 	// ------------------- 양도게시판 등록
-	public int insertTransferboard(TransferBoardVO vo) {
-		System.out.println("insertTransferboard Service()");
+	public int insertTransferBoard(TransferBoardVO vo) {
+		System.out.println("insertTransferBoard Service()");
 
 		// 티켓 상태 변경 4
 		ticketDAO.updateTicket(vo.getTicketSq());
 		// 양도게시판 등록
-		int result = transferBoardDAO.insertTransferboard(vo);
-		// 비교할 티켓 정보들 가져오기
+		int result = transferBoardDAO.insertTransferBoard(vo);
+		// 티켓 시퀀스로 알람신청과 비교가능한 정보 가져오기
 		AlarmVO alarmVO = alarmDAO.getAlarm(vo.getTicketSq());
 
 		// 티켓정보로 양도알림테이블에서 비교 후 값 가져오기
@@ -79,8 +79,8 @@ public class TransferBoardService {
 	}
 
 	// -------------------- 양도 게시글 삭제
-	public int deleteTransferboard(MyTicketingVO vo) {
-		System.out.println("deleteTransferboard Service()");
+	public int deleteTransferBoard(MyTicketingVO vo) {
+		System.out.println("deleteTransferBoard Service()");
 
 		// 티켓 상태 변경
 		ticketDAO.cancelTransferTicket(vo.getTicketSq());
@@ -89,18 +89,18 @@ public class TransferBoardService {
 		alarmDAO.deleteNotification(vo.getTransferBoardSq());
 
 		// 양도게시글 삭제
-		return transferBoardDAO.deleteTransferboard(vo.getTransferBoardSq());
+		return transferBoardDAO.deleteTransferBoard(vo.getTransferBoardSq());
 	}
 
 	// -------------------- 양도게시글 리스트 가져오기
-	public Map<String, Object> getTransferboardList(Criteria cri) {
-		System.out.println("getTransferboardList Service()");
+	public Map<String, Object> getTransferBoardList(Criteria cri) {
+		System.out.println("getTransferBoardList Service()");
 
 		Map<String, Object> map = new HashMap<>();
 
 		int total = transferBoardDAO.getTotal(cri);
 		// 양도 게시판 리스트
-		List<TransferBoardVO> transferBoardList = transferBoardDAO.getTransferboardList(cri);
+		List<TransferBoardVO> transferBoardList = transferBoardDAO.getTransferBoardList(cri);
 		// 임박 5개 가져오기
 		List<TransferBoardVO> imminentShowing = transferBoardDAO.getImminentShowing();
 
@@ -114,8 +114,8 @@ public class TransferBoardService {
 	}
 
 	// -------------------- 양도게시판 디테일 가져오기
-	public Map<String, Object> getTransferboard(int no) {
-		System.out.println("getTransferboardList Service()");
+	public Map<String, Object> getTransferBoard(int no) {
+		System.out.println("getTransferBoard Service()");
 
 		Map<String, Object> map = new HashMap<>();
 		List<Integer> seatClassSqList = new ArrayList<>();
@@ -123,7 +123,7 @@ public class TransferBoardService {
 		List<Integer> seatPriceSqList = new ArrayList<>();
 
 		// 양도게시글
-		TransferBoardVO transferBoardVO = transferBoardDAO.getTransferboard(no);
+		TransferBoardVO transferBoardVO = transferBoardDAO.getTransferBoard(no);
 		// 공연 정보
 		ShowVO showVO = showDAO.getShow(transferBoardVO.getShowSq());
 		// 공연 좌석

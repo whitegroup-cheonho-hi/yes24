@@ -60,7 +60,7 @@ public class MainController {
 	public String transferBoardForm(Model model, Criteria cri) {
 		System.out.println("transferBoardForm()");
 
-		Map<String, Object> map = transferBoardService.getTransferboardList(cri);
+		Map<String, Object> map = transferBoardService.getTransferBoardList(cri);
 
 		model.addAttribute("transferBoardList", map.get("transferBoardList"));
 		model.addAttribute("imminentShowing", map.get("imminentShowing"));

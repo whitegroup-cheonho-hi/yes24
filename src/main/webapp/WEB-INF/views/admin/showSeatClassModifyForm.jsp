@@ -51,7 +51,7 @@
 #resetButton{width: 70px; height: 35px; font-size: 14px; font-weight: bold; background-color:  #f43142;
     		color: white; border: none; border-radius: 5px; margin-bottom: 5px; cursor: pointer;}
 #imgCol2{ display: flex; justify-content: space-between;}
-#seatClass button{width: 40px; height: 26px; font-size: 14px; cursor: pointer; border-radius: 5px; border: solid 1px gray;}
+#seatClass button{width: 50px; height: 26px; font-size: 14px; cursor: pointer; border-radius: 5px; border: solid 1px gray;}
 /* #seatClass{margin-left: 560px;} */
 </style>
 </head>
@@ -299,24 +299,30 @@
 			  ];
 			
 				console.log(seatClassList);
-			 // 공연클래스 좌석 등록 ajax						
-			  $.ajax({
-				
-				url : "${pageContext.request.contextPath}/show/updateSeatClass",		
-				type : "post",
-				contentType : "application/json",
-				data : JSON.stringify(seatClassList),
-			
-				dataType : "json",
-				success : function(result){
+				if(seatClassList.seatClassList != null){
+					 // 공연클래스 좌석 등록 ajax						
+					  $.ajax({
+						
+						url : "${pageContext.request.contextPath}/show/updateSeatClass",		
+						type : "post",
+						contentType : "application/json",
+						data : JSON.stringify(seatClassList),
 					
-			    window.location.href = '${pageContext.request.contextPath}/';
-			
-				},
-				error : function(XHR, status, error) {
-					console.error(status + " : " + error);
+						dataType : "json",
+						success : function(result){
+							
+					    window.location.href = '${pageContext.request.contextPath}/showing/showingModifyForm/'+showSq;
+					
+						},
+						error : function(XHR, status, error) {
+							console.error(status + " : " + error);
+						}
+					});
+				}else{
+					
+					alert("좌석클래스를 지정해주세요");
 				}
-			});   
+				
  
 		});
 		
