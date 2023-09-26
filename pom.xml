@@ -75,7 +75,7 @@
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
-			<version>4.0.1</version> <!-- 원하는 Servlet API 버전을 지정합니다. -->
+			<version>4.0.1</version> <!-- 최신 버전 사용 권장 -->
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>
