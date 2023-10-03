@@ -3,7 +3,9 @@
 
 <mapper namespace="showing">
 
-<!-- 회차정보가져오기 -->
+<!-- 회차정보가져오기 2023/10/09 리펙토링 로컬에서는 문제가 없었는데 웹 애플리케이션에서는  
+비교 조건값을 TO_CHAR(w.showing_date, 'YYYY-MM-DD') 바꿔주지 않으면 안되더라.
+근데 이게 웃긴게 다른거는 오류나서 로컬 개발때 바꿨는데 이건 왜 오류가 안났지..-->
 	<select id="getShowings" parameterType="ShowingVO" resultType="ShowingVO">
 		
 		<![CDATA[
