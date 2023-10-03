@@ -23,7 +23,7 @@
 				AND 
 				    s.show_sq = #{showSq}
 			    AND 
-			        w.showing_date = #{showingDate}
+			        TO_CHAR(w.showing_date, 'YYYY-MM-DD') = #{showingDate}
 			ORDER BY 
 			   		w.start_time     		
 		]]>

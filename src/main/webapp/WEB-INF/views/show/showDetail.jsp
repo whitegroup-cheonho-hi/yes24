@@ -694,8 +694,8 @@ $(document).ready(function() {
 		  $.ajax({
 		    url: "${pageContext.request.contextPath}/showing/getShowing",
 		    type: "post",
-		    //contentType: "application/json",
 		    data: ShowingVO,
+		    
 		    dataType: "json",
 		    success: function(result) {
 		    	console.log("회차그린");

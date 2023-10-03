@@ -33,22 +33,29 @@ public class ShowingController {
 	@Autowired
 	private UserService userService;
 
-	// ---------------------- 공연회차 가져오기
 	@ResponseBody
 	@RequestMapping(value = "/getShowing", method = RequestMethod.POST)
 	public JsonResult getShowing(@ModelAttribute ShowingVO vo) {
-		System.out.println("getShowing()");
+	    System.out.println("getShowing()");
 
-		List<ShowingVO> showingList = showingService.getShowing(vo);
+	    try {
+	        List<ShowingVO> showingList = showingService.getShowing(vo);
+	        System.out.println(vo);
 
-		JsonResult jsonResult = new JsonResult();
-			
-		jsonResult.success(showingList);
+	        JsonResult jsonResult = new JsonResult();
+	        jsonResult.success(showingList);
 
-		return jsonResult;
+	        return jsonResult;
+	    } catch (Exception ex) {
+	        // 예외가 발생하면 로깅하고 예외 메시지와 vo 정보를 함께 반환
+	        ex.printStackTrace(); // 예외 정보를 로그에 출력
+	        JsonResult errorResult = new JsonResult();
+	        errorResult.fail("An error occurred: " + ex.getMessage()); // fail 메소드를 사용하여 실패 상태를 설정
+	        errorResult.setData(vo); // setData 메소드를 사용하여 vo 객체의 정보를 응답에 추가
 
+	        return errorResult;
+	    }
 	}
-
 	// ---------------------- 잔여좌석 가져오기
 	@ResponseBody
 	@RequestMapping(value = "/remainingSeats", method = RequestMethod.POST)

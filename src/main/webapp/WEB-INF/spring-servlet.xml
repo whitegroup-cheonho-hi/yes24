@@ -61,7 +61,7 @@
 
 	<!-- url매핑 -->
 	<mvc:resources mapping="/upload/**"
-		location="file:/Users/yangjun-u/upload/" />
+		location="file:///usr/local/tomcat9/webapps/upload/" />
 	<!-- location="file:C:/yes24/img/upload/" /> -->
 	
 	<bean
